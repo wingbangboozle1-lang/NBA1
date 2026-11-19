@@ -14,13 +14,15 @@
    "n": 21,
    "title": "Amended pre-tip seal: the LAL/UTA lag moved three lines and nothing else",
    "detail": "The official tables absorbed the 11/18 UTA 109 @ LAL 97 game. Re-originating with the identical formulas moved PHX@UTA spread -7.6 -> -6.4 (total 227.0 -> 225.8), SAC@LAL 22.1 -> 20.7 (237.4 -> 235.3), DAL@UTA -7.5 -> -6.3 (221.7 -> 220.5); the other 23 spreads are unchanged and totals drift <= 0.2 from the league-baseline re-weight. The movements match session arena/d66245d4-nba1's independent re-price to the published rounding. All 26 singles carry the same pick_line as the 05:45Z seal; four model_home_win_prob fields moved. Sealed at 13:00Z (ledger entry 18) - 12 hours before the first tip - and settle_slate.py now grades the latest seal.",
-   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "reading": "The official tables absorbed the 11/18 UTA 109 @ LAL 97 game. Re-originating with the identical formulas moved PHX@UTA spread -7.6 -> -6.4 (total 227.0 -> 225.8), SAC@LAL 22.1 -> 20.7 (237.4 -> 235.3), DAL@UTA -7.5 -> -6.3 (221.7 -> 220.5); the other 23 spreads are unchanged and totals drift <= 0.2 from the league-baseline re-weight. The movements match session arena/d66245d4-nba1's independent re-price to the published rounding. All 26 singles carry the same pick_line as the 05:45Z seal; four model_home_win_prob fields moved. Sealed at 13:00Z (ledger entry 18) - 12 hours before the first tip - and settle_slate.py now grades the latest seal."
   },
   {
    "n": 22,
    "title": "The scheduled rebuild was dead for three causes; all three are fixed and measured",
    "detail": "(1) S1_season/S2_train parsed 0 rows in every recorded run since 2026-11-15 (client-rendered pages; API fallback times out from runners; headless browser refused) - now declared unreadable with evidence and expiry 2026-12-19, with anti-rot re-checks. (2) The publish step's single git add aborted on never-existing paths and silently dropped every verified promotion for days (F-CDF-02) - now per-path. (3) The gate's S1 blocks are declaration-aware and the staleness is published. Measured after the fix: promote exits 0, gate PASSes with five PASS BY DECLARATION entries, engine/pipeline.py + engine/build_site.py run to completion.",
-   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_capture_gate_report.json"
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_capture_gate_report.json",
+   "reading": "(1) S1_season/S2_train parsed 0 rows in every recorded run since 2026-11-15 (client-rendered pages; API fallback times out from runners; headless browser refused) - now declared unreadable with evidence and expiry 2026-12-19, with anti-rot re-checks. (2) The publish step's single git add aborted on never-existing paths and silently dropped every verified promotion for days (F-CDF-02) - now per-path. (3) The gate's S1 blocks are declaration-aware and the staleness is published. Measured after the fix: promote exits 0, gate PASSes with five PASS BY DECLARATION entries, engine/pipeline.py + engine/build_site.py run to completion."
   },
   {
    "n": 0,

@@ -1774,7 +1774,7 @@
   "sigma_total": 19.68
  },
  "params": {
-  "hca": 0.59,
+  "hca": -1.1,
   "b2b_penalty": 6.261634081582916,
   "total_bias": 1.2558123937988073,
   "total_b2b_coef": 0.0,
@@ -1782,9 +1782,9 @@
   "sigma_total": 19.67601349561475,
   "shrink_k": 2.9,
   "hca_source": {
-   "home_win_rate": 0.5135,
-   "games": 74,
-   "home_wins": 38,
+   "home_win_rate": 0.4747,
+   "games": 99,
+   "home_wins": 47,
    "sigma_margin": 17.409312,
    "method": "HCA_points = sigma_margin * norm_ppf(measured home_win_rate) - pinned to the measured rate, not fitted freely (R09)",
    "corpus": "the official completed-game set this run read (data/raw/games_completed.json and its per-source captures)"
@@ -1872,9 +1872,9 @@
    "used": false,
    "disclosure": "estimated on the test window (in-sample) - NOT APPLIED to any published line: requirement R09 pins home-court advantage to the measured home-win rate instead of fitting it freely. The pinned value is in `pinned_to`; the diagnostic fit is kept so the reader can see the size of the claim the pin refuses to make.",
    "pinned_to": {
-    "hca_points": 0.59,
-    "home_win_rate": 0.5135,
-    "games": 74,
+    "hca_points": -1.1,
+    "home_win_rate": 0.4747,
+    "games": 99,
     "sigma_margin": 17.409312,
     "provenance": "data/hca_measured.json / engine/hca.compute_hca"
    }

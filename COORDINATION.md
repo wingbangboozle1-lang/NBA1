@@ -12117,3 +12117,92 @@ branch other than this one.
 alongside, never silently replaced), and the generated-site files via their builders.
 
 **Delivery record** — appended below as the work lands (per ground rules: small, frequent commits).
+
+### 74.1 Delivery record — session `arena/cdf3a108-nba1`, 2026-11-19T13:2xZ
+
+**C01 claim** — pushed 12:2xZ (banner + §0b row + this section), before any file was touched.
+
+**C02 first-hand official re-read** — three team-stat pages + standings + injury index read through the
+platform web-fetch channel at 12:2x–12:45Z; 30 rows x 3 pages + 30 standings rows typed verbatim with
+per-row `source_url` + `verified_at_utc` into `data/official/teams_reread_2026-11-19_cdf3a108.json` and
+`data/official/standings_reread_2026-11-19_cdf3a108.json`. The LAL/UTA one-game lag (F-929-01, F-89F-04,
+S-89F-02, Q37) is **resolved on the official pages** (both 16 GP) and the diff against the 05:55Z capture
+is exactly 14 fields on those two clubs. Standings identity holds (home wins 111 == road losses 111;
+home games 221; rate 0.5023 = the pinned rate, unchanged).
+
+**C03 recut** — `scripts/recut_cdf3a108.py` (formulas verbatim from `recut_2026_11_19.py`; input plumbing
+only). Gates G1–G5 **all PASS for the first time** (G3/G4 recorded FAIL on the previous two cuts:
+444 team-games = 2 x 222 finals). Drift vs the previous cut printed, not hidden.
+
+**C04 re-origination** — `scripts/originate_horizon_cdf3a108.py` byte-identical to the 929395a5 formulas
+(proven by `diff` excluding attribution strings). 26 games re-priced. Per-game diff vs the 05:45Z seal:
+PHX@UTA −7.6→−6.4 / total 227.0→225.8, SAC@LAL 22.1→20.7 / 237.4→235.3, DAL@UTA −7.5→−6.3 / 221.7→220.5,
+HOU@DEN −8.2→−8.3 (rounding), every other spread unchanged; totals drift ≤ +0.2 from the league-baseline
+re-weight. **The three movements match `arena/d66245d4-nba1`'s independent re-price (+1.21/−1.34,
+−1.41/−2.19, +1.20/−1.35) to the published rounding** — an independent reader with the same formula.
+
+**C05 amended pre-tip seal** — `data/archive/seal_2026-11-19T1300Z/horizon_{lines,picks}_2026-11-19.json`,
+ledger **entry 18** (`pre_tip_publication`, `supersedes_entry: 17`, published 12h+ before the first tip
+2026-11-20T01:00Z). 26 singles carry the **same pick_line on every row** as the 05:45Z seal — only four
+`model_home_win_prob` fields moved (PHX@UTA 0.3247→0.3509, HOU@DEN 0.3119→0.3097, SAC@LAL 0.907→0.8922,
+DAL@UTA 0.3268→0.3531) and one parlay's leg probability. `verify_ledger.py` chain OK (18 entries).
+
+**C06 settlement seal rule** — `scripts/settle_slate.py` now grades the **latest** pre-tip seal the ledger
+committed to (the ledger's `files` map is the seal index); a pre-tip amendment is what settles; any bytes
+no entry committed to are refused (exit 4). Cross-scope edit (owner `arena/ca442d3d-nba1`, delivered §65),
+logged here as required; pinned by `scripts/test_settle_seal_cdf3a108.py` (3 cases: amended seal graded;
+single seal backwards compatible; tampered bytes refused).
+
+**C07 R01 last mile (takeover of §73's open tail — handoff logged in the top banner).** Three causes,
+all measured, all fixed:
+1. `S1_season`/`S2_train` declared unreadable in `data/raw/unreadable_sources.json` (evidence +
+   expiry 2026-12-19 + anti-rot re-check; the earlier "readable in some runs" premise is contradicted by
+   every committed run record since 2026-11-15 and by 89f7b601's byte captures). The gate, the promoter
+   (`promote_team_advanced`'s missing-capture path, evidence-gated so §73's missing-evidence property
+   stays pinned by `test_promote_official.py`), and the two S1-specific gate blocks are declaration-aware
+   with the staleness published (F-CDF-03).
+2. **Publish-path defect (F-CDF-02, High)**: one `git add` listing `data/raw/standings.json` first —
+   a path with 0 commits — aborted the whole staging block on every run, so **every verified promotion
+   was silently dropped** from the published tree (measured: `auto/refresh-20261119-120839` carries only
+   `_capture_*` although its own run record proves promote wrote the promoted outputs at 12:08:36Z).
+   Per-path staging now, with a loud notice for never-existing declared snapshots.
+3. **Operational proof recorded**: production run
+   [44526320610](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44526320610) executed
+   **Rebuild only after all freshness and provenance gates pass — SUCCESS** (Report-why-blocked SKIPPED):
+   the first rebuild execution since 2026-11-15T12:43:11Z. Step transcript:
+   `verify/2026-11-19-cdf3a108/refresh_run_44526320610_steps.json`. The trailing run-level `cancelled`
+   is the shared `refresh-official-global` group cancelling the post steps after Publish completed —
+   recorded, not dressed up. **R01 -> done.**
+
+**Adoption of the stranded auto-refresh branch** (integration action): `auto/refresh-20261119-120839`
+published captures with **no PR** (its `gh pr create` failed silently — S-CDF-03). Its payloads (10
+official 11/19 injury PDFs, consecutive-edition diffs, the 12:03:37Z run record) were adopted onto this
+branch and `data/raw/injuries.json` re-promoted to the **11/19 07:00 AM ET** edition (44 rows,
+digest-bound). Editions after 07:00 AM remain uncaptured (F-CDF-01).
+
+**C08 registers** — A21/A22 answered (the lag adoption; the three R01 causes), Q38/Q39 opened (pick
+probability sigma basis; S1's two records — both adopted from d66245d4's seat which could not edit
+shared registers), flags F-CDF-01..06, suggestions S-CDF-01..03, requirements R01 done + R04/R09/R20/
+R30/R32 re-evidenced, executive.json + EXECUTIVE_SUMMARY.md §0c.
+
+**C09 gate battery (all measured on this branch before the PR):**
+
+| Gate | Result |
+| --- | --- |
+| verify_all | VERIFY OK (0 failures) |
+| verify_dashboard | VERIFY OK |
+| verify_integration | PASSED (0 errors) |
+| check_links / check_site / check_rendered | PASS / PASS / PASS |
+| check_registers | REGISTERS OK (2,248 fields) |
+| check_build_data | PASS |
+| verify_ledger | chain OK (18 entries) |
+| scripts/test_*.py (15 files) | 0 failures |
+| render_check.mjs | 167 pages, 13,174 blocks, 0 problems |
+| refresh_gate / promote_official | PASS (5 by declaration) / exit 0 |
+
+**Parallel-session note.** `arena/fb91550a-nba1` (§77, F-915-06 — restoring 25 verified finals to the
+dispersion corpus) was live during this session on the same `refresh-official-global` queue; no files
+overlap (their scope is the HCA/dispersion constants, this session's constants are re-derived from the
+same formulas and will pick up their correction at merge if they land). The collision class of F-CA-04
+(cancel-in-progress queue) cancelled the trailing post steps of run 44526320610 — the record above
+says so rather than hiding it.
