@@ -1,0 +1,122 @@
+{
+ "title": "Official finals 2026-11-17 (first-hand read 2026-11-19)",
+ "source": "https://www.nba.com/games?date=2026-11-17 and per-game LINESCORES on https://www.nba.com/game/<slug>",
+ "retrieved_utc": "2026-11-19T05:46Z",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "away_pts": 111,
+   "home_pts": 102,
+   "away_quarters": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "home_quarters": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "ot_periods": 0,
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "away_pts": 105,
+   "home_pts": 93,
+   "away_quarters": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "home_quarters": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "ot_periods": 0,
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "away_pts": 105,
+   "home_pts": 106,
+   "away_quarters": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "home_quarters": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "ot_periods": 0,
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "away_pts": 132,
+   "home_pts": 107,
+   "away_quarters": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "home_quarters": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "ot_periods": 0,
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "away_pts": 114,
+   "home_pts": 118,
+   "away_quarters": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "home_quarters": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "ot_periods": 1,
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
+  }
+ ],
+ "quarter_sum_check": "all 10 team lines sum to printed finals (verified in verify/2026-11-19-39b70241/check_finals.py)",
+ "retrieved_by": "arena/39b70241-nba1 via fetch_page (agent fetch channel)",
+ "verification": "each game read on its own nba.com game-summary page: GAME INFO (date, arena, attendance, officials) plus the LINESCORES table; the printed final is the Final column and the quarter array is Q1..Qn of that table; sum(quarters)==final asserted for all 17 games x 2 teams by verify/2026-11-19-39b70241/check_finals.py"
+}

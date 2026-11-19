@@ -1,0 +1,78 @@
+name: Capture newest injury PDFs (39b70241)
+
+# Session arena/39b70241-nba1, COORDINATION §66 (Y02).
+#
+# Requirement R03 says every official injury PDF is stored with its timestamp and
+# consecutive reports are diffed.  The archive on this branch stops at
+# 2026-11-17 11:30 AM ET, so the editions that gate the 2026-11-19 - 2026-11-22
+# slate are missing.  A session sandbox can read a page but cannot write PDF
+# bytes, so the fetch runs on a runner that has the network and commits the
+# content-addressed bytes back to this session's branch, where the parsers and
+# checks run locally against them.
+#
+# Deliberately narrow (same shape as capture-injury-07920bdc.yml, reviewed on the
+# board at §60):
+#   * runs only on this session's branch, and only when this file or the capture
+#     script itself changes - it cannot arm itself in a loop and cannot be armed
+#     by another session's push;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it writes only data/raw/injury_pdfs/** (the shared PDF archive, append-only)
+#     and verify/2026-11-19-39b70241/** (this session's own record);
+#   * the fetch script refuses any host other than official.nba.com and
+#     ak-static.cms.nba.com.
+
+on:
+  push:
+    branches: [arena/39b70241-nba1]
+    paths:
+      - scripts/capture_injury_39b70241.py
+      - .github/workflows/capture-injury-39b70241.yml
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "only consider editions dated on/after (YYYY-MM-DD)"
+        required: false
+        default: "2026-11-18"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-injury-39b70241
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch the newest official injury-report PDFs
+        run: python3 scripts/capture_injury_39b70241.py --max 40 --since "${{ github.event.inputs.since || '2026-11-18' }}"
+
+      - name: Parse every archived edition and diff consecutive reports
+        run: |
+          python3 engine/injury_diff.py --pdf-dir data/raw/injury_pdfs \
+            --out-dir data/parsed/injury_diffs 2>&1 | tail -80
+
+      - name: Commit captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/injury_pdfs data/parsed/injury_diffs verify/2026-11-19-39b70241
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture newest official injury PDFs (39b70241 Y02) [skip ci]"
+          # Rebase in case the session pushed while the run was in flight; never
+          # force, so another session's or the owner's work is never discarded.
+          git pull --rebase origin arena/39b70241-nba1
+          git push origin HEAD:arena/39b70241-nba1
