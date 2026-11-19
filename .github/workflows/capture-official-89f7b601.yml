@@ -1,30 +1,47 @@
 name: Capture official stats bytes (89f7b601)
 
-# Session arena/89f7b601-nba1, COORDINATION.md §69 (T02).
+# Session arena/89f7b601-nba1, COORDINATION.md §69 (T02/T03).
 #
 # The agent sandbox reaches only github.com / npm / pypi, so www.nba.com and
 # stats.nba.com cannot be read as bytes there (measured: `curl` returns
 # http_code 000 for both).  The five page parsers the scheduled refresh runs
-# return 0 rows while the fetches return HTTP 200 and ~294 KB bodies, so the
+# return 0 rows while the fetches return HTTP 200 with 225-295 KB bodies, so the
 # repair has to be developed against the *delivered bytes*, not a recollection.
 # This workflow puts that capture on a runner and commits the content-addressed
 # artifacts back to this session's branch.
 #
+# Two capture layers, because the first one is what proves the second is needed:
+#
+#   1. `capture_official_89f7b601.py` stores the exact response bytes.  Measured
+#      from those bytes: 0 `/team/` links, 0 `/stats/team/` links, 0 `rowSet`,
+#      and on the standings page 0 `<tr>` elements at all.  The tables are
+#      mounted client-side, so no string parse can ever yield 30 rows.  The same
+#      run measured the data layer behind those tables (stats.nba.com
+#      leaguedashteamstats / leaguestandings) as unreachable from a runner:
+#      4 endpoints x 3 attempts x 25s, every attempt TimeoutError, no HTTP status.
+#   2. `render_official_89f7b601.py` therefore runs a headless browser on the
+#      same official URLs, waits for the table, and stores the rendered DOM plus
+#      every <table> as text cells.  That is the artifact the parser can be
+#      tested against.
+#
 # Deliberately narrow:
-#   * runs only on this session's branch, only when this file or the capture
-#     script changes - it cannot arm itself in a loop, and another session's
-#     push cannot arm it;
+#   * runs only on this session's branch, only when one of the three files
+#     changes - it cannot arm itself in a loop, and another session's push
+#     cannot arm it;
 #   * the bot commit carries [skip ci], which does not trigger workflows;
 #   * it writes only data/raw/session-89f7b601/** and commits nothing else;
-#   * the script refuses any host outside the four official ones;
-#   * a partial capture exits 3 and the job stays red, so "success" always
-#     means every endpoint produced bytes.
+#   * the fetch script refuses any host outside the four official ones;
+#   * the commit step runs AFTER both captures, so a green job always means the
+#     artifacts are on the branch (the first version of this file committed
+#     before the render step ran, and the render output was silently dropped -
+#     recorded in §69.5 rather than quietly fixed).
 
 on:
   push:
     branches: [arena/89f7b601-nba1]
     paths:
       - scripts/capture_official_89f7b601.py
+      - scripts/render_official_89f7b601.py
       - .github/workflows/capture-official-89f7b601.yml
   workflow_dispatch:
 
@@ -38,7 +55,7 @@ concurrency:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -66,8 +83,7 @@ jobs:
               raise SystemExit(0)
           m = json.load(open(p))
           for r in m["results"]:
-              st = r.get("status")
-              if st == "stored":
+              if r.get("status") == "stored":
                   s = r.get("structure", {})
                   print(f"STORED {r['name']:<22} {r['bytes']:>8} B  "
                         f"tr={s.get('html_tr_elements')} "
@@ -80,18 +96,49 @@ jobs:
                   print(f"MISSING {r['name']:<22} {errs}")
           PY
 
-      - name: Commit the captured bytes back to this branch
+      - name: Install a headless browser
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Render the five pages and store the live DOM
+        if: always()
+        continue-on-error: true
+        run: python3 scripts/render_official_89f7b601.py
+
+      - name: Record what the render produced
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/session-89f7b601/render/render_manifest.json"
+          if not os.path.exists(p):
+              print("::warning::no render manifest was written")
+              raise SystemExit(0)
+          m = json.load(open(p))
+          for r in m["results"]:
+              if r.get("status") == "stored":
+                  print(f"RENDERED {r['name']:<22} {r['bytes']:>9} B  "
+                        f"tables={r['n_tables']} rows={r['n_rows_total']} "
+                        f"selector_found={r.get('selector_found')}")
+              else:
+                  print(f"NO-DOM   {r['name']:<22} {r.get('error')}")
+          PY
+
+      - name: Commit every captured artifact back to this branch
         if: always()
         run: |
           set -eu
           if [ -z "$(git status --porcelain data/raw/session-89f7b601)" ]; then
-            echo "nothing captured"
+            echo "nothing new to commit"
             exit 0
           fi
           git config user.name  "nba1-capture-bot"
           git config user.email "nba1-capture-bot@users.noreply.github.com"
           git add data/raw/session-89f7b601
-          git commit -m "89f7b601 capture: byte-exact official bodies for the five unparsed sources [skip ci]"
+          git commit -m "89f7b601 capture: official bytes + rendered DOM for the five unparsed sources [skip ci]"
           for i in 1 2 3 4 5; do
             if git pull --rebase origin arena/89f7b601-nba1 && git push origin HEAD:arena/89f7b601-nba1; then
               exit 0
@@ -105,22 +152,6 @@ jobs:
       # scheduled refresh fails on. The four stats.nba.com API probes are
       # evidence-gathering: a host that will not answer a runner is a finding
       # to record, not a reason to lose the page bytes.
-      # A headless browser, because the delivered HTML has zero team rows in it
-      # (measured: see the structural digest in capture_manifest.json) and the
-      # stats.nba.com data layer times out from a runner. Letting the page
-      # render itself is the only remaining path to the same official table.
-      - name: Install a headless browser
-        if: always()
-        continue-on-error: true
-        run: |
-          python3 -m pip install --quiet playwright
-          python3 -m playwright install --with-deps chromium
-
-      - name: Render the five pages and store the live DOM
-        if: always()
-        continue-on-error: true
-        run: python3 scripts/render_official_89f7b601.py
-
       - name: Fail the job when any PAGE source was not captured
         if: always()
         run: |
