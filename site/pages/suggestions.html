@@ -504,6 +504,36 @@
 <td>Approve lifting F138 game by game.</td>
 <td class="src"><span class="na" title="source id verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>S-89F-01</td>
+<td>Data coverage</td>
+<td><b>Make the official games feed the standings source of record, and delete the standings parser</b></td>
+<td>F-89F-01 and F-89F-02 together close every path to the standings page from CI: the HTML has no table, the data layer times out, and a browser is refused at the edge. Meanwhile the per-date games feed is reached successfully on every scheduled run and prints each team's record. The pipeline is currently failing on a source it cannot read while ignoring a source it reads every day.</td>
+<td>- Derive standings W-L from the games feed, corroborate with the recorded per-team URLs, and retire the standings parser and its evidence files <span class='fine'>(effort: Low - the parse already exists in engine/fetch_official.py and the check is written (scripts/verify_standings_89f7b601.py); risk: Low - it corroborates 30/30 today; the eleven non-W-L fields would need to be declared unavailable rather than published; unlocks: R01's standings half becomes genuinely green instead of failing closed forever; removes a permanently red gate)</span><br>- Keep trying to reach the standings page and leave the gate red <span class='fine'>(effort: None; risk: High - a permanently red gate trains everyone to ignore gates; unlocks: Nothing)</span><br>- Buy or broker a data feed <span class='fine'>(effort: High; risk: Medium; unlocks: Everything the page carries including GB and splits, at a cost and with a third party in the provenance chain)</span></td>
+<td>Take option 1. It is the only option that turns a measured structural impossibility into a green gate without inventing data. The eleven fields the feed cannot carry must be rendered as unavailable, not estimated.</td>
+<td>Approve retiring the standings-page parser in favour of the games feed plus the corroboration check.</td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-89F-02</td>
+<td>Process</td>
+<td><b>Gate the model input on the drift check before any horizon is priced</b></td>
+<td>data/derived/team_stats_recut.json is priced from official tables that move several times a day. A re-read found 5 of 80 compared rows stale, including a GP change that a standing flag had already described. Nothing in the pipeline notices: the recut is rebuilt by a session script, not by a gate.</td>
+<td>- Run scripts/recut_drift_89f7b601.py as a pre-origination step and refuse to originate a horizon when verdict is DRIFT <span class='fine'>(effort: Low - the check exists and exits 6 on drift; risk: Low - it can only block a stale price, never publish a wrong one; unlocks: Every horizon is priced from inputs that were verified against the official page in the same cycle)</span><br>- Keep the check as a report only <span class='fine'>(effort: None; risk: Medium - the report will be read once and then ignored; unlocks: Visibility without enforcement)</span></td>
+<td>Take option 1. A check that cannot block is a comment.</td>
+<td>Approve wiring the drift check into origination as a hard gate.</td>
+<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-89F-03</td>
+<td>Verification</td>
+<td><b>Publish a per-source reachability matrix, so 'cannot parse' never again hides 'cannot reach'</b></td>
+<td>Five sources failed for a day under the label 'parse failure' while the real condition was 'not deliverable'. The difference matters: a parse failure is fixable in code, a delivery failure is not. The evidence needed to tell them apart was already being collected (counts of table rows, team links, rowSet) and was being thrown away.</td>
+<td>- Publish a small table per refresh run: source, HTTP status, bytes, table rows, team links, rowSet present, parse result, verdict (delivered-but-unrenderable / unreachable / parsed) <span class='fine'>(effort: Low - every field already exists in the refresh record after F-89F-05; risk: Low; unlocks: A reader can tell instantly whether a red gate means 'NBA changed its page' or 'NBA refused us')</span><br>- Keep the single 'parsed 0' line <span class='fine'>(effort: None; risk: High - the same day-long confusion repeats on the next page change; unlocks: Nothing)</span></td>
+<td>Take option 1. It is a rendering job on data that already exists.</td>
+<td>Approve a reachability table on the source-check page.</td>
+<td class="src"><span class="na" title="source id data/raw/_last_refresh.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

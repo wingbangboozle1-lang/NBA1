@@ -177,6 +177,18 @@ jobs:
           echo "$n test file(s) run, $bad failing."
           [ "$bad" -eq 0 ]
 
+      # Added by session arena/89f7b601-nba1 (COORDINATION §69.6).
+      #
+      # Every gate above passed while docs/b/pages/*.html fetched a data
+      # directory that did not exist, so build B's pages rendered empty on the
+      # live site. check_site.py only asked whether pages and links exist;
+      # check_rendered.py only executes the Command Center; verify_all.py only
+      # audits rows that were rendered. A page that loads its chrome and then
+      # fetches nothing is invisible to all three. This resolves the data URL
+      # each page's own script builds and requires the file to be there.
+      - name: Every build's pages can load the data they fetch
+        run: python3 scripts/check_build_data.py
+
       - name: Static link and source check across every build
         run: python3 scripts/check_links.py
 

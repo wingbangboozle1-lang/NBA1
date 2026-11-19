@@ -328,6 +328,30 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
+<tr id="Q35">
+<td>Q35</td>
+<td>Is the standings page, or the games feed, the source of record for team records?</td>
+<td>Two official sources disagree about nothing but agree about little: the standings page cannot be read from CI at all (0 table rows in the delivered HTML, data layer times out, browser refused at the edge) while the games feed is read on every run and prints W-L for all 30 teams. No document says which one the model is allowed to treat as authoritative when only one of them is reachable, and the published pipeline currently depends entirely on the unreachable one.</td>
+<td>Decide the source of record explicitly and record it in COORDINATION.md. Then either retire the standings parser (F-89F-01) or obtain a network route to it. There is no third option that keeps the current gate green.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q36">
+<td>Q36</td>
+<td>What should be published for the eleven standings fields the games feed cannot carry?</td>
+<td>GB, conference record, division record, home/road/neutral splits, OT record, LAST10 and streak are only on the standings page. That page is unreadable from CI. The games feed verifies W-L for all 30 teams and nothing else. So the site can either publish those eleven fields from a single unverified transcription, or publish them as unavailable.</td>
+<td>Choose one: (a) publish them from the transcription and label them single-source, or (b) blank them and flag them. The current pages do neither explicitly, which is the defect.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q37">
+<td>Q37</td>
+<td>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</td>
+<td>The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.</td>
+<td>Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q4">
 <td>Q4</td>
 <td>How much of a team does an injury actually cost?</td>
@@ -369,7 +393,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">31 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">34 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -731,6 +755,33 @@
 <td><b>Publish the referee crew and attendance the gamebooks already print</b></td>
 <td>F138 blanked attendance and officials for all eight 11/16 games because one session could not confirm them. A second independent read of the same gamebook PDFs confirms them for at least CHI@CLE (19432, sellout, three officials named) and ORL@BOS (three officials named). The cells are on the official document; only the pipeline connection is missing.</td>
 <td>Take option 2. Every filled cell has two independent reads and an official PDF link; the games whose gamebook printed no attendance stay blank and stay flagged.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-89F-01</td>
+<td><span class="chip info">Data coverage</span></td>
+<td><b>Make the official games feed the standings source of record, and delete the standings parser</b></td>
+<td>F-89F-01 and F-89F-02 together close every path to the standings page from CI: the HTML has no table, the data layer times out, and a browser is refused at the edge. Meanwhile the per-date games feed is reached successfully on every scheduled run and prints each team's record. The pipeline is currently failing on a source it cannot read while ignoring a source it reads every day.</td>
+<td>Take option 1. It is the only option that turns a measured structural impossibility into a green gate without inventing data. The eleven fields the feed cannot carry must be rendered as unavailable, not estimated.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-89F-02</td>
+<td><span class="chip info">Process</span></td>
+<td><b>Gate the model input on the drift check before any horizon is priced</b></td>
+<td>data/derived/team_stats_recut.json is priced from official tables that move several times a day. A re-read found 5 of 80 compared rows stale, including a GP change that a standing flag had already described. Nothing in the pipeline notices: the recut is rebuilt by a session script, not by a gate.</td>
+<td>Take option 1. A check that cannot block is a comment.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-89F-03</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>Publish a per-source reachability matrix, so 'cannot parse' never again hides 'cannot reach'</b></td>
+<td>Five sources failed for a day under the label 'parse failure' while the real condition was 'not deliverable'. The difference matters: a parse failure is fixable in code, a delivery failure is not. The evidence needed to tell them apart was already being collected (counts of table rows, team links, rowSet) and was being thrown away.</td>
+<td>Take option 1. It is a rendering job on data that already exists.</td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>
