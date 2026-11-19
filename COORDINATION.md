@@ -12130,3 +12130,5 @@ Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The plat
 
 **Sources used in this seat (all official, all linked):** https://official.nba.com/nba-injury-report-2026-27-season/ (index); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf (header + rows as text); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf (header, as text; the edition's bytes were hashed on a runner per `data/parsed/injury_diffs/editions/Injury-Report_2026-11-16_09_45AM.json`).
 
+
+**Delivery:** PR [#194](https://github.com/wingbangboozle1-lang/NBA1/pull/194) merged at 2026-11-19T12:17:56Z as `b5e53576b594edfe8160ffe29c6ecff042aa0afc`. CI validation passed. GitHub Pages deployment run [44522582003](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44522582003) succeeded. Its runner emitted a non-blocking Node.js 20 deprecation warning for `actions/upload-artifact@v4`; deployment completed successfully.
