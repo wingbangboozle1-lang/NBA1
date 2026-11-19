@@ -354,7 +354,30 @@
    },
    "note": "Rolling-slate publication for the 2026-11-19 .. 2026-11-22 window, generated before the first tip of the window (2026-11-20T01:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
    "prev": "6a5e074814621a79ce02c0ecf819f36a08536e3a7cb14a12f5808ddf7c41d924"
+  },
+  {
+   "entry": 16,
+   "type": "sgp_grading_record",
+   "at_utc": "2026-11-19T06:20Z",
+   "file": "data/settlement/sgp_grades_2026-11-17.json",
+   "sha256": "27622106ecb2ee72d43fb6bf8a9fb5fe65b80816f9bdebac986cc45cf7bffa88",
+   "graded_from": [
+    "data/settlement/settlement_2026-11-17.json",
+    "data/archive/horizon_picks_2026-11-17.json"
+   ],
+   "summary": {
+    "tickets": 4,
+    "won": 1,
+    "lost": 2,
+    "void": 1,
+    "unsettled": 0,
+    "legs_void": 4,
+    "legs_graded": 4,
+    "units": -1.1
+   },
+   "note": "All four published tickets on the 11/17 slate are graded from official box-score rows, official box-score Inactive Players blocks and one official gamebook inactive list, all read in this session on 2026-11-19. Net -1.10 paper units (1 won, 2 lost, 1 void); the sealed settlement file is not rewritten, and the slate's combined paper result becomes -15.90 units across singles, parlays and SGPs.",
+   "prev": "683c666a1e5391e08f3299f9cdb9a48c352d067e21df2df1a9cc3b45257ac614"
   }
  ],
- "head": "683c666a1e5391e08f3299f9cdb9a48c352d067e21df2df1a9cc3b45257ac614"
+ "head": "56ca827327861d1058f097d8c6409e538c36efd19845373d3098991f76761d75"
 }

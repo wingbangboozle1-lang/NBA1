@@ -82,15 +82,16 @@
     {
       "id": "G4_ledger_integrity",
       "requirement": "scripts/verify_ledger.py exits 0 and prints 'ledger chain OK'",
-      "observed": "ledger chain OK",
-      "observed_detail": "ledger chain OK",
-      "passed": true,
+      "observed": "failed",
+      "observed_detail": "ledger chain BROKEN",
+      "passed": false,
       "source": "data/ledger/ledger.json via scripts/verify_ledger.py"
     }
   ],
   "open": false,
   "closed_by": [
     "G1_validation",
-    "G2_sample_floor"
+    "G2_sample_floor",
+    "G4_ledger_integrity"
   ]
 }
