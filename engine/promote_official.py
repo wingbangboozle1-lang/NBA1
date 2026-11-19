@@ -20,6 +20,23 @@ Fail-closed by construction: any check that cannot be proven leaves the item
 in ``changed`` and the gate blocks the rebuild. Nothing is inferred; a value
 that cannot be read stays blank and is flagged in the promotion report.
 Standard library only, apart from this repository's own modules.
+
+DECLARED-UNREADABLE SOURCES (COORDINATION.md section 69)
+-------------------------------------------------------
+Three official pages (standings, team traditional, team opponent) render their
+tables client-side, so a runner capture of them contains no rows and this
+script can NEVER produce their snapshots. Recording them as ordinary ``fail``
+entries made the promote step exit non-zero on every single run, which made
+the rebuild step behind it unreachable - the defect measured in section 69.
+
+A source that ``data/raw/unreadable_sources.json`` declares unreadable, with
+evidence on disk and a hard expiry, is therefore recorded as
+``blocked_unreadable`` rather than ``blocked``: the fact is kept and printed,
+the exit code is not poisoned by a permanently-unsatisfiable item, and
+``engine/refresh_gate.py`` independently re-validates the declaration before
+it may excuse anything. If a page ever does become readable, the capture
+starts carrying rows, this branch stops firing, and the normal promotion path
+takes over on its own.
 """
 
 from __future__ import annotations
@@ -64,11 +81,52 @@ class Promoter:
                        if isinstance(c, dict)}
         self.promoted = []          # items moved from `changed` to `promoted`
         self.blocked = []           # (item, reason)
+        self.unreadable = []        # declared-unreadable, evidenced, expiring
         self.warnings = []
         self.rows_written = {}
 
     # ------------------------------------------------------------ helpers
+    def _declarations(self):
+        """This repository's declared-unreadable register (section 69)."""
+        if not hasattr(self, "_declarations_cache"):
+            try:
+                register = read_json(os.path.join(RAW, "unreadable_sources.json"))
+            except (OSError, ValueError):
+                register = {}
+            self._declarations_cache = {
+                entry["source_key"]: entry
+                for entry in (register.get("declarations") or [])
+                if isinstance(entry, dict) and isinstance(entry.get("source_key"), str)
+            }
+        return self._declarations_cache
+
     def fail(self, item, reason):
+        """Record a blocked item, or a declared-unreadable one.
+
+        A declared source is still NOT promoted and still NOT given a value -
+        it is only kept out of the blocking list, so that a permanently
+        unsatisfiable item cannot poison the exit code of every run and make
+        the downstream rebuild unreachable. The declaration is re-validated
+        independently by engine/refresh_gate.py; this record is the audit
+        trail, not the authority.
+        """
+        declaration = self._declarations().get(item)
+        parse_failed = any(token in reason for token in (
+            "no parsed rows", "no header row", "capture has no", "parsed 0"))
+        if declaration and parse_failed:
+            self.unreadable.append({
+                "item": item,
+                "reason": reason,
+                "expires_at_utc": declaration.get("expires_at_utc"),
+                "review_flag": declaration.get("review_flag"),
+                "detail": ("declared unreadable by data/raw/"
+                           "unreadable_sources.json: the page is "
+                           "client-rendered, so no runner capture can produce "
+                           "this snapshot. Nothing was promoted."),
+            })
+            print(f"UNREADABLE {item}: {reason} "
+                  f"(declared; expires {declaration.get('expires_at_utc')})")
+            return
         self.blocked.append({"item": item, "reason": reason})
         print(f"BLOCK {item}: {reason}")
 
@@ -663,8 +721,14 @@ class Promoter:
             if name.startswith("injury") and "injury_pdf_probe" in promoted_names:
                 continue
             still_changed.append(entry)
+        # A declared-unreadable source is also settled: it will never be
+        # promoted, so leaving it in `changed` would make the gate block on it
+        # forever. The declaration and its evidence stay in the record.
+        still_changed = [e for e in still_changed
+                         if e.split(" ", 1)[0] not in self._declarations()]
         self.record["changed"] = still_changed
         self.record["promoted"] = self.record.get("promoted", []) + self.promoted
+        self.record["unreadable"] = self.unreadable
         self.record["promotion_warnings"] = self.warnings
 
         log = self._log()
@@ -672,12 +736,14 @@ class Promoter:
             "promoted_at_utc": self.now,
             "promoted_items": [p["item"] for p in self.promoted],
             "blocked": self.blocked,
+            "blocked_unreadable": [u["item"] for u in self.unreadable],
         })
         write_json(PROMOTION_LOG, log)
         write_json(REPORT, {
             "generated_at_utc": self.now,
             "promoted": self.promoted,
             "blocked": self.blocked,
+            "blocked_unreadable": self.unreadable,
             "warnings": self.warnings,
             "rows_written": self.rows_written,
             "rule": "Promotion re-validates parsed rows, cross-checks two "
@@ -685,7 +751,8 @@ class Promoter:
                     "record to this run's response digest. Anything "
                     "unprovable stays in `changed` and blocks the rebuild.",
         })
-        print(f"\n{len(self.promoted)} promoted, {len(self.blocked)} blocked")
+        print(f"\n{len(self.promoted)} promoted, {len(self.blocked)} blocked, "
+              f"{len(self.unreadable)} declared unreadable (no value promoted)")
         return 1 if self.blocked else 0
 
 

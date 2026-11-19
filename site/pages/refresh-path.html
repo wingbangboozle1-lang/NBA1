@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheduled refresh publish path &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="../../model-v2.html">Model v2 (disagreement-first)</a>
+      <a href="../../picks.html">Legacy horizon picks file</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="roll.html">Rolling Slate</a>
+<a href="projection.html">Projection Surface</a>
+<a href="bet-surface.html">Bet Surface (gated)</a>
+<a href="bet.html">Bet surface (gate state)</a>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>RESULTS &amp; SETTLEMENT</h3>
+<a href="results.html">Official Results &amp; Settlement</a>
+<a href="player-logs.html">Player Game Logs</a>
+<a href="settlement.html">Settlement &amp; Ledger</a>
+<a href="injury-ledger.html">Injury PDF Ledger</a>
+<a href="refresh-path.html">Scheduled Refresh Path</a>
+<a href="official-feed.html">Official Result Feed</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+<a href="estimators.html">Two Estimators</a>
+<a href="luck-z.html">Luck as a z-score</a>
+<a href="parlay-pricing.html">Parlay Pricing</a>
+<a href="rest-travel.html">Rest, B2B &amp; Travel</a>
+<a href="rotation.html">Minutes Redistribution</a>
+<a href="brief-coverage.html">Requirements Coverage</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+<a href="verify-2026-11-15.html">Nov 15 re-verification</a>
+<a href="verify-2026-11-16.html">Nov 16 re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 19 NOV</h3>
+<a href="../../live/live-horizon.html">Live horizon check &amp; calibration</a>
+<a href="../../live/decision-register.html">Decision register</a>
+<a href="../../live/requirement-coverage.html">Requirement coverage</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Scheduled refresh publish path</h1>
+      <p class="sub">Whether the scheduled job's capture, promotion and rebuild path can actually run, measured from the run record and from git history.</p>
+    </div>
+    <h2 class="sec">Scheduled refresh publish path</h2><p class="secsub">What the scheduled job fetches, what it can promote, and whether the rebuild step behind its fail-closed gate can ever be reached.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Run-record field</th>
+<th>Measured value</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>record path</td>
+<td><code>data/raw/_last_refresh.json</code></td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">data/raw/_last_refresh.json</a></td>
+</tr>
+<tr>
+<td>captured at (UTC)</td>
+<td>2026-11-19T06:13:47Z</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">data/raw/_last_refresh.json</a></td>
+</tr>
+<tr>
+<td>fetch step</td>
+<td>success</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">refresh-data.yml</a></td>
+</tr>
+<tr>
+<td>promotion step</td>
+<td>failure</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">refresh-data.yml</a></td>
+</tr>
+<tr>
+<td>freshness gate ok</td>
+<td>false</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">refresh-data.yml</a></td>
+</tr>
+<tr>
+<td>rebuild step (this record)</td>
+<td>skipped</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">refresh-data.yml</a></td>
+</tr>
+<tr>
+<td>rebuild has EVER run</td>
+<td>yes</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">data/raw/_last_refresh.json</a></td>
+</tr>
+<tr>
+<td>last successful rebuild</td>
+<td>2026-11-15T12:43:11Z</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">data/raw/_last_refresh.json</a></td>
+</tr>
+<tr>
+<td>run records read / skipped-or-failed since</td>
+<td>18 / 7</td>
+<td class="src"><a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">data/raw/_last_refresh.json</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Read from <code>data/raw/_last_refresh.json</code>, the file the scheduled workflow writes, and from the workflow source. No value here is typed by hand. These are repository run-record fields; no official NBA page publishes them, so the honest source is the committed file.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Source key</th>
+<th>Classification</th>
+<th>Gate requires it</th>
+<th>Commits touching the required snapshot</th>
+<th>Model pipeline loads it</th>
+<th>Unreadable declaration expires</th>
+<th>Measured parse problem</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><code>S10_team_opponent</code></td>
+<td>unreadable</td>
+<td>yes</td>
+<td>0</td>
+<td>no</td>
+<td>2026-12-19T00:00:00Z</td>
+<td>html_table: no header row with a Team column found</td>
+<td class="src"><a class="source" href="https://www.nba.com/stats/teams/opponent" target="_blank" rel="noopener">https://www.nba.com/stats/teams/opponent</a></td>
+</tr>
+<tr>
+<td><code>S1_season</code></td>
+<td>unreadable</td>
+<td>no</td>
+<td>0</td>
+<td>yes</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>TimeoutError: The read operation timed out</td>
+<td class="src"><a class="source" href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">https://www.nba.com/stats/teams/advanced</a></td>
+</tr>
+<tr>
+<td><code>S2_train</code></td>
+<td>unreadable</td>
+<td>no</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>no</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>TimeoutError: The read operation timed out</td>
+<td class="src"><a class="source" href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">https://www.nba.com/stats/teams/advanced</a></td>
+</tr>
+<tr>
+<td><code>S4_schedule</code></td>
+<td>readable</td>
+<td>no</td>
+<td>0</td>
+<td>yes</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a class="source" href="https://www.nba.com/schedule" target="_blank" rel="noopener">https://www.nba.com/schedule</a></td>
+</tr>
+<tr>
+<td><code>S5_injury_index</code></td>
+<td>readable</td>
+<td>no</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>no</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a class="source" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">https://official.nba.com/nba-injury-report-2026-27-season/</a></td>
+</tr>
+<tr>
+<td><code>S7_players</code></td>
+<td>unreadable</td>
+<td>no</td>
+<td>0</td>
+<td>yes</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a class="source" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">https://www.nba.com/stats/players/traditional</a></td>
+</tr>
+<tr>
+<td><code>S8_standings</code></td>
+<td>unreadable</td>
+<td>yes</td>
+<td>0</td>
+<td>no</td>
+<td>2026-12-19T00:00:00Z</td>
+<td>html_table: East: parsed 0 teams, expected 15</td>
+<td class="src"><a class="source" href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a></td>
+</tr>
+<tr>
+<td><code>S9_team_traditional</code></td>
+<td>unreadable</td>
+<td>yes</td>
+<td>0</td>
+<td>no</td>
+<td>2026-12-19T00:00:00Z</td>
+<td>html_table: no header row with a Team column found</td>
+<td class="src"><a class="source" href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">https://www.nba.com/stats/teams/traditional</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote"><b>Classification</b> is derived: <i>readable</i> means this run's capture parsed rows; <i>unreadable</i> means a committed evidence record proves the captured page carries no table; <i>unmeasured</i> means neither, and the gate blocks. <b>Commits touching the required snapshot</b> is <code>git log --all</code> over the full 884-commit history: a 0 means the file the gate demands has never existed, so no scheduled run could ever satisfy it.</p>
+<div class="banner warn"><div class="b-t">Why a declaration exists, and what it does not do</div><div class="b-b"><p>The gate used to require <code>data/raw/standings.json</code>, <code>team_traditional.json</code> and <code>team_opponent.json</code>. Those files have <b>zero commits in the repository's history</b> because the three official pages render their tables client-side &mdash; the runner's own evidence records measure 0 <code>&lt;tr&gt;</code> rows on the standings page and 0 <code>/stats/team/</code> links on the traditional page. A requirement no run can satisfy does not make the site safer; it makes the rebuild step dead code, which is what it had been since gate commit <code>25bfcea</code> (2026-11-15T11:38Z) landed after the last successful rebuild at 12:43:11Z that same day.</p><p><code>data/raw/unreadable_sources.json</code> declares those three sources unreadable with their evidence and a hard expiry (currently <b>S10_team_opponent, S8_standings, S9_team_traditional</b>). A declaration <b>never promotes a value</b> and never touches an input the model loads: none of the three is consumed by <code>engine/pipeline.py</code>. It is refused the moment the page starts parsing rows, the moment it expires, and the moment the source is not fetched at HTTP 200 in the same run.</p></div></div>
+<p class="note">Built by <code>scripts/build_dashboard.py</code> from <code>data/raw/refresh_path_audit.json</code> (generated by <code>scripts/f3cb4a98_refresh_path_audit.py</code>) and <code>data/raw/unreadable_sources.json</code>. The register is also published on the Flagged for Review page, where it can be reviewed and revoked.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

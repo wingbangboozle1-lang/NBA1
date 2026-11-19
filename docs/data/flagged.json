@@ -1680,6 +1680,36 @@
    "suggested_action": "Re-check on the next cycle: when the stat tables catch up, re-cut without the lag allowance."
   },
   {
+   "id": "F-F3C-01",
+   "severity": "High",
+   "status": "open",
+   "title": "The scheduled refresh's rebuild step has been unreachable since 2026-11-15 because its gate required three snapshots that no run can produce",
+   "detail": "Session arena/f3cb4a98-nba1, COORDINATION §69. engine/refresh_gate.py required data/raw/standings.json, data/raw/team_traditional.json and data/raw/team_opponent.json before the scheduled rebuild step in .github/workflows/refresh-data.yml would run. Measured: those three files have 0 commits across the repository's full 884-commit history (git fetch --unshallow origin was required first; a shallow clone answers 0 for everything). They cannot exist because the three official pages render their tables client-side: the runner's committed evidence records measure <tr> = 0 on the captured standings page (data/raw/_capture_evidence_S8_standings.json) and /stats/team/ = 0 with <tr> = 12 (the date-picker chrome only) on the captured traditional page. engine/fetch_official.py writes the parsed capture only in its 'if rows:' branch, and engine/promote_official.py writes the snapshot only when rows parse. The last successful rebuild was 55d7b48 at 2026-11-15T12:43:11Z; gate commit 25bfcea landed the promoted_paths requirement at 11:38Z the same day, and every run since has recorded build_outcome skipped or failure. Consequence: the brief's first requirement (refresh the official schedule, standings, team statistics and injury report for each rolling slate, then rebuild only after the gates pass) has never been satisfied in the automated path; each published model input was produced by a session reading the pages first-hand. Fixed by declaring the three sources unreadable with evidence and a hard expiry (data/raw/unreadable_sources.json) rather than by weakening the gate for readable sources; see F-F3C-02 for what the declaration does and does not permit. This flag stays open until a scheduled run is observed reaching its rebuild step.",
+   "affected": "engine/refresh_gate.py, engine/promote_official.py, .github/workflows/refresh-data.yml, data/raw/unreadable_sources.json, the scheduled 'Refresh official data' workflow",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py",
+   "suggested_action": "Watch the next scheduled refresh-data.yml run and confirm the 'Rebuild only after all freshness and provenance gates pass' step executes rather than being skipped. It will still be skipped while S1_season fails to parse (the season advanced table times out on both the page parser and the official stats.nba.com fallback) - that is a genuine transient failure and must keep blocking."
+  },
+  {
+   "id": "F-F3C-02",
+   "severity": "Medium",
+   "status": "open",
+   "title": "Three official sources are declared unreadable to the gate; the declaration is evidenced, expiring, and refuses to apply the moment a page becomes readable",
+   "detail": "Session arena/f3cb4a98-nba1, COORDINATION §69. data/raw/unreadable_sources.json declares S8_standings (https://www.nba.com/standings), S9_team_traditional (https://www.nba.com/stats/teams/traditional) and S10_team_opponent (https://www.nba.com/stats/teams/opponent) unreadable, each with the official URL, the committed evidence record, a review flag and an expiry of 2026-12-19T00:00:00Z. engine/refresh_gate.py honours a declaration only when all of these hold: it names a source the gate requires; expires_at_utc parses, is in the future and is under 400 days out; the fetcher checked that source at HTTP 200 IN THE SAME RUN; a bounded parse-failure evidence file exists on disk; and the source did NOT parse rows this run. Anything else is rejected and printed, and the original blocking requirement applies. A declaration never promotes a value: none of the three sources is consumed by engine/pipeline.py (measured - it loads team_advanced, games_completed, schedule_upcoming, injuries and players_traditional only), so no published number changes. The anti-rot rule is the important one: if a page ever starts parsing rows, the gate fails until the snapshot is actually promoted, so the declaration cannot silently outlive the problem. 12 new tests in scripts/test_refresh_gate.py and 4 in scripts/test_promote_official.py pin each of those refusals.",
+   "affected": "data/raw/unreadable_sources.json, engine/refresh_gate.py, engine/promote_official.py, scripts/test_refresh_gate.py, scripts/test_promote_official.py",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/unreadable_sources.json",
+   "suggested_action": "Re-test at the 2026-12-19 expiry by running the scheduled capture on a runner and checking whether _capture_S8_standings.json, _capture_S9_team_traditional.json or _capture_S10_team_opponent.json gained rows. If any did, delete that declaration; the gate will then require the snapshot normally and will fail until promotion succeeds."
+  },
+  {
+   "id": "F-F3C-03",
+   "severity": "Medium",
+   "status": "open",
+   "title": "The advanced team table (S1) fails its parse on the runner and its gate requirement is therefore still unmeetable in practice",
+   "detail": "Session arena/f3cb4a98-nba1, COORDINATION §69. With F-F3C-01 resolved, the refresh gate on main still prints 7 blocks. Five of them trace to S1_season: the fetcher's own parser (parse_teams_advanced) finds fewer than 30 rows in the captured page, and the fallback to the official stats.nba.com leaguedashteamstats endpoint timed out on both of its two attempts (data/raw/_capture_evidence_S1_season.json: 'TimeoutError: The read operation timed out', attempts 1 and 2). The result is that data/raw/_capture_S1_season.json is absent, so the gate cannot compare the captured rows with the promoted season-to-date snapshot, and it blocks. This is a genuine transient failure and is deliberately NOT declared: the page IS parseable in principle (engine/fetch_official.py has a dedicated parser for it and an API fallback), so declaring it would hide a real problem. The remaining two blocks are stale promotion provenance on schedule_upcoming.json (verified 2026-11-16T15:25:57Z) and injuries.json.",
+   "affected": "engine/fetch_official.py (parse_teams_advanced, STATS_API fallback), data/raw/_capture_evidence_S1_season.json, data/raw/_capture_S1_season.json",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Retry the stats.nba.com fallback with a longer timeout or a retry with backoff, and record whether the page's own HTML contains the table when fetched with the web-client headers on the runner. Do not declare S1 unreadable: it is the one team-stat source the model actually loads."
+  },
+  {
    "id": "F-89F-01",
    "severity": "High",
    "status": "open",

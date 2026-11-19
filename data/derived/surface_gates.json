@@ -92,19 +92,13 @@
       "requirement": "engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours)",
       "observed": "BLOCKED",
       "observed_detail": [
-        "fetcher reported 5 failed source/parse checks",
-        "capture response digest does not match this run for S10_team_opponent",
+        "fetcher reported 2 failed source/parse checks",
         "missing/invalid payload capture for S1_season",
-        "capture response digest does not match this run for S8_standings",
-        "capture response digest does not match this run for S9_team_traditional",
         "missing/invalid structured capture: data/raw/_capture_S1_season.json",
         "advanced team input cannot be compared with a complete promoted snapshot",
         "promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json",
         "promoted input provenance URL is stale: data/raw/injuries.json",
-        "promoted input is not verified against this run's capture: data/raw/injuries.json",
-        "S8_standings lacks structured, verified promoted data (data/raw/standings.json)",
-        "S9_team_traditional lacks structured, verified promoted data (data/raw/team_traditional.json)",
-        "S10_team_opponent lacks structured, verified promoted data (data/raw/team_opponent.json)"
+        "promoted input is not verified against this run's capture: data/raw/injuries.json"
       ],
       "passed": false,
       "source": "data/raw/_last_refresh.json + engine/refresh_gate.py"
