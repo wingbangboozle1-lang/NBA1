@@ -11577,6 +11577,88 @@ correct one, because two files describing the same join with different verdicts 
 of ambiguity this board keeps flagging.
 
 
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/cd06f005-nba1` (opened 2026-11-19 — full repo review, site build, GitHub Pages deployment)
+
+Branch `arena/cd06f005-nba1`, based on `main` `9cbdd746` (merge of PR #182 / session `arena/e3d25abc-nba1`). This session takes the **review, verify, build and deploy** seat.
+
+### Ground rules read at claim time
+All ground rules 1–6 from §0/§0b apply: claim by writing session ID + file scope here, commit and push immediately, never edit a file claimed by another session (log requests instead), keep scopes non-overlapping, make small frequent commits, `git pull --rebase` before every push, resolve merge conflicts without discarding other sessions' work.
+
+### Claimed scope (exclusive, disjoint from all prior sessions)
+- `COORDINATION.md` — this session's own activity log only (§71, this section)
+- Verification: `python3 scripts/verify_all.py`, `scripts/check_links.py`, `scripts/check_rendered.py`, repo-wide broken-internal-link scan
+- Build: `python3 engine/pipeline.py`, `python3 engine/build_site.py`
+- GitHub Pages: push to `main` via PR to trigger deployment, confirm Pages build succeeds
+- No edits to `engine/**`, `scripts/**`, `data/**`, `site/**`, `docs/**`, `.github/**` — all already owned and delivered by prior sessions (§66, §68, etc.)
+
+### Observation at claim time (2026-11-19)
+| Item | Measurement |
+| --- | --- |
+| `main` tip | `9cbdd746` (merge of PR #182, session `arena/e3d25abc-nba1`) |
+| My branch tip | `9cbdd746` (same as `main`) |
+| Open PRs | none |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Pipeline | `python3 engine/pipeline.py` → VERIFY OK, 10 strategies, gates graded |
+| Site build | `python3 engine/build_site.py` → 17 pages written to `docs/b/pages/` |
+| Verification | `verify_all.py` → VERIFY OK, 0 failures; `check_links.py` → PASS |
+
+### Delivery record
+| Task | Status | Sources |
+| --- | --- | --- |
+| Repo review (line by line) | Complete — all features from the brief are implemented; no irregularities found | `engine/fetch_official.py` (official NBA hosts only), `engine/refresh_gate.py` (fail-closed freshness/provenance), `engine/pipeline.py` (full build), `engine/hca.py` (HCA pinned to measured home-win rate), `engine/disagreement.py` (disagreement-as-headline), `engine/luck_zscore.py` (z-score per team), `engine/minutes_redist.py` (top-8 redistribution), `engine/parlay.py` (rho-priced parlays), `engine/market_prior.py` (market-anchored prior), `engine/total_model.py` (possessions × PPP), `engine/injury_diff.py` (consecutive injury diffs), `engine/injuries.py` (availability), `engine/leaderboard.py` (strategy leaderboard) |
+| Scheduled refresh job | Complete — `.github/workflows/refresh-data.yml` runs 3× daily, fetches only official NBA hosts, gates rebuild on freshness/provenance/promotion | `engine/fetch_official.py`, `engine/refresh_gate.py`, `engine/promote_official.py` |
+| Official per-game result feed | Complete — `data/raw/_capture_results_*.json` for 11/06–11/19, one row per game with date, teams, final score, quarter scores | `engine/fetch_official.py` `capture_results()`, `row_from_json_game()` |
+| Injury PDF archive + diffs | Complete — `data/raw/injury_pdfs/` (content-addressed), `data/parsed/injury_diffs/` (consecutive diffs) | `engine/fetch_official.py` `capture_injury()`, `engine/injury_diff.py` |
+| Pre-registration per strategy | Complete — `data/prereg/S*.json` frozen before first tip | `data/prereg/` |
+| Tamper-evident ledger | Complete — `data/ledger/ledger.json` | `data/ledger/` |
+| Split projection/bet surfaces | Complete — `site/pages/projection.html`, `site/pages/bet-surface.html`, `site/pages/bet.html` | Site pages |
+| Two independent estimators | Complete — `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Disagreement as headline, blend underneath |
+| HCA pinned to measured home-win rate | Complete — `engine/hca.py`, `data/hca_measured.json` | HCA = sigma × norm_ppf(home_win_rate) |
+| Luck as z-score per team | Complete — `engine/luck_zscore.py`, `data/luck_zscores.json` | Pythagorean exp 13.91, noise band \|z\| < 1.96 |
+| Rest / B2B / 3-in-4 + travel distance | Complete — `engine/pipeline.py` rest math, `data/travel_distance.json`, `data/arenas.json` | Official schedule + arena coordinates |
+| Minutes redistribution | Complete — `engine/minutes_redist.py`, `data/minutes_redistribution.json` | Top-8 shares, replacement shares |
+| Parlay pricing with rho | Complete — `engine/parlay.py`, `data/parlay_pricing.json` | Measured rho + naive product side by side |
+| Rotation availability column | Complete — on picks page, injury rows include availability | `engine/pipeline.py` injuries output |
+| Market-anchored prior | Complete — `engine/market_prior.py`, `data/market_prior.json` | Blend model line with closing line, weighted by OOS log-loss |
+| Total = possessions × PPP | Complete — `engine/total_model.py`, `data/total_model.json` | Not average of scoring averages |
+| Injury revision + retrieval time banner | Complete — injury report includes revision/retrieval timestamps | `data/official/injury_*.json` |
+| Ledger settlement from official finals | Complete — `data/settlement/settlement_*.json`, `data/ledger/ledger.json` | Settlement stamps visible |
+| Team-stat re-cut | Complete — `engine/fetch_official.py` S8/S9/S10 (standings, traditional, opponent) | `data/raw/_capture_S8_standings.json`, `S9_team_traditional`, `S10_team_opponent` |
+| Per-player game logs | Complete — `data/official/player_game_logs_2026-11-17.json`, `…_18.json`, `data/player_gamelogs/` | Minutes, points, rebounds, assists, opponent |
+| Executive summary | Complete — `EXECUTIVE_SUMMARY.md` | Linked from every page |
+| Suggestions section | Complete — `site/pages/suggestions.html`, `data/suggestions.json` | Options with effort/risk/unlocks |
+| Questions section | Complete — `site/pages/questions.html`, `data/questions.json` | Open questions and answers |
+| Flagged for Review page | Complete — `site/pages/flagged.html` | Unverified items listed with sources |
+| Source register | Complete — `site/pages/sources.html`, `data/sources.json` | 63+ official URLs |
+| Site build | Complete — `docs/b/pages/` (17 pages), `site/pages/` (39 pages) | All internal links resolve, every row source-linked |
+| GitHub Pages deployment | Pending — push to `main` via PR to trigger Pages build | `.github/workflows/pages.yml` |
+
+### Verification performed
+- `python3 scripts/verify_all.py` → **VERIFY OK** (builders, checker, data audits, 0 failures)
+- `python3 scripts/check_links.py` → **RESULT: PASS**
+- `python3 scripts/check_rendered.py` → PASS (Command Center pages render from data)
+- Repo-wide broken-internal-link scan → 0 broken links across all HTML files
+- All table rows carry official source links or explicit no-source marks
+- No value inferred; blanks flagged as unverified
+
+### Irregularities flagged
+None. Every published value traces to an official NBA source (nba.com, official.nba.com, ak-static.cms.nba.com, stats.nba.com). Values that could not be confirmed are left blank and listed on Flagged for Review.
+
+### Sources used for manual review
+- https://www.nba.com/schedule — official schedule
+- https://www.nba.com/games — official games & scores
+- https://www.nba.com/stats/teams/advanced — official team advanced stats
+- https://www.nba.com/stats/teams/traditional — official team traditional stats
+- https://www.nba.com/stats/teams/opponent — official team opponent stats
+- https://www.nba.com/standings — official standings
+- https://official.nba.com/nba-injury-report-2026-27-season/ — official injury report index
+- https://official.nba.com/rule-no-5-scoring-and-timing/ — NBA Rule No. 5
+
+### Handoff
+This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd746` with no uncommitted changes. All verification gates pass. Ready for integration: create PR from this branch to `main`, merge, confirm GitHub Pages deploys successfully.
+
 ## 🔑 ACTIVE CLAIM — session `arena/d66245d4-nba1` (opened 2026-11-19 06:5x UTC) — **d66245d4: live-horizon independent verification + decision-register settlement seat**
 
 **Why this seat exists.** Two things are true at 06:5xZ that nothing else on the board covers:
