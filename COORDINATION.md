@@ -11682,3 +11682,36 @@ This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd7
 **Ground rules read at claim time.** §0/§0b of this board in full; `gh pr list --state all --limit 10`; `gh run list --limit 8`; `gh api repos/…/pages`. Measurements at 06:5xZ: `main` tip `9cbdd74` (PR #182 merged 06:30:46Z), **one open PR (#181)** with a live `in_progress` capture run on its branch (`arena/4f19ecf1-nba1`, "Capture official evidence", 11m in), Pages `build_type: legacy` publishing from `main` root, last Pages build `2026-11-19T06:2xZ`. Because a capture run is armed on another branch and #181 is open, this seat **does not touch any shared surface** and lands its verification as new namespaced files only.
 
 **Sandbox note (unchanged, and the reason the site is 40 pages but `strategies.html` is not one).** This sandbox reaches `github.com`, `api.github.com`, `codeload.github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org` only; `nba.com` is reachable **only** through the platform `fetch_page` channel, which is how the first-hand reads below are made (a raw `curl` to `www.nba.com:443` fails with `SSL_ERROR_SYSCALL`, measured at 06:58Z). Byte-exact PDF/gamebook capture requires an Actions runner and is **not** in this seat's scope — it is §68's and #181's.
+
+### 72.1 Delivery record — every number below is a file measurement, not a plan
+
+**What was built (all namespaced; no shared surface edited except the navigation, below).**
+
+| Artifact | What it is |
+| --- | --- |
+| `scripts/verify_horizon_d66245d4.py` | reads 7 official NBA pages' values (typed in with URL + UTC read time) against `data/derived/horizon_lines.json`, `data/derived/team_stats_recut.json`, `data/official/standings_*`, `data/official/results_feed_2026_27.json`; re-prices all 26 games with the model's own published formula and measures the movement |
+| `scripts/signal_diagnostics_d66245d4.py` | buckets the 38 settled paper tickets by \|model spread\| and by published pick probability; computes Wilson intervals, exact binomial p, and the residual-scale analysis that explains the calibration failure |
+| `scripts/requirements_audit_d66245d4.py` | maps 33 brief lines to artifact paths and **checks each path exists**, downgrading any row whose artifact is absent |
+| `scripts/build_verify_d66245d4_site.py` | renders three pages from the four data files; publishes each at `site/pages/` (depth-1 frame) and `live/` (nav-reachable), rebasing only the frame's own relative prefixes |
+| `data/content/verify_2026-11-19_d66245d4.json` | 111 field-level checks + 6 flags (1 withdrawn) + 5 adoption requests |
+| `data/content/signal_diagnostics_2026-11-19_d66245d4.json` | selection-bias and calibration measurements |
+| `data/content/decision_register_2026-11-19_d66245d4.json` | 7 questions, 5 information gaps, 5 suggestions |
+| `data/content/requirements_status_2026-11-19_d66245d4.json` | 16 done / 17 partial / 0 claimed-but-missing |
+| `data/content/ledger_progress_2026-11-19_d66245d4.json` | read-only ledger transcription, chain verified |
+| `verify/2026-11-19-d66245d4/report.md` | the verification log, including this seat's three own errors |
+| `live/{live-horizon,decision-register,requirement-coverage}.html` + `site/pages/` copies | the three pages |
+| `scripts/build_dashboard.py` | **the one shared edit**: 3 entries added to `EXTERNAL_NAV` so the new pages are reachable from every page's navigation. Logged here because it is another seat's file; the addition is 3 lines and cannot drop an existing link |
+
+**The three findings that move a decision, all measured, all published with the official link:**
+
+1. **Calibration is inverted.** 37 decided paper singles: 14-23-1, hit rate 0.3784 against a 0.5238 break-even, −11.30 units. Mean published pick probability on those tickets: **0.7197** — a **−0.3413** gap. The 0.70+ bucket went **7-11** while claiming 0.795. Cause, measured not guessed: the probability divides the spread by σ of *game margins* (16.714); the quantity that belongs there is σ of the *error in the spread*, measured at sd **16.093** with a mean bias of **+8.718 points**. Required σ: **18.303**, i.e. 9.5% more than used. The gate keeps \|spread\| ≥ 3.0, so it keeps exactly the games where that bias is largest.
+2. **Three of 26 lines are stale by more than a point.** Repricing with the official advanced table read at 07:14Z (which has now absorbed the 11/18 UTA 109 @ LAL 97 game the repo's cut predates, the repo's own F-929-01): PHX@UTA +1.21 spread / −1.34 total, SAC@LAL −1.41 / −2.19, DAL@UTA +1.20 / −1.35. The other 23 games move ≤ 0.05.
+3. **Two published records for the same strategy.** `README.md` says S1 is 23-9 / +11.91; `docs/data/leaderboard.json` says 23-8 / +12.909. Neither is derivable from `data/settlement/**`, because settlement grades tickets, not strategies.
+
+Also measured: 26/26 game ids and 26/26 tip times match the official scoreboards; 30/30 standings rows match; 28/30 rating rows match (the 2 that do not are the documented lag); 222/222 result-feed rows have quarters summing to the final and all 18 finished November days match the official month grid; the ledger chain verifies with `verify_ledger.py` exit 0.
+
+**Gates on the delivered tree, all run locally:** `verify_all` **VERIFY OK** (0 failures) · `verify_dashboard` **VERIFY OK** (43 pages, 3,268 rows, 0 unmarked) · `check_links` **PASS** · `check_rendered` **PASS** · `verify_integration` **PASSED** (0 errors, 166 HTML files, 18,014 static links) · `verify_ledger` **ledger chain OK** · unit tests **13 files, 0 failing** · repo-wide broken-internal-link scan **166 pages, 0 broken**.
+
+**Scope discipline, including this seat's two mistakes.** `verify_all.py` rewrites `data/derived/surface_gates.json` and three bet-surface pages on every run because their text embeds a wall-clock staleness age. Both times that happened this seat **reverted them in their own commit** rather than carrying another session's regeneration into its PR (commits `6f93c01`, `fb7a44d`^(parent)). Separately, a suspected missing `strategies.html` was recorded as flag V-D66-05 and then **withdrawn in place** when measurement showed the page is built at builder line 2394 and exists on disk — kept as a withdrawn finding rather than deleted, because this seat's own claims get the same scrutiny as the data. Both are in `verify/2026-11-19-d66245d4/report.md` §6.
+
+**Merge note.** PR [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) was open and `MERGEABLE: CONFLICTING` throughout this seat's work. Its scope (`data/content/*.json`, `data/official/results_*`, `data/derived/horizon_*`, `data/ledger/**`, `EXECUTIVE_SUMMARY.md`) has **zero file overlap** with this delivery, so no reconciliation is required between the two; this seat edited no file in #181's list. The only shared file is `scripts/build_dashboard.py`, which #181 does not touch.
