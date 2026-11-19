@@ -1623,6 +1623,51 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Retry the stats.nba.com fallback with a longer timeout or a retry with backoff, and record whether the page's own HTML contains the table when fetched with the web-client headers on the runner. Do not declare S1 unreadable: it is the one team-stat source the model actually loads.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F-89F-01</td>
+<td>High</td>
+<td><b>The five scheduled-refresh parse failures are not a parser bug: the delivered official pages contain no team rows at all</b></td>
+<td>Session arena/89f7b601-nba1 captured the exact response bytes the scheduled refresh receives for all five failing sources (runner run 44477742276, stored content-addressed under data/raw/session-89f7b601/). Every one returned HTTP 200 with 225-295 KB, and every one contains zero team links: 0 '/team/', 0 '/stats/team/', 0 'rowSet'. The standings body contains 0 '&lt;tr&gt;' elements. The tables are mounted by client-side JavaScript after the HTML arrives, so no string parse of the response can produce 30 rows and the refresh has been reporting a structural impossibility as a parse failure. The same run measured the data layer behind those tables (stats.nba.com leaguedashteamstats and leaguestandings, read out of the page's own JS chunk) to be unreachable from a GitHub runner: 4 endpoints x 3 attempts x 25s, every attempt TimeoutError, no HTTP status. Flag F1 on this page has carried the same observation since 2026-11-14 without a measured byte-level proof; this is that proof.</td>
+<td>R01 (scheduled refresh), RFG4, and every downstream table that depends on standings or the three team-stat tables</td>
+<td>Stop treating this as a parse defect. Either accept the official per-date games feed as the standings source of record (it is reachable and prints every team's record; see F-89F-03) or obtain a network path to stats.nba.com. Do not write another parser for the HTML.</td>
+<td class="src"><span class="na" title="source id data/raw/session-89f7b601/capture_manifest.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-89F-02</td>
+<td>Medium</td>
+<td><b>A headless browser on a GitHub runner is refused at the edge: the rendered official page is an Akamai 'Access Denied'</b></td>
+<td>F-89F-01 rules out parsing, so the next correct repair is to let the page render itself. Session arena/89f7b601-nba1 ran Chromium on the runner against all five official URLs (runner run 44481346010). Every one returned a 298-312 byte page reading 'Access Denied ... You don't have permission to access &quot;http://www.nba.com/standings&quot; on this server', with an errors.edgesuite.net reference. Zero tables, zero rows, and the selector that was waited for never appeared. That means nba.com blocks datacenter IPs for browser user agents as well as for the API. This is a finding to record, not something to work around by disguising the client.</td>
+<td>Any future headless-capture plan for nba.com pages, including the suggested action recorded on F1</td>
+<td>Withdraw the 'add a headless-browser capture' suggestion on F1: it has now been tried and measured to fail. Replace it with the games-feed route.</td>
+<td class="src"><span class="na" title="source id data/raw/session-89f7b601/render/render_manifest.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-89F-03</td>
+<td>Low</td>
+<td><b>Standings W-L is corroborated by the official games feed for all 30 teams, but only W-L is; GB, splits, LAST10 and streak are single-source</b></td>
+<td>scripts/verify_standings_89f7b601.py checks the transcribed standings table against the official per-date games feed (www.nba.com/games?date=...), which the scheduled job already reaches and which prints each team's record beside its score. All 30 teams agree exactly on W and L, with the feed page URL recorded per team in data/official/standings_corroboration_89f7b601.json. The limit is stated per row rather than implied: the feed carries no GB, conference or division record, home/road/neutral split, OT record, LAST10 or streak, so those eleven fields remain single-source and are listed as uncorroborated for every team.</td>
+<td>The standings table on the model and lines pages</td>
+<td>Adopt the corroboration check as a scheduled gate: it is the only standings verification the pipeline can actually run, and it fails loudly (exit 4) on a disagreement between two official sources.</td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-89F-04</td>
+<td>Medium</td>
+<td><b>The LAL/UTA one-game table lag (F-929-01, F-9FF-02) has resolved on the official side but the committed model input still carries the stale 15-GP rows</b></td>
+<td>Flags F-929-01 and F-9FF-02 recorded that all three official team-stat tables lagged the standings by exactly the 11/18 UTA@LAL game, with LAL on 15 GP 13-2 and UTA on 15 GP 2-13. A first-hand re-read of the traditional and opponent pages on 2026-11-19 now shows both clubs on 16 GP agreeing with the standings: LAL 16-13-3 and UTA 16-3-13 on both pages. The lag has cleared. However data/derived/team_stats_recut.json, the input the horizon is priced from, still carries gp 15 for both, and UTA's opponent points also moved from 117.3 to 116.0. 80 committed team-rows were compared; 75 agree, 5 drift, and 10 opponent rows are not covered by the partial read and are reported NOT_CHECKED rather than as agreement. Nothing was rewritten by the checking session.</td>
+<td>data/derived/team_stats_recut.json; the horizon lines and ratings priced from it</td>
+<td>Re-cut data/derived/team_stats_recut.json from the 16-GP official rows before the next horizon origination, and close F-929-01 and F-9FF-02 as resolved on the official side. The advanced rating columns were not re-transcribed in this read, so they remain single-source and should be re-read with the same cycle.</td>
+<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-89F-05</td>
+<td>Low</td>
+<td><b>The refresh record threw away every diagnostic that could have explained 'parsed 0 rows'</b></td>
+<td>For at least a day, data/raw/_last_refresh.json recorded the same five failures as 'expected 30 team rows, parsed 0' with no further detail: the counts that would have named the cause (how many table rows the document had, how many team links, whether a rowSet was present) were computed at the time and then discarded, and the parser's problem list was truncated to twelve strings without a total. The parser also silently dropped any row whose team cell could not be resolved, so a document full of unidentifiable rows produced exactly {'rows': [], 'problems': []} - identical to an empty page. Both were fixed this session and are pinned by scripts/test_parse_89f7b601.py; the first scheduled run after the fix reports html_tr=12 team_links=0 rowSet=0 parse_problems=1 per source, which is the diagnosis in the record.</td>
+<td>data/raw/_last_refresh.json readability; RFG4 triage time</td>
+<td>Keep the diagnostics. Any future fetch failure must name what the document actually contained, because the alternative is spending a day re-deriving it.</td>
+<td class="src"><span class="na" title="source id data/raw/_last_refresh.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

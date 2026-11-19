@@ -1,0 +1,758 @@
+{
+ "title": "Standings corroboration against the official games feed",
+ "generated_by": "scripts/verify_standings_89f7b601.py",
+ "generated_for": "COORDINATION.md \u00a769 (session arena/89f7b601-nba1)",
+ "rule": "A standings row is CORROBORATED only when a second official source, read by the CI pipeline itself, prints the same W-L. Fields the second source does not carry are listed as uncorroborated rather than assumed.",
+ "why_this_check_exists": "The standings page cannot be parsed (0 <tr> in the delivered HTML), its data layer stats.nba.com times out from a runner (4 endpoints x 3 attempts, all TimeoutError), and headless Chromium on a runner receives Akamai 'Access Denied'. The per-date games feed is reachable and prints each team's record beside its score, so it is the only official second source the pipeline can read.",
+ "verdict": "CORROBORATED",
+ "verdict_detail": "all 30 teams the feed names agree exactly with the transcribed table, on W and L",
+ "summary": {
+  "teams_in_standings": 30,
+  "teams_checked": 30,
+  "agree": 30,
+  "disagree": 0,
+  "not_named_by_feed": 0,
+  "read_day": "2026-11-19"
+ },
+ "standings_under_test": {
+  "file": "data/official/standings_2026-11-19_9ff20954.json",
+  "source_url": "https://www.nba.com/standings",
+  "retrieved_utc": "2026-11-19T06:00Z",
+  "captured_by": "arena/9ff20954-nba1"
+ },
+ "feed_sources": [
+  {
+   "file": "data/raw/_capture_results_2026-11-07.json",
+   "game_date": "2026-11-07",
+   "records_read": 14,
+   "source_url": "https://www.nba.com/games?date=2026-11-07"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-08.json",
+   "game_date": "2026-11-08",
+   "records_read": 14,
+   "source_url": "https://www.nba.com/games?date=2026-11-08"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-09.json",
+   "game_date": "2026-11-09",
+   "records_read": 16,
+   "source_url": "https://www.nba.com/games?date=2026-11-09"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-10.json",
+   "game_date": "2026-11-10",
+   "records_read": 12,
+   "source_url": "https://www.nba.com/games?date=2026-11-10"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-11.json",
+   "game_date": "2026-11-11",
+   "records_read": 20,
+   "source_url": "https://www.nba.com/games?date=2026-11-11"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-12.json",
+   "game_date": "2026-11-12",
+   "records_read": 8,
+   "source_url": "https://www.nba.com/games?date=2026-11-12"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-14.json",
+   "game_date": "2026-11-14",
+   "records_read": 10,
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-15.json",
+   "game_date": "2026-11-15",
+   "records_read": 18,
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-16.json",
+   "game_date": "2026-11-16",
+   "records_read": 16,
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-17.json",
+   "game_date": "2026-11-17",
+   "records_read": 10,
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "file": "data/raw/_capture_results_2026-11-18.json",
+   "game_date": "2026-11-18",
+   "records_read": 24,
+   "source_url": "https://www.nba.com/games?date=2026-11-18"
+  }
+ ],
+ "per_team": [
+  {
+   "team": "ATL",
+   "standings_w": 9,
+   "standings_l": 6,
+   "feed_record": "9-6",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "BKN",
+   "standings_w": 3,
+   "standings_l": 11,
+   "feed_record": "3-11",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "BOS",
+   "standings_w": 11,
+   "standings_l": 4,
+   "feed_record": "11-4",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "CHA",
+   "standings_w": 4,
+   "standings_l": 10,
+   "feed_record": "4-10",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "CHI",
+   "standings_w": 4,
+   "standings_l": 10,
+   "feed_record": "4-10",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "CLE",
+   "standings_w": 8,
+   "standings_l": 8,
+   "feed_record": "8-8",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "DAL",
+   "standings_w": 8,
+   "standings_l": 7,
+   "feed_record": "8-7",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "DEN",
+   "standings_w": 8,
+   "standings_l": 5,
+   "feed_record": "8-5",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "DET",
+   "standings_w": 10,
+   "standings_l": 4,
+   "feed_record": "10-4",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "GSW",
+   "standings_w": 8,
+   "standings_l": 7,
+   "feed_record": "8-7",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "HOU",
+   "standings_w": 12,
+   "standings_l": 4,
+   "feed_record": "12-4",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "IND",
+   "standings_w": 5,
+   "standings_l": 10,
+   "feed_record": "5-10",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "LAC",
+   "standings_w": 4,
+   "standings_l": 9,
+   "feed_record": "4-9",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "LAL",
+   "standings_w": 13,
+   "standings_l": 3,
+   "feed_record": "13-3",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "MEM",
+   "standings_w": 11,
+   "standings_l": 4,
+   "feed_record": "11-4",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "MIA",
+   "standings_w": 9,
+   "standings_l": 6,
+   "feed_record": "9-6",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "MIL",
+   "standings_w": 1,
+   "standings_l": 14,
+   "feed_record": "1-14",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "MIN",
+   "standings_w": 11,
+   "standings_l": 4,
+   "feed_record": "11-4",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "NOP",
+   "standings_w": 5,
+   "standings_l": 11,
+   "feed_record": "5-11",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "NYK",
+   "standings_w": 8,
+   "standings_l": 6,
+   "feed_record": "8-6",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "OKC",
+   "standings_w": 9,
+   "standings_l": 6,
+   "feed_record": "9-6",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "ORL",
+   "standings_w": 6,
+   "standings_l": 8,
+   "feed_record": "6-8",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "PHI",
+   "standings_w": 13,
+   "standings_l": 3,
+   "feed_record": "13-3",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "PHX",
+   "standings_w": 7,
+   "standings_l": 7,
+   "feed_record": "7-7",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "POR",
+   "standings_w": 9,
+   "standings_l": 5,
+   "feed_record": "9-5",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "SAC",
+   "standings_w": 1,
+   "standings_l": 13,
+   "feed_record": "1-13",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "SAS",
+   "standings_w": 12,
+   "standings_l": 3,
+   "feed_record": "12-3",
+   "feed_game_date": "2026-11-17",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "TOR",
+   "standings_w": 5,
+   "standings_l": 10,
+   "feed_record": "5-10",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "UTA",
+   "standings_w": 3,
+   "standings_l": 13,
+   "feed_record": "3-13",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  },
+  {
+   "team": "WAS",
+   "standings_w": 5,
+   "standings_l": 11,
+   "feed_record": "5-11",
+   "feed_game_date": "2026-11-18",
+   "feed_source_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "agree",
+   "uncorroborated_fields": [
+    "rank",
+    "win_pct",
+    "gb",
+    "conf_rec",
+    "div_rec",
+    "home",
+    "road",
+    "neutral",
+    "ot",
+    "last10",
+    "streak"
+   ]
+  }
+ ],
+ "what_this_does_not_prove": [
+  "It does not verify GB, conference or division records, home/road/neutral splits, OT records, LAST10 or streak: the games feed does not carry them.",
+  "It does not verify the traditional, opponent or advanced team-stat tables at all; those have no second reachable official source and remain single-source (transcribed).",
+  "It is not a substitute for the standings page: a printed record is a snapshot as at that game day, so a team idle since an earlier date is checked against that earlier date."
+ ]
+}

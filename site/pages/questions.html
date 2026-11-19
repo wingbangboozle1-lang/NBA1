@@ -550,6 +550,33 @@
 <td>Medium</td>
 <td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
+<tr id="Q35">
+<td>Q35</td>
+<td><b>Is the standings page, or the games feed, the source of record for team records?</b></td>
+<td>Two official sources disagree about nothing but agree about little: the standings page cannot be read from CI at all (0 table rows in the delivered HTML, data layer times out, browser refused at the edge) while the games feed is read on every run and prints W-L for all 30 teams. No document says which one the model is allowed to treat as authoritative when only one of them is reachable, and the published pipeline currently depends entirely on the unreachable one.</td>
+<td>Decide the source of record explicitly and record it in COORDINATION.md. Then either retire the standings parser (F-89F-01) or obtain a network route to it. There is no third option that keeps the current gate green.</td>
+<td>R01 status, the freshness gate, and the credibility of every 'standings-verified' claim on the site</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q36">
+<td>Q36</td>
+<td><b>What should be published for the eleven standings fields the games feed cannot carry?</b></td>
+<td>GB, conference record, division record, home/road/neutral splits, OT record, LAST10 and streak are only on the standings page. That page is unreadable from CI. The games feed verifies W-L for all 30 teams and nothing else. So the site can either publish those eleven fields from a single unverified transcription, or publish them as unavailable.</td>
+<td>Choose one: (a) publish them from the transcription and label them single-source, or (b) blank them and flag them. The current pages do neither explicitly, which is the defect.</td>
+<td>F-89F-03's stated limit; the accuracy claim on the model page</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q37">
+<td>Q37</td>
+<td><b>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</b></td>
+<td>The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.</td>
+<td>Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.</td>
+<td>S-89F-02's gate design; any claim that a priced line rests on current inputs</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>
     <footer class="foot">

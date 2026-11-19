@@ -1,0 +1,838 @@
+{
+ "title": "Team-stat model inputs vs a fresh official re-read",
+ "generated_by": "scripts/recut_drift_89f7b601.py",
+ "generated_for": "COORDINATION.md \u00a769 T05 (session arena/89f7b601-nba1)",
+ "rule": "Every compared field must equal the official page exactly. A team the re-read does not cover is NOT_CHECKED, never 'agree'. Nothing here rewrites a committed input.",
+ "verdict": "DRIFT",
+ "re_read": {
+  "path": "data/official/teams_reread_2026-11-19_89f7b601.json",
+  "retrieved_utc": "2026-11-19T08:0xZ",
+  "source_urls": {
+   "traditional": "https://www.nba.com/stats/teams/traditional",
+   "opponent": "https://www.nba.com/stats/teams/opponent",
+   "advanced": "https://www.nba.com/stats/teams/advanced"
+  },
+  "coverage": {
+   "rows_transcribed": 30,
+   "opponent_rows_transcribed": 20,
+   "why_opponent_is_partial": "The opponent page was read through a channel that returned the table in two chunks; the second chunk begins mid-table. Rows outside those chunks are not transcribed and the drift check treats a missing row as 'not checked', never as agreement. Completing them requires a byte read from the runner.",
+   "what_is_not_here": "No advanced-table numeric column is re-transcribed in this file; the advanced page read returned its table but this session did not transcribe ratings, only the GP/W/L it shares with the traditional page. Ratings therefore remain single-source."
+  }
+ },
+ "totals": {
+  "checked": 80,
+  "agree": 75,
+  "drift": 5,
+  "not_checked": 10
+ },
+ "drift_findings": [
+  {
+   "table": "teams_traditional",
+   "team": "LAL",
+   "diffs": {
+    "gp": {
+     "committed": 15,
+     "reread": 16
+    },
+    "l": {
+     "committed": 2,
+     "reread": 3
+    }
+   },
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "table": "teams_traditional",
+   "team": "UTA",
+   "diffs": {
+    "gp": {
+     "committed": 15,
+     "reread": 16
+    },
+    "w": {
+     "committed": 2,
+     "reread": 3
+    }
+   },
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "table": "teams_opponent",
+   "team": "UTA",
+   "diffs": {
+    "gp": {
+     "committed": 15,
+     "reread": 16
+    },
+    "w": {
+     "committed": 2,
+     "reread": 3
+    },
+    "opp_pts": {
+     "committed": 117.3,
+     "reread": 116.0
+    }
+   },
+   "source_url": "https://www.nba.com/stats/teams/opponent"
+  },
+  {
+   "table": "team_stats_recut(advanced)",
+   "team": "LAL",
+   "diffs": {
+    "gp": {
+     "committed": 15,
+     "reread": 16
+    },
+    "l": {
+     "committed": 2,
+     "reread": 3
+    }
+   },
+   "source_url": null
+  },
+  {
+   "table": "team_stats_recut(advanced)",
+   "team": "UTA",
+   "diffs": {
+    "gp": {
+     "committed": 15,
+     "reread": 16
+    },
+    "w": {
+     "committed": 2,
+     "reread": 3
+    }
+   },
+   "source_url": null
+  }
+ ],
+ "sections": [
+  {
+   "table": "teams_traditional",
+   "committed": {
+    "path": "data/official/teams_traditional_2026-11-19_9ff20954.json",
+    "retrieved_utc": "2026-11-19T06:00Z",
+    "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season"
+   },
+   "counts": {
+    "checked": 30,
+    "agree": 28,
+    "drift": 2,
+    "not_checked": 0
+   },
+   "rows": [
+    {
+     "team": "LAL",
+     "table": "teams_traditional",
+     "status": "DRIFT",
+     "diffs": {
+      "gp": {
+       "committed": 15,
+       "reread": 16
+      },
+      "l": {
+       "committed": 2,
+       "reread": 3
+      }
+     },
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "PHI",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "SAS",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "HOU",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "BOS",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "MEM",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "MIN",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "DET",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "POR",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "DEN",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "ATL",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "MIA",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "OKC",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "NYK",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "DAL",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "GSW",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "CLE",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "PHX",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "ORL",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "IND",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "TOR",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "NOP",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "WAS",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "LAC",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "CHA",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "CHI",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "BKN",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "UTA",
+     "table": "teams_traditional",
+     "status": "DRIFT",
+     "diffs": {
+      "gp": {
+       "committed": 15,
+       "reread": 16
+      },
+      "w": {
+       "committed": 2,
+       "reread": 3
+      }
+     },
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "SAC",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+     "team": "MIL",
+     "table": "teams_traditional",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/traditional"
+    }
+   ]
+  },
+  {
+   "table": "teams_opponent",
+   "committed": {
+    "path": "data/official/teams_opponent_2026-11-19_9ff20954.json",
+    "retrieved_utc": "2026-11-19T06:00Z",
+    "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season"
+   },
+   "counts": {
+    "checked": 20,
+    "agree": 19,
+    "drift": 1,
+    "not_checked": 10
+   },
+   "rows": [
+    {
+     "team": "LAL",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "PHI",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "HOU",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "SAS",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "BOS",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "MEM",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "MIN",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "DET",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "ATL",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "MIA",
+     "table": "teams_opponent",
+     "status": "NOT_CHECKED",
+     "why": "the re-read does not cover this team; a partial read cannot certify it"
+    },
+    {
+     "team": "OKC",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "POR",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "CLE",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "DAL",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "DEN",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "GSW",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "NYK",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "PHX",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "ORL",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "IND",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "NOP",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "TOR",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "WAS",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "CHA",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "CHI",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "LAC",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "BKN",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "UTA",
+     "table": "teams_opponent",
+     "status": "DRIFT",
+     "diffs": {
+      "gp": {
+       "committed": 15,
+       "reread": 16
+      },
+      "w": {
+       "committed": 2,
+       "reread": 3
+      },
+      "opp_pts": {
+       "committed": 117.3,
+       "reread": 116.0
+      }
+     },
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "MIL",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    },
+    {
+     "team": "SAC",
+     "table": "teams_opponent",
+     "status": "agree",
+     "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+     "reread_source_url": "https://www.nba.com/stats/teams/opponent"
+    }
+   ]
+  }
+ ],
+ "model_input": {
+  "committed": {
+   "path": "data/derived/team_stats_recut.json",
+   "generated_by": "scripts/recut_2026_11_19.py",
+   "retrieved_utc": "2026-11-19T05:44Z"
+  },
+  "counts": {
+   "checked": 30,
+   "agree": 28,
+   "drift": 2,
+   "not_checked": 0
+  },
+  "rows": [
+   {
+    "team": "LAL",
+    "table": "team_stats_recut(advanced)",
+    "status": "DRIFT",
+    "diffs": {
+     "gp": {
+      "committed": 15,
+      "reread": 16
+     },
+     "l": {
+      "committed": 2,
+      "reread": 3
+     }
+    },
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "HOU",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "MEM",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "SAS",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "CLE",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "BOS",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "MIA",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "POR",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "PHX",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "DET",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "NYK",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "PHI",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "MIN",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "DEN",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "TOR",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "GSW",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "OKC",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "ATL",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "DAL",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "NOP",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "LAC",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "ORL",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "CHI",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "IND",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "BKN",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "WAS",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "UTA",
+    "table": "team_stats_recut(advanced)",
+    "status": "DRIFT",
+    "diffs": {
+     "gp": {
+      "committed": 15,
+      "reread": 16
+     },
+     "w": {
+      "committed": 2,
+      "reread": 3
+     }
+    },
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "SAC",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "MIL",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   },
+   {
+    "team": "CHA",
+    "table": "team_stats_recut(advanced)",
+    "status": "agree",
+    "source_url": null,
+    "reread_source_url": null
+   }
+  ],
+  "note": "Only GP/W/L are compared: this session's re-read did not transcribe advanced rating columns, so the ratings remain single-source and are NOT certified here."
+ },
+ "what_this_does_not_certify": [
+  "Advanced ratings (off_rtg, def_rtg, net_rtg, pace, pie, poss): the re-read did not transcribe those columns, so they are single-source.",
+  "The 10 opponent rows outside the two chunks that were read.",
+  "That the committed transcription was wrong when it was made: a difference here is most likely the official page moving between 06:00Z and this read, which is what a rolling table does."
+ ]
+}

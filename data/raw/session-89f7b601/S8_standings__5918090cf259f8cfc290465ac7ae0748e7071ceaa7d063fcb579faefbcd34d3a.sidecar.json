@@ -1,0 +1,33 @@
+{
+ "name": "S8_standings",
+ "url": "https://www.nba.com/standings",
+ "retrieved_utc": "2026-11-19T07:02:22Z",
+ "attempts": [
+  {
+   "attempt": 1,
+   "http_status": 200,
+   "bytes": 225373,
+   "elapsed_s": 0.12
+  }
+ ],
+ "sha256": "5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a",
+ "sha256_matches_in_memory": true,
+ "artifact": "data/raw/session-89f7b601/S8_standings__5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a.bin",
+ "gz_artifact": "data/raw/session-89f7b601/S8_standings__5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a.json.gz",
+ "bytes": 225373,
+ "status": "stored",
+ "structure": {
+  "bytes_delivered": 225373,
+  "html_tr_elements": 0,
+  "team_links": 0,
+  "stats_team_links": 0,
+  "next_data_script": 1,
+  "rowSet": 0,
+  "resultSets": 0,
+  "leaguedash": 0,
+  "stats_nba_com": 0,
+  "rule_34": 0,
+  "looks_like_json": false
+ },
+ "content_type_guess": "html"
+}

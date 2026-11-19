@@ -380,7 +380,7 @@
   {
    "id": "Q27",
    "question": "Is the measured home-win rate stable enough to pin to?",
-   "what_is_missing": "A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. A third capture 2026-11-16T18:3xZ gave 0.5204 (102 of 196) once the three late 11/15 finals had landed, so three reads in one day span 0.5319 to 0.5204 \u2014 about 1.15 points of raw rate movement on a ~195-game sample. That is still within noise for a rate this size, but the stability of the measurement has still never been tracked across a season, which remains the ask.",
+   "what_is_missing": "A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. A third capture 2026-11-16T18:3xZ gave 0.5204 (102 of 196) once the three late 11/15 finals had landed, so three reads in one day span 0.5319 to 0.5204 — about 1.15 points of raw rate movement on a ~195-game sample. That is still within noise for a rate this size, but the stability of the measurement has still never been tracked across a season, which remains the ask.",
    "how_to_answer": "Record the measured home-win rate at every refresh and publish the series with its sample size, so pinning can be tested for drift instead of assumed sound.",
    "blocks": "Whether pinning HCA to one measurement beats fitting it freely",
    "source_url": "https://www.nba.com/standings"
@@ -438,6 +438,33 @@
    "priority": "Medium",
    "source": "data/ledger/ledger.json entry 12",
    "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "id": "Q35",
+   "question": "Is the standings page, or the games feed, the source of record for team records?",
+   "what_is_missing": "Two official sources disagree about nothing but agree about little: the standings page cannot be read from CI at all (0 table rows in the delivered HTML, data layer times out, browser refused at the edge) while the games feed is read on every run and prints W-L for all 30 teams. No document says which one the model is allowed to treat as authoritative when only one of them is reachable, and the published pipeline currently depends entirely on the unreachable one.",
+   "how_to_answer": "Decide the source of record explicitly and record it in COORDINATION.md. Then either retire the standings parser (F-89F-01) or obtain a network route to it. There is no third option that keeps the current gate green.",
+   "blocks": "R01 status, the freshness gate, and the credibility of every 'standings-verified' claim on the site",
+   "source": "data/official/standings_corroboration_89f7b601.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json"
+  },
+  {
+   "id": "Q36",
+   "question": "What should be published for the eleven standings fields the games feed cannot carry?",
+   "what_is_missing": "GB, conference record, division record, home/road/neutral splits, OT record, LAST10 and streak are only on the standings page. That page is unreadable from CI. The games feed verifies W-L for all 30 teams and nothing else. So the site can either publish those eleven fields from a single unverified transcription, or publish them as unavailable.",
+   "how_to_answer": "Choose one: (a) publish them from the transcription and label them single-source, or (b) blank them and flag them. The current pages do neither explicitly, which is the defect.",
+   "blocks": "F-89F-03's stated limit; the accuracy claim on the model page",
+   "source": "data/official/standings_corroboration_89f7b601.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json"
+  },
+  {
+   "id": "Q37",
+   "question": "Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?",
+   "what_is_missing": "The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.",
+   "how_to_answer": "Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.",
+   "blocks": "S-89F-02's gate design; any claim that a priced line rests on current inputs",
+   "source": "data/derived/recut_drift_89f7b601.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json"
   }
  ]
 }
