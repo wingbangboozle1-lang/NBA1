@@ -254,6 +254,70 @@ def classify(entry):
     return "unmeasured"
 
 
+def rebuild_history():
+    """Read EVERY committed run record and report when the rebuild really ran.
+
+    The current record alone is not evidence about history: on 2026-11-19 its
+    `build_outcome` is `skipped`, which says nothing about 2026-11-14. This
+    session published "rebuild has ever run: no" from the current record and
+    it was wrong (see COORDINATION.md section 73.2), so the history is read
+    from git instead of inferred from one file.
+    """
+    facts = {"records_read": 0, "successes": [], "skipped_or_failed_after_last_success": 0,
+             "error": None, "method": "git show <sha>:data/raw/_last_refresh.json for every "
+                                      "commit that touched the file"}
+    if os.path.exists(os.path.join(ROOT, ".git", "shallow")):
+        facts["error"] = ("shallow clone: run `git fetch --unshallow origin` first")
+        return facts
+    try:
+        commits = subprocess.run(
+            ["git", "log", "--all", "--format=%H", "--", "data/raw/_last_refresh.json"],
+            cwd=ROOT, capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.SubprocessError) as exc:      # pragma: no cover
+        facts["error"] = f"{type(exc).__name__}: {exc}"
+        return facts
+    if commits.returncode != 0:
+        facts["error"] = (commits.stderr or "git log failed").strip()[:300]
+        return facts
+    seen = set()
+    rows = []
+    for sha in [c for c in commits.stdout.split() if c]:
+        try:
+            raw = subprocess.run(
+                ["git", "show", f"{sha}:data/raw/_last_refresh.json"],
+                cwd=ROOT, capture_output=True, text=True, timeout=60)
+        except (OSError, subprocess.SubprocessError):
+            continue
+        if raw.returncode != 0:
+            continue
+        try:
+            record = json.loads(raw.stdout)
+        except ValueError:
+            continue
+        stamp = record.get("captured_at_utc")
+        key = (stamp, record.get("build_outcome"))
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append({"captured_at_utc": stamp,
+                     "build_outcome": record.get("build_outcome"),
+                     "freshness_ok": record.get("freshness_ok"),
+                     "promote_outcome": record.get("promote_outcome")})
+    rows.sort(key=lambda r: r["captured_at_utc"] or "")
+    facts["records_read"] = len(rows)
+    facts["successes"] = [r for r in rows if r["build_outcome"] == "success"]
+    if facts["successes"]:
+        last = facts["successes"][-1]
+        facts["last_success_utc"] = last["captured_at_utc"]
+        facts["skipped_or_failed_after_last_success"] = len(
+            [r for r in rows if (r["captured_at_utc"] or "") >
+             (last["captured_at_utc"] or "")])
+    else:
+        facts["last_success_utc"] = None
+    facts["rebuild_has_ever_run"] = bool(facts["successes"])
+    return facts
+
+
 def audit():
     history_warning = assert_full_history()
     record = load_or(RECORD, {}) or {}
@@ -379,7 +443,8 @@ def audit():
                 r["key"] for r in rows
                 if r["terminal_gate_requirement"] and r["declared_unreadable"]],
             "declared_unreadable": sorted(declared),
-            "rebuild_ever_ran": record.get("build_outcome") not in (None, "skipped"),
+            "rebuild_ever_ran_this_record": record.get("build_outcome") not in (None, "skipped"),
+            "rebuild_history": rebuild_history(),
         },
         "sources": rows,
         "gate_required_snapshots": gate_paths,
@@ -398,7 +463,12 @@ def render(payload):
         f"  promote       : {payload['run_record']['promote_outcome']}",
         f"  freshness ok  : {payload['run_record']['freshness_ok']}",
         f"  build         : {payload['run_record']['build_outcome']}",
-        f"  rebuild ever  : {s['rebuild_ever_ran']}",
+        f"  rebuild here  : {s.get('rebuild_ever_ran_this_record')}",
+        f"  rebuild EVER  : {s.get('rebuild_history', {}).get('rebuild_has_ever_run')}"
+        f"  (last success {s.get('rebuild_history', {}).get('last_success_utc')},"
+        f" {s.get('rebuild_history', {}).get('records_read')} records read,"
+        f" {s.get('rebuild_history', {}).get('skipped_or_failed_after_last_success')}"
+        f" skipped/failed since)",
         "",
         f"{'source':22s} {'class':12s} {'gate':6s} {'hist':5s} {'pipeline':9s} problems",
         "-" * 90,

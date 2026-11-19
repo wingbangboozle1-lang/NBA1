@@ -11813,3 +11813,15 @@ First-hand read performed this session: `https://www.nba.com/stats/teams/advance
 ### 73.7 What this does NOT claim
 
 It does not claim the rebuild now runs. It claims the three dead predicates are gone, the remaining seven blocks are real, and the declaration that removed them is evidenced, expiring, published and self-revoking. Operational proof needs an observed scheduled run, and R01 stays partial until one is seen.
+
+### 73.8 Post-merge correction found by fetch-back: the page said "rebuild has ever run: no"
+
+Fetching the live page back after PR #185 merged exposed a **second error of this seat's own making**, and it is recorded rather than quietly patched.
+
+The audit's `summary.rebuild_ever_ran` was computed from **the current run record only** — `record.get("build_outcome") not in (None, "skipped")` — so on a tip record that says `skipped` it printed `False`, which is a statement about 2026-11-19 that was then published as a statement about the repository's whole history. That directly contradicted this seat's own §73.1 correction, on the same page, in the same table. A reader would have seen "last successful rebuild 2026-11-15" in the board and "rebuild has ever run: **no**" on the site.
+
+**Fix.** `scripts/f3cb4a98_refresh_path_audit.py` now has `rebuild_history()`, which reads `_last_refresh.json` out of **every commit that ever touched it** and reports the real answer (18 distinct records: rebuilds succeeded on 2026-11-14/15, last success `2026-11-15T12:43:11Z`, **7** skipped-or-failed since). It refuses to answer at all from a shallow clone. The summary key became `rebuild_ever_ran_this_record` (honest name for what it measures), and the page gained three rows: `rebuild has EVER run`, `last successful rebuild`, and `run records read / skipped-or-failed since`.
+
+**Regression pin.** `scripts/test_refresh_gate.py::AuditHistoryTests` asserts the history answer is `True` with last success `2026-11-15T12:43:11Z`, and that the checkout is unshallowed — so the mistake fails a test rather than shipping.
+
+**Lesson worth the board, because it is the same mistake twice.** §73.2 was "I inferred history from a shallow clone"; this was "I inferred history from a single file". Both are the same error: *substituting the cheapest available measurement for the measurement the claim requires.* The `F-F3C-01` finding itself is unaffected — it rests on `git log` over 884 commits, not on this flag — but the published summary line was wrong for one deploy cycle.

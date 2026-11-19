@@ -2370,8 +2370,18 @@ def main():
              [esc("fetch step"), esc(rr.get("fetch_outcome")), wf_src],
              [esc("promotion step"), esc(rr.get("promote_outcome")), wf_src],
              [esc("freshness gate ok"), esc(rr.get("freshness_ok")), wf_src],
-             [esc("rebuild step"), esc(rr.get("build_outcome")), wf_src],
-             [esc("rebuild has ever run"), esc(audit.get("summary", {}).get("rebuild_ever_ran")),
+             [esc("rebuild step (this record)"), esc(rr.get("build_outcome")), wf_src],
+             [esc("rebuild has EVER run"),
+              esc(audit.get("summary", {}).get("rebuild_history", {})
+                  .get("rebuild_has_ever_run")), rec_src],
+             [esc("last successful rebuild"),
+              esc(audit.get("summary", {}).get("rebuild_history", {})
+                  .get("last_success_utc")), rec_src],
+             [esc("run records read / skipped-or-failed since"),
+              "%s / %s" % (esc(audit.get("summary", {}).get("rebuild_history", {})
+                               .get("records_read")),
+                           esc(audit.get("summary", {}).get("rebuild_history", {})
+                               .get("skipped_or_failed_after_last_success"))),
               rec_src]],
             note="Read from <code>data/raw/_last_refresh.json</code>, the file the scheduled "
                  "workflow writes, and from the workflow source. No value here is typed by "
