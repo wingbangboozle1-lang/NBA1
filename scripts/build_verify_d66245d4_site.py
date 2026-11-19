@@ -314,6 +314,9 @@ def _rebase(html, depth):
     """
     up = "../" * (depth - 1)          # repo-root prefix at this depth
     out = html
+    # a placeholder resolved per depth, so a link that must differ between the two published
+    # copies is computed rather than hand-written twice
+    out = out.replace("__BRIEF__", "%ssite/pages/requirements.html" % up if depth > 1 else "requirements.html")
     out = out.replace('href="../assets/', 'href="%ssite/assets/' % up)
     out = out.replace('src="../assets/', 'src="%ssite/assets/' % up)
     out = out.replace('href="../../', 'href="%s' % up)     # depth-1 root-relative link
@@ -341,7 +344,7 @@ def build_requirement_coverage(bd):
     body.append(bd.banner(
         "warn", "How to read a status",
         "<p>%s</p><p class='fine'>This register is a second opinion beside the existing "
-        "<a href='../site/pages/requirements.html'>Brief Traceability</a> page, which is generated "
+        "<a href='__BRIEF__'>Brief Traceability</a> page, which is generated "
         "by a different script from a different cut. The two are published side by side rather than "
         "reconciled by hand, so a reader can see where they agree and where they do not.</p>"
         % bd.esc(d["rule"])))
@@ -406,6 +409,9 @@ def main():
         for name, html in out.items():
             if depth != 1:
                 html = _rebase(html, depth)
+            else:
+                # resolve the one placeholder whose target differs by depth even at depth 1
+                html = html.replace("__BRIEF__", "requirements.html")
             with open(os.path.join(outdir, name), "w", encoding="utf-8") as fh:
                 fh.write(html)
             print("wrote %s/%s  (%d bytes)" % (d, name, len(html)))
