@@ -1,0 +1,87 @@
+{
+ "title": "Injury-report PDF archive audit \u2014 byte-level, every file",
+ "audited_at_utc": "2026-11-19T05:58:05Z",
+ "audited_by": "arena/e3d25abc-nba1 (scripts/e3d25abc_verify_archive.py)",
+ "official_index": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "method": "Every .pdf under data/raw/injury_pdfs/ is read, its SHA-256 recomputed from the bytes, and compared with the digest in its filename and in its sidecar. Nothing is sampled.",
+ "totals": {
+  "files": 154,
+  "distinct_editions": 152,
+  "files_fully_clean": 154,
+  "files_with_problems": 0,
+  "digest_in_filename_is_full_sha256": 78,
+  "digest_in_filename_truncated_to_16": 76,
+  "edition_parse_records_published": 152,
+  "diff_records_published": 153,
+  "diff_pairs_adjacent": 151,
+  "diff_pairs_not_adjacent": 0,
+  "diff_pairs_self_to_self": 2
+ },
+ "per_day": {
+  "2026-11-15": {
+   "files": 83,
+   "editions": 81,
+   "clean": 83,
+   "truncated_digest_names": 76,
+   "missing_retrieval_stamp": 0
+  },
+  "2026-11-16": {
+   "files": 17,
+   "editions": 17,
+   "clean": 17,
+   "truncated_digest_names": 0,
+   "missing_retrieval_stamp": 0
+  },
+  "2026-11-17": {
+   "files": 20,
+   "editions": 20,
+   "clean": 20,
+   "truncated_digest_names": 0,
+   "missing_retrieval_stamp": 0
+  },
+  "2026-11-18": {
+   "files": 30,
+   "editions": 30,
+   "clean": 30,
+   "truncated_digest_names": 0,
+   "missing_retrieval_stamp": 0
+  },
+  "2026-11-19": {
+   "files": 4,
+   "editions": 4,
+   "clean": 4,
+   "truncated_digest_names": 0,
+   "missing_retrieval_stamp": 0
+  }
+ },
+ "duplicate_edition_files": {
+  "Injury-Report_2026-11-15_05_15PM": {
+   "files": [
+    "Injury-Report_2026-11-15_05_15PM__e6605d35bf4acfcb.pdf",
+    "Injury-Report_2026-11-15_05_15PM__e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab.pdf"
+   ],
+   "identical_bytes": true,
+   "digests": [
+    "e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab"
+   ]
+  },
+  "Injury-Report_2026-11-15_05_30PM": {
+   "files": [
+    "Injury-Report_2026-11-15_05_30PM__0ff31c236dda6c0d.pdf",
+    "Injury-Report_2026-11-15_05_30PM__0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89.pdf"
+   ],
+   "identical_bytes": true,
+   "digests": [
+    "0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89"
+   ]
+  }
+ },
+ "editions_without_parse_record": [],
+ "non_adjacent_diffs": [],
+ "self_diffs": [
+  "diff_Injury-Report_2026-11-15_05_15PM_to_Injury-Report_2026-11-15_05_15PM.json",
+  "diff_Injury-Report_2026-11-15_05_30PM_to_Injury-Report_2026-11-15_05_30PM.json"
+ ],
+ "problems": [],
+ "problem_count_by_kind": {}
+}

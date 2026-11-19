@@ -148,10 +148,19 @@ def store(rel: str, raw: bytes, meta: dict, compress: bool = False) -> dict:
 
 
 def fetch_recorded(url: str, rel: str, name: str, compress: bool = False,
-                   expect: str = "html") -> dict:
-    """Fetch one URL and record the outcome - including a failed outcome."""
+                   expect: str = "html", extra: dict | None = None) -> dict:
+    """Fetch one URL and record the outcome - including a failed outcome.
+
+    `extra` lands in the sidecar *before* it is written, which matters: this
+    seat's own recovery pass (scripts/e3d25abc_injury_chain.py) refuses a PDF
+    whose sidecar cannot name the edition and the official source URL, and the
+    first run of this script stored neither, so four perfectly good 11/19
+    editions were rejected as unprovable.
+    """
     rec = {"url": url, "name": name, "http_status": None, "error": None,
            "attempts": 0}
+    if extra:
+        rec.update(extra)
     for attempt in (1, 2):
         rec["attempts"] = attempt
         try:
@@ -299,7 +308,9 @@ def main() -> int:
 
     for edition in todo:
         url = INJURY_HOST + edition
-        rec = fetch_recorded(url, "injury_pdfs", edition[:-4])
+        rec = fetch_recorded(url, "injury_pdfs", edition[:-4], expect="pdf",
+                             extra={"edition": edition, "source_url": url,
+                                    "content_type": "application/pdf"})
         rec.pop("_raw", None)
         rec["edition"] = edition
         rec["listed_on_official_index"] = True
@@ -350,7 +361,8 @@ def main() -> int:
             code = f"{g['away']}{g['home']}"
             gb_url = f"https://statsdmz.nba.com/pdfs/{ymd}/{ymd}_{code}_book.pdf"
             grec = fetch_recorded(gb_url, f"gamebooks/{d}",
-                                  f"{d}_{code}", expect="pdf")
+                                  f"{d}_{code}", expect="pdf",
+                                  extra={"game_date": d, "slug": code})
             grec["marked_final_on_scoreboard_card"] = g["marked_final_on_page"]
             # The official game page itself, stored gzipped: the second,
             # independent official read of the printed final and the line score

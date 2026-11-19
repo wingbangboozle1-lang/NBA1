@@ -1,0 +1,898 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-18_05_45PM.pdf",
+  "label": "Injury-Report_2026-11-18_05_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_05_45PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "97281ddb2797d7e0cbe6e46114f2374850d958b0d0297b7e17738cfe3aa70841",
+  "rows": 140
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-19_12_00AM__8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee.pdf",
+  "label": "Injury-Report_2026-11-19_12_00AM",
+  "source_url": null,
+  "retrieved_at_utc": "2026-11-19T05:53:53Z",
+  "sha256": "8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee",
+  "rows": 44
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Camara, Toumani",
+   "before_status": "Questionable",
+   "after_status": "Questionable",
+   "before_reason": "Injury/Illness - Soreness",
+   "after_reason": "Injury/Illness - Abdominal Soreness",
+   "before_matchup": "POR@MIL",
+   "after_matchup": "POR@MIL"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "LA Clippers",
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Injury Management",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Surgery",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Rotator Cuff Surgery",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Kuminga, Jonathan",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Shoulder Contusion",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Pullin, Zyon",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Quadriceps Contusion",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Harper, Dylan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Soreness",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Calf Strain",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "matchup": "LAC@SAS"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "Atlanta Hawks",
+   "player": "Castro, Rafael",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Flemings, Kingston",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Gueye, Mouhamed",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Landale, Jock",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "McCollum, CJ",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Newell, Asa",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Veesaar, Henri",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Brooklyn Nets",
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Brooklyn Nets",
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Brooklyn Nets",
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Brooklyn Nets",
+   "player": "Powell, Drake",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Awaka, Tobe",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Robinson, Orlando",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Williams, Patrick",
+   "status": "Available",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Questionable",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh Jr., Ernest",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Doubtful",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Aldama, Santi",
+   "status": "Probable",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Christie, Max",
+   "status": "Questionable",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Clayton Jr., Walter",
+   "status": "Probable",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Lawal, Tobi",
+   "status": "Doubtful",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Cunningham, Cade",
+   "status": "Questionable",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Questionable",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Green, Draymond",
+   "status": "Questionable",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Horford, Al",
+   "status": "Questionable",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Capela, Clint",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Furphy, Johnny",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Haliburton, Tyrese",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "McConnell, T.J.",
+   "status": "Available",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Nembhard, Andrew",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Sheppard, Ben",
+   "status": "Out",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Reaves, Austin",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Adebayo, Bam",
+   "status": "Available",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Gardner, Myron",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Available",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Available",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Dieng, Ousmane",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Jones, Kam",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Markovic, Bogoljub",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Nance, Pete",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Rollins, Ryan",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "status": "Probable",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Probable",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "status": "Probable",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Holmgren, Chet",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Sorber, Thomas",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Wallace, Cason",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Williams, Jalen",
+   "status": "Out",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Williams, Jaylin",
+   "status": "Questionable",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "team": "Orlando Magic",
+   "player": "Banchero, Paolo",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Orlando Magic",
+   "player": "Isaac, Jonathan",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Orlando Magic",
+   "player": "Nelson, Izaiyah",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Orlando Magic",
+   "player": "Penda, Noah",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Brown, Jaylen",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Wade, Dean",
+   "status": "Questionable",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Phoenix Suns",
+   "player": "Williams, Mark",
+   "status": "Out",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Achiuwa, Precious",
+   "status": "Available",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Hunter, De'Andre",
+   "status": "Available",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Mogbo, Jonathan",
+   "status": "Out",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Pedulla, Sean",
+   "status": "Out",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Raynaud, Maxime",
+   "status": "Out",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Barnes, Scottie",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Barrett, RJ",
+   "status": "Questionable",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "McCullar Jr., Kevin",
+   "status": "Available",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Smith, Malachi",
+   "status": "Available",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Hayes, Jaxson",
+   "status": "Questionable",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "matchup": "UTA@LAL"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "matchup": "WAS@TOR"
+  }
+ ],
+ "team_block_filing_changes": []
+}

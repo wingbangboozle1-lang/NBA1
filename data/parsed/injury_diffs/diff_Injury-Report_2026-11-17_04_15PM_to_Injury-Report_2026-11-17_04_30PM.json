@@ -1,0 +1,67 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_04_15PM.pdf",
+  "label": "Injury-Report_2026-11-17_04_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_04_15PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "09e6189765c953ea4e0d3015f7025a34751e2b138b6cbd75641b57b94c132b4d",
+  "rows": 91
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-17_04_30PM.pdf",
+  "label": "Injury-Report_2026-11-17_04_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_04_30PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "0c16e49818ed3ed1e7df92cad6e87e14bd03b85d1f77b57791ccd6b67eeed0c8",
+  "rows": 96
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [
+  {
+   "team": "Miami Heat",
+   "player": "Adebayo, Bam",
+   "status": "Probable",
+   "reason": "Injury/Illness - Right Hip Impingement",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Gardner, Myron",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Probable",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Available",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "MIL@MIA"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

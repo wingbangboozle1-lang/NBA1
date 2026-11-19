@@ -1,0 +1,120 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_05_00PM.pdf",
+  "label": "Injury-Report_2026-11-17_05_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_05_00PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "7bfb7d7377d909e1db80a59c61080ed6c57a70cbc952731c1e3e4758ac740729",
+  "rows": 116
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-17_05_15PM.pdf",
+  "label": "Injury-Report_2026-11-17_05_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_05_15PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "6e5db894a020ecc3b4aca3d032dffb9b315c0209e6aba31bc4a21a16efd79c00",
+  "rows": 126
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "before_status": "Out",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Left Left 5th Metatarsal Fracture",
+   "after_reason": "Injury/Illness - Left 5th Metatarsal Fracture",
+   "before_matchup": "MEM@CLE",
+   "after_matchup": "MEM@CLE"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "reason": "Injury/Illness - Right ACL Repair / Surgery",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Oblique Tear",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Green, Draymond",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Elbow Inflammation / Soreness",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Horford, Al",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Bilateral Low Back Injury Management",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "reason": "Not With Team",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Furphy, Johnny",
+   "status": "Out",
+   "reason": "Injury/Illness - Right ACL Repair / Surgery",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Haliburton, Tyrese",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "McConnell, T.J.",
+   "status": "Probable",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Nembhard, Andrew",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Hip Soreness / Tightness",
+   "matchup": "HOU@IND"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "Sheppard, Ben",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Meniscus Surgery",
+   "matchup": "HOU@IND"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}
