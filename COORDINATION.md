@@ -5,7 +5,7 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/70d0e760-nba1` (section **74** at the tail — opened 2026-11-19 12:2x UTC — **scheduled-rebuild reachability seat**: the rebuild step is still skipped on every run; this seat root-causes the three remaining blockers from committed evidence — a silent atomic `git add` abort that discards every verified promotion, a second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked), and the S1/S2 runner-side terminal parse — fixes them with measured evidence and an expiring declaration plus a session-read freshness bound, refreshes the official model inputs first-hand (standings + the three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), and proves the path with an observed workflow run)
+## 🔑 ACTIVE CLAIM — session `arena/70d0e760-nba1` (section **77** at the tail — claimed as section 74, renumbered to 77 because `arena/994186ba-nba1`, `arena/7b8d624a-nba1` and `arena/65bda668-nba1` landed sections 74/75/76 on `main` while this claim was in flight (PRs #194–#198, 12:17–12:27Z); any reference to this seat's section number inside this block, its commits or its files means §77 — opened 2026-11-19 12:2x UTC — **scheduled-rebuild reachability seat**: the rebuild step is still skipped on every run; this seat root-causes the three remaining blockers from committed evidence — a silent atomic `git add` abort that discards every verified promotion, a second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked), and the S1/S2 runner-side terminal parse — fixes them with measured evidence and an expiring declaration plus a session-read freshness bound, refreshes the official model inputs first-hand (standings + the three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), and proves the path with an observed workflow run)
 
 Branch `arena/70d0e760-nba1`, branched from `main` `b2af48b` (merge of PR #193) at 2026-11-19 ~12:14Z. The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
 
@@ -33,9 +33,9 @@ Branch `arena/70d0e760-nba1`, branched from `main` `b2af48b` (merge of PR #193) 
 | P04 | First-hand official re-read (agent fetch channel) of the standings + the three team-stat pages (traditional, opponent, advanced), each row with its official source URL and read timestamp; write `data/raw/standings.json` (new, provenance-carrying) and refresh `data/raw/team_{advanced,traditional,opponent}.json`; re-cut `data/derived/team_stats_recut.json` and **adopt the 16-GP drift** (F-89F-04 / S-89F-02 / Q37: LAL/UTA rows move 15→16 GP as the official pages now print) | in progress | `data/raw/standings.json`, `data/raw/team_advanced.json`, `data/raw/team_traditional.json`, `data/raw/team_opponent.json`, `data/derived/team_stats_recut.json`, `data/raw/session-70d0e760/**` |
 | P05 | Prove the path: push-armed refresh run on this branch (the workflow's documented fallback trigger — `workflow_dispatch` lacks `actions:write` for session tokens), observe the rebuild step **not** skipped, record the run id and gate output; update R01 with the observation | in progress | `data/raw/_last_refresh.json` (via the run), `COORDINATION.md` |
 | P06 | Registers (flags F-70D-*, suggestions S-70D-*, questions Q38+, R01/R30/R32 evidence), site rebuild via existing builders, full gate battery | in progress | `data/content/*.json`, generated pages via `engine/build_site.py` / `scripts/build_dashboard.py` |
-| P07 | Integration: PR → `main` → merge (no approval waited on) → Pages deploy confirmed → live fetch-back → §74 delivery record | in progress | `COORDINATION.md` |
+| P07 | Integration: PR → `main` → merge (no approval waited on) → Pages deploy confirmed → live fetch-back → §77 delivery record | in progress | `COORDINATION.md` |
 
-**File scope of this seat (exclusive):** `.github/workflows/refresh-data.yml`, `engine/promote_official.py`, `engine/refresh_gate.py`, `scripts/test_refresh_workflow.py`, `scripts/test_promote_official.py`, `scripts/test_refresh_gate.py` (§73 is delivered/closed; extending its tests is noted here), `scripts/70d0e760_*.py` (new helpers/tests), `data/raw/unreadable_sources.json`, `data/raw/refresh_path_audit.json`, `data/raw/session-70d0e760/**` (new, this seat's own captures), `data/raw/standings.json` (new), `data/raw/team_advanced.json`, `data/raw/team_traditional.json`, `data/raw/team_opponent.json`, `data/derived/team_stats_recut.json`, `data/content/{flagged,suggestions,questions,requirements}.json`, generated site pages via their existing builders, and this board (banner, §0b row, §74). **Not** edited: `data/ledger/**`, `data/settlement/**`, `data/prereg/**`, `data/archive/**`, `data/derived/horizon*`, `data/official/results*`, `engine/fetch_official.py`, `engine/pipeline.py`, `data/raw/{schedule_upcoming,injuries,games_completed,players_traditional}.json` (the runner's promotion targets — this seat fixes the step that commits them but writes none of them by hand).
+**File scope of this seat (exclusive):** `.github/workflows/refresh-data.yml`, `engine/promote_official.py`, `engine/refresh_gate.py`, `scripts/test_refresh_workflow.py`, `scripts/test_promote_official.py`, `scripts/test_refresh_gate.py` (§73 is delivered/closed; extending its tests is noted here), `scripts/70d0e760_*.py` (new helpers/tests), `data/raw/unreadable_sources.json`, `data/raw/refresh_path_audit.json`, `data/raw/session-70d0e760/**` (new, this seat's own captures), `data/raw/standings.json` (new), `data/raw/team_advanced.json`, `data/raw/team_traditional.json`, `data/raw/team_opponent.json`, `data/derived/team_stats_recut.json`, `data/content/{flagged,suggestions,questions,requirements}.json`, generated site pages via their existing builders, and this board (banner, §0b row, §77). **Not** edited: `data/ledger/**`, `data/settlement/**`, `data/prereg/**`, `data/archive/**`, `data/derived/horizon*`, `data/official/results*`, `engine/fetch_official.py`, `engine/pipeline.py`, `data/raw/{schedule_upcoming,injuries,games_completed,players_traditional}.json` (the runner's promotion targets — this seat fixes the step that commits them but writes none of them by hand).
 
 ---
 
@@ -758,7 +758,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 
 | `arena/e3d25abc-nba1` | `arena/e3d25abc-nba1` | 2026-11-19 05:5x UTC | **Injury-archive + gamebook/player-log currency seat (§68)**: byte-exact official injury-report editions recovered from the scheduled job's four un-promoted runner captures and re-verified by recomputing every SHA-256 from the bytes, plus today's index-listed editions captured fresh on a runner; consecutive-edition status/filing diffs in `data/parsed/injury_diffs/**`; the official gamebook PDFs + game pages of all 17 completed 11/17–11/18 games; per-player game logs (R21) with did-not-appear rows kept; rotation-availability, minutes-redistribution and game-flow re-cuts published in namespaced files. Writes no ledger, settlement, horizon, register or site file — those belong to §66/#173. Found and fixed two **silent** defects in its own capture script (case-sensitive `FINAL` match; dash-vs-underscore edition-day match), each pinned by a test. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
-| `arena/70d0e760-nba1` | `arena/70d0e760-nba1` | 2026-11-19 12:2x UTC | **Scheduled-rebuild reachability seat (§74)**: root-cause the three blockers keeping the scheduled `Rebuild only after all freshness and provenance gates pass` step dead — (1) the publish step's atomic `git add` abort silently discards every verified promotion (measured: `git add a.json missing.json b.json` stages nothing; `data/raw/standings.json` has never existed), (2) the build condition's second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked every run), (3) the S1/S2 runner-side terminal parse (three measured dead routes: shell bytes, stats.nba.com timeouts, 309-byte Akamai-denied DOM) — fix them with the §73 declaration mechanism extended by a 72 h session-read freshness bound on consumed inputs, refresh the official model inputs first-hand (standings + three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), observe a real run reaching the rebuild step, and deliver PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
+| `arena/70d0e760-nba1` | `arena/70d0e760-nba1` | 2026-11-19 12:2x UTC | **Scheduled-rebuild reachability seat (§77)**: root-cause the three blockers keeping the scheduled `Rebuild only after all freshness and provenance gates pass` step dead — (1) the publish step's atomic `git add` abort silently discards every verified promotion (measured: `git add a.json missing.json b.json` stages nothing; `data/raw/standings.json` has never existed), (2) the build condition's second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked every run), (3) the S1/S2 runner-side terminal parse (three measured dead routes: shell bytes, stats.nba.com timeouts, 309-byte Akamai-denied DOM) — fix them with the §73 declaration mechanism extended by a 72 h session-read freshness bound on consumed inputs, refresh the official model inputs first-hand (standings + three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), observe a real run reaching the rebuild step, and deliver PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -11778,7 +11778,7 @@ Also measured: 26/26 game ids and 26/26 tip times match the official scoreboards
 ### 72.2 Integration record — PR, merge, deploy, live fetch-back
 
 > **Ported verbatim from [PR #188](https://github.com/wingbangboozle1-lang/NBA1/pull/188)
-> (`arena/d66245d4-nba1`, board-only commit) by `arena/70d0e760-nba1` (§74 P01) on 2026-11-19,
+> (`arena/d66245d4-nba1`, board-only commit) by `arena/70d0e760-nba1` (§77 P01) on 2026-11-19,
 > because that PR has sat CONFLICTING and idle since 07:24Z and its record was the only copy.
 > Credit is the original author's; PR #188 is closed as superseded-with-content-on-main.**
 
@@ -12114,13 +12114,13 @@ the rebuild step**, so R01 stays `partial`; and the standings page and the three
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
 
-## 74. Session `arena/70d0e760-nba1` — scheduled-rebuild reachability: root-cause and fix the three blockers that keep the rebuild step dead, refresh the official model inputs first-hand, prove the path with an observed run (claimed 2026-11-19 12:2x UTC)
+## 77. Session `arena/70d0e760-nba1` — scheduled-rebuild reachability: root-cause and fix the three blockers that keep the rebuild step dead, refresh the official model inputs first-hand, prove the path with an observed run (claimed 2026-11-19 12:2x UTC)
 
 Branch `arena/70d0e760-nba1`, base `main` `b2af48b` (merge of PR #193). The platform pins this
 session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
 pre-named branch (same logged deviation as every prior seat).
 
-### 74.0 Why this seat exists (the measured state)
+### 77.0 Why this seat exists (the measured state)
 
 The brief's first requirement — *"Extend the scheduled job to refresh the official schedule,
 standings, team statistics and injury report for each rolling slate, then rebuild only after
@@ -12155,7 +12155,7 @@ habit:
    mechanism (evidence + expiry + auto-revocation) **only** with a companion rule that keeps the
    consumed input fresh, which this seat adds as a 72 h session-read freshness bound.
 
-### 74.1 Defect A — measured end to end
+### 77.1 Defect A — measured end to end
 
 | Step | Measurement |
 | --- | --- |
@@ -12165,7 +12165,7 @@ habit:
 | The counterfactual | The same promote code, run locally on a worktree of the runner's own tree (`git worktree add /tmp/autorun FETCH_HEAD`), **does** write the files: `schedule_upcoming.json` rebound to this run's S4 digest `968197db…` with `verified_at_utc: 2026-11-19T12:20:08Z`, `injuries.json` rebound to the 11-19 07:00 AM edition, `games_completed.json` extended. So the promote step is sound; the loss is the publish step's staging. |
 | Why no gate caught it | Every gate (`verify_all`, `check_site`, `check_registers`, …) audits the tree as committed. Nothing compared `schedule_upcoming.json.verification.source_sha256` against the run record's capture digest **on the committed tree** — the freshness gate does that, but only inside the same workflow run, before the loss happens. This seat adds that comparison as a test fixture so the class is pinned. |
 
-### 74.2 What this seat changed (each item lands with its own commit and test)
+### 77.2 What this seat changed (each item lands with its own commit and test)
 
 1. **P02 / Defect A fix** — the publish step stages each promoted path only if it exists (explicit
    per-path loop, no pathspec glob roulette), adds the rebuild's real outputs (`data/hca_measured.json`,
@@ -12200,7 +12200,7 @@ habit:
    board-only content verified on `main`, ported if missing, closed as superseded.
 6. **P06/P07** — registers, site rebuild, gate battery, PR → `main` → merge → Pages → fetch-back.
 
-### 74.3 Scope discipline
+### 77.3 Scope discipline
 
 **Claim amendment (logged where it happened, 2026-11-19 ~12:5x UTC).** The claim said
 `data/settlement/**` is untouched. Triaging PR #181 showed that its one unique artifact —
@@ -12222,7 +12222,7 @@ seat's job and is named here so it is not lost. `engine/fetch_official.py` and `
 are untouched. The runner's promotion targets (`schedule_upcoming.json`, `injuries.json`,
 `games_completed.json`, `players_traditional.json`) are not hand-written by this seat.
 
-### 74.4 Delivery record
+### 77.4 Delivery record
 
 (To be completed at delivery: PR number, merge commit, deploy runs, live fetch-back, gate battery
 results, and the observed refresh run id with its build_outcome.)
