@@ -105,6 +105,22 @@ jobs:
       # scheduled refresh fails on. The four stats.nba.com API probes are
       # evidence-gathering: a host that will not answer a runner is a finding
       # to record, not a reason to lose the page bytes.
+      # A headless browser, because the delivered HTML has zero team rows in it
+      # (measured: see the structural digest in capture_manifest.json) and the
+      # stats.nba.com data layer times out from a runner. Letting the page
+      # render itself is the only remaining path to the same official table.
+      - name: Install a headless browser
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Render the five pages and store the live DOM
+        if: always()
+        continue-on-error: true
+        run: python3 scripts/render_official_89f7b601.py
+
       - name: Fail the job when any PAGE source was not captured
         if: always()
         run: |
