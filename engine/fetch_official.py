@@ -468,6 +468,29 @@ def extract_json_games(text):
     return games
 
 
+def _period_scores(team):
+    """Quarter (period) scores from the page's own embedded team block.
+
+    Measured on the 2026-11-16 capture (session `arena/ca442d3d-nba1`,
+    scripts/build_results_feed_ca442d3d.py docstring): each team block carries
+    `periods: [{period, score}, ...]` on the games date page. So the quarter
+    scores come from the same official document as the final - no box-score
+    page has to be trusted for them. Anything missing, non-numeric or absent
+    returns (None, reason): a quarter line is never guessed or filled in.
+    """
+    ps = team.get("periods")
+    if not isinstance(ps, list) or not ps:
+        return None, "no periods array on the team block"
+    out = []
+    for p in ps:
+        v = p.get("periodScore", p.get("score")) if isinstance(p, dict) else p
+        try:
+            out.append(int(v))
+        except (TypeError, ValueError):
+            return None, f"non-integer period score {v!r}"
+    return out, None
+
+
 def row_from_json_game(g, known):
     """Convert one embedded game object into a row, not_final marker, or
     unparsed reason. Never guesses: non-final statuses are not_final, missing
@@ -499,10 +522,30 @@ def row_from_json_game(g, known):
     snapshot_match = None
     if k is not None:
         snapshot_match = (k["away"] == away_tri and k["home"] == home_tri)
+    # Quarter lines from the same embedded object (requirement: one row per
+    # game with date, teams, final score, quarter scores). Fail-closed: the
+    # periods must parse AND sum to the printed final on both sides, else the
+    # fields stay null with the reason recorded - never corrected, never
+    # filled in.
+    away_q, away_q_note = _period_scores(away)
+    home_q, home_q_note = _period_scores(home)
+    quarters_note = None
+    if away_q is None or home_q is None:
+        quarters_note = away_q_note or home_q_note
+    elif sum(away_q) != a_pts or sum(home_q) != h_pts:
+        quarters_note = (f"periods {away_q}/{home_q} sum to "
+                         f"{sum(away_q)}/{sum(home_q)}, printed final "
+                         f"{a_pts}/{h_pts}")
+        away_q = home_q = None
     return ("row", {
         "game_id": gid, "away": away_tri, "home": home_tri,
         "away_pts": a_pts, "home_pts": h_pts,
         "status": status, "ot": ot,
+        "away_quarters": away_q, "home_quarters": home_q,
+        "quarters_note": quarters_note,
+        "quarters_source": ("embedded JSON periods"
+                            if away_q is not None and home_q is not None
+                            else None),
         "away_record_printed": away.get("teamSubtitle"),
         "home_record_printed": home.get("teamSubtitle"),
         "snapshot_match": snapshot_match,

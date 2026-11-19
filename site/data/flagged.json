@@ -1592,10 +1592,10 @@
   },
   {
    "id": "F-CA-07",
-   "severity": "High",
+   "severity": "Medium",
    "status": "open",
    "title": "The scheduled refresh captures the newest injury editions but never reaches promotion, so an edition-only change is archived without its diff or a promoted injuries.json (the trigger half of R04)",
-   "detail": "Opened 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION \u00a765). The 16:36Z refresh on this branch captured 10 official injury editions for 2026-11-17 (bytes + sidecars committed by the runner in 68caa0e) and then stopped: `data/raw/_last_refresh.json` for that run records `promotion` as an empty record with `promoted: []` and `blocked: null`, while `changed` lists only 'evidence S1_season', 'evidence S2_train', 'evidence S8_standings' - the three sources whose parse failed with 'expected 30 team rows, parsed 0' (F-CA-02). So the injury capture is not part of the `changed` vocabulary that the promote step consumes, and an edition-only change cannot wake promotion. Consequence, and it is the same shape as arena/b454a53d-nba1's F140 from the other direction: the ten newest official editions sit in the archive with no revision-to-revision diff and were never promoted, so the model input data/raw/injuries.json is still `Injury-Report_2026-11-16_09_45AM.pdf` (verification.verified_at_utc 2026-11-16T15:25:57Z) - a day and roughly twenty-five editions behind the newest archived PDF (2026-11-17 11:30 AM) - while the roll page's cut banner names the newer edition because the horizon build read it separately as a text render. This seat verified the chain by hand over the committed archive (11/17 11:15 AM -> 11:30 AM, 59 rows / 33 player rows, 0 status and 0 filing changes, written to data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-17_11_15AM_to_Injury-Report_2026-11-17_11_30AM.json), which proves the code and isolates the gap to the trigger. Proposed, not applied here because `.github/workflows/refresh-data.yml` and the changed-list semantics belong to the refresh owner: treat 'new editions archived' as a promotion-relevant change, and gate the *model rebuild* (not the injury promotion) on the structured sources. Until then, R04's automation is only as current as the last session that ran the diff by hand.",
+   "detail": "Opened 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION \u00a765). The 16:36Z refresh on this branch captured 10 official injury editions for 2026-11-17 (bytes + sidecars committed by the runner in 68caa0e) and then stopped: `data/raw/_last_refresh.json` for that run records `promotion` as an empty record with `promoted: []` and `blocked: null`, while `changed` lists only 'evidence S1_season', 'evidence S2_train', 'evidence S8_standings' - the three sources whose parse failed with 'expected 30 team rows, parsed 0' (F-CA-02). So the injury capture is not part of the `changed` vocabulary that the promote step consumes, and an edition-only change cannot wake promotion. Consequence, and it is the same shape as arena/b454a53d-nba1's F140 from the other direction: the ten newest official editions sit in the archive with no revision-to-revision diff and were never promoted, so the model input data/raw/injuries.json is still `Injury-Report_2026-11-16_09_45AM.pdf` (verification.verified_at_utc 2026-11-16T15:25:57Z) - a day and roughly twenty-five editions behind the newest archived PDF (2026-11-17 11:30 AM) - while the roll page's cut banner names the newer edition because the horizon build read it separately as a text render. This seat verified the chain by hand over the committed archive (11/17 11:15 AM -> 11:30 AM, 59 rows / 33 player rows, 0 status and 0 filing changes, written to data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-17_11_15AM_to_Injury-Report_2026-11-17_11_30AM.json), which proves the code and isolates the gap to the trigger. Proposed, not applied here because `.github/workflows/refresh-data.yml` and the changed-list semantics belong to the refresh owner: treat 'new editions archived' as a promotion-relevant change, and gate the *model rebuild* (not the injury promotion) on the structured sources. Until then, R04's automation is only as current as the last session that ran the diff by hand. UPDATE 2026-11-19 (arena/9ff20954-nba1): the trigger half was fixed in PR #170 (arena/374ffc79-nba1: the promote step now runs after any non-cancelled fetch attempt, merged 2026-11-19T05:42Z) and the promote-side half in this branch (engine/promote_official.py: promote the newest SUCCESSFUL injury-PDF retrieval instead of failing when the newest edition is rate-limited 403/429). Local re-run of the 2026-11-17 capture promoted injury_pdf_probe (59 rows, 11/17 11:30 AM edition) and injury_diff_chain (0/0 changes), and data/raw/injuries.json now carries that edition. Operational proof still requires observing a future scheduled refresh run publish a newer edition; until then the flag stays open at Medium.",
    "affected": "engine/fetch_official.py (changed-list), engine/promote_official.py, .github/workflows/refresh-data.yml, data/raw/injuries.json, R04, R18, R26",
    "links": [
     {
@@ -1658,6 +1658,26 @@
    "detail": "Both teams played on 11/17 and again on 11/18 (UTA 132 @ LAC 107; CHA 114 @ LAL 118 OT; then UTA 109 @ LAL 97). The rest model reads the official finals corpus, so both show rest_days=0 for their next game; the flag exists so a reviewer does not mistake the back-to-back for a data gap.",
    "source": "https://www.nba.com/games?date=2026-11-18",
    "added_by": "arena/929395a5-nba1"
+  },
+  {
+   "id": "F-9FF-01",
+   "severity": "Low",
+   "status": "open",
+   "title": "Injury PDF raw_pdf_sha256 not measured for the 2026-11-19 12:30 AM edition transcription (read via web-fetch text render)",
+   "detail": "Session arena/9ff20954-nba1 read the 2026-11-19 12:30 AM injury edition via a text render of the official PDF (https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_30AM.pdf), not byte-exact. The transcription data/official/injury_2026-11-19_1230AM_9ff20954.json therefore records raw_pdf_sha256 as null with this note, never an invented digest. Statuses were transcribed verbatim; the scheduled fetcher (engine/fetch_official.py) records the byte digest when it archives the PDF.",
+   "affected": "data/official/injury_2026-11-19_1230AM_9ff20954.json",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_30AM.pdf",
+   "suggested_action": "When the scheduled refresh archives the PDF bytes, backfill the sha256 into the transcription or supersede it with the fetcher's digest-bound record."
+  },
+  {
+   "id": "F-9FF-02",
+   "severity": "Medium",
+   "status": "open",
+   "title": "All three official team-stat tables lag the standings by exactly the 11/18 UTA@LAL game (LAL/UTA one GP short, on the correct side)",
+   "detail": "Session arena/9ff20954-nba1 re-read the official advanced, traditional and opponent tables on 2026-11-19: all three lag the official standings by exactly one game, the 11/18 UTA 109 @ LAL 97 final (0022600268). LAL shows 15 GP 13-2 on the stat tables vs 16-13-3 in the standings (missing a loss); UTA shows 15-2-13 vs 16-3-13 (missing a win); the other 28 teams match exactly. Advanced GP sum is 442 = 2 x (222 decided games - 1 lagged game). The recut gates G3/G4 pass only with this documented one-game lag allowance; no value was fabricated. Same irregularity as F-929-01 (raised independently by arena/929395a5-nba1); this flag records the 9ff20954 re-cut's handling.",
+   "affected": "data/derived/team_stats_recut.json, data/derived/measured_constants_2026_27.json",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "suggested_action": "Re-check on the next cycle: when the stat tables catch up, re-cut without the lag allowance."
   }
  ]
 }
