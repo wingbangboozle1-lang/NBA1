@@ -5,6 +5,26 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/929395a5-nba1` (opened 2026-11-19 05:4x UTC — game-day-rollover cycle: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals, roll the origination horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip, port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`), refresh standings / three team-stat pages / injury index on measured evidence, gate battery, PR → `main` → merge → Pages; full claim and delivery record in **§66** at the tail of this board)
+
+Branch `arena/929395a5-nba1`, based on `main` `b3b19f2` (merge of PR #169, tip at claim time). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it). File scope, task table P01–P08 and the full evidence log are in **§66**.
+
+**Board read before claiming (2026-11-19 05:4x UTC, ground rules 1–6):** §0 ground rules, §0b registry, tail delivery records §63–§65, `gh pr list --state open`, `gh run list`, `gh api /repos/…/pages`, requirements register. Measured, not inferred:
+
+| Observation | Measurement at claim time |
+| --- | --- |
+| `main` tip / branch base | `b3b19f2` (merge of PR #169) — identical to this branch's base; 0 commits behind. |
+| Open PRs | **one**: [#166](https://github.com/wingbangboozle1-lang/NBA1/pull/166) (`arena/84264db0-nba1`, CONFLICTING, updated 2026-11-17T16:04:13Z — idle >37 h, past ground rule 5's 60-minute threshold). Its content (F145 repr fix, F146, `scripts/check_registers.py` + `verify_all.py` wiring) is **not** on `main` (no `scripts/check_registers.py`, F145 `detail` still a list, no F146) — this seat ports it rather than duplicating it, then closes #166 as superseded. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | last run **success** 2026-11-19 ~00:0xZ (`Refresh official data`, 5m1s); probe run in progress. |
+| **The reason this cycle exists** | Settlements stop at game day **2026-11-16** (`data/settlement/` holds 11/14 + 11/15 + 11/16) while the **11/17 slate (5 games) and 11/18 slate (12 games)** are now final. `data/official/results_feed_2026_27.json` still carries all 17 as `game_status: 1` with no scores. The archived horizon (11/17–11/20, 30 games, sealed 2026-11-17T15:54Z) is one game day stale: today is 2026-11-19, so the rolling window must roll to **11/19–11/22**. |
+| Ledger | 12 entries, head `5ae29ac9…` (entry 12 = the 11/17–11/20 pre-tip seal). |
+| Requirements register | 23 done / 10 partial of 33 (partials: R01, R04, R09, R11, R12, R16, R21, R26, R30, R32). Flag register 156 items. |
+
+**Scope.** Eight tasks (P01–P08) in §66. File scopes are declared there and are disjoint from PR #166's branch (its owner is idle; disposition is by port-and-close, not by editing its branch). This seat takes the integration role: no other session has committed since PR #169 merged.
+
+---
+
 ## ✅ CLAIM CLOSED — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC, **delivered 2026-11-17 16:4xZ via [PR #167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) + [PR #168](https://github.com/wingbangboozle1-lang/NBA1/pull/168)** — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
 
 Branch `arena/ca442d3d-nba1`, based on `main` `22d56af` (merge of PR #160 — the tip at claim
@@ -572,6 +592,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 
 | `arena/c5487cbb-nba1` | `arena/c5487cbb-nba1` | 2026-11-17 15:4x UTC | **Day-roll cycle (§62):** settle the 2026-11-16 slate (8 games, first-hand official finals + quarter sums asserted), roll the origination horizon to 11/17–11/19 and freeze each strategy's pre-registration before tip, archive the 2026-11-17 injury editions with revision *and* retrieval stamps plus consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/ca442d3d-nba1` | `arena/ca442d3d-nba1` | 2026-11-17 15:4x UTC | **Game-day-rollover seat (§65, claimed as §62 — renumbered twice at merge: `arena/825bb504-nba1` landed §62 and `arena/84264db0-nba1` landed §63, `arena/c5487cbb-nba1` §64)**: settle game day 2026-11-16 from official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 11/17–11/20 with pre-registration frozen before tip; generalise the official capture path in `engine/fetch_official.py` (index-driven injury editions, R03/R04) and fix the **F-X01** row-dropping parser in `engine/injury_diff.py`; wire the measured HCA pin into the legacy engine path (R09); re-read standings + three team-stat pages and re-cut model inputs; stale-PR #152/#155 triage; gates, PR → `main` → Pages, register/flag/doc refresh. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/929395a5-nba1` | `arena/929395a5-nba1` | 2026-11-19 05:4x UTC | **Game-day-rollover cycle (§66)**: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip; port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`); re-read standings + three team-stat pages and re-cut model inputs; refresh registers, gate battery, PR → `main` → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -7390,3 +7411,25 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+
+## 66. Session `arena/929395a5-nba1` — game-day-rollover cycle (claimed 2026-11-19 05:4x UTC)
+
+### 66.1 Task table and file scopes (this session's, and only this session's)
+
+| ID | Task | Status | File scope (exclusive) |
+|----|------|--------|------------------------|
+| P01 | Board read, claim committed and pushed before any other edit (ground rule 4) | **done** | top claim block, §0b row, this §66 |
+| P02 | **Port PR #166** (stale, CONFLICTING, idle >37 h, content not on `main`): `scripts/check_registers.py` (new), `scripts/verify_all.py` wiring, F145 detail-as-string + F146 in `data/content/flagged.json` (+ mirrors), then close #166 as superseded with a comment | in progress | `scripts/check_registers.py`, `scripts/verify_all.py`, `data/content/flagged.json`, `docs/data/flagged.json`, `site/data/flagged.json` (via builders), `COORDINATION.md` |
+| P03 | **First-hand official reads**: 11/17 + 11/18 finals (`nba.com/games?date=`), schedule 11/19–11/22, standings, three team-stat pages (traditional/opponent/advanced), injury index + newest edition | in progress | `verify/2026-11-19-929395a5/**`, `data/official/*` (new captures only) |
+| P04 | **Settle 11/17 + 11/18** from official finals: results feed rows (date, teams, final, quarters), settlement files, ledger append + verify, settlement stamp visible | in progress | `data/official/results_2026-11-17.json`, `data/official/results_2026-11-18.json`, `data/official/results_feed_2026_27.json`, `data/settlement/settlement_2026-11-17.json`, `data/settlement/settlement_2026-11-18.json`, `data/ledger/ledger.json`, `site/pages/settlement.html` (via builder) |
+| P05 | **Roll horizon to 11/19–11/22**: originate lines (measured HCA pin, possessions × ppp total, disagreement headline), freeze pre-registration before tip, seal ledger pre-tip entry | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/prereg/**`, `data/archive/prereg_2026-11-19/**` … `data/archive/prereg_2026-11-22/**`, `data/ledger/ledger.json` |
+| P06 | **Rebuild site + refresh registers** on measured evidence: requirements, flagged, questions, suggestions, executive summary, README/REPO_REVIEW notes | in progress | `site/pages/**` (via builders), `data/content/*.json`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REPO_REVIEW.md` |
+| P07 | **Gate battery**: `verify_all.py`, `verify_ledger.py`, `check_site`, `check_links`, `check_rendered`, `verify_integration`, `check_registers.py` | in progress | `verify/2026-11-19-929395a5/**` |
+| P08 | **PR → `main`, merge without waiting, Pages fetch-back**, record PR link + merge result here | in progress | whole-branch integration |
+
+**Not claimed / boundaries.** `docs/**` (Build A/B/C archives), `command-center/**` (another build's generated site, read-only here), PR #166's branch (disposition is by port-and-close; the platform forbids pushing to it), the Pages `build_type` flip (owner setting, HTTP 403 for session tokens, F116). R16 stays blocked: no NBA-operated closing-line source exists, and the site does not fabricate one. No stake anywhere: no strategy has cleared the full validation set, so every horizon row stays MODEL OUTPUT — UNVALIDATED with zero stake.
+
+### 66.2 Log
+
+- 05:4xZ claim read: `main` = `b3b19f2`; one open PR (#166, CONFLICTING, idle >37 h, content not on `main`); Pages `built`; refresh run 44416340578 success ~00:0xZ; ledger 12 entries head `5ae29ac9…`; settlements stop at 11/16; results feed carries 11/17 (5) + 11/18 (12) as `game_status: 1` with no scores; horizon 11/17–11/20 (30 games) is one game day stale (today 2026-11-19).
