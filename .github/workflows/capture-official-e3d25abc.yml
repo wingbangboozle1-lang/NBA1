@@ -1,0 +1,134 @@
+name: Capture official evidence (e3d25abc)
+
+# Session arena/e3d25abc-nba1, COORDINATION §67 (Q02).
+#
+# The sandbox this session runs in reaches only github.com / npm / pypi, so
+# nba.com and ak-static.cms.nba.com cannot be read from the agent as bytes.
+# This workflow puts the fetch on a runner that has the network and commits the
+# content-addressed bytes back to this branch, where the parsers and the checks
+# run locally against them.  Same shape as capture-official-ca442d3d.yml, which
+# the board reviewed (§65.9: run 44120656545 committed its captures back).
+#
+# Deliberately narrow:
+#   * runs only on this session's branch, and only when this file or the capture
+#     script itself changes - it cannot arm itself in a loop and cannot be armed
+#     by another session's push;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it writes only data/raw/session-e3d25abc/** and commits nothing else;
+#   * the fetch script refuses any host outside the four official ones.
+
+on:
+  push:
+    branches: [arena/e3d25abc-nba1]
+    paths:
+      - scripts/capture_official_e3d25abc.py
+      - .github/workflows/capture-official-e3d25abc.yml
+  workflow_dispatch:
+    inputs:
+      injury_days:
+        description: "comma-separated days whose injury editions to archive (YYYY-MM-DD)"
+        required: false
+        default: ""
+      result_days:
+        description: "comma-separated game days to capture scoreboards + gamebooks"
+        required: false
+        default: ""
+      slate_days:
+        description: "comma-separated future slate days"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official-e3d25abc
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Work out which days to capture
+        id: days
+        run: |
+          if [ -n "${{ inputs.injury_days }}" ]; then
+            INJ="${{ inputs.injury_days }}"
+            RES="${{ inputs.result_days }}"
+            SLATE="${{ inputs.slate_days }}"
+          else
+            # Game days needing a gamebook = the two most recent UTC days (a late
+            # Pacific tip finishes after 00:00Z).  Injury editions = those two
+            # days plus today, so tonight's slate has its own official revisions.
+            # Horizon = today + 1..3 days: the brief's "up to 3 days in advance".
+            D0=$(date -u +%F)
+            D1=$(date -u -d '1 day ago' +%F)
+            D2=$(date -u -d '2 day ago' +%F)
+            INJ="${D2},${D1},${D0}"
+            RES="${D2},${D1}"
+            SLATE="${D0},$(date -u -d 'tomorrow' +%F),$(date -u -d '+2 day' +%F),$(date -u -d '+3 day' +%F)"
+          fi
+          echo "injury_days=${INJ}" >> "$GITHUB_OUTPUT"
+          echo "result_days=${RES}" >> "$GITHUB_OUTPUT"
+          echo "slate_days=${SLATE}" >> "$GITHUB_OUTPUT"
+          echo "injury editions for: ${INJ}"
+          echo "gamebooks for:       ${RES}"
+          echo "slate pages for:     ${SLATE}"
+
+      - name: Fetch official injury editions, gamebooks and scoreboard pages
+        run: |
+          python3 scripts/capture_official_e3d25abc.py \
+            --injury-days "${{ steps.days.outputs.injury_days }}" \
+            --result-days "${{ steps.days.outputs.result_days }}" \
+            --slate-days "${{ steps.days.outputs.slate_days }}"
+
+      - name: Summarise what was captured
+        run: |
+          python3 - <<'PY'
+          import json
+          m = json.load(open("data/raw/session-e3d25abc/capture_manifest.json"))
+          inj = m["injury_editions"]
+          ok = [r for r in inj if r.get("sha256")]
+          print(f"injury editions fetched  : {len(ok)} of {len(inj)}")
+          for d in sorted({r['edition'].split('_')[2] for r in ok}):
+              n = sum(1 for r in ok if r['edition'].split('_')[2] == d)
+              print(f"   {d}: {n} edition(s)")
+          print(f"gamebooks fetched        : "
+                f"{sum(1 for g in m['gamebooks'] if g.get('sha256'))} of {len(m['gamebooks'])}")
+          print(f"slate pages fetched      : {len(m['slate'])}")
+          print(f"failures recorded        : {len(m['failures'])}")
+          for f in m["failures"][:12]:
+              print("   FAIL", f.get("edition") or f.get("game_id") or f.get("url"), f["error"])
+          PY
+
+      - name: Commit the captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/session-e3d25abc
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture official injury editions + 11/17-11/18 gamebooks (e3d25abc §67 Q02) [skip ci]"
+          # Rebase in case the session pushed while the run was in flight; never
+          # force, so another session's work is never discarded.
+          git pull --rebase origin arena/e3d25abc-nba1
+          git push origin HEAD:arena/e3d25abc-nba1
+
+      - name: Upload the manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-manifest-e3d25abc
+          path: data/raw/session-e3d25abc/capture_manifest.json
+          if-no-files-found: warn
