@@ -12310,3 +12310,35 @@ The official schedule's own month grid confirms the per-day counts 19→4, 20→
 | Gates on the merged tree | `verify_all` VERIFY OK (FAILURES: 0) · `check_links` PASS · `check_site` PASS · `check_registers` OK · `check_build_data` PASS · `verify_integration` PASSED (0 errors) · `verify_ledger` chain OK · `verify_dashboard` OK · `check_rendered` PASS · `render_check` 167 pages / 0 problems · 16/16 test files pass · this seat's `verify_integration_232a9f86.py` exit 0 |
 
 **Final-integration conclusion.** The combined tree is green end to end: the site builds deterministically (0 diff), every gate passes, no internal link is broken, the ledger chain verifies, and the live site serves the current 11/19–11/22 horizon and the 11/17–11/18 settlements from official sources read first-hand this session. The nine partial requirements remain partial and are published on the Flagged for Review page with their source links; none blocks the merge. No strategy is funded; every pick is MODEL OUTPUT — UNVALIDATED, zero stake.
+
+## 77. Session `arena/fb91550a-nba1` — R01 scheduled-refresh publish/rebuild path (claimed 2026-11-19 12:14 UTC; renumbered 74 -> 77 at rebase because §74/§75/§76 were taken)
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/fb91550a-nba1` (opened 2026-11-19 12:1x UTC — **R01 rebuild-path completion + R09 legacy-HCA fix + first-hand official re-verification of the live 11/19–11/22 horizon + integration delivery**)
+
+Branch `arena/fb91550a-nba1`, based on `main` `b2af48b` (merge of PR #193, 2026-11-19 ~08:26Z). The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19 12:14 UTC, ground rules 1–6):** §0 ground rules, §0b registry, tail delivery records §68–§73 + §69.2, `gh pr list --state all`, `gh run list --workflow=refresh-data.yml`, `gh api /repos/…/pages`, `data/raw/_last_refresh.json`, `engine/refresh_gate.py` run directly, `data/ledger/ledger.json` (17 entries), `data/content/requirements.json` (24 done / 9 partial of 33).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip / branch base | `b2af48b` (PR #193 merge) — identical; 0 commits behind. |
+| Open PRs | **two**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, CONFLICTING, subject already on `main` via PR #172 — stale duplicate, see T00) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, COORDINATION.md-only). Neither is touched by this seat except T00's close-with-comment on #181. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | Last scheduled run **44520339923** (2026-11-19T12:03:31Z, `main`, `schedule` event) **success** — but its **Rebuild step was `skipped`** (fetch success, promote success, freshness-gate step success, rebuild skipped, settle success). The committed `data/raw/_last_refresh.json` on `main` is still the 08:09:58Z record (`build_outcome: skipped`, 5 failed checks S1/S2/S8/S9/S10). R01's rebuild half is still unproven in production. |
+| Gate run on this tree | `python3 engine/refresh_gate.py --max-age-hours 10` prints 3 NOTEs (S8/S9/S10 declared-unreadable, failing as expected) + **7 BLOCKs**: fetcher reported 2 failed checks; missing/invalid payload capture for S1_season; advanced team input cannot be compared with a complete promoted snapshot; schedule_upcoming.json not verified against this run's capture; injuries.json provenance URL stale + not verified. The S1_season/S2_train pair is the same client-rendered class §69 proved byte-exact (0 team rows) but is **not** in the declared-unreadable register — that is the first thing this seat measures. |
+| Horizon | 2026-11-19..22, 26 games (4/9/6/7), ledger entry 17 pre-tip freeze 2026-11-19T05:45Z, first tip 2026-11-20T01:00Z (11/19 8:00 PM ET). Results feed 222/222 final through 11/18. 11/19 games have not tipped at claim time, so **no settlement is owed this cycle** — the settle step's correctness is verified, not exercised. |
+| Requirements register | 24 done / 9 partial (R01, R04, R09, R11, R12, R16, R26, R30, R32). This seat targets R01 (rebuild observation) and R09 (legacy flat-HCA path) as closable; the rest stay partial with re-evidenced gaps. |
+
+### Task table and file scopes (this session's, and only this session's)
+
+| Task | Work | Files (exclusive) |
+| --- | --- | --- |
+| T00 | Triage PR #181: verify its subject is already on `main` (PR #172), close it as superseded with a comment citing the canonical merges. Do not merge it (it would double-settle 11/17+11/18 and fork the ledger). | none (GitHub only) |
+| T01 | First-hand official re-verification of the live horizon via the fetch channel: games pages 11/19–11/22 (counts, matchups, times, venues), standings, teams advanced/traditional/opponent (GP drift F-929-01), injury index + newest edition, results 11/19 (expect 0 final). Compare to committed captures; record drift. | `verify/2026-11-19-fb91550a/**` (new) |
+| T02 | R01: root-cause the 12:03Z rebuild skip from the run log; measure whether S1_season/S2_train meet the §73 three-part admissibility rule for the declared-unreadable register (HTTP 200 same-run check, bounded evidence record, promoted-snapshot history). If admissible, extend the register by measurement (script-generated, not hand-typed); if not, leave the block and say why. Never relax a check on a readable source. | `engine/refresh_gate.py` (only if needed), `data/raw/unreadable_sources.json` (script-generated), `scripts/fb91550a_*.py` (new), `scripts/test_fb91550a_*.py` (new) |
+| T03 | R09: fix the legacy flat-HCA path (`engine/model_core.py` `flat_hca = 2.0`, `engine/pipeline.py` `flat_hca=2.0`, `scripts/originate_horizon.py` `home_court_applied: False`) so the legacy path applies the measured pin (or states it does not) instead of a fitted 2.0. Published surfaces already use the pin; this closes the code-level contradiction. | `engine/model_core.py`, `engine/pipeline.py`, `scripts/originate_horizon.py`, `scripts/test_fb91550a_hca.py` (new) |
+| T04 | Rebuild the site from the (possibly unchanged) data via existing builders; run the full gate battery. | generated pages via builders only |
+| T05 | Refresh registers (requirements evidence, flagged, questions, suggestions) via builders; EXECUTIVE_SUMMARY update; PR → merge → Pages verify → live fetch-back; record here. | `data/content/*.json` (via builders), `EXECUTIVE_SUMMARY.md`, this board |
+
+**Explicitly not in scope:** ledger entries, settlement files, horizon lines/picks, prereg archives, `data/official/results*` (no game day has ended since the 11/19 freeze), market data (none exists — R16 stays blocked), arena coordinates (R11 stays partial). If T01 finds drift that requires re-pricing the horizon, that is logged as a request for the horizon owner, not executed here.
