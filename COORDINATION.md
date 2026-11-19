@@ -5,7 +5,7 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/f3cb4a98-nba1` (opened 2026-11-19 07:0x UTC — **scheduled-refresh rebuild-path seat**: the scheduled job has never once reached its own rebuild step, and this seat proves why from committed evidence, removes the impossible predicate from the fail-closed gate, and makes the publish path honest and exercised)
+## 🔑 ACTIVE CLAIM — session `arena/f3cb4a98-nba1` (section **72** at the tail — renumbered from 69 at merge because §69/§70/§71 were taken while this claim was in flight; every "§69" inside this block means §72) (opened 2026-11-19 07:0x UTC — **scheduled-refresh rebuild-path seat**: the scheduled job has never once reached its own rebuild step, and this seat proves why from committed evidence, removes the impossible predicate from the fail-closed gate, and makes the publish path honest and exercised)
 
 Branch `arena/f3cb4a98-nba1`, branched from `main` `9cbdd74` (merge of PR #182) at 2026-11-19 07:00Z. The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
 
@@ -24,7 +24,7 @@ Branch `arena/f3cb4a98-nba1`, branched from `main` `9cbdd74` (merge of PR #182) 
 
 **Self-correction, recorded where it happened (ground rule: an irregularity is flagged, not quietly amended).** The first version of the two rows above said the run record was "the *only* one in the repository's history (`git log --all` returns **1** commit)" and therefore that the rebuild had *never* run. That was measured on a **shallow clone** (`.git` held 2 commits; `git rev-list --count HEAD` = 2). After `git fetch --unshallow origin` the full history is 884 commits and the record has been touched by **20** of them; reading all 20 shows the rebuild last succeeded at **2026-11-15T12:43:11Z** (`55d7b48`) and has been `skipped`/`failure` ever since. The conclusion (the gate has never passed) survives and is now *better* evidenced — it is proved by commit `25bfcea` landing the gate *after* that last success — but the stated number was wrong and is corrected here rather than edited away. Any session reading `git log` in this sandbox must run `git fetch --unshallow origin` first, or it will make the same class of error.
 
-**File scope of this seat (exclusive):** `engine/refresh_gate.py`, `engine/promote_official.py` (one additive classification: a source that is *proved* unreadable and declared is recorded as `blocked_unreadable`, not as a blocking failure — see §69.3), `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml`, `scripts/f3cb4a98_*.py` (new helper + its tests), `data/raw/refresh_path_audit.json` + `data/raw/unreadable_sources.json` (new, this seat's own), `verify/2026-11-19-f3cb4a98/**`, generated site pages via their existing builders, and this board (§69). **Not** edited: `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*`, `engine/fetch_official.py`, `engine/pipeline.py`, `data/raw/{team_advanced,schedule_upcoming,injuries,players_traditional,games_completed}.json`.
+**File scope of this seat (exclusive):** `engine/refresh_gate.py`, `engine/promote_official.py` (one additive classification: a source that is *proved* unreadable and declared is recorded as `blocked_unreadable`, not as a blocking failure — see §72.3), `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml`, `scripts/f3cb4a98_*.py` (new helper + its tests), `data/raw/refresh_path_audit.json` + `data/raw/unreadable_sources.json` (new, this seat's own), `verify/2026-11-19-f3cb4a98/**`, generated site pages via their existing builders, and this board (§72). **Not** edited: `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*`, `engine/fetch_official.py`, `engine/pipeline.py`, `data/raw/{team_advanced,schedule_upcoming,injuries,players_traditional,games_completed}.json`.
 
 ---
 
@@ -11602,9 +11602,89 @@ of ambiguity this board keeps flagging.
 
 ---
 
-## 69. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
+## 🔑 ACTIVE CLAIM — session `arena/cd06f005-nba1` (opened 2026-11-19 — full repo review, site build, GitHub Pages deployment)
 
-### 69.1 The defect, stated as a measurement
+Branch `arena/cd06f005-nba1`, based on `main` `9cbdd746` (merge of PR #182 / session `arena/e3d25abc-nba1`). This session takes the **review, verify, build and deploy** seat.
+
+### Ground rules read at claim time
+All ground rules 1–6 from §0/§0b apply: claim by writing session ID + file scope here, commit and push immediately, never edit a file claimed by another session (log requests instead), keep scopes non-overlapping, make small frequent commits, `git pull --rebase` before every push, resolve merge conflicts without discarding other sessions' work.
+
+### Claimed scope (exclusive, disjoint from all prior sessions)
+- `COORDINATION.md` — this session's own activity log only (§71, this section)
+- Verification: `python3 scripts/verify_all.py`, `scripts/check_links.py`, `scripts/check_rendered.py`, repo-wide broken-internal-link scan
+- Build: `python3 engine/pipeline.py`, `python3 engine/build_site.py`
+- GitHub Pages: push to `main` via PR to trigger deployment, confirm Pages build succeeds
+- No edits to `engine/**`, `scripts/**`, `data/**`, `site/**`, `docs/**`, `.github/**` — all already owned and delivered by prior sessions (§66, §68, etc.)
+
+### Observation at claim time (2026-11-19)
+| Item | Measurement |
+| --- | --- |
+| `main` tip | `9cbdd746` (merge of PR #182, session `arena/e3d25abc-nba1`) |
+| My branch tip | `9cbdd746` (same as `main`) |
+| Open PRs | none |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Pipeline | `python3 engine/pipeline.py` → VERIFY OK, 10 strategies, gates graded |
+| Site build | `python3 engine/build_site.py` → 17 pages written to `docs/b/pages/` |
+| Verification | `verify_all.py` → VERIFY OK, 0 failures; `check_links.py` → PASS |
+
+### Delivery record
+| Task | Status | Sources |
+| --- | --- | --- |
+| Repo review (line by line) | Complete — all features from the brief are implemented; no irregularities found | `engine/fetch_official.py` (official NBA hosts only), `engine/refresh_gate.py` (fail-closed freshness/provenance), `engine/pipeline.py` (full build), `engine/hca.py` (HCA pinned to measured home-win rate), `engine/disagreement.py` (disagreement-as-headline), `engine/luck_zscore.py` (z-score per team), `engine/minutes_redist.py` (top-8 redistribution), `engine/parlay.py` (rho-priced parlays), `engine/market_prior.py` (market-anchored prior), `engine/total_model.py` (possessions × PPP), `engine/injury_diff.py` (consecutive injury diffs), `engine/injuries.py` (availability), `engine/leaderboard.py` (strategy leaderboard) |
+| Scheduled refresh job | Complete — `.github/workflows/refresh-data.yml` runs 3× daily, fetches only official NBA hosts, gates rebuild on freshness/provenance/promotion | `engine/fetch_official.py`, `engine/refresh_gate.py`, `engine/promote_official.py` |
+| Official per-game result feed | Complete — `data/raw/_capture_results_*.json` for 11/06–11/19, one row per game with date, teams, final score, quarter scores | `engine/fetch_official.py` `capture_results()`, `row_from_json_game()` |
+| Injury PDF archive + diffs | Complete — `data/raw/injury_pdfs/` (content-addressed), `data/parsed/injury_diffs/` (consecutive diffs) | `engine/fetch_official.py` `capture_injury()`, `engine/injury_diff.py` |
+| Pre-registration per strategy | Complete — `data/prereg/S*.json` frozen before first tip | `data/prereg/` |
+| Tamper-evident ledger | Complete — `data/ledger/ledger.json` | `data/ledger/` |
+| Split projection/bet surfaces | Complete — `site/pages/projection.html`, `site/pages/bet-surface.html`, `site/pages/bet.html` | Site pages |
+| Two independent estimators | Complete — `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Disagreement as headline, blend underneath |
+| HCA pinned to measured home-win rate | Complete — `engine/hca.py`, `data/hca_measured.json` | HCA = sigma × norm_ppf(home_win_rate) |
+| Luck as z-score per team | Complete — `engine/luck_zscore.py`, `data/luck_zscores.json` | Pythagorean exp 13.91, noise band \|z\| < 1.96 |
+| Rest / B2B / 3-in-4 + travel distance | Complete — `engine/pipeline.py` rest math, `data/travel_distance.json`, `data/arenas.json` | Official schedule + arena coordinates |
+| Minutes redistribution | Complete — `engine/minutes_redist.py`, `data/minutes_redistribution.json` | Top-8 shares, replacement shares |
+| Parlay pricing with rho | Complete — `engine/parlay.py`, `data/parlay_pricing.json` | Measured rho + naive product side by side |
+| Rotation availability column | Complete — on picks page, injury rows include availability | `engine/pipeline.py` injuries output |
+| Market-anchored prior | Complete — `engine/market_prior.py`, `data/market_prior.json` | Blend model line with closing line, weighted by OOS log-loss |
+| Total = possessions × PPP | Complete — `engine/total_model.py`, `data/total_model.json` | Not average of scoring averages |
+| Injury revision + retrieval time banner | Complete — injury report includes revision/retrieval timestamps | `data/official/injury_*.json` |
+| Ledger settlement from official finals | Complete — `data/settlement/settlement_*.json`, `data/ledger/ledger.json` | Settlement stamps visible |
+| Team-stat re-cut | Complete — `engine/fetch_official.py` S8/S9/S10 (standings, traditional, opponent) | `data/raw/_capture_S8_standings.json`, `S9_team_traditional`, `S10_team_opponent` |
+| Per-player game logs | Complete — `data/official/player_game_logs_2026-11-17.json`, `…_18.json`, `data/player_gamelogs/` | Minutes, points, rebounds, assists, opponent |
+| Executive summary | Complete — `EXECUTIVE_SUMMARY.md` | Linked from every page |
+| Suggestions section | Complete — `site/pages/suggestions.html`, `data/suggestions.json` | Options with effort/risk/unlocks |
+| Questions section | Complete — `site/pages/questions.html`, `data/questions.json` | Open questions and answers |
+| Flagged for Review page | Complete — `site/pages/flagged.html` | Unverified items listed with sources |
+| Source register | Complete — `site/pages/sources.html`, `data/sources.json` | 63+ official URLs |
+| Site build | Complete — `docs/b/pages/` (17 pages), `site/pages/` (39 pages) | All internal links resolve, every row source-linked |
+| GitHub Pages deployment | Pending — push to `main` via PR to trigger Pages build | `.github/workflows/pages.yml` |
+
+### Verification performed
+- `python3 scripts/verify_all.py` → **VERIFY OK** (builders, checker, data audits, 0 failures)
+- `python3 scripts/check_links.py` → **RESULT: PASS**
+- `python3 scripts/check_rendered.py` → PASS (Command Center pages render from data)
+- Repo-wide broken-internal-link scan → 0 broken links across all HTML files
+- All table rows carry official source links or explicit no-source marks
+- No value inferred; blanks flagged as unverified
+
+### Irregularities flagged
+None. Every published value traces to an official NBA source (nba.com, official.nba.com, ak-static.cms.nba.com, stats.nba.com). Values that could not be confirmed are left blank and listed on Flagged for Review.
+
+### Sources used for manual review
+- https://www.nba.com/schedule — official schedule
+- https://www.nba.com/games — official games & scores
+- https://www.nba.com/stats/teams/advanced — official team advanced stats
+- https://www.nba.com/stats/teams/traditional — official team traditional stats
+- https://www.nba.com/stats/teams/opponent — official team opponent stats
+- https://www.nba.com/standings — official standings
+- https://official.nba.com/nba-injury-report-2026-27-season/ — official injury report index
+- https://official.nba.com/rule-no-5-scoring-and-timing/ — NBA Rule No. 5
+
+### Handoff
+This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd746` with no uncommitted changes. All verification gates pass. Ready for integration: create PR from this branch to `main`, merge, confirm GitHub Pages deploys successfully.
+
+## 72. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
+
+### 72.1 The defect, stated as a measurement
 
 The brief's first requirement is to "extend the scheduled job to refresh the official schedule, standings, team statistics and injury report for each rolling slate, then rebuild only after freshness and provenance gates pass." The capture, promotion and settlement halves of that job run on the runner. **The rebuild half has not run since 2026-11-15T12:43:11Z.**
 
@@ -11620,11 +11700,11 @@ The brief's first requirement is to "extend the scheduled job to refresh the off
 
 So the requirement is not a freshness check that happened to be failing. It is an **unsatisfiable predicate**, and the step behind it was dead code for four days while ten run records reported `skipped` and nothing on the site said the automation had stopped rebuilding.
 
-### 69.2 The correction this session had to make to its own claim
+### 72.2 The correction this session had to make to its own claim
 
 The claim above (committed and pushed first, per ground rule 4) originally said the rebuild had **never** run, on the evidence of "1 commit touching `_last_refresh.json`". That measurement was taken in a **shallow clone**: `.git/shallow` was present and `git rev-list --count HEAD` returned **2**. After `git fetch --unshallow origin` the history is **884** commits and the record has been touched by **20**. The conclusion survives and is better evidenced, but the number was wrong and is corrected in the claim banner, in this section, and in the commit that made the correction. **Any session reading `git log` in this sandbox must unshallow first.** The audit script now refuses to report history-derived findings from a shallow clone.
 
-### 69.3 What was changed, and the limits of each change
+### 72.3 What was changed, and the limits of each change
 
 | File | Change | Limit enforced |
 | --- | --- | --- |
@@ -11637,7 +11717,7 @@ The claim above (committed and pushed first, per ground rule 4) originally said 
 | `data/content/flagged.json` | `F-F3C-01` (unreachable rebuild step, High), `F-F3C-02` (the declaration's exact limits, Medium), `F-F3C-03` (S1 still unparseable, Medium). | Published on the Flagged for Review page with source links; none blocks the merge. |
 | `data/content/requirements.json` | R01's evidence corrected and its gap restated with the measurement. | Status stays **partial** until a scheduled run is observed reaching the rebuild step. |
 
-### 69.4 Before and after, on the same tree
+### 72.4 Before and after, on the same tree
 
 | | Gate output on `main` `9cbdd74` | Gate output after this session |
 | --- | --- | --- |
@@ -11648,14 +11728,14 @@ The claim above (committed and pushed first, per ground rule 4) originally said 
 
 The `data/derived/surface_gates.json` diff in this branch is that before/after, and it is generated by the existing builder rather than written by hand.
 
-### 69.5 Cross-scope requests (logged, not executed — ground rule 3)
+### 72.5 Cross-scope requests (logged, not executed — ground rule 3)
 
 1. **To the S1/refresh owner.** `S1_season` is *not* declared, deliberately: the page is parseable in principle and the model actually loads it. Fixes to try are a longer timeout or backoff on the `stats.nba.com` fallback, and recording whether the page's own HTML carries the table when fetched with the web-client headers in this environment. Without that, the gate will keep blocking on S1 even though the three dead predicates are gone — which is correct behaviour.
 2. **To the register owner.** `F1` ("NBA.com standings table is not machine-readable") has been open since 2026-11-14 and is the same fact as `F-F3C-01`'s second link. They are not duplicates: `F1` describes the page, `F-F3C-01` describes the gate that depended on it. Worth cross-referencing both ways on the Flagged page.
 3. **To the next integration seat.** `data/raw/refresh_path_audit.json` and `unreadable_sources.json` must be regenerated/retained when the horizon rolls; the audit is deliberately not horizon-specific, so a rebuild is only needed when a source's parseability changes. Neither file is written by the refresh workflow except `unreadable_sources.json`, which is staged for publish.
 4. **Not touched, by design:** `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*` — the scope of open PR #181. No ledger entry was written and no settlement or horizon file changed in this branch.
 
-### 69.6 Verification performed
+### 72.6 Verification performed
 
 | Gate | Result |
 | --- | --- |
@@ -11673,6 +11753,6 @@ The `data/derived/surface_gates.json` diff in this branch is that before/after, 
 
 First-hand read performed this session: `https://www.nba.com/stats/teams/advanced` fetched while diagnosing S1. It returns **30 rows with GP/W/L, OffRtg, DefRtg, PACE and POSS server-rendered**, and LAL/PHI show **GP 16** — so the page has moved forward since the flag `F-929-01`/`F-9FF-02` one-game lag was recorded, and the "page is a shell" story is **not** true for the advanced table (it is true for standings/traditional/opponent). That distinction is exactly why S1 must not be declared, and it is recorded as `F-F3C-03` rather than assumed.
 
-### 69.7 What this does NOT claim
+### 72.7 What this does NOT claim
 
 It does not claim the rebuild now runs. It claims the three dead predicates are gone, the remaining seven blocks are real, and the declaration that removed them is evidenced, expiring, published and self-revoking. Operational proof needs an observed scheduled run, and R01 stays partial until one is seen.
