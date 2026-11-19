@@ -37,23 +37,27 @@ jobs:
         run: python3 scripts/capture_official_4f19ecf1.py --only gamebooks
       - name: Commit gamebooks
         if: always()
+        continue-on-error: true
         run: |
           git add data/raw/session-4f19ecf1 data/official/gamebooks
           if ! git diff --cached --quiet; then
-            git commit -m "Capture official NBA evidence: 11/17-18 gamebooks (4f19ecf1 G03) [skip ci]"
-            git pull --rebase origin arena/4f19ecf1-nba1
-            git push origin HEAD:arena/4f19ecf1-nba1
+            git -c user.name="arena/4f19ecf1-nba1" -c user.email="arena-4f19ecf1@users.noreply.github.com" commit -m "Capture official NBA evidence: 11/17-18 gamebooks (4f19ecf1 G03) [skip ci]"
           fi
+          git fetch origin arena/4f19ecf1-nba1
+          git -c user.name="arena/4f19ecf1-nba1" -c user.email="arena-4f19ecf1@users.noreply.github.com" merge --no-edit origin/arena/4f19ecf1-nba1 || true
+          git push origin HEAD:arena/4f19ecf1-nba1 || true
       - name: Injury grid slice (next 15 unprobed labels)
         continue-on-error: true
         timeout-minutes: 1
         run: GRID_NEXT=1 GRID_BATCH=15 python3 scripts/capture_official_4f19ecf1.py --only injury
       - name: Commit injury slice
         if: always()
+        continue-on-error: true
         run: |
           git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
           if ! git diff --cached --quiet; then
-            git commit -m "Capture official NBA evidence: injury grid slice (4f19ecf1 G02) [skip ci]"
-            git pull --rebase origin arena/4f19ecf1-nba1
-            git push origin HEAD:arena/4f19ecf1-nba1
+            git -c user.name="arena/4f19ecf1-nba1" -c user.email="arena-4f19ecf1@users.noreply.github.com" commit -m "Capture official NBA evidence: injury grid slice (4f19ecf1 G02) [skip ci]"
           fi
+          git fetch origin arena/4f19ecf1-nba1
+          git -c user.name="arena/4f19ecf1-nba1" -c user.email="arena-4f19ecf1@users.noreply.github.com" merge --no-edit origin/arena/4f19ecf1-nba1 || true
+          git push origin HEAD:arena/4f19ecf1-nba1 || true
