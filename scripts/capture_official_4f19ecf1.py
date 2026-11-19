@@ -255,6 +255,24 @@ def probe_clock_grid():
         return True
 
     todo = [e for e in candidates if e not in archived and _in_window(e)]
+    # GRID_NEXT auto-resume mode (scheduled runs): keep only labels neither
+    # archived nor already recorded as probed, take the first GRID_BATCH (15),
+    # so each short-lived run fills the next slice and the chain converges.
+    if os.environ.get("GRID_NEXT"):
+        recorded = set()
+        for day in ("2026-11-17", "2026-11-18", "2026-11-19"):
+            q = os.path.join(SESSION_DIR, "_probe_%s.json" % day)
+            if os.path.exists(q):
+                try:
+                    recorded.update(json.load(open(q, encoding="utf-8")))
+                except ValueError:
+                    pass
+        todo = [e for e in todo if e not in recorded]
+        n = int(os.environ.get("GRID_BATCH", "15"))
+        todo = todo[:n]
+        if not todo:
+            log("grid complete: no unprobed labels left in the 11/17-11/19 window")
+            return []
     log("injury clock-grid probe: %d candidates (%d already archived), %d to probe"
         % (len(candidates), len(archived & set(candidates)), len(todo)))
     def _probe_edition(edition):
