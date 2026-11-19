@@ -12449,6 +12449,21 @@ Branch `arena/fb91550a-nba1`, based on `main` `b2af48b` (merge of PR #193, 2026-
 
 **Still open after this delivery:** R01 `partial` pending an observed rebuild; S1 needs a runner-side fetch route (F-915-04); whether Actions may create PRs at all is unmeasured and now fails loudly (F-915-01); the HCA pin consequence is published for decision (F-915-06).
 
+### 77.7 Correction record — my own flag was wrong, and the live page caught it (2026-11-19 ~12:5x UTC)
+
+After PR #203 merged I re-read the **live** landing page rather than trusting my local build. It showed the standings-derived home-court pin as **+0.09 points (0.5023, 111 of 221)** — not the −1.10 I had just written into **F-915-06**. Both are real:
+
+| Pin | Corpus | Formula | Value |
+| --- | --- | --- | --- |
+| Standings pin (published in the executive summary, `data/derived/measured_constants_2026_27.json`) | official standings HOME/ROAD columns, 221 games | `sigma_margin · Φ⁻¹(rate)` | **+0.09 pts** (unchanged this session — standings were not re-read) |
+| Feed pin (`data/hca_measured.json`, the file R09 wires into the legacy reference line) | `data/raw/games_completed.json` | same formula, feed corpus | **+0.59 → −1.10 pts** after the 25 restored finals (9 home / 16 road) |
+
+So F-915-06 as first published **over-stated** the finding: it described one pin flipping when there are two derivations over two corpora. Corrected in **PR #205 → merged `43a430f`**, deployed, and the flag now states the decision it actually needs: *pick one source of record, make the other a cross-check with a tolerance, or raise on disagreement.*
+
+This is the same failure class the board's own §69.2 recorded — a fetch-back finding a defect that the green gate suite could not see. Recorded rather than quietly rewritten.
+
+---
+
 ---
 
 ---
