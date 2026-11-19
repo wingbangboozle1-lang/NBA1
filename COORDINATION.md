@@ -7433,3 +7433,41 @@ this addendum changes a file another session claims.
 ### 66.2 Log
 
 - 05:4xZ claim read: `main` = `b3b19f2`; one open PR (#166, CONFLICTING, idle >37 h, content not on `main`); Pages `built`; refresh run 44416340578 success ~00:0xZ; ledger 12 entries head `5ae29ac9…`; settlements stop at 11/16; results feed carries 11/17 (5) + 11/18 (12) as `game_status: 1` with no scores; horizon 11/17–11/20 (30 games) is one game day stale (today 2026-11-19).
+
+
+## 67. Delivery record — session `arena/929395a5-nba1` (2026-11-19)
+
+Branch `arena/929395a5-nba1` from `main` `b3b19f2` (PR #169 merge). All eight tasks done.
+
+**P01 claim** — §66 claim block + §0b row, commit `10ea4da`, pushed.
+**P02 port** — `scripts/check_registers.py` extracted from PR #166 (no merge base with
+`main`; fetched via `git fetch origin pull/166/head:pr166` + `git show`), wired into
+`scripts/verify_all.py`; F145 list-detail defect fixed to a string; F146 appended in all
+three `flagged.json` mirrors (157 items). Gate proven: passes clean (1945 fields, 0
+problems) and rejects the exact F145 defect (exit 1). PR #166 closed as superseded
+(branch left on remote for the owner).
+**P03 first-hand reads** — 17 finals transcribed from the official game pages (quarter
+scores sum-verified, 1 OT); schedule 11/19–11/22 (26 games) from the official schedule
+and date pages; standings (30 rows, W=L=222, home win rate 0.5023); team-stat re-cut
+(30×3, PTS−OppPTS=+/- 30/30); injury edition 11/19 12:30 AM ET (31 rows). Commit `f52de44`.
+**P04 settlements** — 11/17 (1-4-0, −6.7u) and 11/18 (4-8-0, −8.1u) settled from the
+official finals; ledger entries 13–16; `verify_ledger.py` chain OK; results feed 222/222
+final. Commit `233f55c`. (One incident: `settle_slate.py` run twice for two dates of one
+slate overwrites `settlement_<slate>.json`; repaired by byte-identical reproduction and
+splitting into per-date files — see §66 P04 note.)
+**P05 horizon roll** — recut (G3/G4 FAIL recorded for the LAL/UTA lag, not repaired);
+measured constants (sigma_margin 16.71, sigma_total 19.08, HCA pin +0.09 pts); 26 games
+11/19–11/22 (G-TOT pass −2.5); 23 picks, 12 parlays, 8 SGP candidates; pre-tip freeze
+2026-11-19T05:45Z, 19+ hours before the first tip; ledger entry 17. Commit `f578f5c`.
+**P06 site + registers** — `verify_all.py` VERIFY OK (41 pages, 3039 rows, 0 unmarked);
+F-929-01..04 added (161 items); executive summary, EXECUTIVE_SUMMARY.md §0b and
+questions Q-929-1..3 updated. Commit `569a0f5`.
+**P07 gate battery** — `verify_ledger.py` OK, `check_registers.py` OK (1986 fields),
+`verify_all.py` VERIFY OK, working tree clean.
+**P08** — PR to `main`, merge, Pages fetch-back (pending at this writing).
+
+**Flags raised by this session:** F-929-01 (LAL/UTA stat lag), F-929-02 (stale date-page
+records), F-929-03 (injury render ambiguities), F-929-04 (LAL/UTA back-to-backs).
+**Handover:** the engine fixes from §65 are in `main`; the remaining gap is data
+currency + the F-CA-07 trigger wiring. The next session should re-check F-929-01 (stat
+tables catching up) and settle 11/19 after its finals.
