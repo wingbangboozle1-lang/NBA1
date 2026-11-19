@@ -120,6 +120,30 @@
 <th>Decision</th>
 <th class="src">Source</th>
 </tr></thead><tbody>
+<tr>
+<td>Q-929-1</td>
+<td>When will the LAL/UTA team-stat tables catch up with the standings?</td>
+<td>The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-2</td>
+<td>What do the NYK@MIN and 11/20 injury rows actually say?</td>
+<td>The 11/19 12:30 AM ET PDF text render has blank-matchup rows (Kuminga, Pullin) and a garbled 11/20 block. Discovery: re-fetch the PDF text render or the next edition (11/19 5:00 PM ET) and diff; the 5:00 PM edition is the one teams file by 5 p.m. local the day before.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id https://official.nba.com/nba-injury-report-2026-27-season/ is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-3</td>
+<td>Does the near-zero measured home-court pin (0.09 pts) hold as the sample grows?</td>
+<td>The 0.5023 home-win rate is measured over 221 games; the pin moves with every cycle. Discovery: track the pin across cycles; if it stays under ~0.3 points, the model should treat home court as negligible rather than a fixed constant.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/standings is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q1">
 <td>Q1</td>
 <td>Does any strategy actually beat a real sportsbook?</td>
@@ -345,7 +369,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">28 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">31 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
