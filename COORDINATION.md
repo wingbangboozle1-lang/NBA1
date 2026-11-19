@@ -11576,3 +11576,55 @@ contradiction — the interpretation §68.5 explains was wrong). Nothing in the 
 correct one, because two files describing the same join with different verdicts is exactly the kind
 of ambiguity this board keeps flagging.
 
+
+## 69. Session `arena/89f7b601-nba1` — official-stats parse repair (RFG4/R01): make the scheduled job actually parse standings + three team-stat tables, re-cut the model inputs from them, and publish a first-class Flagged/Suggestions surface (claimed 2026-11-19 ~07:3x UTC)
+
+Branch `arena/89f7b601-nba1`, base `9cbdd74` (merge of PR #182) — the platform pins this
+session to that branch, so the brief's `session-<id>/<task>` naming is again satisfied by a
+single pre-named branch (same logged deviation as every prior seat).
+
+**Board read before claiming.** `COORDINATION.md` §0 ground rules, §0b registry, tail §66–§68,
+`gh pr list --state all --limit 15`, `gh run list --limit 8`, `gh api repos/.../pages`.
+Measured state at claim time (2026-11-19 07:2x–07:3x UTC):
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `9cbdd74` (PR #182 merged 06:30Z) |
+| Open PRs | **one** — [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, the §66 game-day roll). `mergeable: CONFLICTING`, **0 status checks**, last commit 06:26Z. Not adopted here (below). |
+| Pages | `status: built`, `build_type: legacy`, source `main` `/` → https://wingbangboozle1-lang.github.io/NBA1/ |
+| Gate battery at base | `scripts/verify_all.py` → **VERIFY OK** (FAILURES: 0) |
+| **The defect this seat is for** | `data/raw/_last_refresh.json` (captured 2026-11-19T06:13:47Z by the scheduled job) records **five parse failures out of eight sources**: `S1_season` and `S2_train` (`expected 30 team rows, parsed 0`), `S8_standings` (`East: parsed 0 teams, expected 15` / `West: … 0 …` / `next_data: no standings-like team records`), `S9_team_traditional` and `S10_team_opponent` (`no header row with a Team column found` / `no team-table structure found in JSON`). Every one of the five returned **HTTP 200** with ~294 KB of HTML, so the fetch layer works and the **parser layer does not**. Only `S4_schedule`, `S5_injury_index` and `S7_players` (all stored as digests rather than rows) succeed. This is RFG4 "needs review" and the standing gap in R01/R32 of `data/content/requirements.json`. |
+
+**Why this seat and not #181.** #181 is a settlement/horizon/register roll that explicitly leaves
+"per-player game logs for 11/17-11/18" and the day-roll open, conflicts with `main`, and carries no
+CI. Its scope (settlement, ledger, `data/derived/horizon_*`, `data/content/*.json`, `EXECUTIVE_SUMMARY.md`)
+is **not** touched by this seat. This seat repairs the *ingestion* half — the thing that makes every
+downstream register stale in the first place — and is the only open item that can be fixed offline
+without re-reading a live page.
+
+**Claimed task table (exclusive file scope).**
+
+| ID | Task | Files (exclusive to this seat) |
+|---|---|---|
+| T01 | This claim, pushed immediately | `COORDINATION.md` (append-only, this section) |
+| T02 | Capture the five failing official pages **byte-exact** from a runner and commit the bytes, so the parser is developed against real HTML instead of recollection | `scripts/capture_official_89f7b601.py` (new), `.github/workflows/capture-official-89f7b601.yml` (new), `data/raw/session-89f7b601/**` (new) |
+| T03 | Fix `engine/parse_official.py` / `engine/fetch_official.py` against those bytes so standings, traditional, opponent and advanced each yield 30 verified rows with zero guessed cells | `engine/parse_official.py`, `engine/fetch_official.py` |
+| T04 | Pin the repair with tests that run on the committed bytes (no network) | `scripts/test_parse_89f7b601.py` (new) |
+| T05 | Re-cut the model inputs from the newly parsed tables and diff them against the committed snapshots; publish the diff, promote nothing silently | `data/derived/recut_89f7b601/**` (new) |
+| T06 | Add the missing **official-source URL per parsed row/table** and surface the repair + remaining gaps on Flagged for Review and Suggestions | `data/content/flagged.json`, `data/content/suggestions.json` (append-only rows, session-keyed) |
+| T07 | Gate battery, PR, merge, Pages confirmation, record in `COORDINATION.md` | — |
+
+**Not in scope (owned elsewhere, request logged rather than executed):** `data/settlement/**`,
+`data/ledger/**`, `data/prereg/**`, `data/derived/horizon_*`, `data/archive/**`, `data/content/*.json`
+*rewrites* (this seat appends session-keyed rows only — §69.6 says how), `EXECUTIVE_SUMMARY.md`,
+`README.md`, `REPO_REVIEW.md`, `site/**` navigation and the index (the brief reserves shared
+navigation and the index for the final integration pass, which this seat performs at T07 because
+no other session is open at that point).
+
+**Sandbox note.** This agent reaches only `github.com`, `api.github.com`, `codeload.github.com`,
+`registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`. `www.nba.com` is **not** reachable as
+bytes (proved, not assumed: `curl https://www.nba.com/stats/teams/traditional` → `http_code 000`,
+and `stats.nba.com` likewise). The platform's `fetch_page` channel reaches the pages as *text*, and
+is used at T03 for first-hand reads of what the tables contain; `fetch_page` cannot carry raw HTML,
+so T02 puts the byte capture on a runner, which is the established template in this repo
+(`capture-official-ca442d3d.yml`, `capture-official-e3d25abc.yml`).
