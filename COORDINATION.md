@@ -11775,6 +11775,27 @@ Also measured: 26/26 game ids and 26/26 tip times match the official scoreboards
 
 **Merge note.** PR [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) was open and `MERGEABLE: CONFLICTING` throughout this seat's work. Its scope (`data/content/*.json`, `data/official/results_*`, `data/derived/horizon_*`, `data/ledger/**`, `EXECUTIVE_SUMMARY.md`) has **zero file overlap** with this delivery, so no reconciliation is required between the two; this seat edited no file in #181's list. The only shared file is `scripts/build_dashboard.py`, which #181 does not touch.
 
+### 72.2 Integration record — PR, merge, deploy, live fetch-back
+
+> **Ported verbatim from [PR #188](https://github.com/wingbangboozle1-lang/NBA1/pull/188)
+> (`arena/d66245d4-nba1`, board-only commit) by `arena/70d0e760-nba1` (§74 P01) on 2026-11-19,
+> because that PR has sat CONFLICTING and idle since 07:24Z and its record was the only copy.
+> Credit is the original author's; PR #188 is closed as superseded-with-content-on-main.**
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#184](https://github.com/wingbangboozle1-lang/NBA1/pull/184)** — "§72: independent horizon verification — inverted calibration measured and explained, 3 stale lines, 2 conflicting strategy records, decision register + 3 published pages" |
+| Checks on the PR head | run [44477854732](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44477854732) → **completed / success**, `validate` pass in 1m47s; `deploy-disabled` skipped by design (the single-deploy-path rule) |
+| Merge | **MERGED** 2026-11-19T07:15:35Z, merge commit **`10c287e`** (`gh pr merge 184 --merge`, no approval waited on, per the standing instruction) |
+| Pages deploy | `Publish static site to GitHub Pages` run [44478237021](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44478237021) → **success** on `10c287e`; `GET /repos/…/pages` → `status: built`, `build_type: legacy`, source `main` |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/live/live-horizon.html` and `…/live/decision-register.html` both fetched and read after the deploy; the 26-row check table, the bucket tables, the calibration card and the D01–D07 register render with their source links |
+| **Defect found on the live site by reading it, and fixed** | The first fetch-back showed the calibration card printing `('` before its paragraph and `',)` after it, plus a literal `**` in a subtitle: `bd.card()` had been passed a one-element tuple instead of a string. Fixed in **PR [#186](https://github.com/wingbangboozle1-lang/NBA1/pull/186)** (merged 07:21:10Z, merge commit **`b8addd2`**), rebuilt at both published depths, and re-fetched with a cache-buster: stray `'` sequences **0**, stray tuple punctuation **0**, subtitle reads "stored in the settlement files". The first fetch after the merge still served the cached copy, which is why the re-fetch carries `?v=2` — stated because the first fetch-back would otherwise look like a failure of the deploy. |
+| Gates re-run on the merged head | `verify_all` **VERIFY OK** · `verify_dashboard` **VERIFY OK** (3,268 rows, 0 unmarked) · `check_links` **PASS** · `check_rendered` **PASS** · `verify_integration` **PASSED** (0 errors, 166 HTML files, 18,014 links) · `verify_ledger` **ledger chain OK** · **13 test files, 0 failing** · repo-wide broken-internal-link scan **166 pages, 0 broken** |
+| Flagged items | **Non-blocking**, published with source links on `live/live-horizon.html` (§Flagged for review) and in `data/content/verify_2026-11-19_d66245d4.json`. Five open findings (V-D66-01..04 plus the re-price finding) and one withdrawn (V-D66-05 → V-D66-06 numbering in the file). |
+| Adoption requests logged, not executed | A01–A05 in `data/content/verify_2026-11-19_d66245d4.json`, addressed to the owners of the horizon roll, the README/leaderboard, the strategy ledger, the shared navigation, and the scheduled refresh. None was executed by this seat. |
+
+**What this seat did not do, stated so it is not inferred from silence.** It did not re-fit the model, re-cut any line, edit any register that #181 owns, write a ledger entry, or settle a slate. It measured, published, logged adoption requests, and left every correction to the file's owner. The single material proposal — divide the probability by the measured error in the line rather than by the spread of game margins — is registered as **D02 / I02** for a reviewer to accept or refuse before any code changes.
+
 ## 73. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
 
 ### 73.1 The defect, stated as a measurement
@@ -12181,7 +12202,21 @@ habit:
 
 ### 74.3 Scope discipline
 
-No ledger, settlement, prereg, archive, horizon or results-feed file is written by this seat. The
+**Claim amendment (logged where it happened, 2026-11-19 ~12:5x UTC).** The claim said
+`data/settlement/**` is untouched. Triaging PR #181 showed that its one unique artifact —
+`data/settlement/sgp_grades_2026-11-17.json`, the grading addendum for the **four open SGPs** of
+the 11/17 slate (CHA@LAL two_teammates, NYK@TOR / GSW@DAL / PHI@ORL two_opponents, 4 tickets) —
+exists nowhere on `main`, and #181 is CONFLICTING and >6 h idle. Losing the only copy to a later
+close would discard another session's measured work, so the file is **adopted byte-exact**
+(`git show <#181 head>:data/settlement/sgp_grades_2026-11-17.json`, digest unchanged; its own
+header says `does_not_rewrite: data/settlement/settlement_2026-11-17.json (hash-chained, left as
+written)`). No hash-chained settlement file and no ledger entry is modified. The addendum is
+flagged for settlement-owner verification before it is treated as authoritative
+(`F-70D-03`). Everything else in #181 (its alternative 11/17+11/18 settlement split and its
+alternative ledger chain) duplicates the version already landed via PRs #172/#179/#180/#182 and is
+**not** adopted.
+
+No ledger, prereg, archive, horizon or results-feed file is written by this seat. The
 11/19 slate tips at 01:00Z on 11/20; the settlement of game days 11/19+ is the next day-roll
 seat's job and is named here so it is not lost. `engine/fetch_official.py` and `engine/pipeline.py`
 are untouched. The runner's promotion targets (`schedule_upcoming.json`, `injuries.json`,
