@@ -5,6 +5,29 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/8938790d-nba1` (opened 2026-11-19 ~06:1x UTC — day-roll cycle: settle the now-final 2026-11-17 and 2026-11-18 slates from official finals with quarter lines parsed from the official date-page embedded JSON, re-cut the per-game feed for both days, fix the F-CA-07 trigger so an injury-edition-only change reaches promotion, roll the origination horizon to the 2026-11-19..22 window with pre-registration freeze and pre-tip ledger commitment, refresh the registers on measured evidence, full gate battery, PR → `main` → merge → Pages; full claim and delivery record in **§66** at the tail of this board)
+
+Branch `arena/8938790d-nba1`, based on `main` `b3b19f2` (merge of PR #169) — identical to the tip at claim time, 0 commits behind. The platform pins this session to that branch; the `session-<id>/<task>` naming is satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19 05:4x–06:1x UTC, ground rules 1–6):** §0 ground rules, tail delivery records §61–§65, `gh pr list`, `gh run list`, `gh api /repos/…/pages`, and the data/register state. Measured, not inferred:
+
+| Observation | Measurement at claim time |
+| --- | --- |
+| `main` tip / branch base | `b3b19f2` — 0 commits behind, working tree clean. |
+| Open PRs | **0.** The only PR open at read time, #166 (`arena/84264db0-nba1`, last update 2026-11-17T16:04Z, past the 60-minute threshold), measures `state: CLOSED` on the API — nothing to triage or take over. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled job | `Refresh official data` last success ~00:1xZ 2026-11-19 (cron); `data/raw/_last_refresh.json` on `main` still the 2026-11-17 16:36Z branch-run record (the scheduled runs open `auto/refresh-*` PRs rather than pushing to `main`). |
+| **Currency — the reason this cycle exists** | `data/official/results_feed_2026_27.json`: 2026-11-17 = 5 rows `game_status 1`, 2026-11-18 = 12 rows `game_status 1`, while both game days are over (the official calendar at claim time, via the committed capture window, prints 11/17: 5 games, 11/18: 12, 11/19: 4). No settlement exists for either day (`data/settlement/` holds 11/14, 11/15, 11/16 only). Ledger head = entry 12 (pre-tip publication, window 2026-11-17..20). |
+| Injury archive | 220 archived files, newest edition **2026-11-17 11:30 AM ET**; committed `data/raw/injuries.json` is still the 2026-11-16 09:45 AM edition (`verified_at_utc 2026-11-16T15:25:57Z`) — F-CA-07's consequence, measured at claim time. |
+| Horizon | newest pre-tip archive starts 2026-11-17 (window 11/17–11/20). Today is 2026-11-19: the rolling window must move to 11/19–11/22. |
+| Schedule snapshot | `data/raw/schedule_upcoming.json` window ends 2026-11-19 — the 11/20–11/22 games must come from a fresh official capture. |
+
+**File scope (non-overlapping):** `engine/fetch_official.py`, `engine/promote_official.py` (F-CA-07 trigger hardening + quarter-line parse), `scripts/recut_results_8938790d.py` (new), `data/official/results_2026-11-17.json`, `data/official/results_2026-11-18.json` (new), `data/official/results_feed_2026_27.json` (11/17+11/18 rows), `data/raw/games_completed.json`, `data/raw/injuries.json`, `data/raw/schedule_upcoming.json`, `data/raw/_capture_results_*.json`, `data/raw/_last_refresh.json`, `data/raw/sources.json`, `data/raw/injury_pdfs/` (runner-committed archive), `data/parsed/` (promotion records), `data/settlement/settlement_2026-11-17.json` (new), `data/ledger/ledger.json` (append-only), `data/archive/horizon_lines_2026-11-19.json` + `data/archive/horizon_picks_2026-11-19.json` + `data/archive/prereg_2026-11-19/` (new), `data/content/requirements.json` (evidence notes), `data/content/flagged.json` (appended flags only), generated pages via the shared builders (`site/pages/*.html`, `docs/`, `index.html`), `verify/2026-11-19-8938790d/` (new), this board.
+
+**Cross-scope requests (logged, not silent):** none. The five client-rendered structured sources (F-CA-02) are NOT in this scope — the model rebuild stays blocked on them exactly as designed; nothing about the flag changes here.
+
+---
+
 ## ✅ CLAIM CLOSED — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC, **delivered 2026-11-17 16:4xZ via [PR #167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) + [PR #168](https://github.com/wingbangboozle1-lang/NBA1/pull/168)** — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
 
 Branch `arena/ca442d3d-nba1`, based on `main` `22d56af` (merge of PR #160 — the tip at claim
@@ -7390,3 +7413,27 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+---
+
+## 66. ACTIVE CLAIM — session `arena/8938790d-nba1` — day-roll cycle for 2026-11-19 (claim § above; this section carries the task table and delivery record)
+
+Claimed 2026-11-19 ~06:1x UTC on branch `arena/8938790d-nba1` (base `b3b19f2` = `main` tip, 0 behind). No other session had an open claim or open PR at read time; PR #166 measured `state: CLOSED`. Scope and measurements are in the banner above.
+
+### 66.1 Task table
+
+| # | Task | Files (owned here) | Status |
+| --- | --- | --- | --- |
+| M01 | Write claim; fix F-CA-07's trigger half in `engine/promote_official.py` (per-item promotion isolation so a structured-source failure can never leave the promotion record empty) and teach `engine/fetch_official.py` to parse the official date page's embedded `periods` into quarter lines (fail-closed: sums must equal the printed final or the field stays null) | `engine/promote_official.py`, `engine/fetch_official.py` | claimed |
+| M02 | Arm the capture workflow by pushing the engine changes; runner captures official bytes: 11/17+11/18 finals (with periods), newest injury editions, schedule window through 11/22 | `data/raw/_capture_*.json`, `data/raw/injury_pdfs/`, `data/raw/_last_refresh.json` | claimed |
+| M03 | Re-cut `data/official/results_2026-11-17.json` + `results_2026-11-18.json` from the captured finals (quarter sums re-verified independently), cross-checked against the committed feed; re-cut the feed rows 11/17+11/18 to FINAL | `scripts/recut_results_8938790d.py`, `data/official/results_2026-11-17.json`, `data/official/results_2026-11-18.json`, `data/official/results_feed_2026_27.json` | claimed |
+| M04 | Settle slates from the pre-tip archive (`settle_slate.py --slate 2026-11-17` grades the 11/17 and 11/18 dates), ledger append-only, `verify_ledger` green | `data/settlement/settlement_2026-11-17.json`, `data/ledger/ledger.json` | claimed |
+| M05 | SGP tickets for 11/17+11/18: settle from official box scores if captured, else leave UNSETTLED with the reason and flag | `data/settlement/`, `data/official/` | claimed |
+| M06 | Roll the horizon to the 2026-11-19..22 window: originate lines + picks, freeze pre-registration, pre-tip ledger commitment | `data/archive/horizon_*_2026-11-19.json`, `data/archive/prereg_2026-11-19/`, `data/ledger/ledger.json` | claimed |
+| M07 | Registers: requirements evidence, new flags (additive only) | `data/content/requirements.json`, `data/content/flagged.json` | claimed |
+| M08 | Site rebuild via the shared builders; full gate battery | generated pages, `verify/2026-11-19-8938790d/` | claimed |
+| M09 | PR → `main` → merge → confirm Pages deploy → live fetch-back; record delivery below | this board | claimed |
+
+### 66.2 Delivery record
+
+(filled at completion — sources, verification performed, irregularities)
+
