@@ -408,16 +408,41 @@ class AuditHistoryTests(unittest.TestCase):
         history = audit.rebuild_history()
         if history.get("error"):
             self.skipTest(f"history unavailable in this environment: {history['error']}")
+        self.assertFalse(os.path.exists(os.path.join(audit.ROOT, ".git", "shallow")))
         # The repository has a real success in its history (2026-11-15T12:43:11Z).
         self.assertTrue(history["rebuild_has_ever_run"], history)
         self.assertGreaterEqual(history["records_read"], 5)
         self.assertEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
 
-    def test_audit_refuses_a_shallow_clone(self):
+    def test_audit_reports_shallow_clones_instead_of_guessing(self):
+        """The guard must DESCRIBE the checkout, and must not fail the suite.
+
+        The first version of this test asserted that the checkout was
+        unshallowed. `actions/checkout` is shallow on CI, so that assertion
+        failed the whole `Publish static site` workflow on main (run
+        44479540069) while the same suite passed locally in an unshallowed
+        sandbox. A test that asserts a property of the environment rather than
+        the behaviour of the code is a bad test: this one now pins the
+        behaviour, which is that the guard answers truthfully either way.
+        """
         import importlib
         audit = importlib.import_module("scripts.f3cb4a98_refresh_path_audit")
-        self.assertIsNone(audit.assert_full_history(),
-                          "this checkout must be unshallowed for the audit to be trusted")
+        warning = audit.assert_full_history()
+        shallow = os.path.exists(os.path.join(audit.ROOT, ".git", "shallow"))
+        if shallow:
+            self.assertIsInstance(warning, str)
+            self.assertIn("SHALLOW CLONE", warning)
+        else:
+            self.assertIsNone(warning)
+
+    def test_history_result_is_honest_in_either_checkout(self):
+        """In a shallow clone the audit must decline, not answer 'False'."""
+        import importlib
+        audit = importlib.import_module("scripts.f3cb4a98_refresh_path_audit")
+        history = audit.rebuild_history()
+        if os.path.exists(os.path.join(audit.ROOT, ".git", "shallow")):
+            self.assertIsNotNone(history.get("error"))
+            self.assertNotIn("rebuild_has_ever_run", history)
 
 
 if __name__ == "__main__":

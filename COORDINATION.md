@@ -11825,3 +11825,28 @@ The audit's `summary.rebuild_ever_ran` was computed from **the current run recor
 **Regression pin.** `scripts/test_refresh_gate.py::AuditHistoryTests` asserts the history answer is `True` with last success `2026-11-15T12:43:11Z`, and that the checkout is unshallowed — so the mistake fails a test rather than shipping.
 
 **Lesson worth the board, because it is the same mistake twice.** §73.2 was "I inferred history from a shallow clone"; this was "I inferred history from a single file". Both are the same error: *substituting the cheapest available measurement for the measurement the claim requires.* The `F-F3C-01` finding itself is unaffected — it rests on `git log` over 884 commits, not on this flag — but the published summary line was wrong for one deploy cycle.
+
+### 73.9 Second post-merge failure, same root cause: a test that asserted the environment
+
+`Publish static site to GitHub Pages` run **[44479540069](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44479540069)** went **red on `main` `035f7f1`** in the step `Run the unit-test suite (parsers, promotion, injury diff, gates)`. The failure was this seat's:
+
+```
+FAIL: test_audit_refuses_a_shallow_clone
+AssertionError: 'SHALLOW CLONE: history counts are not trustworthy...' is not None
+                : this checkout must be unshallowed for the audit to be trusted
+```
+
+The test asserted `assertIsNone(assert_full_history())` — a property of **the checkout**, not of the code. `actions/checkout` is shallow on CI, so the assertion was guaranteed to fail there while passing in this sandbox, which had been unshallowed by hand. That is precisely the class of defect this seat spent the whole session flagging in other people's code, and it was committed here.
+
+**Reproduced before fixing**, rather than guessed: `git clone --depth 1 file://$REPO` then `git fetch origin <branch>` and `git checkout FETCH_HEAD` reproduces the runner's exact state (`shallow=YES`) and the exact failure, and nothing else in the suite failed there. The run log itself was unreachable from this sandbox (`results-receiver.actions.githubusercontent.com` returns EOF), so the reproduction was the only honest route to the cause.
+
+**Fix.** The test now pins the guard's *behaviour* in either checkout: shallow ⇒ the guard returns a `SHALLOW CLONE` warning; unshallowed ⇒ it returns `None`. A companion test asserts that in a shallow clone `rebuild_history()` **declines** (`error` set, no `rebuild_has_ever_run` key) instead of answering `False` — the exact way §73.8 went wrong. The history test skips with a printed reason when history is unavailable.
+
+**Verified under CI's own conditions.** The full suite was re-run inside a genuinely shallow clone: **13 test files, 0 failing, `test_refresh_gate` 22 tests with 1 honest skip**. Not "should pass" — measured in the same shape as the runner.
+
+**Three mistakes by this seat in one session, all recorded, none quietly amended:**
+1. §73.2 — inferred history from a 2-commit shallow clone.
+2. §73.8 — inferred history from a single run record, and published it.
+3. §73.9 — shipped a test that asserted the environment instead of the behaviour, turning `main` red.
+
+All three are the same error in different clothes: **substituting the cheapest available measurement for the measurement the claim requires.**
