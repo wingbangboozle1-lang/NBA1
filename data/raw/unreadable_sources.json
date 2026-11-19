@@ -61,36 +61,45 @@
   },
   {
    "source_key": "S1_season",
-   "kind": "runner_unreadable_session_maintained",
    "official_url": "https://www.nba.com/stats/teams/advanced",
    "required_snapshot": "data/raw/team_advanced.json",
-   "reason": "The official advanced team table is client-rendered for our runner: the byte-exact capture (run 44477742276, COORDINATION.md section 69) measured 293,688 bytes of HTML with <tr> = 12 (date-picker chrome), /stats/team/ = 0 and rowSet = 0 - zero team rows in a quarter of a megabyte; the page's own stats.nba.com data endpoint timed out 4/4 from GitHub Actions with no HTTP status; a headless Chromium render returned a 298-312 byte Akamai 'Access Denied' page. The SAME table serves 30 rows to the platform web-fetch channel (COORDINATION.md section 73.6 and the 2026-11-19T13:2xZ re-read in data/official/teams_reread_2026-11-19_4eef6d3b.json), so the value exists and the model consumes it (engine/pipeline.py loads team_advanced.json) - it is therefore maintained by first-hand session transcription with a real verification block and a 72h freshness gate, NOT declared away silently. This replaced the 'transient timeout' reading of section 73.5 request 1: the failure is delivery-side and reproducible, not transient.",
+   "reason": "The official Teams Advanced page is the same client-rendered family as S8/S9/S10: the runner's committed evidence (data/raw/_capture_evidence_S1_season.json) records html_tr=12 (date-picker chrome only), team_links=0, rowSet=0, parse_problems=5 — zero team rows in the served bytes. The fetcher's own stats.nba.com API fallback has timed out on every recorded attempt (the 2026-11-19T08:09:58Z run: 0 rows again), and session arena/89f7b601-nba1 measured the data layer unreachable from a runner (4 endpoints x 3 attempts, all TimeoutError) and headless Chromium refused at the Akamai edge ('Access Denied', run 44481346010). Every run record since 2026-11-15 shows 'expected 30 team rows, parsed 0'. The premise that S1 'is readable in some runs' (the earlier not_declared note) is not borne out by any recorded run.",
    "evidence": [
     "data/raw/_capture_evidence_S1_season.json",
-    "data/raw/_capture_evidence_S2_train.json",
-    "data/official/teams_reread_2026-11-19_4eef6d3b.json"
+    "data/raw/_capture_S1_season.json"
    ],
-   "review_flag": "F-F3C-03",
-   "declared_at_utc": "2026-11-19T13:40:00Z",
+   "review_flag": "F-89F-01",
+   "declared_at_utc": "2026-11-19T12:50:00Z",
+   "declared_by": "arena/cdf3a108-nba1 (continuation of section 73 scope, ground rule 5)",
    "expires_at_utc": "2026-12-19T00:00:00Z",
-   "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration and return to the strict capture-equality compare.",
-   "consequence_if_wrong": "A rebuild could run on a stale advanced input. Mitigated by: engine/refresh_gate.py requires team_advanced.json to carry an explicit session verification naming the official URL, a transcriber and a read no older than 72 hours, with a complete 30-row W+L==GP integrity check - if sessions stop re-reading, the gate blocks again."
+   "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration; the gate will then require the snapshot and the exact-match comparison normally.",
+   "consequence_if_wrong": "Unlike S8/S9/S10, this snapshot IS consumed by engine/pipeline.py (data/raw/team_advanced.json). The declaration does not promote a value: the rebuild runs on the last digest-bound committed snapshot and its staleness is published (requirements R01/R32; the model surfaces read data/derived/team_stats_recut.json, which is re-cut from first-hand reads and is NOT affected by this declaration).",
+   "measured_by": [
+    "arena/f3cb4a98-nba1 (evidence records + gate mechanism)",
+    "arena/89f7b601-nba1 (byte-exact captures + transport measurements)",
+    "arena/cdf3a108-nba1 (every-run parsed-0 record read back from all committed run records)"
+   ]
   },
   {
    "source_key": "S2_train",
-   "kind": "runner_unreadable_session_maintained",
    "official_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-   "required_snapshot": "data/raw/team_advanced.json (train_2026-10-20_2026-11-05 window)",
-   "reason": "The training-window read of the same page family as S1_season, with the same measured failure modes (shell HTML, API timeout). Its window is date-frozen (2026-10-20..2026-11-05), so the transcription is re-verified rather than re-measured: the 2026-11-19 re-read byte-matched the previous verified cut.",
+   "required_snapshot": "data/raw/team_advanced.json (training window)",
+   "reason": "The training-window variant of the same client-rendered page as S1_season. It is not a gate-required source, but its parse failure is recorded in the run's failed[] list and counted against the rebuild gate; the same measured impossibility applies.",
    "evidence": [
     "data/raw/_capture_evidence_S2_train.json",
-    "data/official/teams_reread_2026-11-19_4eef6d3b.json"
+    "data/raw/_capture_S2_train.json"
    ],
-   "review_flag": "F-F3C-03",
-   "declared_at_utc": "2026-11-19T13:40:00Z",
+   "review_flag": "F-89F-01",
+   "declared_at_utc": "2026-11-19T12:50:00Z",
+   "declared_by": "arena/cdf3a108-nba1 (continuation of section 73 scope, ground rule 5)",
    "expires_at_utc": "2026-12-19T00:00:00Z",
-   "expiry_rule": "Re-test at expiry; same rule as S1_season.",
-   "consequence_if_wrong": "Same as S1_season, applied to the training window only; the window's games are all final and frozen."
+   "expiry_rule": "Re-test at expiry with S1_season.",
+   "consequence_if_wrong": "Failure-excusal only: this declaration satisfies no snapshot requirement and promotes no value.",
+   "measured_by": [
+    "arena/f3cb4a98-nba1",
+    "arena/89f7b601-nba1",
+    "arena/cdf3a108-nba1"
+   ]
   }
  ],
  "not_declared": [
@@ -99,5 +108,14 @@
    "why_not": "Not required by the gate's promoted_paths block; its capture is evidence-only by design."
   }
  ],
- "not_declared_note": "The previous 'not_declared' entries for S1_season and S2_train said their failure was a 'transient timeout'. Section 69's byte-exact captures and section 74's measurement refuted that: the pages are client-rendered shells to the runner by delivery, and the API is unreachable from Actions. They are now declared runner_unreadable_session_maintained, above."
+ "amendments": [
+  {
+   "at_utc": "2026-11-19T12:50:00Z",
+   "by": "arena/cdf3a108-nba1",
+   "change": "S1_season and S2_train declared unreadable (moved from not_declared); the earlier 'readable in some runs' premise is contradicted by every committed run record since 2026-11-15 and by arena/89f7b601-nba1's byte-exact capture + transport measurements.",
+   "board": "COORDINATION.md section 74 C07"
+  }
+ ],
+ "not_declared_note": "The previous 'not_declared' entries for S1_season and S2_train said their failure was a 'transient timeout'. Section 69's byte-exact captures and section 74's measurement refuted that: the pages are client-rendered shells to the runner by delivery, and the API is unreachable from Actions. They are now declared runner_unreadable_session_maintained, above.",
+ "merge_note": "Merged by arena/4eef6d3b-nba1 (section 79): both concurrent seats (this one and arena/cdf3a108-nba1) independently declared S1_season and S2_train runner-unreadable-session-maintained with the same evidence and expiry. The richer entry per key is kept verbatim; `amendments` (cdf3a108) and `not_declared_note` (this seat) are both retained."
 }

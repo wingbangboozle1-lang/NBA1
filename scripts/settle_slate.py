@@ -170,32 +170,48 @@ def main(argv=None):
                     help="who/what settled it (session id or script)")
     args = ap.parse_args(argv)
 
-    picks_rel = f"data/archive/horizon_picks_{args.slate}.json"
-    lines_rel = f"data/archive/horizon_lines_{args.slate}.json"
-    for rel in (picks_rel, lines_rel, LEDGER):
-        if not os.path.exists(os.path.join(ROOT, rel)):
-            print(f"MISSING input {rel}", file=sys.stderr)
-            return 2
+    picks_base = f"horizon_picks_{args.slate}.json"
+    lines_base = f"horizon_lines_{args.slate}.json"
+    if not os.path.exists(os.path.join(ROOT, LEDGER)):
+        print(f"MISSING input {LEDGER}", file=sys.stderr)
+        return 2
+    ledger = load(LEDGER)
+
+    # The archive that settles is the LATEST pre-tip seal the ledger committed
+    # to for this slate.  A pre-tip amendment (same basenames, later archive
+    # directory, entry type pre_tip_publication carrying supersedes_entry) is a
+    # legal seal under the brief's "publish the hash before tip" rule and
+    # supersedes the earlier one; the ledger's `files` map is the seal index.
+    # Every candidate must hash to its recorded digest at its recorded path —
+    # a pick that changed after publication cannot be graded.
+    picks_rel = lines_rel = committed = None
+    for e in ledger["entries"]:
+        files = e.get("files") or {}
+        cand_p = [f for f, h in files.items()
+                  if os.path.basename(f) == picks_base
+                  and os.path.exists(os.path.join(ROOT, f)) and sha256_file(f) == h]
+        cand_l = [f for f, h in files.items()
+                  if os.path.basename(f) == lines_base
+                  and os.path.exists(os.path.join(ROOT, f)) and sha256_file(f) == h]
+        if cand_p and cand_l:
+            picks_rel, lines_rel, committed = cand_p[0], cand_l[0], e
+    if committed is None:
+        print(f"REFUSED: no pre-tip seal for {args.slate} (searched every ledger "
+              f"entry's files map for {picks_base} / {lines_base} and re-hashed each "
+              f"candidate). A pick that changed after publication cannot be graded.",
+              file=sys.stderr)
+        return 4
 
     picks = load(picks_rel)
     lines = load(lines_rel)
-    ledger = load(LEDGER)
     picks_sha = sha256_file(picks_rel)
     lines_sha = sha256_file(lines_rel)
-
-    # The archive must be the file the ledger committed to before tip.
-    committed = None
-    for e in ledger["entries"]:
-        for f, h in (e.get("files") or {}).items():
-            if f.endswith(os.path.basename(picks_rel)) and h == picks_sha:
-                committed = e
-    if committed is None:
-        print(f"REFUSED: {picks_rel} (sha {picks_sha[:12]}…) is not the file any "
-              f"ledger entry committed to before tip. A pick that changed after "
-              f"publication cannot be graded.", file=sys.stderr)
-        return 4
     print(f"pre-tip archive verified against ledger entry {committed['entry']} "
           f"({committed.get('at_utc')}), sha {picks_sha[:16]}…")
+    if committed.get("supersedes_entry"):
+        print(f"note: entry {committed['entry']} is a pre-tip amendment superseding "
+              f"entry {committed['supersedes_entry']}; this run grades the amended "
+              f"seal ({picks_rel})")
 
     # Slate dates present in the archive.
     slate_dates = sorted({r["date"] for r in picks["singles"]} |

@@ -425,7 +425,7 @@ def main():
                      "beside the ratings so a reader can see the sample each rating rests on. "
                      "This cut ABSORBS the 11/18 UTA 109 @ LAL 97 game (LAL and UTA now 16 GP, "
                      "matching the standings): it replaces the pre-drift cut and resolves "
-                     "F-89F-04/Q37. Drift detail: data/derived/recut_2026-11-19_4eef6d3b/drift.json."),
+                     "F-89F-04/Q37. Drift detail: data/derived/recut_2026-11-19_4eef6d3b/drift.json. Independent corroboration: session arena/cdf3a108-nba1 re-cut the same inputs from the same official pages at 12:45Z (scripts/recut_cdf3a108.py, merged as PR #204) and measured the identical drift (LAL/UTA 15->16)."),
             "gates": drift_doc["gates"],
         },
         "rows": out_rows,

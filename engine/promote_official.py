@@ -274,7 +274,23 @@ class Promoter:
             try:
                 cap = read_json(cap_path)
             except (OSError, ValueError) as exc:
-                self.fail(item, f"{key} capture unreadable: {exc}")
+                # The fetcher writes _capture_<key>.json only when rows PARSE
+                # (engine/fetch_official.py, the `if rows:` branch); on a
+                # proved-unreadable page it writes the evidence record instead
+                # (see engine/refresh_gate.py's declared branch, same rule).
+                # A missing capture file is therefore the EXPECTED state of a
+                # declared source whose evidence record exists — recorded with a
+                # parse-failure reason so fail() routes it to unreadable — and an
+                # ordinary hard block otherwise (a declaration never excuses a
+                # page that was not even attempted; test_promote_official pins
+                # that property).
+                evidence_path = os.path.join(RAW, f"_capture_evidence_{key}.json")
+                if os.path.exists(evidence_path):
+                    self.fail(item, f"{key} capture has no parsed rows (the fetcher "
+                                    f"wrote {os.path.basename(evidence_path)} instead "
+                                    f"of a rows-bearing capture)")
+                else:
+                    self.fail(item, f"{key} capture unreadable: {exc}")
                 return
             rows = cap.get("rows") or []
             cols = cap.get("cols") or po.ADVANCED_COLS

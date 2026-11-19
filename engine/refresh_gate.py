@@ -46,11 +46,6 @@ REQUIRED = {
     "S1_season", "S4_schedule", "S5_injury_index", "S8_standings",
     "S9_team_traditional", "S10_team_opponent",
 }
-# S2_train (the date-filtered training-window read of the SAME advanced page)
-# is fetched and failed identically every run and feeds the model's train
-# window, so it is declarable alongside REQUIRED (section 74). S7_players is
-# deliberately absent: it is evidence-only and no snapshot is required of it.
-DECLARABLE_EXTRA = {"S2_train"}
 # How old a session-verified advanced input may be while the scheduled rebuild
 # still runs (section 74 T04). The runner can never parse the advanced page
 # (byte evidence: data/raw/_capture_evidence_S1_season.json - a client-rendered
@@ -97,9 +92,11 @@ def live_declarations(base, now, by_key, parse_ok):
     one of these measured facts holds:
 
       1. the register parses and is shaped as expected;
-      2. the declaration names a source the gate actually requires (or the
-         one declared-eligible companion source, S2_train - the training
-         window of the same page; section 74);
+      2. the declaration names a source the gate requires, or an evidenced
+         capture source whose recorded parse failure it may excuse (a
+         non-required source such as S2_train has no snapshot requirement to
+         waive — the declaration only keeps its expected parse failure out of
+         the blocking list);
       3. `expires_at_utc` parses, is in the future, and is not absurdly far out;
       4. the fetcher checked that source in THIS run at HTTP 200 (a stale
          declaration must not mask a source that was never fetched today);
@@ -131,8 +128,10 @@ def live_declarations(base, now, by_key, parse_ok):
         if not isinstance(key, str) or not key:
             rejected.append("declaration without a source_key")
             continue
-        if key not in REQUIRED and key not in DECLARABLE_EXTRA:
-            rejected.append(f"{key}: not a source this gate requires")
+        if key not in REQUIRED and key not in EVIDENCE:
+            rejected.append(f"{key}: not a source this gate requires (nor an "
+                            f"evidenced capture source whose parse failure it "
+                            f"may excuse)")
             continue
         try:
             expires = parse_utc(entry.get("expires_at_utc"))
@@ -400,8 +399,12 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # section 74, T02). Previously this branch re-blocked the very
             # source the declaration had just excused, which made the
             # declaration mechanism a no-op for S1 and left the rebuild
-            # unreachable for a second, independent reason.
-            if check_key not in declared:
+            # unreachable for a second, independent reason. The warning keeps
+            # the excuse visible in the gate report (cdf3a108).
+            if check_key in declared:
+                warnings.append(f"{check_key}: no structured capture ({rel}) by "
+                                f"design (declared unreadable); nothing promoted")
+            else:
                 errors.append(f"missing/invalid structured capture: {rel}")
             continue
         if check_key == "S1_season":
@@ -409,16 +412,23 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # field is not part of the capture schema (engine/fetch_official.py
             # writes `rows`/`cols`), so testing it with `or` made this clause
             # true for EVERY well-formed capture ever written - a second latent
-            # unsatisfiable predicate, fixed here together with the missing
-            # declaration escape.
+            # unsatisfiable predicate (fb91550a), fixed here together with the
+            # missing declaration escape. A live declaration is honoured when
+            # the table is incomplete (cdf3a108, 2026-11-19 amendment: every
+            # recorded run since 2026-11-15 parsed 0 rows and the byte-exact
+            # captures prove the page is client-rendered for a plain fetch);
+            # the anti-rot rule above keeps this honest the moment rows parse.
             complete = len(payload.get("rows") or []) == 30
-            if not complete and check_key not in declared:
-                # S1 is producible through two routes (the page's own parser
-                # and the official stats.nba.com fallback), so a transient
-                # parse failure must block rather than be declared around.
-                errors.append("advanced team capture is not a complete 30-team table "
-                              "(the page's own parser and the official stats.nba.com "
-                              "fallback both failed this run)")
+            if not complete:
+                if check_key in declared:
+                    warnings.append("S1_season: structured capture is not a "
+                                    "complete 30-team table (declared "
+                                    "unreadable); the promoted snapshot stays "
+                                    "at its last verified promotion")
+                else:
+                    errors.append("advanced team capture is not a complete 30-team table "
+                                  "(the page's own parser and the official stats.nba.com "
+                                  "fallback both failed this run)")
         if check_key == "S4_schedule" and not payload.get("games") and check_key not in declared:
             errors.append("official schedule capture has no parsed game IDs")
 

@@ -257,6 +257,20 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id data/derived/model_report_v2.json (measured_correlations) is not in the register">&mdash;</span></td>
 </tr>
+<tr id="A21">
+<td>A21</td>
+<td><b>S-89F-02 / Q37 adoption: does the model-input lag for LAL and UTA (F-929-01, F-89F-04) move any published line, and was it adopted?</b></td>
+<td>Adopted 2026-11-19 (session arena/cdf3a108-nba1). The official team-stat pages re-read at 12:2x-12:4x UTC carry 16 GP for both clubs (the 11/18 UTA 109 @ LAL 97 game is absorbed), so gates G3/G4 pass where the 05:44Z cut recorded FAIL. Three of 26 published lines move by more than a point: PHX@UTA spread -7.6 -&gt; -6.4, SAC@LAL 22.1 -&gt; 20.7, DAL@UTA -7.5 -&gt; -6.3 (the other 23 move &lt;= 0.2 on the total and 0.0 on the spread). The movements match session arena/d66245d4-nba1's independent re-price (+1.21/-1.34, -1.41/-2.19, +1.20/-1.35) to the published rounding. An amended pre-tip seal was published before the 2026-11-20T01:00Z first tip (ledger entry 18, supersedes entry 17); no pick selection changed - 26 singles with the same pick_line on every row - only four model_home_win_prob fields moved.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/official/teams_reread_2026-11-19_cdf3a108.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A22">
+<td>A22</td>
+<td><b>R01: why had no scheduled refresh reached its rebuild step since 2026-11-15, and what closes the gap?</b></td>
+<td>Three measured causes, all fixed 2026-11-19 by session arena/cdf3a108-nba1 (continuing section 73's open tail). (1) S1_season/S2_train sat in the gate's blocking failure list as an unsatisfiable requirement of the same client-rendered class as S8/S9/S10 - every recorded run parsed 0 rows and the byte-exact captures prove the page carries no table; both are now declared unreadable with evidence and a hard expiry (2026-12-19), honoured by gate, promoter and anti-rot re-checks. (2) The publish step staged its promoted outputs with ONE git add listing data/raw/standings.json first - a path that has never existed; git aborts the whole command on the first unmatched pathspec and 2&gt;/dev/null hid it, so every verified promotion (schedule_upcoming, injuries, games_completed, data/parsed) was silently dropped from every capture commit (flag F-CDF-02); staging is now per-path. (3) The gate's S1-specific blocks (structured capture + exact-match comparison) are now declaration-aware with the staleness published. Measured after the fix: engine/promote_official.py exits 0 with 0 blocked, engine/refresh_gate.py returns PASS with five PASS BY DECLARATION entries, and the rebuild commands (engine/pipeline.py + engine/build_site.py) run to completion.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/raw/_capture_gate_report.json is not in the register">&mdash;</span></td>
+</tr>
 <tr>
 <td>A-4EE-1</td>
 <td><b>When will the LAL/UTA team-stat tables catch up with the standings? (Q-929-1)</b></td>
@@ -583,6 +597,24 @@
 <td>S-89F-02's gate design; any claim that a priced line rests on current inputs</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q38">
+<td>Q38</td>
+<td><b>Which sigma should published pick probabilities use - the measured margin sigma (16.714) or the measured spread-error sigma (18.303)?</b></td>
+<td>Session arena/d66245d4-nba1 measured 37 decided paper singles hitting 0.3784 against a mean published pick probability of 0.7197 - the probability divides the spread by sigma of game margins where the quantity that belongs there is the sigma of the error in the spread (measured 18.303 with a +8.718-point bias). The 2026-11-19T13:00Z amendment kept the old basis for series continuity, so the published probabilities remain overconfident.</td>
+<td>Publish both bases side by side on the picks surface and let the next settlement cycle grade calibration under log-loss; adopt the better-calibrated basis by pre-registered rule, not by judgement.</td>
+<td>the credibility of every published pick probability; F-CDF-04</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/content/signal_diagnostics_2026-11-19_d66245d4.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q39">
+<td>Q39</td>
+<td><b>What is the source of record for strategy-level results? S1 currently carries two published records (README 23-9 / +11.91u vs docs/data/leaderboard.json 23-8 / +12.909u).</b></td>
+<td>Settlement files grade TICKETS, not strategies, so neither record can be derived from data/settlement/** as it stands. Two surfaces publish different numbers and no rule names the winner.</td>
+<td>Derive strategy totals from the ticket-level settlement rows (each ticket names its strategy family), regenerate the leaderboard from them, and retire the underivable record.</td>
+<td>any reward-tier decision on the leaderboard; F-CDF-05</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id docs/data/leaderboard.json is not in the register">&mdash;</span></td>
 </tr>
 <tr>
 <td>Q-4EE-1</td>

@@ -1,28 +1,6 @@
 {
- "captured_at_utc": "2026-11-19T12:33:10Z",
+ "captured_at_utc": "2026-11-19T12:03:37Z",
  "results": [
-  {
-   "edition": "Injury-Report_2026-11-19_07_30AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_30AM.pdf",
-   "http_status": 200,
-   "bytes": 87407,
-   "sha256": "203010882f372cbef3fb137f9832fa28ccc84c48eb320f9270b88cd3851760e6",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_07_30AM__203010882f372cbef3fb137f9832fa28ccc84c48eb320f9270b88cd3851760e6.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_07_15AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_15AM.pdf",
-   "http_status": 200,
-   "bytes": 87382,
-   "sha256": "28e003863a32366507c9caf01611c3c03062701c8cdf7d63553f0b9a3426b0ae",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_07_15AM__28e003863a32366507c9caf01611c3c03062701c8cdf7d63553f0b9a3426b0ae.pdf"
-  },
   {
    "edition": "Injury-Report_2026-11-19_07_00AM.pdf",
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf",
@@ -110,10 +88,32 @@
    "listed_on_official_index": true,
    "pdf_valid": true,
    "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_05_15AM__033b705b7fd1f9639168b1b9fe03ae743c485456b6402a3c99482397fcaa3643.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-19_05_00AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_05_00AM.pdf",
+   "http_status": 200,
+   "bytes": 87286,
+   "sha256": "48679b6ed404b13e761302063abfffc508e1a90fd4f5290bbb215e5c1ac09bea",
+   "attempts": 1,
+   "listed_on_official_index": true,
+   "pdf_valid": true,
+   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_05_00AM__48679b6ed404b13e761302063abfffc508e1a90fd4f5290bbb215e5c1ac09bea.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-19_04_45AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_04_45AM.pdf",
+   "http_status": 200,
+   "bytes": 87396,
+   "sha256": "f5feb2c0ef89fa39d731cf0133234edeed33f851ef8742719767136cf2c52158",
+   "attempts": 1,
+   "listed_on_official_index": true,
+   "pdf_valid": true,
+   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_04_45AM__f5feb2c0ef89fa39d731cf0133234edeed33f851ef8742719767136cf2c52158.pdf"
   }
  ],
- "editions_listed_on_index": 31,
- "newest_listed": "Injury-Report_2026-11-19_07_30AM.pdf",
+ "editions_listed_on_index": 29,
+ "newest_listed": "Injury-Report_2026-11-19_07_00AM.pdf",
  "editions_already_archived": 161,
  "method": "index-driven: every edition listed by official.nba.com, newest first, capped per run, already-archived editions skipped because captures are content-addressed",
  "note": "HTTP status only. 403 from ak-static.cms.nba.com has been observed both for editions that exist to a browser and for editions that are not published yet; it is recorded as unavailable at capture time, not as proof of absence."

@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-19T08:09:58Z",
+ "captured_at_utc": "2026-11-19T12:03:37Z",
  "window": "2026-11-19 through 2026-11-22 (parsed from the official schedule/games pages this run)",
  "note": "Official NBA.com schedule rows parsed verbatim this run. Cells the capture did not carry are marked per-cell in field_provenance (carried_forward = value kept from the previous verified snapshot; blank_unverified = the official pages served no readable value and none was inferred).",
  "record_sources": {
@@ -372,118 +372,73 @@
    "source_id": "carried_forward"
   },
   "0022600043": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600044": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600045": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600046": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600047": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600048": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600049": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600050": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600051": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600274": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600275": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600276": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600277": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600278": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600279": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600280": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600281": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600282": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600283": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600284": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600285": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   },
   "0022600286": {
-   "venue": "blank_unverified",
-   "city": "blank_unverified",
-   "cup_group": "blank_unverified"
+   "source_id": "carried_forward"
   }
  },
  "field_provenance_flags": [
-  "blank_unverified",
   "carried_forward"
  ],
  "source_urls": {
@@ -517,8 +472,8 @@
  "verification": {
   "verified": true,
   "source_url": "https://www.nba.com/schedule",
-  "source_sha256": "474138ac5923f7dc1459d9423f6014a8a9026ff49b06659bea8fe3efa8fa7d53",
-  "verified_at_utc": "2026-11-19T12:40:00Z",
+  "source_sha256": "968197dba975367d6be79503ac359e82a53a08b27c9635d334a3c25cf1703a5c",
+  "verified_at_utc": "2026-11-19T12:58:20Z",
   "verified_by": "engine/promote_official.py",
   "parsed_via": null,
   "fallback_sources": [
@@ -526,29 +481,29 @@
     "date": "2026-11-19",
     "url": "https://www.nba.com/games?date=2026-11-19",
     "http_status": 200,
-    "bytes": 346602,
-    "sha256": "d516497ac331039e526bacc852bcfc17df6798ec71b76a987134ccba2984736d"
+    "bytes": 346649,
+    "sha256": "cb080283e3616e00554d33279bd5dc7d4fe5b99a6a1dac0faf0bfb0f9408eab5"
    },
    {
     "date": "2026-11-20",
     "url": "https://www.nba.com/games?date=2026-11-20",
     "http_status": 200,
-    "bytes": 359316,
-    "sha256": "2a3ca9128c87a81c8b042fa9ada3c8d0b2547a4b117ab9a001a1247028d172bd"
+    "bytes": 359502,
+    "sha256": "5dcae38597899eedc6efb094ba769c0fb9043f06a7434ca4a289da4ea3f174d5"
    },
    {
     "date": "2026-11-21",
     "url": "https://www.nba.com/games?date=2026-11-21",
     "http_status": 200,
-    "bytes": 324619,
-    "sha256": "278e51df56662fd11f5c2d08521efc99dc37efbeafcb2b0f1fe0e29b62d757f3"
+    "bytes": 324752,
+    "sha256": "f9233be788d4dc633afb5980d3e70e9f32890ba3d9ab9290696d4d43f2db151e"
    },
    {
     "date": "2026-11-22",
     "url": "https://www.nba.com/games?date=2026-11-22",
     "http_status": 200,
-    "bytes": 330122,
-    "sha256": "88b3af6d5e616b1f0e0c0444b690ea801a13e9086d0fbda6fb2f9cbe715f00ac"
+    "bytes": 330255,
+    "sha256": "ee386a71648518f071f29244cfe7fb29cb5ebbcff758ef363e669c47553a3781"
    }
   ],
   "row_count": 26

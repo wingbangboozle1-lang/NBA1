@@ -273,6 +273,22 @@ jobs:
           # no-change run produces no timestamp-only commit.
           # Settlement output is evidence, not a snapshot: it may land in the
           # same PR when a game day ended during this run.
+          # Also stage the digest-bound promotion records and computed diffs
+          # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
+          #
+          # EVERY PATH IS OPTIONAL. `git add` aborts the WHOLE invocation with
+          # exit 128 when any one pathspec matches nothing, and
+          # `2>/dev/null || true` then hid that abort. Two seats measured this
+          # independently on 2026-11-19 and fixed it independently:
+          #   * arena/fb91550a-nba1 (section 74 T02): reproduced the abort with
+          #     scripts/fb91550a_refresh_publish_audit.py - 13 auto/refresh-*
+          #     branches, 0 pull requests ever, the 12:03Z run's promoted
+          #     schedule/editions/finals never published;
+          #   * arena/cdf3a108-nba1 (section 74 C07 / F-CDF-02): auto/refresh-
+          #     20261119-120839 carried only _capture_* although its own run
+          #     record proved promote wrote the promoted outputs at 12:08:36Z.
+          # The merge keeps the superset implementation (fb91550a's path list
+          # and glob guard) with both measurements recorded above.
           #
           # EVERY PATH IS OPTIONAL (COORDINATION.md section 74, T02). `git add`
           # aborts the WHOLE invocation with exit 128 when any one pathspec
@@ -328,6 +344,7 @@ jobs:
           else
             echo "::warning title=Publish::no capture payloads to stage"
           fi
+
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0

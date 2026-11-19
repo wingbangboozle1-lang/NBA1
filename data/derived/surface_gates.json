@@ -90,18 +90,15 @@
     {
       "id": "G5_freshness_provenance",
       "requirement": "engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours)",
-      "observed": "BLOCKED",
-      "observed_detail": [
-        "promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json"
-      ],
-      "passed": false,
+      "observed": "PASS",
+      "observed_detail": [],
+      "passed": true,
       "source": "data/raw/_last_refresh.json + engine/refresh_gate.py"
     }
   ],
   "open": false,
   "closed_by": [
     "G1_validation",
-    "G2_sample_floor",
-    "G5_freshness_provenance"
+    "G2_sample_floor"
   ]
 }

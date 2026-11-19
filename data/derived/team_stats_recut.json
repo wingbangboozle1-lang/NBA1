@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Team model inputs, re-cut from first-hand official reads on 2026-11-19",
   "generated_by": "scripts/recut_2026-11-19_4eef6d3b.py",
-  "retrieved_utc": "2026-11-19T13:06:22Z",
+  "retrieved_utc": "2026-11-19T13:09:56Z",
   "sources": {
    "advanced": "https://www.nba.com/stats/teams/advanced",
    "traditional": "https://www.nba.com/stats/teams/traditional",
@@ -11,7 +11,7 @@
    "finals": "https://www.nba.com/games"
   },
   "games_through": "222 decided games (results feed through 2026-11-18)",
-  "note": "Every value is printed on the official advanced page (read first-hand 2026-11-19T13:2xZ via the platform web-fetch channel; the runner cannot parse this page). Nothing is fitted, imputed or adjusted. GP/W/L are shipped beside the ratings so a reader can see the sample each rating rests on. This cut ABSORBS the 11/18 UTA 109 @ LAL 97 game (LAL and UTA now 16 GP, matching the standings): it replaces the pre-drift cut and resolves F-89F-04/Q37. Drift detail: data/derived/recut_2026-11-19_4eef6d3b/drift.json.",
+  "note": "Every value is printed on the official advanced page (read first-hand 2026-11-19T13:2xZ via the platform web-fetch channel; the runner cannot parse this page). Nothing is fitted, imputed or adjusted. GP/W/L are shipped beside the ratings so a reader can see the sample each rating rests on. This cut ABSORBS the 11/18 UTA 109 @ LAL 97 game (LAL and UTA now 16 GP, matching the standings): it replaces the pre-drift cut and resolves F-89F-04/Q37. Drift detail: data/derived/recut_2026-11-19_4eef6d3b/drift.json. Independent corroboration: session arena/cdf3a108-nba1 re-cut the same inputs from the same official pages at 12:45Z (scripts/recut_cdf3a108.py, merged as PR #204) and measured the identical drift (LAL/UTA 15->16).",
   "gates": {
    "G1_W_plus_L_eq_GP": "pass (all 30)",
    "G2_netrtg_eq_off_minus_def": "pass (all 30, 0.25 rounding tolerance)",

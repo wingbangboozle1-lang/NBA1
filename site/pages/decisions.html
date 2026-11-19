@@ -374,6 +374,22 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
 </tr>
+<tr id="Q38">
+<td>Q38</td>
+<td>Which sigma should published pick probabilities use - the measured margin sigma (16.714) or the measured spread-error sigma (18.303)?</td>
+<td>Session arena/d66245d4-nba1 measured 37 decided paper singles hitting 0.3784 against a mean published pick probability of 0.7197 - the probability divides the spread by sigma of game margins where the quantity that belongs there is the sigma of the error in the spread (measured 18.303 with a +8.718-point bias). The 2026-11-19T13:00Z amendment kept the old basis for series continuity, so the published probabilities remain overconfident.</td>
+<td>Publish both bases side by side on the picks surface and let the next settlement cycle grade calibration under log-loss; adopt the better-calibrated basis by pre-registered rule, not by judgement.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id data/content/signal_diagnostics_2026-11-19_d66245d4.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q39">
+<td>Q39</td>
+<td>What is the source of record for strategy-level results? S1 currently carries two published records (README 23-9 / +11.91u vs docs/data/leaderboard.json 23-8 / +12.909u).</td>
+<td>Settlement files grade TICKETS, not strategies, so neither record can be derived from data/settlement/** as it stands. Two surfaces publish different numbers and no rule names the winner.</td>
+<td>Derive strategy totals from the ticket-level settlement rows (each ticket names its strategy family), regenerate the leaderboard from them, and retire the underivable record.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id docs/data/leaderboard.json is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q4">
 <td>Q4</td>
 <td>How much of a team does an injury actually cost?</td>
@@ -415,7 +431,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">36 open, 21 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">38 open, 23 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -804,6 +820,33 @@
 <td><b>Publish a per-source reachability matrix, so 'cannot parse' never again hides 'cannot reach'</b></td>
 <td>Five sources failed for a day under the label 'parse failure' while the real condition was 'not deliverable'. The difference matters: a parse failure is fixable in code, a delivery failure is not. The evidence needed to tell them apart was already being collected (counts of table rows, team links, rowSet) and was being thrown away.</td>
 <td>Take option 1. It is a rendering job on data that already exists.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>S-CDF-01</td>
+<td><span class="chip info">Model honesty</span></td>
+<td><b>Publish both probability bases until the next settlement grades which calibrates better</b></td>
+<td>The published pick probability is overconfident (measured hit rate 0.3784 against a mean published 0.7197). Fixing it silently would break series continuity; leaving it silently keeps a number on the site that its own settlement records contradict.</td>
+<td>Option 1.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-02</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>Derive strategy-level leaderboard rows from ticket-level settlement records</b></td>
+<td>S1 carries two published records (23-9 / +11.91 vs 23-8 / +12.909) and neither can be derived from the settlement files, which grade tickets. A leaderboard that cannot be recomputed from its own evidence cannot support reward decisions.</td>
+<td>Option 1.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-03</td>
+<td><span class="chip info">Operations</span></td>
+<td><b>Adopt auto-refresh branches mechanically and make gh pr create failures loud</b></td>
+<td>The scheduled refresh publishes captures to auto/refresh-* branches and opens a PR - but the gh pr create failure is swallowed with a warning. auto/refresh-20261119-120839 held ten official injury PDFs and a full capture set with no PR until this session adopted it by hand (F-CDF-01).</td>
+<td>Option 1.</td>
 <td>&mdash;</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
