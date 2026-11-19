@@ -272,6 +272,17 @@ def probe_clock_grid():
                     recorded.update(json.load(open(q, encoding="utf-8")))
                 except ValueError:
                     pass
+        # the probe driver also records outcomes in the pipeline's shared probe
+        # record (data/raw/_capture_injury_probe.json -> results[].edition);
+        # without this the loop re-probes the same 403 slots forever.
+        shared = os.path.join("data", "raw", "_capture_injury_probe.json")
+        if os.path.exists(shared):
+            try:
+                for rec in json.load(open(shared, encoding="utf-8")).get("results", []):
+                    if rec.get("edition"):
+                        recorded.add(rec["edition"])
+            except ValueError:
+                pass
         todo = [e for e in todo if e not in recorded]
         n = int(os.environ.get("GRID_BATCH", "15"))
         todo = todo[:n]
