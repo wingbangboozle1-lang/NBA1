@@ -123,6 +123,19 @@ class PublishStagingTests(unittest.TestCase):
         self.assertIn("data/hca_measured.json", publish)
         self.assertIn("data/derived/", publish)
 
+    def test_every_script_the_workflow_calls_actually_exists(self):
+        """A missing helper is not a loud failure - python exits 2 on a file
+        that is not there, and the run failed at the LAST step while every
+        earlier step showed green (observed run 44530780692, section 78).
+        One call site of a superseded helper survived its deletion; this
+        check makes that class impossible to ship."""
+        import re
+        repo = Path(__file__).resolve().parents[1]
+        for wf in sorted((repo / ".github" / "workflows").glob("*.yml")):
+            for ref in re.findall(r"python3\s+(scripts/[\w./-]+\.py)", wf.read_text(encoding="utf-8")):
+                self.assertTrue((repo / ref).exists(),
+                                f"{wf.name} calls {ref}, which does not exist")
+
     def test_git_add_is_atomic_per_invocation(self):
         """The root cause, pinned: one unmatched pathspec voids the batch.
 

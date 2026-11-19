@@ -339,7 +339,7 @@ jobs:
             echo "No new capture payloads - nothing to publish."
             exit 0
           fi
-          python3 scripts/stage_publish.py record
+          git add data/raw/_last_refresh.json 2>/dev/null || true
 
           # Evidence for the pull request body: the run record plus this
           # job's own site check (CI does not run on token-created PRs).

@@ -1915,6 +1915,17 @@
    "source": "COORD77",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md",
    "suggested_action": "Each in-flight seat rebases onto main after \u00a777 lands, keeps both sides' data verbatim, ports its tests to the landed implementations where they are equivalent, and keeps its unique findings (\u00a777.5 lists them)."
+  },
+  {
+   "id": "F-70D-06",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "A superseded helper's last call site survived its deletion and killed the observed run's publish step",
+   "detail": "This seat superseded scripts/stage_publish.py with the landed publish-path mechanism (arena/fb91550a-nba1's candidates loop) and deleted the helper, but missed one call site (`python3 scripts/stage_publish.py record`) in the same step. python exits 2 on a missing script file, so the OBSERVED run 44530780692 - the first run since 2026-11-15 to reach 'Rebuild only after all freshness and provenance gates pass' - failed at the LAST step after every earlier step went green, and its captures were staged but never committed. Fixed by restoring the record staging line; pinned by a new test that fails if any workflow calls a script that does not exist.",
+   "affected": ".github/workflows/refresh-data.yml publish step; run 44530780692's outputs",
+   "source": "REFRESH_RUN_44530780692",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44530780692",
+   "suggested_action": "None - fixed and pinned. Reviewers can confirm the rebuild step ran on run 44530780692 (job 135583204160 step list: fetch \u2713 promote \u2713 freshness \u2713 rebuild \u2713 settle \u2713)."
   }
  ]
 }
