@@ -1947,6 +1947,15 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>S-70D-01 (queue the concurrency group) removes the cause; a publish-side guard could also refuse to commit when the record's digests do not match the captures being staged.</td>
 <td class="src"><span class="na" title="source id GIT_COMMIT_05c1e08 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-54B-02</td>
+<td>High</td>
+<td><b>A scheduled run that catches up with the injury-report index blocked the rebuild on the fixed-clock probe's expected 403s</b></td>
+<td>Measured on run 44533474414 (fetch 2026-11-19T13:27:00Z, branch arena/54bd21d2-nba1): every index-listed 11/19 edition was already archived, so the fetcher's todo fell back to the fixed-clock probe and all eight results were 403 (the probe's own note records 403 as 'unavailable to this client', expected for editions not yet published). The gate took results[0] as 'the latest indexed injury PDF' and blocked; promote failed the whole item with 'no successful injury-PDF retrieval in this run'; injuries.json kept its older binding and the gate then blocked twice more on stale provenance. Consequence: any run in the steady state between publications - the state a cron run lands in when nothing new was filed since the previous run - could not rebuild even though nothing was missing. Fixed in this PR (COORDINATION section 80): gate and promote now agree on one canonical current edition - the newest HTTP-200 retrieval of the run, or, in catch-up state, the content-addressed archive of the newest index-listed edition (sidecar-bound URL, SHA-256 and retrieval stamp; sidecar/filename disagreement refuses the binding) - while an index-listed edition that is neither archived nor fetched still blocks exactly as before. Pinning tests: scripts/test_54bd21d2_rebuild_reach.py (catch-up passes, unarchived still blocks, fetched-state binds the newest 200, sidecar mismatch refuses). Open until a reviewer confirms the next scheduled run's record shows build_outcome success in the catch-up state too.</td>
+<td>Scheduled rebuild (R01) whenever the injury-report index has no unarchived edition; data/raw/injuries.json freshness</td>
+<td>Merged fix in this PR; verify on the next scheduled run (15:15 UTC) that a catch-up record reaches build_outcome success.</td>
+<td class="src"><span class="na" title="source id run 44533474414 record: data/raw/_capture_injury_probe.json (newest_listed Injury-Report_2026-11-19_07_00AM.pdf, 8 results, 0 with http 200, 0 listed) + data/raw/_capture_gate_report.json blocking_errors is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

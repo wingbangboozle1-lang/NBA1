@@ -85,6 +85,48 @@ def read_json(path: str) -> dict:
         return json.load(stream)
 
 
+def archived_injury_edition(base: str, name: str) -> dict | None:
+    """The content-addressed archive record for one injury-report edition.
+
+    Returns None when the edition is not archived. The sidecar carries the
+    official URL, the SHA-256 and the retrieval stamp, so an archived copy
+    proves a successful official retrieval even for a run in which nothing
+    new was fetched (COORDINATION.md §80: a catch-up run whose results hold
+    only the fixed-clock probe's expected 403s must not block the rebuild on
+    them when the newest index-listed edition is already on disk).
+    """
+    directory = os.path.join(base, "data/raw/injury_pdfs")
+    try:
+        entries = sorted(os.listdir(directory))
+    except OSError:
+        return None
+    # Archive filenames are content-addressed as
+    # <edition-name-without-.pdf>__<sha256>.pdf (engine/fetch_official.py),
+    # e.g. Injury-Report_2026-11-19_07_00AM__df04….pdf.
+    stem_name = name[:-4] if name.endswith(".pdf") else name
+    for filename in entries:
+        if filename.startswith(stem_name + "__") and filename.endswith(".pdf"):
+            stem = filename[:-4]
+            try:
+                meta = read_json(os.path.join(directory, stem + ".json"))
+            except (OSError, ValueError):
+                meta = {}
+            name_sha = filename[len(stem_name) + 2:-4]
+            sha = meta.get("sha256") or name_sha
+            if meta.get("sha256") and meta["sha256"] != name_sha:
+                # Sidecar and filename disagree: the archive is inconsistent,
+                # which is not a steady state the gate may wave through.
+                return {"edition": name, "sha256": sha,
+                        "artifact_path": f"data/raw/injury_pdfs/{filename}",
+                        "archive_integrity_error": "sidecar sha256 does not "
+                                                   "match the content-addressed filename"}
+            return {"edition": name, "url": meta.get("source_url"),
+                    "sha256": sha, "artifact_path": f"data/raw/injury_pdfs/{filename}",
+                    "retrieved_at_utc": meta.get("retrieved_at_utc"),
+                    "archived": True}
+    return None
+
+
 def live_declarations(base, now, by_key, parse_ok):
     """Which sources are admissible as declared-unreadable, and why the rest are not.
 
@@ -333,27 +375,46 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             errors.append(f"capture response digest does not match this run for {key}")
 
     injury = by_key.get("injury_pdf_probe", {})
-    pdf_results = injury.get("results", [])
+    pdf_results = injury.get("results", []) or []
     # A rate-limited newest edition (403/429 from ak-static) must not block
     # the verification side when promote binds to the newest SUCCESSFUL
     # retrieval (flag F-CA-07's promote-side rule): both sides must bind to
     # the same artifact or they can never agree (arena/70d0e760-nba1, §81).
-    ok_pdfs = [r for r in pdf_results if r.get("http_status") == 200]
-    if not ok_pdfs:
-        errors.append("no indexed injury PDF was retrieved successfully in this run")
+    # Canonical order (COORDINATION §80): the newest HTTP-200 of this run, or
+    # - when the run catches up with the index and every listed edition is
+    # already archived - the content-addressed archive of the newest
+    # index-listed edition (measured failure without the archive path: run
+    # 44533474414, 2026-11-19T13:27Z, where results held only the
+    # fixed-clock probe's expected 403s and the rebuild was blocked on them).
+    canonical = next((r for r in pdf_results if r.get("http_status") == 200), None)
+    if canonical is None:
+        newest_listed = injury.get("newest_listed")
+        if isinstance(newest_listed, str) and newest_listed:
+            canonical = archived_injury_edition(base, newest_listed)
+            if canonical is not None:
+                warnings.append(
+                    f"newest index-listed edition {newest_listed} already "
+                    f"archived (retrieved "
+                    f"{canonical.get('retrieved_at_utc') or 'unknown'}); no new "
+                    f"retrieval was due this run - promotion binds from the "
+                    f"archive")
+    latest_pdf = canonical
+    if latest_pdf is None:
+        errors.append("latest indexed injury PDF was not retrieved successfully")
     else:
-        latest_pdf = ok_pdfs[0]
         if pdf_results and pdf_results[0] is not latest_pdf:
             warnings.append(
                 f"newest indexed injury edition {pdf_results[0].get('url', '?')} "
                 f"was not retrieved (status {pdf_results[0].get('http_status')}); "
                 f"promotion and verification bind to "
                 f"{latest_pdf.get('url', '?')}")
+        if latest_pdf.get("archive_integrity_error"):
+            errors.append("archived injury PDF " + latest_pdf["archive_integrity_error"])
         if not SHA256_RE.fullmatch(str(latest_pdf.get("sha256", ""))):
             errors.append("latest indexed injury PDF has no valid SHA-256")
-        if latest_pdf.get("pdf_valid") is not True:
+        if not latest_pdf.get("archived") and latest_pdf.get("pdf_valid") is not True:
             errors.append("latest indexed injury response is not verified as a PDF")
-        parsed_pdf_url = urlparse(str(latest_pdf.get("url", "")))
+        parsed_pdf_url = urlparse(str(latest_pdf.get("url") or ""))
         if parsed_pdf_url.scheme != "https" or parsed_pdf_url.hostname != "ak-static.cms.nba.com":
             errors.append("latest injury PDF does not have official NBA provenance")
         artifact_path = latest_pdf.get("artifact_path", "")
@@ -363,7 +424,10 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             absolute = os.path.join(base, artifact_path)
             try:
                 with open(absolute, "rb") as pdf_file:
-                    actual_sha = hashlib.sha256(pdf_file.read()).hexdigest()
+                    body = pdf_file.read()
+                if body[:5] != b"%PDF-":
+                    errors.append("archived injury PDF does not begin with a PDF header")
+                actual_sha = hashlib.sha256(body).hexdigest()
                 if actual_sha != latest_pdf.get("sha256"):
                     errors.append("archived injury PDF bytes do not match the fetch digest")
             except OSError:
@@ -552,8 +616,8 @@ def evaluate_with_report(record: dict, now: dt.datetime,
         return payload
 
     require_promotion("data/raw/schedule_upcoming.json", "S4_schedule")
-    pdf_digest = latest_pdf.get("sha256") if ok_pdfs else None
-    pdf_url = latest_pdf.get("url") if ok_pdfs else None
+    pdf_digest = latest_pdf.get("sha256") if latest_pdf else None
+    pdf_url = latest_pdf.get("url") if latest_pdf else None
     require_promotion("data/raw/injuries.json", "injury_pdf_probe", pdf_digest, pdf_url)
 
     # Each current and previous-day official result capture must explicitly
