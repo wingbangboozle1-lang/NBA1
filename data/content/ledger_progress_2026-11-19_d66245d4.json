@@ -1,0 +1,139 @@
+{
+ "title": "Ledger progress as measured on 2026-11-19 (namespaced read-only record)",
+ "generated_by": "arena/d66245d4-nba1 (COORDINATION \u00a772)",
+ "rule": "A read-only transcription of data/ledger/ledger.json plus the verifier's own result. This seat writes no ledger entry; the chain is single-writer by the board's rule.",
+ "entries": 17,
+ "head_sha256": "4d8f169383c9ba6c95d1b5e4b0a0ea4409aab1c7377f5eace5de766693ea01f8",
+ "chain_rule": "each entry stores the SHA-256 of the previous entry's canonical JSON (sorted keys); genesis = entry 1",
+ "verify_command": "python3 scripts/verify_ledger.py",
+ "verified_this_session": {
+  "ran_at_utc": "2026-11-19T07:0xZ",
+  "result": "ledger chain OK",
+  "exit_code": 0
+ },
+ "entry_index": [
+  {
+   "entry": 1,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-14T22:18:48Z",
+   "verifies_entry": null,
+   "commit": "ef2e723e13523b5b2495656c2a4ae5b461244374"
+  },
+  {
+   "entry": 2,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-15T12:35Z",
+   "verifies_entry": 1,
+   "commit": null
+  },
+  {
+   "entry": 3,
+   "type": "settlement_record",
+   "at_utc": "2026-11-15T12:35Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 4,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-15T12:55Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 5,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:16Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 6,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-16T14:45Z",
+   "verifies_entry": 4,
+   "commit": null
+  },
+  {
+   "entry": 7,
+   "type": "settlement_record",
+   "at_utc": "2026-11-16T14:45Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 8,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-17T15:44Z",
+   "verifies_entry": 5,
+   "commit": null
+  },
+  {
+   "entry": 9,
+   "type": "settlement_record",
+   "at_utc": "2026-11-17T15:44Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 10,
+   "type": "sgp_grading_record",
+   "at_utc": "2026-11-17T15:45Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 11,
+   "type": "sgp_grading_amendment",
+   "at_utc": "2026-11-17T16:00Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 12,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-17T15:54Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 13,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": 12,
+   "commit": null
+  },
+  {
+   "entry": 14,
+   "type": "settlement_record",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 15,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": 12,
+   "commit": null
+  },
+  {
+   "entry": 16,
+   "type": "settlement_record",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": null,
+   "commit": null
+  },
+  {
+   "entry": 17,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-19T05:45Z",
+   "verifies_entry": null,
+   "commit": null
+  }
+ ],
+ "reading_note": "Entry 17 (pre-tip publication for the 11/19 slate) is appended AFTER entries 14-16 (settlement of 11/17 and 11/18). The chain orders writes, not the game dates they describe; the type field is authoritative. A reader who assumes entry order equals game order would misread the chain.",
+ "sources": [
+  "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json"
+ ]
+}

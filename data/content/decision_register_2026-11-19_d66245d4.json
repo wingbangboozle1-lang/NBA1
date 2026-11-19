@@ -1,0 +1,146 @@
+{
+  "title": "Decision register — what must be answered before anything is decided, 2026-11-19",
+  "generated_by": "arena/d66245d4-nba1 (COORDINATION §72)",
+  "read_this_first": "The repository already carries 31 open questions and 39 suggestions. This register does NOT repeat them. It carries only what the measurements in this pass (data/content/verify_2026-11-19_d66245d4.json and data/content/signal_diagnostics_2026-11-19_d66245d4.json) change about the decisions in front of a reviewer. Every row names the artifact that answers it, or the artifact that would have to exist.",
+  "the_one_thing": {
+    "statement": "The published picks lose, and they lose hardest where the model is most confident. Over the 37 decided paper singles: 14-23-1, hit rate 0.378 against a 0.524 break-even, -11.30 units. The model's mean published win probability on those same tickets was 0.720, so it was 34.1 points overconfident. The most confident bucket (published probability 0.70+) went 7-11 while claiming a mean probability of 0.795.",
+    "why_it_happens": "Measured, not guessed: the model's probability divides its spread by the standard deviation of game margins (16.71 points), when the quantity that belongs in that division is the standard deviation of the error in its own spread. On the games already settled that error has sd 16.09 and a mean bias of +8.72 points — the model over-predicts the picked team's winning margin by 8.7 points on average. Because the pick gate keeps only |spread| >= 3.0, it keeps exactly the games where that bias is largest.",
+    "what_it_does_not_mean": "It does not prove the model has no information. Sign accuracy was 14 of 37 at the model's own number, and the smallest bucket (3.0-5.0) actually went 4-3. It proves the model's CONFIDENCE is miscalibrated and its selection rule amplifies the error. Those are fixable; the fix is measurable; but until it is fixed no strategy on this site can be called skill.",
+    "sources": [
+      "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json",
+      "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-18.json"
+    ]
+  },
+  "questions": [
+    {
+      "id": "D01",
+      "question": "Is the pick gate a skill filter or a variance filter?",
+      "why_it_blocks_a_decision": "Every published pick, every parlay leg and every prop on this site is selected by '|model spread| >= 3.0'. If that is a variance filter rather than a skill filter, the entire strategy library is measuring noise, and adding games will never fix it — the bias is in the selection rule, not the sample.",
+      "what_we_have": "37 decided singles, bucketed by |model spread|: 3.0-5.0 went 4-3, 5.0-8.0 went 1-4, 8.0-12.0 went 6-5, 12.0+ went 3-11. The ordering runs opposite to confidence.",
+      "what_is_missing": "Enough games per bucket for the intervals to separate. At n=37 no bucket's Wilson interval excludes .500 except by being worse than it; the monotone ordering is suggestive and not significant.",
+      "how_to_discover": "Keep settling. The diagnostic recomputes on every run: python3 scripts/signal_diagnostics_d66245d4.py. The decision rule to register NOW, before more data arrives: if the 12.0+ bucket's hit rate stays below .500 after 100 decided tickets in that bucket, retire the gate rather than tune it.",
+      "decision_owner": "the strategy-owning session",
+      "artifact": "data/content/signal_diagnostics_2026-11-19_d66245d4.json"
+    },
+    {
+      "id": "D02",
+      "question": "Should the probability be divided by the error in the line rather than by the spread of game margins?",
+      "why_it_blocks_a_decision": "Every probability, every fair price, every parlay joint and every leaderboard LBS score inherits this denominator. If it is wrong, they are all wrong together, and a reviewer cannot rank strategies that share the same defect.",
+      "what_we_have": "Measured: sigma used = 16.714 (data/derived/measured_constants_2026_27.json); sigma implied by the model's own published probabilities = 16.595; sigma needed to cover the model's measured forecast error = 18.303. The model is using 91.3% of the sigma its own error requires.",
+      "what_is_missing": "The residual error has to be measured per team, not pooled, before it can be used as a denominator: a 15-game sample has a different error scale for a team that has played 16 than for one that has played 13. That requires the team-level error table, which is not built.",
+      "how_to_discover": "Extend scripts/signal_diagnostics_d66245d4.py to compute the residual per team on the 222-game results feed and publish sd(residual) per team beside GP. The feed already carries everything needed.",
+      "decision_owner": "the model-owning session",
+      "artifact": "data/content/signal_diagnostics_2026-11-19_d66245d4.json → residual_scale"
+    },
+    {
+      "id": "D03",
+      "question": "Which record is the official record for strategy S1 — 23-9 or 23-8?",
+      "why_it_blocks_a_decision": "The competition leaderboard exists to rank strategies. Two published files disagree on the record of the top-ranked strategy by one game and by one unit of return. A reviewer cannot decide whether to fund, retire or wait for a strategy whose own record has two values.",
+      "what_we_have": "README.md: '23-9, worth +11.91 model units, exact binomial p = 0.020'. docs/data/leaderboard.json: '23-8, +12.909 units, LBS 82.0, n_graded 31'.",
+      "what_is_missing": "Any per-strategy grading of the five settled slates. data/settlement/** grades tickets; nothing maps a settled ticket to a strategy. Neither figure can be reproduced from the settlement record at all.",
+      "how_to_discover": "Add a strategy field to the settlement row (which strategy originated the ticket) and regenerate the leaderboard from data/settlement/**. Until then the honest answer is 'no published record of any strategy is currently reproducible'.",
+      "decision_owner": "the strategy-ledger owner",
+      "artifact": "data/derived/strategies.json, docs/data/leaderboard.json"
+    },
+    {
+      "id": "D04",
+      "question": "Are the three stale lines (PHX@UTA, SAC@LAL, DAL@UTA) safe to publish?",
+      "why_it_blocks_a_decision": "They are stale by 1.2 to 2.2 points because the official advanced table has now absorbed the 11/18 UTA 109 @ LAL 97 game that the repo's cut predates. The repository already carries the flag (F-929-01) but publishes the lines anyway, and a reader has no way to see which lines are affected.",
+      "what_we_have": "Re-pricing every game with the model's own published formula: 23 of 26 games move by 0.05 point or less; PHX@UTA moves +1.21 spread / -1.34 total, SAC@LAL -1.41 / -2.19, DAL@UTA +1.20 / -1.35.",
+      "what_is_missing": "A per-line freshness stamp. The line file carries the injury edition but not the GP of each input, so a reader cannot tell which lines rest on a superseded table.",
+      "how_to_discover": "Publish gp_home/gp_away beside every line and re-cut when either moves. The horizon file already stores gp_home/gp_away — it is one field away.",
+      "decision_owner": "the horizon-roll owner",
+      "artifact": "data/content/verify_2026-11-19_d66245d4.json → rows.reprice"
+    },
+    {
+      "id": "D05",
+      "question": "Is 26 games the right horizon when the injury basis is five revisions old before tip?",
+      "why_it_blocks_a_decision": "The brief asks for picks up to 3 days ahead. But the 11/19 lines were cut from the 12:30 AM edition and the index already lists 01:45 AM, with first tip at 8:00 PM ET. Every additional day of horizon is a day of injury information that does not exist yet.",
+      "what_we_have": "8 editions published for 11/19 by 07:16Z; the model used the 3rd. 4 games tip on 11/19, 9 on 11/20, 6 on 11/21, 7 on 11/22.",
+      "what_is_missing": "Any measurement of how much a line moves per injury revision. Without it, 'freeze at T minus X hours' is a preference, not a decision.",
+      "how_to_discover": "The archive now holds 154 injury editions (COORDINATION §68) and the settlement record holds the lines each was priced against. Diffing consecutive editions against the line movement gives the elasticity directly.",
+      "decision_owner": "operations + the horizon-roll owner",
+      "artifact": "data/content/verify_2026-11-19_d66245d4.json → injury"
+    },
+    {
+      "id": "D06",
+      "question": "Does the site have a single number for anything a reviewer would act on?",
+      "why_it_blocks_a_decision": "Measured in this pass: two S1 records (D03), two strategy counts (8 in data/derived/strategies.json vs 10 in docs/data/leaderboard.json), one 6-day-old strategy ledger, and a records column wrong on 3 of 26 horizon rows. These are not model disagreements; they are the same quantity published twice with different values.",
+      "what_we_have": "All four inconsistencies are reproduced with file paths and values in verify_2026-11-19_d66245d4.json → flagged.",
+      "what_is_missing": "A build gate. Nothing in scripts/verify_all.py compares two published files against each other for the same quantity.",
+      "how_to_discover": "Add a cross-file consistency check: for every team/strategy id that appears in more than one published file, assert the values agree, and fail the build when they do not. This is a small script and it is the highest-value gate missing from the repository.",
+      "decision_owner": "the integration seat",
+      "artifact": "data/content/verify_2026-11-19_d66245d4.json → flagged"
+    },
+    {
+      "id": "D07",
+      "question": "What would make a strategy fundable, stated in advance?",
+      "why_it_blocks_a_decision": "The six gates exist but their stated thresholds (n >= 100) are unreachable this season at the current publication rate: 39 singles in 5 slates. A reviewer is being asked to choose a path against a bar that cannot be reached before the sample the bar protects against is already irrelevant.",
+      "what_we_have": "39 published singles over 5 settled slates (about 8 per slate); 14-23-1. The largest bucket at the gate threshold holds 14.",
+      "what_is_missing": "A pre-registered decision rule that is reachable. Anything that says 'wait for n=100' is a decision to decide nothing for ~12 more slates.",
+      "how_to_discover": "Pre-register the rule now, before the next slate: for example, 'retire the gate if the 12.0+ bucket is below .500 at n=50 in that bucket; fund at n=50 with a Wilson lower bound above .524 after a Bonferroni correction for the number of strategies'. Either threshold is defensible; publishing neither is what makes the leaderboard undecidable.",
+      "decision_owner": "the strategy-owning session",
+      "artifact": "data/derived/strategies.json → gates_definition"
+    }
+  ],
+  "information_we_do_not_have": [
+    {"missing": "A sportsbook price, for any game, ever", "consequence": "no strategy can be shown to beat a market; every 'edge' on the site is against the model's own reference line", "what_would_produce_it": "a licensed odds feed; the repository's own SG27 records that no NBA-operated source publishes one"},
+    {"missing": "Per-strategy attribution of settled tickets", "consequence": "no published strategy record is reproducible (D03)", "what_would_produce_it": "a strategy field on each settlement row"},
+    {"missing": "Closing-line movement per injury revision", "consequence": "the value of freezing the horizon at any particular hour is unmeasured (D05)", "what_would_produce_it": "consecutive official editions joined to consecutive line snapshots — both already archived"},
+    {"missing": "Team-level forecast error", "consequence": "the probability denominator cannot be corrected per team, only pooled (D02)", "what_would_produce_it": "the 222-game results feed the repository already stores"},
+    {"missing": "Measured same-game correlation for the prop legs", "consequence": "SGP prices carry an unmeasured rho; the repository says so itself (correlations tier C)", "what_would_produce_it": "player-game-log pairs across enough games; the logs now cover 11/15-11/18 only"}
+  ],
+  "suggestions": [
+    {
+      "id": "I01",
+      "title": "Publish the calibration gap as the headline instead of the record",
+      "problem": "The site leads with 23-9 / 14-23-1, a number a reader cannot act on. The number that explains the record — the model was 34 points overconfident on its own picks — is buried in a file.",
+      "options": [
+        {"option": "Put 'published probability vs realised hit rate' at the top of the picks page, beside the record", "effort": "Low — one render of an existing diagnostic", "risk": "None — it shows a worse number than the current headline, which is the point", "unlocks": "an honest basis for D01, D02, D07"},
+        {"option": "Leave the record as the headline and add the diagnostic as a footnote", "effort": "None", "risk": "High — a reader continues to see a record with no context", "unlocks": "nothing"}
+      ],
+      "evidence": "data/content/signal_diagnostics_2026-11-19_d66245d4.json"
+    },
+    {
+      "id": "I02",
+      "title": "Correct the probability denominator before adding another strategy",
+      "problem": "Every probability on the site divides by 16.71 (game-margin sigma) when its own forecast error implies 18.30. Adding strategies on the current denominator multiplies a shared error.",
+      "options": [
+        {"option": "Add the measured residual scale to the probability and re-publish the affected probabilities with both values shown", "effort": "Medium — one function, then every surface that prints a probability", "risk": "Low — the change is transparent if both values are printed", "unlocks": "D02; makes D01 and D07 answerable"},
+        {"option": "Tune the gate threshold instead", "effort": "Low", "risk": "High — it treats a miscalibrated probability as a threshold problem and cannot fix the inverted ordering", "unlocks": "nothing"}
+      ],
+      "evidence": "data/content/signal_diagnostics_2026-11-19_d66245d4.json → residual_scale"
+    },
+    {
+      "id": "I03",
+      "title": "One build gate for cross-file agreement",
+      "problem": "Four quantities are published twice with different values (two S1 records, two strategy counts, one stale ledger, three wrong records). No existing gate compares published files to each other.",
+      "options": [
+        {"option": "A script that asserts every (entity, field) pair appearing in more than one published file agrees, wired into verify_all", "effort": "Medium — needs a map of which files may legitimately differ by timestamp", "risk": "Low — failures are the point", "unlocks": "D06; makes every other register trustworthy"},
+        {"option": "Fix the four instances by hand", "effort": "Low", "risk": "High — they recur on the next roll, which is how these four arrived", "unlocks": "D06 for one day"}
+      ],
+      "evidence": "data/content/verify_2026-11-19_d66245d4.json → flagged V-D66-01/02/03"
+    },
+    {
+      "id": "I04",
+      "title": "Stamp every line with the GP of its inputs and the injury edition age",
+      "problem": "A reader cannot tell from the picks page which lines rest on a superseded team table or a stale injury report; this pass found 3 of 26 lines stale by more than a point.",
+      "options": [
+        {"option": "Two extra columns on the picks page: gp_home/gp_away and 'injuries N revisions old'", "effort": "Low — both values are already in the files", "risk": "None", "unlocks": "D04, D05; makes staleness visible instead of flagged in a register"},
+        {"option": "Re-cut on every revision", "effort": "High — needs a fetch path from the sandbox that can reach the PDF host", "risk": "Medium", "unlocks": "D05 fully"}
+      ],
+      "evidence": "data/content/verify_2026-11-19_d66245d4.json → rows.reprice, injury"
+    },
+    {
+      "id": "I05",
+      "title": "Pre-register the retirement rule, not just the funding rule",
+      "problem": "The gates say what would fund a strategy and nothing about when to stop testing one. A gate set with only an entry condition will accumulate strategies faster than it can retire them, which is how 10 strategies ended up chasing 39 tickets.",
+      "options": [
+        {"option": "Add a registered retirement rule with a fixed n and a fixed statistic", "effort": "Low — one file, frozen before the next slate", "risk": "Low", "unlocks": "D07"},
+        {"option": "Keep the entry-only gate set", "effort": "None", "risk": "High — multiplicity grows with no mechanism to shrink it", "unlocks": "nothing"}
+      ],
+      "evidence": "data/derived/strategies.json → gates_definition"
+    }
+  ],
+  "how_to_use_this_register": "Each row above names the artifact that answers it. Nothing here should be implemented before a reviewer picks a path: the repository's standing rule is that suggestions are options, and the decision section exists so a path is chosen before code changes. I01-I05 are ordered by the size of the error they remove, not by the effort they take — I02 removes a bias that affects every number on the site, and it is not the cheapest."
+}
