@@ -45,6 +45,32 @@ class RefreshWorkflowTests(unittest.TestCase):
         for field in ("promotion step", "freshness step", "freshness gate `ok`", "settlement step"):
             self.assertIn(field, self.text)
 
+    def test_a_declaration_pass_is_surfaced_in_the_run_log(self):
+        """A green gate on a declaration must never look like a green gate on data."""
+        freshness = self.text.split("id: freshness", 1)[1].split("\n      - name:", 1)[0]
+        self.assertIn("_capture_gate_report.json", freshness)
+        self.assertIn("declarations_applied", freshness)
+        self.assertIn("::warning title=Gate passed by declaration::", freshness)
+
+    def test_the_declaration_register_is_staged_for_publication(self):
+        # If the bot cannot stage it, a live declaration could be silently
+        # reverted by the next automated commit and the gate would block again.
+        publish = self.text.split("name: Publish captures", 1)[1]
+        self.assertIn("data/raw/unreadable_sources.json", publish)
+        self.assertIn("data/raw/refresh_path_audit.json", publish)
+
+    def test_the_gate_step_cannot_fail_the_job_on_a_declaration_note(self):
+        """The gate keeps its own exit code out of the step's status.
+
+        The step must not become a silent pass: the rebuild still requires
+        `steps.freshness.outputs.ok == 'true'`, which only engine/refresh_gate.py
+        writes, and that is asserted separately below.
+        """
+        freshness = self.text.split("id: freshness", 1)[1].split("\n      - name:", 1)[0]
+        self.assertIn("exit 0", freshness)
+        build = self.text.split("id: build", 1)[1].split("\n      - name:", 1)[0]
+        self.assertIn("steps.freshness.outputs.ok == 'true'", build)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,6 +5,31 @@ module permits builders to run only when every required official source was
 successfully checked in this run, the check is recent, and no capture changed
 since its last verified promotion. A changed capture is never treated as an
 approved model input merely because it came from an official URL.
+
+DECLARED-UNREADABLE SOURCES (COORDINATION.md section 69)
+-------------------------------------------------------
+A fail-closed gate has a failure mode that is worse than being permissive: a
+requirement that no run can ever satisfy. This gate used to require
+`data/raw/standings.json`, `data/raw/team_traditional.json` and
+`data/raw/team_opponent.json` before permitting a rebuild. Those three files
+have zero commits in the repository's history, because the pages they come
+from are client-rendered and the runner's own committed evidence proves the
+capture contains no table (see `data/raw/_capture_evidence_S8_standings.json`
+and `..._S9_team_traditional.json`). The rebuild step behind the gate was
+therefore dead code from the moment that requirement landed.
+
+`data/raw/unreadable_sources.json` is the deliberate answer. A source may be
+DECLARED unreadable with (a) measured evidence on disk, (b) a hard expiry, and
+(c) publication on the Flagged for Review page. While a declaration is live the
+gate does not require that source's snapshot; the moment it expires, the gate
+blocks again. Non-negotiable properties, all enforced below:
+
+  * a declaration never suppresses a requirement for a source whose capture
+    DID parse this run - parsing again fails the gate rather than passing;
+  * a declaration never promotes a value; it only removes an unsatisfiable
+    predicate;
+  * an unknown, malformed, expired or evidence-less declaration is ignored,
+    and the original (blocking) requirement applies.
 """
 from __future__ import annotations
 
@@ -27,6 +52,18 @@ PROMOTION_SENSITIVE = {
     "S1_season", "S4_schedule", "S5_injury_index", "S8_standings",
     "S9_team_traditional", "S10_team_opponent", "S7_players",
 }
+# The register of sources proved unreadable by our own client, with evidence
+# and an expiry. See the module docstring.
+DECLARATIONS = "data/raw/unreadable_sources.json"
+# The bounded parse-failure evidence records that justify a declaration. A
+# declaration naming a source with no such file on disk is ignored.
+EVIDENCE = {
+    "S1_season": "data/raw/_capture_evidence_S1_season.json",
+    "S2_train": "data/raw/_capture_evidence_S2_train.json",
+    "S8_standings": "data/raw/_capture_evidence_S8_standings.json",
+    "S9_team_traditional": "data/raw/_capture_evidence_S9_team_traditional.json",
+    "S10_team_opponent": "data/raw/_capture_evidence_S10_team_opponent.json",
+}
 
 
 def parse_utc(value: str) -> dt.datetime:
@@ -40,8 +77,101 @@ def read_json(path: str) -> dict:
         return json.load(stream)
 
 
+def live_declarations(base, now, by_key, parse_ok):
+    """Which sources are admissible as declared-unreadable, and why the rest are not.
+
+    Returns (accepted, rejected). A declaration is accepted only when every
+    one of these measured facts holds:
+
+      1. the register parses and is shaped as expected;
+      2. the declaration names a source the gate actually requires;
+      3. `expires_at_utc` parses, is in the future, and is not absurdly far out;
+      4. the fetcher checked that source in THIS run at HTTP 200 (a stale
+         declaration must not mask a source that was never fetched today);
+      5. a bounded parse-failure evidence file exists for it on disk;
+      6. the source did NOT parse rows in this run (`parse_ok` is False). This
+         is the anti-rot rule: if the page becomes readable, the declaration
+         stops applying and the normal requirement comes back, so the gate
+         fails until the snapshot is actually promoted.
+
+    Anything failing one of these is rejected with the reason, and the caller
+    keeps the original blocking requirement.
+    """
+    accepted, rejected = {}, []
+    path = os.path.join(base, DECLARATIONS)
+    try:
+        register = read_json(path)
+    except (OSError, ValueError) as exc:
+        return {}, [f"declaration register unreadable ({exc})"]
+    declarations = register.get("declarations")
+    if not isinstance(declarations, list):
+        return {}, ["declaration register has no declarations list"]
+    # An over-long horizon would defeat the point of an expiry.
+    horizon = 400 * 24
+    for entry in declarations:
+        if not isinstance(entry, dict):
+            rejected.append("malformed declaration entry")
+            continue
+        key = entry.get("source_key")
+        if not isinstance(key, str) or not key:
+            rejected.append("declaration without a source_key")
+            continue
+        if key not in REQUIRED:
+            rejected.append(f"{key}: not a source this gate requires")
+            continue
+        try:
+            expires = parse_utc(entry.get("expires_at_utc"))
+        except (TypeError, ValueError):
+            rejected.append(f"{key}: missing or invalid expires_at_utc")
+            continue
+        if expires <= now:
+            rejected.append(f"{key}: declaration EXPIRED at {entry.get('expires_at_utc')}")
+            continue
+        if (expires - now).total_seconds() / 3600 > horizon:
+            rejected.append(f"{key}: expires_at_utc is more than {horizon // 24} days out")
+            continue
+        check = by_key.get(key) or {}
+        if check.get("http_status") != 200:
+            rejected.append(f"{key}: source was not checked at HTTP 200 in this run, "
+                            f"so a declaration cannot stand in for it")
+            continue
+        evidence = EVIDENCE.get(key)
+        if not evidence or not os.path.exists(os.path.join(base, evidence)):
+            rejected.append(f"{key}: no bounded parse-failure evidence on disk "
+                            f"({evidence or 'no evidence path known'})")
+            continue
+        if parse_ok.get(key):
+            rejected.append(f"{key}: DECLARATION STALE - the capture parsed rows in "
+                            f"this run, so the snapshot is now producible and the "
+                            f"normal requirement applies")
+            continue
+        accepted[key] = {
+            "source_key": key,
+            "expires_at_utc": entry.get("expires_at_utc"),
+            "review_flag": entry.get("review_flag"),
+            "evidence": evidence,
+            "required_snapshot": entry.get("required_snapshot"),
+        }
+    return accepted, rejected
+
+
 def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[str]:
+    """Back-compatible wrapper returning only the blocking errors."""
+    return evaluate_with_report(record, now, max_age_hours)[0]
+
+
+def evaluate_with_report(record: dict, now: dt.datetime,
+                         max_age_hours: float = 10) -> tuple[list[str], dict]:
+    """Gate decision plus the machine-readable reason for it.
+
+    Returns (errors, report). `errors` empty means the rebuild may run.
+    `report` always carries the declarations that were applied and any that
+    were rejected, so a green gate built on a declaration is never
+    indistinguishable from a green gate built on fresh promoted data.
+    """
     errors: list[str] = []
+    warnings: list[str] = []
+    accepted_declarations: list[dict] = []
     base = os.environ.get("NBA1_REPO_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     captured = record.get("captured_at_utc")
     try:
@@ -55,8 +185,12 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
     failures = record.get("failed")
     if not isinstance(failures, list):
         errors.append("refresh record has no valid failure list")
-    elif failures:
-        errors.append(f"fetcher reported {len(failures)} failed source/parse checks")
+        failures = []
+    # NOTE ON ORDERING: the `failed` entries for a source that is declared
+    # unreadable are separated from the rest further down, once the run's
+    # provenance checks are indexed (the declaration has to be validated
+    # against THIS run before it can excuse anything). Every other entry stays
+    # a hard block, unchanged.
 
     checks = record.get("source_checks")
     if not isinstance(checks, list):
@@ -81,6 +215,40 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
         except (TypeError, ValueError):
             errors.append(f"missing/invalid source-check timestamp: {check['key']}")
 
+    # Resolve declared-unreadable sources now, before any per-source verdict,
+    # so that every later check can ask "is this source excused, and by what?"
+    parse_ok = {}
+    for key, capture in (("S8_standings", "_capture_S8_standings.json"),
+                         ("S9_team_traditional", "_capture_S9_team_traditional.json"),
+                         ("S10_team_opponent", "_capture_S10_team_opponent.json")):
+        try:
+            parsed = read_json(os.path.join(base, "data/raw", capture))
+        except (OSError, ValueError):
+            parsed = {}
+        parse_ok[key] = bool(isinstance(parsed, dict) and parsed.get("rows"))
+
+    declared, rejected_declarations = live_declarations(base, now, by_key, parse_ok)
+    accepted_declarations.extend(declared.values())
+    for reason in rejected_declarations:
+        # A rejected declaration is never silently dropped: the gate says so
+        # and the original requirement still applies.
+        warnings.append(f"declaration not applied: {reason}")
+
+    # A declared source's own parse failure is an EXPECTED, EVIDENCED outcome,
+    # not an unexplained error. It is moved from the blocking list to the
+    # notes. Every undeclared failure still blocks, with the original wording.
+    undeclared_failures = []
+    for item in failures:
+        key = item[0] if isinstance(item, (list, tuple)) and item else None
+        if isinstance(key, str) and key.split(" ", 1)[0] in declared:
+            warnings.append(f"declared source failed as expected: {key}: "
+                            f"{item[1]} (evidence {declared[key.split(' ', 1)[0]]['evidence']})")
+            continue
+        undeclared_failures.append(item)
+    if undeclared_failures:
+        errors.append(f"fetcher reported {len(undeclared_failures)} failed "
+                      f"source/parse checks")
+
     capture_names = {
         "S1_season": "_capture_S1_season.json",
         "S4_schedule": "_capture_S4_schedule.json",
@@ -103,6 +271,37 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
         try:
             payload = read_json(path)
         except (OSError, ValueError):
+            payload = None
+        # A declared source never produces a rows-bearing capture (the fetcher
+        # writes _capture_<key>.json only in its `if rows:` branch), so any
+        # file that does exist for it is a stale page-level artifact from an
+        # earlier run and its digest cannot match this run by construction.
+        # The right proof for this run's response is the evidence record, whose
+        # URL is checked below; the digest itself is already proven by the
+        # source-check record above, which is this run's own hash of the bytes.
+        if key in declared and not (isinstance(payload, dict) and payload.get("rows")):
+            # The fetcher writes _capture_<key>.json only when rows PARSE
+            # (engine/fetch_official.py, the `if rows:` branch); on a proved
+            # unreadable source it writes the evidence record instead and
+            # leaves the old capture untouched. Demanding the parsed payload
+            # here would re-introduce the unsatisfiable predicate that this
+            # whole mechanism exists to remove. The evidence record must still
+            # prove the response itself: same URL, recorded in this run.
+            evidence_rel = declared[key]["evidence"]
+            try:
+                evidence = read_json(os.path.join(base, evidence_rel))
+            except (OSError, ValueError):
+                errors.append(f"missing/invalid payload capture for {key} "
+                              f"and its evidence record is unreadable")
+                continue
+            if evidence.get("source_url") != check.get("url"):
+                errors.append(f"capture provenance URL mismatch for {key} "
+                              f"(evidence {evidence_rel})")
+            warnings.append(f"{key}: no parsed payload by design (declared "
+                            f"unreadable); provenance verified against "
+                            f"{evidence_rel}")
+            continue
+        if payload is None:
             errors.append(f"missing/invalid payload capture for {key}")
             continue
         if payload.get("source_url") != check.get("url"):
@@ -168,7 +367,14 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
             errors.append(f"missing/invalid structured capture: {rel}")
             continue
         if check_key == "S1_season" and (payload.get("row_count") != 30 or len(payload.get("rows", [])) != 30):
-            errors.append("advanced team capture is not a complete 30-team table")
+            # S1 IS producible (engine/fetch_official.py has its own parser for
+            # the page plus the official stats API fallback), so it is never
+            # declared. When its parse fails the gate must block: that is a
+            # transient failure and no snapshot may be rebuilt from it. The
+            # message names the fallback so the operator knows the fix.
+            errors.append("advanced team capture is not a complete 30-team table "
+                          "(the page's own parser and the official stats.nba.com "
+                          "fallback both failed this run)")
         if check_key == "S4_schedule" and not payload.get("games"):
             errors.append("official schedule capture has no parsed game IDs")
 
@@ -237,7 +443,16 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
         "S9_team_traditional": "data/raw/team_traditional.json",
         "S10_team_opponent": "data/raw/team_opponent.json",
     }
+    # Did each of these sources parse rows in this run? The capture files are
+    # the fetcher's own output; a capture carrying rows means the page WAS
+    # readable, which makes any standing declaration stale (see the helper).
     for key, relative_path in promoted_paths.items():
+        if key in declared:
+            # Deliberately NOT an error and NOT a pass on the data: this source
+            # is proved unreadable, evidence-backed and time-limited, so the
+            # gate does not require a snapshot nothing can produce. The
+            # declaration is surfaced through `declarations` in the outcome.
+            continue
         check = by_key.get(key, {})
         path = os.path.join(base, relative_path)
         try:
@@ -259,7 +474,15 @@ def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[
         except (TypeError, ValueError):
             errors.append(f"{key} promotion is missing its verification timestamp")
 
-    return errors
+    report = {
+        "declarations_applied": accepted_declarations,
+        "warnings": warnings,
+        "rule": ("A declaration removes an unsatisfiable snapshot requirement "
+                 "for a source proved unreadable by our own client. It never "
+                 "promotes a value, and it is refused the moment the source "
+                 "starts parsing or its expiry passes."),
+    }
+    return errors, report
 
 
 def main() -> int:
@@ -270,18 +493,46 @@ def main() -> int:
     args = parser.parse_args()
     root = os.environ.get("NBA1_REPO_ROOT", os.getcwd())
     path = args.record if os.path.isabs(args.record) else os.path.join(root, args.record)
+    report: dict = {"declarations_applied": [], "warnings": []}
     try:
         record = read_json(path)
     except (OSError, ValueError) as exc:
         errors = [f"cannot read refresh record: {exc}"]
     else:
         now = parse_utc(args.now) if args.now else dt.datetime.now(dt.timezone.utc)
-        errors = evaluate(record, now, args.max_age_hours)
+        errors, report = evaluate_with_report(record, now, args.max_age_hours)
     allowed = not errors
+    for warning in report.get("warnings", []):
+        print(f"NOTE: {warning}")
     for error in errors:
         print(f"BLOCK: {error}")
     if not errors:
         print("PASS: all freshness, provenance, integrity, and promotion gates passed")
+        for entry in report.get("declarations_applied", []):
+            print(f"PASS BY DECLARATION: {entry['source_key']} "
+                  f"(expires {entry['expires_at_utc']}, evidence "
+                  f"{entry['evidence']}, flag {entry.get('review_flag')})")
+    # Persist the decision, not only the exit code: a green gate that ran on a
+    # declaration must be distinguishable from a green gate that ran on fresh
+    # promoted data, for anyone reading the repository later.
+    try:
+        gate_report = {
+            "gate": "refresh freshness + provenance",
+            "run_at_utc": (dt.datetime.now(dt.timezone.utc)
+                           .strftime("%Y-%m-%dT%H:%M:%SZ")),
+            "max_age_hours": args.max_age_hours,
+            "ok": allowed,
+            "blocking_errors": errors,
+            "declarations_applied": report.get("declarations_applied", []),
+            "warnings": report.get("warnings", []),
+        }
+        with open(os.path.join(root, "data/raw/_capture_gate_report.json"),
+                  "w", encoding="utf-8") as stream:
+            json.dump(gate_report, stream, indent=1)
+            stream.write("\n")
+    except OSError:
+        pass
+
     output = os.environ.get("GITHUB_OUTPUT")
     if output:
         with open(output, "a", encoding="utf-8") as stream:

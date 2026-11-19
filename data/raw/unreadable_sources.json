@@ -1,0 +1,74 @@
+{
+ "title": "Declared-unreadable official sources",
+ "session": "arena/f3cb4a98-nba1",
+ "board": "COORDINATION.md section 69",
+ "purpose": "A fail-closed gate needs a way to say 'this source cannot be read by our client, and here is the proof' without also saying 'therefore publish anyway'. This register records that declaration per source, with the measured evidence that justifies it and a hard expiry. engine/refresh_gate.py permits a rebuild while a declaration is live; the moment it expires the gate blocks again. Nothing here relaxes a requirement for a source that IS readable, and nothing here promotes any value: a declared source contributes no model input.",
+ "rule": "A declaration is admissible only if (a) the fetcher checked the source in the same run at HTTP 200, (b) a bounded parse-failure evidence record exists on disk, and (c) the promoted snapshot the gate would otherwise require has no commits in the repository's history (so the requirement is terminal rather than transient). Every field is measured by scripts/f3cb4a98_refresh_path_audit.py; none is typed by hand.",
+ "why_needed": "engine/refresh_gate.py requires data/raw/standings.json, data/raw/team_traditional.json and data/raw/team_opponent.json before the scheduled rebuild may run. Those three files have 0 commits across the repository's 884-commit history because the pages they come from are client-rendered: the runner's own committed evidence shows the captured standings page contains 0 <tr> rows and the captured traditional page contains 0 /stats/team/ links (only 12 date-picker rows). engine/promote_official.py writes those snapshots only when rows parse, so the requirement can never be met and the rebuild step behind it has been dead code since gate commit 25bfcea (2026-11-15T11:38Z) landed after the last successful rebuild at 12:43:11Z that same day.",
+ "does_not_change": [
+  "The three snapshots are still required once they are producible: the declaration is checked against live parse success every run, and a declared source whose capture begins to parse rows fails the gate rather than being skipped.",
+  "No value from a declared source is published, promoted, or used in a model. The declaration only stops a provably-unsatisfiable predicate from permanently disabling an otherwise-green rebuild.",
+  "Every declaration is published on the Flagged for Review page with its evidence links, so it is reviewable rather than invisible."
+ ],
+ "declarations": [
+  {
+   "source_key": "S8_standings",
+   "official_url": "https://www.nba.com/standings",
+   "required_snapshot": "data/raw/standings.json",
+   "reason": "The official standings page renders its table client-side. A web-client fetch returns the page shell: the committed capture evidence record measured <tr> = 0 and the /team/ and /game/ link indicators at 0, while the word 'standings' appears 107 times (navigation and tie-break prose only).",
+   "evidence": [
+    "data/raw/_capture_evidence_S8_standings.json",
+    "data/raw/_capture_S8_standings.json"
+   ],
+   "review_flag": "F1",
+   "declared_at_utc": "2026-11-19T07:20:00Z",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration; the gate will then require the snapshot normally.",
+   "consequence_if_wrong": "A rebuild could run without a fresh standings snapshot. Mitigated by: the snapshot is not consumed by engine/pipeline.py (measured: it loads team_advanced, games_completed, schedule_upcoming, injuries and players_traditional only), so no published value changes; and the declaration names the URL and evidence so the omission is visible on the Flagged for Review page."
+  },
+  {
+   "source_key": "S9_team_traditional",
+   "official_url": "https://www.nba.com/stats/teams/traditional",
+   "required_snapshot": "data/raw/team_traditional.json",
+   "reason": "The official traditional team table is also client-rendered: the committed evidence record measured /stats/team/ = 0 and <tr> = 12 (the date-picker chrome only), and the parser's own problems say 'no header row with a Team column found'.",
+   "evidence": [
+    "data/raw/_capture_evidence_S9_team_traditional.json",
+    "data/raw/_capture_S9_team_traditional.json"
+   ],
+   "review_flag": "F1",
+   "declared_at_utc": "2026-11-19T07:20:00Z",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration.",
+   "consequence_if_wrong": "A rebuild could run without a fresh traditional table. Mitigated by: not consumed by engine/pipeline.py; and the second read of the same numbers is the standings/advanced path, which is separately gated."
+  },
+  {
+   "source_key": "S10_team_opponent",
+   "official_url": "https://www.nba.com/stats/teams/opponent",
+   "required_snapshot": "data/raw/team_opponent.json",
+   "reason": "Same client-rendered page family as S9: the committed evidence record says 'html_table: no header row with a Team column found' and 'next_data: no team-table structure found in JSON'.",
+   "evidence": [
+    "data/raw/_capture_evidence_S10_team_opponent.json",
+    "data/raw/_capture_S10_team_opponent.json"
+   ],
+   "review_flag": "F1",
+   "declared_at_utc": "2026-11-19T07:20:00Z",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration.",
+   "consequence_if_wrong": "A rebuild could run without a fresh opponent table. Mitigated by: not consumed by engine/pipeline.py; the requirement brief's 'opponent' input is cited on the site from the last verified first-hand read, which is unchanged by this declaration."
+  }
+ ],
+ "not_declared": [
+  {
+   "source_key": "S1_season",
+   "why_not": "This one IS readable in some runs — engine/fetch_official.py parses the same page with its own parser and falls back to the official stats.nba.com API. The committed evidence record shows the API timed out on both attempts in this run, which is transient, not terminal. A timeout must block, and does."
+  },
+  {
+   "source_key": "S2_train",
+   "why_not": "Same transient timeout as S1_season; also not required by the gate."
+  },
+  {
+   "source_key": "S7_players",
+   "why_not": "Not required by the gate's promoted_paths block; its capture is evidence-only by design."
+  }
+ ]
+}

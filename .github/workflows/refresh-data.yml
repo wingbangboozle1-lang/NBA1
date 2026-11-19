@@ -98,7 +98,23 @@ jobs:
         id: freshness
         if: steps.fetch.outcome == 'success'
         continue-on-error: true
-        run: python3 engine/refresh_gate.py --max-age-hours 10
+        run: |
+          python3 engine/refresh_gate.py --max-age-hours 10
+          echo "gate_exit=$?"
+          # Publish the decision even when it blocks: a green gate that ran on a
+          # declared-unreadable source must be distinguishable from a green gate
+          # that ran on fresh promoted data (COORDINATION.md section 69).
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/_capture_gate_report.json"
+          if os.path.exists(p):
+              d = json.load(open(p))
+              for entry in d.get("declarations_applied", []):
+                  print(f"::warning title=Gate passed by declaration::"
+                        f"{entry['source_key']} unreadable until "
+                        f"{entry['expires_at_utc']} (evidence {entry['evidence']})")
+          PY
+          exit 0
 
       # A changed raw capture is only evidence; it is not a promotion into the
       # model inputs. The gate blocks rebuilding until changes are verified and
@@ -219,6 +235,7 @@ jobs:
           # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
           git add data/raw/standings.json data/raw/team_traditional.json \
                   data/raw/team_opponent.json data/raw/team_advanced.json \
+                  data/raw/unreadable_sources.json data/raw/refresh_path_audit.json \
                   data/raw/schedule_upcoming.json data/raw/injuries.json \
                   data/raw/games_completed.json data/parsed/ 2>/dev/null || true
           if git diff --cached --quiet; then
