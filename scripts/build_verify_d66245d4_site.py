@@ -19,6 +19,7 @@ Run:  python3 scripts/build_verify_d66245d4_site.py
 import importlib.util
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -301,18 +302,47 @@ def build_decision_register(bd):
                    "does not have, and the suggestions that would produce it.", "\n".join(body))
 
 
+def _rebase(html, depth):
+    """Rewrite a depth-1 page frame to another depth so one generated page can be published at
+    two paths without a second template.
+
+    The depth-1 frame uses "" for the repository root, "../" for site/, and a bare filename for
+    a sibling page in site/pages/. Published from live/ the root becomes "../", the site/
+    directory "../site/", and a sibling page "../site/pages/<name>".
+    """
+    up = "../" * (depth - 1)          # repo-root prefix at this depth
+    out = html
+    out = out.replace('href="../assets/', 'href="%ssite/assets/' % up)
+    out = out.replace('src="../assets/', 'src="%ssite/assets/' % up)
+    out = out.replace('href="../../', 'href="%s' % up)     # depth-1 root-relative link
+
+    def _sib(m):
+        return 'href="%ssite/pages/%s"' % (up, m.group(1))
+
+    out = re.sub(r'href="([a-z0-9\-]+\.html)"', _sib, out)
+    return out
+
+
 def main():
     bd = _bd()
-    pages = os.path.join(ROOT, "site", "pages")
-    os.makedirs(pages, exist_ok=True)
+    # Published from site/pages/ because page() renders a depth-1 frame (css ../assets/site.css,
+    # home ../../index.html, sibling pages by bare filename). A copy at live/ links to the same
+    # pages through its own depth so the nav entry works no matter which path a reader arrives
+    # by; both copies are generated here from the same source, so they cannot disagree.
     out = {
         "live-horizon.html": build_live_horizon(bd),
         "decision-register.html": build_decision_register(bd),
     }
-    for name, html in out.items():
-        with open(os.path.join(pages, name), "w", encoding="utf-8") as fh:
-            fh.write(html)
-        print("wrote site/pages/%s  (%d bytes)" % (name, len(html)))
+    dirs = [("site/pages", 1), ("live", 2)]
+    for d, depth in dirs:
+        outdir = os.path.join(ROOT, d)
+        os.makedirs(outdir, exist_ok=True)
+        for name, html in out.items():
+            if depth != 1:
+                html = _rebase(html, depth)
+            with open(os.path.join(outdir, name), "w", encoding="utf-8") as fh:
+                fh.write(html)
+            print("wrote %s/%s  (%d bytes)" % (d, name, len(html)))
     return 0
 
 
