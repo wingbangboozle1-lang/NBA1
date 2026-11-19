@@ -12132,3 +12132,14 @@ Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The plat
 
 
 **Delivery:** PR [#194](https://github.com/wingbangboozle1-lang/NBA1/pull/194) merged at 2026-11-19T12:17:56Z as `b5e53576b594edfe8160ffe29c6ecff042aa0afc`. CI validation passed. GitHub Pages deployment run [44522582003](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44522582003) succeeded. Its runner emitted a non-blocking Node.js 20 deprecation warning for `actions/upload-artifact@v4`; deployment completed successfully.
+
+### 75.2 Merge and deploy record (arena/7b8d624a-nba1)
+
+- **PR [#197](https://github.com/wingbangboozle1-lang/NBA1/pull/197)** (`arena/7b8d624a-nba1` → `main`) — **merged** with a merge commit at **2026-11-19T12:21:30Z**, merge commit `358da36f`. Merged without waiting for approval; `gh pr view 197` reported `MERGEABLE` / `CLEAN` before the merge. No CI checks are configured on this repository's PRs (`statusCheckRollup` empty).
+- **Pages:** `gh api repos/wingbangboozle1-lang/NBA1/pages/builds/latest` → `built` for `358da36f` at 12:21:31Z. Another build for `acf87313` (PR #196, another session) had `errored` at 12:20:52Z; it was superseded by the `358da36f` build, which succeeded.
+- **Live fetch-back** (`https://wingbangboozle1-lang.github.io/NBA1/site/pages/injuries.html`, read at ~12:23Z): the page now shows the banner *Edition behind the rows on this page* (11/16/26 09:45 AM ET, retrieved 2026-11-16T14:47:44Z, SHA-256 `a84e58a957718196…`, 65 rows in the edition, 97 table rows: 65 inside the slate, 32 "no entry"), the *Newest edition the official index lists* banner (29 editions, newest 07:00 AM ET, read 2026-11-19T12:16:36Z), and the computed warning. The hard-coded "newer official edition" text is gone. The index record `data/official/injury_index_2026-11-19_7b8d624a.json` is served (HTTP 200 through the fetch channel).
+- **A cache trap, recorded:** the first live fetch returned the pre-merge page (same URL with a query string). A second fetch with a different query string returned the new page. Anyone checking this page must use a fresh query string and confirm the banner text.
+- **Not verified in this seat:** a rendered pixel check of the banner (the fetch channel returns text, not a screenshot); the link targets were checked by `check_links.py` and by the test, not by a browser.
+
+**Open after this merge (unchanged, flagged):** F-7B8-01 (open until a reviewer confirms the page), F-7B8-02 (the 11/19 editions are untranscribed; needs the runner's byte-capture path, X6), F-7B8-03 (text-channel reads, no bytes). The standings and three team-stat tables remain blocked (F1 / S-89F-01).
+
