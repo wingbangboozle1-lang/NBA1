@@ -1938,6 +1938,15 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>None - fixed and pinned. Reviewers can confirm the rebuild step ran on run 44530780692 (job 135583204160 step list: fetch ✓ promote ✓ freshness ✓ rebuild ✓ settle ✓).</td>
 <td class="src"><span class="na" title="source id REFRESH_RUN_44530780692 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-70D-07</td>
+<td>Medium</td>
+<td><b>Two racing scheduled runs on one branch published a mixed capture/record tree</b></td>
+<td>The publish commit the refresh bot pushed to arena/70d0e760-nba1 (05c1e08, 2026-11-19) is internally inconsistent: its _last_refresh.json is one run's record (captured_at 08:09:58Z, build skipped) while its _capture_*.json files are a LATER run's (captured_at 13:21:55Z) whose own record never committed. Cause: two armed runs overlapped on the same branch while the refresh-official-global concurrency group let both publish (today's F-CA-04 churn, see S-70D-01). The commit is kept in history as evidence; the branch's data/raw surface was restored to main's coherent set (record captured_at 12:49:05Z with build_outcome success, digests matching its captures) so the gate verifies cleanly. Every capture regenerates on the next scheduled run.</td>
+<td>data/raw/_capture_*.json vs data/raw/_last_refresh.json consistency; any gate run against a mixed tree</td>
+<td>S-70D-01 (queue the concurrency group) removes the cause; a publish-side guard could also refuse to commit when the record's digests do not match the captures being staged.</td>
+<td class="src"><span class="na" title="source id GIT_COMMIT_05c1e08 is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

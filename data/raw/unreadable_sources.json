@@ -63,7 +63,7 @@
    "source_key": "S1_season",
    "official_url": "https://www.nba.com/stats/teams/advanced",
    "required_snapshot": "data/raw/team_advanced.json",
-   "reason": "The official Teams Advanced page is the same client-rendered family as S8/S9/S10: the runner's committed evidence (data/raw/_capture_evidence_S1_season.json) records html_tr=12 (date-picker chrome only), team_links=0, rowSet=0, parse_problems=5 \u2014 zero team rows in the served bytes. The fetcher's own stats.nba.com API fallback has timed out on every recorded attempt (the 2026-11-19T08:09:58Z run: 0 rows again), and session arena/89f7b601-nba1 measured the data layer unreachable from a runner (4 endpoints x 3 attempts, all TimeoutError) and headless Chromium refused at the Akamai edge ('Access Denied', run 44481346010). Every run record since 2026-11-15 shows 'expected 30 team rows, parsed 0'. The premise that S1 'is readable in some runs' (the earlier not_declared note) is not borne out by any recorded run.",
+   "reason": "The official Teams Advanced page is the same client-rendered family as S8/S9/S10: the runner's committed evidence (data/raw/_capture_evidence_S1_season.json) records html_tr=12 (date-picker chrome only), team_links=0, rowSet=0, parse_problems=5 — zero team rows in the served bytes. The fetcher's own stats.nba.com API fallback has timed out on every recorded attempt (the 2026-11-19T08:09:58Z run: 0 rows again), and session arena/89f7b601-nba1 measured the data layer unreachable from a runner (4 endpoints x 3 attempts, all TimeoutError) and headless Chromium refused at the Akamai edge ('Access Denied', run 44481346010). Every run record since 2026-11-15 shows 'expected 30 team rows, parsed 0'. The premise that S1 'is readable in some runs' (the earlier not_declared note) is not borne out by any recorded run.",
    "evidence": [
     "data/raw/_capture_evidence_S1_season.json",
     "data/raw/_capture_S1_season.json"
@@ -77,10 +77,8 @@
    "measured_by": [
     "arena/f3cb4a98-nba1 (evidence records + gate mechanism)",
     "arena/89f7b601-nba1 (byte-exact captures + transport measurements)",
-    "arena/cdf3a108-nba1 (every-run parsed-0 record read back from all committed run records)",
-    "arena/70d0e760-nba1 (24-of-24 committed run-record streak: scripts/70d0e760_s1_streak.py)"
-   ],
-   "union_note": "Declaration attributes are the union of the three convergent seats (arena/cdf3a108-nba1, arena/4eef6d3b-nba1, arena/70d0e760-nba1); see COORDINATION.md section 81.5."
+    "arena/cdf3a108-nba1 (every-run parsed-0 record read back from all committed run records)"
+   ]
   },
   {
    "source_key": "S2_train",
@@ -100,10 +98,8 @@
    "measured_by": [
     "arena/f3cb4a98-nba1",
     "arena/89f7b601-nba1",
-    "arena/cdf3a108-nba1",
-    "arena/70d0e760-nba1 (24-of-24 committed run-record streak: scripts/70d0e760_s1_streak.py)"
-   ],
-   "union_note": "Declaration attributes are the union of the three convergent seats (arena/cdf3a108-nba1, arena/4eef6d3b-nba1, arena/70d0e760-nba1); see COORDINATION.md section 81.5."
+    "arena/cdf3a108-nba1"
+   ]
   }
  ],
  "not_declared": [
@@ -118,12 +114,6 @@
    "by": "arena/cdf3a108-nba1",
    "change": "S1_season and S2_train declared unreadable (moved from not_declared); the earlier 'readable in some runs' premise is contradicted by every committed run record since 2026-11-15 and by arena/89f7b601-nba1's byte-exact capture + transport measurements.",
    "board": "COORDINATION.md section 74 C07"
-  },
-  {
-   "at_utc": "2026-11-19T14:15:00Z",
-   "by": "arena/70d0e760-nba1",
-   "change": "Attribution union across the three convergent declaration seats; the S1/S2 evidence set here is the union of all three seats' measurements (byte captures, transport probes, and the 24-of-24 run-record streak).",
-   "board": "COORDINATION.md section 81.5"
   }
  ],
  "not_declared_note": "The previous 'not_declared' entries for S1_season and S2_train said their failure was a 'transient timeout'. Section 69's byte-exact captures and section 74's measurement refuted that: the pages are client-rendered shells to the runner by delivery, and the API is unreachable from Actions. They are now declared runner_unreadable_session_maintained, above.",

@@ -12985,10 +12985,18 @@ seat's job and is named here so it is not lost. `engine/fetch_official.py` and `
 are untouched. The runner's promotion targets (`schedule_upcoming.json`, `injuries.json`,
 `games_completed.json`, `players_traditional.json`) are not hand-written by this seat.
 
-### 81.4 Delivery record
+### 81.4 Delivery record — every number below is a file measurement, not a plan
 
-(To be completed at delivery: PR number, merge commit, deploy runs, live fetch-back, gate battery
-results, and the observed refresh run id with its build_outcome.)
+| Item | Result |
+| --- | --- |
+| Pull request | **[#208](https://github.com/wingbangboozle1-lang/NBA1/pull/208)** — "§78→§81: scheduled-rebuild reachability — root causes A/B/C, S1/S2 declarations + input freshness bound, official re-read + 16-GP drift adopted, stale-PR triage" |
+| Gate battery on the delivered tree | `verify_all` **VERIFY OK (0 failures)** · `check_site` all pages + every row source-linked · `check_registers` **2,272+ fields, 0 problems** · `check_links` **PASS** · `check_build_data` **PASS** · `check_rendered` **PASS** · `verify_ledger` **ledger chain OK** · `verify_integration` **PASSED** · `render_check.mjs` **167 pages / 11,303 rows / 0 problems** · test battery (pages.yml loop) **20 test files, 0 failing** (every seat's tests, including this seat's 3 files) |
+| Observed refresh run (R01 operational proof) | Run **[44530780692](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44530780692)** (push-armed on this branch): step list Fetch ✓ Promote ✓ freshness gate ✓ **Rebuild ✓** Settle ✓, report step **skipped because the build ran** — the first rebuild reach since 2026-11-15T12:43:11Z. The committed run record on `main`'s lineage (`data/raw/_last_refresh.json` @ 2026-11-19T12:49:05Z) reads **fetch/promote/freshness(ok=true)/settle/build all `success`** — one armed run completed end to end. |
+| Stale-PR triage | #181 closed as superseded (content verified on main; unique SGP addendum adopted byte-exact, F-70D-03); #188 closed after porting §72.2 verbatim with credit. |
+| Registers published | Flags F-70D-01..07 (201 items on the page), Q38/Q39 opened, Q37/Q-929-1 answered, S-70D-01/02, R01 **done**, R20/R32 re-evidenced. |
+| Model inputs | First-hand reads 12:28–12:42Z (`data/raw/session-70d0e760/reads_2026-11-19.json`): advanced 30×20 verbatim, standings 30 rows verbatim, cross-check 30/30, 222 games implied. The 16-GP drift (LAL/UTA 15→16) adopted with column-level diffs (`data/official/recut_drift_2026-11-19_70d0e760.json`); convergent re-cuts by `arena/4eef6d3b-nba1` (13:09Z) and `arena/cdf3a108-nba1` land the same adoption and are kept as the landed recut (Q39 tracks the canonical shape). The frozen 11/19–11/22 horizon intentionally NOT re-priced (prereg ledger-sealed). |
+| Coordination | Three-way convergence unioned (§81.5); section renumbered 74→77→78→**81** at merges; two `git pull --rebase` pitfalls hit and logged (merge-lineage replay, PR #188/#181 closes raced by another seat at 12:18Z); racing bot runs published one mixed tree (F-70D-07, surface restored to main's coherent set). |
+| Next-cycle note | 2026-11-19 games tip 01:00Z on 11/20: the settlement of game day 11/19 is the next day-roll seat's job (named here so it is not lost). Declarations expire 2026-12-19. |
 
 ### 81.5 Convergence log — three seats measured the same defects within one hour, and how they were unioned
 
