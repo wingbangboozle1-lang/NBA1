@@ -1875,6 +1875,15 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>None - closed with evidence; record corrected here per the ground rule to record collisions.</td>
 <td class="src"><span class="na" title="source id gh pr view/diff/close (2026-11-19) is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-54B-01</td>
+<td>Medium</td>
+<td><b>The refresh-path audit counted git history with bare filenames (always 0) and its JSON was stale at publish time</b></td>
+<td>scripts/f3cb4a98_refresh_path_audit.py called `git log -- &lt;bare filename&gt;` from the repository root, so every history count read 0 for files that live under data/raw/ - `terminal_gate_requirement` therefore degenerated to `required_by_gate` and would have called ANY required-but-present snapshot 'terminal' the moment one was missing from a checkout. The published data/raw/refresh_path_audit.json (and the site's refresh-path page built from it) was also stale: built 2026-11-19T07:22:45Z by arena/f3cb4a98-nba1, it still showed three declared sources after arena/cdf3a108-nba1's register extended S1_season and S2_train. Fixed in this PR (arena/54bd21d2-nba1, section 79): repo-relative paths, a terminal-capture-requirement classification for never-produced capture files (S1_season/S2_train), and the audit regenerated from the current register. Open until a reviewer confirms the live refresh-path page shows five declared sources and truthful per-source history counts.</td>
+<td>site/pages/refresh-path.html (data/raw/refresh_path_audit.json)</td>
+<td>Re-run python3 scripts/f3cb4a98_refresh_path_audit.py after any register change and rebuild the dashboard; both are done in this PR.</td>
+<td class="src"><span class="na" title="source id git history measurement in session arena/54bd21d2-nba1 (section 79): git log --all -- data/raw/_capture_S1_season.json = 0 commits across 943; data/raw/refresh_path_audit.json built_at_utc 2026-11-19T07:22:45Z while data/raw/unreadable_sources.json already declared five sources is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
