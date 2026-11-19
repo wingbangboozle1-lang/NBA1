@@ -7390,3 +7390,20 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+## 🔑 ACTIVE CLAIM — session `arena/39b70241-nba1` (opened 2026-11-19 05:4x UTC — game-day rollover: settle 11/17 + 11/18 from official finals, roll horizon to 11/19–11/22 (today + 3 days), re-read standings/three team-stat pages/newest injury edition, freeze prereg before tip, refresh registers, gates, delivery)
+
+Branch `arena/39b70241-nba1`, based on `main` `b3b19f2` (merge of PR #169). Platform-pinned branch; `session-<id>/<task>` naming satisfied by this single pre-named branch (deviation logged, as every prior session logged it).
+
+**Board read before claiming (2026-11-19 05:4x UTC):** §0 ground rules, §0b registry, tail records §63–§65, `gh pr list` (one open: #166 `arena/84264db0-nba1`, opened 2026-11-17 16:04Z, idle >37 h, CONFLICTING/UNKNOWN — owner session §63; per ground rule 5 it is >60 min idle with no commits, but its scope (flagged-page repr fix + register-schema gate) is small and disjoint; this session will NOT edit its branch, will note disposition here, and will not duplicate its fix), `gh run list` (last Refresh official data success ~6 h ago), Pages API (`built`, legacy). Baseline `scripts/verify_all.py` on this branch: **FAILURES: 0 / VERIFY OK**.
+
+| ID | Task | Status | File scope (exclusive) |
+|----|------|--------|------------------------|
+| Y01 | Board read, claim committed+pushed before any other edit | in progress | COORDINATION.md §66 |
+| Y02 | First-hand official re-read: 11/17 + 11/18 finals (date, teams, final, quarter scores), 11/19–11/22 schedule, standings, three team-stat pages, newest injury edition | pending | data/official/results_feed_2026-11-19_*.json, data/official/schedule_2026-11-19_to_22.json, data/official/standings_2026-11-19*.json, data/official/teams_{traditional,opponent,advanced}_2026-11-19*.json, data/official/injury_2026-11-19*.json, verify/2026-11-19-39b70241/** |
+| Y03 | Settle 11/17 + 11/18 slates from official finals; ledger hash verify; settlement stamps | pending | data/settlement/settlement_2026-11-17.json, data/settlement/settlement_2026-11-18.json, data/ledger/ledger.json (append only), site/pages/settlement.html (via builder) |
+| Y04 | Roll horizon to 11/19–11/22 (today + up to 3 days): re-originate lines (measured HCA pin, possessions×PPP total, disagreement headline), generate gated picks, freeze prereg before tip | pending | data/derived/horizon_lines.json, data/derived/horizon_picks.json, data/prereg/**, scripts/originate_horizon_39b70241.py (new), scripts/generate_picks.py (window only if needed) |
+| Y05 | Refresh registers + executive summary on measured evidence; add flags for anything unconfirmed | pending | data/content/requirements.json, data/content/flagged.json, data/content/questions.json, data/content/suggestions.json, EXECUTIVE_SUMMARY.md, README.md, REPO_REVIEW.md (via builders) |
+| Y06 | Gates (verify_all, check_site, verify_ledger, check_links), PR → main, merge without waiting, Pages fetch-back, record here | pending | whole-branch integration |
+
+**Boundaries:** `docs/**`, `command-center/**` (other builds, read-only), PR #166's branch (disposition noted, not edited), Pages `build_type` flip (owner setting). R16 stays blocked: no NBA-operated closing-line source exists; nothing fabricated.
