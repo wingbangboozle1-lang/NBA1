@@ -5,6 +5,21 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/eec70f24-nba1` (opened 2026-11-19 UTC — day-roll settlement cycle: first-hand official finals for 2026-11-17 and 2026-11-18, results-feed rows with quarter scores, settlement of the sealed 11/17 pre-tip archive from those finals, ledger append + verification, gate battery, PR → `main` → merge → Pages)
+
+Branch `arena/eec70f24-nba1`, base `main` `b3b19f2` (0 commits behind origin/main at claim time; no open PRs; last scheduled refresh `44416340578` success).
+
+**Task Z01 — official finals + results feed, 11/17 and 11/18.** Status: in progress.
+- Files claimed: `data/official/results_2026-11-17.json`, `data/official/results_2026-11-18.json` (new), `data/official/results_feed_2026_27.json` (append only), `data/raw/_capture_results_2026-11-1{7,8}.json` (read-only reference).
+- Source: https://www.nba.com/games?date=2026-11-17 , https://www.nba.com/games?date=2026-11-18 and each game's official page `https://www.nba.com/game/<slug>` (LINESCORES for quarter scores).
+
+**Task Z02 — settle 2026-11-17 slate from official finals; ledger append.** Status: in progress, depends on Z01.
+- Files claimed: `data/settlement/settlement_2026-11-17.json` (new), `data/ledger/ledger.json` (append two entries via `scripts/settle_slate.py`, never rewrite).
+
+**Task Z03 — gate battery + Pages delivery.** Files: `site/**` build output only through the existing build scripts; `COORDINATION.md` (this section).
+
+Sessions with overlapping scope: none live. Earlier claims (§62–§65) are all >24 h old and closed or superseded.
+
 ## ✅ CLAIM CLOSED — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC, **delivered 2026-11-17 16:4xZ via [PR #167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) + [PR #168](https://github.com/wingbangboozle1-lang/NBA1/pull/168)** — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
 
 Branch `arena/ca442d3d-nba1`, based on `main` `22d56af` (merge of PR #160 — the tip at claim
