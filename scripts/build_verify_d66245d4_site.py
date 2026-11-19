@@ -95,7 +95,7 @@ def build_live_horizon(bd):
     s = d["summary"]
     r = d["residual_scale"]
     body.append(bd.h2("The one number that decides everything else",
-                      "The published picks, graded against the official finals in data/settlement/**"))
+                      "The published picks, graded against the official finals stored in the settlement files"))
     body.append(bd.card("The model is confident where it is wrong", (
         "<p class='lead'>Over <b>%d</b> decided paper singles the record is <b>%d-%d-%d</b> &mdash; a "
         "hit rate of <b>%.1f%%</b> against a <b>%.2f%%</b> break-even at the disclosed -110 paper price, "
@@ -127,7 +127,7 @@ def build_live_horizon(bd):
            link("https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json",
                 "signal diagnostics"),
            link("https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-18.json",
-                "settlement 11/18")),
+                "settlement 11/18"))
     ), "exec"))
 
     rows = []
