@@ -1,0 +1,118 @@
+name: Capture official stats bytes (89f7b601)
+
+# Session arena/89f7b601-nba1, COORDINATION.md §69 (T02).
+#
+# The agent sandbox reaches only github.com / npm / pypi, so www.nba.com and
+# stats.nba.com cannot be read as bytes there (measured: `curl` returns
+# http_code 000 for both).  The five page parsers the scheduled refresh runs
+# return 0 rows while the fetches return HTTP 200 and ~294 KB bodies, so the
+# repair has to be developed against the *delivered bytes*, not a recollection.
+# This workflow puts that capture on a runner and commits the content-addressed
+# artifacts back to this session's branch.
+#
+# Deliberately narrow:
+#   * runs only on this session's branch, only when this file or the capture
+#     script changes - it cannot arm itself in a loop, and another session's
+#     push cannot arm it;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it writes only data/raw/session-89f7b601/** and commits nothing else;
+#   * the script refuses any host outside the four official ones;
+#   * a partial capture exits 3 and the job stays red, so "success" always
+#     means every endpoint produced bytes.
+
+on:
+  push:
+    branches: [arena/89f7b601-nba1]
+    paths:
+      - scripts/capture_official_89f7b601.py
+      - .github/workflows/capture-official-89f7b601.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official-89f7b601
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: arena/89f7b601-nba1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Capture the five failing official sources byte-exact
+        id: cap
+        continue-on-error: true
+        run: python3 scripts/capture_official_89f7b601.py
+
+      - name: Record what was delivered (counts only, no values)
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/session-89f7b601/capture_manifest.json"
+          if not os.path.exists(p):
+              print("::warning::no capture manifest was written")
+              raise SystemExit(0)
+          m = json.load(open(p))
+          for r in m["results"]:
+              st = r.get("status")
+              if st == "stored":
+                  s = r.get("structure", {})
+                  print(f"STORED {r['name']:<22} {r['bytes']:>8} B  "
+                        f"tr={s.get('html_tr_elements')} "
+                        f"teamlinks={s.get('team_links')} "
+                        f"next={s.get('next_data_script')} "
+                        f"resultSets={s.get('resultSets')} "
+                        f"kind={r.get('content_type_guess')}")
+              else:
+                  errs = [a.get("error") or a.get("http_status") for a in r.get("attempts", [])]
+                  print(f"MISSING {r['name']:<22} {errs}")
+          PY
+
+      - name: Commit the captured bytes back to this branch
+        if: always()
+        run: |
+          set -eu
+          if [ -z "$(git status --porcelain data/raw/session-89f7b601)" ]; then
+            echo "nothing captured"
+            exit 0
+          fi
+          git config user.name  "nba1-capture-bot"
+          git config user.email "nba1-capture-bot@users.noreply.github.com"
+          git add data/raw/session-89f7b601
+          git commit -m "89f7b601 capture: byte-exact official bodies for the five unparsed sources [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin arena/89f7b601-nba1 && git push origin HEAD:arena/89f7b601-nba1; then
+              exit 0
+            fi
+            sleep $((i*5))
+          done
+          echo "could not push the capture after 5 attempts"
+          exit 1
+
+      - name: Fail the job when any endpoint was not captured
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          p = "data/raw/session-89f7b601/capture_manifest.json"
+          if not os.path.exists(p):
+              print("no manifest"); sys.exit(1)
+          m = json.load(open(p))
+          bad = [r["name"] for r in m["results"] if r.get("status") != "stored"]
+          print("captured", len(m["results"]) - len(bad), "of", len(m["results"]))
+          if bad:
+              print("::error::endpoints not captured:", ", ".join(bad))
+              sys.exit(1)
+          PY
