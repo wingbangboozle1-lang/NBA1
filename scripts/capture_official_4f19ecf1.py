@@ -68,6 +68,16 @@ import capture_official_ca442d3d as base  # noqa: E402  (host allowlist + store)
 # below therefore writes under data/raw/session-4f19ecf1/ and nothing else.
 base.OUT_ROOT = SESSION_DIR
 
+# Measured defect in the shared template (this session, 2026-11-19T06:0xZ, on
+# the captured 11/17 scoreboard bytes): the official cards print the status as
+# uppercase "FINAL" and base.FINAL_RE ("\bFinal(?:/OT\d*)?\b") is case-
+# sensitive, so parse_scoreboard reported 0 of 5 (11/17) and 0 of 12 (11/18)
+# games as Final while the same cards print "Knicks - FINAL Raptors -".
+# The template script is left unchanged (it is the closed claim's record);
+# this session's capture matches case-insensitively. Logged as F-4F19-01.
+import re as _re  # noqa: E402
+base.FINAL_RE = _re.compile(r"\bFinal(?:/OT\d*)?\b", _re.I)
+
 import fetch_official as fo  # noqa: E402  (index-driven injury capture, engine)
 
 
@@ -135,32 +145,146 @@ def capture_gamebooks(dates, manifest):
             time.sleep(1.2)
 
 
-def capture_injury_editions(manifest):
-    """Archive every unarchived edition of 2026-11-17..19 listed on the index.
+def probe_clock_grid():
+    """Archive editions the index no longer lists, by probing the league's own
+    publication clock.
 
-    engine/fetch_official.capture_injury is called directly so the canonical
-    archive naming, sidecar schema and probe record stay exactly the ones the
-    scheduled refresh writes (PR #170's promotion path reads those). The
-    engine caps 10 new editions per call; this driver loops until the index is
-    exhausted for the three dates or the pass bound is hit, then writes one
-    MERGED probe record (newest edition first) so promote_injuries sees the
-    true newest archived edition rather than the last pass's.
+    MEASURED (2026-11-19): the official index page lists only the *current*
+    day's editions — on 2026-11-17T16:36Z the engine's capture recorded 47
+    listed editions, all of them 2026-11-17 (12:00 AM -> 11:30 AM ET), and the
+    2026-11-19T06:00Z fetch listed 4, all 2026-11-19 (12:00 AM -> 12:45 AM).
+    The 11/17-afternoon and 11/18 series are therefore not discoverable from
+    the index any more. What IS known from the archive itself (114 archived
+    editions across 2026-11-15..17 and 2026-11-19): the league files at
+    15-minute intervals around the clock on game days. Each candidate label on
+    that grid is probed exactly once and the outcome recorded — HTTP 200 bytes
+    are stored content-addressed (identical re-downloads write nothing);
+    anything else is recorded as "unavailable at capture time", which is never
+    proof of absence. Discovery provenance is recorded in the probe record
+    (``listed_on_official_index`` stays false for grid probes), not guessed.
     """
-    raw = fo.get(INJURY_INDEX_URL, timeout=45)
-    text = fo.as_text(raw)
+    import hashlib
+    import urllib.error
+
+    def labels_for(day, start_h, start_m, end_h, end_m):
+        out = []
+        h, m = start_h, start_m
+        while (h, m) <= (end_h, end_m):
+            ampm = "AM" if h < 12 else "PM"
+            hh = h % 12 or 12
+            out.append("Injury-Report_%s_%02d_%02d%s.pdf" % (day, hh, m, ampm))
+            m += 15
+            if m == 60:
+                h, m = (h + 1) % 24, 0
+        return out
+
+    # Grid windows: 11/17 from the 11:45 AM ET point the archive stops at,
+    # through 11:45 PM; 11/18 the full day; 11/19 12:00 AM -> 2:00 AM (the
+    # run happens in the small hours ET; anything later is the scheduled job's).
+    candidates = []
+    candidates += labels_for("2026-11-17", 11, 45, 23, 45)
+    candidates += labels_for("2026-11-18", 0, 0, 23, 45)
+    candidates += labels_for("2026-11-19", 0, 0, 2, 0)
+
+    archived = set()
+    if os.path.isdir(fo.INJURY_PDF_DIR):
+        for fn in os.listdir(fo.INJURY_PDF_DIR):
+            if fn.endswith(".pdf"):
+                archived.add(fn[:-4].split("__")[0] + ".pdf")
+
+    results = []
+    todo = [e for e in candidates if e not in archived]
+    log("injury clock-grid probe: %d candidates (%d already archived), %d to probe"
+        % (len(candidates), len(archived & set(candidates)), len(todo)))
+    for edition in todo:
+        url = fo.INJURY_HOST + edition
+        rec = {"edition": edition, "url": url, "http_status": None,
+               "bytes": 0, "sha256": None, "attempts": 0,
+               "listed_on_official_index": False,
+               "discovered_via": ("clock-grid probe (league files at 15-minute "
+                                  "intervals; see manifest clock_grid note)")}
+        for attempt in (1, 2):
+            rec["attempts"] = attempt
+            try:
+                raw = fo.get(url, timeout=30)
+                rec["http_status"] = 200
+                rec["bytes"] = len(raw)
+                rec["sha256"] = hashlib.sha256(raw).hexdigest()
+                rec["pdf_valid"] = b"%PDF-" in raw[:1024]
+                if not rec["pdf_valid"]:
+                    rec["error"] = "HTTP 200 response did not contain a PDF signature"
+                    log("  %s: invalid PDF response; not stored" % edition)
+                    break
+                os.makedirs(fo.INJURY_PDF_DIR, exist_ok=True)
+                stem = "%s__%s" % (edition[:-4], rec["sha256"])
+                pdf_path = os.path.join(fo.INJURY_PDF_DIR, stem + ".pdf")
+                meta_path = os.path.join(fo.INJURY_PDF_DIR, stem + ".json")
+                if not os.path.exists(pdf_path):
+                    with open(pdf_path, "wb") as fh:
+                        fh.write(raw)
+                if not os.path.exists(meta_path):
+                    with open(meta_path, "w", encoding="utf-8") as fh:
+                        json.dump({"edition": edition, "source_url": url,
+                                   "retrieved_at_utc": now_utc(),
+                                   "bytes": len(raw),
+                                   "sha256": rec["sha256"],
+                                   "content_type": "application/pdf"},
+                                  fh, indent=2)
+                rec["artifact_path"] = os.path.relpath(pdf_path, ROOT).replace(os.sep, "/")
+                log("  %s: 200, %d PDF bytes" % (edition, len(raw)))
+                break
+            except urllib.error.HTTPError as exc:
+                rec["http_status"] = exc.code
+                log("  %s: HTTP %s (attempt %d)" % (edition, exc.code, attempt))
+                if exc.code in (403, 429) and attempt == 1:
+                    time.sleep(8)
+                    continue
+                break
+            except Exception as exc:  # noqa: BLE001
+                rec["error"] = "%s: %s" % (type(exc).__name__, exc)
+                log("  %s: %s" % (edition, rec["error"]))
+                break
+        results.append(rec)
+        time.sleep(1.5)
+    return results
+
+
+def capture_injury_editions(manifest):
+    """Archive every unarchived edition of 2026-11-17..19 the official index
+    lists (engine path), then probe the league's clock grid for the editions
+    the index no longer lists (see probe_clock_grid).
+
+    engine/fetch_official.capture_injury is called for the index-driven part so
+    the canonical archive naming, sidecar schema and probe record stay exactly
+    the ones the scheduled refresh writes (PR #170's promotion path reads
+    those). The engine caps 10 new editions per call; this driver loops until
+    the index is exhausted or the pass bound is hit. Both sources are then
+    merged into ONE probe record sorted newest-edition-first, so
+    promote_injuries sees the true newest archived edition rather than the last
+    pass's.
+    """
+    # Keep the index page bytes as evidence of what the league lists today.
+    irec = base.fetch_recorded(INJURY_INDEX_URL, "html", "injury_index",
+                               compress=True)
+    irec.pop("_raw", None)
+    text = fo.as_text(fo.get(INJURY_INDEX_URL, timeout=45))
     editions = fo.parse_injury_index(text)
-    # Edition filenames keep hyphens in the date part:
-    # Injury-Report_2026-11-17_11_30AM.pdf (pinned by engine/fetch_official's
-    # name_re and by every archived file in data/raw/injury_pdfs/).
     wanted = [e for e in editions
-              if any(f"Injury-Report_{d}_" in e for d in INJURY_DATES)]
-    log(f"injury index: {len(editions)} editions listed, "
-        f"{len(wanted)} for {', '.join(INJURY_DATES)}")
+              if any(("Injury-Report_%s_" % d) in e for d in INJURY_DATES)]
+    log("injury index: %d editions listed, %d for %s"
+        % (len(editions), len(wanted), ", ".join(INJURY_DATES)))
     manifest["injury_index"] = {
         "url": INJURY_INDEX_URL,
+        "page_stored": irec.get("stored"),
+        "page_sha256": irec.get("sha256"),
         "editions_listed": len(editions),
         "editions_wanted_dates": len(wanted),
         "newest_listed": editions[0] if editions else None,
+        "note": ("MEASURED: the index lists only the current day's editions "
+                 "(47 listed on 2026-11-17T16:36Z, all 2026-11-17; 4 listed on "
+                 "2026-11-19T06:00Z, all 2026-11-19). Earlier series are "
+                 "probed from the league's 15-minute clock grid - see the "
+                 "manifest's clock_grid block."),
     }
 
     all_results = []
@@ -169,21 +293,23 @@ def capture_injury_editions(manifest):
         results = fo.capture_injury(now_utc(), changed, failed, editions)
         fresh = [r for r in results if r.get("artifact_path")]
         all_results.extend(results)
-        log(f"injury pass {p}: {len(results)} attempted, "
-            f"{len(fresh)} stored (cap 10 new per pass)")
+        log("injury index pass %d: %d attempted, %d stored (cap 10 new per pass)"
+            % (p, len(results), len(fresh)))
         if len(results) < 10:
             break
         time.sleep(2.0)
 
-    # Merge with the archive so the probe record's results[0] is the newest
-    # edition actually stored (promote_injuries takes results[0]).
+    grid = probe_clock_grid()
+    all_results.extend(grid)
+
+    # Merge so the probe record's results[0] is the newest edition actually
+    # stored (promote_injuries takes results[0]).
     def ed_key(name):
-        import re
-        m = re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)", name)
+        m = _re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)", name)
         if not m:
             return (name, 0)
         y, mo, d, hh, mm, ampm = m.groups()
-        return (f"{y}-{mo}-{d}",
+        return ("%s-%s-%s" % (y, mo, d),
                 (int(hh) % 12 + (12 if ampm == "PM" else 0)) * 100 + int(mm))
 
     seen, merged = set(), []
@@ -202,10 +328,10 @@ def capture_injury_editions(manifest):
         "editions_listed_on_index": len(editions),
         "newest_listed": editions[0] if editions else None,
         "editions_already_archived": archived,
-        "method": ("index-driven (engine/fetch_official.capture_injury), "
-                   "looped past the per-pass cap by session driver "
-                   "arena/4f19ecf1-nba1 so the 2026-11-17..19 series is "
-                   "archived in full; records merged newest-edition-first"),
+        "method": ("index-driven (engine/fetch_official.capture_injury, looped "
+                   "past the per-pass cap) plus a 15-minute clock-grid probe for "
+                   "the earlier series the index no longer lists; records merged "
+                   "newest-edition-first; session driver arena/4f19ecf1-nba1"),
         "note": ("HTTP status only. 403 from ak-static.cms.nba.com is recorded "
                  "as unavailable at capture time, never as proof of absence."),
     }
@@ -218,14 +344,24 @@ def capture_injury_editions(manifest):
     manifest["injury_editions"] = {
         "attempted": len(merged),
         "stored_ok": len(stored),
-        "non_200": [{"edition": r["edition"], "http_status": r.get("http_status")}
-                    for r in merged if r.get("http_status") != 200],
+        "non_200_count": sum(1 for r in merged if r.get("http_status") != 200),
+        "non_200_sample": [{"edition": r["edition"], "http_status": r.get("http_status")}
+                           for r in merged if r.get("http_status") != 200][:20],
         "newest_stored": stored[0]["edition"] if stored else None,
         "changed": changed,
         "failed": failed,
     }
-    log(f"injury archive: {len(stored)} editions stored OK, "
-        f"newest {stored[0]['edition'] if stored else None}")
+    manifest["clock_grid"] = {
+        "rule": ("quarter-hourly labels, measured from 114 archived editions "
+                 "across 2026-11-15..17 and 2026-11-19 and from the 47-edition "
+                 "index listing on 2026-11-17"),
+        "probe_results": {
+            "200": sum(1 for r in grid if r.get("http_status") == 200),
+            "other": sum(1 for r in grid if r.get("http_status") != 200),
+        },
+    }
+    log("injury archive: %d editions stored OK across both sources, newest %s"
+        % (len(stored), stored[0]["edition"] if stored else None))
 
 
 def main() -> int:
