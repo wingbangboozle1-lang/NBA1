@@ -1,0 +1,381 @@
+{
+  "session": "arena/232a9f86-nba1",
+  "checks": {
+    "horizon": {
+      "horizon_games": 26,
+      "official_games_in_window": 26,
+      "matched": 26,
+      "unmatched": 0,
+      "official_games_missing_from_horizon": [],
+      "unmatched_rows": [],
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-19",
+        "https://www.nba.com/games?date=2026-11-20",
+        "https://www.nba.com/games?date=2026-11-21",
+        "https://www.nba.com/games?date=2026-11-22"
+      ]
+    },
+    "results_feed_quarters": {
+      "rows": 17,
+      "bad": 0,
+      "details": [
+        {
+          "date": "2026-11-17",
+          "game_id": "0022600253",
+          "status": "FINAL",
+          "away_pts": 111,
+          "home_pts": 102,
+          "away_quarters": [
+            23,
+            31,
+            26,
+            31
+          ],
+          "home_quarters": [
+            29,
+            21,
+            33,
+            19
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-17",
+          "game_id": "0022600254",
+          "status": "FINAL",
+          "away_pts": 105,
+          "home_pts": 106,
+          "away_quarters": [
+            17,
+            31,
+            31,
+            26
+          ],
+          "home_quarters": [
+            29,
+            20,
+            30,
+            27
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-17",
+          "game_id": "0022600255",
+          "status": "FINAL",
+          "away_pts": 105,
+          "home_pts": 93,
+          "away_quarters": [
+            26,
+            29,
+            23,
+            27
+          ],
+          "home_quarters": [
+            33,
+            21,
+            18,
+            21
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-17",
+          "game_id": "0022600256",
+          "status": "FINAL",
+          "away_pts": 114,
+          "home_pts": 118,
+          "away_quarters": [
+            34,
+            32,
+            28,
+            17,
+            3
+          ],
+          "home_quarters": [
+            30,
+            29,
+            22,
+            30,
+            7
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-17",
+          "game_id": "0022600257",
+          "status": "FINAL",
+          "away_pts": 132,
+          "home_pts": 107,
+          "away_quarters": [
+            35,
+            23,
+            30,
+            44
+          ],
+          "home_quarters": [
+            29,
+            33,
+            24,
+            21
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600258",
+          "status": "FINAL",
+          "away_pts": 124,
+          "home_pts": 121,
+          "away_quarters": [
+            30,
+            41,
+            29,
+            24
+          ],
+          "home_quarters": [
+            37,
+            35,
+            27,
+            22
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600259",
+          "status": "FINAL",
+          "away_pts": 119,
+          "home_pts": 104,
+          "away_quarters": [
+            39,
+            23,
+            31,
+            26
+          ],
+          "home_quarters": [
+            28,
+            18,
+            30,
+            28
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600260",
+          "status": "FINAL",
+          "away_pts": 130,
+          "home_pts": 137,
+          "away_quarters": [
+            23,
+            25,
+            38,
+            44
+          ],
+          "home_quarters": [
+            34,
+            40,
+            38,
+            25
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600261",
+          "status": "FINAL",
+          "away_pts": 121,
+          "home_pts": 116,
+          "away_quarters": [
+            27,
+            37,
+            28,
+            29
+          ],
+          "home_quarters": [
+            40,
+            29,
+            28,
+            19
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600262",
+          "status": "FINAL",
+          "away_pts": 137,
+          "home_pts": 107,
+          "away_quarters": [
+            37,
+            39,
+            35,
+            26
+          ],
+          "home_quarters": [
+            21,
+            30,
+            26,
+            30
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600263",
+          "status": "FINAL",
+          "away_pts": 103,
+          "home_pts": 99,
+          "away_quarters": [
+            29,
+            20,
+            29,
+            25
+          ],
+          "home_quarters": [
+            23,
+            24,
+            32,
+            20
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600264",
+          "status": "FINAL",
+          "away_pts": 122,
+          "home_pts": 109,
+          "away_quarters": [
+            31,
+            36,
+            25,
+            30
+          ],
+          "home_quarters": [
+            31,
+            29,
+            26,
+            23
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600265",
+          "status": "FINAL",
+          "away_pts": 117,
+          "home_pts": 112,
+          "away_quarters": [
+            31,
+            33,
+            19,
+            34
+          ],
+          "home_quarters": [
+            29,
+            22,
+            32,
+            29
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600266",
+          "status": "FINAL",
+          "away_pts": 101,
+          "home_pts": 105,
+          "away_quarters": [
+            30,
+            31,
+            19,
+            21
+          ],
+          "home_quarters": [
+            24,
+            25,
+            31,
+            25
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600267",
+          "status": "FINAL",
+          "away_pts": 94,
+          "home_pts": 116,
+          "away_quarters": [
+            25,
+            24,
+            23,
+            22
+          ],
+          "home_quarters": [
+            35,
+            27,
+            30,
+            24
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600268",
+          "status": "FINAL",
+          "away_pts": 109,
+          "home_pts": 97,
+          "away_quarters": [
+            29,
+            27,
+            22,
+            31
+          ],
+          "home_quarters": [
+            34,
+            20,
+            22,
+            21
+          ],
+          "quarters_sum_ok": true
+        },
+        {
+          "date": "2026-11-18",
+          "game_id": "0022600269",
+          "status": "FINAL",
+          "away_pts": 128,
+          "home_pts": 107,
+          "away_quarters": [
+            36,
+            29,
+            34,
+            29
+          ],
+          "home_quarters": [
+            31,
+            29,
+            24,
+            23
+          ],
+          "quarters_sum_ok": true
+        }
+      ],
+      "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+    },
+    "ledger_chain": {
+      "exit_code": 0,
+      "chain_ok": true,
+      "tail": "ledger chain OK"
+    }
+  },
+  "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/game/nyk-vs-tor-0022600253"
+  ],
+  "pass": true
+}

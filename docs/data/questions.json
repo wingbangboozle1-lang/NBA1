@@ -159,6 +159,12 @@
    "answer": "Measured on the official final-score corpus: home points against away points 0.0823; margin against total -0.0115; home points against total 0.732. The first two are near zero, so legs on different games are close to independent and the naive product is nearly right for cross-game parlays. Home points against total at 0.732 is not, which is exactly the same-game-parlay case - so the site prints the rho-priced figure next to the naive product and lets the difference show, rather than withholding the price.",
    "source": "data/derived/model_report_v2.json (measured_correlations)",
    "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "id": "A-4EE-1",
+   "question": "When will the LAL/UTA team-stat tables catch up with the standings? (Q-929-1)",
+   "answer": "They already have. First-hand read 2026-11-19T13:2xZ: all three official tables print LAL 16 GP 13-3 and UTA 16 GP 3-13, matching the standings (G3 passes 30/30); the committed model cut was re-cut to match (F-4EE-04, data/derived/recut_2026-11-19_4eef6d3b/drift.json). Q-929-1 can be closed.",
+   "source": "https://www.nba.com/stats/teams/advanced"
   }
  ],
  "open": [
@@ -465,6 +471,18 @@
    "blocks": "S-89F-02's gate design; any claim that a priced line rests on current inputs",
    "source": "data/derived/recut_drift_89f7b601.json",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json"
+  },
+  {
+   "id": "Q-4EE-1",
+   "question": "Should the corrected probability formula (sigma 18.303, S-4EE-01) take effect for the 2026-11-20 roll, or later?",
+   "what_is_missing": "A decision owner for pre-registration amendments. The measurement (F-4EE-06) exists; the authority to change a frozen signal does not sit with any single seat.",
+   "suggested_source": "Decision register / user review of S-4EE-01."
+  },
+  {
+   "id": "Q-4EE-2",
+   "question": "Who keeps the session-maintained advanced input fresh within its 72-hour gate (F-4EE-03)?",
+   "what_is_missing": "A standing cadence. Today each day-roll/verification session re-reads the official table; if no session runs for 72h the scheduled rebuild blocks (correctly, but silently for site visitors). A named owner or an automated reminder would close it.",
+   "suggested_source": "Coordination board ground rules / next integration seat."
   }
  ]
 }

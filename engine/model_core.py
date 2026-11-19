@@ -22,7 +22,9 @@ shrinkage, home court, rest and availability. That is stated on the Model page
 because it explains why the refinements below are the whole game.
 """
 
+import json
 import math
+import os
 
 from common import ABBR, TEAM_NAME, mean, norm_cdf, rnd
 
@@ -162,18 +164,46 @@ def apply_availability(line, loss_home=0.0, loss_away=0.0, alpha=None):
     return out
 
 
-def reference_line(table, home, away, flat_hca=2.0):
+MEASURED_HCA_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "data", "hca_measured.json")
+
+
+def measured_hca_points(path=MEASURED_HCA_PATH):
+    """Home-court advantage in points, read from the measured-pin file (R09).
+
+    The value is written by engine/pipeline.py from engine/hca.compute_hca
+    (HCA = sigma_margin * norm_ppf(measured home-win rate)). There is
+    deliberately NO fallback: if the file is missing or malformed this raises,
+    because a silent 2.0 would be the flat, unmeasured edge R09 forbids.
+    """
+    if not os.path.exists(path):
+        raise RuntimeError(
+            f"measured HCA missing: {path} (R09 forbids a flat fallback; "
+            "run engine/pipeline.py or engine/hca.py to write it)")
+    with open(path, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    value = doc.get("hca_points")
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        raise RuntimeError(f"measured HCA malformed in {path}: hca_points={value!r}")
+    return float(value)
+
+
+def reference_line(table, home, away, flat_hca=None):
     """The REFERENCE line we bet against.
 
     Deliberately naive and public: raw published net rating (no shrinkage,
-    no rest, no availability), a flat +2.0 home edge, and a total that is
-    simply the two teams' published scoring averages added together (no
-    defensive adjustment at all).
+    no rest, no availability), a home edge pinned to the measured home-win
+    rate (R09; `flat_hca` is only an explicit override for tests), and a total
+    that is simply the two teams' published scoring averages added together
+    (no defensive adjustment at all).
 
     Why a model stands in for the market: no sportsbook price is published by
     an NBA-operated source, so no official link can be attached to one. See
     Flagged for Review F3.
     """
+    if flat_hca is None:
+        flat_hca = measured_hca_points()
     base = base_line(table, home, away, shrink_k=None)
     naive_total = table.ppg(home) + table.ppg(away)
     return {

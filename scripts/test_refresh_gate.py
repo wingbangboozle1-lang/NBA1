@@ -409,10 +409,16 @@ class AuditHistoryTests(unittest.TestCase):
         if history.get("error"):
             self.skipTest(f"history unavailable in this environment: {history['error']}")
         self.assertFalse(os.path.exists(os.path.join(audit.ROOT, ".git", "shallow")))
-        # The repository has a real success in its history (2026-11-15T12:43:11Z).
+        # The repository has real successes in its history. The floor is the
+        # 2026-11-15T12:43:11Z rebuild that section 73 measured; the value
+        # itself is history-derived and legitimately advances as rebuilds
+        # succeed (arena/4eef6d3b-nba1 section 78: the first success since
+        # then is run 44527302396 at 2026-11-19T12:49:05Z, which moved this
+        # pin - so it is now a range, not a frozen string).
         self.assertTrue(history["rebuild_has_ever_run"], history)
         self.assertGreaterEqual(history["records_read"], 5)
-        self.assertEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
+        self.assertGreaterEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
+        self.assertRegex(history["last_success_utc"], r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 
     def test_audit_reports_shallow_clones_instead_of_guessing(self):
         """The guard must DESCRIBE the checkout, and must not fail the suite.

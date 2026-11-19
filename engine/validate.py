@@ -158,7 +158,7 @@ def run(train_block, season_block, completed, train_src, season_src):
     resid_raw = []
     for g in holdout:
         raw = base_line(train, g["home"], g["away"], shrink_k=None)
-        ref0 = reference_line(train, g["home"], g["away"], flat_hca=2.0)
+        ref0 = reference_line(train, g["home"], g["away"])
         resid_raw.append((g["home_pts"] - g["away_pts"]) - ref0["margin"])
     sd_resid = stdev(resid_raw)
     s2 = (sd_resid ** 2) / (2.0 * (1.0 + 1.0 / g_avg))
@@ -184,7 +184,7 @@ def run(train_block, season_block, completed, train_src, season_src):
     for g in holdout:
         hb, ab, hrest, arest, known = rest_flags(g, last_played)
         base = base_line(train, g["home"], g["away"], shrink_k=k)
-        ref = reference_line(train, g["home"], g["away"], flat_hca=2.0)
+        ref = reference_line(train, g["home"], g["away"])
         actual_margin = g["home_pts"] - g["away_pts"]
         actual_total = g["home_pts"] + g["away_pts"]
         rows.append({

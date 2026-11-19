@@ -127,6 +127,22 @@
 <th class="src">Source</th>
 </tr></thead><tbody>
 <tr>
+<td>Q-4EE-1</td>
+<td>Should the corrected probability formula (sigma 18.303, S-4EE-01) take effect for the 2026-11-20 roll, or later?</td>
+<td>A decision owner for pre-registration amendments. The measurement (F-4EE-06) exists; the authority to change a frozen signal does not sit with any single seat.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-4EE-2</td>
+<td>Who keeps the session-maintained advanced input fresh within its 72-hour gate (F-4EE-03)?</td>
+<td>A standing cadence. Today each day-roll/verification session re-reads the official table; if no session runs for 72h the scheduled rebuild blocks (correctly, but silently for site visitors). A named owner or an automated reminder would close it.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
+</tr>
+<tr>
 <td>Q-929-1</td>
 <td>When will the LAL/UTA team-stat tables catch up with the standings?</td>
 <td>The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.</td>
@@ -399,7 +415,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">34 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">36 open, 21 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -790,6 +806,33 @@
 <td>Take option 1. It is a rendering job on data that already exists.</td>
 <td>&mdash;</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>S-4EE-01</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Pre-register a corrected pick-probability formula (sigma 18.303) for the next roll; keep every sealed probability as published</b></td>
+<td>F-4EE-06: published probabilities divide the spread by sigma of game margins (16.714) instead of sigma of the spread error (measured 18.303). Realized hit rate 0.3784 against 0.7197 mean published probability. Changing sealed numbers would break the pre-registration discipline; the fix must be prospective.</td>
+<td>Option 1. The measurement is unambiguous and the settlement rules are unaffected (they grade the pick line, not the probability).</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-02</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Derive one authoritative per-strategy record from the sealed tickets and reconcile README + leaderboard to it</b></td>
+<td>F-4EE-05: S1's published record differs between README (23-9 / +11.91) and docs/data/leaderboard.json (23-8 / +12.909); settlement grades tickets, not strategies, so neither is derivable.</td>
+<td>Option 1, adopted by the next strategy/leaderboard seat.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-03</td>
+<td><span class="chip info">Automation</span></td>
+<td><b>Decide whether a gate-passing scheduled rebuild should publish the regenerated site data or stay smoke-only (today the run discards docs/data + docs/b churn)</b></td>
+<td>The rebuild step (pipeline + build_site) now runs when gates pass, but the 'Discard generated-site churn only' step reverts docs/data and docs/b before the publish commit, so the scheduled job never updates the live site's data - sessions do, at integration. That is defensible churn control (the generated files embed wall-clock ages) but it means 'rebuild' in the brief's first requirement is validated, not published.</td>
+<td>Flag for the decision register; either choice is coherent, but it should be an explicit decision, not an accident of a churn filter.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Sources are the official pages the suggestion is built on. A suggestion that adds a source is the only kind that can add a link here, which is why the rows for licensed-price work point at the NBA page that shows the gap.</p>

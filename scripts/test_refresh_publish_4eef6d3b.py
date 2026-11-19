@@ -104,21 +104,28 @@ class GitAddAtomicityTests(unittest.TestCase):
 
 
 class PublishStepStagingTests(unittest.TestCase):
+    """Pin the staging MECHANISM on whatever text the merged workflow carries.
+
+    Both concurrent fixes (arena/fb91550a-nba1's candidate-list loop and this
+    seat's per-path adds) remove the same bug: one unmatched pathspec aborting
+    a compound `git add`. The merged tree ships fb91550a's loop; these tests
+    assert the behaviour that must survive ANY future rewrite of the step.
+    """
+
     @classmethod
     def setUpClass(cls):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
         cls.script = _step_block(cls.text, "Publish captures")
 
-    def test_staging_loop_present(self):
-        self.assertIn("for p in ", self.script)
-        self.assertIn('git add -- "${p}" 2>/dev/null || true', self.script)
-        self.assertIn("done", self.script)
+    def test_staging_skips_absent_paths_instead_of_aborting(self):
+        self.assertIn("git add -- \"$p\"", self.script)
+        self.assertIn("os.path.exists", self.script)
+        self.assertIn("does not exist in this run; skipped, not an error", self.script)
 
     def test_no_compound_add_mixes_missing_snapshots_with_promotable_paths(self):
         # No single `git add` invocation may name one of the never-existing
         # snapshots together with a promotable input (that is exactly the
-        # abort that lost them all).  The per-path loop is the only staging
-        # mechanism left in the step.
+        # abort that lost them all).
         for m in re.finditer(r"^(\s*)git add\b[^\n]*(\\\n[^\n]*)*", self.script,
                              re.MULTILINE):
             cmd = m.group(0)
@@ -126,18 +133,15 @@ class PublishStepStagingTests(unittest.TestCase):
             self.assertNotIn("team_traditional.json", cmd)
             self.assertNotIn("team_opponent.json", cmd)
 
-    def test_every_promotable_path_is_in_the_staging_loop(self):
-        loop = re.search(r"for p in (.*?); do", self.script, re.DOTALL)
-        self.assertIsNotNone(loop, "staging loop missing")
-        blob = loop.group(1)
+    def test_every_promotable_path_is_a_staging_candidate(self):
         for name in ("schedule_upcoming.json", "injuries.json",
                      "games_completed.json", "team_advanced.json",
-                     "data/parsed/", "unreadable_sources.json",
-                     "refresh_path_audit.json"):
-            self.assertIn(name, blob)
+                     "data/parsed/", "unreadable_sources.json"):
+            self.assertIn(name, self.script,
+                          f"{name} must stay in the publish step's staging list")
 
     def test_staged_output_survives_missing_snapshots_in_real_git(self):
-        """Run the workflow's own staging loop in a repo where the three
+        """Run the workflow's own staging block in a repo where the three
         declared-unreadable snapshots do not exist (they never have)."""
         d = tempfile.mkdtemp(prefix="nba1-publish-")
         self.addCleanup(shutil.rmtree, d, ignore_errors=True)
@@ -149,40 +153,29 @@ class PublishStepStagingTests(unittest.TestCase):
         git("init", "-q", ".")
         os.makedirs(os.path.join(d, "data", "raw"))
         os.makedirs(os.path.join(d, "data", "parsed"))
-        for p in ("data/raw/_capture_S4_schedule.json",
-                  "data/raw/schedule_upcoming.json",
-                  "data/raw/injuries.json",
-                  "data/raw/games_completed.json",
-                  "data/raw/team_advanced.json",
-                  "data/parsed/promotion_report.json"):
-            Path(d, p).write_text("{}")
+        present = ("data/raw/games_completed.json", "data/raw/schedule_upcoming.json",
+                   "data/raw/injuries.json", "data/raw/team_advanced.json",
+                   "data/parsed/promotion_report.json", "data/raw/_capture_S4_schedule.json")
+        for path in present:
+            Path(d, path).write_text("{}")
         Path(d, "x").write_text("x")
         git("add", "-A")
         git("commit", "-qm", "init")
-        for p in ("data/raw/_capture_S4_schedule.json",
-                  "data/raw/schedule_upcoming.json",
-                  "data/raw/injuries.json",
-                  "data/raw/games_completed.json",
-                  "data/raw/team_advanced.json",
-                  "data/parsed/promotion_report.json"):
-            Path(d, p).write_text('{"changed": 1}')
-        loop = re.search(r"^(\s*)for p in .*?^\s*done", self.script,
-                         re.MULTILINE | re.DOTALL)
-        self.assertIsNotNone(loop)
+        for path in present:
+            Path(d, path).write_text('{"changed": 1}')
+        # The staging block: everything from the candidate list through the
+        # capture glob, but not the PR-body heredoc that follows.
+        block = self.script.split("python3 - <<'PY' | while", 1)[1]
+        block = "python3 - <<'PY' | while" + block.split("# Evidence for the pull request body", 1)[0]
         indents = [len(ln) - len(ln.lstrip())
-                   for ln in loop.group(0).splitlines() if ln.strip()]
-        body = "\n".join(ln[min(indents):] for ln in loop.group(0).splitlines())
+                   for ln in block.splitlines() if ln.strip()]
+        body = "\n".join(ln[min(indents):] for ln in block.splitlines())
         Path(d, "stage.sh").write_text("set -u\n" + body + "\n")
         run = subprocess.run(["bash", "-eo", "pipefail", "stage.sh"], cwd=d,
                              capture_output=True, text=True)
         self.assertEqual(run.returncode, 0, run.stdout + run.stderr)
         staged = git("diff", "--cached", "--name-only").stdout.split()
-        for name in ("data/raw/schedule_upcoming.json",
-                     "data/raw/injuries.json",
-                     "data/raw/games_completed.json",
-                     "data/raw/team_advanced.json",
-                     "data/parsed/promotion_report.json",
-                     "data/raw/_capture_S4_schedule.json"):
+        for name in present:
             self.assertIn(name, staged,
                           "the promoted input must be staged even though "
                           "standings.json / team_traditional.json / "
