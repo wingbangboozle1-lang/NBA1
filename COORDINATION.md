@@ -11567,3 +11567,12 @@ the commit that introduced the error in the same PR - so the PR diff shows both.
 the standing rule is that an irregularity is flagged, not quietly amended: this seat's own board text
 failed the same test it applies to source data, and the file - not the recollection - is the authority.
 
+**Artifact removed by this seat (own file, superseded).** `data/derived/availability_range_e3d25abc.json`
+was an early draft of the availability cut: its rows carry the pre-classification vocabulary (no
+`outcome` field, and the version that labelled a cleared player who sat as an "IRREGULAR: cleared"
+contradiction — the interpretation §68.5 explains was wrong). Nothing in the repository references it
+(`grep -rln` over `*.py`, `*.json`, `*.js`, `*.md`: no hits), and the authoritative file is
+`data/derived/availability_2026-11-17_18_e3d25abc.json`. It is deleted rather than left beside the
+correct one, because two files describing the same join with different verdicts is exactly the kind
+of ambiguity this board keeps flagging.
+
