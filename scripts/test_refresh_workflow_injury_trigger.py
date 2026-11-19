@@ -29,7 +29,8 @@ class RefreshWorkflowInjuryTriggerTests(unittest.TestCase):
         )[0]
         condition = next(line for line in step.splitlines() if line.strip().startswith("if:"))
         self.assertIn("steps.fetch.outcome == 'success'", condition)
-        self.assertIn("steps.promote.outcome == 'success'", condition)
+        self.assertNotIn("steps.promote.outcome == 'success'", condition,
+                         "promote exit code must not gate the rebuild (section 74)")
         self.assertIn("steps.freshness.outcome == 'success'", condition)
         self.assertIn("steps.freshness.outputs.ok == 'true'", condition)
 

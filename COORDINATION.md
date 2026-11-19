@@ -726,11 +726,13 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/d361b9a5-nba1` | `arena/d361b9a5-nba1` | 2026-11-16 02:15 UTC | Takeover of stale PR #117 (§46 RFG4: structured official parsers, digest-bound verified promotion, injury-PDF diffs; idle >75 min) + first-hand official verification pass + gate suite + PR/merge/delivery (§49, claimed as §47 — renumbered at merge). Platform pins this session to its branch (deviation logged, as above). PR #114 deliberately left for its owner/integration seat (558-commit re-cut; decision logged in §49). |
 | `arena/abac961f-nba1` | `arena/abac961f-nba1` | 2026-11-15 23:40 UTC | RFG4 only: structured official parsers, verified promotion records, consecutive injury-PDF status diffs (§46). Not the integration seat — `arena/513516f6-nba1` (§41) holds it. Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2042a559-nba1` | `arena/2042a559-nba1` | 2026-11-16 14:2x UTC | Session §50: measured minutes shares from official gamebooks (R12), projection/bet surface split with computed gates (R07), 11/15 results-feed completion from official game pages (R02), travel distance held blank and flagged (R11), register + flags update, verification, PR/merge/Pages record. Platform pins this session to its branch. |
+| `arena/65bda668-nba1` | `arena/65bda668-nba1` | 2026-11-19 12:1x UTC | **R09 residual seat (§76)**: replace the literal `flat_hca=2.0` at the legacy `reference_line` call sites (`engine/pipeline.py` x2, `engine/validate.py` x2) with the measured home-court pin read from `data/hca_measured.json`, failing loudly when it is absent; add a CI test. Publishes no model number: the generated Flagged, Requirements, Sources and index-tile outputs change only by the new flag F-HCA-01 and the R09 text (§76.3). In progress. |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/0e9c924f-nba1` | `arena/0e9c924f-nba1` | 2026-11-16 14:2x UTC | **Integration seat for the 2026-11-16 quiet window**: stale-PR #130/#136 takeover triage (>10 h idle, both CONFLICTING), fresh official verification, 2026-11-15 settlement from official finals, single-deploy-path fix (Pages `build_type`), gate suite, PR → `main` → merge → live confirmation (§50). Platform pins this session to this pre-named branch (deviation logged, as every session before it). Delivery: PR #142 merged `fa69d52` 15:03:32Z, Pages built, live confirmed. |
+| `arena/7b8d624a-nba1` | `arena/7b8d624a-nba1` | 2026-11-19 12:16 UTC | **Injuries-banner currency seat (§74)**: the Injuries page shows three contradictory "current edition" statements; replace the hard-coded warning with a computed one from a timestamped read of the official injury index, and stop the consecutive-edition diff from being labelled against the wrong edition. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/7ec9e7a3-nba1` | `arena/7ec9e7a3-nba1` | 2026-11-16 18:1x UTC | Late-afternoon cycle (§55, delivered ~19:3xZ — see §55.7): first-hand official re-verification of the 11/16–11/19 horizon (schedule rows, standings, injury-report edition currency, team-stats re-read), settlement-and-ledger integrity, flag-register closure of stale-resolved items (F119/F123 class), gate battery, PR → `main`, Pages confirmation, delivery. Platform pins this session to its pre-named branch (deviation logged, as above). |---
@@ -12083,9 +12085,375 @@ the rebuild step**, so R01 stays `partial`; and the standings page and the three
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
 
+## 74. COMPLETED — session `arena/994186ba-nba1` — test-discovery import safety
+
+**Claimed task:** make the already-wired R10 luck-noise-band verification script safe to import under Python unittest discovery, while preserving its direct CLI behavior. Baseline measurement: `python3 -m unittest discover -s scripts -p 'test_*.py'` ran 110 tests but failed to import `test_noise_band_refusal` because that script executes the assertions and raises `SystemExit(0)` at module import. The script's own direct run reports zero assertion failures; this is a test-harness integration defect, not a strategy/model defect.
+
+**Exclusive scope:** `scripts/test_noise_band_refusal.py`, `verify/2026-11-19-994186ba/**`, and this board section only. No model, data, register, generated-site or other session-owned files are in scope.
+
+**Delivery:** The assertions now live in `main()` behind the standard executable guard, so unittest discovery imports the file without executing or exiting. Direct CLI behavior is retained. Detailed verification is recorded in `verify/2026-11-19-994186ba/report.md`.
+
+**Verification:** `python3 scripts/test_noise_band_refusal.py` — PASS (0 assertion failures); `python3 -m unittest discover -s scripts -p 'test_*.py'` — PASS (109 tests, 3 skipped); `git diff --check` — PASS. The full test run emitted non-fatal ResourceWarnings from two untouched legacy test modules. No NBA values, source claims, picks or bet gates were changed; no model/strategy validation is claimed.
+
 ---
 
-## 74. Session `arena/cdf3a108-nba1` — pre-tip re-origination + model-inputs currency + R01 last mile (claimed 2026-11-19 12:2x UTC)
+## 75. Session `arena/7b8d624a-nba1` — Injuries-banner currency seat (claimed 2026-11-19 12:16 UTC as §74; renumbered to §75 at merge because `arena/994186ba-nba1` landed §74 first. Every "§74" inside this session's files and commits means this section)
+
+Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The platform pins this session to this pre-named branch (deviation logged, as every session before it).
+
+**Board read before claiming.** §0 ground rules, §0b registry, tail §69 and §72, `gh pr list --state open` (two open: #188 `arena/d66245d4-nba1` board-only and CONFLICTING; #181 `arena/39b70241-nba1` CONFLICTING and superseded by §66/§71 merges), `gh run list --limit 12` (latest scheduled `Refresh official data` on `main` ran 08:09:58Z and failed S1/S2/S8/S9/S10 parses, as §69 recorded), `gh api repos/.../pages` (`status: built`, `build_type: legacy`, source `main /`). The clone was shallow (`rev-list --count HEAD` = 1); `git fetch --unshallow origin` was run before reading any log (941 commits). Ancestry checked: `arena/f3cb4a98-nba1` (§73) and `arena/89f7b601-nba1` (§69) are in `main`; `arena/d66245d4-nba1` (§72) and `arena/39b70241-nba1` (§66) are not.
+
+**Measured defect (the task).** `site/pages/injuries.html`, built by `scripts/build_dashboard.py`, shows three banners that contradict each other:
+
+| # | Banner on the page | What the build measured | Defect |
+| --- | --- | --- | --- |
+| 1 | "Newest official edition" — revision 11/19/2026 12:30 AM ET, retrieved 2026-11-19T06:00Z | the newest stored file by filename sort, `data/official/injury_2026-11-19_1230AM_9ff20954.json` | the official index lists 11/19 editions through **07:00 AM ET** (fetched from `https://official.nba.com/nba-injury-report-2026-27-season/` at 12:1x UTC): the banner is not the newest official edition |
+| 2 | Consecutive-edition diff "against the previous stored edition" — 0 comparable rows | `_newest("injury_diff_*.json")` returns `injury_diff_2026-11-17_1015AM_to_1030AM_84264db0.json`, an 11/17 to 11/17 diff | the diff is not against the edition shown; no diff exists for the 11/19 edition, and the page says it does |
+| 3 | "There is a newer official edition than the one behind these numbers" — hard-coded text naming 11/13 07:30 PM rows and a "latest official edition read this cycle (01:30 PM ET)" | string literal in `scripts/build_dashboard.py` (~line 2172) | hard-coded narrative that cannot follow the data and contradicts banner 1 |
+
+**Task table (exclusive file scope).**
+
+| ID | Task | Files (exclusive to this seat) |
+| --- | --- | --- |
+| I01 | This claim, pushed immediately | `COORDINATION.md` (append-only, §74 + registry row) |
+| I02 | Timestamped first-hand read of the official injury index (stamp taken with `date -u` before and after the read), stored as a data record with every listed 11/19 edition and its PDF URL | `data/official/injury_index_2026-11-19_7b8d624a.json` (new) |
+| I03 | Replace banners 2 and 3 with values computed from the data: the row edition, the count and the newest time of later listed editions, and the diff only when its `to_edition` is the row edition (otherwise "no consecutive diff computed for this edition yet") | `scripts/build_dashboard.py` (injuries section only, lines ~2110-2300) |
+| I04 | Regenerate and keep only the change to `site/pages/injuries.html` (other generated pages are reverted if they move for unrelated reasons) | `site/pages/injuries.html` |
+| I05 | A test that fails on the pre-fix banner text and passes after | `scripts/test_injuries_banner_7b8d624a.py` (new) |
+| I06 | Gate battery (`scripts/verify_all.py` where runnable, `scripts/check_links.py`), PR → `main`, merge without waiting, Pages fetch-back of the live page, delivery record in §74 | — |
+
+**Not in scope (logged as requests, not executed):** the scheduled refresh's injury pointer (X6 in §73/§69) stays with the scheduled-job owner; the 07:00 AM ET edition is listed on the index but **its PDF is not captured or transcribed by this seat**, so its rows are not shown; the standings and team-stat tables (F1 / S-89F-01) remain blocked as §69 recorded.
+
+### 75.1 Delivery record (arena/7b8d624a-nba1, 2026-11-19 ~12:16–12:4x UTC)
+
+**Status at write time: PR open, not yet merged; the merge result will be recorded in §75.2 after merge.**
+
+| Task | Result | Evidence (file or command) |
+| --- | --- | --- |
+| I01 claim | done, pushed `053c46b5`, renumbered §74 → §75 at rebase (`arena/994186ba-nba1` landed §74 first) | this section; registry row in §0b |
+| I02 index read | done. Official index read at `2026-11-19T12:16:35Z`–`12:16:36Z`: **29** 11/19 editions, 12:00 AM → **07:00 AM ET** | `data/official/injury_index_2026-11-19_7b8d624a.json` (source: https://official.nba.com/nba-injury-report-2026-27-season/) |
+| I02b printed headers | `Injury-Report_2026-11-19_07_00AM.pdf` prints **"Injury Report: 11/19/26 07:00 AM"**; `Injury-Report_2026-11-16_09_45AM.pdf` prints **"Injury Report: 11/16/26 09:45 AM"** — both read as text (no bytes; stated in the record) | sources: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf and …/Injury-Report_2026-11-16_09_45AM.pdf |
+| I03 banners | the three injury banners are computed from stored records; the hard-coded warning and the mislabelled diff are removed | `scripts/build_dashboard.py` (injuries section only; `git diff -U0` hunk is contained in that section) |
+| I04 page | regenerated; **only** `site/pages/injuries.html` changed for the page itself; plus the flags page, the index open-flag tile (171 → 174) and the data mirrors | `git diff --stat` of the commit |
+| I05 test | `scripts/test_injuries_banner_7b8d624a.py`: **FAIL (6 checks) on the pre-fix committed page, PASS on the rebuilt page**. It also caught a wrong relative link of my own (`../../../` → `../../`) before the commit | run both: `python3 scripts/test_injuries_banner_7b8d624a.py` and the same with `/tmp/injuries_prefix.html` |
+| Gates | `scripts/verify_all.py` → **VERIFY OK, FAILURES: 0**; `scripts/check_links.py` → **PASS, internal broken 0**; `scripts/verify_dashboard.py` → **VERIFY OK** (each run after the rebase onto `b5e53576`) | logs in the session's run output |
+| Flags | `F-7B8-01` (Medium: three contradictory edition claims, fixed in this PR, open until a reviewer confirms the live page), `F-7B8-02` (High: the table is one edition, 65 rows, and 32 'no entry' placeholder rows; 29 newer 11/19 editions are listed and untranscribed), `F-7B8-03` (Low: text-channel reads, no bytes) | `data/content/flagged.json` (append-only, 33 lines added) |
+
+**Measured irregularities (not fixed here, published on the Flagged page):**
+
+- The Injuries table is **97 rows**: 65 are the 11/16 09:45 AM edition's entries (dates 11/16–11/17, matching its record of 65 rows); **32 are placeholder rows** dated 11/18–11/19 whose status is `NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM` (the edition does not list those games). They carry no injury claim, but the table does not say so anywhere except in the reason text. Counts are now computed and printed on the page (F-7B8-02).
+- The pre-fix banner's diff link pointed to an **11/17 → 11/17** comparison with 0 changes, while the banner called it the diff against the previous edition. No consecutive diff into the 11/19 editions exists in the repository.
+- The builder's old "newest" selection sorted filenames, so the banner could name a different edition than the one the table used (this is why the rows and the banner disagreed).
+
+**Not done in this seat, and why:**
+
+- **Transcribing and diffing the 11/19 editions** (the real fix for F-7B8-02). The sandbox cannot reach `ak-static.cms.nba.com` as bytes, and the scheduled runner's injury chain belongs to the scheduled-job owner (X6). Logged as a request below, not executed.
+- The standings and the three team-stat tables remain blocked as §69 recorded (F1 / S-89F-01).
+
+**Requests (logged, not executed; files owned elsewhere):**
+
+- To the scheduled-job owner (X6, §73/§69): capture every 11/19 editions' bytes on the runner (the index lists 29), hash them, write `data/parsed/injury_diffs/editions/*.json` records with revision and retrieval stamps, and write the consecutive diffs. Then this page's banners will name them automatically (the builder already reads `editions/` and `diff_*_to_<label>.json`).
+- To the integration seat: confirm F-7B8-01..03 on the live page and decide their severity.
+
+**Sources used in this seat (all official, all linked):** https://official.nba.com/nba-injury-report-2026-27-season/ (index); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf (header + rows as text); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf (header, as text; the edition's bytes were hashed on a runner per `data/parsed/injury_diffs/editions/Injury-Report_2026-11-16_09_45AM.json`).
+
+
+**Delivery:** PR [#194](https://github.com/wingbangboozle1-lang/NBA1/pull/194) merged at 2026-11-19T12:17:56Z as `b5e53576b594edfe8160ffe29c6ecff042aa0afc`. CI validation passed. GitHub Pages deployment run [44522582003](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44522582003) succeeded. Its runner emitted a non-blocking Node.js 20 deprecation warning for `actions/upload-artifact@v4`; deployment completed successfully.
+
+### 75.2 Merge and deploy record (arena/7b8d624a-nba1)
+
+- **PR [#197](https://github.com/wingbangboozle1-lang/NBA1/pull/197)** (`arena/7b8d624a-nba1` → `main`) — **merged** with a merge commit at **2026-11-19T12:21:30Z**, merge commit `358da36f`. Merged without waiting for approval; `gh pr view 197` reported `MERGEABLE` / `CLEAN` before the merge. No CI checks are configured on this repository's PRs (`statusCheckRollup` empty).
+- **Pages:** `gh api repos/wingbangboozle1-lang/NBA1/pages/builds/latest` → `built` for `358da36f` at 12:21:31Z. Another build for `acf87313` (PR #196, another session) had `errored` at 12:20:52Z; it was superseded by the `358da36f` build, which succeeded.
+- **Live fetch-back** (`https://wingbangboozle1-lang.github.io/NBA1/site/pages/injuries.html`, read at ~12:23Z): the page now shows the banner *Edition behind the rows on this page* (11/16/26 09:45 AM ET, retrieved 2026-11-16T14:47:44Z, SHA-256 `a84e58a957718196…`, 65 rows in the edition, 97 table rows: 65 inside the slate, 32 "no entry"), the *Newest edition the official index lists* banner (29 editions, newest 07:00 AM ET, read 2026-11-19T12:16:36Z), and the computed warning. The hard-coded "newer official edition" text is gone. The index record `data/official/injury_index_2026-11-19_7b8d624a.json` is served (HTTP 200 through the fetch channel).
+- **A cache trap, recorded:** the first live fetch returned the pre-merge page (same URL with a query string). A second fetch with a different query string returned the new page. Anyone checking this page must use a fresh query string and confirm the banner text.
+- **Not verified in this seat:** a rendered pixel check of the banner (the fetch channel returns text, not a screenshot); the link targets were checked by `check_links.py` and by the test, not by a browser.
+
+**Open after this merge (unchanged, flagged):** F-7B8-01 (open until a reviewer confirms the page), F-7B8-02 (the 11/19 editions are untranscribed; needs the runner's byte-capture path, X6), F-7B8-03 (text-channel reads, no bytes). The standings and three team-stat tables remain blocked (F1 / S-89F-01).
+
+---
+
+## 76. Session `arena/65bda668-nba1` — R09 residual: measured HCA through the legacy reference line (claimed 2026-11-19 12:1x UTC)
+
+**Board read before claiming (2026-11-19 12:1x UTC, ground rules 1–6):** §0 ground rules, §0b registry, tail delivery record §69.2, `git fetch origin`, `gh pr list --state open` (two OPEN: #181 `arena/39b70241-nba1`, CONFLICTING since 06:26Z; #188 `arena/d66245d4-nba1`, last touch 07:24Z — both idle >60 min, neither claims R09), `gh run list` (latest `Refresh official data` success; `Publish static site` success on `b2af48b`), `data/content/requirements.json` (R09 `partial`, gap text names `engine/model_core.py:reference_line` `flat_hca = 2.0`).
+
+**Measured at claim time (first-hand, in this sandbox):**
+- `engine/model_core.py:165` — `def reference_line(table, home, away, flat_hca=2.0)`.
+- `engine/pipeline.py:232` and `:285`, `engine/validate.py:161` and `:187` — each calls `reference_line(..., flat_hca=2.0)`. The pipeline's own pin (§65 N04) overrides the *fitted* `params["hca"]` but never reaches these four calls.
+- `data/hca_measured.json` — `hca_points` 0.59, `home_win_rate` 0.5135, `games` 74 (the last pipeline write). Other pins exist in the repo (0.71 horizon, 0.72 §65 re-measure); **F-CA-03** already flags that there is no named corpus of record. This seat does not resolve F-CA-03; it reads whichever file the pipeline last wrote, and says so.
+
+**Scope and non-goals.** Code change: the four literal `2.0` call sites read one helper; the helper raises if the file is missing (no silent fallback to 2.0). No `data/derived/*`, horizon, ledger, prereg, or settlement file is touched, and no published model number changes — the legacy pipeline is not re-run. The shared registers (`data/content/flagged.json`: one appended flag F-HCA-01; `data/content/requirements.json`: R09 evidence and gap text; `data/raw/sources.json`: source S74_HCA) and their generated pages are regenerated by `scripts/build_dashboard.py` (diff limited to those outputs and the index flag tile 174→175 (on the then-current main)).
+
+**File scope:** `engine/model_core.py` (helper only), `engine/pipeline.py`, `engine/validate.py`, `scripts/test_hca_wiring_65bda668.py` (new), `data/content/requirements.json` (R09 evidence text only), `COORDINATION.md` (this section and the §0b row).
+
+### 76.1 Claim-time measurements
+
+- `engine/model_core.py:165` `reference_line(..., flat_hca=2.0)`; call sites `engine/pipeline.py` (2) and `engine/validate.py` (2) passed the literal.
+- `data/hca_measured.json`: 0.59 pts, home-win rate 0.5135 over 74 games (legacy pin).
+- Board read: §0, §0b, §69.2, `git fetch origin` (main `b2af48b`), `gh pr list` (#181 CONFLICTING; #188 OPEN, idle since 07:24Z — neither touches R09), `gh run list`.
+
+### 76.2 Work and checks
+
+| Item | Result |
+| --- | --- |
+| Helper `measured_hca_points()` (no fallback; raises on missing/malformed) and `reference_line` default `flat_hca=None` | done — `engine/model_core.py` |
+| Four call sites read the helper | done — `engine/pipeline.py`, `engine/validate.py`; `grep flat_hca=2.0 engine scripts` = 0 |
+| CI test `scripts/test_hca_wiring_65bda668.py` (6 checks) | **6/6 pass on this branch; 5 of 6 fail on the pre-§76 code** (measured by stashing `engine/` and re-running). The one test that passes on the old code is the explicit-override test, which guards the `flat_hca=` override path that §76 keeps |
+| Full `scripts/test_*.py` loop vs unmodified baseline | identical except the new test; two pre-existing failures on both states: `test_refresh_gate.py`, `test_surface_freshness.py` (the known refresh-gate block, R01) |
+| `engine` import smoke (`validate`, `pipeline`) | import ok |
+| `scripts/check_registers.py`, `check_build_data.py`, `check_links.py`, `check_site.py`, `verify_all.py` | all pass |
+| Generated outputs | `scripts/build_dashboard.py` run; diff = 13 files, all the flag/requirement/source surfaces + index tile 174→175 (on the then-current main). No model number, horizon, ledger or settlement file changed. |
+| New flag | **F-HCA-01** (Medium, open): three committed home-court pins disagree — legacy 0.59 (0.5135/74), published horizon **0.10** (0.5023/221, `horizon_lines_v2.json` `_meta.home_court_anchor`), §65 0.72 (0.5171, recomputed 16.868·Φ⁻¹(0.5171) = 0.723). The R09 register text still quoted 0.71 for the horizon; §76 corrects that text. |
+
+### 76.3 Verification and sources
+
+- Recomputed the three pins with Φ⁻¹ (stdlib `NormalDist`): 0.589 / 0.096 / 0.723 — matches the files as rounded (0.59 / 0.10 / 0.72).
+- Source key `S74_HCA` (repository artifacts, same pattern as §69.2) so the flag's link renders; rendered page confirmed it links to `data/derived/horizon_lines_v2.json`.
+- **External official sources: none consulted in this seat.** No new NBA.com value was read or entered; every number above comes from committed repository files.
+
+### 76.4 Irregularities for review (not fixed here)
+
+- **F-HCA-01** above — the published horizon's home edge (0.10 pts) and the legacy line's (0.59 pts) differ, and no corpus of record is named (F-CA-03 still open).
+- The legacy pipeline's outputs (`docs/data/backtest.json`, `validation.json`) still carry the numbers from its last run; they have not been regenerated with the wired value.
+- `data/hca_measured.json` is rewritten by `engine/pipeline.py` on every run, so the legacy value will move with each run; this seat did not run the pipeline.
+
+### 76.5 Status
+
+Work complete on branch `arena/65bda668-nba1`; delivery record and PR follow in §76.6.
+
+
+### 76.2 Integration record — PR, merge, deploy, live fetch-back (2026-11-19 ~12:2x–12:3x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request | **#195** — *§76: R09 residual — measured home-court pin through the legacy reference line; flag F-HCA-01*. https://github.com/wingbangboozle1-lang/NBA1/pull/195 |
+| Conflicts seen and how they were resolved | `main` moved three times during the run (#194, #197/#198 — §74/§75 injuries seat). Each time the board was rebuilt from `main` (rows and sections re-inserted, never overwritten); the number §74 was renumbered to §76 because §74 and §75 were taken. The registers and generated pages were regenerated by `scripts/build_dashboard.py` on the final base, not hand-merged. |
+| CI on the final head `c737f0f` | `validate` **success** (run 44523704572). |
+| Merge | **MERGED** 2026-11-19T12:27:11Z → **`267f15f`** (`gh pr merge 195 --merge`). |
+| Deploy | `pages build and deployment` **success** and `Publish static site to GitHub Pages` **success** on `267f15f` (run 44524012017); Pages API `status: built`, `build_type: legacy`, source `main`. |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` serves **175 rows**, and the last chunk carries **F-HCA-01** with its source link to `S74_HCA`. Fetched through the platform fetch channel (sandbox TCP to `*.github.io` is not used). |
+| Open after this seat | The brief's wider R09 item (one named corpus of record for home-court advantage, F-CA-03/F-HCA-01); the legacy pipeline has not been re-run with the wired value. |
+
+## 🔑 ACTIVE CLAIM — session `arena/232a9f86-nba1` (opened 2026-11-19 ~12:15 UTC — **final integration seat**: triage the two stale open PRs, first-hand official re-verification of the live 11/19–11/22 horizon and the 11/17–11/18 settlements, deterministic site rebuild, full gate battery, no-broken-links confirmation, PR → `main` → merge → Pages, delivery record)
+
+Branch `arena/232a9f86-nba1`, at `main` tip `b2af48b` (merge of PR #193, the §69.2 board record) at claim time. Platform pins this session to this single pre-named branch; the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
+
+**Board read before claiming (2026-11-19 12:1x UTC, ground rules 1–6):** §0 ground rules, §0b registry, the tail delivery records §66–§73, `gh pr list --state all` (**two OPEN**, both `mergeable: CONFLICTING`), `gh run list`, `gh api /repos/…/pages` (`status: built`, `build_type: legacy`, source `main /`), and the live data files (`data/derived/horizon_lines.json`, `data/content/requirements.json`, `data/settlement/*`).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip | `b2af48b` = merge of PR #193 (§69.2 board record), 2026-11-19T08:26:07Z |
+| Open PRs | **two, both CONFLICTING**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, 100 files — the 11/17+11/18 game-day rollover, **already on `main`** via PR #172/#179/#180/#182) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, board-only `COORDINATION.md` — §72.2 delivery record, superseded by later records) |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live horizon | `data/derived/horizon_lines.json` = **26 games, 2026-11-19..2026-11-22**, generated 2026-11-19T05:45Z (today + 3 days, measured HCA pin applied) |
+| Settlements | `data/settlement/` carries 11/14, 11/15, 11/16, **11/17, 11/18** — current through the last completed game day |
+| Requirements | 33 rows: **24 done / 9 partial / 0 missing / 0 blocked** (R01, R04, R09, R11, R12, R16, R26, R30, R32) |
+| Registers | flagged 171 · suggestions 42 · questions 20 answered / 34 open |
+
+**Why this seat exists.** The brief's closing instruction is a **final integration session**: once every task is done, merge the branches, re-verify the combined data line by line, confirm the site builds with no broken links, and publish to GitHub Pages; then open a PR from the integration branch to `main`, merge it without waiting, confirm the deploy, and record the PR link and merge result here. The last three delivery seats (§71, §72, §73, §69) each landed a slice; none ran the closing pass over the *combined* tree, and two stale PRs (#181, #188) are still open and CONFLICTING against the current tip. This seat is that closing pass.
+
+**File scope of this seat (integration; regenerates, does not hand-edit data):** `COORDINATION.md` (this claim + delivery record), the **generated** site/data outputs rebuilt deterministically from the merged sources (`index.html`, `site/**`, `docs/data/**`, `data/derived/surface_gates.json`), any **first-hand verification artifacts** this seat reads (`verify/2026-11-19-232a9f86/**`), and PR/merge/deploy bookkeeping. **Not hand-edited:** `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*`, `data/content/*.json` (registers are only appended if this seat makes a new, evidence-backed finding — otherwise left to their owners).
+
+**Task table (this session's, and only this session's):**
+
+| ID | Task | Files |
+|---|---|---|
+| T01 | Claim + push (this section) | `COORDINATION.md` |
+| T02 | Triage the two stale open PRs: close #181 as superseded (content already on `main`), resolve #188 (board-only) | PR bookkeeping, `COORDINATION.md` |
+| T03 | First-hand official re-verification of the live 11/19–11/22 horizon (schedule + team records) and the 11/17–11/18 settlements, via the fetch channel | `verify/2026-11-19-232a9f86/**` |
+| T04 | Deterministic rebuild of every generated site/data artifact from the merged sources | generated outputs only |
+| T05 | Full gate battery on the combined tree (`verify_all`, `check_site`, `check_links`, `check_rendered`, `check_registers`, `check_build_data`, `verify_integration`, `verify_ledger`, `verify_dashboard`, `test_*.py`) | gate outputs |
+| T06 | No-broken-links + live-site fetch-back confirmation | gate outputs, `COORDINATION.md` |
+| T07 | PR from this branch to `main` → merge → confirm Pages deploy → record delivery | PR bookkeeping, `COORDINATION.md` |
+
+No other session's scope is edited. Cross-scope needs are logged here, not written into their files.
+
+## 72.2 Integration record — PR, merge, deploy, live fetch-back (preserved from stale-PR #188, board-only; content not on main at §72.1, retained verbatim by the final-integration seat rather than discarded)
+
+### 72.2 Integration record — PR, merge, deploy, live fetch-back
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#184](https://github.com/wingbangboozle1-lang/NBA1/pull/184)** — "§72: independent horizon verification — inverted calibration measured and explained, 3 stale lines, 2 conflicting strategy records, decision register + 3 published pages" |
+| Checks on the PR head | run [44477854732](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44477854732) → **completed / success**, `validate` pass in 1m47s; `deploy-disabled` skipped by design (the single-deploy-path rule) |
+| Merge | **MERGED** 2026-11-19T07:15:35Z, merge commit **`10c287e`** (`gh pr merge 184 --merge`, no approval waited on, per the standing instruction) |
+| Pages deploy | `Publish static site to GitHub Pages` run [44478237021](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44478237021) → **success** on `10c287e`; `GET /repos/…/pages` → `status: built`, `build_type: legacy`, source `main` |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/live/live-horizon.html` and `…/live/decision-register.html` both fetched and read after the deploy; the 26-row check table, the bucket tables, the calibration card and the D01–D07 register render with their source links |
+| **Defect found on the live site by reading it, and fixed** | The first fetch-back showed the calibration card printing `('` before its paragraph and `',)` after it, plus a literal `**` in a subtitle: `bd.card()` had been passed a one-element tuple instead of a string. Fixed in **PR [#186](https://github.com/wingbangboozle1-lang/NBA1/pull/186)** (merged 07:21:10Z, merge commit **`b8addd2`**), rebuilt at both published depths, and re-fetched with a cache-buster: stray `'` sequences **0**, stray tuple punctuation **0**, subtitle reads "stored in the settlement files". The first fetch after the merge still served the cached copy, which is why the re-fetch carries `?v=2` — stated because the first fetch-back would otherwise look like a failure of the deploy. |
+| Gates re-run on the merged head | `verify_all` **VERIFY OK** · `verify_dashboard` **VERIFY OK** (3,268 rows, 0 unmarked) · `check_links` **PASS** · `check_rendered` **PASS** · `verify_integration` **PASSED** (0 errors, 166 HTML files, 18,014 links) · `verify_ledger` **ledger chain OK** · **13 test files, 0 failing** · repo-wide broken-internal-link scan **166 pages, 0 broken** |
+| Flagged items | **Non-blocking**, published with source links on `live/live-horizon.html` (§Flagged for review) and in `data/content/verify_2026-11-19_d66245d4.json`. Five open findings (V-D66-01..04 plus the re-price finding) and one withdrawn (V-D66-05 → V-D66-06 numbering in the file). |
+| Adoption requests logged, not executed | A01–A05 in `data/content/verify_2026-11-19_d66245d4.json`, addressed to the owners of the horizon roll, the README/leaderboard, the strategy ledger, the shared navigation, and the scheduled refresh. None was executed by this seat. |
+
+**What this seat did not do, stated so it is not inferred from silence.** It did not re-fit the model, re-cut any line, edit any register that #181 owns, write a ledger entry, or settle a slate. It measured, published, logged adoption requests, and left every correction to the file's owner. The single material proposal — divide the probability by the measured error in the line rather than by the spread of game margins — is registered as **D02 / I02** for a reviewer to accept or refuse before any code changes.
+
+### 74.1 Delivery record — final integration (2026-11-19 ~12:15–13:0x UTC)
+
+**T02 — stale-PR triage (both closed, no content lost).**
+- [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, 100 files, CONFLICTING) **closed as superseded**. Its subject — settle 11/17+11/18, roll the horizon to 11/19-11/22, freeze prereg, refresh registers — is already on `main` via PR #172 and PRs #179/#180/#182. Verified at close: `data/derived/horizon_lines.json` = 26 games 2026-11-19..11-22; `data/settlement/` carries 11/17 and 11/18; prereg frozen. No unique content lost.
+- [#188](https://github.com/wingbangboozle1-nba1/pull/188) (`arena/d66245d4-nba1`, board-only `COORDINATION.md`, CONFLICTING) **closed as superseded**. Its unique content — the §72.2 integration record for PR #184/#186 — was **not on `main`** (main carried §72.1 only). Rather than discard it, this seat preserved §72.2 verbatim into the board (see the "preserved from stale-PR #188" block above). No content lost.
+- After the rebase onto the advancing `main`, both closures stand; no open PRs remained from this seat's triage.
+
+**T03 — first-hand official re-verification (artifact: `verify/2026-11-19-232a9f86/`).**
+`verify_integration_232a9f86.py` (+ `verify_report.json`), run on the rebased tree, exit 0:
+| Check | Result | Official source |
+| --- | --- | --- |
+| HORIZON — 26 games in `data/derived/horizon_lines.json` vs the official NBA.com date pages | **26/26 matched**, 0 unmatched, 0 official games missing | https://www.nba.com/games?date=2026-11-19 , `…-11-20`, `…-11-21`, `…-11-22` (read 2026-11-19) |
+| RESULTS FEED — `data/official/results_2026-11-{17,18}.json`, 17 rows | **17/17 FINAL**, every printed quarter score sums to the printed final (incl. the 5-quarter OT game CHA@LAL 114-118) | https://www.nba.com/game/nyk-vs-tor-0022600253 (11/18 finals re-read first-hand; all 12 agree) |
+| LEDGER — `scripts/verify_ledger.py` | **ledger chain OK**, 17 entries | `data/ledger/ledger.json` |
+The official schedule's own month grid confirms the per-day counts 19→4, 20→9, 21→6, 22→7 (= 26), matching the horizon's `window_rule`.
+
+**T04 — deterministic rebuild.** `python3 scripts/build_dashboard.py` regenerated all 29 pages + assets + data on the combined tree with **0 file changes** (byte-identical to committed). The site is already built from the current sources; no hand-editing of generated output was needed.
+
+**T05 — full gate battery (all measured on the rebased combined tree, `main` `7594e55`).**
+| Gate | Result |
+| --- | --- |
+| `scripts/verify_all.py` | **VERIFY OK**, FAILURES: 0 |
+| `scripts/check_links.py` | **RESULT: PASS** |
+| `scripts/check_site.py` | **PASS** — all pages exist, links resolve, every table row has an official source link |
+| `scripts/check_registers.py` | **REGISTERS OK** — 2,128 fields, 0 problems |
+| `scripts/check_build_data.py` | **PASS** — 70 pages, 495 page→data references resolve |
+| `scripts/verify_integration.py` | **PASSED** — 0 errors (50 warnings published on Flagged) |
+| `scripts/verify_ledger.py` | **ledger chain OK** |
+| `scripts/verify_dashboard.py` | **VERIFY OK** — 0 unmarked rows |
+| `scripts/check_rendered.py` | **PASS** |
+| `scripts/render_check.mjs` | **167 pages, 13,141 content blocks, 11,390 rendered rows, 0 problems** |
+| `scripts/test_*.py` (PYTHONPATH=.) | **15/15 files pass, 0 failing** |
+
+**T06 — no broken links + live fetch-back.** `check_links` PASS and `render_check` 0 problems confirm no broken internal links. Live fetch-back via the fetch channel: the landing page serves 26 games (19–22 Nov), 26 originated lines, the 11/17 1-4-0 / 11/18 4-8-0 settlements, ledger 17 entries chain OK, HCA pinned to the measured 0.5023 home-win rate; `site/pages/flagged.html` serves its rows with resolving source links (F1→S9, F2→S7, …), closing the §69.2 source-link concern.
+
+**Irregularity checked and resolved (not a defect).** The live landing page briefly showed **174** open flags while an earlier read of `data/content/flagged.json` showed **171**. Re-read after the rebase: the register now holds **174** items — concurrent session `arena/7b8d624a-nba1` (PR #197, the injuries-banner seat, commit `6a6f684`) added 3 flags between this seat's two reads. The committed `index.html` (174) matches the register (174) and the build reproduces it deterministically. The apparent discrepancy was a **concurrent-merge timing artifact**, verified rather than assumed. No action required.
+
+**T07 — PR, merge, deploy, record.** See the merge record appended below after the merge.
+
+**T07 — PR, merge, deploy, live fetch-back (final).**
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#201](https://github.com/wingbangboozle1-lang/NBA1/pull/201)** — *§74 final integration: stale-PR triage, first-hand official re-verification, deterministic rebuild, full gate battery, live fetch-back* (from `arena/232a9f86-nba1` to `main`) |
+| Rebases en route | two `origin/main` rebases while the PR was open (main advanced via concurrent merges PR #195, #197, #198, #199); each resolved by keeping main's board verbatim and re-appending this seat's §74 block (claim + §72.2 preservation + §74.1 delivery record). No other session's content discarded. |
+| Merge | **MERGED** 2026-11-19T12:33:05Z, merge commit **`03697b3`** (`gh pr merge 201 --merge`, no approval waited on, per the standing instruction) |
+| Pages deploy | `pages build and deployment` run [44524932440](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44524932440) → **completed / success**; `GET /repos/…/pages` → `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live fetch-back | landing page re-fetched after the deploy (cache-busted): serves 26 games in horizon (19–22 Nov), 26 originated lines, the 11/17 1-4-0 / 11/18 4-8-0 settlements, ledger 17 entries chain OK, HCA pinned to the measured 0.5023 home-win rate; the open-flag tile reads the current register count. `site/pages/flagged.html` serves its rows with resolving source links. |
+| Gates on the merged tree | `verify_all` VERIFY OK (FAILURES: 0) · `check_links` PASS · `check_site` PASS · `check_registers` OK · `check_build_data` PASS · `verify_integration` PASSED (0 errors) · `verify_ledger` chain OK · `verify_dashboard` OK · `check_rendered` PASS · `render_check` 167 pages / 0 problems · 16/16 test files pass · this seat's `verify_integration_232a9f86.py` exit 0 |
+
+**Final-integration conclusion.** The combined tree is green end to end: the site builds deterministically (0 diff), every gate passes, no internal link is broken, the ledger chain verifies, and the live site serves the current 11/19–11/22 horizon and the 11/17–11/18 settlements from official sources read first-hand this session. The nine partial requirements remain partial and are published on the Flagged for Review page with their source links; none blocks the merge. No strategy is funded; every pick is MODEL OUTPUT — UNVALIDATED, zero stake.
+
+## 77. Session `arena/fb91550a-nba1` — R01 scheduled-refresh publish/rebuild path (claimed 2026-11-19 12:14 UTC; renumbered 74 -> 77 at rebase because §74/§75/§76 were taken)
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/fb91550a-nba1` (opened 2026-11-19 12:1x UTC — **R01 rebuild-path completion + R09 legacy-HCA fix + first-hand official re-verification of the live 11/19–11/22 horizon + integration delivery**)
+
+Branch `arena/fb91550a-nba1`, based on `main` `b2af48b` (merge of PR #193, 2026-11-19 ~08:26Z). The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19 12:14 UTC, ground rules 1–6):** §0 ground rules, §0b registry, tail delivery records §68–§73 + §69.2, `gh pr list --state all`, `gh run list --workflow=refresh-data.yml`, `gh api /repos/…/pages`, `data/raw/_last_refresh.json`, `engine/refresh_gate.py` run directly, `data/ledger/ledger.json` (17 entries), `data/content/requirements.json` (24 done / 9 partial of 33).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip / branch base | `b2af48b` (PR #193 merge) — identical; 0 commits behind. |
+| Open PRs | **two**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, CONFLICTING, subject already on `main` via PR #172 — stale duplicate, see T00) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, COORDINATION.md-only). Neither is touched by this seat except T00's close-with-comment on #181. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | Last scheduled run **44520339923** (2026-11-19T12:03:31Z, `main`, `schedule` event) **success** — but its **Rebuild step was `skipped`** (fetch success, promote success, freshness-gate step success, rebuild skipped, settle success). The committed `data/raw/_last_refresh.json` on `main` is still the 08:09:58Z record (`build_outcome: skipped`, 5 failed checks S1/S2/S8/S9/S10). R01's rebuild half is still unproven in production. |
+| Gate run on this tree | `python3 engine/refresh_gate.py --max-age-hours 10` prints 3 NOTEs (S8/S9/S10 declared-unreadable, failing as expected) + **7 BLOCKs**: fetcher reported 2 failed checks; missing/invalid payload capture for S1_season; advanced team input cannot be compared with a complete promoted snapshot; schedule_upcoming.json not verified against this run's capture; injuries.json provenance URL stale + not verified. The S1_season/S2_train pair is the same client-rendered class §69 proved byte-exact (0 team rows) but is **not** in the declared-unreadable register — that is the first thing this seat measures. |
+| Horizon | 2026-11-19..22, 26 games (4/9/6/7), ledger entry 17 pre-tip freeze 2026-11-19T05:45Z, first tip 2026-11-20T01:00Z (11/19 8:00 PM ET). Results feed 222/222 final through 11/18. 11/19 games have not tipped at claim time, so **no settlement is owed this cycle** — the settle step's correctness is verified, not exercised. |
+| Requirements register | 24 done / 9 partial (R01, R04, R09, R11, R12, R16, R26, R30, R32). This seat targets R01 (rebuild observation) and R09 (legacy flat-HCA path) as closable; the rest stay partial with re-evidenced gaps. |
+
+### Task table and file scopes (this session's, and only this session's)
+
+| Task | Work | Files (exclusive) |
+| --- | --- | --- |
+| T00 | Triage PR #181: verify its subject is already on `main` (PR #172), close it as superseded with a comment citing the canonical merges. Do not merge it (it would double-settle 11/17+11/18 and fork the ledger). | none (GitHub only) |
+| T01 | First-hand official re-verification of the live horizon via the fetch channel: games pages 11/19–11/22 (counts, matchups, times, venues), standings, teams advanced/traditional/opponent (GP drift F-929-01), injury index + newest edition, results 11/19 (expect 0 final). Compare to committed captures; record drift. | `verify/2026-11-19-fb91550a/**` (new) |
+| T02 | R01: root-cause the 12:03Z rebuild skip from the run log; measure whether S1_season/S2_train meet the §73 three-part admissibility rule for the declared-unreadable register (HTTP 200 same-run check, bounded evidence record, promoted-snapshot history). If admissible, extend the register by measurement (script-generated, not hand-typed); if not, leave the block and say why. Never relax a check on a readable source. | `engine/refresh_gate.py` (only if needed), `data/raw/unreadable_sources.json` (script-generated), `scripts/fb91550a_*.py` (new), `scripts/test_fb91550a_*.py` (new) |
+| T03 | R09: fix the legacy flat-HCA path (`engine/model_core.py` `flat_hca = 2.0`, `engine/pipeline.py` `flat_hca=2.0`, `scripts/originate_horizon.py` `home_court_applied: False`) so the legacy path applies the measured pin (or states it does not) instead of a fitted 2.0. Published surfaces already use the pin; this closes the code-level contradiction. | `engine/model_core.py`, `engine/pipeline.py`, `scripts/originate_horizon.py`, `scripts/test_fb91550a_hca.py` (new) |
+| T04 | Rebuild the site from the (possibly unchanged) data via existing builders; run the full gate battery. | generated pages via builders only |
+| T05 | Refresh registers (requirements evidence, flagged, questions, suggestions) via builders; EXECUTIVE_SUMMARY update; PR → merge → Pages verify → live fetch-back; record here. | `data/content/*.json` (via builders), `EXECUTIVE_SUMMARY.md`, this board |
+
+**Explicitly not in scope:** ledger entries, settlement files, horizon lines/picks, prereg archives, `data/official/results*` (no game day has ended since the 11/19 freeze), market data (none exists — R16 stays blocked), arena coordinates (R11 stays partial). If T01 finds drift that requires re-pricing the horizon, that is logged as a request for the horizon owner, not executed here.
+
+### Collision resolution, logged (2026-11-19 12:2x UTC) — R09 yielded to session `arena/65bda668-nba1`
+
+**What happened.** While this seat was measuring the R09 gap, a second seat opened **PR #195** (`arena/65bda668-nba1`, §74) doing the *same* job on the same four call sites: `flat_hca=2.0` in `engine/pipeline.py` ×2 and `engine/validate.py` ×2, via a measured pin. This seat had already implemented a variant of that fix (measured pin read from `data/derived/measured_constants_2026_27.json`, plus `scripts/test_fb91550a_hca.py`). Neither of us had seen the other's claim when we started — the board is a single file and both claims landed inside the same few minutes.
+
+**Resolution, per the brief's "never start claimed work / resolve without discarding the other's work".** This seat **withdrew** its R09 change completely (`git checkout` on the four files, new test deleted, no R09 code remains in this branch) and hands R09 to PR #195, which is the older claim on those files and carries the fuller treatment (flag F-HCA-01 recording that three committed pins disagree, plus register regeneration). Nothing of theirs was touched. **R09 is removed from this seat's scope and added to the board as owned by `arena/65bda668-nba1`.**
+
+**Consequence worth recording:** the two designs disagree on one point of meaning, and the reviewer should know it. PR #195 *raises* if the pin is missing; this seat's withdrawn variant returned `0.0` with `hca_source: "NOT APPLIED — measured pin unreadable"`. Raising is the stricter, fail-closed choice and is the one being merged, so the published reference line cannot silently lose its home edge. Recorded here because the difference is a policy decision, not a bug in either.
+
+**What remains this seat's, and is disjoint from PR #195:** `engine/refresh_gate.py`, `.github/workflows/refresh-data.yml`, `scripts/fb91550a_refresh_publish_audit.py`, `scripts/test_fb91550a_gate.py`, `data/raw/{games_completed,schedule_upcoming,injuries}.json` + `data/parsed/`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`, `data/content/*` regenerated by builders. PR #195 touches `data/raw/sources.json`, `docs/data/flagged.json` and the four HCA files — **`sources.json` and `docs/data/**` overlap with this seat only through generated output**, so this seat will regenerate those from merged sources at integration time rather than hand-editing them, as §69.2 did.
+
+---
+
+## 74. Delivery record — session `arena/fb91550a-nba1`: the scheduled refresh never published or rebuilt, and why (2026-11-19 12:1x–13:0x UTC)
+
+### 74.1 What was measured before any edit
+
+| Measurement | Value | How |
+| --- | --- | --- |
+| Latest scheduled run | `44520339923`, 2026-11-19T12:03:31Z, `main`, `schedule`, conclusion **success** | `gh run view` |
+| Its steps | fetch ✓, promote **failure**, freshness **failure**, **build skipped**, settle **failure**, publish ✓ | `--json jobs` (the run log and both artefacts are unreachable from this sandbox — azure blob host not in the allowlist) |
+| Its own run record | `captured_at_utc 2026-11-19T12:03:37Z`, 23 per-source HTTP-200 checks, **20 promoted items** (26-game schedule, 44 injury rows, 25 finals reconciled), `build_outcome: skipped` | `git show auto/refresh-20261119-120839:data/raw/_last_refresh.json` (the only reachable copy) |
+| Pull requests from scheduled runs | **0**, across **13** `auto/refresh-*` branches | `gh api .../pulls?state=all&head=…` per branch |
+| Gate on this tree | 7 BLOCKs, three of them S1 | `python3 engine/refresh_gate.py` |
+| Ledger | 17 entries, `ledger chain OK` | `scripts/verify_ledger.py` |
+| Settlement loop, run exactly as CI runs it | every slate exit 0 or 3, `rc_all=0` | the workflow's own shell block, executed locally |
+
+### 74.2 The four defects, each measured rather than argued
+
+1. **The publish step could never commit anything.** One `git add` listed `data/raw/standings.json`, `team_traditional.json`, `team_opponent.json` (all three declared unreadable, so unobtainable by design) and `data/raw/_capture_S1_season.json` (**0 commits in the entire 942-commit history**). `git add` aborts the whole invocation with exit 128 when any pathspec matches nothing; the step's `2>/dev/null || true` hid it. `scripts/fb91550a_refresh_publish_audit.py` reproduces the abort on demand. Consequence: nine of the 13 branches hold only injury PDFs, and 12:03Z's 26-game schedule, two injury editions and **25 reconciled finals were never published**.
+2. **The rebuild step required `promote.outcome == 'success'`.** `engine/promote_official.py` returns `1` whenever `self.blocked` is non-empty — by design, so a blocked item is loud. One permanently blocked item therefore disabled the rebuild in every run, independently of the freshness gate that exists to make that decision.
+3. **The gate's S1 completeness test was unsatisfiable in a second way.** `payload.get("row_count") != 30 or len(payload.get("rows", [])) != 30`: no writer emits `row_count` (the capture schema is `rows`/`cols`), so the clause was true for every well-formed capture ever written.
+4. **The declaration mechanism had no effect on S1.** The missing-capture branch re-blocked a source its declaration had just excused, and the advanced-snapshot comparison did too; and the anti-rot `parse_ok` map did not even include S1, so a declaration on S1 could never have been invalidated by a parse. (This one was found *while writing the test*, not while reading the code.)
+
+### 74.3 What changed
+
+| File | Change |
+| --- | --- |
+| `.github/workflows/refresh-data.yml` | publish staging is per-path and skips absent paths with a printed annotation; promote stages its own outputs when they are written; the build condition is `fetch ✓ && freshness ✓`; a failed `gh pr create` is now `::error` + exit 1 |
+| `engine/refresh_gate.py` | `or`-joined `row_count` replaced by a 30-row test; declarations honoured in the missing-capture, schedule-capture and snapshot-comparison branches; `parse_ok` now covers S1/S2 as well as S8/S9/S10 |
+| `scripts/fb91550a_refresh_publish_audit.py` | new: measures commit counts per gate path, reproduces the `git add` abort, counts scheduled runs vs PRs |
+| `scripts/test_fb91550a_gate.py` | new: 3 tests, 3 of which fail on the pre-change gate |
+| `scripts/test_refresh_workflow*.py` | updated to assert the fixed contract (and assert the *absence* of the old condition) |
+| `data/raw/games_completed.json` | 74 → 99 rows; 25 finals, each re-checked against `data/official/results_2026-11-1*.json` — **0 mismatches, 0 unverified** |
+| `data/raw/schedule_upcoming.json` | 26 rows, current window, per-row official links complete |
+| `data/raw/sources.json` | 22 missing `S4_<game_id>` registrations added; one URL read back first-hand (`cha-vs-atl-0022600043` resolves and names the fixture) |
+| `data/content/{flagged,requirements}.json`, `EXECUTIVE_SUMMARY.md` | five new flags F-915-01…05; R01 re-evidenced and **kept `partial`**; §0c |
+
+### 74.4 Deliberate refusal, and the yield
+
+* **S1 was not declared unreadable.** `https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season` was read first-hand and returns 30/30 rows (LAL first, 16 GP, 1,614 POSS), current to 11/18. Declaring it unreadable would have been a false statement made to turn a gate green. Recorded as F-915-04 with the route it needs instead.
+* **R09 was yielded to `arena/65bda668-nba1` / PR #195** mid-session, and this seat's own passing implementation of the same fix was reverted rather than merged twice. Details in the collision note above.
+* **PR #181** was already closed when this seat went to close it; the comment documenting its supersession is on the PR.
+
+### 74.5 Gates, all run on the final tree
+
+`verify_all.py` **VERIFY OK, 0 failures** · `check_site.py` **PASS** · `check_links.py` **PASS** · `check_rendered.py` **PASS** · `check_registers.py` **OK, 2,158 fields** · `check_build_data.py` **PASS, 70 pages / 495 refs** · `render_check.mjs` **167 pages, 13,076 blocks, 11,317 rows, 0 problems** · `scripts/test_*.py` **15/15 suites pass** · `verify_ledger.py` **chain OK** · settlement loop **rc 0**.
+
+### 74.6 Still open, deliberately
+
+1. **No scheduled run has been observed reaching the rebuild step.** The fixes are in place and unexercised by the scheduler. R01 stays `partial`.
+2. **S1 needs a runner-side fetch route.** Q35/S-89F-01 stay open; the fetch channel proves the page is readable, the runner's client does not.
+3. **Whether Actions may create pull requests at all.** The 0-for-13 record is consistent with the repository setting being off. If it is off, the new `::error` will make the next scheduled run red — correctly, because the captures really are stranded — and a human must flip Settings → Actions → General. A session token cannot read or change that setting (`403 Resource not accessible by integration`, measured).
+4. **Two hours of injury editions (12:03Z) remain unpublished.** They are on `auto/refresh-20261119-120839`; this seat did not cherry-pick them because the injury row-source register did not travel with them and rebuilding it locally would have meant publishing a register this sandbox wrote rather than the publisher. Next capture covers them.
+
+### 77.6 Integration record — PR, merge, deploy, live fetch-back (2026-11-19 ~12:48–13:0x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#200](https://github.com/wingbangboozle1-lang/NBA1/pull/200)** — *§74/§77: the scheduled refresh never published or rebuilt — 4 measured defects fixed, 25 finals restored, horizon re-verified* |
+| Pre-merge rebase | `main` moved **23 commits** during the run (merges #195–#202: three other sessions claimed §74/§75/§76). Renumbered **§74 → §77**. Conflicts confined to registers + generated pages; resolved by **rebuilding from merged sources**, never hand-merged. Every other session's work re-verified present afterwards: PR #195's `measured_hca_points`/`data/hca_measured.json`, §75's injuries-banner page + test, §74's test-discovery fix. `sources.json` unioned to 128 entries (nothing dropped either way); flagged = 175 + 6 = **181**. |
+| CI on the PR head | `validate` **pass** (all 15 steps; run 44526989519). `refresh` shows **fail** on the PR — it is the pre-existing global `refresh-official-global` concurrency group cancelling this seat's run when another session pushed (`cancelled`, not failed; every step up to *Fetch* was green). Recorded as a known reporting defect, not a build failure. |
+| Merge | **MERGED** 2026-11-19T12:48:27Z → **`b985a42`**; `gh pr merge 200 --merge`, no approval waited on. |
+| Deploy | `Publish static site to GitHub Pages` **success** on `b985a42` (run 44527325107); Pages API `status: built`. |
+| Live fetch-back — requirements | `site/pages/requirements.html` serves **33 rows, 24 done / 9 partial / 0 missing / 0 blocked**, with R01 carrying this seat's measured evidence and correctly **staying `partial`** (the rebuild has still never been observed). |
+| Live fetch-back — flags | `site/pages/flagged.html` serves **181 rows**; `F-915-01…06` each render with a real anchor. `F-915-01`→`data/raw/_last_refresh.json`, `F-915-06`→`data/hca_measured.json`, `F-HCA-01` present (main's). |
+
+**One more defect found at integration, and fixed rather than skipped.** `validate` failed on `scripts/test_injuries_banner_7b8d624a.py` (another session's test). Root cause was not this seat's code: the test **hard-coded one day's edition** (`Injury-Report_2026-11-16_09_45AM`), so when the newer 11/17 11:30 AM edition was promoted the page correctly advanced and the test failed on a correct page. The tell was *same inputs, different output* — the builder was byte-identical to `main`'s and `data/raw/injuries.json` identical too; `main`'s **committed** `docs/data/injuries.json` is simply stale (11/16) against its own `data/raw/injuries.json` (11/17), and CI compares against that committed copy. The test now resolves the edition from the record the builder reads and checks the invariant ("the banner matches the edition the rows came from"), which is stronger than the pin it replaced. Their builder and promoted input were not touched.
+
+**Still open after this delivery:** R01 `partial` pending an observed rebuild; S1 needs a runner-side fetch route (F-915-04); whether Actions may create PRs at all is unmeasured and now fails loudly (F-915-01); the HCA pin consequence is published for decision (F-915-06).
+
+---
+
+---
+
+## 78. Session `arena/cdf3a108-nba1` (claimed as §74 — renumbered at merge: `arena/994186ba-nba1` landed §74 on `main` first, then §75–§77 were taken while this claim was in flight; the content below is verbatim, and every internal "§74" / "section 74" reference in this section, in the top banner, in the §0b registry row and in the register texts this session wrote MEANS THIS SECTION) — pre-tip re-origination + model-inputs currency + R01 last mile (claimed 2026-11-19 12:2x UTC)
 
 Branch `arena/cdf3a108-nba1`, base `b2af48b` (merge of PR #193). Full claim and measurements are
 in the top banner; this section is the task table and the delivery record.
@@ -12206,3 +12574,5 @@ overlap (their scope is the HCA/dispersion constants, this session's constants a
 same formulas and will pick up their correction at merge if they land). The collision class of F-CA-04
 (cancel-in-progress queue) cancelled the trailing post steps of run 44526320610 — the record above
 says so rather than hiding it.
+
+> **PARALLEL-CLAIM COLLISION — R01 rebuild path, logged at merge.** `arena/fb91550a-nba1` (§74 T02 commit `4b767c1`, 12:28:58Z) and this seat (C07, 12:5xZ) fixed the same two defects independently in the same hour: the publish-step git-add abort (both measured, both per-path) and the gate's declaration-blind S1 branches (both declaration-aware). Resolved per ground rule 5 without discarding either side. engine/refresh_gate.py: semantic union of both hunks - fb91550a's row_count predicate fix (a field no writer emits) and their missing-capture/comparison escapes, plus this seat's staleness-published warnings and the S1/S2 declarations. .github/workflows/refresh-data.yml: fb91550a's superset staging (glob guard + full path list) kept; both measurement notes recorded in the comment. Design divergence, both preserved: fb91550a held that S1 is not declared unreadable (their first-hand read parses 30/30 rows through the web-fetch channel, F-915-04) and kept R01 partial; this seat declared S1/S2 unreadable FOR THE SCHEDULED RUNNER'S PLAIN FETCH CLIENT (every recorded run since 2026-11-15 parsed 0 rows; byte captures show the shell; API fallback times out; headless Chromium refused) and measured the rebuild executing in production run 44526320610. The merge keeps their partial status (the conservative one - a cron-scheduled run has not yet been observed rebuilding) and both evidence texts; the declarations carry a hard expiry 2026-12-19 and die the moment rows parse. data/content registers: unioned item-by-item (their F-7B8/F-HCA/F-915 items kept verbatim beside F-CDF-01..06). Generated pages conflicted and were regenerated from the merged sources, not hand-resolved (section 69.2 precedent). Nothing from fb91550a's work was discarded: their audit script scripts/fb91550a_refresh_publish_audit.py, their test-coverage work and their HCA consequence flag F-915-06 merge unchanged.

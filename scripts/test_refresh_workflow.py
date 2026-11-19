@@ -15,12 +15,26 @@ class RefreshWorkflowTests(unittest.TestCase):
     def setUpClass(cls):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
 
-    def test_build_requires_successful_fetch_promotion_and_freshness(self):
+    def test_build_requires_successful_fetch_and_freshness(self):
+        """The gate decides, not promote's exit code (COORDINATION.md section 74).
+
+        This test previously required `steps.promote.outcome == 'success'` in
+        the rebuild condition. That was the defect, not the requirement:
+        engine/promote_official.py exits 1 whenever ANY item is blocked, so one
+        permanently blocked item (S1_season, whose capture has never existed)
+        made the rebuild unreachable in every scheduled run. The freshness gate
+        below re-reads the promotion records and blocks unless every required
+        input is verified against this run's capture, which is the property that
+        actually matters. Asserted positively AND negatively so the condition
+        cannot silently regress in either direction.
+        """
         self.assertIn(
-            "if: steps.fetch.outcome == 'success' && steps.promote.outcome == 'success' "
-            "&& steps.freshness.outcome == 'success' && steps.freshness.outputs.ok == 'true'",
+            "if: steps.fetch.outcome == 'success' && steps.freshness.outcome == 'success' "
+            "&& steps.freshness.outputs.ok == 'true'",
             self.text,
         )
+        self.assertNotIn("steps.promote.outcome == 'success'", self.text,
+                         "promote's exit code must not gate the rebuild")
 
     def test_promotion_runs_after_completed_fetch_and_freshness_is_success_only(self):
         promote = self.text.split("id: promote", 1)[1].split("\n      - name:", 1)[0]

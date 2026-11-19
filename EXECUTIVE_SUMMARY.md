@@ -1,6 +1,6 @@
 # Executive summary — NBA1 line origination and strategy lab
 
-**As of** 2026-11-19 (UTC) · **Sessions** `arena/934ca56f-nba1` (original), `arena/929395a5-nba1`
+**As of** 2026-11-19 (UTC) · **Sessions** `arena/934ca56f-nba1` (original), `arena/fb91550a-nba1`
 (this update) · **Live site** <https://wingbangboozle1-lang.github.io/NBA1/>
 
 This document states what the system does, what it has actually established, what it has
@@ -10,7 +10,7 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
-## 0c. Update — 2026-11-19T13:10Z, session `arena/cdf3a108-nba1` (read this first)
+## 0d. Update — 2026-11-19T13:10Z, session `arena/cdf3a108-nba1` (read this first)
 
 **The 05:45Z cut had one measured input lag, it moved three lines, and the amended seal is published
 before tip.** Every section below that describes the LAL/UTA team-stat lag (F-929-01, F-89F-04,
@@ -41,7 +41,45 @@ anywhere in this repository, so every unit figure is a paper figure at the state
 the published pick probabilities remain overconfident until Q38 (the sigma basis) is answered
 (F-CDF-04); and S1's strategy record remains doubled (23-9 / +11.91 vs 23-8 / +12.909) until Q39 is
 (F-CDF-05).
+---
 
+## 0c. Update — 2026-11-19T12:5xZ, session `arena/fb91550a-nba1` (read this first)
+
+**The scheduled job was measured for the first time from inside its own publish path, and it
+had never published or rebuilt anything.** This section supersedes any statement that the
+scheduled refresh "runs" in the sense of *delivering* what it captures.
+
+| Item | Was | Is now | Evidence |
+| --- | --- | --- | --- |
+| Scheduled publish path | assumed working; 13 runs, no PRs, attributed to "no changes" | **structurally broken**: a single `git add` named four paths that cannot exist, and `git add` aborts entirely (exit 128) on any unmatched pathspec — so every run committed nothing | `scripts/fb91550a_refresh_publish_audit.py` reproduces the abort; 13 `auto/refresh-*` branches, **0 pull requests ever** |
+| Rebuild step | blocked by one unsatisfiable snapshot requirement (§69) | **three independent unsatisfiable predicates** plus a fourth latent one; all four fixed | `engine/refresh_gate.py`, `scripts/test_fb91550a_gate.py` (3/3 pass; 3 fail on the old code) |
+| Rebuild gate dependence | `fetch ✓ && promote ✓ && freshness ✓` | `fetch ✓ && freshness ✓` — the freshness gate re-reads promotion records and is the authority; promote's exit code (1 whenever *any* item is blocked) can no longer disable the rebuild | `.github/workflows/refresh-data.yml` |
+| Failed PR on a scheduled run | warning, run still green | **`::error` and exit 1** — a stranded capture is a failed refresh | same file |
+| R01 (scheduled refresh + gated rebuild) | partial | **still partial, and now honestly so**: the only remaining block is S1 (official Advanced team table) | F-915-04 |
+| Official results feed | 74 rows, current to 11/15 | **99 rows, current to 11/18** — the 25 finals the 12:03Z run captured and could not publish | every row re-checked against `data/official/results_*.json`: 0 mismatches |
+| Horizon 11/19–11/22 | frozen pre-tip at 05:45Z, not re-read | **re-read from the official games pages**: 26/26 matchups present, **25/25 times agree**, 1 `NOT_CHECKED` | `verify/2026-11-19-fb91550a/horizon_reverification.json` |
+| Official schedule rows with a source link | 3 rows rendered a blank Source cell | **all 26 rows carry their official game-page link** (22 missing `S4_<game_id>` registrations added and read back) | F-915-03 |
+
+### What this session refused to do
+
+**It refused to declare S1 unreadable.** That was the one-line path to a green gate: add
+`S1_season` to `data/raw/unreadable_sources.json` exactly as S8/S9/S10 are declared. It
+would have been false. Read first-hand through the platform fetch channel on 2026-11-19,
+`https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season` returns
+the complete 30-row Advanced table (Los Angeles Lakers first, 16 GP, 1,614 possessions),
+current through 11/18. The page is not unreadable; the *runner's HTTP client* cannot read
+it, and its stats.nba.com fallback times out. Those are different problems with different
+fixes, and only one of them justifies a declaration. So R01 stays `partial` and the gate
+keeps blocking on S1 — that is the gate doing its job, not a defect.
+
+### What is proven, and what is not
+
+**Proven:** the publish step could not have worked, by a mechanism reproduced on demand;
+the gate had four defects, three of which independently disabled the rebuild; the 25 finals
+now in the feed match official captures exactly; the horizon matches the official pages on
+every row checked. **Not proven:** no scheduled run has yet been *observed* reaching the
+rebuild step. That remains the single open measurement in R01, and the honest state of this
+repo is that the fix is in place and untested by the scheduler until its next tick.
 ---
 
 ## 0b. Update — 2026-11-19T05:45Z, session `arena/929395a5-nba1` (read this first)
