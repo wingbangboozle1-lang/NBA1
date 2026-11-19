@@ -518,7 +518,7 @@
 <td>- Derive standings W-L from the games feed, corroborate with the recorded per-team URLs, and retire the standings parser and its evidence files <span class='fine'>(effort: Low - the parse already exists in engine/fetch_official.py and the check is written (scripts/verify_standings_89f7b601.py); risk: Low - it corroborates 30/30 today; the eleven non-W-L fields would need to be declared unavailable rather than published; unlocks: R01's standings half becomes genuinely green instead of failing closed forever; removes a permanently red gate)</span><br>- Keep trying to reach the standings page and leave the gate red <span class='fine'>(effort: None; risk: High - a permanently red gate trains everyone to ignore gates; unlocks: Nothing)</span><br>- Buy or broker a data feed <span class='fine'>(effort: High; risk: Medium; unlocks: Everything the page carries including GB and splits, at a cost and with a third party in the provenance chain)</span></td>
 <td>Take option 1. It is the only option that turns a measured structural impossibility into a green gate without inventing data. The eleven fields the feed cannot carry must be rendered as unavailable, not estimated.</td>
 <td>Approve retiring the standings-page parser in favour of the games feed plus the corroboration check.</td>
-<td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json" target="_blank" rel="noopener">S89F_CORROB</a></td>
 </tr>
 <tr>
 <td>S-89F-02</td>
@@ -528,7 +528,7 @@
 <td>- Run scripts/recut_drift_89f7b601.py as a pre-origination step and refuse to originate a horizon when verdict is DRIFT <span class='fine'>(effort: Low - the check exists and exits 6 on drift; risk: Low - it can only block a stale price, never publish a wrong one; unlocks: Every horizon is priced from inputs that were verified against the official page in the same cycle)</span><br>- Keep the check as a report only <span class='fine'>(effort: None; risk: Medium - the report will be read once and then ignored; unlocks: Visibility without enforcement)</span></td>
 <td>Take option 1. A check that cannot block is a comment.</td>
 <td>Approve wiring the drift check into origination as a hard gate.</td>
-<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
 </tr>
 <tr>
 <td>S-89F-03</td>
@@ -538,7 +538,7 @@
 <td>- Publish a small table per refresh run: source, HTTP status, bytes, table rows, team links, rowSet present, parse result, verdict (delivered-but-unrenderable / unreachable / parsed) <span class='fine'>(effort: Low - every field already exists in the refresh record after F-89F-05; risk: Low; unlocks: A reader can tell instantly whether a red gate means 'NBA changed its page' or 'NBA refused us')</span><br>- Keep the single 'parsed 0' line <span class='fine'>(effort: None; risk: High - the same day-long confusion repeats on the next page change; unlocks: Nothing)</span></td>
 <td>Take option 1. It is a rendering job on data that already exists.</td>
 <td>Approve a reachability table on the source-check page.</td>
-<td class="src"><span class="na" title="source id data/raw/_last_refresh.json is not in the register">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
