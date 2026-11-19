@@ -273,7 +273,81 @@
    },
    "note": "Rolling-slate publication for the 2026-11-17 .. 2026-11-20 window, generated before the first tip of the window (2026-11-18T00:30Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
    "prev": "2b3041707dc5e5bd7ad4ddeb39b3393e0831307a52a614a54d7f9c5783e45773"
+  },
+  {
+   "entry": 13,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": 12,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-17.json": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
+    "data/archive/horizon_lines_2026-11-17.json": "132b2a8773f43252936a550cf10d9843dd469a8e3d85155f9f98c9802f601337"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-17"
+   ],
+   "prev": "5ae29ac9a28d613552c9ad9fac9aed81e27d0ae87cb1f705b07f5979a4f7bcfc"
+  },
+  {
+   "entry": 14,
+   "type": "settlement_record",
+   "at_utc": "2026-11-19T06:00Z",
+   "file": "data/settlement/settlement_2026-11-17.json",
+   "sha256": "d17950cf96121acb4718f0113d3bf0df19e4a3135d016ba8b163308e58ebf9bd",
+   "official_finals_files": [
+    "data/official/results_2026-11-17.json"
+   ],
+   "settled_by": "arena/929395a5-nba1",
+   "summary": {
+    "record": "1-4-0",
+    "singles_units_at_minus110": -3.4,
+    "parlay_units": -3.3,
+    "total_units_settled": -6.7,
+    "dates_settled": [
+     "2026-11-17"
+    ],
+    "dates_unsettled": []
+   },
+   "prev": "7f6e90462a4629bafb010d864d474b5e5d8ef804bad543685b5943bafbe074c4"
+  },
+  {
+   "entry": 15,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-19T06:00Z",
+   "verifies_entry": 12,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-17.json": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
+    "data/archive/horizon_lines_2026-11-17.json": "132b2a8773f43252936a550cf10d9843dd469a8e3d85155f9f98c9802f601337"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-18"
+   ],
+   "prev": "ae0ef8810bdb6b23b9bf95c3e14d537002555fad27ee5a4380bf9248901f7f7d"
+  },
+  {
+   "entry": 16,
+   "type": "settlement_record",
+   "at_utc": "2026-11-19T06:00Z",
+   "file": "data/settlement/settlement_2026-11-18.json",
+   "sha256": "ebd42ceeeb333d54dc10de013009b5b14bc4355a0e3a3238d27f3c3ff0720669",
+   "official_finals_files": [
+    "data/official/results_2026-11-18.json"
+   ],
+   "settled_by": "arena/929395a5-nba1",
+   "summary": {
+    "record": "4-8-0",
+    "singles_units_at_minus110": -4.8,
+    "parlay_units": -3.3,
+    "total_units_settled": -8.1,
+    "dates_settled": [
+     "2026-11-18"
+    ],
+    "dates_unsettled": []
+   },
+   "prev": "04e3cb360ad310be2cf2ee28d14ec5226781f5ca596498cfe04cc1b2c384207b"
   }
  ],
- "head": "5ae29ac9a28d613552c9ad9fac9aed81e27d0ae87cb1f705b07f5979a4f7bcfc"
+ "head": "55d441c6c1dcc16fd17e6cbbeac2c5413139a06e3b0a9df47b52fb17ce7bf0cb"
 }
