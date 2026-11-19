@@ -540,6 +540,36 @@
 <td>Approve a reachability table on the source-check page.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>S-CDF-01</td>
+<td>Model honesty</td>
+<td><b>Publish both probability bases until the next settlement grades which calibrates better</b></td>
+<td>The published pick probability is overconfident (measured hit rate 0.3784 against a mean published 0.7197). Fixing it silently would break series continuity; leaving it silently keeps a number on the site that its own settlement records contradict.</td>
+<td>- Add a calibrated_probability column computed with the measured spread-error sigma (18.303) beside the current column, and pre-register that the next settlement cycle adopts the better-calibrated basis under log-loss <span class='fine'>(effort: Low - one extra field in generate_picks.py and one column in the picks builder; risk: Low - both numbers stay labelled model-internal; nothing is deleted; unlocks: Answers Q38 with evidence instead of judgement)</span><br>- Replace the basis now <span class='fine'>(effort: Low; risk: Medium - every archived probability series loses comparability without a graded reason; unlocks: A better-calibrated number today)</span><br>- Change nothing <span class='fine'>(effort: None; risk: High - the site keeps publishing numbers its own settlements refute (F-CDF-04); unlocks: Nothing)</span></td>
+<td>Option 1.</td>
+<td>Approve the dual-column publication and the log-loss adoption rule.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-02</td>
+<td>Verification</td>
+<td><b>Derive strategy-level leaderboard rows from ticket-level settlement records</b></td>
+<td>S1 carries two published records (23-9 / +11.91 vs 23-8 / +12.909) and neither can be derived from the settlement files, which grade tickets. A leaderboard that cannot be recomputed from its own evidence cannot support reward decisions.</td>
+<td>- Grade every ticket with its strategy id, aggregate to strategy totals in one derived file, and regenerate every surface from it <span class='fine'>(effort: Medium - a small aggregation script over data/settlement/**; risk: Low; unlocks: Answers Q39; makes reward tiers auditable)</span><br>- Designate one existing record as canonical and flag the other <span class='fine'>(effort: None; risk: Medium - the canonical one is still underivable; unlocks: A single number, unverified)</span></td>
+<td>Option 1.</td>
+<td>Approve the derived aggregation as the source of record.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-03</td>
+<td>Operations</td>
+<td><b>Adopt auto-refresh branches mechanically and make gh pr create failures loud</b></td>
+<td>The scheduled refresh publishes captures to auto/refresh-* branches and opens a PR - but the gh pr create failure is swallowed with a warning. auto/refresh-20261119-120839 held ten official injury PDFs and a full capture set with no PR until this session adopted it by hand (F-CDF-01).</td>
+<td>- Let the publish step fail visibly when gh pr create fails, and add a scheduled sweep that merges or archives any auto/refresh branch older than one run <span class='fine'>(effort: Low - two small workflow edits; risk: Low; unlocks: Captures can no longer strand silently)</span><br>- Keep the swallow-and-warn behaviour <span class='fine'>(effort: None; risk: High - the next stranded capture is found only by accident; unlocks: Nothing)</span></td>
+<td>Option 1.</td>
+<td>Approve the sweep + loud-failure change to refresh-data.yml.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

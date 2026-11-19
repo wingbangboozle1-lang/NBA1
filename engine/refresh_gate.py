@@ -84,7 +84,11 @@ def live_declarations(base, now, by_key, parse_ok):
     one of these measured facts holds:
 
       1. the register parses and is shaped as expected;
-      2. the declaration names a source the gate actually requires;
+      2. the declaration names a source the gate requires, or an evidenced
+         capture source whose recorded parse failure it may excuse (a
+         non-required source such as S2_train has no snapshot requirement to
+         waive — the declaration only keeps its expected parse failure out of
+         the blocking list);
       3. `expires_at_utc` parses, is in the future, and is not absurdly far out;
       4. the fetcher checked that source in THIS run at HTTP 200 (a stale
          declaration must not mask a source that was never fetched today);
@@ -116,8 +120,10 @@ def live_declarations(base, now, by_key, parse_ok):
         if not isinstance(key, str) or not key:
             rejected.append("declaration without a source_key")
             continue
-        if key not in REQUIRED:
-            rejected.append(f"{key}: not a source this gate requires")
+        if key not in REQUIRED and key not in EVIDENCE:
+            rejected.append(f"{key}: not a source this gate requires (nor an "
+                            f"evidenced capture source whose parse failure it "
+                            f"may excuse)")
             continue
         try:
             expires = parse_utc(entry.get("expires_at_utc"))
@@ -378,8 +384,12 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # section 74, T02). Previously this branch re-blocked the very
             # source the declaration had just excused, which made the
             # declaration mechanism a no-op for S1 and left the rebuild
-            # unreachable for a second, independent reason.
-            if check_key not in declared:
+            # unreachable for a second, independent reason. The warning keeps
+            # the excuse visible in the gate report (cdf3a108).
+            if check_key in declared:
+                warnings.append(f"{check_key}: no structured capture ({rel}) by "
+                                f"design (declared unreadable); nothing promoted")
+            else:
                 errors.append(f"missing/invalid structured capture: {rel}")
             continue
         if check_key == "S1_season":
@@ -387,40 +397,52 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # field is not part of the capture schema (engine/fetch_official.py
             # writes `rows`/`cols`), so testing it with `or` made this clause
             # true for EVERY well-formed capture ever written - a second latent
-            # unsatisfiable predicate, fixed here together with the missing
-            # declaration escape.
+            # unsatisfiable predicate (fb91550a), fixed here together with the
+            # missing declaration escape. A live declaration is honoured when
+            # the table is incomplete (cdf3a108, 2026-11-19 amendment: every
+            # recorded run since 2026-11-15 parsed 0 rows and the byte-exact
+            # captures prove the page is client-rendered for a plain fetch);
+            # the anti-rot rule above keeps this honest the moment rows parse.
             complete = len(payload.get("rows") or []) == 30
-            if not complete and check_key not in declared:
-                # S1 is producible through two routes (the page's own parser
-                # and the official stats.nba.com fallback), so a transient
-                # parse failure must block rather than be declared around.
-                errors.append("advanced team capture is not a complete 30-team table "
-                              "(the page's own parser and the official stats.nba.com "
-                              "fallback both failed this run)")
+            if not complete:
+                if check_key in declared:
+                    warnings.append("S1_season: structured capture is not a "
+                                    "complete 30-team table (declared "
+                                    "unreadable); the promoted snapshot stays "
+                                    "at its last verified promotion")
+                else:
+                    errors.append("advanced team capture is not a complete 30-team table "
+                                  "(the page's own parser and the official stats.nba.com "
+                                  "fallback both failed this run)")
         if check_key == "S4_schedule" and not payload.get("games") and check_key not in declared:
             errors.append("official schedule capture has no parsed game IDs")
 
     # Advanced rows are parseable now, so compare every official row against
     # the season-to-date model snapshot rather than trusting a change list.
-    # A DECLARED source has no capture to compare (see section 74): the
-    # comparison is skipped for it and the declaration's evidence record is the
-    # proof instead. The comparison still applies to every non-declared source.
+    # A DECLARED source has no capture to compare (section 74): the comparison
+    # is skipped for it and the declaration's evidence record is the proof
+    # instead (fb91550a). The staleness it leaves behind is published in the
+    # gate report rather than passed over silently (cdf3a108). The comparison
+    # still applies to every non-declared source.
     if "S1_season" in declared:
-        pass
+        warnings.append("advanced team comparison skipped by live declaration "
+                        "(S1_season unreadable); data/raw/team_advanced.json "
+                        "stays at its last verified promotion and is published "
+                        "as stale")
     else:
-      try:
-          adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
-          adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
-          season_window = next(w for w in adv_snapshot.get("windows", [])
-                               if w.get("window_id") == "season_to_date")
-          cols = adv_capture.get("cols", [])
-          snap_cols = adv_snapshot.get("cols", [])
-          captured_rows = {row[0]: row for row in adv_capture.get("rows", [])}
-          promoted_rows = {row[0]: row for row in season_window.get("rows", [])}
-          if cols != snap_cols or captured_rows != promoted_rows or len(captured_rows) != 30:
-              errors.append("advanced team capture does not exactly match the promoted season-to-date rows")
-      except (OSError, ValueError, KeyError, StopIteration, TypeError, IndexError):
-          errors.append("advanced team input cannot be compared with a complete promoted snapshot")
+        try:
+            adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
+            adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
+            season_window = next(w for w in adv_snapshot.get("windows", [])
+                                 if w.get("window_id") == "season_to_date")
+            cols = adv_capture.get("cols", [])
+            snap_cols = adv_snapshot.get("cols", [])
+            captured_rows = {row[0]: row for row in adv_capture.get("rows", [])}
+            promoted_rows = {row[0]: row for row in season_window.get("rows", [])}
+            if cols != snap_cols or captured_rows != promoted_rows or len(captured_rows) != 30:
+                errors.append("advanced team capture does not exactly match the promoted season-to-date rows")
+        except (OSError, ValueError, KeyError, StopIteration, TypeError, IndexError):
+            errors.append("advanced team input cannot be compared with a complete promoted snapshot")
 
     def require_promotion(path: str, source_key: str, digest: str | None = None,
                           url: str | None = None) -> dict | None:

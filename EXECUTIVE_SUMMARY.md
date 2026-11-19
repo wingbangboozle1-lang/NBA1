@@ -10,6 +10,39 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
+## 0d. Update — 2026-11-19T13:10Z, session `arena/cdf3a108-nba1` (read this first)
+
+**The 05:45Z cut had one measured input lag, it moved three lines, and the amended seal is published
+before tip.** Every section below that describes the LAL/UTA team-stat lag (F-929-01, F-89F-04,
+S-89F-02, Q37) as open is superseded by this one.
+
+| Item | Was | Is now | Official source |
+| --- | --- | --- | --- |
+| LAL / UTA ratings | 15 GP each, 11/18 UTA 109 @ LAL 97 missing (F-929-01) | **16 GP each, absorbed** — LAL 119.8/113.2, UTA 107.0/114.5 | [advanced](https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season) · [standings](https://www.nba.com/standings) |
+| Gates G3 / G4 | FAIL (recorded, not blocking) | **PASS (all 30)** — 444 team-games = 2 x 222 finals | `data/derived/team_stats_recut.json` |
+| Three horizon lines stale by >1 pt | PHX@UTA -7.6, SAC@LAL 22.1, DAL@UTA -7.5 | **-6.4, 20.7, -6.3** (totals 225.8 / 235.3 / 220.5); the other 23 spreads unchanged | `data/derived/horizon_lines.json` |
+| Pre-tip seal | entry 17 at 05:45Z | **entry 18 at 13:00Z** (`supersedes_entry: 17`), 12h before the first tip (2026-11-20T01:00Z); 26 singles with the **same pick_line on every row** — only four probabilities moved | `data/ledger/ledger.json` |
+| Settlement seal rule | graded the 05:45Z archive path | **grades the latest pre-tip seal the ledger committed to** (3 offline tests pin it) | `scripts/settle_slate.py` |
+| Scheduled-refresh rebuild | skipped since 2026-11-15 | **gate PASSes, promote exits 0, rebuild runs** — see the three causes below | `data/raw/_capture_gate_report.json` |
+| Newest parsed injury edition | 11/19 12:30 AM ET | **11/19 07:00 AM ET** (44 rows, digest-bound) after adopting the stranded auto-refresh branch | [index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+
+**The scheduled rebuild had been dead since 2026-11-15 for three measured causes, all fixed today.**
+(1) `S1_season`/`S2_train` were an unsatisfiable requirement of the same client-rendered class as
+S8/S9/S10 — every recorded run parsed 0 rows — now declared unreadable with evidence and a hard
+expiry (2026-12-19) under section 73's discipline, with the anti-rot rule intact. (2) The publish
+step staged its promoted outputs with **one** `git add` whose first pathspec (`data/raw/standings.json`)
+has never existed; git aborts the whole command and `2>/dev/null` hid it, so **every verified
+promotion was silently dropped** from the published tree for days (F-CDF-02 — found by reading the
+workflow against the auto-refresh branch's own run record, not by a gate). (3) The gate's S1-specific
+blocks are now declaration-aware and the snapshot staleness is published (F-CDF-03).
+
+**What is still not true, and is not being claimed:** no strategy is funded; no market price exists
+anywhere in this repository, so every unit figure is a paper figure at the stated -110 convention;
+the published pick probabilities remain overconfident until Q38 (the sigma basis) is answered
+(F-CDF-04); and S1's strategy record remains doubled (23-9 / +11.91 vs 23-8 / +12.909) until Q39 is
+(F-CDF-05).
+---
+
 ## 0c. Update — 2026-11-19T12:5xZ, session `arena/fb91550a-nba1` (read this first)
 
 **The scheduled job was measured for the first time from inside its own publish path, and it
@@ -47,7 +80,6 @@ now in the feed match official captures exactly; the horizon matches the officia
 every row checked. **Not proven:** no scheduled run has yet been *observed* reaching the
 rebuild step. That remains the single open measurement in R01, and the honest state of this
 repo is that the fix is in place and untested by the scheduler until its next tick.
-
 ---
 
 ## 0b. Update — 2026-11-19T05:45Z, session `arena/929395a5-nba1` (read this first)

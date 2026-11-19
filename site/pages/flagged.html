@@ -1669,6 +1669,60 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
 <tr>
+<td>F-CDF-01</td>
+<td>Medium</td>
+<td><b>11/19 overnight injury editions captured but stranded on an auto-refresh branch; later editions not yet archived</b></td>
+<td>The official index read at 2026-11-19T12:45Z lists editions from 12:00 AM through 7:15 AM ET. The scheduled run at 12:03Z archived the newest ten and promoted the 07:00 AM edition into its workspace, but its gh pr create failed silently and the payloads sat on the unmerged branch auto/refresh-20261119-120839. This session adopted that branch's payloads mechanically (injury_pdfs, diffs, probe captures, run record) and re-promoted: data/raw/injuries.json now carries the 11/19 07:00 AM edition (44 rows, digest-bound). Editions after 07:00 AM are not yet archived; game-day reports (11 a.m.-1 p.m. local) were not yet due at the read time. The 15:15Z / 22:15Z scheduled runs capture them.</td>
+<td>Injuries page edition currency; R04 archive completeness</td>
+<td>Merge or archive stranded auto/refresh branches mechanically (S-CDF-03), and make gh pr create failures loud.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-CDF-02</td>
+<td>High</td>
+<td><b>The publish step silently dropped every verified promotion (one git add, never-existing pathspec first)</b></td>
+<td>Measured on auto/refresh-20261119-120839: the run record proves engine/promote_official.py wrote schedule_upcoming.json, injuries.json, games_completed.json and data/parsed/** at 12:08:36Z, and the published commit carries only _capture_* files. Cause: the staging block was a single `git add data/raw/standings.json ... 2&gt;/dev/null || true`; git aborts the whole command on the first unmatched pathspec, and data/raw/standings.json (with team_traditional.json and team_opponent.json) has never existed. Main's promoted inputs therefore sat at their 2026-11-16 proofs for three days while every run re-verified them in vain. Fixed this session (per-path staging with an explicit notice for never-existing declared snapshots).</td>
+<td>data/raw/{schedule_upcoming,injuries,games_completed}.json, data/parsed/**, and the refresh gate's promoted-input checks</td>
+<td>Inspect the historical gap on any surface that consumed data/raw/injuries.json or schedule_upcoming.json before 2026-11-19T13:00Z.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>F-CDF-03</td>
+<td>Medium</td>
+<td><b>data/raw/team_advanced.json stays at its last verified promotion while S1_season is declared unreadable</b></td>
+<td>The legacy engine/pipeline.py path (docs/ build) consumes data/raw/team_advanced.json, whose two windows predate digest-binding (verification: null) and are one game behind today's first-hand read for LAL/UTA. While S1_season is declared unreadable (expires 2026-12-19) the gate publishes this staleness instead of blocking. The model surfaces do NOT use this file: they read data/derived/team_stats_recut.json, re-cut 2026-11-19T12:45Z from the official pages (LAL 16 GP 119.8/113.2, UTA 16 GP 107.0/114.5).</td>
+<td>docs/ legacy build ratings; R01 rebuild freshness</td>
+<td>At declaration expiry (or if a runner route to the advanced table appears), re-promote team_advanced.json and retire the flag.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/session-89f7b601/capture_manifest.json" target="_blank" rel="noopener">S89F_CAP</a></td>
+</tr>
+<tr>
+<td>F-CDF-04</td>
+<td>Medium</td>
+<td><b>Published pick probabilities are overconfident: sigma basis question open (Q38)</b></td>
+<td>Adopted from session arena/d66245d4-nba1's measurement (its seat could not edit shared registers): 37 decided paper singles hit 0.3784 against a mean published pick probability of 0.7197. The published probability divides the modelled margin by sigma of game margins (16.714) where the measured sigma of the error in the spread is 18.303 with a +8.718-point bias. The 2026-11-19T13:00Z amended seal kept the old basis for series continuity, so the probabilities on the picks surface remain model-internal and overconfident.</td>
+<td>every pick probability on the picks and lines surfaces</td>
+<td>Answer Q38: publish both bases and pre-register the adoption rule.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>F-CDF-05</td>
+<td>Medium</td>
+<td><b>Two published records for strategy S1 (23-9 / +11.91 vs 23-8 / +12.909)</b></td>
+<td>Adopted from session arena/d66245d4-nba1's finding 3: README.md headlines S1 at 23-9 worth +11.91 model units; docs/data/leaderboard.json carries 23-8 / +12.909. Neither is derivable from data/settlement/** because settlement grades tickets, not strategies. Both numbers are printed as they stand; nothing is reconciled by guessing.</td>
+<td>leaderboard, executive summary headline, reward-tier decisions</td>
+<td>Answer Q39: derive strategy rows from ticket-level settlement records and retire the underivable record.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>F-CDF-06</td>
+<td>Low</td>
+<td><b>S1_season and S2_train declared unreadable with hard expiry 2026-12-19</b></td>
+<td>Declared by session arena/cdf3a108-nba1 under section 73's evidence discipline: measured evidence on disk, a hard expiry, and publication here. Every recorded run since 2026-11-15 parsed 0 rows from both pages; the byte-exact captures show the served HTML carries no team table; the stats.nba.com fallback timed out on every recorded attempt; headless Chromium is refused at the Akamai edge. The earlier premise that S1 'is readable in some runs' is not borne out by any committed record. Nothing is promoted from either source and the anti-rot rule revokes the declaration the moment rows parse.</td>
+<td>R01 rebuild gate; data/raw/team_advanced.json currency (F-CDF-03)</td>
+<td>Re-test at expiry; delete the declarations if a runner route to the tables appears.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/session-89f7b601/capture_manifest.json" target="_blank" rel="noopener">S89F_CAP</a></td>
+</tr>
+<tr>
 <td>F-7B8-01</td>
 <td>Medium</td>
 <td><b>The Injuries page stated three different 'current edition' claims</b></td>

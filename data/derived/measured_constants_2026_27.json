@@ -1,13 +1,13 @@
 {
  "_meta": {
   "title": "Measured constants for the 2026-27 model, re-derived on 2026-11-19",
-  "generated_by": "scripts/recut_2026_11_19.py",
-  "retrieved_utc": "2026-11-19T05:44Z",
+  "generated_by": "scripts/recut_cdf3a108.py (formulas verbatim from scripts/recut_2026_11_19.py)",
+  "retrieved_utc": "2026-11-19T12:29Z",
   "rule": "measure, never fit. Each constant states the official column it came from."
  },
  "league": {
-  "off_rtg_poss_weighted": 113.494,
-  "pace_gp_weighted": 99.642,
+  "off_rtg_poss_weighted": 113.425,
+  "pace_gp_weighted": 99.659,
   "formula": "sum(OffRtg_i * POSS_i) / sum(POSS_i) over the 30 official rows; PACE weighted by GP",
   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
  },
@@ -33,9 +33,16 @@
    "hca_points": 0.83,
    "as_of": "2026-11-17 (session arena/84264db0-nba1)"
   },
+  "previous_pin": {
+   "rate": 0.5023,
+   "hca_points": 0.09,
+   "as_of": "2026-11-19T05:44Z (session arena/929395a5-nba1)"
+  },
   "drift": {
-   "rate_change": -0.0173,
-   "points_change": -0.735
+   "rate_change_vs_2026_11_17": -0.0173,
+   "points_change_vs_2026_11_17": -0.735,
+   "rate_change_vs_0545Z_cut": -0.0,
+   "points_change_vs_0545Z_cut": 0.005
   }
  }
 }
