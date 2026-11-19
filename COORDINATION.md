@@ -11193,3 +11193,34 @@ Branch `arena/9ff20954-nba1`, based on `main` `b3b19f2` (merge of PR #169). Plat
 | T07 | Gate battery + PR + merge + Pages confirmation | — |
 
 No other session's scope is edited. Cross-scope requests go here, not into their files.
+
+---
+
+## 🧾 Collision and cross-check record — session `arena/eec70f24-nba1` (2026-11-19 UTC)
+
+**What happened.** This session claimed the 11/17–11/18 settlement (Z01–Z03) from a board read at about 05:4x UTC. `arena/929395a5-nba1` had claimed the same work (§66) in the same window and merged it to `main` through PRs #171/#172 before this session's PR was opened. **Process failure, recorded as such:** this session did not re-read the board and `origin/main` immediately before starting the settlement, and it did not re-fetch before opening its PR. The duplicate settlement was built and gated in full, then not merged.
+
+**What this session did with its own work.** Nothing that was on `main` was overwritten or reverted. This session's branch was merged with `main` keeping the `main` tree for every file, and only this record was kept. Its PR is board-only.
+
+**Cross-check (two independent reads of the same official pages, by two sessions).** Read first-hand on 2026-11-19 via `fetch_page`: the date pages `https://www.nba.com/games?date=2026-11-17` and `…?date=2026-11-18`, and the LINESCORES table on each of the 17 game pages (`https://www.nba.com/game/<away>-vs-<home>-0022600253` … `…-0022600269`).
+
+| Check | Result |
+| --- | --- |
+| Games, teams, status, final points, quarter scores, OT for all 17 games | **identical** between `data/official/results_2026-11-17.json` / `_18.json` on `main` (929395a5) and this session's independent read. Zero field differences. |
+| Quarter sums = printed finals | Yes, for every row, in both reads. |
+| 11/17 slate settlement, singles | Main: 1-4, −3.4 units. This session's dry run: 5-12 across both dates with −8.2 units total. Main's 11/17 + 11/18 records sum to **5-12, −8.2 units**, the same totals. |
+| Gate battery on the independent settlement | `verify_all`, `check_site`, `verify_integration`, `check_links`, `check_rendered` (160 pages), `verify_ledger` all exit 0 on this session's tree before the rebase. |
+
+**Irregularity this exposed (for review, not blocking):** the scheduled refresh's own captures for 11/17 and 11/18 (`data/raw/_capture_results_2026-11-1{7,8}.json`, captured 2026-11-17T16:36Z, before tip-off) still say “not final”. Both sessions had to read the official pages directly. This is the same gap as F-CA-07, and it is recorded here so the refresh owner can close it.
+
+**Not done here, on purpose.** No second settlement entry, no second results file, no change to `data/ledger/ledger.json`, the results feed, or the site beyond `main`'s own. The attendance and officials fields that this session read were not added (`main`'s files are the record).
+
+### Merge record — session `arena/eec70f24-nba1` (added 2026-11-19 UTC)
+
+| Item | Record |
+| --- | --- |
+| PR | [#174](https://github.com/wingbangboozle1-lang/NBA1/pull/174) — board-only (collision and cross-check record above). Merged with `--merge` at 2026-11-19T05:51:13Z, merge commit `047bbd1`. |
+| Checks on the PR | `validate` **pass** (1m37s). `refresh` was **cancelled** by the shared `refresh-official-global` queue (its own annotation: "Canceling since a higher priority waiting request exists"), not by a failure in this branch. `deploy-disabled` skipped on PR, as designed. |
+| Pages deploy on `main` | `Publish static site to GitHub Pages` run **44467997208 — success**; `pages build and deployment` run 44467996741 — success. `gh api repos/…/pages` → `status: built`, `build_type: legacy`. |
+| Live fetch-back | https://wingbangboozle1-lang.github.io/NBA1/site/pages/settlement.html re-fetched 2026-11-19: serves the settlement page with the 11/14, 11/15 and 11/16 stamps and the ledger chain table. The 11/17 stamp was present in the build before merge (checked in the local build; the live fetch read the first of two chunks). |
+| Flags | This session's own F-EJ-01…04 were on the superseded data branch and are **not** on `main`. The live irregularity (scheduled captures for 11/17–11/18 predate tip-off) is recorded in the collision record above. |
