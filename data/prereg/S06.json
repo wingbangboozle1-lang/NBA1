@@ -10,7 +10,7 @@
    "game_total_over"
   ]
  },
- "universe": "all 30 games on the official 2026-11-17 .. 2026-11-20 slate (data/raw/official_schedule_capture_2026-11-17.json: 2026-11-17=5, 2026-11-18=12, 2026-11-19=4, 2026-11-20=9); source file data/raw/official_schedule_capture_2026-11-17.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
+ "universe": "all 26 games on the official 2026-11-19 .. 2026-11-22 slate (data/raw/official_schedule_capture_2026-11-19_39b70241.json: 2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7); source file data/raw/official_schedule_capture_2026-11-19_39b70241.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
  "exact_settlement_rule": "Both legs must win (official box score + official final). Any losing leg loses the stake 1.10; void legs removed. Price at the model's published joint_prob_rho (G-PROP blocked).",
  "price_status": "No licensed two-sided price exists (no odds feed; F-W07). Spread/total tickets settle on the repo's paper -110 convention (stake 1.10 to win 1.00). Moneyline strategies record W/L only; unit ROI stays blank until a price exists. SGP tickets settle at the model's published joint_prob_rho as fair price.",
  "validation_gates": {
@@ -24,22 +24,22 @@
   "status_2026_11_15": "NO strategy has passed (Build A 0/8, Build B 0/10). All tickets are MODEL OUTPUT — UNVALIDATED, unfunded, zero stake."
  },
  "definition_ref": "data/derived/horizon_picks.json sgp_candidates[]",
- "frozen_at_utc": "2026-11-17T15:54Z",
- "frozen_by": "arena/161f1638-nba1",
- "slate_window": "2026-11-17 .. 2026-11-20",
- "games_in_universe": 30,
- "first_tip_of_universe_utc": "2026-11-18T00:30Z",
- "first_game_tipping": "2026-11-17 NYK@TOR (7:30 PM ET)",
+ "frozen_at_utc": "2026-11-19T06:10Z",
+ "frozen_by": "arena/39b70241-nba1",
+ "slate_window": "2026-11-19 .. 2026-11-22",
+ "games_in_universe": 26,
+ "first_tip_of_universe_utc": "2026-11-20T01:00Z",
+ "first_game_tipping": "2026-11-19 GSW@MEM (8:00 PM ET)",
  "frozen_before_first_tip": true,
- "hours_before_first_tip": 8.6,
+ "hours_before_first_tip": 18.83,
  "input_digests_sha256": {
-  "data/derived/horizon_picks.json": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
-  "data/derived/horizon_lines.json": "132b2a8773f43252936a550cf10d9843dd469a8e3d85155f9f98c9802f601337",
-  "data/derived/team_stats_recut.json": "109bdc0e93d92a59e2bd45fda189dc12ce6e94a9374eec06d9ac8d2d81430949",
-  "data/derived/measured_constants_2026_27.json": "87d025a9067a8641efdca6721cbe7f2bebee58a0f471284fbf2e12873dd5fd25",
-  "data/raw/official_schedule_capture_2026-11-17.json": "45e767cdfd4d88f3cd9d258eb3078a685fb7ae65c8df9a5c702aaf19c6d3d0b0",
-  "data/official/injury_2026-11-17_1030AM_84264db0.json": "ff5994e096fa4edfc9ec4043b2523708b123a92c38dac1980f70bff4ea306e2e",
-  "data/official/results_2026-11-16.json": "00404b1c493cc71421ccea351415f681523f6083e5bb20b784922535b4ba605a",
-  "data/settlement/settlement_2026-11-16.json": "101dc06334df17769ee99407d028dd1cf1336ed77f58ca14ca17953c4237b77b"
+  "data/derived/horizon_picks.json": "7c67906450751740a0c55e8dc34ccd9854351d111420a45909b78681c44dca95",
+  "data/derived/horizon_lines.json": "15108f4ca60f650729cee9a7fa03f9207e585882aabb1e7d27f9e2373e345174",
+  "data/derived/team_stats_recut_2026-11-19_39b70241.json": "8133eafebbad95d87c3eb0dfd53997cdbef0905535675c3cf920135f842ccbeb",
+  "data/derived/measured_constants_2026_11_19_39b70241.json": "54bdb99856e3031bc0fd1e02d115ebf95cd37a1bd2e9d55fe9f0776790c0e797",
+  "data/raw/official_schedule_capture_2026-11-19_39b70241.json": "57829210d379c3404cd0331816fadafab8f76dbe6d72e9dc3c2965e784fa3b99",
+  "data/official/injury_20261119_1245AM_39b70241.json": "fa1d734f2e3d01da2a00a0d970d463274ad1c61ba331aa55ffee49a13c076d73",
+  "data/official/results_2026-11-18_39b70241.json": "926d32dd51b68de26be7c87dcf6f5749c937f45f476782ee30b7d3e38d0654ac",
+  "data/settlement/settlement_2026-11-17.json": "2b6f918ff16e8c05973f7ee0576aa73ee231079d3a6a601ef5727769f872373c"
  }
 }

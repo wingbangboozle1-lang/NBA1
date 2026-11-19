@@ -1,0 +1,60 @@
+{
+ "_meta": {
+  "title": "Measured constants for the 2026-27 model, re-derived on 2026-11-19",
+  "generated_by": "scripts/y04_roll_2026_11_19_39b70241.py",
+  "retrieved_utc": "2026-11-19T05:54Z",
+  "rule": "measure, never fit. Each constant states the official column it came from.",
+  "supersedes": "data/derived/measured_constants_2026_27.json (read 2026-11-17, 205 finals)"
+ },
+ "league": {
+  "off_rtg_poss_weighted": 113.494,
+  "def_rtg_poss_weighted": 113.494,
+  "pace_gp_weighted": 99.643,
+  "formula": "sum(OffRtg_i * POSS_i) / sum(POSS_i) over the 30 official rows; PACE weighted by GP; the def side is the same weighting of the advanced DefRtg column, which is points allowed per 100 possessions",
+  "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+ },
+ "dispersion": {
+  "finals_n": 222,
+  "margin_mean": 0.95,
+  "sigma_margin": 16.714,
+  "total_mean": 227.455,
+  "sigma_total": 19.081,
+  "formula": "sample standard deviation (n-1) of the official home-minus-away margin and of the official game total, over every decided game in the results feed, de-duplicated by game id",
+  "source_url": "data/official/results_feed_2026_27.json (official finals, promoted from nba.com game-summary pages)"
+ },
+ "home_court_pin": {
+  "home_win_rate": 0.5023,
+  "home_wins": 111,
+  "home_games": 221,
+  "sigma_margin_used": 16.714,
+  "hca_points": 0.09,
+  "sample": "111 home wins in 221 non-neutral home games (1 neutral-site pairs are excluded by the standings' own column)",
+  "formula": "HCA_points = sigma_margin * Phi^-1(home win rate); the rate comes from the official standings HOME/ROAD columns, never from a fit",
+  "source_url": "https://www.nba.com/standings",
+  "prior_pin": {
+   "rate": 0.5196,
+   "hca_points": 0.83,
+   "as_of": "2026-11-17 (session arena/84264db0-nba1, 204 home games)"
+  },
+  "drift": {
+   "rate_change": -0.0173,
+   "points_change": -0.735
+  }
+ },
+ "gates": {
+  "A-COUNT_schedule_matches_month_grid": "pass (2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7 = the grid's own counts)",
+  "A-IDS_new_and_unique": "pass (26 unique ids, none already in the results feed)",
+  "A-INJ_byte_exact": "pass (sha256 91002377f7653e4c… over the runner-fetched PDF; 23 player rows, 21 NOT YET SUBMITTED blocks)",
+  "A1_W_plus_L_eq_GP": "pass (30/30, standings counts)",
+  "A2_netrtg_eq_off_minus_def": "pass (30/30, 0.25 rounding tolerance)",
+  "A3_gp_eq_finals_corpus_decided_games": "pass (30/30 against 222 finals)",
+  "A3b_advanced_page_gp_vs_standings": "REPORTED: 2 of 30 team tables lag one game — Los Angeles Lakers page 15 vs standings 16, Utah Jazz page 15 vs standings 16; this is the same discrepancy GA3 raises in the readback report. The page's ratings are shipped as printed with the sample they rest on named.",
+  "A4_trad_x_adv_offrtg": "pass (30/30, 1.0 tolerance)",
+  "A5_poss_vs_pace_min": "pass (30/30, 6 possessions)",
+  "A6_opponent_pts_vs_finals_allowed": "pass (30/30 within 0.6 pts against the finals corpus, each team checked against the window its own table covers; 2 of 30 needed a lag window: Los Angeles Lakers newest dropped, Utah Jazz newest dropped)",
+  "A7_home_court_sample": "pass: 111 home wins in 221 home games, home wins == road losses (111), and the 1 neutral-site pair(s) account for the gap to 222 decided games. The feed's own designated-home win count is 111; the +0 difference is the neutral game, whose standings record sits in neutral_rec for both clubs while the results feed still names a home side — so the home-win RATE is measured on the 221 non-neutral games only.",
+  "A8b_advanced_page_team_games": "REPORTED: the three /stats/ team tables cover 442 team-games while the standings and the finals corpus both record 444 = 2 x 222; the 2-game difference is the 11/18 build-cycle lag named in A3b, not a transcription error",
+  "A8_team_games_vs_finals": "pass with the A3b exception (sum of standings GP 444 == 2 x 222 decided games)",
+  "A9_closed_league_gap": "pass: league OffRtg 113.494 vs DefRtg 113.494, gap -0.0004"
+ }
+}

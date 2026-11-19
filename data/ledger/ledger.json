@@ -313,7 +313,48 @@
     "dates_unsettled": []
    },
    "prev": "4cf184fcb1c3ab598edafea3a0a4ba0bf4fccbc98eaf36b8801eefad45bac8bf"
+  },
+  {
+   "entry": 15,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-19T06:10Z",
+   "first_tip_utc": "2026-11-20T01:00Z",
+   "first_game_tipping": "2026-11-19 GSW@MEM (8:00 PM ET)",
+   "window": "2026-11-19 .. 2026-11-22 (today + up to 3 days)",
+   "games_in_universe": 26,
+   "games_per_day": "2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7",
+   "files": {
+    "data/archive/horizon_picks_2026-11-19.json": "7c67906450751740a0c55e8dc34ccd9854351d111420a45909b78681c44dca95",
+    "data/archive/horizon_lines_2026-11-19.json": "15108f4ca60f650729cee9a7fa03f9207e585882aabb1e7d27f9e2373e345174"
+   },
+   "prereg_files": {
+    "data/prereg/S01.json": "8ab8abde5498471f0fe741f35fea3a145aae6652df1b39f1301cce5aa65ca7d7",
+    "data/prereg/S02.json": "c868b16cd31a56f714d15f8409c2cb0f40e31e7de8995ab6480cc80c5b110a57",
+    "data/prereg/S03.json": "cc1d21389b4f1d343a0282860e723e67c362312eaccfb6bb18633b83c30250f5",
+    "data/prereg/S04.json": "651da5a10db04243a0685c5b47c3db25f86b4dd225003c26a6d012c6c6bdc39d",
+    "data/prereg/S05.json": "dff1e3781a42d2504e9ace085aef69fe47937282ed01ef6d7ee1930c63044e02",
+    "data/prereg/S06.json": "3eeba0b3eba371fcfcf5615a57403009b8ee8eb4078a2133f03e0dda053b015b",
+    "data/prereg/S07.json": "23da369ef2140096f49cf2c980ff10e600842ed94e481b84fdd7426b40a74f50",
+    "data/prereg/S08.json": "fdf90f6972ed0b737de9263ad666df06669f33f15664e9d08435ceadb3098fb6",
+    "data/prereg/T-SINGLE.json": "5d7f49e65233d357a57289cf3cda2c44cf0e1237458e11407d7b15a0b941fe63",
+    "data/prereg/T-PARLAY.json": "6e7ba6ab1ad3c6838601a21e41ea645c73e65607b7759a3c47043efa3d379cd6",
+    "data/prereg/T-SGP.json": "a759cc5419a711a2156701e7b96fb4c7c6ca07154efb3d00324777efa832d11c",
+    "data/prereg/Prereg_index.json": "271d581cd1eca96afe5f77726d46130e2f0ad6d9c4624bafed4edcbf217af1a8"
+   },
+   "prereg_archive_dir": "data/archive/prereg_2026-11-19",
+   "model_input_digests": {
+    "data/derived/horizon_picks.json": "7c67906450751740a0c55e8dc34ccd9854351d111420a45909b78681c44dca95",
+    "data/derived/horizon_lines.json": "15108f4ca60f650729cee9a7fa03f9207e585882aabb1e7d27f9e2373e345174",
+    "data/derived/team_stats_recut_2026-11-19_39b70241.json": "8133eafebbad95d87c3eb0dfd53997cdbef0905535675c3cf920135f842ccbeb",
+    "data/derived/measured_constants_2026_11_19_39b70241.json": "54bdb99856e3031bc0fd1e02d115ebf95cd37a1bd2e9d55fe9f0776790c0e797",
+    "data/raw/official_schedule_capture_2026-11-19_39b70241.json": "57829210d379c3404cd0331816fadafab8f76dbe6d72e9dc3c2965e784fa3b99",
+    "data/official/injury_20261119_1245AM_39b70241.json": "fa1d734f2e3d01da2a00a0d970d463274ad1c61ba331aa55ffee49a13c076d73",
+    "data/official/results_2026-11-18_39b70241.json": "926d32dd51b68de26be7c87dcf6f5749c937f45f476782ee30b7d3e38d0654ac",
+    "data/settlement/settlement_2026-11-17.json": "2b6f918ff16e8c05973f7ee0576aa73ee231079d3a6a601ef5727769f872373c"
+   },
+   "note": "Rolling-slate publication for the 2026-11-19 .. 2026-11-22 window, generated before the first tip of the window (2026-11-20T01:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
+   "prev": "6a5e074814621a79ce02c0ecf819f36a08536e3a7cb14a12f5808ddf7c41d924"
   }
  ],
- "head": "6a5e074814621a79ce02c0ecf819f36a08536e3a7cb14a12f5808ddf7c41d924"
+ "head": "683c666a1e5391e08f3299f9cdb9a48c352d067e21df2df1a9cc3b45257ac614"
 }

@@ -1,0 +1,27 @@
+{
+ "title": "Pre-registration index — strategies frozen before the first tip of the 2026-11-19 .. 2026-11-22 slate",
+ "rule": "Per the project brief: every strategy's signal, thresholds, universe and exact settlement rule are frozen before the first bet of the slate. Files are hash-chained into data/ledger/ledger.json at publication.",
+ "frozen_at_utc": "2026-11-19T06:10Z",
+ "slate_window": "2026-11-19 .. 2026-11-22",
+ "games_in_universe": 26,
+ "games_per_day": "2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7",
+ "first_tip_utc": "2026-11-20T01:00Z",
+ "first_game_tipping": "2026-11-19 GSW@MEM (8:00 PM ET)",
+ "files": {
+  "data/prereg/S01.json": "8ab8abde5498471f0fe741f35fea3a145aae6652df1b39f1301cce5aa65ca7d7",
+  "data/prereg/S02.json": "c868b16cd31a56f714d15f8409c2cb0f40e31e7de8995ab6480cc80c5b110a57",
+  "data/prereg/S03.json": "cc1d21389b4f1d343a0282860e723e67c362312eaccfb6bb18633b83c30250f5",
+  "data/prereg/S04.json": "651da5a10db04243a0685c5b47c3db25f86b4dd225003c26a6d012c6c6bdc39d",
+  "data/prereg/S05.json": "dff1e3781a42d2504e9ace085aef69fe47937282ed01ef6d7ee1930c63044e02",
+  "data/prereg/S06.json": "3eeba0b3eba371fcfcf5615a57403009b8ee8eb4078a2133f03e0dda053b015b",
+  "data/prereg/S07.json": "23da369ef2140096f49cf2c980ff10e600842ed94e481b84fdd7426b40a74f50",
+  "data/prereg/S08.json": "fdf90f6972ed0b737de9263ad666df06669f33f15664e9d08435ceadb3098fb6",
+  "data/prereg/T-SINGLE.json": "5d7f49e65233d357a57289cf3cda2c44cf0e1237458e11407d7b15a0b941fe63",
+  "data/prereg/T-PARLAY.json": "6e7ba6ab1ad3c6838601a21e41ea645c73e65607b7759a3c47043efa3d379cd6",
+  "data/prereg/T-SGP.json": "a759cc5419a711a2156701e7b96fb4c7c6ca07154efb3d00324777efa832d11c"
+ },
+ "universe": "all 26 games on the official 2026-11-19 .. 2026-11-22 slate (data/raw/official_schedule_capture_2026-11-19_39b70241.json: 2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7); source file data/raw/official_schedule_capture_2026-11-19_39b70241.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
+ "slate_tickets_published": "data/derived/horizon_picks.json (archived byte-identical at data/archive/horizon_picks_2026-11-19.json)",
+ "prior_vintage_settled": "data/settlement/settlement_2026-11-17.json settles the 2026-11-17 and 2026-11-18 games of the 2026-11-17..20 vintage (ledger entries 13-14, 5-12-0, -14.8 paper units); its four published SGPs stay open in that file and are graded by the addendum data/settlement/sgp_grades_2026-11-17.json where official box-score evidence exists. Earlier vintages remain settleable from data/archive/.",
+ "frozen_by_this_branch": "arena/39b70241-nba1 (scripts/freeze_prereg_39b70241.py, a copy of scripts/freeze_prereg.py with attribution updated)"
+}

@@ -1,0 +1,448 @@
+{
+ "title": "Official injury report 2026-11-19 12:45 AM ET — promoted from a byte-exact PDF",
+ "edition": "2026-11-19 12 45AM",
+ "edition_pdf": "Injury-Report_2026-11-19_12_45AM",
+ "revision_time_et": "11/19/2026 12:45 AM ET (printed on the official PDF)",
+ "retrieved_utc": "2026-11-19T05:52:29Z",
+ "retrieval_channel": "GitHub Actions runner fetch of the official PDF on branch arena/39b70241-nba1 (workflow capture-injury-39b70241, run 44468125114), then the repo's clipped-cell reader (engine/injury_cells.py) parsed the bytes locally in this workspace",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_45AM.pdf",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "raw_pdf_sha256": "91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33",
+ "raw_pdf_sha256_note": "MEASURED over the bytes at data/raw/injury_pdfs/Injury-Report_2026-11-19_12_45AM__91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33.pdf (87302 bytes). This is the first edition on this branch whose raw PDF was retrievable, so flag F-X13 from the 11/17 window does not apply here.",
+ "text_file": "data/parsed/injury_diffs/editions/Injury-Report_2026-11-19_12_45AM.json",
+ "text_sha256": "9416195398cee6ee2852152f4c5021cfa1f29bcf530d3c5048d90e711eb1ea4e",
+ "columns": [
+  "game_date",
+  "game_time_et",
+  "matchup",
+  "team",
+  "player",
+  "status",
+  "reason"
+ ],
+ "rows": [
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "LA Clippers",
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Injury Management"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "LA Clippers",
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Surgery"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "LA Clippers",
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Rotator Cuff Surgery"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Harper, Dylan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Soreness"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Calf Strain"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "LAC@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Kuminga, Jonathan",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Shoulder Contusion"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NYK@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Pullin, Zyon",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Quadriceps Contusion"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Avdija, Deni",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Foot Inflammation / Soreness"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Camara, Toumani",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Abdominal Soreness"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Carlson, Branden",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Fracture"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Meniscus Surgery"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Williams III, Robert",
+   "status": "Out",
+   "reason": "Rest"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise"
+  }
+ ],
+ "not_yet_submitted": [
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@MEM",
+   "team": "Golden State Warriors",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@MEM",
+   "team": "Memphis Grizzlies",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/19/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIL",
+   "team": "Milwaukee Bucks",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHA@ATL",
+   "team": "Charlotte Hornets",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHA@ATL",
+   "team": "Atlanta Hawks",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "IND@CLE",
+   "team": "Indiana Pacers",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "IND@CLE",
+   "team": "Cleveland Cavaliers",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "ORL@BKN",
+   "team": "Orlando Magic",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "ORL@BKN",
+   "team": "Brooklyn Nets",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "TOR@DET",
+   "team": "Toronto Raptors",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "TOR@DET",
+   "team": "Detroit Pistons",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NOP@OKC",
+   "team": "New Orleans Pelicans",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "NOP@OKC",
+   "team": "Oklahoma City Thunder",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "WAS@CHI",
+   "team": "Washington Wizards",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "WAS@CHI",
+   "team": "Chicago Bulls",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "09:30 (ET)",
+   "matchup": "PHX@UTA",
+   "team": "Phoenix Suns",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "09:30 (ET)",
+   "matchup": "PHX@UTA",
+   "team": "Utah Jazz",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "HOU@DEN",
+   "team": "Houston Rockets",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "HOU@DEN",
+   "team": "Denver Nuggets",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "SAC@LAL",
+   "team": "Sacramento Kings",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  },
+  {
+   "game_date": "11/20/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "SAC@LAL",
+   "team": "Los Angeles Lakers",
+   "note": "printed on the official PDF: the club had not filed for this game when the edition was published"
+  }
+ ],
+ "coverage": {
+  "games_with_a_block_or_rows": [
+   [
+    "11/19/2026",
+    "GSW@MEM"
+   ],
+   [
+    "11/19/2026",
+    "LAC@SAS"
+   ],
+   [
+    "11/19/2026",
+    "NYK@MIN"
+   ],
+   [
+    "11/19/2026",
+    "POR@MIL"
+   ],
+   [
+    "11/20/2026",
+    "CHA@ATL"
+   ],
+   [
+    "11/20/2026",
+    "HOU@DEN"
+   ],
+   [
+    "11/20/2026",
+    "IND@CLE"
+   ],
+   [
+    "11/20/2026",
+    "NOP@OKC"
+   ],
+   [
+    "11/20/2026",
+    "ORL@BKN"
+   ],
+   [
+    "11/20/2026",
+    "PHX@UTA"
+   ],
+   [
+    "11/20/2026",
+    "SAC@LAL"
+   ],
+   [
+    "11/20/2026",
+    "TOR@DET"
+   ],
+   [
+    "11/20/2026",
+    "WAS@CHI"
+   ]
+  ],
+  "note": "the 12:45 AM edition covers tonight's four games; clubs file by 5 PM local the day before, so 11/20–11/22 have no rows at this build"
+ },
+ "counts": {
+  "player_rows": 23,
+  "not_yet_submitted_team_blocks": 21,
+  "status": {
+   "Available": 2,
+   "Out": 17,
+   "Questionable": 4
+  }
+ },
+ "transcription_note": "44 parsed rows, 0 unparsed; statuses and reasons verbatim."
+}
