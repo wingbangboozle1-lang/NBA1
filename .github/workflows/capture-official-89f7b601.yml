@@ -101,18 +101,26 @@ jobs:
           echo "could not push the capture after 5 attempts"
           exit 1
 
-      - name: Fail the job when any endpoint was not captured
+      # The contract is the five PAGE sources, because those are the five the
+      # scheduled refresh fails on. The four stats.nba.com API probes are
+      # evidence-gathering: a host that will not answer a runner is a finding
+      # to record, not a reason to lose the page bytes.
+      - name: Fail the job when any PAGE source was not captured
         if: always()
         run: |
           python3 - <<'PY'
           import json, os, sys
           p = "data/raw/session-89f7b601/capture_manifest.json"
           if not os.path.exists(p):
-              print("no manifest"); sys.exit(1)
+              print("::error::no capture manifest was written"); sys.exit(1)
           m = json.load(open(p))
-          bad = [r["name"] for r in m["results"] if r.get("status") != "stored"]
-          print("captured", len(m["results"]) - len(bad), "of", len(m["results"]))
+          pages = [r for r in m["results"] if not r["name"].startswith("A")]
+          bad = [r["name"] for r in pages if r.get("status") != "stored"]
+          apis = [r for r in m["results"] if r["name"].startswith("A")]
+          api_ok = [r["name"] for r in apis if r.get("status") == "stored"]
+          print(f"page sources captured {len(pages)-len(bad)}/{len(pages)}")
+          print(f"API probes reachable {len(api_ok)}/{len(apis)}: {api_ok or 'none'}")
           if bad:
-              print("::error::endpoints not captured:", ", ".join(bad))
+              print("::error::page sources not captured:", ", ".join(bad))
               sys.exit(1)
           PY
