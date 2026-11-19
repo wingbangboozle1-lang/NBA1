@@ -1017,7 +1017,21 @@ def main():
                         rows = []
                     time.sleep(2.0)
             if len(rows) != 30:
-                failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
+                # Carry the parser's own diagnosis into the refresh record. The
+                # 2026-11-19T06:13Z run recorded only "parsed 0" for all five
+                # sources, which is why the root cause took a byte-exact capture
+                # to find: the numbers that would have named it (how many <tr>
+                # the document had, how many problems each strategy raised) were
+                # computed and then thrown away. RFG4 observability fix, §69.
+                diag = po.diagnostics(text).get("indicators", {})
+                _, _, meta_p = po.parse_team_table(
+                    text, cols=STATS_COLS, int_cols=STATS_API_INT,
+                    variant="advanced")
+                failed.append((key, f"expected 30 team rows, parsed {len(rows)} "
+                                    f"(html_tr={diag.get('<tr')} "
+                                    f"team_links={diag.get('/team/')} "
+                                    f"rowSet={diag.get('rowSet')} "
+                                    f"parse_problems={meta_p.get('problems_total')})"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
                 needles = ["stats.nba.com", "/stats/api", "leaguedash",
                            "graphql", "<td"]
@@ -1097,8 +1111,12 @@ def main():
                                              "promote_official.py)."}):
                     changed.append(key)
             else:
+                diag = po.diagnostics(text).get("indicators", {})
                 failed.append((key, f"no standings rows parsed "
-                                    f"({meta.get('problems')})"))
+                                    f"(html_tr={diag.get('<tr')} "
+                                    f"team_links={diag.get('/team/')} "
+                                    f"problems_total={meta.get('problems_total')}) "
+                                    f"{meta.get('problems')}"))
                 log(f"  SKIPPED: no standings rows - keeping the existing snapshot")
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
@@ -1127,8 +1145,12 @@ def main():
                                              "promote_official.py)."}):
                     changed.append(key)
             else:
+                diag = po.diagnostics(text).get("indicators", {})
                 failed.append((key, f"no {variant} team rows parsed "
-                                    f"({meta.get('problems')})"))
+                                    f"(html_tr={diag.get('<tr')} "
+                                    f"team_links={diag.get('/team/')} "
+                                    f"problems_total={meta.get('problems_total')}) "
+                                    f"{meta.get('problems')})"))
                 log(f"  SKIPPED: no {variant} team rows - keeping the existing snapshot")
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),

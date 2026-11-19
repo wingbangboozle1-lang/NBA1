@@ -167,7 +167,8 @@ def parse_team_table(text, cols=None, int_cols=(), variant="generic"):
                                     "integrity": "ok"}
         problems.extend(f"{strategy}: {p}" for p in probs)
     return cols or [], [], {"strategy": None, "row_count": 0,
-                            "problems": problems[:12]}
+                            "problems": problems[:12],
+                            "problems_total": len(problems)}
 
 
 def _team_table_html(text, cols, int_cols):
@@ -422,7 +423,8 @@ def parse_standings(text):
                                           "integrity": "ok"}
         problems.extend(f"{strategy}: {p}" for p in probs)
     return STANDINGS_COLS, [], {"strategy": None, "row_count": 0,
-                                "problems": problems[:12]}
+                                "problems": problems[:12],
+                                "problems_total": len(problems)}
 
 
 def _standings_split(text):
