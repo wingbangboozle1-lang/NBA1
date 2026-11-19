@@ -12407,6 +12407,34 @@ Branch `arena/fb91550a-nba1`, based on `main` `b2af48b` (merge of PR #193, 2026-
 3. **Whether Actions may create pull requests at all.** The 0-for-13 record is consistent with the repository setting being off. If it is off, the new `::error` will make the next scheduled run red — correctly, because the captures really are stranded — and a human must flip Settings → Actions → General. A session token cannot read or change that setting (`403 Resource not accessible by integration`, measured).
 4. **Two hours of injury editions (12:03Z) remain unpublished.** They are on `auto/refresh-20261119-120839`; this seat did not cherry-pick them because the injury row-source register did not travel with them and rebuilding it locally would have meant publishing a register this sandbox wrote rather than the publisher. Next capture covers them.
 
+### 77.6 Integration record — PR, merge, deploy, live fetch-back (2026-11-19 ~12:48–13:0x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#200](https://github.com/wingbangboozle1-lang/NBA1/pull/200)** — *§74/§77: the scheduled refresh never published or rebuilt — 4 measured defects fixed, 25 finals restored, horizon re-verified* |
+| Pre-merge rebase | `main` moved **23 commits** during the run (merges #195–#202: three other sessions claimed §74/§75/§76). Renumbered **§74 → §77**. Conflicts confined to registers + generated pages; resolved by **rebuilding from merged sources**, never hand-merged. Every other session's work re-verified present afterwards: PR #195's `measured_hca_points`/`data/hca_measured.json`, §75's injuries-banner page + test, §74's test-discovery fix. `sources.json` unioned to 128 entries (nothing dropped either way); flagged = 175 + 6 = **181**. |
+| CI on the PR head | `validate` **pass** (all 15 steps; run 44526989519). `refresh` shows **fail** on the PR — it is the pre-existing global `refresh-official-global` concurrency group cancelling this seat's run when another session pushed (`cancelled`, not failed; every step up to *Fetch* was green). Recorded as a known reporting defect, not a build failure. |
+| Merge | **MERGED** 2026-11-19T12:48:27Z → **`b985a42`**; `gh pr merge 200 --merge`, no approval waited on. |
+| Deploy | `Publish static site to GitHub Pages` **success** on `b985a42` (run 44527325107); Pages API `status: built`. |
+| Live fetch-back — requirements | `site/pages/requirements.html` serves **33 rows, 24 done / 9 partial / 0 missing / 0 blocked**, with R01 carrying this seat's measured evidence and correctly **staying `partial`** (the rebuild has still never been observed). |
+| Live fetch-back — flags | `site/pages/flagged.html` serves **181 rows**; `F-915-01…06` each render with a real anchor. `F-915-01`→`data/raw/_last_refresh.json`, `F-915-06`→`data/hca_measured.json`, `F-HCA-01` present (main's). |
+
+**One more defect found at integration, and fixed rather than skipped.** `validate` failed on `scripts/test_injuries_banner_7b8d624a.py` (another session's test). Root cause was not this seat's code: the test **hard-coded one day's edition** (`Injury-Report_2026-11-16_09_45AM`), so when the newer 11/17 11:30 AM edition was promoted the page correctly advanced and the test failed on a correct page. The tell was *same inputs, different output* — the builder was byte-identical to `main`'s and `data/raw/injuries.json` identical too; `main`'s **committed** `docs/data/injuries.json` is simply stale (11/16) against its own `data/raw/injuries.json` (11/17), and CI compares against that committed copy. The test now resolves the edition from the record the builder reads and checks the invariant ("the banner matches the edition the rows came from"), which is stronger than the pin it replaced. Their builder and promoted input were not touched.
+
+**Still open after this delivery:** R01 `partial` pending an observed rebuild; S1 needs a runner-side fetch route (F-915-04); whether Actions may create PRs at all is unmeasured and now fails loudly (F-915-01); the HCA pin consequence is published for decision (F-915-06).
+
+### 77.7 Correction record — my own flag was wrong, and the live page caught it (2026-11-19 ~12:5x UTC)
+
+After PR #203 merged I re-read the **live** landing page rather than trusting my local build. It showed the standings-derived home-court pin as **+0.09 points (0.5023, 111 of 221)** — not the −1.10 I had just written into **F-915-06**. Both are real:
+
+| Pin | Corpus | Formula | Value |
+| --- | --- | --- | --- |
+| Standings pin (published in the executive summary, `data/derived/measured_constants_2026_27.json`) | official standings HOME/ROAD columns, 221 games | `sigma_margin · Φ⁻¹(rate)` | **+0.09 pts** (unchanged this session — standings were not re-read) |
+| Feed pin (`data/hca_measured.json`, the file R09 wires into the legacy reference line) | `data/raw/games_completed.json` | same formula, feed corpus | **+0.59 → −1.10 pts** after the 25 restored finals (9 home / 16 road) |
+
+So F-915-06 as first published **over-stated** the finding: it described one pin flipping when there are two derivations over two corpora. Corrected in **PR #205 → merged `43a430f`**, deployed, and the flag now states the decision it actually needs: *pick one source of record, make the other a cross-check with a tolerance, or raise on disagreement.*
+
+This is the same failure class the board's own §69.2 recorded — a fetch-back finding a defect that the green gate suite could not see. Recorded rather than quietly rewritten.
 ## 78. Session `arena/4eef6d3b-nba1` — refresh-path completion seat, claimed and delivered as "§74" and renumbered here after a live numbering collision (claimed ~12:25Z, delivered ~14:2x UTC 2026-11-19)
 
 ### 78.0 The collision, recorded first (ground rule 6)

@@ -458,13 +458,35 @@ def main():
         },
     }
     if home_rate is not None:
-        consts["hca_pin"] = {
+        # Carry the R09 home_court_pin block FORWARD instead of emitting a
+        # parallel one: this seat's first re-cut dropped the block (with its
+        # prior_pin/drift history) and had to restore it by hand (section
+        # 78 merge record). The recomputation CONFIRMS the block's values;
+        # it updates them only when they actually move.
+        consts["home_court_pin"] = {
             "home_win_rate": round(home_rate, 4),
+            "home_wins": home_wins,
+            "home_games": home_games,
+            "sigma_margin_used": round(sd_m, 3),
             "hca_points": round(hca_pts, 3),
-            "formula": "HCA = sigma_margin * norm_ppf(measured home-win rate); the pin is measured, "
-                       "never fitted (R09)",
+            "formula": "HCA_points = sigma_margin * Phi^-1(home_win_rate); the rate comes "
+                       "from the official standings HOME/ROAD columns, never from a fit",
             "source_url": SRC_STD,
+            "reconfirmed_by": {"session": "arena/4eef6d3b-nba1 (section 78)",
+                               "at_utc": NOW,
+                               "script": "scripts/recut_2026-11-19_4eef6d3b.py"},
         }
+        # Preserve the block's own history (prior_pin/drift sub-blocks written
+        # by earlier seats) - a re-cut updates measurements, never deletes
+        # provenance.
+        try:
+            prev_consts = load("data/derived/measured_constants_2026_27.json")
+            prev_pin = (prev_consts.get("home_court_pin") or {})
+            for sub in ("prior_pin", "drift"):
+                if sub in prev_pin:
+                    consts["home_court_pin"][sub] = prev_pin[sub]
+        except (OSError, ValueError):
+            pass
     dump("data/derived/measured_constants_2026_27.json", consts)
     print("done; drift rows:", len(drift))
 

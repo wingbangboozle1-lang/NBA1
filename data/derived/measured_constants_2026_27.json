@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Measured constants for the 2026-27 model, re-derived on 2026-11-19",
   "generated_by": "scripts/recut_2026-11-19_4eef6d3b.py",
-  "retrieved_utc": "2026-11-19T12:48:05Z",
+  "retrieved_utc": "2026-11-19T13:06:22Z",
   "rule": "measure, never fit. Each constant states the official column it came from."
  },
  "league": {
@@ -20,10 +20,27 @@
   "formula": "sample standard deviation (n-1) of the official home-minus-away margin and of the official game total, over every decided game in the corpus, de-duplicated by game id",
   "source_url": "https://www.nba.com/games"
  },
- "hca_pin": {
+ "home_court_pin": {
   "home_win_rate": 0.5023,
+  "home_wins": 111,
+  "home_games": 221,
+  "sigma_margin_used": 16.714,
   "hca_points": 0.095,
-  "formula": "HCA = sigma_margin * norm_ppf(measured home-win rate); the pin is measured, never fitted (R09)",
-  "source_url": "https://www.nba.com/standings"
+  "formula": "HCA_points = sigma_margin * Phi^-1(home_win_rate); the rate comes from the official standings HOME/ROAD columns, never from a fit",
+  "source_url": "https://www.nba.com/standings",
+  "reconfirmed_by": {
+   "session": "arena/4eef6d3b-nba1 (section 78)",
+   "at_utc": "2026-11-19T13:06:22Z",
+   "script": "scripts/recut_2026-11-19_4eef6d3b.py"
+  },
+  "prior_pin": {
+   "rate": 0.5196,
+   "hca_points": 0.83,
+   "as_of": "2026-11-17 (session arena/84264db0-nba1)"
+  },
+  "drift": {
+   "rate_change": -0.0173,
+   "points_change": -0.735
+  }
  }
 }
