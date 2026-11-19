@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement coverage &mdash; 2026-11-19 &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="../../model-v2.html">Model v2 (disagreement-first)</a>
+      <a href="../../picks.html">Legacy horizon picks file</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="roll.html">Rolling Slate</a>
+<a href="projection.html">Projection Surface</a>
+<a href="bet-surface.html">Bet Surface (gated)</a>
+<a href="bet.html">Bet surface (gate state)</a>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>RESULTS &amp; SETTLEMENT</h3>
+<a href="results.html">Official Results &amp; Settlement</a>
+<a href="player-logs.html">Player Game Logs</a>
+<a href="settlement.html">Settlement &amp; Ledger</a>
+<a href="injury-ledger.html">Injury PDF Ledger</a>
+<a href="official-feed.html">Official Result Feed</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+<a href="estimators.html">Two Estimators</a>
+<a href="luck-z.html">Luck as a z-score</a>
+<a href="parlay-pricing.html">Parlay Pricing</a>
+<a href="rest-travel.html">Rest, B2B &amp; Travel</a>
+<a href="rotation.html">Minutes Redistribution</a>
+<a href="brief-coverage.html">Requirements Coverage</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+<a href="verify-2026-11-15.html">Nov 15 re-verification</a>
+<a href="verify-2026-11-16.html">Nov 16 re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 19 NOV</h3>
+<a href="../../live/live-horizon.html">Live horizon check &amp; calibration</a>
+<a href="../../live/decision-register.html">Decision register</a>
+<a href="../../live/requirement-coverage.html">Requirement coverage</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Requirement coverage &mdash; 2026-11-19</h1>
+      <p class="sub">Every distinct line of the brief mapped to the artifact that implements it, the evidence checked today, and the gap that remains.</p>
+    </div>
+    <div class="tiles">
+<div class="tile"><div class="tile-v">33</div><div class="tile-l">Requirements tracked</div><div class="tile-s">every distinct line of the brief</div></div>
+<div class="tile"><div class="tile-v">16</div><div class="tile-l">Done</div><div class="tile-s">artifact exists and the cited evidence was checked this pass</div></div>
+<div class="tile"><div class="tile-v">17</div><div class="tile-l">Partial</div><div class="tile-s">implemented with a named gap</div></div>
+<div class="tile"><div class="tile-v">0</div><div class="tile-l">Claimed but missing</div><div class="tile-s">the script downgrades a row whose artifact is absent</div></div>
+</div>
+<div class="banner warn"><div class="b-t">How to read a status</div><div class="b-b"><p>A row is 'done' only when every artifact it names exists on disk AND this pass verified the evidence it cites. 'partial' names the gap. A row whose artifact does not exist is downgraded to 'claimed-but-missing' by the script itself, so this register cannot claim work that is not in the repository. This is a second opinion beside data/content/requirements.json (scripts/build_requirements.py), not a replacement: the two are published side by side so a reader can see where they agree.</p><p class='fine'>This register is a second opinion beside the existing <a href='../site/pages/requirements.html'>Brief Traceability</a> page, which is generated by a different script from a different cut. The two are published side by side rather than reconciled by hand, so a reader can see where they agree and where they do not.</p></div></div>
+<h2 class="sec">Every line of the brief, mapped to a file</h2><p class="secsub">The artifact paths are checked for existence by the script that writes this table</p>
+<div class="tablewrap">
+<table class="tbl wide"
+>
+<thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Artifact(s) in this repository</th>
+<th>Evidence checked 2026-11-19</th>
+<th>Gap</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr id="B01">
+<td>B01</td>
+<td>Scheduled job refreshes schedule, standings, team stats and injury report for each rolling slate, then rebuilds only after freshness and provenance gates pass</td>
+<td><code>.github/workflows/refresh-data.yml</code><br><code>engine/refresh_gate.py</code><br><code>data/derived/surface_gates.json</code></td>
+<td>verifier ran the same gate logic the UI shows; the gate is BLOCKED on freshness and provenance, and the bet surface is closed because of it (data/content/verify_2026-11-19_d66245d4.json)</td>
+<td>the scheduled run still promotes an injury pointer that is not the newest archived edition (open item X6 on this board, unchanged by this seat)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B02">
+<td>B02</td>
+<td>Official per-game result feed, kept current, settled only after final scores are verified; one row per game: date, teams, final score, quarter scores</td>
+<td><code>data/official/results_feed_2026_27.json</code></td>
+<td>222 rows, 222 Final, 0 quarter-sum failures; every one of the 18 finished November days matches the official month grid exactly (rows.results_feed)</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B03">
+<td>B03</td>
+<td>Store every injury PDF with its timestamp and diff consecutive reports to detect status changes</td>
+<td><code>data/raw/injury_pdfs</code><br><code>data/parsed/injury_diffs</code><br><code>engine/injury_diff.py</code></td>
+<td>154 archived PDFs with 153 consecutive diffs (COORDINATION §68); this seat separately confirmed the index lists 8 editions for 11/19 (rows.injury)</td>
+<td>PDF bytes cannot be re-hashed from this sandbox; the byte audit belongs to §68</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B04">
+<td>B04</td>
+<td>Freeze a pre-registration file per strategy before its first bet: signal, thresholds, universe, settlement rule</td>
+<td><code>data/prereg</code><br><code>data/archive/prereg_2026-11-19</code><br><code>scripts/freeze_prereg.py</code></td>
+<td>verify_ledger.py confirms every superseded live-path pre-registration is preserved byte-frozen in data/archive/prereg_&lt;date&gt;/</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B05">
+<td>B05</td>
+<td>Tamper-evident ledger: hash each published pick, publish the hash before tip, verify after settlement</td>
+<td><code>data/ledger/ledger.json</code><br><code>scripts/verify_ledger.py</code></td>
+<td>17 entries, chain verifies (exit 0), head 4d8f1693...; entry 17 is the pre-tip publication for the 11/19 slate</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B06">
+<td>B06</td>
+<td>Split the site into 'projection' (safe to publish now) and 'bet' (gated) surfaces; never mix them</td>
+<td><code>site/pages/projection.html</code><br><code>site/pages/bet-surface.html</code><br><code>site/pages/bet.html</code><br><code>data/derived/surface_gates.json</code></td>
+<td>both surfaces exist and the bet surface is fail-closed: its gates are BLOCKED so it shows no picks</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B07">
+<td>B07</td>
+<td>Two independent estimators; publish their disagreement as the primary confidence signal, blend underneath</td>
+<td><code>data/estimator_a.json</code><br><code>data/estimator_b.json</code><br><code>data/disagreement.json</code><br><code>site/pages/estimators.html</code></td>
+<td>the estimators page exists and the picks page prints disagreement as its headline</td>
+<td>this seat did not re-derive the two estimators; that is a model task, not a verification task</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B08">
+<td>B08</td>
+<td>Pin home-court advantage to the measured home-win rate instead of fitting it</td>
+<td><code>data/derived/hca_pin_2026_11_17_ca442d3d.json</code><br><code>data/derived/measured_constants_2026_27.json</code></td>
+<td>measured home win rate 0.5023 -&gt; HCA 0.09 points, applied on every one of the 26 horizon rows (home_court_applied: true)</td>
+<td>the pin is applied, but the measured rate is 0.5023 while an independent read of the standings gives 111 home wins in 221 games (0.5023) - consistent</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B09">
+<td>B09</td>
+<td>Report luck as a z-score per team and refuse to publish a strategy leaning on a team outside the noise band</td>
+<td><code>data/luck_zscores.json</code><br><code>site/pages/luck-z.html</code></td>
+<td>data/derived/strategies.json carries a noise_band_refusal block per strategy and the refusal test suite passes (13 test files, 0 failing)</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B10">
+<td>B10</td>
+<td>Compute rest, back-to-back and 3-in-4 from the official schedule and add travel distance from a sourced arena-coordinate table</td>
+<td><code>data/derived/rest_travel_2026_27.json</code><br><code>data/arenas.json</code><br><code>site/pages/rest-travel.html</code></td>
+<td>rest and travel rows exist and render</td>
+<td>arena COORDINATES come from Wikipedia, not an NBA-published table (the repository's own flag F109) - a sourced approximation, not an official value</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B11">
+<td>B11</td>
+<td>Model minutes redistribution explicitly: top-8 minutes shares and replacement shares when a player is out</td>
+<td><code>data/derived/minutes_redistribution_2026-11-19_e3d25abc.json</code><br><code>data/derived/minutes_shares.json</code></td>
+<td>382 one-player-out scenarios with recipients weighted by the minutes those teammates actually played</td>
+<td>measured absences exist for a two-day window only; the file states this in window_limits rather than estimating across it</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B12">
+<td>B12</td>
+<td>Publish the disagreement between the two estimators as the headline and the blend underneath</td>
+<td><code>site/pages/picks.html</code><br><code>site/pages/estimators.html</code></td>
+<td>picks page headline is the disagreement; the record is secondary</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B13">
+<td>B13</td>
+<td>Price every parlay with the measured rho and print the naive product next to it</td>
+<td><code>data/derived/measured_rho.json</code><br><code>site/pages/parlay-pricing.html</code><br><code>data/derived/horizon_picks.json</code></td>
+<td>12 parlays and 8 SGP candidates priced on the published horizon; measured rho register present with corpus n=74</td>
+<td>the prop-leg rho is still tier C (unmeasured); the repository says so itself</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B14">
+<td>B14</td>
+<td>Put rotation availability on the picks page as its own column</td>
+<td><code>site/pages/picks.html</code><br><code>data/derived/availability_2026-11-17_18_e3d25abc.json</code></td>
+<td>the availability column is on the picks page and the availability file records 136 out/not-available declarations with 0 contradictions</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B15">
+<td>B15</td>
+<td>Market-anchored prior: blend the model line with the closing line, weighted by measured out-of-sample log-loss</td>
+<td><code>data/derived/market_anchor.json</code><br><code>scripts/market_anchor.py</code></td>
+<td>the weighting is implemented and measured; the blend is 100% model because no closing line exists</td>
+<td>BLOCKED on the input: no NBA-operated source publishes a closing line, so the market half cannot be built (the repository's own F98)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B16">
+<td>B16</td>
+<td>Model the total as possessions x points-per-possession, not as an average of team scoring averages</td>
+<td><code>data/derived/horizon_lines.json</code></td>
+<td>recomputed all 26 totals from the published formula: 26/26 reproduce the published total to within 0.06 point (rows.reprice.formula_verdict)</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B17">
+<td>B17</td>
+<td>Show the injury-report revision time and retrieval time in the Injuries page banner</td>
+<td><code>site/pages/injuries.html</code><br><code>data/official/injury_editions_2026-11-19_e3d25abc.json</code></td>
+<td>the editions file carries revision and retrieval stamps per edition</td>
+<td>this seat did not re-render the banner to see both fields; it verified the underlying file, not the pixel</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B18">
+<td>B18</td>
+<td>Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible</td>
+<td><code>data/settlement</code><br><code>data/ledger/ledger.json</code><br><code>site/pages/settlement.html</code></td>
+<td>five slates settled 11/14-11/18; each settlement file carries settled_at_utc and a per-game official URL</td>
+<td>11/17 and 11/18 were both settled at 2026-11-19T06:00Z - i.e. 11/17 settled a day late, which is what the 'as soon as each game day ends' clause asks to avoid</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B19">
+<td>B19</td>
+<td>Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs</td>
+<td><code>data/official/teams_inputs_2026-11-19_9ff20954.json</code><br><code>data/derived/team_stats_recut.json</code></td>
+<td>all three pages are stored for 11/19 and the advanced table was independently re-read here: 30/30 rows, 2 differ, both the documented one-game lag (F-929-01)</td>
+<td>the lag is now measurable in points: 3 of 26 lines move by more than 1 point when repriced (V-D66-05)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B20">
+<td>B20</td>
+<td>Capture per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players who appear on an injury report</td>
+<td><code>data/official/player_game_logs_2026-11-17.json</code><br><code>data/official/player_game_logs_2026-11-18.json</code></td>
+<td>437 player rows over 17 games for 11/17-11/18, with DNP rows kept (COORDINATION §68)</td>
+<td>the log set covers four game days, so a per-player variance estimate rests on very few observations</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B21">
+<td>B21</td>
+<td>Generate picks for every upcoming slate up to 3 days in advance using originated lines</td>
+<td><code>data/derived/horizon_picks.json</code><br><code>data/derived/horizon_lines.json</code></td>
+<td>26 games across 11/19-11/22; 26 singles, 12 parlays, 8 SGP candidates, every line reproduced from the published formula</td>
+<td>the horizon is 4 calendar days (today + 3), which is the brief's wording; the injury basis for the near day is 5 revisions old (V-D66-04)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B22">
+<td>B22</td>
+<td>Track how injuries affect rotation minutes and production, and provide game-flow analysis</td>
+<td><code>data/derived/game_flow_2026-11-19_e3d25abc.json</code><br><code>data/derived/injury_impact.json</code><br><code>site/pages/gameflow.html</code></td>
+<td>17 games of quarter lines, halves and OT; rotation and availability files present</td>
+<td>production effects rest on a two-day window</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B23">
+<td>B23</td>
+<td>Determine correlation values</td>
+<td><code>data/derived/measured_rho.json</code><br><code>data/derived/correlations.json</code></td>
+<td>side-and-total rho measured at -0.105 with p=0.37 on n=74 - i.e. not distinguishable from zero at this sample</td>
+<td>prop-leg correlation remains unmeasured (tier C)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B24">
+<td>B24</td>
+<td>Remove luck from the equation and build selectively skill-based strategies</td>
+<td><code>data/derived/strategies.json</code><br><code>data/luck_zscores.json</code><br><code>scripts/test_noise_band_refusal.py</code></td>
+<td>the noise-band refusal is implemented and tested; but this pass measured the opposite of skill: 14-23-1 with a -34 point calibration gap</td>
+<td>MATERIAL: the published picks are not merely unproven, they are anti-calibrated; the highest-confidence bucket is the worst (data/content/signal_diagnostics_2026-11-19_d66245d4.json)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B25">
+<td>B25</td>
+<td>Executive summary outlining important details</td>
+<td><code>EXECUTIVE_SUMMARY.md</code><br><code>data/content/executive.json</code></td>
+<td>present and linked from every page</td>
+<td>the summary still leads with an S1 record that disagrees with docs/data/leaderboard.json (V-D66-02)</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B26">
+<td>B26</td>
+<td>A suggestions section so a reviewer can choose a path before changes are implemented</td>
+<td><code>site/pages/suggestions.html</code><br><code>site/pages/decisions.html</code><br><code>data/content/suggestions.json</code></td>
+<td>39 suggestions and a decisions page already exist; this seat adds five more (I01-I05) tied to measured errors in a namespaced register</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B27">
+<td>B27</td>
+<td>A clear list of questions, information and answers needed before a decision, with suggestions to discover missing information</td>
+<td><code>live/decision-register.html</code><br><code>site/pages/decision-register.html</code><br><code>data/content/decision_register_2026-11-19_d66245d4.json</code></td>
+<td>7 questions, 5 named information gaps, 5 suggestions, each with the artifact that answers it</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B28">
+<td>B28</td>
+<td>Review the repo line by line, verifying from official sources, with links for manual review, and flag irregularities</td>
+<td><code>data/content/verify_2026-11-19_d66245d4.json</code><br><code>live/live-horizon.html</code></td>
+<td>111 field-level checks against seven official NBA pages read first-hand today; 6 flags, 1 of them a withdrawn false positive of this seat's own</td>
+<td>this is a horizon-and-settlement pass, not every line of the repository; the model internals were re-derived from their published formula but not re-fitted</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B29">
+<td>B29</td>
+<td>Create a GitHub Pages site: clean landing page, subpages by category, dashboard-like, every entry in a readable table with sources</td>
+<td><code>index.html</code><br><code>site/pages</code><br><code>live/live-horizon.html</code></td>
+<td>164 HTML pages build; 0 broken internal links repo-wide; every table row carries an official or repository-artifact source link (verify_dashboard: 0 unmarked rows of 3218)</td>
+<td>the two new pages are reachable from the shared nav; the rest of the site's navigation is unchanged</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B30">
+<td>B30</td>
+<td>Verification: every table row must have a source link; leave unconfirmed values blank and flagged, never infer</td>
+<td><code>scripts/verify_dashboard.py</code><br><code>scripts/verify_all.py</code></td>
+<td>verify_dashboard.py passes on 43 pages / 3218 rows with 0 unmarked; this seat's own pages were rewritten to comply rather than exempted</td>
+<td>the gate checks provenance structure, not that a source still says what the row claims; stated by the gate itself</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B31">
+<td>B31</td>
+<td>Read COORDINATION.md, claim a task, keep scopes non-overlapping, commit and push the claim, log cross-scope requests</td>
+<td><code>COORDINATION.md</code></td>
+<td>§72 claim written and pushed before any work (commit 4d4a45a); 5 adoption requests logged instead of editing PR #181's files</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B32">
+<td>B32</td>
+<td>Create a PR, merge without waiting, confirm Pages, record the PR and merge result on the board, publish flagged items on a Flagged for Review page</td>
+<td><code>COORDINATION.md</code><br><code>live/live-horizon.html</code></td>
+<td>this table is written before delivery; the delivery record is appended to §72 with the PR number and merge commit when it runs</td>
+<td>pending at the time this file was written</td>
+<td><span class="v warn">partial</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+<tr id="B33">
+<td>B33</td>
+<td>No manual input from the user; work autonomously and verify every value</td>
+<td><code>data/content/verify_2026-11-19_d66245d4.json</code></td>
+<td>every value on the new pages is either an official read or a script computation; none was typed from memory</td>
+<td>none found in this pass</td>
+<td><span class="v ok">done</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements_status_2026-11-19_d66245d4.json" target="_blank" rel="noopener">audit</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">The ledger, as measured</h2><p class="secsub">Read-only: this seat writes no ledger entry</p>
+<div class="tiles">
+<div class="tile"><div class="tile-v">17</div><div class="tile-l">Ledger entries</div><div class="tile-s">each one hashes the previous entry's canonical JSON</div></div>
+<div class="tile"><div class="tile-v">yes</div><div class="tile-l">Chain verifies</div><div class="tile-s">ledger chain OK</div></div>
+<div class="tile"><div class="tile-v">4d8f169383c9ba6c...</div><div class="tile-l">Head</div><div class="tile-s">SHA-256 of the newest entry</div></div>
+</div>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Entry</th>
+<th>Type</th>
+<th>At (UTC)</th>
+<th>Verifies entry</th>
+<th>Commit</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>pre_tip_publication</td>
+<td>2026-11-14T22:18:48Z</td>
+<td></td>
+<td><code>ef2e723e13</code></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>settlement_verification</td>
+<td>2026-11-15T12:35Z</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>settlement_record</td>
+<td>2026-11-15T12:35Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>pre_tip_publication</td>
+<td>2026-11-15T12:55Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>pre_tip_publication</td>
+<td>2026-11-16T00:16Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>settlement_settlement_verification</td>
+<td>2026-11-16T14:45Z</td>
+<td>4</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>settlement_record</td>
+<td>2026-11-16T14:45Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>settlement_settlement_verification</td>
+<td>2026-11-17T15:44Z</td>
+<td>5</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>settlement_record</td>
+<td>2026-11-17T15:44Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>sgp_grading_record</td>
+<td>2026-11-17T15:45Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>sgp_grading_amendment</td>
+<td>2026-11-17T16:00Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>pre_tip_publication</td>
+<td>2026-11-17T15:54Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>settlement_settlement_verification</td>
+<td>2026-11-19T06:00Z</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>settlement_record</td>
+<td>2026-11-19T06:00Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>settlement_settlement_verification</td>
+<td>2026-11-19T06:00Z</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>settlement_record</td>
+<td>2026-11-19T06:00Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>pre_tip_publication</td>
+<td>2026-11-19T05:45Z</td>
+<td></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+</tbody></table></div>
+<section class="card "><h2>Reading note</h2><p>Entry 17 (pre-tip publication for the 11/19 slate) is appended AFTER entries 14-16 (settlement of 11/17 and 11/18). The chain orders writes, not the game dates they describe; the type field is authoritative. A reader who assumes entry order equals game order would misread the chain.</p></section>
+<section class="card "><h2>The findings this pass recorded</h2><p>The full set, with evidence and severity, is on the <a href='live-horizon.html'>live horizon page</a>. Summarised: 6 findings, of which 1 is a withdrawn false positive of this seat's own and 0 are unresolved defects in the measurement chain.</p></section>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

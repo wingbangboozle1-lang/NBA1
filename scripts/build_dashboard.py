@@ -138,6 +138,7 @@ EXTERNAL_NAV = [
         # through pth["navbase"] like every other site/pages entry.
         ("Live horizon check &amp; calibration", "live/live-horizon.html"),
         ("Decision register", "live/decision-register.html"),
+        ("Requirement coverage", "live/requirement-coverage.html"),
     ]),
     ("INDEPENDENT CHECK &middot; 14 NOV", [
         ("&#10003; What is actually true", "verified/index.html"),

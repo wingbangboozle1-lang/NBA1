@@ -26,6 +26,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "data", "content")
 
 VERIFY = os.path.join(CONTENT, "verify_2026-11-19_d66245d4.json")
+REQS = os.path.join(CONTENT, "requirements_status_2026-11-19_d66245d4.json")
+LEDGER = os.path.join(CONTENT, "ledger_progress_2026-11-19_d66245d4.json")
 DIAG = os.path.join(CONTENT, "signal_diagnostics_2026-11-19_d66245d4.json")
 DECISIONS = os.path.join(CONTENT, "decision_register_2026-11-19_d66245d4.json")
 
@@ -323,6 +325,69 @@ def _rebase(html, depth):
     return out
 
 
+def build_requirement_coverage(bd):
+    d = load(REQS)
+    led = load(LEDGER)
+    v = load(VERIFY)
+    body = []
+    c = d["counts"]
+    body.append(bd.tiles([
+        ("Requirements tracked", len(d["rows"]), "every distinct line of the brief"),
+        ("Done", c.get("done", 0), "artifact exists and the cited evidence was checked this pass"),
+        ("Partial", c.get("partial", 0), "implemented with a named gap"),
+        ("Claimed but missing", c.get("claimed-but-missing", 0),
+         "the script downgrades a row whose artifact is absent"),
+    ]))
+    body.append(bd.banner(
+        "warn", "How to read a status",
+        "<p>%s</p><p class='fine'>This register is a second opinion beside the existing "
+        "<a href='../site/pages/requirements.html'>Brief Traceability</a> page, which is generated "
+        "by a different script from a different cut. The two are published side by side rather than "
+        "reconciled by hand, so a reader can see where they agree and where they do not.</p>"
+        % bd.esc(d["rule"])))
+
+    rows = []
+    for r in d["rows"]:
+        cls = {"done": "ok", "partial": "warn", "claimed-but-missing": "bad"}.get(r["status"], "")
+        rows.append([
+            bd.esc(r["id"]), bd.esc(r["requirement"]),
+            "<br>".join("<code>%s</code>" % bd.esc(a) for a in r["artifacts"]),
+            bd.esc(r["evidence_2026_11_19"]), bd.esc(r["gap"]),
+            '<span class="v %s">%s</span>' % (cls, bd.esc(r["status"])),
+            repolink("data/content/requirements_status_2026-11-19_d66245d4.json", "audit"),
+        ])
+    body.append(bd.h2("Every line of the brief, mapped to a file",
+                      "The artifact paths are checked for existence by the script that writes this table"))
+    body.append(bd.table(["ID", "Requirement", "Artifact(s) in this repository", "Evidence checked 2026-11-19",
+                          "Gap", "Status", "Source"], rows, cls="wide", anchor_pattern=r"^B\d+$"))
+
+    body.append(bd.h2("The ledger, as measured", "Read-only: this seat writes no ledger entry"))
+    body.append(bd.tiles([
+        ("Ledger entries", led["entries"], "each one hashes the previous entry's canonical JSON"),
+        ("Chain verifies", "yes" if led["verified_this_session"]["exit_code"] == 0 else "NO",
+         led["verified_this_session"]["result"]),
+        ("Head", led["head_sha256"][:16] + "...", "SHA-256 of the newest entry"),
+    ]))
+    lrows = []
+    for e in led["entry_index"]:
+        lrows.append([str(e["entry"]), bd.esc(e["type"] or ""), bd.esc(e["at_utc"] or ""),
+                      bd.esc(str(e["verifies_entry"] or "")),
+                      "<code>%s</code>" % bd.esc((e["commit"] or "")[:10]) if e["commit"] else bd.NA,
+                      repolink("data/ledger/ledger.json", "ledger")])
+    body.append(bd.table(["Entry", "Type", "At (UTC)", "Verifies entry", "Commit", "Source"], lrows))
+    body.append(bd.card("Reading note", "<p>%s</p>" % bd.esc(led["reading_note"]), ""))
+
+    body.append(bd.card("The findings this pass recorded", (
+        "<p>The full set, with evidence and severity, is on the "
+        "<a href='live-horizon.html'>live horizon page</a>. Summarised: %d findings, of which 1 is "
+        "a withdrawn false positive of this seat's own and 0 are unresolved defects in the "
+        "measurement chain.</p>" % len(v["flagged"]))))
+
+    return bd.page("Requirement coverage &mdash; 2026-11-19",
+                   "Every distinct line of the brief mapped to the artifact that implements it, the "
+                   "evidence checked today, and the gap that remains.", "\n".join(body))
+
+
 def main():
     bd = _bd()
     # Published from site/pages/ because page() renders a depth-1 frame (css ../assets/site.css,
@@ -332,6 +397,7 @@ def main():
     out = {
         "live-horizon.html": build_live_horizon(bd),
         "decision-register.html": build_decision_register(bd),
+        "requirement-coverage.html": build_requirement_coverage(bd),
     }
     dirs = [("site/pages", 1), ("live", 2)]
     for d, depth in dirs:
