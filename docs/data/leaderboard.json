@@ -13,40 +13,20 @@
    "name": "Side edge vs reference",
    "family": "Single bet",
    "components": {
-    "sample": 1.0,
+    "sample": 0.9,
     "edge": 1.0,
-    "calibration": 0.2,
+    "calibration": 0.986,
     "result": 1.0,
-    "gates": 0.6
-   },
-   "lbs": 82.0,
-   "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G5 failed.",
-   "n_graded": 31,
-   "record": "23-8",
-   "units": 12.909,
-   "status": "GRADED",
-   "rank": 1
-  },
-  {
-   "id": "S5",
-   "name": "Back-to-back fade",
-   "family": "Single bet",
-   "components": {
-    "sample": 0.433,
-    "edge": 1.0,
-    "calibration": 0.824,
-    "result": 0.916,
     "gates": 0.5
    },
-   "lbs": 76.4,
+   "lbs": 90.3,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G4, G5 failed.",
-   "n_graded": 13,
-   "record": "8-5",
-   "units": 2.273,
+   "n_graded": 27,
+   "record": "17-10",
+   "units": 5.455,
    "status": "GRADED",
-   "rank": 2
+   "rank": 1
   },
   {
    "id": "S2",
@@ -66,25 +46,45 @@
    "record": "8-7",
    "units": 0.273,
    "status": "GRADED",
-   "rank": 3
+   "rank": 2
   },
   {
    "id": "S3",
    "name": "Moneyline value",
    "family": "Single bet",
    "components": {
-    "sample": 0.567,
-    "edge": 0.524,
-    "calibration": 0.525,
+    "sample": 0.4,
+    "edge": 1.0,
+    "calibration": 0.141,
     "result": 0.0,
-    "gates": 0.5
+    "gates": 0.3
    },
-   "lbs": 39.8,
+   "lbs": 39.6,
    "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G4, G5 failed.",
-   "n_graded": 17,
-   "record": "8-9",
-   "units": -1.727,
+   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G4, G5 failed.",
+   "n_graded": 12,
+   "record": "6-6",
+   "units": -0.545,
+   "status": "GRADED",
+   "rank": 3
+  },
+  {
+   "id": "S5",
+   "name": "Back-to-back fade",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.4,
+    "edge": 1.0,
+    "calibration": 0.037,
+    "result": 0.0,
+    "gates": 0.3
+   },
+   "lbs": 38.0,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G4, G5 failed.",
+   "n_graded": 12,
+   "record": "6-6",
+   "units": -0.545,
    "status": "GRADED",
    "rank": 4
   },
@@ -93,18 +93,18 @@
    "name": "Same-game parlay (side + total)",
    "family": "Parlay / SGP",
    "components": {
-    "sample": 0.8,
+    "sample": 0.767,
     "edge": 0.0,
-    "calibration": 0.893,
+    "calibration": 0.615,
     "result": 0.0,
     "gates": 0.417
    },
-   "lbs": 35.6,
+   "lbs": 30.8,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G3, G4, G5 failed.",
-   "n_graded": 24,
-   "record": "9-15",
-   "units": 1.03,
+   "n_graded": 23,
+   "record": "7-16",
+   "units": -4.188,
    "status": "GRADED",
    "rank": 5
   },
@@ -115,16 +115,16 @@
    "components": {
     "sample": 0.267,
     "edge": 0.0,
-    "calibration": 0.362,
+    "calibration": 0.0,
     "result": 0.0,
     "gates": 0.167
    },
-   "lbs": 13.3,
+   "lbs": 7.8,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G1, G2, G3, G4, G5 failed.",
    "n_graded": 8,
-   "record": "3-5",
-   "units": -1.873,
+   "record": "2-6",
+   "units": -3.635,
    "status": "GRADED",
    "rank": 6
   },

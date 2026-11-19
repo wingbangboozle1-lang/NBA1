@@ -20,6 +20,13 @@
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "source_sha256": "0d6584817bccff09c894650bcea68cfde34c4c2357838c23494a5cd779612e90"
+  },
+  {
+   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "source_sha256": "6ab68a487193e679bed7fbf14139134a1c04cebd2ce9f3f32265295281655816"
   }
  ],
  "S7_players": [
@@ -43,6 +50,13 @@
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://www.nba.com/stats/players/traditional",
    "source_sha256": "18f822b62ffe9d00c8c734e8febb3d68ea195b99b9536c736f56c2d5b40d64fb"
+  },
+  {
+   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://www.nba.com/stats/players/traditional",
+   "source_sha256": "1a8677b218a18ab5bd2f68d64ab89aceb6ce9f8592198783952d5f91fd044423"
   }
  ],
  "_runs": [
@@ -167,6 +181,42 @@
      "item": "S1_season",
      "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'"
     }
+   ]
+  },
+  {
+   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "promoted_items": [
+    "S4_schedule",
+    "injury_diff_chain",
+    "injury_pdf_probe",
+    "results 2026-11-06",
+    "results 2026-11-07",
+    "results 2026-11-08",
+    "results 2026-11-09",
+    "results 2026-11-10",
+    "results 2026-11-11",
+    "results 2026-11-12",
+    "results 2026-11-13",
+    "results 2026-11-14",
+    "results 2026-11-15",
+    "results 2026-11-16",
+    "results 2026-11-17",
+    "results 2026-11-18",
+    "results 2026-11-19",
+    "results_feed",
+    "S5_injury_index",
+    "S7_players"
+   ],
+   "blocked": [
+    {
+     "item": "S1_season",
+     "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'"
+    }
+   ],
+   "blocked_unreadable": [
+    "S8_standings",
+    "S9_team_traditional",
+    "S10_team_opponent"
    ]
   }
  ]

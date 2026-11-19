@@ -18,7 +18,33 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "site", "pages", "injuries.html")
 INDEX_REC = os.path.join(ROOT, "data", "official", "injury_index_2026-11-19_7b8d624a.json")
-EDITION = os.path.join(ROOT, "data", "parsed", "injury_diffs", "editions", "Injury-Report_2026-11-16_09_45AM.json")
+_DOCS_INJ = os.path.join(ROOT, "docs", "data", "injuries.json")
+
+
+def _edition_behind_the_page():
+    """The edition the published page is actually built from, READ not pinned.
+
+    This test used to hard-code Injury-Report_2026-11-16_09_45AM. That made it a
+    pin on one day's data rather than a check of the invariant it describes:
+    when the scheduled refresh promoted the newer 2026-11-17_11_30AM edition
+    (59 rows) the page correctly advanced to it, and the test failed even though
+    every banner was right. The invariant is "the banner matches the edition the
+    rows came from", so the edition is resolved from the same record the builder
+    reads. (COORDINATION.md section 77.)
+    """
+    try:
+        rec = json.load(open(_DOCS_INJ, encoding="utf-8"))
+    except (OSError, ValueError):
+        return None, None
+    import re as _re
+    label = (rec.get("report") or "").replace("NBA Official Injury Report, ", "").strip()
+    path = os.path.join(ROOT, "data", "parsed", "injury_diffs", "editions", label + ".json")
+    if not label or not os.path.exists(path):
+        return label, None
+    return label, json.load(open(path, encoding="utf-8"))
+
+
+_PAGE_LABEL, _PAGE_EDITION = _edition_behind_the_page()
 
 fails = []
 
@@ -32,13 +58,20 @@ s = open(PAGE, encoding="utf-8").read()
 banners = re.findall(r'<div class="banner (\w+)"><div class="b-t">(.*?)</div><div class="b-b">(.*?)</div></div>', s, re.S)
 text_all = _html.unescape(re.sub(r"<[^>]+>", " ", s))
 
-# 1. The edition behind the rows: printed revision and retrieval stamps.
-ed = json.load(open(EDITION, encoding="utf-8"))
+# 1. The edition behind the rows: printed revision and retrieval stamps, for
+#    whichever edition the page is built from (resolved above, never pinned).
 b1 = [b for b in banners if b[1].startswith("Edition behind the rows")]
 check(len(b1) == 1, "banner naming the rows' edition is missing")
-if b1:
+check(_PAGE_EDITION is not None,
+      "the edition named by the published rows has no stored edition record (%r)" % _PAGE_LABEL)
+if b1 and _PAGE_EDITION is not None:
+    ed = _PAGE_EDITION
     t1 = _html.unescape(re.sub(r"<[^>]+>", " ", b1[0][2]))
-    check("11/16/26 09:45 AM ET" in t1, "revision time of the rows' edition not shown")
+    _m = re.search(r"Injury-Report_(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)", _PAGE_LABEL or "")
+    if _m:
+        _y, _mo, _d, _hh, _mi, _ap = _m.groups()
+        check(("%s/%s/%s %s:%s %s ET" % (_mo, _d, _y[2:], _hh, _mi, _ap)) in t1,
+              "revision time of the rows' edition not shown")
     check(ed["retrieved_at_utc"] in t1, "retrieval time of the rows' edition not shown")
     check(ed["sha256"][:16] in t1, "sha-256 prefix of the rows' edition not shown")
 
@@ -52,7 +85,15 @@ diffs = re.findall(r'(from <b>|diff file\)|Consecutive-edition diff into this ed
 if "Consecutive-edition diff into this edition (from" in text_all:
     check("injury_diff_2026-11-17_1015AM_to_1030AM" not in s,
           "banner still links the 11/17 diff as if it described the rows' edition")
-    check("09_30AM" in s, "diff banner does not name its 'from' edition")
+    # The 'from' edition must be the one immediately before the page's own
+    # edition, read from the stored edition sequence rather than assumed.
+    _editions = sorted(os.path.basename(p).replace(".json", "")
+                       for p in __import__("glob").glob(os.path.join(
+                           ROOT, "data", "parsed", "injury_diffs", "editions", "*.json")))
+    _idx = _editions.index(_PAGE_LABEL) if _PAGE_LABEL in _editions else -1
+    if _idx > 0:
+        _prev_label = _editions[_idx - 1].replace("Injury-Report_", "")
+        check(_prev_label in s, "diff banner does not name its 'from' edition (%r)" % _prev_label)
 
 # 4. The index banner agrees with the stored index record.
 rec = json.load(open(INDEX_REC, encoding="utf-8"))
