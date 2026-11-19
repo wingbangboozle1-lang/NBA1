@@ -11207,7 +11207,7 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 
 ### 66.2 Pull request and Pages result
 
-- **Second parallel-session rebase note:** the board-only update conflicted with the append-only settlement cross-check added by `arena/eec70f24-nba1` (PR #174). Preserved that full record and this PR/deployment record; only `COORDINATION.md` conflicted.
+- **Parallel-session rebase notes:** the board-only update conflicted first with the append-only settlement cross-check added by `arena/eec70f24-nba1` (PR #174), and again with its merge-result addendum (PR #176). Both full records and this PR/deployment record were preserved; only `COORDINATION.md` conflicted.
 - PR [#171](https://github.com/wingbangboozle1-lang/NBA1/pull/171) merged to `main` at 2026-11-19T05:48:16Z as `9a6bfd1aaba883fdf19f45b14beb515877fc5815`.
 - PR validation run [44467440390](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467440390): **success**. Main validation run [44467666692](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467666692): **success**. GitHub Pages build/deploy run [44467666033](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467666033): **success**; GitHub API reports Pages `built` at https://wingbangboozle1-lang.github.io/NBA1/.
 - The Pages API confirms deployment completion, but this sandbox cannot fetch the published page or NBA host directly; no direct HTTP/content re-fetch is claimed. GitHub Actions emitted only the existing Node.js 20 deprecation warning; checks passed.
