@@ -265,6 +265,33 @@
 <th>Priority</th>
 <th class="src">Source</th>
 </tr></thead><tbody>
+<tr>
+<td>Q-929-1</td>
+<td><b>When will the LAL/UTA team-stat tables catch up with the standings?</b></td>
+<td>The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-2</td>
+<td><b>What do the NYK@MIN and 11/20 injury rows actually say?</b></td>
+<td>The 11/19 12:30 AM ET PDF text render has blank-matchup rows (Kuminga, Pullin) and a garbled 11/20 block. Discovery: re-fetch the PDF text render or the next edition (11/19 5:00 PM ET) and diff; the 5:00 PM edition is the one teams file by 5 p.m. local the day before.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://official.nba.com/nba-injury-report-2026-27-season/ is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-3</td>
+<td><b>Does the near-zero measured home-court pin (0.09 pts) hold as the sample grows?</b></td>
+<td>The 0.5023 home-win rate is measured over 221 games; the pin moves with every cycle. Discovery: track the pin across cycles; if it stays under ~0.3 points, the model should treat home court as negligible rather than a fixed constant.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/standings is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q1">
 <td>Q1</td>
 <td><b>Does any strategy actually beat a real sportsbook?</b></td>

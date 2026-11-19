@@ -1,104 +1,89 @@
 {
- "generated_at_utc": "2026-11-19T05:50:24Z",
+ "generated_at_utc": "2026-11-16T15:25:57Z",
  "promoted": [
   {
    "item": "S4_schedule",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "30 games -> data/raw/schedule_upcoming.json; 0 source-register entries added"
-  },
-  {
-   "item": "injury_diff_chain",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "Injury-Report_2026-11-17_11_15AM -> Injury-Report_2026-11-17_11_30AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-17_11_15AM_to_Injury-Report_2026-11-17_11_30AM.json"
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
+   "detail": "29 games -> data/raw/schedule_upcoming.json; 29 source-register entries added"
   },
   {
    "item": "injury_pdf_probe",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "59 rows from Injury-Report_2026-11-17_11_30AM -> data/raw/injuries.json"
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
+   "detail": "65 rows from Injury-Report_2026-11-16_09_45AM -> data/raw/injuries.json"
   },
   {
    "item": "results 2026-11-06",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-07",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "7 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-08",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "7 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-09",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "8 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-10",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "6 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-11",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "10 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-12",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "4 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-13",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-14",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "5 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-15",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-16",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "8 finals reconciled (0 new this run)"
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
+   "detail": "0 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-17",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "0 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-18",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
-   "detail": "0 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-19",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "0 finals reconciled (0 new this run)"
   },
   {
    "item": "results_feed",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "no new finals to append"
   },
   {
    "item": "S5_injury_index",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "digest-bound evidence record written (no model input)"
   },
   {
    "item": "S7_players",
-   "promoted_at_utc": "2026-11-19T05:50:24Z",
+   "promoted_at_utc": "2026-11-16T15:25:57Z",
    "detail": "digest-bound evidence record written (no model input)"
   }
  ],
@@ -122,8 +107,8 @@
  ],
  "warnings": [],
  "rows_written": {
-  "schedule_upcoming.json": 30,
-  "injuries.json": 59
+  "schedule_upcoming.json": 29,
+  "injuries.json": 65
  },
  "rule": "Promotion re-validates parsed rows, cross-checks two official pages against each other, and binds every record to this run's response digest. Anything unprovable stays in `changed` and blocks the rebuild."
 }

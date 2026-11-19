@@ -1,0 +1,214 @@
+{
+ "title": "Official finals \u2014 2026-11-17 (first-hand reads)",
+ "captured_by": "arena/929395a5-nba1",
+ "retrieved_utc": "2026-11-19T05:55Z",
+ "rule": "One row per game: date, teams, final score, quarter scores. Quarter sums asserted before write.",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL",
+   "away_pts": 111,
+   "home_pts": 102,
+   "away_quarters": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "home_quarters": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "quarters_sum_check": "away 23+31+26+31=111 \u2713, home 29+21+33+19=102 \u2713",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "7:30 PM ET",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": 19800,
+   "officials": "Eric Lewis, Mitchell Ervin, Evan Scott",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:55Z",
+   "verified_by_reads": [
+    "arena/929395a5-nba1: LINESCORES on the official game page (fetch_page, final chunk), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "date page final + game page LINESCORES agree on final score"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 106,
+   "away_quarters": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "home_quarters": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "quarters_sum_check": "away 17+31+31+26=105 \u2713, home 29+20+30+27=106 \u2713",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "8:00 PM ET",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "attendance": 18281,
+   "officials": "Derrick Collins, Brent Barnaky, Josh Tiven",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_box_score_url": "https://www.nba.com/game/por-vs-min-0022600254/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:55Z",
+   "verified_by_reads": [
+    "arena/929395a5-nba1: LINESCORES on the official game page (fetch_page, final chunk), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "date page final + game page LINESCORES agree on final score"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 93,
+   "away_quarters": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "home_quarters": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "quarters_sum_check": "away 26+29+23+27=105 \u2713, home 33+21+18+21=93 \u2713",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "8:00 PM ET",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "attendance": 18412,
+   "officials": "James Capers, Che Flores, Biniam Maru",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_box_score_url": "https://www.nba.com/game/det-vs-sas-0022600255/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:55Z",
+   "verified_by_reads": [
+    "arena/929395a5-nba1: LINESCORES on the official game page (fetch_page, final chunk), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "date page final + game page LINESCORES agree on final score"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "status": "FINAL",
+   "away_pts": 114,
+   "home_pts": 118,
+   "away_quarters": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "home_quarters": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "quarters_sum_check": "away 34+32+28+17+3=114 \u2713, home 30+29+22+30+7=118 \u2713",
+   "ot_periods": 1,
+   "final_label": "Final/OT",
+   "tip_et": "11:00 PM ET",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "attendance": 19057,
+   "officials": "Zach Zarba, Nick Buchert, Jonathan Sterling",
+   "state_at_retrieval": "Final/OT",
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_box_score_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:55Z",
+   "verified_by_reads": [
+    "arena/929395a5-nba1: LINESCORES on the official game page (fetch_page, final chunk), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "date page final + game page LINESCORES agree on final score"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "status": "FINAL",
+   "away_pts": 132,
+   "home_pts": 107,
+   "away_quarters": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "home_quarters": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "quarters_sum_check": "away 35+23+30+44=132 \u2713, home 29+33+24+21=107 \u2713",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "10:30 PM ET",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "attendance": 14716,
+   "officials": "James Williams, Andy Nagy, Agon Abazi",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_box_score_url": "https://www.nba.com/game/uta-vs-lac-0022600257/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:55Z",
+   "verified_by_reads": [
+    "arena/929395a5-nba1: LINESCORES on the official game page (fetch_page, final chunk), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "date page final + game page LINESCORES agree on final score"
+  }
+ ],
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-17",
+  "https://www.nba.com/game/nyk-vs-tor-0022600253",
+  "https://www.nba.com/game/por-vs-min-0022600254",
+  "https://www.nba.com/game/det-vs-sas-0022600255",
+  "https://www.nba.com/game/cha-vs-lal-0022600256",
+  "https://www.nba.com/game/uta-vs-lac-0022600257"
+ ],
+ "summary": "5 of 5 games Final; all quarter sums verified."
+}
