@@ -1,0 +1,115 @@
+{
+ "session": "arena/e3d25abc-nba1",
+ "coordination": "\u00a767 Q02",
+ "run_at_utc": "2026-11-19T05:49:13Z",
+ "hosts_allowed": [
+  "ak-static.cms.nba.com",
+  "official.nba.com",
+  "statsdmz.nba.com",
+  "www.nba.com"
+ ],
+ "rule": "Bytes as received, content-addressed, one sidecar each. This script publishes no parsed value: parsing happens locally on the stored bytes so it can be re-run and audited.",
+ "injury_index": {
+  "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "http_status": 200,
+  "error": null,
+  "retrieved_at_utc": "2026-11-19T05:49:14Z",
+  "page_sha256": "0b5597f3826fdaf1be4eb8ed2a7199ec5245a1ac05440aaafae5b2512a889c3a",
+  "page_bytes": 117705,
+  "stored": "data/raw/session-e3d25abc/injury/injury_index_2026-11-19__0b5597f3826fdaf1be4eb8ed2a7199ec5245a1ac05440aaafae5b2512a889c3a.json.gz",
+  "editions_listed": 4,
+  "newest_listed": "Injury-Report_2026-11-19_12_45AM.pdf",
+  "per_day_counts": {
+   "2026-11-19": 0
+  }
+ },
+ "injury_editions": [],
+ "days": [
+  {
+   "date": "2026-11-17",
+   "games": 5,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-e3d25abc/html/games_2026-11-17__ecbdd418d78a747b7de774d84110d55b2984fbc364480d94d52c1146af11ceec.json.gz",
+   "page_sha256": "ecbdd418d78a747b7de774d84110d55b2984fbc364480d94d52c1146af11ceec"
+  },
+  {
+   "date": "2026-11-18",
+   "games": 12,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-e3d25abc/html/games_2026-11-18__276a9679e42cba2627bceb3d0abcd584c147b55609d568577a5990b9f7264682.json.gz",
+   "page_sha256": "276a9679e42cba2627bceb3d0abcd584c147b55609d568577a5990b9f7264682"
+  }
+ ],
+ "gamebooks": [],
+ "slate": [
+  {
+   "date": "2026-11-19",
+   "games": 4,
+   "http_status": 200,
+   "stored": "data/raw/session-e3d25abc/html/slate_2026-11-19__cf6ce3947aeb551df23665a862b6eb97545010d765a1ca9640067939dd29c2db.json.gz",
+   "sha256": "cf6ce3947aeb551df23665a862b6eb97545010d765a1ca9640067939dd29c2db",
+   "retrieved_at_utc": "2026-11-19T05:49:14Z",
+   "game_ids": [
+    "0022600273",
+    "0022600270",
+    "0022600272",
+    "0022600271"
+   ]
+  },
+  {
+   "date": "2026-11-20",
+   "games": 9,
+   "http_status": 200,
+   "stored": "data/raw/session-e3d25abc/html/slate_2026-11-20__85c5347c7a5d898a778a0c592f933e87e7431f672d5e35fa134f3db782c30b85.json.gz",
+   "sha256": "85c5347c7a5d898a778a0c592f933e87e7431f672d5e35fa134f3db782c30b85",
+   "retrieved_at_utc": "2026-11-19T05:49:15Z",
+   "game_ids": [
+    "0022600043",
+    "0022600046",
+    "0022600045",
+    "0022600044",
+    "0022600048",
+    "0022600047",
+    "0022600049",
+    "0022600050",
+    "0022600051"
+   ]
+  },
+  {
+   "date": "2026-11-21",
+   "games": 6,
+   "http_status": 200,
+   "stored": "data/raw/session-e3d25abc/html/slate_2026-11-21__c8bedb90c0338a7fd03bc4c475f8014688545a3ed6e62d9d61d1fddb885b25a7.json.gz",
+   "sha256": "c8bedb90c0338a7fd03bc4c475f8014688545a3ed6e62d9d61d1fddb885b25a7",
+   "retrieved_at_utc": "2026-11-19T05:49:15Z",
+   "game_ids": [
+    "0022600274",
+    "0022600275",
+    "0022600278",
+    "0022600277",
+    "0022600276",
+    "0022600279"
+   ]
+  },
+  {
+   "date": "2026-11-22",
+   "games": 7,
+   "http_status": 200,
+   "stored": "data/raw/session-e3d25abc/html/slate_2026-11-22__b493da474c8f6c730b1ee5fb2419b93fb6fa9a7fed25201bcea73de15a589df3.json.gz",
+   "sha256": "b493da474c8f6c730b1ee5fb2419b93fb6fa9a7fed25201bcea73de15a589df3",
+   "retrieved_at_utc": "2026-11-19T05:49:15Z",
+   "game_ids": [
+    "0022600280",
+    "0022600281",
+    "0022600284",
+    "0022600282",
+    "0022600283",
+    "0022600285",
+    "0022600286"
+   ]
+  }
+ ],
+ "failures": []
+}
