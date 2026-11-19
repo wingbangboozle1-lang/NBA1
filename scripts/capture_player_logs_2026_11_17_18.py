@@ -846,11 +846,15 @@ def build_date(date, games, inj_names, inj_label):
         "problems": all_problems,
         "sources": sorted({e["url"] for e in games}) + ["https://www.nba.com/games?date=%s" % date],
     }
-    out = os.path.join(ROOT, "data", "official", "player_game_logs_%s.json" % date)
+    # Canonical `player_game_logs_<date>.json` belongs to the game-page
+    # derivation (session arena/e3d25abc-nba1, PR #179). This seat's files are
+    # the independent gamebook-PDF derivation, kept namespaced so both exist.
+    out = os.path.join(ROOT, "data", "official",
+                       "player_game_logs_%s_gamebook_4f19ecf1.json" % date)
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, indent=1, ensure_ascii=False)
         fh.write("\n")
-    print("wrote data/official/player_game_logs_%s.json" % date)
+    print("wrote data/official/player_game_logs_%s_gamebook_4f19ecf1.json" % date)
     print(json.dumps(doc["coverage"], indent=1))
     bad = 0
     for g in all_games:
