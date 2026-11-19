@@ -635,15 +635,43 @@ class Promoter:
 
     # -------------------------------------------------------------- driver
     def run(self):
-        self.promote_standings()
-        self.promote_team_tables()
-        self.promote_team_advanced()
-        self.promote_schedule()
-        self.promote_injuries()
-        self.promote_results()
-        for item, cap in (("S5_injury_index", "_capture_S5_injury_index.json"),
-                          ("S7_players", "_capture_S7_players.json")):
-            self.promote_evidence_only(item, cap)
+        # F-CA-07 (opened 2026-11-17 by arena/ca442d3d-nba1, §65.9): one run's
+        # promotion record was observed EMPTY ("promoted: [], blocked: null")
+        # while the fetch step had captured ten new injury editions, because a
+        # promotion step died before its report was written and the empty
+        # record was all that survived. Whatever the runner-side trigger, the
+        # failure mode this class can prevent is: an unexpected exception in
+        # any single promote_* step must not kill the driver, and the report
+        # must always be written with per-item evidence. The rebuild gate (not
+        # the injury promotion) is what the structured sources are allowed to
+        # block - that separation is the flag's requested behaviour.
+        steps = (
+            ("S8_standings", self.promote_standings),
+            ("S9_team_traditional", self.promote_team_tables),
+            ("S1_season", self.promote_team_advanced),
+            ("S4_schedule", self.promote_schedule),
+            ("injury_pdf_probe", self.promote_injuries),
+            ("results_feed", self.promote_results),
+            ("S5_injury_index",
+             lambda: self.promote_evidence_only("S5_injury_index",
+                                                "_capture_S5_injury_index.json")),
+            ("S7_players",
+             lambda: self.promote_evidence_only("S7_players",
+                                                "_capture_S7_players.json")),
+        )
+        for name, fn in steps:
+            try:
+                fn()
+            except Exception as exc:                        # noqa: BLE001
+                # Record the crash as a blocked item and keep promoting the
+                # rest; the report below is still written this run.
+                try:
+                    self.fail(name, f"unexpected {type(exc).__name__}: {exc}")
+                except Exception:                           # noqa: BLE001
+                    self.blocked.append({"item": name,
+                                         "reason": (f"unexpected "
+                                                    f"{type(exc).__name__}: "
+                                                    f"{exc}")})
 
         # Move every fully promoted item out of `changed`.
         still_changed = []

@@ -1,6 +1,6 @@
 {
- "captured_at_utc": "2026-11-16T14:47:44Z",
- "window": "2026-11-16 through 2026-11-19 (parsed from the official schedule/games pages this run)",
+ "captured_at_utc": "2026-11-17T16:36:32Z",
+ "window": "2026-11-17 through 2026-11-20 (parsed from the official schedule/games pages this run)",
  "note": "Official NBA.com schedule rows parsed verbatim this run. Cells the capture did not carry are marked per-cell in field_provenance (carried_forward = value kept from the previous verified snapshot; blank_unverified = the official pages served no readable value and none was inferred).",
  "record_sources": {
   "default": "https://www.nba.com/games?date=YYYY-MM-DD and https://www.nba.com/schedule"
@@ -20,110 +20,6 @@
  ],
  "rows": [
   [
-   "2026-11-16",
-   "7:00 pm ET",
-   "ORL",
-   "5-7",
-   "BOS",
-   "11-2",
-   "TD Garden",
-   "Boston, MA",
-   "",
-   "0022600245",
-   "S4_0022600245"
-  ],
-  [
-   "2026-11-16",
-   "7:00 pm ET",
-   "CHI",
-   "3-9",
-   "CLE",
-   "7-7",
-   "Rocket Arena",
-   "Cleveland, OH",
-   "",
-   "0022600246",
-   "S4_0022600246"
-  ],
-  [
-   "2026-11-16",
-   "7:00 pm ET",
-   "MEM",
-   "9-4",
-   "WAS",
-   "4-10",
-   "Capital One Arena",
-   "Washington, DC",
-   "",
-   "0022600247",
-   "S4_0022600247"
-  ],
-  [
-   "2026-11-16",
-   "7:30 pm ET",
-   "PHI",
-   "11-3",
-   "BKN",
-   "3-9",
-   "Barclays Center",
-   "Brooklyn, NY",
-   "",
-   "0022600248",
-   "S4_0022600248"
-  ],
-  [
-   "2026-11-16",
-   "7:30 pm ET",
-   "HOU",
-   "11-3",
-   "MIA",
-   "7-6",
-   "Kaseya Center",
-   "Miami, FL",
-   "",
-   "0022600249",
-   "S4_0022600249"
-  ],
-  [
-   "2026-11-16",
-   "8:00 pm ET",
-   "POR",
-   "9-3",
-   "MIN",
-   "9-4",
-   "Target Center",
-   "Minneapolis, MN",
-   "",
-   "0022600250",
-   "S4_0022600250"
-  ],
-  [
-   "2026-11-16",
-   "8:00 pm ET",
-   "GSW",
-   "8-5",
-   "NOP",
-   "4-10",
-   "Smoothie King Center",
-   "New Orleans, LA",
-   "",
-   "0022600251",
-   "S4_0022600251"
-  ],
-  [
-   "2026-11-16",
-   "9:00 pm ET",
-   "PHX",
-   "5-7",
-   "DEN",
-   "7-4",
-   "Ball Arena",
-   "Denver, CO",
-   "",
-   "0022600252",
-   "S4_0022600252"
-  ],
-  [
    "2026-11-17",
    "7:30 pm ET",
    "NYK",
@@ -140,9 +36,9 @@
    "2026-11-17",
    "8:00 pm ET",
    "POR",
-   "9-3",
-   "MIN",
    "9-4",
+   "MIN",
+   "10-4",
    "Target Center",
    "Minneapolis, MN",
    "",
@@ -192,9 +88,9 @@
    "2026-11-18",
    "7:00 pm ET",
    "MEM",
-   "9-4",
+   "10-4",
    "CLE",
-   "7-7",
+   "8-7",
    "",
    "",
    "",
@@ -205,7 +101,7 @@
    "2026-11-18",
    "7:00 pm ET",
    "HOU",
-   "11-3",
+   "11-4",
    "IND",
    "5-9",
    "",
@@ -220,7 +116,7 @@
    "MIL",
    "1-13",
    "MIA",
-   "7-6",
+   "8-6",
    "",
    "",
    "",
@@ -231,9 +127,9 @@
    "2026-11-18",
    "7:00 pm ET",
    "PHI",
-   "11-3",
+   "12-3",
    "ORL",
-   "5-7",
+   "6-7",
    "",
    "",
    "",
@@ -244,9 +140,9 @@
    "2026-11-18",
    "7:30 pm ET",
    "CHI",
-   "3-9",
+   "3-10",
    "BKN",
-   "3-9",
+   "3-10",
    "",
    "",
    "",
@@ -257,7 +153,7 @@
    "2026-11-18",
    "7:30 pm ET",
    "WAS",
-   "4-10",
+   "4-11",
    "TOR",
    "5-8",
    "",
@@ -272,7 +168,7 @@
    "DET",
    "8-4",
    "NOP",
-   "4-10",
+   "5-10",
    "",
    "",
    "",
@@ -296,9 +192,9 @@
    "2026-11-18",
    "9:30 pm ET",
    "BOS",
-   "11-2",
+   "11-3",
    "DEN",
-   "7-4",
+   "7-5",
    "",
    "",
    "",
@@ -309,7 +205,7 @@
    "2026-11-18",
    "8:00 pm ET",
    "GSW",
-   "8-5",
+   "8-6",
    "DAL",
    "7-7",
    "",
@@ -335,7 +231,7 @@
    "2026-11-18",
    "10:00 pm ET",
    "PHX",
-   "5-7",
+   "6-7",
    "SAC",
    "1-12",
    "",
@@ -348,9 +244,9 @@
    "2026-11-19",
    "8:00 pm ET",
    "GSW",
-   "8-5",
+   "8-6",
    "MEM",
-   "9-4",
+   "10-4",
    "",
    "",
    "",
@@ -361,7 +257,7 @@
    "2026-11-19",
    "8:00 pm ET",
    "POR",
-   "9-3",
+   "9-4",
    "MIL",
    "1-13",
    "",
@@ -376,7 +272,7 @@
    "NYK",
    "7-6",
    "MIN",
-   "9-4",
+   "10-4",
    "",
    "",
    "",
@@ -395,49 +291,126 @@
    "",
    "0022600273",
    "S4_0022600273"
+  ],
+  [
+   "2026-11-20",
+   "7:00 pm ET",
+   "CHA",
+   "4-9 (0-2)",
+   "ATL",
+   "8-6 (1-1)",
+   "",
+   "",
+   "",
+   "0022600043",
+   "S4_0022600043"
+  ],
+  [
+   "2026-11-20",
+   "7:30 pm ET",
+   "ORL",
+   "6-7 (2-0)",
+   "BKN",
+   "3-10 (0-1)",
+   "",
+   "",
+   "",
+   "0022600044",
+   "S4_0022600044"
+  ],
+  [
+   "2026-11-20",
+   "7:30 pm ET",
+   "IND",
+   "5-9 (1-1)",
+   "CLE",
+   "8-7 (1-1)",
+   "",
+   "",
+   "",
+   "0022600045",
+   "S4_0022600045"
+  ],
+  [
+   "2026-11-20",
+   "7:30 pm ET",
+   "TOR",
+   "5-8 (1-1)",
+   "DET",
+   "8-4 (1-0)",
+   "",
+   "",
+   "",
+   "0022600046",
+   "S4_0022600046"
+  ],
+  [
+   "2026-11-20",
+   "8:00 pm ET",
+   "WAS",
+   "4-11 (1-1)",
+   "CHI",
+   "3-10 (1-1)",
+   "",
+   "",
+   "",
+   "0022600047",
+   "S4_0022600047"
+  ],
+  [
+   "2026-11-20",
+   "8:00 pm ET",
+   "NOP",
+   "5-10 (0-2)",
+   "OKC",
+   "9-5 (1-1)",
+   "",
+   "",
+   "",
+   "0022600048",
+   "S4_0022600048"
+  ],
+  [
+   "2026-11-20",
+   "9:30 pm ET",
+   "PHX",
+   "6-7 (0-1)",
+   "UTA",
+   "1-13 (0-2)",
+   "",
+   "",
+   "",
+   "0022600049",
+   "S4_0022600049"
+  ],
+  [
+   "2026-11-20",
+   "10:00 pm ET",
+   "HOU",
+   "11-4 (1-1)",
+   "DEN",
+   "7-5 (1-0)",
+   "",
+   "",
+   "",
+   "0022600050",
+   "S4_0022600050"
+  ],
+  [
+   "2026-11-20",
+   "10:00 pm ET",
+   "SAC",
+   "1-12 (0-2)",
+   "LAL",
+   "12-2 (1-1)",
+   "",
+   "",
+   "",
+   "0022600051",
+   "S4_0022600051"
   ]
  ],
  "field_provenance": {
-  "0022600245": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600246": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600247": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600248": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600249": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600250": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600251": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
-  "0022600252": {
-   "venue": "carried_forward",
-   "city": "carried_forward",
-   "source_id": "carried_forward"
-  },
   "0022600253": {
    "venue": "carried_forward",
    "city": "carried_forward",
@@ -510,20 +483,39 @@
   },
   "0022600273": {
    "source_id": "carried_forward"
+  },
+  "0022600043": {
+   "source_id": "carried_forward"
+  },
+  "0022600044": {
+   "source_id": "carried_forward"
+  },
+  "0022600045": {
+   "source_id": "carried_forward"
+  },
+  "0022600046": {
+   "source_id": "carried_forward"
+  },
+  "0022600047": {
+   "source_id": "carried_forward"
+  },
+  "0022600048": {
+   "source_id": "carried_forward"
+  },
+  "0022600049": {
+   "source_id": "carried_forward"
+  },
+  "0022600050": {
+   "source_id": "carried_forward"
+  },
+  "0022600051": {
+   "source_id": "carried_forward"
   }
  },
  "field_provenance_flags": [
   "carried_forward"
  ],
  "source_urls": {
-  "0022600245": "https://www.nba.com/game/orl-vs-bos-0022600245",
-  "0022600246": "https://www.nba.com/game/chi-vs-cle-0022600246",
-  "0022600247": "https://www.nba.com/game/mem-vs-was-0022600247",
-  "0022600248": "https://www.nba.com/game/phi-vs-bkn-0022600248",
-  "0022600249": "https://www.nba.com/game/hou-vs-mia-0022600249",
-  "0022600250": "https://www.nba.com/game/por-vs-min-0022600250",
-  "0022600251": "https://www.nba.com/game/gsw-vs-nop-0022600251",
-  "0022600252": "https://www.nba.com/game/phx-vs-den-0022600252",
   "0022600253": "https://www.nba.com/game/nyk-vs-tor-0022600253",
   "0022600254": "https://www.nba.com/game/por-vs-min-0022600254",
   "0022600255": "https://www.nba.com/game/det-vs-sas-0022600255",
@@ -544,45 +536,54 @@
   "0022600270": "https://www.nba.com/game/gsw-vs-mem-0022600270",
   "0022600271": "https://www.nba.com/game/por-vs-mil-0022600271",
   "0022600272": "https://www.nba.com/game/nyk-vs-min-0022600272",
-  "0022600273": "https://www.nba.com/game/lac-vs-sas-0022600273"
+  "0022600273": "https://www.nba.com/game/lac-vs-sas-0022600273",
+  "0022600043": "https://www.nba.com/game/cha-vs-atl-0022600043",
+  "0022600044": "https://www.nba.com/game/orl-vs-bkn-0022600044",
+  "0022600045": "https://www.nba.com/game/ind-vs-cle-0022600045",
+  "0022600046": "https://www.nba.com/game/tor-vs-det-0022600046",
+  "0022600047": "https://www.nba.com/game/was-vs-chi-0022600047",
+  "0022600048": "https://www.nba.com/game/nop-vs-okc-0022600048",
+  "0022600049": "https://www.nba.com/game/phx-vs-uta-0022600049",
+  "0022600050": "https://www.nba.com/game/hou-vs-den-0022600050",
+  "0022600051": "https://www.nba.com/game/sac-vs-lal-0022600051"
  },
  "verification": {
   "verified": true,
   "source_url": "https://www.nba.com/schedule",
-  "source_sha256": "f626342da7bf5000da7d271b8002db78ac8c8a44092868a5512f8cecfeb9d27c",
-  "verified_at_utc": "2026-11-16T15:25:57Z",
+  "source_sha256": "80609ffd3dbb0733fbc9e93d6dd38c642847bbf6d04453ad0d47c9528a28628f",
+  "verified_at_utc": "2026-11-19T05:50:24Z",
   "verified_by": "engine/promote_official.py",
   "parsed_via": null,
   "fallback_sources": [
    {
-    "date": "2026-11-16",
-    "url": "https://www.nba.com/games?date=2026-11-16",
-    "http_status": 200,
-    "bytes": 374010,
-    "sha256": "f726cc6dcb0ee6ea42816801bb8d661494202a4cf7aa4e90b951ea7a52c64f91"
-   },
-   {
     "date": "2026-11-17",
     "url": "https://www.nba.com/games?date=2026-11-17",
     "http_status": 200,
-    "bytes": 368333,
-    "sha256": "2d462b12bcb399f830e80e4551caf2c91697361cf0eca4227a53087671720a16"
+    "bytes": 415936,
+    "sha256": "20345570851443f57e7bcb09d1ab24d2ceb888ef7e7a3eb64c1d9fe41bf562af"
    },
    {
     "date": "2026-11-18",
     "url": "https://www.nba.com/games?date=2026-11-18",
     "http_status": 200,
-    "bytes": 425156,
-    "sha256": "998e939ff79f3d34bb2ec7cdeb15966db0a57b9d64de87df99c49357b7d65894"
+    "bytes": 423957,
+    "sha256": "60d5732d60c4019189e2856a0ed3b3c7c3db225f2009cd47283fa363aaf842dc"
    },
    {
     "date": "2026-11-19",
     "url": "https://www.nba.com/games?date=2026-11-19",
     "http_status": 200,
-    "bytes": 327110,
-    "sha256": "16173381c87cbe6d40ea82677932b7807f0b95125c604f3684126867ecf0ebb1"
+    "bytes": 325967,
+    "sha256": "0ede77259b834b39e1f722080b16e21b4c24b864608eb166971dd9cee2d0e266"
+   },
+   {
+    "date": "2026-11-20",
+    "url": "https://www.nba.com/games?date=2026-11-20",
+    "http_status": 200,
+    "bytes": 390541,
+    "sha256": "f85f2973a0edd78bdbaeea660ea1528014e0bf0f483c0e5887678d21539c9cb0"
    }
   ],
-  "row_count": 29
+  "row_count": 30
  }
 }
