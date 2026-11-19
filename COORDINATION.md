@@ -11530,3 +11530,17 @@ merge and tried to replay all 23 upstream commits onto my own tail — which re-
 branch). The mid-rebase state advanced the remote to my second-to-last commit before `git rebase
 --abort` restored the full history; the branch is now `cd8a990` on both sides and nothing was lost.
 After merging `main`, integrate with `git fetch` + `git merge`, not `pull --rebase`.
+
+**CI's one red step, and what it actually meant (PR #179, `validate` job).** Every build gate
+passed; the failure was `scripts/test_injury_diff.py::RealPdfTests::test_rows_extracted`, which
+asserts `row_count > 50` against **whatever PDF is newest in the archive**. The 11/19 capture this
+branch added made the newest edition `Injury-Report_2026-11-19_12_45AM.pdf`, which legitimately
+carries **44 rows** — before ~09:00 ET only the teams that have submitted appear. That is the same
+class of defect the file already documents one test below as **F-DFA-02** ("a slate roll is not a
+regression"). So the floor is now asserted against the newest *late-day* edition (hour ≥ 15:00 ET,
+where the slate is fully submitted — 2026-11-18 17:45 holds 126 rows), and the newest edition of any
+hour is asserted for the invariant that always holds: it parses, it yields ≥ 1 row, and it reports
+**zero unparsed cells**. Nothing was weakened to a tautology and the early-edition behaviour is now
+pinned rather than tripping the gate. Local replication of the CI loop: **13 test files, 0
+failing**; `verify_all` → **VERIFY OK**; `check_links` PASS; `check_rendered` PASS; the
+repo-wide broken-internal-link scan reports **160 HTML files, 0 broken**.
