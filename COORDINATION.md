@@ -11599,3 +11599,80 @@ contradiction — the interpretation §68.5 explains was wrong). Nothing in the 
 correct one, because two files describing the same join with different verdicts is exactly the kind
 of ambiguity this board keeps flagging.
 
+
+---
+
+## 69. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
+
+### 69.1 The defect, stated as a measurement
+
+The brief's first requirement is to "extend the scheduled job to refresh the official schedule, standings, team statistics and injury report for each rolling slate, then rebuild only after freshness and provenance gates pass." The capture, promotion and settlement halves of that job run on the runner. **The rebuild half has not run since 2026-11-15T12:43:11Z.**
+
+| Link in the chain | Measured fact | Where it is read |
+| --- | --- | --- |
+| Last successful rebuild | `55d7b48`, 2026-11-15T12:43:11Z, `build_outcome: success` | `git show 55d7b48:data/raw/_last_refresh.json` |
+| Every later run | 10 `skipped`, 1 `failure`; the tip (`232612e`) is `build_outcome: skipped`, `freshness_ok: false`, `promote_outcome: failure` | all 20 committed records |
+| The gate requirement that blocks | `data/raw/standings.json`, `team_traditional.json`, `team_opponent.json` | `engine/refresh_gate.py` `promoted_paths` |
+| Those three files in history | **0 commits each**, across the full **884-commit** history | `git log --all -- data/raw/<file>.json` |
+| Why they cannot exist | the pages are client-rendered; the runner's own evidence measures `<tr>` = **0** (standings) and `/stats/team/` = **0** with `<tr>` = **12** (traditional, date-picker chrome only) | `data/raw/_capture_evidence_S8_standings.json`, `…_S9_team_traditional.json` |
+| When the requirement landed | gate commit `25bfcea`, **2026-11-15T11:38Z** — five minutes *before* the last successful rebuild | `git show 25bfcea --stat` |
+| Why the rebuild is skipped rather than attempted | `if: … steps.promote.outcome == 'success' && … steps.freshness.outputs.ok == 'true'`; the promote step exited 1 on every run because it recorded those same three pages as ordinary blocking failures | `refresh-data.yml`, promote step |
+
+So the requirement is not a freshness check that happened to be failing. It is an **unsatisfiable predicate**, and the step behind it was dead code for four days while ten run records reported `skipped` and nothing on the site said the automation had stopped rebuilding.
+
+### 69.2 The correction this session had to make to its own claim
+
+The claim above (committed and pushed first, per ground rule 4) originally said the rebuild had **never** run, on the evidence of "1 commit touching `_last_refresh.json`". That measurement was taken in a **shallow clone**: `.git/shallow` was present and `git rev-list --count HEAD` returned **2**. After `git fetch --unshallow origin` the history is **884** commits and the record has been touched by **20**. The conclusion survives and is better evidenced, but the number was wrong and is corrected in the claim banner, in this section, and in the commit that made the correction. **Any session reading `git log` in this sandbox must unshallow first.** The audit script now refuses to report history-derived findings from a shallow clone.
+
+### 69.3 What was changed, and the limits of each change
+
+| File | Change | Limit enforced |
+| --- | --- | --- |
+| `data/raw/unreadable_sources.json` (new) | Declares `S8_standings`, `S9_team_traditional`, `S10_team_opponent` unreadable, each with official URL, evidence path, review flag and an expiry of **2026-12-19**. | A declaration never promotes a value. `engine/pipeline.py` is measured to load none of the three (it loads `team_advanced`, `games_completed`, `schedule_upcoming`, `injuries`, `players_traditional`), so no published number changes. |
+| `engine/refresh_gate.py` | Honours a declaration only if: it names a required source; `expires_at_utc` parses, is future and under 400 days; the fetcher checked that source at HTTP 200 **in this run**; a bounded evidence file is on disk; and **the source did not parse rows this run**. | The anti-rot rule: if a page starts parsing, the declaration is rejected as `DECLARATION STALE` and the normal blocking requirement returns. Every rejection is printed. Two further unsatisfiable predicates were fixed the same way: `failed[]` entries for declared sources become notes (undeclared ones still block), and the digest check proves a declared source against its evidence record instead of a capture the fetcher never writes on a parse failure. |
+| `engine/promote_official.py` | A declared source that fails to parse is recorded as `blocked_unreadable` instead of `blocked`, so its exit code stops poisoning the workflow's `promote.outcome`. | Nothing is promoted and no snapshot is written; an **undeclared** parse failure still blocks; a declared source with **no capture attempt** this run still blocks. |
+| `.github/workflows/refresh-data.yml` | Stages the register and the gate report; emits `::warning title=Gate passed by declaration::` so a green gate built on a declaration is visibly different from one built on fresh data. | The rebuild still requires `steps.freshness.outputs.ok == 'true'`, which only `engine/refresh_gate.py` writes. |
+| `scripts/f3cb4a98_refresh_path_audit.py` (new) | Measures, per source: run-record presence, capture rows, evidence problems, promoted snapshot + verification, whether `engine/pipeline.py` loads it, commits in history, and its official URL (parsed from the fetcher's own `FETCHES` table). Output `data/raw/refresh_path_audit.json`. | Refuses to report history counts from a shallow clone; reads the schedule's `games`, the injury index's `editions` and the table branches' `rows` by their real shapes. |
+| `scripts/build_dashboard.py` | New page **Scheduled Refresh Path** (`site/pages/refresh-path.html`), linked from the index nav, rendering both tables with a source link on every row. | Uses the existing page/table helpers, so it inherits the provenance rule that `verify_all.py` and `verify_dashboard.py` enforce. |
+| `data/content/flagged.json` | `F-F3C-01` (unreachable rebuild step, High), `F-F3C-02` (the declaration's exact limits, Medium), `F-F3C-03` (S1 still unparseable, Medium). | Published on the Flagged for Review page with source links; none blocks the merge. |
+| `data/content/requirements.json` | R01's evidence corrected and its gap restated with the measurement. | Status stays **partial** until a scheduled run is observed reaching the rebuild step. |
+
+### 69.4 Before and after, on the same tree
+
+| | Gate output on `main` `9cbdd74` | Gate output after this session |
+| --- | --- | --- |
+| `BLOCK` lines | **13** | **7** |
+| Blocks that no run could ever clear | **3** — `S8_standings`, `S9_team_traditional`, `S10_team_opponent` "lacks structured, verified promoted data" | **0** |
+| Blocks that are genuine transient failures | 10 | 7 (S1 season table parse + API timeout ×4 referencing it, stale provenance on `schedule_upcoming.json` and `injuries.json`) |
+| Promote step exit | `1` on every run | `0` when only declared sources fail |
+
+The `data/derived/surface_gates.json` diff in this branch is that before/after, and it is generated by the existing builder rather than written by hand.
+
+### 69.5 Cross-scope requests (logged, not executed — ground rule 3)
+
+1. **To the S1/refresh owner.** `S1_season` is *not* declared, deliberately: the page is parseable in principle and the model actually loads it. Fixes to try are a longer timeout or backoff on the `stats.nba.com` fallback, and recording whether the page's own HTML carries the table when fetched with the web-client headers in this environment. Without that, the gate will keep blocking on S1 even though the three dead predicates are gone — which is correct behaviour.
+2. **To the register owner.** `F1` ("NBA.com standings table is not machine-readable") has been open since 2026-11-14 and is the same fact as `F-F3C-01`'s second link. They are not duplicates: `F1` describes the page, `F-F3C-01` describes the gate that depended on it. Worth cross-referencing both ways on the Flagged page.
+3. **To the next integration seat.** `data/raw/refresh_path_audit.json` and `unreadable_sources.json` must be regenerated/retained when the horizon rolls; the audit is deliberately not horizon-specific, so a rebuild is only needed when a source's parseability changes. Neither file is written by the refresh workflow except `unreadable_sources.json`, which is staged for publish.
+4. **Not touched, by design:** `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*` — the scope of open PR #181. No ledger entry was written and no settlement or horizon file changed in this branch.
+
+### 69.6 Verification performed
+
+| Gate | Result |
+| --- | --- |
+| `scripts/verify_all.py` | **VERIFY OK**, FAILURES: 0 |
+| `scripts/check_site.py` | PASS — all pages exist, links resolve, every table row has an official source |
+| `scripts/check_links.py` | **RESULT: PASS** |
+| `scripts/check_rendered.py` | **RESULT: PASS** |
+| `scripts/check_registers.py` | 2,021 fields across 4 registers, 0 problems |
+| `scripts/verify_integration.py` | PASSED, no errors |
+| `scripts/verify_dashboard.py` | VERIFY OK — every row has an allowed source link or an explicit no-source mark |
+| `scripts/verify_ledger.py` | ledger chain OK (untouched) |
+| `scripts/test_*.py` | **13 files, 0 failing** — `test_refresh_gate` 19 (was 7), `test_promote_official` 11 (was 7), `test_refresh_workflow` 6 (was 3) |
+| Site build | 29 pages written; `site/pages/refresh-path.html` new |
+| Sources used | `https://www.nba.com/standings`, `https://www.nba.com/stats/teams/traditional`, `https://www.nba.com/stats/teams/opponent`, `https://www.nba.com/stats/teams/advanced`, `https://www.nba.com/stats/players/traditional`, `https://www.nba.com/schedule`, `https://official.nba.com/nba-injury-report-2026-27-season/` (the fetcher's declared URLs, parsed from its own `FETCHES` table); plus `https://github.com/wingbangboozle1-lang/NBA1` blobs for repository-derived run-record fields |
+
+First-hand read performed this session: `https://www.nba.com/stats/teams/advanced` fetched while diagnosing S1. It returns **30 rows with GP/W/L, OffRtg, DefRtg, PACE and POSS server-rendered**, and LAL/PHI show **GP 16** — so the page has moved forward since the flag `F-929-01`/`F-9FF-02` one-game lag was recorded, and the "page is a shell" story is **not** true for the advanced table (it is true for standings/traditional/opponent). That distinction is exactly why S1 must not be declared, and it is recorded as `F-F3C-03` rather than assumed.
+
+### 69.7 What this does NOT claim
+
+It does not claim the rebuild now runs. It claims the three dead predicates are gone, the remaining seven blocks are real, and the declaration that removed them is evidenced, expiring, published and self-revoking. Operational proof needs an observed scheduled run, and R01 stays partial until one is seen.
