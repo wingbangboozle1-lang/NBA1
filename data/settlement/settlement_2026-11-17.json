@@ -1,0 +1,360 @@
+{
+ "title": "Settlement — 2026-11-17 slate (settled from official finals)",
+ "settled_at_utc": "2026-11-19T06:00Z",
+ "settled_by": "arena/929395a5-nba1",
+ "slate_archive": {
+  "picks": "data/archive/horizon_picks_2026-11-17.json",
+  "picks_sha256": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
+  "lines": "data/archive/horizon_lines_2026-11-17.json",
+  "lines_sha256": "132b2a8773f43252936a550cf10d9843dd469a8e3d85155f9f98c9802f601337",
+  "ledger_entry_committing_it": 12
+ },
+ "rules": {
+  "single": "grade from published pick_line text \"TEAM -x.x\": cover if team wins by more than x.x, PUSH at exactly x.x, else LOSS; units paper -110 (WIN +1.00, LOSS -1.10, PUSH 0.00); gate failures NO BET 0.00",
+  "parlay": "every leg must WIN; any losing leg loses stake 1.10; WIN pays the published fair-odds band lower bound",
+  "sgp": "legs are player props (Over/Under). A leg whose player did not play is VOID and removed; remaining legs settle at the ticket price frozen at publication (joint_prob_rho as fair price; G-PROP blocked, no market price). Any losing leg loses the stake (1.10).",
+  "finals_source": "data/official/results_2026-11-14.json — official game pages (LINESCORES), quarters sum to finals (asserted at capture)",
+  "source": "grading rules copied verbatim from data/settlement/settlement_2026-11-14.json (frozen)"
+ },
+ "official_finals_rule": "A game is graded only when its official page printed Final and its quarter scores sum to the printed final; data/official/results_<date>.json rows are re-checked by verify_final() at settlement time.",
+ "singles": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "pick_side": "AWAY",
+   "pick_line": "NYK -3.2",
+   "pick_prob": 0.5752,
+   "gate": "G-CFG pass (|spread| 3.2 >= 3.0)",
+   "away": "NYK",
+   "away_pts": 111,
+   "home": "TOR",
+   "home_pts": 102,
+   "away_quarters": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "home_quarters": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 9,
+   "result": "WIN",
+   "units": 1.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_finals": "data/official/results_2026-11-17.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "pick_side": "HOME",
+   "pick_line": "MIN -5.6",
+   "pick_prob": 0.6301,
+   "gate": "G-CFG pass (|spread| 5.6 >= 3.0)",
+   "away": "POR",
+   "away_pts": 105,
+   "home": "MIN",
+   "home_pts": 106,
+   "away_quarters": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "home_quarters": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 1,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_finals": "data/official/results_2026-11-17.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "pick_side": "HOME",
+   "pick_line": "SAS -8.3",
+   "pick_prob": 0.6887,
+   "gate": "G-CFG pass (|spread| 8.3 >= 3.0)",
+   "away": "DET",
+   "away_pts": 105,
+   "home": "SAS",
+   "home_pts": 93,
+   "away_quarters": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "home_quarters": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -12,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_finals": "data/official/results_2026-11-17.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "pick_side": "HOME",
+   "pick_line": "LAC -8.1",
+   "pick_prob": 0.6845,
+   "gate": "G-CFG pass (|spread| 8.1 >= 3.0)",
+   "away": "UTA",
+   "away_pts": 132,
+   "home": "LAC",
+   "home_pts": 107,
+   "away_quarters": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "home_quarters": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -25,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_finals": "data/official/results_2026-11-17.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "pick_side": "HOME",
+   "pick_line": "LAL -19.9",
+   "pick_prob": 0.8809,
+   "gate": "G-CFG pass (|spread| 19.9 >= 3.0)",
+   "away": "CHA",
+   "away_pts": 114,
+   "home": "LAL",
+   "home_pts": 118,
+   "away_quarters": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "home_quarters": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "ot_periods": 1,
+   "margin_pick_team": 4,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_finals": "data/official/results_2026-11-17.json (official LINESCORES)"
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-17",
+   "legs": [
+    "CHA@LAL — LAL -19.9",
+    "DET@SAS — SAS -8.3"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHA@LAL — LAL -19.9",
+     "result": "LOSS",
+     "margin": 4,
+     "source_game_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
+    },
+    {
+     "leg": "DET@SAS — SAS -8.3",
+     "result": "LOSS",
+     "margin": -12,
+     "source_game_url": "https://www.nba.com/game/det-vs-sas-0022600255"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.57,
+    "joint_ub": 0.689,
+    "rho_lb": -0.247,
+    "rho_ub": 0.547,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "legs": [
+    "CHA@LAL — LAL -19.9",
+    "UTA@LAC — LAC -8.1"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHA@LAL — LAL -19.9",
+     "result": "LOSS",
+     "margin": 4,
+     "source_game_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
+    },
+    {
+     "leg": "UTA@LAC — LAC -8.1",
+     "result": "LOSS",
+     "margin": -25,
+     "source_game_url": "https://www.nba.com/game/uta-vs-lac-0022600257"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.565,
+    "joint_ub": 0.684,
+    "rho_lb": -0.25,
+    "rho_ub": 0.542,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "legs": [
+    "CHA@LAL — LAL -19.9",
+    "POR@MIN — MIN -5.6"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHA@LAL — LAL -19.9",
+     "result": "LOSS",
+     "margin": 4,
+     "source_game_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
+    },
+    {
+     "leg": "POR@MIN — MIN -5.6",
+     "result": "LOSS",
+     "margin": 1,
+     "source_game_url": "https://www.nba.com/game/por-vs-min-0022600254"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.511,
+    "joint_ub": 0.63,
+    "rho_lb": -0.282,
+    "rho_ub": 0.48,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ]
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-17",
+   "game": "CHA@LAL",
+   "kind": "two_teammates",
+   "legs": [
+    "Luka Dončić (LAL) OVER 38.5",
+    "Austin Reaves (LAL) OVER 24.5"
+   ],
+   "frozen_price_joint_prob_rho": 0.2443,
+   "frozen_price_independent_printed_beside": 0.2598,
+   "result": "UNSETTLED — player appearance requires the official box score",
+   "units": null,
+   "why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game": "NYK@TOR",
+   "kind": "two_opponents",
+   "legs": [
+    "Jalen Brunson (NYK) OVER 26.5",
+    "Scottie Barnes (TOR) OVER 23.5"
+   ],
+   "frozen_price_joint_prob_rho": 0.2381,
+   "frozen_price_independent_printed_beside": 0.233,
+   "result": "UNSETTLED — player appearance requires the official box score",
+   "units": null,
+   "why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ]
+  }
+ ],
+ "summary": {
+  "dates_settled": [
+   "2026-11-17"
+  ],
+  "dates_unsettled": [],
+  "singles_published": 5,
+  "wins": 1,
+  "losses": 4,
+  "pushes": 0,
+  "no_bets": 0,
+  "singles_units_at_minus110": -3.4,
+  "parlays_published": 3,
+  "parlays_won": 0,
+  "parlay_units": -3.3,
+  "sgp_published": 2,
+  "sgp_settled": 0,
+  "total_units_settled": -6.7,
+  "validation_note": "Every ticket was published as MODEL OUTPUT — UNVALIDATED, unfunded, zero-stake paper output. No strategy is funded.",
+  "record": "1-4-0"
+ },
+ "sources": [
+  "data/official/results_2026-11-17.json",
+  "https://www.nba.com/game/cha-vs-lal-0022600256",
+  "https://www.nba.com/game/det-vs-sas-0022600255",
+  "https://www.nba.com/game/nyk-vs-tor-0022600253",
+  "https://www.nba.com/game/por-vs-min-0022600254",
+  "https://www.nba.com/game/uta-vs-lac-0022600257"
+ ]
+}

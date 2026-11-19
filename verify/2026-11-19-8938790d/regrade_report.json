@@ -1,0 +1,18 @@
+{
+ "session": "arena/8938790d-nba1",
+ "script": "verify/2026-11-19-8938790d/regrade_2026_11_17_18.py",
+ "checks_run": 54,
+ "failures": [],
+ "verdict": "PASS",
+ "graded_from": {
+  "pre_tip_archive": "data/archive/horizon_picks_2026-11-17.json",
+  "picks_sha256": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
+  "ledger_entry_committing_it": 12,
+  "official_finals": [
+   "data/official/results_2026-11-17.json",
+   "data/official/results_2026-11-18.json"
+  ],
+  "results_feed": "data/official/results_feed_2026_27.json"
+ },
+ "note": "Independent re-grade of the merged settlements' arithmetic and cross-file agreement. Page-level verification of the finals is arena/eec70f24-nba1's cross-check record (all 17 game pages re-read); this script re-derives every graded row and summary number locally from the frozen archive and the official results files."
+}

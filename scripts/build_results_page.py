@@ -264,9 +264,15 @@ def player_logs_page():
     cov = doc["coverage"]
     # The 2026-11-15 capture predates a naming change; read whichever key the
     # capture carries rather than inventing a count.
-    inj_count = (cov.get("players_on_2026_11_16_0130PM_report")
-                 if cov.get("players_on_2026_11_16_0130PM_report") is not None
-                 else cov.get("players_on_2026_11_15_0615PM_report"))
+    # The 2026-11-15 capture predates a naming change; read whichever key the
+    # capture carries rather than inventing a count.  `players_on_report` is the
+    # dated-free key the 2026-11-17/18 captures (§68) publish, so a log file for
+    # any other game day states its own count instead of rendering "None".
+    inj_count = next((v for v in (cov.get("players_on_2026_11_16_0130PM_report"),
+                                  cov.get("players_on_report"),
+                                  cov.get("players_on_2026_11_15_0615PM_report"))
+                      if v is not None), None)
+
     body.append('<p class="lead">Minutes, points, rebounds and assists for <b>every player in the '
                 'official gamebook</b> of each finished game &mdash; not just the players on the '
                 'injury report, because a rotation question needs the players who actually played. '

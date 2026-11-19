@@ -1,0 +1,102 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-18_05_30PM.pdf",
+  "label": "Injury-Report_2026-11-18_05_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_05_30PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "56cc96e71332d74ab76d9be9766552f03a558a8bbc738b79e5361bd344d8ad23",
+  "rows": 134
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-18_05_45PM.pdf",
+  "label": "Injury-Report_2026-11-18_05_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_05_45PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "97281ddb2797d7e0cbe6e46114f2374850d958b0d0297b7e17738cfe3aa70841",
+  "rows": 140
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Chicago Bulls",
+   "player": "Williams, Patrick",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Right Finger Dislocation",
+   "after_reason": "-",
+   "before_matchup": "CHI@BKN",
+   "after_matchup": "CHI@BKN"
+  },
+  {
+   "team": "Indiana Pacers",
+   "player": "McConnell, T.J.",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Right Hamstring Strain",
+   "after_reason": "Injury/Illness - Right Hamstring Strain",
+   "before_matchup": "HOU@IND",
+   "after_matchup": "HOU@IND"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Avdija, Deni",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Foot Inflammation / Soreness",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Camara, Toumani",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Soreness",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Carlson, Branden",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Fracture",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Meniscus Surgery",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Williams III, Robert",
+   "status": "Out",
+   "reason": "Rest",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+   "matchup": "POR@MIL"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

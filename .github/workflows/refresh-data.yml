@@ -85,7 +85,12 @@ jobs:
       # unprovable stays in `changed` and the gate below blocks the rebuild.
       - name: Promote verified structured inputs (fail-closed)
         id: promote
-        if: steps.fetch.outcome == 'success'
+        # Promotion also runs after a completed fetch attempt that returned
+        # non-zero: an injury PDF may have been captured even when unrelated
+        # client-rendered sources fail parsing. The rebuild remains strictly
+        # gated on fetch success and the freshness gate below, so this only
+        # refreshes verified evidence; it cannot publish stale model inputs.
+        if: always() && steps.fetch.outcome != 'cancelled' && steps.fetch.outcome != 'skipped'
         continue-on-error: true
         run: python3 engine/promote_official.py
 

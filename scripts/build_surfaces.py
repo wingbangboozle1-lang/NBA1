@@ -12,20 +12,22 @@ Outputs
                                data/derived/horizon_picks_v2.json ONLY when all four gates pass.
   site/pages/bet-surface.html  the index-linked ALIAS of bet.html, written from the same render in
                                the same run so the two can never disagree (R07 split; §61 W04).
-  data/derived/surface_gates.json  the four gates, their requirement, observed value, and pass flag.
+  data/derived/surface_gates.json  the five gates, their requirement, observed value, and pass flag.
 
-The four gates (all computed here from repository files, fail-closed; ALL must pass)
+The five gates (all computed here from repository files, fail-closed; ALL must pass)
 -----------------------------------------------------------------------------------
   G1 validation   : at least one strategy in data/derived/strategies.json has status VALIDATED.
   G2 sample floor : at least one strategy has n_graded >= 100 (the floor written in strategies.json).
   G3 pre-register : at least one data/prereg/S*.json exists and every one has frozen_before_first_tip True.
   G4 ledger       : scripts/verify_ledger.py exits 0 and prints "ledger chain OK".
+  G5 freshness    : the complete engine.refresh_gate provenance/freshness check passes now.
 
 Run:  python3 scripts/build_surfaces.py
       Both modes run the separation checks; the exit code is non-zero if a rule is broken.
 """
 from __future__ import annotations
 
+import datetime as dt
 import glob
 import html
 import json
@@ -35,6 +37,9 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+from engine.refresh_gate import evaluate as evaluate_refresh_gate
+
 DERIVED = os.path.join(ROOT, "data", "derived")
 PAGES = os.path.join(ROOT, "site", "pages")
 
@@ -138,13 +143,38 @@ def gate_ledger():
     }
 
 
+def gate_freshness():
+    """Reuse the scheduled refresh's complete fail-closed provenance check.
+
+    This is intentionally evaluated at render time as a second line of defense:
+    running a page builder directly must not publish picks from old or
+    unpromoted inputs merely because the scheduled workflow normally gates its
+    own rebuild.
+    """
+    path = os.path.join(ROOT, "data", "raw", "_last_refresh.json")
+    try:
+        record = _load(path)
+        now = dt.datetime.now(dt.timezone.utc)
+        errors = evaluate_refresh_gate(record, now, max_age_hours=10)
+    except Exception as exc:  # fail closed if malformed provenance raises unexpectedly
+        errors = ["refresh record unavailable or invalid: %s" % exc]
+    return {
+        "id": "G5_freshness_provenance",
+        "requirement": "engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours)",
+        "observed": "PASS" if not errors else "BLOCKED",
+        "observed_detail": errors,
+        "passed": not errors,
+        "source": "data/raw/_last_refresh.json + engine/refresh_gate.py",
+    }
+
+
 def compute_gates():
-    gates = [gate_validation(), gate_sample_floor(), gate_prereg(), gate_ledger()]
+    gates = [gate_validation(), gate_sample_floor(), gate_prereg(), gate_ledger(), gate_freshness()]
     return {
         "title": "Bet-surface gates (R07)",
         "generated_by": "scripts/build_surfaces.py",
         "rule": ("bet.html and its index-linked alias bet-surface.html show picks only when ALL "
-                 "four gates pass (fail-closed); both are written from the same render in the "
+                 "five gates pass (fail-closed); both are written from the same render in the "
                  "same run. Projection carries model output and is not gated."),
         "gates": gates,
         "open": all(g["passed"] for g in gates),
@@ -270,16 +300,22 @@ def render_bet(gates, picks):
     out = [PAGE_HEAD % {"title": "Bet surface"}]
     out.append("<h1>Bet surface &middot; gated</h1>")
     if not gates["open"]:
-        out.append('<p class="lede"><strong>Closed.</strong> No picks are shown. Picks appear here only when all four '
+        out.append('<p class="lede"><strong>Closed.</strong> No picks are shown. Picks appear here only when all five '
                    'gates below pass. Closed gates: %s.</p>' % _e(", ".join(gates["closed_by"])))
     else:
-        out.append('<p class="lede">All four gates pass. Picks follow, each with its source link.</p>')
+        out.append('<p class="lede">All five gates pass. Picks follow, each with its source link.</p>')
     out.append('<div class="tablewrap"><table class="dash"><thead><tr>'
                '<th>Gate</th><th>Requirement</th><th>Observed</th><th>Status</th><th>Source</th>'
                '</tr></thead><tbody>')
     for g in gates["gates"]:
+        observed = _e(g["observed"])
+        detail = g.get("observed_detail")
+        if detail:
+            detail_json = _e(json.dumps(detail, indent=2, ensure_ascii=False))
+            observed += ('<details><summary>Details</summary><pre>%s</pre></details>'
+                         % detail_json)
         out.append("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (
-            _e(g["id"]), _e(g["requirement"]), _e(g["observed"]),
+            _e(g["id"]), _e(g["requirement"]), observed,
             "PASS" if g["passed"] else "CLOSED",
             '<span class="na" title="computed from a repository file, not an official value: no official link applies">&mdash;</span> '
             + _e(g["source"])))

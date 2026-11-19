@@ -1,0 +1,60 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_04_30PM.pdf",
+  "label": "Injury-Report_2026-11-17_04_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_04_30PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "0c16e49818ed3ed1e7df92cad6e87e14bd03b85d1f77b57791ccd6b67eeed0c8",
+  "rows": 96
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-17_04_45PM.pdf",
+  "label": "Injury-Report_2026-11-17_04_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_04_45PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "d2a08c9abcd7aabd8acb015da9a12d70cd64c6616b4a409e1e2349d7b04c23b7",
+  "rows": 100
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [
+  {
+   "team": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "reason": "Injury/Illness - Right AC Joint Injury",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery",
+   "matchup": "WAS@TOR"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

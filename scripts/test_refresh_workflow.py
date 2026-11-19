@@ -22,12 +22,15 @@ class RefreshWorkflowTests(unittest.TestCase):
             self.text,
         )
 
-    def test_promotion_and_freshness_are_fail_closed_steps(self):
-        for step_id in ("promote", "freshness"):
-            marker = f"id: {step_id}\n        if:"
-            self.assertIn(marker, self.text)
-            section = self.text.split(marker, 1)[1].split("\n      - name:", 1)[0]
-            self.assertIn("continue-on-error: true", section)
+    def test_promotion_runs_after_completed_fetch_and_freshness_is_success_only(self):
+        promote = self.text.split("id: promote", 1)[1].split("\n      - name:", 1)[0]
+        self.assertIn("if: always()", promote)
+        self.assertIn("steps.fetch.outcome != 'cancelled'", promote)
+        self.assertIn("steps.fetch.outcome != 'skipped'", promote)
+        self.assertIn("continue-on-error: true", promote)
+        freshness = self.text.split("id: freshness", 1)[1].split("\n      - name:", 1)[0]
+        self.assertIn("if: steps.fetch.outcome == 'success'", freshness)
+        self.assertIn("continue-on-error: true", freshness)
 
     def test_run_record_and_refresh_pr_report_expose_gate_outcomes(self):
         for field in (

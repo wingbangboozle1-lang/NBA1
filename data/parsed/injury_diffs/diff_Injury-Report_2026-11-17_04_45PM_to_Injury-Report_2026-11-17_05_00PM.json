@@ -1,0 +1,165 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_04_45PM.pdf",
+  "label": "Injury-Report_2026-11-17_04_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_04_45PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "d2a08c9abcd7aabd8acb015da9a12d70cd64c6616b4a409e1e2349d7b04c23b7",
+  "rows": 100
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-17_05_00PM.pdf",
+  "label": "Injury-Report_2026-11-17_05_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_05_00PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "7bfb7d7377d909e1db80a59c61080ed6c57a70cbc952731c1e3e4758ac740729",
+  "rows": 116
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Elbow Injury Management",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Great Toe Sprain",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Ankle Injury Management",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Low Back Contusion",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Left 5th Metatarsal Fracture",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hip Impingement",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "reason": "Injury/Illness - Lumbar Disc Herniation",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Dieng, Ousmane",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Finger Fracture",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Jones, Kam",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Markovic, Bogoljub",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Nance, Pete",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "reason": "Injury/Illness - Cervical Spine Sprain",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Brown, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "matchup": "PHI@ORL"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

@@ -1,54 +1,21 @@
 {
- "captured_at_utc": "2026-11-19T06:00:57Z",
+ "captured_at_utc": "2026-11-19T06:13:47Z",
  "results": [
   {
-   "edition": "Injury-Report_2026-11-19_12_45AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_45AM.pdf",
+   "edition": "Injury-Report_2026-11-19_01_00AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_01_00AM.pdf",
    "http_status": 200,
-   "bytes": 87302,
-   "sha256": "91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33",
+   "bytes": 87160,
+   "sha256": "83d82e16c3e7d39bd8e24b577c1d0a1905a5825d304380de799f14e67ad181de",
    "attempts": 1,
    "listed_on_official_index": true,
    "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_45AM__91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_12_30AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_30AM.pdf",
-   "http_status": 200,
-   "bytes": 87322,
-   "sha256": "14a511bfabd6666c0c07b6248fda2fbca46a566dcab0c11e13268a6081fe4a15",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_30AM__14a511bfabd6666c0c07b6248fda2fbca46a566dcab0c11e13268a6081fe4a15.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_12_15AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_15AM.pdf",
-   "http_status": 200,
-   "bytes": 87198,
-   "sha256": "5571ebd0eeca2d5e16b70eaf123b845bf50a248c7020a19c0ea2363a692564a2",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_15AM__5571ebd0eeca2d5e16b70eaf123b845bf50a248c7020a19c0ea2363a692564a2.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_12_00AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_00AM.pdf",
-   "http_status": 200,
-   "bytes": 87159,
-   "sha256": "8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_00AM__8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee.pdf"
+   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_01_00AM__83d82e16c3e7d39bd8e24b577c1d0a1905a5825d304380de799f14e67ad181de.pdf"
   }
  ],
- "editions_listed_on_index": 4,
- "newest_listed": "Injury-Report_2026-11-19_12_45AM.pdf",
- "editions_already_archived": 114,
- "method": "index-driven (engine/fetch_official.capture_injury), looped past the per-pass cap by session driver arena/4f19ecf1-nba1 so the 2026-11-17..19 series is archived in full; records merged newest-edition-first",
- "note": "HTTP status only. 403 from ak-static.cms.nba.com is recorded as unavailable at capture time, never as proof of absence."
+ "editions_listed_on_index": 5,
+ "newest_listed": "Injury-Report_2026-11-19_01_00AM.pdf",
+ "editions_already_archived": 152,
+ "method": "index-driven: every edition listed by official.nba.com, newest first, capped per run, already-archived editions skipped because captures are content-addressed",
+ "note": "HTTP status only. 403 from ak-static.cms.nba.com has been observed both for editions that exist to a browser and for editions that are not published yet; it is recorded as unavailable at capture time, not as proof of absence."
 }
