@@ -11628,3 +11628,118 @@ and `stats.nba.com` likewise). The platform's `fetch_page` channel reaches the p
 is used at T03 for first-hand reads of what the tables contain; `fetch_page` cannot carry raw HTML,
 so T02 puts the byte capture on a runner, which is the established template in this repo
 (`capture-official-ca442d3d.yml`, `capture-official-e3d25abc.yml`).
+
+### 69.1 Delivery record — every number below is a file measurement, not a plan (2026-11-19, ~07:3x–09:0x UTC)
+
+**What the task actually turned out to be.** The board and `data/content/requirements.json`
+described this as RFG4 "needs review": *the structured parsers do not work*. That is true but it
+is not the cause. The cause is a delivery problem, and it took committed bytes to see it.
+
+**T02 — the byte-exact capture (the finding).** `scripts/capture_official_89f7b601.py` +
+`.github/workflows/capture-official-89f7b601.yml`, both new. Runner run
+[44477742276](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44477742276) stored the
+exact response bytes for every failing source, content-addressed, under
+`data/raw/session-89f7b601/` with a structural digest taken **before** any parser was touched:
+
+| Source | HTTP | Bytes | `<tr>` | `/team/` | `/stats/team/` | `rowSet` |
+| --- | --- | --- | --- | --- | --- | --- |
+| `S1_season` (teams/advanced) | 200 | 293,688 | 12 | **0** | **0** | **0** |
+| `S2_train` (advanced, 10/20–11/05) | 200 | 294,812 | 12 | **0** | **0** | **0** |
+| `S8_standings` | 200 | 225,373 | **0** | **0** | **0** | **0** |
+| `S9_team_traditional` | 200 | 293,835 | 12 | **0** | **0** | **0** |
+| `S10_team_opponent` | 200 | 293,765 | 12 | **0** | **0** | **0** |
+
+Not one team row, in a quarter of a megabyte, five times. The tables are mounted by client-side
+JavaScript after the HTML arrives, so **no string parse of that response can ever yield 30 rows**.
+The refresh has been reporting a structural impossibility as a parse failure for as long as the
+five sources have existed.
+
+**The data layer, measured in the same run.** The page's own JS chunk names the endpoint
+(`leaguedashteamstats`, already recorded in `data/raw/_capture_evidence_S1_season.json`). Four
+`stats.nba.com` endpoints were tried, 3 attempts each, 25s ceiling:
+**every attempt `TimeoutError`, no HTTP status at all** (4/4 unavailable). That is the same
+signature the 2026-11-19T06:13Z scheduled run recorded.
+
+**T03 — the render, and its refutation.** Since parsing is impossible and the API is unreachable,
+the correct remaining repair is to let the page render itself. `scripts/render_official_89f7b601.py`
+does that in headless Chromium on the runner (run
+[44481346010](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44481346010)). Result:
+**all five pages are a 298–312 byte Akamai "Access Denied"** (`errors.edgesuite.net` reference
+`18.8d51c317.1795074343.8858fa02`), 0 tables, 0 rows. nba.com refuses datacenter IPs for browser
+user agents as well. Recorded as F-89F-02 and the F1 "add a headless-browser capture" suggestion is
+now known to fail.
+
+**Two defects fixed in the parse layer, both found by writing the test first.**
+1. Rows whose team cell could not be resolved to one of the 30 clubs were **dropped silently**, so a
+   400-row unidentifiable document and an empty page produced byte-identical output
+   (`{rows: [], problems: []}`). They are now counted, with a 3-row sample and the true total.
+2. The failure metadata had no untruncated total, so `parsed 0` could not be distinguished from
+   `parsed 0 of 400`. `problems_total` is now returned and `engine/fetch_official.py` names
+   `html_tr`, `team_links`, `rowSet` and `parse_problems` in `data/raw/_last_refresh.json`. **The
+   first scheduled run after the fix proved it** (07:40:34Z): `expected 30 team rows, parsed 0
+   (html_tr=12 team_links=0 rowSet=0 parse_problems=1)` — the diagnosis is now in the record instead
+   of needing another capture round-trip.
+
+**T04 — the check that turns "cannot parse" into a stated coverage fact.**
+`scripts/verify_standings_89f7b601.py` verifies the transcribed standings against the one official
+source CI *can* read: the per-date games feed, which the scheduled job already fetches and which
+prints each team's record beside its score. **All 30 teams agree exactly on W and L**, each with its
+feed page URL. It states its own limit per row rather than implying coverage: the feed carries no
+GB, conference/division record, home/road/neutral split, OT record, LAST10 or streak, and those
+eleven fields are listed as `uncorroborated_fields` for every team. Exit 4 on any disagreement, 5
+if fewer than 30 teams are usable (inconclusive, never a pass).
+
+**T05 — re-read the three official tables and diff the model inputs.**
+`scripts/recut_drift_89f7b601.py` against `data/official/teams_reread_2026-11-19_89f7b601.json`
+(this session's first-hand read, sourced by URL). **80 committed team-rows compared: 75 agree, 5
+drift, 10 not covered.** The drift is one game and it *resolves a standing flag*: F-929-01 and
+F-9FF-02 recorded that all three official tables lagged the standings by the 11/18 UTA@LAL game
+(LAL 15 GP 13-2, UTA 15 GP 2-13). Both now print **16 GP** agreeing with the standings. But
+`data/derived/team_stats_recut.json` — the input the horizon is priced from — still carries 15 for
+both, and UTA's opponent points moved 117.3 → 116.0. Nothing was rewritten: the diff is a record, so
+the input's owner decides (F-89F-04, S-89F-02, Q37).
+
+**T06 — published, and one gate added because a gate was missing.** Registers appended (all plain
+strings, `check_registers.py` clean): flags **F-89F-01…05**, suggestions **S-89F-01…03**, open
+questions **Q35…Q37**; R01 and R30 in `requirements.json` re-evidenced from the measurements above.
+`scripts/check_build_data.py` is new and wired into `pages.yml`: it resolves the data URL each
+page's own script builds and requires the file to exist and parse. It exists because every gate in
+this repository passed while a build's pages fetched nothing — an empty page has no rows for
+`verify_all` to audit and no missing link for `check_site` to find. Proven both ways: PASS on the
+tree, FAIL (2 problems, named paths) with one data file removed.
+
+**T07 — gate battery (all measured this session, on `a78257e`).**
+
+| Gate | Result |
+| --- | --- |
+| `scripts/verify_all.py` | **VERIFY OK** — FAILURES: 0 |
+| `scripts/check_links.py` | **PASS** |
+| `scripts/check_site.py` | **PASS** |
+| `scripts/check_rendered.py` | **PASS** — 17 pages, 707 rows, 0 without a link |
+| `scripts/check_registers.py` | **REGISTERS OK** — 2,107 text fields, 0 problems |
+| `scripts/check_build_data.py` (new) | **PASS** — 66 pages, 427 page→data references, resolved dirs `docs/data`, `site/data` |
+| `scripts/render_check.mjs` | **160 pages, 12,821 content blocks, 0 problems** |
+| Full `scripts/test_*.py` suite | **14/14 files pass**, including new `test_parse_89f7b601.py` (11 cases) |
+| `engine/build_site.py` / `scripts/build_dashboard.py` | deterministic — a rebuild produced no diff |
+
+**Irregularities this seat created and corrected rather than hid.**
+1. The first capture run **sat 9 minutes on `stats.nba.com` and finished nothing**. Fixed by taking
+   the five page sources first with a 25s ceiling each, making the run resume-safe (a stored,
+   digest-verified endpoint is never re-fetched), and making the contract the five page sources — the
+   API probes are evidence, and their absence is recorded, not failed on.
+2. The run after that was **green and committed nothing from the render**: the commit step sat
+   before the browser steps. Order fixed; the commit step now runs after both capture layers.
+3. `scripts/render_check.mjs` walked **every `.html`** in the repo and flagged all five captured
+   Akamai denial pages as "no table rendered at all" — five red lines caused by a file extension.
+   The evidence is now `.dom`, byte-identical, digests re-verified by the test.
+4. **A false alarm of this seat's own making.** I asserted that build B (`docs/b/`) fetched a
+   non-existent `docs/b/data/`, patched `engine/build_site.py` to copy data there, and was wrong:
+   `DATA_PREFIX` slices a page's `src` at `assets/site.js`, so build-B pages resolve to
+   `docs/data`, which is current and correct. The patch was reverted and the copy removed. The
+   episode is why `check_build_data.py` **derives** each page's data directory instead of being told
+   what it "should" be.
+
+**Deliberately left open, with a named next action each.** The standings and the three team-stat
+tables remain unobtainable from CI by any route tried (Q35, S-89F-01). Advanced rating columns were
+not re-transcribed in this read, so they stay single-source (F-89F-04). Ten opponent rows sit
+outside the two chunks this session could read and are `NOT_CHECKED`, never agreement.
