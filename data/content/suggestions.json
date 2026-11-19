@@ -1075,6 +1075,69 @@
    "decision_needed": "Approve a reachability table on the source-check page.",
    "source": "S89F_REFRESH",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+  },
+  {
+   "id": "S-4EE-01",
+   "title": "Pre-register a corrected pick-probability formula (sigma 18.303) for the next roll; keep every sealed probability as published",
+   "category": "Model",
+   "problem": "F-4EE-06: published probabilities divide the spread by sigma of game margins (16.714) instead of sigma of the spread error (measured 18.303). Realized hit rate 0.3784 against 0.7197 mean published probability. Changing sealed numbers would break the pre-registration discipline; the fix must be prospective.",
+   "options": [
+    {
+     "option": "Freeze a prereg v2 (new strategy ids or an amended freeze) whose signal uses sigma 18.303 before the next horizon's first tip, and report old-vs-new calibration side by side until v2 has 30 graded plays",
+     "pros": "honest, keeps every seal intact, gives the leaderboard a fair comparison",
+     "cons": "two probability series coexist for a while"
+    },
+    {
+     "option": "Leave the formula and let the strategy-validation gates absorb the miscalibration",
+     "pros": "no change",
+     "cons": "the leaderboard keeps ranking on numbers known to be wrong (F-4EE-06)"
+    }
+   ],
+   "recommendation": "Option 1. The measurement is unambiguous and the settlement rules are unaffected (they grade the pick line, not the probability).",
+   "decision_needed": "Yes - the formula belongs to the pre-registered signal, so only an explicit decision can change it (owner: next roll/integration seat or the user).",
+   "source": "data/content/signal_diagnostics_2026-11-19_d66245d4.json (section 72 measurement)"
+  },
+  {
+   "id": "S-4EE-02",
+   "title": "Derive one authoritative per-strategy record from the sealed tickets and reconcile README + leaderboard to it",
+   "category": "Data",
+   "problem": "F-4EE-05: S1's published record differs between README (23-9 / +11.91) and docs/data/leaderboard.json (23-8 / +12.909); settlement grades tickets, not strategies, so neither is derivable.",
+   "options": [
+    {
+     "option": "A namespaced rollup script that reads data/settlement/** + the pre-tip archives, attributes each graded ticket to its strategy, and writes one records file both surfaces render",
+     "pros": "single source of truth, reviewable row by row with official final links",
+     "cons": "needs the ticket->strategy mapping, which the archives carry via prereg ids"
+    },
+    {
+     "option": "Hand-edit one surface to match the other",
+     "pros": "quick",
+     "cons": "hides the derivation; the brief forbids unauditable values"
+    }
+   ],
+   "recommendation": "Option 1, adopted by the next strategy/leaderboard seat.",
+   "decision_needed": "No - needs an owner, not a decision.",
+   "source": "COORDINATION.md section 72 finding 3"
+  },
+  {
+   "id": "S-4EE-03",
+   "title": "Decide whether a gate-passing scheduled rebuild should publish the regenerated site data or stay smoke-only (today the run discards docs/data + docs/b churn)",
+   "category": "Automation",
+   "problem": "The rebuild step (pipeline + build_site) now runs when gates pass, but the 'Discard generated-site churn only' step reverts docs/data and docs/b before the publish commit, so the scheduled job never updates the live site's data - sessions do, at integration. That is defensible churn control (the generated files embed wall-clock ages) but it means 'rebuild' in the brief's first requirement is validated, not published.",
+   "options": [
+    {
+     "option": "Keep smoke-only rebuild + session-published site (current)",
+     "pros": "no churn, no clock-stamped diffs in auto PRs",
+     "cons": "site data freshness depends on session cadence"
+    },
+    {
+     "option": "Publish the rebuilt data on gate pass, with the wall-clock fields scrubbed first",
+     "pros": "scheduled job truly completes the refresh-to-publish chain",
+     "cons": "more moving parts in the auto PRs"
+    }
+   ],
+   "recommendation": "Flag for the decision register; either choice is coherent, but it should be an explicit decision, not an accident of a churn filter.",
+   "decision_needed": "Yes - integration/user.",
+   "source": ".github/workflows/refresh-data.yml (Discard generated-site churn only step)"
   }
  ]
 }
