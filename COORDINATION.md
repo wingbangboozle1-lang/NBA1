@@ -7390,3 +7390,13 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+## ACTIVE CLAIM — `arena/374ffc79-nba1` (2026-11-19 UTC)
+
+**Task:** close the previously recorded F-CA-07 scheduled injury-edition promotion trigger gap. Scope is limited to `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow_injury_trigger.py`, and this claim/delivery record in `COORDINATION.md`; do not edit shared published tables, navigation, or data snapshots. The worktree is on Arena-pinned branch `arena/374ffc79-nba1` (base named by the session: `b3b19f2`); branch naming is platform-fixed. Claim evidence: reviewed the board through §65.9 and confirmed F-CA-07 at line 7386, where the board documents that injury-PDF editions can be captured while the scheduled promotion path is skipped when another source makes the fetch step non-successful.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Run verified promotion after a non-cancelled fetch attempt, while retaining strict success-only rebuild gates; add workflow regression test | in progress | `arena/374ffc79-nba1` | `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow_injury_trigger.py` |
+
+No other branch's files are being edited. Existing open claims are historical records; this task is constrained to the two named files plus this board.
