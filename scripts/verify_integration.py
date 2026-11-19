@@ -13,7 +13,7 @@ and fails loudly when they do not hold:
       every HTML file in the repository - including inside inline <script>
   I3  every external link is https and its host is on an allowlist of official /
       documentation hosts
-  I4  every <tr> on every page that carries data has at least one source link
+  I4  every static data <tr> has a direct HTTPS NBA link; script templates are counted separately and require a rendered-DOM audit
   I5  no text-search sentinels leak: "None", "nan", "undefined", "TODO",
       "{{", "}}", "python", "Traceback" in rendered prose
   I6  the numbers asserted in the prose exist in the data files (the class of
@@ -33,6 +33,11 @@ import json
 import os
 import re
 import sys
+
+try:  # Direct script execution (CI) or import as scripts.verify_integration.
+    from source_row_audit import scan_html
+except ImportError:
+    from scripts.source_row_audit import scan_html
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -196,38 +201,35 @@ def check_links():
     ok(f"{checked['html']} HTML files, {checked['links']} static links")
 
 # ---------------------------------------------------------------- I4 sourced rows
-ROW_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.S | re.I)
-LINK_RE = re.compile(r"<a\b[^>]*href\s*=\s*[\"']([^\"']+)[\"']", re.I)
-
 
 def check_rows():
-    print("\n[I4] Data rows carry a source link")
+    print("\n[I4] Static data rows carry a direct HTTPS NBA source link")
     unsourced = []
+    dynamic_template_rows = 0
     for p in walk((".html",)):
-        html = strip_json_blocks(open(p, encoding="utf-8", errors="replace").read())
-        for m in ROW_RE.finditer(html):
-            row = m.group(1)
-            if "<th" in row.lower():
-                continue  # header row
-            checked["rows"] += 1
-            static_row = strip_scripts(row)
-            links = [u for u in LINK_RE.findall(static_row) if u.startswith("http")]
-            official = [
-                u for u in links
-                if re.match(r"^https://([\w.\-]*\.)?nba\.com/", u)
-            ]
-            if official:
-                checked["sourced_rows"] += 1
-            elif links:
-                unsourced.append((rel(p), "no official NBA link"))
+        text = open(p, encoding="utf-8", errors="replace").read()
+        result = scan_html(text, rel(p))
+        counts = result["counts"]
+        checked["rows"] += counts["static_rows"]
+        checked["sourced_rows"] += counts["official_link_present_not_value_verified"]
+        dynamic_template_rows += counts["dynamic_template_rows_not_rendered"]
+        for row in result["static_rows"]:
+            if row["status"] == "official_link_present_not_value_verified":
+                continue
+            if row["status"] == "unverified_non_nba_or_insecure_link_only":
+                why = "only non-NBA or insecure external link(s)"
             else:
-                unsourced.append((rel(p), "no external link at all"))
+                why = "no external source link"
+            unsourced.append((rel(p), row["line"], why, row["row_text"]))
+
     if unsourced:
-        for p, why in unsourced[:40]:
-            warn(f"{p}: row without an official source link ({why})")
+        for p, line, why, text in unsourced[:40]:
+            warn(f"{p}:{line}: row without a direct HTTPS NBA source ({why}): {text[:120]}")
         if len(unsourced) > 40:
-            warn(f"... and {len(unsourced) - 40} more rows without an official link")
-    ok(f"{checked['sourced_rows']}/{checked['rows']} data rows carry an official source link")
+            warn(f"... and {len(unsourced) - 40} more static rows without a direct NBA source")
+    if dynamic_template_rows:
+        ok(f"{dynamic_template_rows} table-row templates inside scripts were excluded from static counts; their rendered output requires a DOM audit")
+    ok(f"{checked['sourced_rows']}/{checked['rows']} static data rows contain a direct HTTPS NBA link (link presence only; values not re-fetched)")
 
 
 # ---------------------------------------------------------------- I5 sentinels
@@ -394,8 +396,8 @@ def main():
         for e in errors:
             print(f"  - {e}")
         return 1
-    print("\nPASSED - no errors. Warnings are listed above and are published on "
-          "the Flagged for Review page.")
+    print("\nPASSED - no errors. Warnings are listed above; publishing them on the "
+          "Flagged for Review page is a separate integration step.")
     return 0
 
 
