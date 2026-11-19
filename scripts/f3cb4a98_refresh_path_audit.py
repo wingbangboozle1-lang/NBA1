@@ -173,6 +173,19 @@ def evidence_problems(evidence):
     return out
 
 
+def fetcher_urls(source_text):
+    """Official URL per source key, read out of engine/fetch_official.py.
+
+    The URL published beside an audit row must be the one the fetcher actually
+    requests, so it is parsed from its FETCHES table rather than retyped.
+    """
+    out = {}
+    for match in re.finditer(
+            r'"(S\d+_[a-z_]+)"\s*:\s*\(\s*"([^"]+)"', source_text):
+        out[match.group(1)] = match.group(2)
+    return out
+
+
 def pipeline_consumers(source_text):
     """Which data/raw filenames engine/pipeline.py loads, read from its source."""
     found = set()
@@ -259,6 +272,11 @@ def audit():
         pipeline_text = ""
     consumers = pipeline_consumers(pipeline_text)
     try:
+        fetcher_text = open(FETCHER, encoding="utf-8").read()
+    except OSError:
+        fetcher_text = ""
+    fetch_urls = fetcher_urls(fetcher_text)
+    try:
         gate_text = open(GATE, encoding="utf-8").read()
     except OSError:
         gate_text = ""
@@ -277,6 +295,8 @@ def audit():
         history, history_error = (git_history_count(promoted) if promoted else (None, None))
         entry = {
             "key": key,
+            "official_url": fetch_urls.get(key)
+            or (checks.get(key) or {}).get("url"),
             "checked_this_run": key in checks,
             "http_status_this_run": (checks.get(key) or {}).get("http_status"),
             "fetch_failure_this_run": failed.get(key),

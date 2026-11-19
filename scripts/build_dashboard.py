@@ -78,6 +78,7 @@ CATEGORIES = [
     ("Player Game Logs", "player-logs.html", "Minutes, points, rebounds and assists for every player in each finished game's official gamebook, with the report cross-reference and the DNP/DND rows kept."),
     ("Settlement &amp; Ledger", "settlement.html", "The tamper-evident ledger: each published pick hashed before tip and verified after settlement, with the settlement stamp visible."),
     ("Injury PDF Ledger", "injury-ledger.html", "Every official injury PDF stored with its timestamp and content hash, and the status changes found by diffing consecutive reports."),
+    ("Scheduled Refresh Path", "refresh-path.html", "Whether the scheduled job's capture, promotion and rebuild path can actually run, measured from the run record and from git history - and every official source declared unreadable, with its evidence and expiry."),
     ("Official Result Feed", "official-feed.html", "The per-game result feed: date, teams, final score and quarter scores, kept current and settled only from verified finals."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
@@ -2321,6 +2322,127 @@ def main():
     built["gameflow.html"] = page("Game flow analysis",
                                   "Pace, expected score, blow-out and overtime probability, and the rest and "
                                   "back-to-back context for every game in the horizon.", "\n".join(b))
+
+
+    # === refresh-path audit (COORDINATION.md section 69) ====================
+    # The brief's first requirement is that the scheduled job refresh the
+    # official sources and then rebuild only after the gates pass. This page
+    # publishes whether that path can actually run, measured, rather than
+    # asserting it. It exists because the answer was "no" for four days and
+    # nothing on the site said so.
+    b = [h2("Scheduled refresh publish path",
+            "What the scheduled job fetches, what it can promote, and whether the "
+            "rebuild step behind its fail-closed gate can ever be reached.")]
+    audit_p = os.path.join(RAW, "refresh_path_audit.json")
+    decl_p = os.path.join(RAW, "unreadable_sources.json")
+    if not os.path.exists(audit_p):
+        b.append(banner("warn", "Audit not built",
+                        "<p><code>data/raw/refresh_path_audit.json</code> is missing. "
+                        "Run <code>python3 scripts/f3cb4a98_refresh_path_audit.py</code>. "
+                        "Nothing about the refresh path is claimed on this page until it exists.</p>"))
+    else:
+        audit = load(audit_p)
+        rr = audit.get("run_record", {})
+        # Every row carries the repository file it was read from, as a link a
+        # reviewer can open. These are run-record fields, not official NBA
+        # values, so the honest source is the committed file itself (and the
+        # workflow that writes it) - stated as such rather than pointed at
+        # nba.com, where none of these fields exist.
+        rec_src = ('<a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/'
+                   'blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">'
+                   '%s</a>' % esc(rr.get("path") or "data/raw/_last_refresh.json"))
+        wf_src = ('<a class="source" href="https://github.com/wingbangboozle1-lang/NBA1/'
+                  'blob/main/.github/workflows/refresh-data.yml" target="_blank" '
+                  'rel="noopener">refresh-data.yml</a>')
+        b.append(table(
+            ["Run-record field", "Measured value"],
+            [[esc("record path"), "<code>%s</code>" % esc(rr.get("path")), rec_src],
+             [esc("captured at (UTC)"), esc(rr.get("captured_at_utc")), rec_src],
+             [esc("fetch step"), esc(rr.get("fetch_outcome")), wf_src],
+             [esc("promotion step"), esc(rr.get("promote_outcome")), wf_src],
+             [esc("freshness gate ok"), esc(rr.get("freshness_ok")), wf_src],
+             [esc("rebuild step"), esc(rr.get("build_outcome")), wf_src],
+             [esc("rebuild has ever run"), esc(audit.get("summary", {}).get("rebuild_ever_ran")),
+              rec_src]],
+            note="Read from <code>data/raw/_last_refresh.json</code>, the file the scheduled "
+                 "workflow writes, and from the workflow source. No value here is typed by "
+                 "hand. These are repository run-record fields; no official NBA page publishes "
+                 "them, so the honest source is the committed file."))
+
+        decls = {}
+        if os.path.exists(decl_p):
+            for entry in (load(decl_p).get("declarations") or []):
+                decls[entry.get("source_key")] = entry
+        rows = []
+        for item in audit.get("sources", []):
+            declaration = decls.get(item.get("key"))
+            url = item.get("official_url")
+            if url:
+                src_cell = ('<a class="source" href="%s" target="_blank" rel="noopener">%s</a>'
+                            % (esc(url), esc(url)))
+            else:
+                src_cell = ('<span class="na" title="no official URL is recorded for '
+                            'this source in engine/fetch_official.py">&mdash;</span>')
+            rows.append([
+                "<code>%s</code>" % esc(item.get("key")),
+                esc(item.get("classification")),
+                esc("yes" if item.get("required_by_gate") else "no"),
+                esc(item.get("promoted_commits_in_history")),
+                esc("yes" if item.get("consumed_by_pipeline") else "no"),
+                (esc(declaration.get("expires_at_utc")) if declaration else NA),
+                esc(item.get("evidence_problems", [None])[0]
+                    if (item.get("evidence_problems") and item.get("classification") != "readable")
+                    else None),
+                src_cell,
+            ])
+        b.append(table(
+            ["Source key", "Classification", "Gate requires it",
+             "Commits touching the required snapshot", "Model pipeline loads it",
+             "Unreadable declaration expires", "Measured parse problem"],
+            rows,
+            note="<b>Classification</b> is derived: <i>readable</i> means this run's "
+                 "capture parsed rows; <i>unreadable</i> means a committed evidence "
+                 "record proves the captured page carries no table; <i>unmeasured</i> "
+                 "means neither, and the gate blocks. <b>Commits touching the required "
+                 "snapshot</b> is <code>git log --all</code> over the full 884-commit "
+                 "history: a 0 means the file the gate demands has never existed, so no "
+                 "scheduled run could ever satisfy it."))
+
+        applied = audit.get("summary", {}).get("terminal_now_covered_by_declaration") or []
+        terminal = audit.get("summary", {}).get("terminal_gate_requirements") or []
+        if terminal:
+            b.append(banner("bad", "Terminal gate requirement uncovered",
+                            "<p>%s still demand a snapshot with no history and no live "
+                            "declaration. The rebuild step is unreachable while this is "
+                            "true.</p>" % esc(", ".join(terminal))))
+        else:
+            b.append(banner("warn", "Why a declaration exists, and what it does not do",
+                            "<p>The gate used to require <code>data/raw/standings.json</code>, "
+                            "<code>team_traditional.json</code> and <code>team_opponent.json</code>. "
+                            "Those files have <b>zero commits in the repository's history</b> because "
+                            "the three official pages render their tables client-side &mdash; the "
+                            "runner's own evidence records measure 0 <code>&lt;tr&gt;</code> rows on the "
+                            "standings page and 0 <code>/stats/team/</code> links on the traditional "
+                            "page. A requirement no run can satisfy does not make the site safer; it "
+                            "makes the rebuild step dead code, which is what it had been since gate "
+                            "commit <code>25bfcea</code> (2026-11-15T11:38Z) landed after the last "
+                            "successful rebuild at 12:43:11Z that same day.</p>"
+                            "<p><code>data/raw/unreadable_sources.json</code> declares those three "
+                            "sources unreadable with their evidence and a hard expiry%s. A declaration "
+                            "<b>never promotes a value</b> and never touches an input the model loads: "
+                            "none of the three is consumed by <code>engine/pipeline.py</code>. It is "
+                            "refused the moment the page starts parsing rows, the moment it expires, "
+                            "and the moment the source is not fetched at HTTP 200 in the same run.</p>"
+                            % ((" (currently <b>%s</b>)" % esc(", ".join(applied))) if applied else "")))
+        b.append('<p class="note">Built by <code>scripts/build_dashboard.py</code> from '
+                 "<code>data/raw/refresh_path_audit.json</code> "
+                 "(generated by <code>scripts/f3cb4a98_refresh_path_audit.py</code>) and "
+                 "<code>data/raw/unreadable_sources.json</code>. The register is also published "
+                 "on the Flagged for Review page, where it can be reviewed and revoked.</p>")
+    built["refresh-path.html"] = page(
+        "Scheduled refresh publish path",
+        "Whether the scheduled job's capture, promotion and rebuild path can actually run, "
+        "measured from the run record and from git history.", "\n".join(b))
 
     # === strategies =========================================================
     b = [h2("Leaderboard", "Ranked by the reward score. The tier is capped by the gates, not by the score: a strategy that fails the skill gate cannot be promoted past a quarter unit however high it scores.")]

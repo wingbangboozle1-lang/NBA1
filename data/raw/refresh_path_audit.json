@@ -2,7 +2,7 @@
  "title": "Scheduled refresh publish-path audit",
  "built_by": "scripts/f3cb4a98_refresh_path_audit.py",
  "session": "arena/f3cb4a98-nba1",
- "built_at_utc": "2026-11-19T07:10:24Z",
+ "built_at_utc": "2026-11-19T07:12:57Z",
  "history_warning": null,
  "rule": "Every field is read from a committed file or from git history. No value is inferred. A gate requirement naming a snapshot with zero commits in history is classified terminal, because no scheduled run can ever satisfy it.",
  "run_record": {
@@ -45,6 +45,7 @@
  "sources": [
   {
    "key": "S10_team_opponent",
+   "official_url": "https://www.nba.com/stats/teams/opponent",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": "no opponent team rows parsed (['html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON'])",
@@ -79,6 +80,7 @@
   },
   {
    "key": "S1_season",
+   "official_url": "https://www.nba.com/stats/teams/advanced",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": "expected 30 team rows, parsed 0",
@@ -112,6 +114,7 @@
   },
   {
    "key": "S2_train",
+   "official_url": "https://www.nba.com/stats/teams/advanced",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": "expected 30 team rows, parsed 0",
@@ -145,6 +148,7 @@
   },
   {
    "key": "S4_schedule",
+   "official_url": "https://www.nba.com/schedule",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": null,
@@ -177,6 +181,7 @@
   },
   {
    "key": "S5_injury_index",
+   "official_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": null,
@@ -207,6 +212,7 @@
   },
   {
    "key": "S7_players",
+   "official_url": "https://www.nba.com/stats/players/traditional",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": null,
@@ -237,6 +243,7 @@
   },
   {
    "key": "S8_standings",
+   "official_url": "https://www.nba.com/standings",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": "no standings rows parsed (['html_table: East: parsed 0 teams, expected 15', 'html_table: West: parsed 0 teams, expected 15', 'next_data: no standings-like team records found in __NEXT_DATA__'])",
@@ -272,6 +279,7 @@
   },
   {
    "key": "S9_team_traditional",
+   "official_url": "https://www.nba.com/stats/teams/traditional",
    "checked_this_run": true,
    "http_status_this_run": 200,
    "fetch_failure_this_run": "no traditional team rows parsed (['html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON'])",
