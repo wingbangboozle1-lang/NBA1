@@ -1851,6 +1851,15 @@
    "detail": "Two conflicts were resolved this session without discarding anyone's work. (1) PR #181 (arena/39b70241-nba1) was CONFLICTING over 300 files and its whole subject - 11/17+11/18 settlement, the 11/19-11/22 roll, the SGP grades - is already on main by PR #172 (\u00a766), with ledger entries 15-17 and every settlement file present; merging it would append a second divergent settlement and fork the hash chain. Its comment records the evidence; it was already closed when this seat went to close it. (2) Session arena/65bda668-nba1 opened PR #195 doing the same R09 fix on the same four call sites while this seat was implementing it. This seat withdrew its R09 change completely and logged the yield on the board; the one substantive difference (their pin read RAISES when missing; ours returned 0.0 and said NOT APPLIED) is recorded on COORDINATION.md because the stricter choice is a policy decision.",
    "source": "S89F_REFRESH",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/pull/181"
+  },
+  {
+   "id": "F-915-06",
+   "severity": "High",
+   "status": "open",
+   "title": "Publishing 25 verified finals flips the measured home-court pin from +0.59 to -1.10 points",
+   "detail": "The HCA pin R09 requires is derived, not fitted: HCA_points = sigma_margin * Phi^-1(home win rate) over every final in data/raw/games_completed.json (engine/hca.compute_hca). Restoring the 25 finals the scheduled run captured but could not publish therefore changes a published model constant. Measured: with 74 finals the home record is 38-36 (0.5135) -> +0.59 points; with 99 finals it is 47-52 (0.4747) -> -1.10 points. The 25 restored games went 9 home wins and 16 road wins, which is why. A negative home-court constant is not an error in the formula, but it is a finding that needs a decision rather than a silent publication: either the early-season home rate is genuinely below even at n=99 (the 11/18 feed the other sessions used reported 0.5023 at n=221 for the prior season's window), or the formula's sigma_margin should be re-measured on the same corpus before the pin is trusted. Flagged for review with both numbers; nothing is hidden and no value was chosen by hand.",
+   "source": "S74_HCA",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/hca_measured.json"
   }
  ]
 }

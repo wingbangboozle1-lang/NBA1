@@ -1749,6 +1749,15 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>F-915-06</td>
+<td>High</td>
+<td><b>Publishing 25 verified finals flips the measured home-court pin from +0.59 to -1.10 points</b></td>
+<td>The HCA pin R09 requires is derived, not fitted: HCA_points = sigma_margin * Phi^-1(home win rate) over every final in data/raw/games_completed.json (engine/hca.compute_hca). Restoring the 25 finals the scheduled run captured but could not publish therefore changes a published model constant. Measured: with 74 finals the home record is 38-36 (0.5135) -&gt; +0.59 points; with 99 finals it is 47-52 (0.4747) -&gt; -1.10 points. The 25 restored games went 9 home wins and 16 road wins, which is why. A negative home-court constant is not an error in the formula, but it is a finding that needs a decision rather than a silent publication: either the early-season home rate is genuinely below even at n=99 (the 11/18 feed the other sessions used reported 0.5023 at n=221 for the prior season's window), or the formula's sigma_margin should be re-measured on the same corpus before the pin is trusted. Flagged for review with both numbers; nothing is hidden and no value was chosen by hand.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_v2.json" target="_blank" rel="noopener">S74_HCA</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
