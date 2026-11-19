@@ -41,6 +41,13 @@
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "source_sha256": "5d64a13d6ab220949f58224afe01638b26811dfbe5c0938987fb5f948761eba9"
+  },
+  {
+   "promoted_at_utc": "2026-11-19T22:59:38Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "source_sha256": "b339528cdb5ed0de7cdb1b466fe7a215ebdf62edb2afa51d6aa07c0e1f9b7a37"
   }
  ],
  "S7_players": [
@@ -85,6 +92,13 @@
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://www.nba.com/stats/players/traditional",
    "source_sha256": "989a8d14528cdda5e816c3b30623dc724da86b7e3e5dad0cd76b6f4bbca72174"
+  },
+  {
+   "promoted_at_utc": "2026-11-19T22:59:38Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://www.nba.com/stats/players/traditional",
+   "source_sha256": "ca5c3dd25be66c9dc08186d0a220b9aa95014d717f8d08fc73a367ff440c569c"
   }
  ],
  "_runs": [
@@ -310,6 +324,36 @@
     "S7_players"
    ],
    "blocked": [],
+   "blocked_unreadable": [
+    "S8_standings",
+    "S9_team_traditional",
+    "S10_team_opponent",
+    "S1_season"
+   ]
+  },
+  {
+   "promoted_at_utc": "2026-11-19T22:59:38Z",
+   "promoted_items": [
+    "S4_schedule",
+    "injury_diff_chain",
+    "injury_pdf_probe",
+    "results 2026-11-06",
+    "results 2026-11-07",
+    "results 2026-11-08",
+    "results 2026-11-09",
+    "results 2026-11-10",
+    "results 2026-11-11",
+    "results 2026-11-12",
+    "results 2026-11-13",
+    "S5_injury_index",
+    "S7_players"
+   ],
+   "blocked": [
+    {
+     "item": "results_feed",
+     "reason": "2026-11-14: committed finals missed by the page parse: ['0022600231', '0022600232', '0022600233', '0022600234'] - nothing appended, comparison left for review"
+    }
+   ],
    "blocked_unreadable": [
     "S8_standings",
     "S9_team_traditional",
