@@ -91,7 +91,13 @@ WEB_CLIENT_HEADERS = {
 
 CARD_ANCHOR_RE = re.compile(
     r"<a[^>]*?/game/([a-z]{3})-vs-([a-z]{3})-(\d{10})[^>]*>(.*?)</a>", re.S)
-FINAL_RE = re.compile(r"\bFinal\b")
+# Case-insensitive on purpose: the measured cause of this seat's first capture
+# run reporting 0/17 gamebooks was that a completed card prints "FINAL" (the
+# page renders the word upper-cased in the finished state) while a live card
+# prints "Final".  A case-sensitive \bFinal\b silently marked every finished
+# game as not-final.  Pinned by scripts/test_e3d25abc_capture_parse.py.
+FINAL_RE = re.compile(r"\bFinal(?:/OT)?\b", re.IGNORECASE)
+NEUTRAL_RE = re.compile(r"neutral site|Neutral Site", re.IGNORECASE)
 EDITION_RE = re.compile(r"Injury-Report_\d{4}-\d{2}-\d{2}_\d{2}_\d{2}(?:AM|PM)\.pdf")
 
 
@@ -105,9 +111,11 @@ def log(msg: str) -> None:
 
 def get(url: str, timeout: int = 60) -> bytes:
     from urllib.parse import urlparse
-    host = urlparse(url).netloc
-    if host not in ALLOWED_HOSTS:
-        raise ValueError(f"refusing to fetch a non-official host: {host}")
+    parsed = urlparse(url)
+    if parsed.scheme != "https":
+        raise ValueError(f"refusing a non-HTTPS fetch: {url}")
+    if parsed.netloc not in ALLOWED_HOSTS:
+        raise ValueError(f"refusing to fetch a non-official host: {parsed.netloc}")
     req = urllib.request.Request(url, headers=WEB_CLIENT_HEADERS)
     with urllib.request.urlopen(req, timeout=timeout) as fh:
         return fh.read()
@@ -185,6 +193,30 @@ def edition_key(name: str):
             (int(hh) % 12 + (12 if ampm == "PM" else 0)) * 100 + int(mm))
 
 
+def select_todo(listed, want_days, archived_names, cap):
+    """Which official injury editions this run should fetch, newest first.
+
+    Two rules, both learned the hard way in this repository:
+      * an edition is selected by the **ISO date inside its own name**
+        (`Injury-Report_2026-11-19_12_45AM.pdf`).  The first run of this script
+        compared an underscored date and so matched nothing - it reported
+        `0 editions fetched` while the index was listing four;
+      * anything already archived is skipped, because captures are
+        content-addressed and a re-download of identical bytes writes nothing.
+    """
+    want = set(want_days or [])
+    out = []
+    for e in listed:
+        if want and edition_key(e)[0] not in want:
+            continue
+        if e in archived_names:
+            continue
+        out.append(e)
+        if len(out) >= cap:
+            break
+    return out
+
+
 def parse_scoreboard(html: str, date: str) -> dict:
     """Games printed by the official per-day scoreboard, read per card.
 
@@ -244,7 +276,10 @@ def main() -> int:
         "page_sha256": irec.get("sha256"), "page_bytes": irec.get("bytes"),
         "stored": irec.get("stored"), "editions_listed": len(listed),
         "newest_listed": listed[0] if listed else None,
-        "per_day_counts": {d: sum(1 for e in listed if f"_{d.replace('-', '_')}_" in e)
+        # Edition names carry the ISO date with DASHES ("Injury-Report_2026-11-19_
+        # 12_45AM.pdf"); matching on an underscored date silently matched nothing,
+        # which is why the first run reported 0 editions fetched with 4 on the index.
+        "per_day_counts": {d: sum(1 for e in listed if f"_{d}_" in e)
                            for d in sorted({edition_key(e)[0] for e in listed})[-8:]}}
     log(f"injury index: HTTP {irec.get('http_status')}, "
         f"{len(listed)} editions listed, newest {manifest['injury_index']['newest_listed']}")
@@ -257,17 +292,22 @@ def main() -> int:
         for fn in os.listdir(ARCHIVE_DIR):
             if fn.endswith(".pdf"):
                 archived_names.add(fn[:-4].split("__")[0] + ".pdf")
-    todo = [e for e in listed
-            if any(f"_{d.replace('-', '_')}_" in e for d in want_days)
-            and e not in archived_names][: args.max_injury_editions]
-    log(f"injury: {len(todo)} not-yet-archived edition(s) for {want_days}")
+    listed_days = {edition_key(e)[0] for e in listed}
+    todo = select_todo(listed, want_days, archived_names, args.max_injury_editions)
+    log(f"injury: {len(todo)} not-yet-archived edition(s) of {len(listed)} listed "
+        f"(index covers {sorted(listed_days)}, requested {want_days})")
+
     for edition in todo:
         url = INJURY_HOST + edition
         rec = fetch_recorded(url, "injury_pdfs", edition[:-4])
         rec.pop("_raw", None)
         rec["edition"] = edition
         rec["listed_on_official_index"] = True
-        rec["archived_in_repo_before_this_run"] = False
+        rec["edition_day"] = edition_key(edition)[0]
+        rec["revision_label_et"] = re.sub(
+            r"Injury-Report_(\d{4}-\d{2}-\d{2})_(\d{2})_(\d{2})(AM|PM)\.pdf",
+            lambda m: f"{m.group(1)} {int(m.group(2))%12 or 12}:{m.group(3)} "
+                      f"{m.group(4)} ET", edition)
         manifest["injury_editions"].append(rec)
         if rec.get("error"):
             manifest["failures"].append({"url": url, "error": rec["error"],
@@ -298,14 +338,33 @@ def main() -> int:
             manifest["failures"].append({"url": url, "error": rec["error"]})
 
         ymd = d.replace("-", "")
+        # A day that has already finished cannot print "Final" on a stale card,
+        # and an unplayed game has no book at all (the 404 is recorded, never
+        # guessed around).  So: fetch the gamebook for every game of a past day,
+        # and only for the finished games of today.
+        day_is_past = d < run_at[:10]
         booked = []
         for g in day["games"]:
-            if not g["marked_final_on_page"]:
+            if not (day_is_past or g["marked_final_on_page"]):
                 continue
             code = f"{g['away']}{g['home']}"
             gb_url = f"https://statsdmz.nba.com/pdfs/{ymd}/{ymd}_{code}_book.pdf"
             grec = fetch_recorded(gb_url, f"gamebooks/{d}",
                                   f"{d}_{code}", expect="pdf")
+            grec["marked_final_on_scoreboard_card"] = g["marked_final_on_page"]
+            # The official game page itself, stored gzipped: the second,
+            # independent official read of the printed final and the line score
+            # (the gamebook is the first).  Bytes, not a rendering.
+            prec = fetch_recorded(g["url"], f"gamepages/{d}",
+                                  f"{d}_{g['game_id']}", compress=True)
+            grec["game_page_stored"] = prec.get("stored")
+            grec["game_page_sha256"] = prec.get("sha256")
+            grec["game_page_bytes"] = prec.get("bytes")
+            grec["game_page_retrieved_at_utc"] = prec.get("retrieved_at_utc")
+            if prec.get("error"):
+                manifest["failures"].append({"url": g["url"],
+                                             "game_id": g["game_id"],
+                                             "error": prec["error"]})
             grec.pop("_raw", None)
             grec.update({"game_id": g["game_id"], "away": g["away"],
                          "home": g["home"], "date": d,
