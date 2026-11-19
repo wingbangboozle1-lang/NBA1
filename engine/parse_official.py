@@ -173,6 +173,11 @@ def parse_team_table(text, cols=None, int_cols=(), variant="generic"):
 
 def _team_table_html(text, cols, int_cols):
     rows, problems = [], []
+    # §69: a row whose team cell cannot be resolved to one of the 30 clubs used
+    # to be dropped without a word, so a document full of unidentifiable rows
+    # reported "0 rows, 0 problems" - indistinguishable from an empty page.
+    # The count is now recorded (bounded sample kept) so the two cases differ.
+    unresolved = 0
     # header row: the first <tr> with >=3 <th> cells and no team link
     header = None
     for tr in TR_RE.finditer(text):
@@ -204,6 +209,12 @@ def _team_table_html(text, cols, int_cols):
                     abbr, name, team_cell = a, n, c
                     break
         if not abbr:
+            if len(cells) >= 3 and any(NUM_RE.fullmatch(c) for c in cells):
+                unresolved += 1
+                if unresolved <= 3:
+                    problems.append(
+                        f"row with {len(cells)} cells did not resolve to a club "
+                        f"(first cell {cells[0]!r})")
             continue
         try:
             ti = cells.index(team_cell)
@@ -235,6 +246,8 @@ def _team_table_html(text, cols, int_cols):
                 problems.append(f"{abbr}: non-numeric cell in {nums[:need]}")
                 continue
         rows.append(row)
+    if unresolved > 3:
+        problems.append(f"{unresolved} rows in total did not resolve to a club")
     if header is None and not cols:
         return cols or [], [], problems + ["no header row with a Team column found"]
     out_cols = cols or (["team"] + target if target else [])
