@@ -175,8 +175,10 @@ def capture_gamebooks(dates, manifest):
                                              "error": grec["error"],
                                              "game_id": g["game_id"]})
             log(f"  gamebook {d} {code}: "
-                f"{grec.get('http_status')} {grec.get('bytes', 0)} bytes")
-            time.sleep(1.2)
+                f"{grec.get('http_status')} {grec.get('bytes', 0)} bytes"
+                + (" (reused from store)" if grec.get("reused_from_store") else ""))
+            if not grec.get("reused_from_store"):
+                time.sleep(1.2)
 
 
 GRID_WINDOW = None   # (lo, hi) datetime batch filter; set by --grid-from/--grid-to
@@ -255,17 +257,19 @@ def probe_clock_grid():
     todo = [e for e in candidates if e not in archived and _in_window(e)]
     log("injury clock-grid probe: %d candidates (%d already archived), %d to probe"
         % (len(candidates), len(archived & set(candidates)), len(todo)))
-    for edition in todo:
+    def _probe_edition(edition):
+        # one clock-grid candidate: fetch, verify the PDF signature, store
+        # content-addressed with a sidecar, and record the outcome exactly
         url = fo.INJURY_HOST + edition
         rec = {"edition": edition, "url": url, "http_status": None,
                "bytes": 0, "sha256": None, "attempts": 0,
                "listed_on_official_index": False,
                "discovered_via": ("clock-grid probe (league files at 15-minute "
                                   "intervals; see manifest clock_grid note)")}
-        for attempt in (1, 2):
+        for attempt in (1, 2, 3):
             rec["attempts"] = attempt
             try:
-                raw = fo.get(url, timeout=30)
+                raw = fo.get(url, timeout=10)
                 rec["http_status"] = 200
                 rec["bytes"] = len(raw)
                 rec["sha256"] = hashlib.sha256(raw).hexdigest()
@@ -295,16 +299,30 @@ def probe_clock_grid():
             except urllib.error.HTTPError as exc:
                 rec["http_status"] = exc.code
                 log("  %s: HTTP %s (attempt %d)" % (edition, exc.code, attempt))
-                if exc.code in (403, 429) and attempt == 1:
-                    time.sleep(8)
+                if exc.code in (403, 429) and attempt < 3:
+                    time.sleep(4)
                     continue
                 break
             except Exception as exc:  # noqa: BLE001
+                # transient network failure (timeout, reset): retry cheaply, then
+                # record the failure as-is - never as proof of absence
                 rec["error"] = "%s: %s" % (type(exc).__name__, exc)
-                log("  %s: %s" % (edition, rec["error"]))
+                log("  %s: %s (attempt %d)" % (edition, rec["error"], attempt))
+                if attempt < 3:
+                    time.sleep(2)
+                    continue
                 break
-        results.append(rec)
-        time.sleep(1.0)
+        time.sleep(0.4)
+        return rec
+
+    # light parallelism: each probe is an independent static-file GET with its
+    # own recorded outcome; 5 workers keep wall time bounded when the CDN is
+    # slow (measured 2026-11-19T06:48Z on this repo's runner: sequential probes
+    # averaged ~50 s each) while staying far below any page-level request rate.
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        for rec in pool.map(_probe_edition, todo):
+            results.append(rec)
     return results
 
 
