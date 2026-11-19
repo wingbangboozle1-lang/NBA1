@@ -233,11 +233,29 @@ jobs:
 
           # Also stage the digest-bound promotion records and computed diffs
           # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
-          git add data/raw/standings.json data/raw/team_traditional.json \
-                  data/raw/team_opponent.json data/raw/team_advanced.json \
-                  data/raw/unreadable_sources.json data/raw/refresh_path_audit.json \
-                  data/raw/schedule_upcoming.json data/raw/injuries.json \
-                  data/raw/games_completed.json data/parsed/ 2>/dev/null || true
+          #
+          # PER-PATH STAGING, and the reason is measured (session arena/cdf3a108-nba1,
+          # section 74 C07): this block used to be one `git add` listing every path,
+          # with `2>/dev/null || true`. `git add` aborts the WHOLE command on the
+          # first unmatched pathspec, and data/raw/standings.json (with
+          # team_traditional.json and team_opponent.json) has never existed — the
+          # three declared-unreadable snapshots. Every verified promotion
+          # (schedule_upcoming.json, injuries.json, games_completed.json, data/parsed/)
+          # was therefore silently dropped from every published capture commit since
+          # the declarations landed: the run record proved the promote step wrote
+          # them at run time and the published tree carried only `_capture_*` files.
+          # A path that exists is staged; one that never existed is skipped loudly.
+          for f in data/raw/standings.json data/raw/team_traditional.json \
+                   data/raw/team_opponent.json data/raw/team_advanced.json \
+                   data/raw/unreadable_sources.json data/raw/refresh_path_audit.json \
+                   data/raw/schedule_upcoming.json data/raw/injuries.json \
+                   data/raw/games_completed.json data/parsed/; do
+            if [ -e "${f}" ]; then
+              git add "${f}"
+            else
+              echo "::notice::publish path ${f} does not exist in this tree - skipped (declared-unreadable snapshots never exist)"
+            fi
+          done
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0
