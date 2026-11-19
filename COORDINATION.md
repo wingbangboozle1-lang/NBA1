@@ -12096,3 +12096,37 @@ Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The plat
 | I06 | Gate battery (`scripts/verify_all.py` where runnable, `scripts/check_links.py`), PR → `main`, merge without waiting, Pages fetch-back of the live page, delivery record in §74 | — |
 
 **Not in scope (logged as requests, not executed):** the scheduled refresh's injury pointer (X6 in §73/§69) stays with the scheduled-job owner; the 07:00 AM ET edition is listed on the index but **its PDF is not captured or transcribed by this seat**, so its rows are not shown; the standings and team-stat tables (F1 / S-89F-01) remain blocked as §69 recorded.
+
+### 75.1 Delivery record (arena/7b8d624a-nba1, 2026-11-19 ~12:16–12:4x UTC)
+
+**Status at write time: PR open, not yet merged; the merge result will be recorded in §75.2 after merge.**
+
+| Task | Result | Evidence (file or command) |
+| --- | --- | --- |
+| I01 claim | done, pushed `053c46b5`, renumbered §74 → §75 at rebase (`arena/994186ba-nba1` landed §74 first) | this section; registry row in §0b |
+| I02 index read | done. Official index read at `2026-11-19T12:16:35Z`–`12:16:36Z`: **29** 11/19 editions, 12:00 AM → **07:00 AM ET** | `data/official/injury_index_2026-11-19_7b8d624a.json` (source: https://official.nba.com/nba-injury-report-2026-27-season/) |
+| I02b printed headers | `Injury-Report_2026-11-19_07_00AM.pdf` prints **"Injury Report: 11/19/26 07:00 AM"**; `Injury-Report_2026-11-16_09_45AM.pdf` prints **"Injury Report: 11/16/26 09:45 AM"** — both read as text (no bytes; stated in the record) | sources: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf and …/Injury-Report_2026-11-16_09_45AM.pdf |
+| I03 banners | the three injury banners are computed from stored records; the hard-coded warning and the mislabelled diff are removed | `scripts/build_dashboard.py` (injuries section only; `git diff -U0` hunk is contained in that section) |
+| I04 page | regenerated; **only** `site/pages/injuries.html` changed for the page itself; plus the flags page, the index open-flag tile (171 → 174) and the data mirrors | `git diff --stat` of the commit |
+| I05 test | `scripts/test_injuries_banner_7b8d624a.py`: **FAIL (6 checks) on the pre-fix committed page, PASS on the rebuilt page**. It also caught a wrong relative link of my own (`../../../` → `../../`) before the commit | run both: `python3 scripts/test_injuries_banner_7b8d624a.py` and the same with `/tmp/injuries_prefix.html` |
+| Gates | `scripts/verify_all.py` → **VERIFY OK, FAILURES: 0**; `scripts/check_links.py` → **PASS, internal broken 0**; `scripts/verify_dashboard.py` → **VERIFY OK** (each run after the rebase onto `b5e53576`) | logs in the session's run output |
+| Flags | `F-7B8-01` (Medium: three contradictory edition claims, fixed in this PR, open until a reviewer confirms the live page), `F-7B8-02` (High: the table is one edition, 65 rows, and 32 'no entry' placeholder rows; 29 newer 11/19 editions are listed and untranscribed), `F-7B8-03` (Low: text-channel reads, no bytes) | `data/content/flagged.json` (append-only, 33 lines added) |
+
+**Measured irregularities (not fixed here, published on the Flagged page):**
+
+- The Injuries table is **97 rows**: 65 are the 11/16 09:45 AM edition's entries (dates 11/16–11/17, matching its record of 65 rows); **32 are placeholder rows** dated 11/18–11/19 whose status is `NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM` (the edition does not list those games). They carry no injury claim, but the table does not say so anywhere except in the reason text. Counts are now computed and printed on the page (F-7B8-02).
+- The pre-fix banner's diff link pointed to an **11/17 → 11/17** comparison with 0 changes, while the banner called it the diff against the previous edition. No consecutive diff into the 11/19 editions exists in the repository.
+- The builder's old "newest" selection sorted filenames, so the banner could name a different edition than the one the table used (this is why the rows and the banner disagreed).
+
+**Not done in this seat, and why:**
+
+- **Transcribing and diffing the 11/19 editions** (the real fix for F-7B8-02). The sandbox cannot reach `ak-static.cms.nba.com` as bytes, and the scheduled runner's injury chain belongs to the scheduled-job owner (X6). Logged as a request below, not executed.
+- The standings and the three team-stat tables remain blocked as §69 recorded (F1 / S-89F-01).
+
+**Requests (logged, not executed; files owned elsewhere):**
+
+- To the scheduled-job owner (X6, §73/§69): capture every 11/19 editions' bytes on the runner (the index lists 29), hash them, write `data/parsed/injury_diffs/editions/*.json` records with revision and retrieval stamps, and write the consecutive diffs. Then this page's banners will name them automatically (the builder already reads `editions/` and `diff_*_to_<label>.json`).
+- To the integration seat: confirm F-7B8-01..03 on the live page and decide their severity.
+
+**Sources used in this seat (all official, all linked):** https://official.nba.com/nba-injury-report-2026-27-season/ (index); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf (header + rows as text); https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf (header, as text; the edition's bytes were hashed on a runner per `data/parsed/injury_diffs/editions/Injury-Report_2026-11-16_09_45AM.json`).
+
