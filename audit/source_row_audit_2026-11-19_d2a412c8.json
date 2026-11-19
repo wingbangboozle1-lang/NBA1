@@ -1,6 +1,6 @@
 {
   "title": "Static HTML table-row source-link audit",
-  "generated_at_utc": "2026-11-19T07:21:26Z",
+  "generated_at_utc": "2026-11-19T07:24:15Z",
   "scope": "Every .html file under the repository root, excluding Git and dependency/build directories.",
   "method": {
     "official_link_rule": "A static data row is link-present only if it contains an anchor to an HTTPS host equal to nba.com or ending in .nba.com.",
@@ -10,10 +10,10 @@
     "network_access": "No outbound requests were made by this audit."
   },
   "counts": {
-    "html_files": 166,
-    "static_rows": 9833,
-    "official_link_present_not_value_verified": 9118,
-    "unverified_non_nba_or_insecure_link_only": 435,
+    "html_files": 167,
+    "static_rows": 9851,
+    "official_link_present_not_value_verified": 9127,
+    "unverified_non_nba_or_insecure_link_only": 444,
     "unverified_no_external_source_link": 280,
     "dynamic_template_rows_not_rendered": 10
   },
@@ -614,7 +614,7 @@
     },
     {
       "file": "index.html",
-      "sha256": "3e026c4f1e7cdc5c41614881c717938e099ca55c2e73836c1ed7157e40478dee",
+      "sha256": "dbe13a348e656a856845562590183ae7bd4a9a39fef89e804fb4cc11b4bda496",
       "static_rows": 29,
       "official_link_present_not_value_verified": 29,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -641,7 +641,7 @@
     },
     {
       "file": "live/live-horizon.html",
-      "sha256": "57f50abbc04fcd6f548336caaa1949f1550de783ed002b4968be90309ac52140",
+      "sha256": "a64e1b65634c9e3897a22e17d77a45da13239d4bef60d35deebca69f2dcf3a9e",
       "static_rows": 52,
       "official_link_present_not_value_verified": 34,
       "unverified_non_nba_or_insecure_link_only": 18,
@@ -893,7 +893,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "sha256": "3007e5e005de2acdcdadf6d105411ee2dd15c5c0d1ff0970229af257f804608b",
+      "sha256": "015d090e966b1f87ba4d9ae4b265ba20c218c5635c02dbdf0b3527f139575535",
       "static_rows": 115,
       "official_link_present_not_value_verified": 98,
       "unverified_non_nba_or_insecure_link_only": 17,
@@ -902,7 +902,7 @@
     },
     {
       "file": "site/pages/bet-surface.html",
-      "sha256": "7f9fa7b8df2974b68c1111b6ce811d99a7cfa6bdcca8478164e22c3d233addae",
+      "sha256": "0de3ea954449457e8bae7aec6757a5e0866caa9eefdb215a9a457af98cadad96",
       "static_rows": 5,
       "official_link_present_not_value_verified": 0,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -911,7 +911,7 @@
     },
     {
       "file": "site/pages/bet.html",
-      "sha256": "7f9fa7b8df2974b68c1111b6ce811d99a7cfa6bdcca8478164e22c3d233addae",
+      "sha256": "0de3ea954449457e8bae7aec6757a5e0866caa9eefdb215a9a457af98cadad96",
       "static_rows": 5,
       "official_link_present_not_value_verified": 0,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -929,7 +929,7 @@
     },
     {
       "file": "site/pages/correlations.html",
-      "sha256": "e9306b1c8ab25bb777cf959e800815e71bb31ba9e81d380b765839d107cd171b",
+      "sha256": "297d617a7c1e35facec6ce05b019e714481846062d26f29f5940396419ab282a",
       "static_rows": 44,
       "official_link_present_not_value_verified": 44,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -947,7 +947,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "sha256": "44a4c2473cc3de2577567cc27356ec369cef1f122180105b53b62c51d8e710de",
+      "sha256": "a2da901c9f25a69b7533800bbcc0167958fcca6a9786f989721a7419b7ba56f9",
       "static_rows": 92,
       "official_link_present_not_value_verified": 56,
       "unverified_non_nba_or_insecure_link_only": 4,
@@ -965,16 +965,16 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "sha256": "b4797446fe8481cc87481fc5e3b03b4be4ec5794723a1e20b98fe3778b861a0e",
-      "static_rows": 163,
-      "official_link_present_not_value_verified": 88,
-      "unverified_non_nba_or_insecure_link_only": 25,
+      "sha256": "523539d984d0b91ea9218739bb53ab413b96b969ccfdca0df8d6824d028a8367",
+      "static_rows": 166,
+      "official_link_present_not_value_verified": 89,
+      "unverified_non_nba_or_insecure_link_only": 27,
       "unverified_no_external_source_link": 50,
       "dynamic_template_rows_not_rendered": 0
     },
     {
       "file": "site/pages/gameday.html",
-      "sha256": "a93676ceb86c2e617335bc46494e880fd43ea3fa1d7246fa8153ba356646054f",
+      "sha256": "b96a39e58b86925c80c3ea619b9aa71c837d12f650e8236fee4da8e284cb0adf",
       "static_rows": 111,
       "official_link_present_not_value_verified": 111,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -983,7 +983,7 @@
     },
     {
       "file": "site/pages/gameflow.html",
-      "sha256": "61ab6c2d86335019d6f704b7df5ef2c3e81ba5599b18a73b49d052b6b953be71",
+      "sha256": "41eca68f52195d49615d95e60ac71371a0d17b60ba5dab852950b1852617a86b",
       "static_rows": 29,
       "official_link_present_not_value_verified": 29,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -992,7 +992,7 @@
     },
     {
       "file": "site/pages/injuries.html",
-      "sha256": "24f0fe6b00a983db40475fb0519aaaf0a117b35e1b1f336c68b00331e89aaa59",
+      "sha256": "9b7be26eda2e9356cb5905628efb083d878ee3d58f9faec088e3bf2af5bb4299",
       "static_rows": 146,
       "official_link_present_not_value_verified": 146,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1010,7 +1010,7 @@
     },
     {
       "file": "site/pages/leaderboard.html",
-      "sha256": "ea9ab48651832e2dcf403228e7a9530aa1f5a871e679067e0f0f8c602e5f2dff",
+      "sha256": "de863bcc125c590c804806fcdeecf230e722249060e2f990945e301eadef4fbb",
       "static_rows": 21,
       "official_link_present_not_value_verified": 21,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1019,7 +1019,7 @@
     },
     {
       "file": "site/pages/live-horizon.html",
-      "sha256": "2e450fdeb10b5550497993e15babfbf7ecfb87b5e67bf9bb110d3d8aca666943",
+      "sha256": "bd83c09a6bb352ce1ba687b0e341683703c9f22bd5034d143821d309df6922af",
       "static_rows": 52,
       "official_link_present_not_value_verified": 34,
       "unverified_non_nba_or_insecure_link_only": 18,
@@ -1037,7 +1037,7 @@
     },
     {
       "file": "site/pages/luck.html",
-      "sha256": "bdaf493b35d5c872f01d031f73d7ada5591fa23c616387e87df009c796a84682",
+      "sha256": "5b8fca315659d810d24be7f1dce32a51a4422b0580c024871282368ab6503a86",
       "static_rows": 30,
       "official_link_present_not_value_verified": 30,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1055,7 +1055,7 @@
     },
     {
       "file": "site/pages/model.html",
-      "sha256": "6cd09a83a9df7d7a14ba65367b74e9e6b05d042a79d36f5242a36b7f10b0aa4a",
+      "sha256": "f61e4c3990d2a7a0e538619959a7c7cbac53758c49981d3fbc34df6f80310144",
       "static_rows": 35,
       "official_link_present_not_value_verified": 35,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1073,7 +1073,7 @@
     },
     {
       "file": "site/pages/official-verify.html",
-      "sha256": "6dbea5a79171fd2fa8e73be7d966b5683e7771ab8e5c7d3fcbf17928b1809f42",
+      "sha256": "783e8185f8287f997ba4206c731d4b47cd4baedadbe6c8cdc80085dd65911954",
       "static_rows": 193,
       "official_link_present_not_value_verified": 193,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1091,7 +1091,7 @@
     },
     {
       "file": "site/pages/picks.html",
-      "sha256": "d424736d34007d860a663ab9a541153cd474aeadabfa662d29c9dafca9a97446",
+      "sha256": "9b6efeb55b5547ea41d13d448e96a34dfc4f0a6f6e1d40fbc6bbafbb5d5d5e39",
       "static_rows": 123,
       "official_link_present_not_value_verified": 123,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1118,7 +1118,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "sha256": "17a8dcfe2442b0eb622e00447c239e6b2b7d4bd445245f90588625a5d0168dbc",
+      "sha256": "b96cf75e187206c2b25490c7588a6d0e1bac05921c94f4454bba57d0523175d7",
       "static_rows": 124,
       "official_link_present_not_value_verified": 116,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1127,7 +1127,7 @@
     },
     {
       "file": "site/pages/props.html",
-      "sha256": "eeae3c1546daac4c5d663dc155f40b3cbe1535dcc36a15efc72c37b24d423da5",
+      "sha256": "3c010a5a28474c29696015f2ce1913bb35da2f45916fd7b1b8b3bad33b0d385d",
       "static_rows": 92,
       "official_link_present_not_value_verified": 92,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1136,7 +1136,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "sha256": "eec80f613959df4ded00105dad7af2f85816d014cad17d71e451202392c40ae7",
+      "sha256": "95af7ade1b56da08107ba49f964f95f0010b40229eb7ec466d1718fb3e9510d6",
       "static_rows": 51,
       "official_link_present_not_value_verified": 31,
       "unverified_non_nba_or_insecure_link_only": 1,
@@ -1144,8 +1144,17 @@
       "dynamic_template_rows_not_rendered": 0
     },
     {
+      "file": "site/pages/refresh-path.html",
+      "sha256": "4e673bea7671e489b8de159535d0756bbf6c21cb12ddefa136e9ce1e1e2c8403",
+      "static_rows": 15,
+      "official_link_present_not_value_verified": 8,
+      "unverified_non_nba_or_insecure_link_only": 7,
+      "unverified_no_external_source_link": 0,
+      "dynamic_template_rows_not_rendered": 0
+    },
+    {
       "file": "site/pages/repo-review.html",
-      "sha256": "589955a4134082237c915bebf77f7bfaf51793d0ff7d6c8947168ae44f9dfffc",
+      "sha256": "3c04c27182fc96e4ce5d164b2805c4950a531ad391aac02a4501fdf26e014c8b",
       "static_rows": 30,
       "official_link_present_not_value_verified": 23,
       "unverified_non_nba_or_insecure_link_only": 7,
@@ -1163,7 +1172,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "sha256": "01eeaeeddf93feb008c1057a2900cef1c8932dcbf6f26b57e05b6674e2e89733",
+      "sha256": "0b95f7c34746edb2ee45666fd2062d216abb2a6c804fd214f65d5141c4616fb5",
       "static_rows": 33,
       "official_link_present_not_value_verified": 12,
       "unverified_non_nba_or_insecure_link_only": 21,
@@ -1190,7 +1199,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "sha256": "7b3f1bb49ea9a9e989bccaadd16a3eab7ad1df5293d15f52166eec2599d31040",
+      "sha256": "4bf08c1355f9b8370c9a37a39b43966b4708f23e966ef585085fd292e19e4ae7",
       "static_rows": 115,
       "official_link_present_not_value_verified": 108,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1217,7 +1226,7 @@
     },
     {
       "file": "site/pages/source-check.html",
-      "sha256": "99ef13a2f75c8acb9220e61d5103c9d3fabc80d1a7943ee207df9bf1ce8d4d26",
+      "sha256": "2d81ade18f6bd4c62a307327f8decdfea636b5008cb8b7ab91836a9c7d17f5ba",
       "static_rows": 96,
       "official_link_present_not_value_verified": 92,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1226,7 +1235,7 @@
     },
     {
       "file": "site/pages/sources.html",
-      "sha256": "f8c8deee5f314ad2900344e60aeed4e820ba99b46ba9f2ab8cdbb25251b7c9b3",
+      "sha256": "34cb40e9c56d670e4c9d4358c86a59c74bfa175b4ea4d50f0a84215574b83f81",
       "static_rows": 100,
       "official_link_present_not_value_verified": 99,
       "unverified_non_nba_or_insecure_link_only": 1,
@@ -1235,7 +1244,7 @@
     },
     {
       "file": "site/pages/strategies.html",
-      "sha256": "0be34cf5cca22396e1c8b96e1f91562b9c0c8a5d88474baab6b162adb1a1a9a4",
+      "sha256": "9b1953e68edac70eea8311367bfe91466fa5c6e78c2c53c7ad5e1067a0658f96",
       "static_rows": 32,
       "official_link_present_not_value_verified": 32,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -1244,7 +1253,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "sha256": "f1203b614fee0bded2943d5a7686a1fad5d9b73413318e8d956d0e704fb81b49",
+      "sha256": "38f7c564056dc5e5cabb393ae20a6543f72bdb1b03a0572dbb8bddaa2369d404",
       "static_rows": 46,
       "official_link_present_not_value_verified": 24,
       "unverified_non_nba_or_insecure_link_only": 2,
@@ -1253,7 +1262,7 @@
     },
     {
       "file": "site/pages/validation.html",
-      "sha256": "91df80693e79ab7070f13e6d2d940c8d87631ba8cfdf62993c390fc1f0a4abe3",
+      "sha256": "df23f5a984b5b4b780d9e227fe7b7d418d2f30e7e3e857c3d0cc6981da584bb3",
       "static_rows": 21,
       "official_link_present_not_value_verified": 21,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -4636,7 +4645,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1505,
+      "line": 1506,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4650,7 +4659,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1512,
+      "line": 1513,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4664,7 +4673,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1519,
+      "line": 1520,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4678,7 +4687,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1526,
+      "line": 1527,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4692,7 +4701,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1533,
+      "line": 1534,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4706,7 +4715,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1540,
+      "line": 1541,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4720,7 +4729,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1547,
+      "line": 1548,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4734,7 +4743,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1554,
+      "line": 1555,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4748,7 +4757,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1561,
+      "line": 1562,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4762,7 +4771,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1568,
+      "line": 1569,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4776,7 +4785,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1575,
+      "line": 1576,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4790,7 +4799,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1582,
+      "line": 1583,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4804,7 +4813,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1589,
+      "line": 1590,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4818,7 +4827,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1596,
+      "line": 1597,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4832,7 +4841,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1603,
+      "line": 1604,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4846,7 +4855,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1610,
+      "line": 1611,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4860,7 +4869,7 @@
     },
     {
       "file": "site/pages/backtest.html",
-      "line": 1617,
+      "line": 1618,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -4926,7 +4935,7 @@
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
-      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) BLOCKED Details [ \"refresh run is stale or future-dated (37.69h; maximum 10h)\", \"fetcher reported 5 failed source/parse checks\", \"source check is stale or future-dated: S1_season (37.69h)\", \"source check is stale or future-dated: S2_train (37.69h)\", \"source check is stale or future-dated: S7_players (37.69h)\", \"source check is stale or future-dated: S4_schedule (37.69h)\", \"source check is stale or future-dated: S5_injury_index (37.69h)\", \"source check is stale or future-dated: S8_standings (37.69h)\", \"source check is stale or future-dated: S9_team_traditional (37.69h)\", \"source check is stale or future-dated: S10_team_opponent (37.",
+      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) BLOCKED Details [ \"fetcher reported 2 failed source/parse checks\", \"missing/invalid payload capture for S1_season\", \"missing/invalid structured capture: data/raw/_capture_S1_season.json\", \"advanced team input cannot be compared with a complete promoted snapshot\", \"promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json\", \"promoted input provenance URL is stale: data/raw/injuries.json\", \"promoted input is not verified against this run's capture: data/raw/injuries.json\" ] CLOSED — data/raw/_last_refresh.json + engine/refresh_gate.py",
       "external_links": [],
       "official_nba_links": [],
       "literal_official_nba_link_candidates": [],
@@ -4986,7 +4995,7 @@
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
-      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) BLOCKED Details [ \"refresh run is stale or future-dated (37.69h; maximum 10h)\", \"fetcher reported 5 failed source/parse checks\", \"source check is stale or future-dated: S1_season (37.69h)\", \"source check is stale or future-dated: S2_train (37.69h)\", \"source check is stale or future-dated: S7_players (37.69h)\", \"source check is stale or future-dated: S4_schedule (37.69h)\", \"source check is stale or future-dated: S5_injury_index (37.69h)\", \"source check is stale or future-dated: S8_standings (37.69h)\", \"source check is stale or future-dated: S9_team_traditional (37.69h)\", \"source check is stale or future-dated: S10_team_opponent (37.",
+      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) BLOCKED Details [ \"fetcher reported 2 failed source/parse checks\", \"missing/invalid payload capture for S1_season\", \"missing/invalid structured capture: data/raw/_capture_S1_season.json\", \"advanced team input cannot be compared with a complete promoted snapshot\", \"promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json\", \"promoted input provenance URL is stale: data/raw/injuries.json\", \"promoted input is not verified against this run's capture: data/raw/injuries.json\" ] CLOSED — data/raw/_last_refresh.json + engine/refresh_gate.py",
       "external_links": [],
       "official_nba_links": [],
       "literal_official_nba_link_candidates": [],
@@ -5484,7 +5493,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 128,
+      "line": 129,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5496,7 +5505,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 136,
+      "line": 137,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5508,7 +5517,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 144,
+      "line": 145,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5520,7 +5529,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 152,
+      "line": 153,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5532,7 +5541,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 168,
+      "line": 169,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5544,7 +5553,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 232,
+      "line": 233,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5556,7 +5565,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 240,
+      "line": 241,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5570,7 +5579,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 248,
+      "line": 249,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5582,7 +5591,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 256,
+      "line": 257,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5594,7 +5603,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 312,
+      "line": 313,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5606,7 +5615,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 320,
+      "line": 321,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5618,7 +5627,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 328,
+      "line": 329,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5630,7 +5639,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 368,
+      "line": 369,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5642,7 +5651,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 472,
+      "line": 473,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5656,7 +5665,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 508,
+      "line": 509,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5670,7 +5679,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 553,
+      "line": 554,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5682,7 +5691,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 562,
+      "line": 563,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5694,7 +5703,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 571,
+      "line": 572,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5706,7 +5715,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 580,
+      "line": 581,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5718,7 +5727,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 589,
+      "line": 590,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5730,7 +5739,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 598,
+      "line": 599,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5742,7 +5751,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 607,
+      "line": 608,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5754,7 +5763,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 616,
+      "line": 617,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5766,7 +5775,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 625,
+      "line": 626,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5778,7 +5787,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 634,
+      "line": 635,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5790,7 +5799,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 652,
+      "line": 653,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5802,7 +5811,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 661,
+      "line": 662,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5814,7 +5823,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 670,
+      "line": 671,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5826,7 +5835,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 679,
+      "line": 680,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5838,7 +5847,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 688,
+      "line": 689,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5850,7 +5859,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 697,
+      "line": 698,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5862,7 +5871,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 706,
+      "line": 707,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5874,7 +5883,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 715,
+      "line": 716,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5886,7 +5895,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 724,
+      "line": 725,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5898,7 +5907,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 733,
+      "line": 734,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5910,7 +5919,7 @@
     },
     {
       "file": "site/pages/decisions.html",
-      "line": 754,
+      "line": 755,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5924,7 +5933,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 418,
+      "line": 419,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5938,7 +5947,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 427,
+      "line": 428,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5952,7 +5961,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 454,
+      "line": 455,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5966,7 +5975,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 589,
+      "line": 590,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -5980,7 +5989,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 598,
+      "line": 599,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -5992,7 +6001,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 607,
+      "line": 608,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6004,7 +6013,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 616,
+      "line": 617,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6016,7 +6025,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 625,
+      "line": 626,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6028,7 +6037,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 634,
+      "line": 635,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6040,7 +6049,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 643,
+      "line": 644,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6054,7 +6063,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 661,
+      "line": 662,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6068,7 +6077,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 670,
+      "line": 671,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6082,7 +6091,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 679,
+      "line": 680,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6096,7 +6105,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 688,
+      "line": 689,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6110,7 +6119,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 697,
+      "line": 698,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6122,7 +6131,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 706,
+      "line": 707,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6134,7 +6143,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 715,
+      "line": 716,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6146,7 +6155,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 724,
+      "line": 725,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6158,7 +6167,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 778,
+      "line": 779,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6172,7 +6181,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 787,
+      "line": 788,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6186,7 +6195,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 825,
+      "line": 826,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6200,7 +6209,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 836,
+      "line": 837,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6214,7 +6223,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 856,
+      "line": 857,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6228,7 +6237,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 865,
+      "line": 866,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6242,7 +6251,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 874,
+      "line": 875,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6256,7 +6265,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 883,
+      "line": 884,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6270,7 +6279,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 892,
+      "line": 893,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6284,7 +6293,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 903,
+      "line": 904,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6298,7 +6307,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 930,
+      "line": 931,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6312,7 +6321,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 957,
+      "line": 958,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6326,7 +6335,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 966,
+      "line": 967,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6340,7 +6349,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1047,
+      "line": 1048,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6354,7 +6363,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1056,
+      "line": 1057,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6366,7 +6375,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1065,
+      "line": 1066,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6378,7 +6387,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1074,
+      "line": 1075,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6390,7 +6399,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1139,
+      "line": 1140,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6404,7 +6413,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1148,
+      "line": 1149,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6416,7 +6425,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1157,
+      "line": 1158,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6428,7 +6437,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1166,
+      "line": 1167,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6440,7 +6449,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1175,
+      "line": 1176,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6452,7 +6461,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1184,
+      "line": 1185,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6464,7 +6473,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1193,
+      "line": 1194,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6476,7 +6485,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1202,
+      "line": 1203,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6488,7 +6497,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1211,
+      "line": 1212,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6500,7 +6509,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1220,
+      "line": 1221,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6512,7 +6521,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1229,
+      "line": 1230,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6524,7 +6533,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1238,
+      "line": 1239,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6536,7 +6545,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1247,
+      "line": 1248,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6548,7 +6557,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1256,
+      "line": 1257,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6560,7 +6569,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1265,
+      "line": 1266,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6572,7 +6581,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1274,
+      "line": 1275,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6584,7 +6593,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1283,
+      "line": 1284,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6596,7 +6605,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1292,
+      "line": 1293,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6608,7 +6617,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1301,
+      "line": 1302,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6620,7 +6629,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1364,
+      "line": 1365,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -6634,7 +6643,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1400,
+      "line": 1401,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6646,7 +6655,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1409,
+      "line": 1410,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6658,7 +6667,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1418,
+      "line": 1419,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6670,7 +6679,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1427,
+      "line": 1428,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6682,7 +6691,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1436,
+      "line": 1437,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6694,7 +6703,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1445,
+      "line": 1446,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6706,7 +6715,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1454,
+      "line": 1455,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6718,7 +6727,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1463,
+      "line": 1464,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6730,7 +6739,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1472,
+      "line": 1473,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6742,7 +6751,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1481,
+      "line": 1482,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6754,7 +6763,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1490,
+      "line": 1491,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6766,7 +6775,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1499,
+      "line": 1500,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6778,7 +6787,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1508,
+      "line": 1509,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6790,7 +6799,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1517,
+      "line": 1518,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6802,7 +6811,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1526,
+      "line": 1527,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6814,7 +6823,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1535,
+      "line": 1536,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6826,7 +6835,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1544,
+      "line": 1545,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6838,7 +6847,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1553,
+      "line": 1554,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6850,7 +6859,7 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1562,
+      "line": 1563,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -6862,12 +6871,40 @@
     },
     {
       "file": "site/pages/flagged.html",
-      "line": 1571,
+      "line": 1572,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
       "row_text": "F-929-04 Low LAL and UTA both played back-to-back on 11/17 and 11/18 Both teams played on 11/17 and again on 11/18 (UTA 132 @ LAC 107; CHA 114 @ LAL 118 OT; then UTA 109 @ LAL 97). The rest model reads the official finals corpus, so both show rest_days=0 for their next game; the flag exists so a reviewer does not mistake the back-to-back for a data gap. — — —",
       "external_links": [],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/flagged.html",
+      "line": 1599,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "F-F3C-01 High The scheduled refresh's rebuild step has been unreachable since 2026-11-15 because its gate required three snapshots that no run can produce Session arena/f3cb4a98-nba1, COORDINATION §69. engine/refresh_gate.py required data/raw/standings.json, data/raw/team_traditional.json and data/raw/team_opponent.json before the scheduled rebuild step in .github/workflows/refresh-data.yml would run. Measured: those three files have 0 commits across the repository's full 884-commit history (git fetch --unshallow origin was required first; a shallow clone answers 0 for everything). They cannot exist because the three official pages render their tables client-side: the runner's committed evidence records measure <tr> = 0 on the captured standings page (data/raw/_capture_evidence_S8_standing",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/flagged.html",
+      "line": 1608,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "F-F3C-02 Medium Three official sources are declared unreadable to the gate; the declaration is evidenced, expiring, and refuses to apply the moment a page becomes readable Session arena/f3cb4a98-nba1, COORDINATION §69. data/raw/unreadable_sources.json declares S8_standings (https://www.nba.com/standings), S9_team_traditional (https://www.nba.com/stats/teams/traditional) and S10_team_opponent (https://www.nba.com/stats/teams/opponent) unreadable, each with the official URL, the committed evidence record, a review flag and an expiry of 2026-12-19T00:00:00Z. engine/refresh_gate.py honours a declaration only when all of these hold: it names a source the gate requires; expires_at_utc parses, is in the future and is under 400 days out; the fetcher checked that source at HTTP 200 IN THE SAME RUN;",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/unreadable_sources.json"
+      ],
       "official_nba_links": [],
       "literal_official_nba_link_candidates": [],
       "dynamic_template": false
@@ -7138,7 +7175,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1041,
+      "line": 1042,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7150,7 +7187,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1050,
+      "line": 1051,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7162,7 +7199,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1059,
+      "line": 1060,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7174,7 +7211,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1068,
+      "line": 1069,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7186,7 +7223,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1095,
+      "line": 1096,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7198,7 +7235,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1107,
+      "line": 1108,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7210,7 +7247,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1119,
+      "line": 1120,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7222,7 +7259,7 @@
     },
     {
       "file": "site/pages/prop-variance.html",
-      "line": 1131,
+      "line": 1132,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7234,7 +7271,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 210,
+      "line": 211,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7246,7 +7283,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 217,
+      "line": 218,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7258,7 +7295,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 224,
+      "line": 225,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7270,7 +7307,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 231,
+      "line": 232,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7282,7 +7319,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 238,
+      "line": 239,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7294,7 +7331,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 245,
+      "line": 246,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7306,7 +7343,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 252,
+      "line": 253,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7318,7 +7355,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 273,
+      "line": 274,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7330,7 +7367,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 282,
+      "line": 283,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7342,7 +7379,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 291,
+      "line": 292,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7354,7 +7391,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 300,
+      "line": 301,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7366,7 +7403,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 363,
+      "line": 364,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7378,7 +7415,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 381,
+      "line": 382,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7390,7 +7427,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 444,
+      "line": 445,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7402,7 +7439,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 453,
+      "line": 454,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7416,7 +7453,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 462,
+      "line": 463,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7428,7 +7465,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 471,
+      "line": 472,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7440,7 +7477,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 525,
+      "line": 526,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7452,7 +7489,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 534,
+      "line": 535,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7464,7 +7501,7 @@
     },
     {
       "file": "site/pages/questions.html",
-      "line": 543,
+      "line": 544,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -7475,8 +7512,106 @@
       "dynamic_template": false
     },
     {
-      "file": "site/pages/repo-review.html",
+      "file": "site/pages/refresh-path.html",
+      "line": 113,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "record path data/raw/_last_refresh.json data/raw/_last_refresh.json",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
       "line": 118,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "captured at (UTC) 2026-11-19T06:13:47Z data/raw/_last_refresh.json",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 123,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "fetch step success refresh-data.yml",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 128,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "promotion step failure refresh-data.yml",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 133,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "freshness gate ok false refresh-data.yml",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 138,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "rebuild step skipped refresh-data.yml",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 143,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "rebuild has ever run no data/raw/_last_refresh.json",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/repo-review.html",
+      "line": 119,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7490,7 +7625,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 124,
+      "line": 125,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7504,7 +7639,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 178,
+      "line": 179,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7518,7 +7653,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 269,
+      "line": 270,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7532,7 +7667,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 289,
+      "line": 290,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7546,7 +7681,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 338,
+      "line": 339,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7560,7 +7695,7 @@
     },
     {
       "file": "site/pages/repo-review.html",
-      "line": 345,
+      "line": 346,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8274,7 +8409,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 136,
+      "line": 137,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8290,7 +8425,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 152,
+      "line": 153,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8305,7 +8440,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 160,
+      "line": 161,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8320,7 +8455,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 168,
+      "line": 169,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8334,7 +8469,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 176,
+      "line": 177,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8349,7 +8484,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 208,
+      "line": 209,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8363,7 +8498,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 216,
+      "line": 217,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8377,7 +8512,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 232,
+      "line": 233,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8391,7 +8526,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 240,
+      "line": 241,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8405,7 +8540,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 264,
+      "line": 265,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8419,7 +8554,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 288,
+      "line": 289,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8434,7 +8569,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 296,
+      "line": 297,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8449,7 +8584,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 304,
+      "line": 305,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8463,7 +8598,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 320,
+      "line": 321,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8478,7 +8613,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 328,
+      "line": 329,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8492,7 +8627,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 336,
+      "line": 337,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8506,7 +8641,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 344,
+      "line": 345,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8520,7 +8655,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 352,
+      "line": 353,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8534,7 +8669,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 360,
+      "line": 361,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8548,7 +8683,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 368,
+      "line": 369,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8562,7 +8697,7 @@
     },
     {
       "file": "site/pages/requirements.html",
-      "line": 376,
+      "line": 377,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8576,7 +8711,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 564,
+      "line": 565,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8588,7 +8723,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 571,
+      "line": 572,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8600,7 +8735,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 578,
+      "line": 579,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8612,7 +8747,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 585,
+      "line": 586,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8624,11 +8759,11 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 592,
+      "line": 593,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
-      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) ['refresh run is stale or future-dated (37.60h; maximum 10h)', 'fetcher reported 5 failed source/parse checks', 'source check is stale or future-dated: S1_season (37.60h)', 'source check is stale or future-dated: S2_train (37.60h)', 'source check is stale or future-dated: S7_players (37.60h)', 'source check is stale or future-dated: S4_schedule (37.60h)', 'source check is stale or future-dated: S5_injury_index (37.60h)', 'source check is stale or future-dated: S8_standings (37.60h)', 'source check is stale or future-dated: S9_team_traditional (37.60h)', 'source check is stale or future-dated: S10_team_opponent (37.60h)', 'source ch",
+      "row_text": "G5_freshness_provenance engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours) ['fetcher reported 2 failed source/parse checks', 'missing/invalid payload capture for S1_season', 'missing/invalid structured capture: data/raw/_capture_S1_season.json', 'advanced team input cannot be compared with a complete promoted snapshot', \"promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json\", 'promoted input provenance URL is stale: data/raw/injuries.json', \"promoted input is not verified against this run's capture: data/raw/injuries.json\"] CLOSED — data/raw/_last_refresh.json + engine/refresh_gate.py",
       "external_links": [],
       "official_nba_links": [],
       "literal_official_nba_link_candidates": [],
@@ -8636,7 +8771,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 1402,
+      "line": 1403,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8648,7 +8783,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 1408,
+      "line": 1409,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8828,7 +8963,7 @@
     },
     {
       "file": "site/pages/source-check.html",
-      "line": 756,
+      "line": 757,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8840,7 +8975,7 @@
     },
     {
       "file": "site/pages/source-check.html",
-      "line": 763,
+      "line": 764,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8852,7 +8987,7 @@
     },
     {
       "file": "site/pages/source-check.html",
-      "line": 770,
+      "line": 771,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8864,7 +8999,7 @@
     },
     {
       "file": "site/pages/source-check.html",
-      "line": 777,
+      "line": 778,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8876,7 +9011,7 @@
     },
     {
       "file": "site/pages/sources.html",
-      "line": 224,
+      "line": 225,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8890,7 +9025,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 212,
+      "line": 213,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8904,7 +9039,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 252,
+      "line": 253,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -8918,7 +9053,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 302,
+      "line": 303,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8930,7 +9065,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 312,
+      "line": 313,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8942,7 +9077,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 322,
+      "line": 323,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8954,7 +9089,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 332,
+      "line": 333,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8966,7 +9101,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 342,
+      "line": 343,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8978,7 +9113,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 352,
+      "line": 353,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8990,7 +9125,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 362,
+      "line": 363,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9002,7 +9137,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 372,
+      "line": 373,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9014,7 +9149,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 382,
+      "line": 383,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9026,7 +9161,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 392,
+      "line": 393,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9038,7 +9173,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 412,
+      "line": 413,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9050,7 +9185,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 422,
+      "line": 423,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9062,7 +9197,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 432,
+      "line": 433,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9074,7 +9209,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 442,
+      "line": 443,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9086,7 +9221,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 452,
+      "line": 453,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9098,7 +9233,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 462,
+      "line": 463,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9110,7 +9245,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 472,
+      "line": 473,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9122,7 +9257,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 482,
+      "line": 483,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9134,7 +9269,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 492,
+      "line": 493,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -9146,7 +9281,7 @@
     },
     {
       "file": "site/pages/suggestions.html",
-      "line": 502,
+      "line": 503,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
