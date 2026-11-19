@@ -1,0 +1,141 @@
+{
+ "session": "arena/4f19ecf1-nba1",
+ "coordination": "COORDINATION.md \u00a768 (G02/G03)",
+ "run_at_utc": "2026-11-19T06:00:49Z",
+ "hosts_allowed": [
+  "ak-static.cms.nba.com",
+  "official.nba.com",
+  "statsdmz.nba.com",
+  "www.nba.com"
+ ],
+ "rule": "Bytes as received, content-addressed with provenance sidecars. This script publishes no parsed value: parsing happens locally on the stored bytes so it can be re-run and audited.",
+ "dates": [
+  "2026-11-17",
+  "2026-11-18"
+ ],
+ "days": [
+  {
+   "date": "2026-11-17",
+   "games": 5,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-4f19ecf1/html/games_2026-11-17__e5ef2bd059e721204875b045077bc643600da5433e1e037322140002547413ed.json.gz"
+  },
+  {
+   "date": "2026-11-18",
+   "games": 12,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-4f19ecf1/html/games_2026-11-18__4f77b07924b5b3e38c50639f4f0ba3b886d3de06805e61f885b5b989bf7049fd.json.gz"
+  }
+ ],
+ "gamebooks": [],
+ "gamebooks_skipped_not_final": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "matchup": "HOU@IND"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "matchup": "CHI@BKN"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "matchup": "ATL@OKC"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "matchup": "DET@NOP"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "matchup": "BOS@DEN"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "matchup": "PHX@SAC"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "matchup": "UTA@LAL"
+  }
+ ],
+ "injury_index": {
+  "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "editions_listed": 4,
+  "editions_wanted_dates": 4,
+  "newest_listed": "Injury-Report_2026-11-19_12_45AM.pdf"
+ },
+ "injury_editions": {
+  "attempted": 4,
+  "stored_ok": 4,
+  "non_200": [],
+  "newest_stored": "Injury-Report_2026-11-19_12_45AM.pdf",
+  "changed": [
+   "injury pdf Injury-Report_2026-11-19_12_45AM.pdf",
+   "injury pdf Injury-Report_2026-11-19_12_30AM.pdf",
+   "injury pdf Injury-Report_2026-11-19_12_15AM.pdf",
+   "injury pdf Injury-Report_2026-11-19_12_00AM.pdf",
+   "injury probe"
+  ],
+  "failed": []
+ },
+ "failures": []
+}
