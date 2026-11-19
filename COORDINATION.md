@@ -12057,10 +12057,12 @@ the rebuild step**, so R01 stays `partial`; and the standings page and the three
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
 
-## 74. ACTIVE CLAIM — session `arena/994186ba-nba1` — test-discovery import safety
+## 74. COMPLETED — session `arena/994186ba-nba1` — test-discovery import safety
 
 **Claimed task:** make the already-wired R10 luck-noise-band verification script safe to import under Python unittest discovery, while preserving its direct CLI behavior. Baseline measurement: `python3 -m unittest discover -s scripts -p 'test_*.py'` ran 110 tests but failed to import `test_noise_band_refusal` because that script executes the assertions and raises `SystemExit(0)` at module import. The script's own direct run reports zero assertion failures; this is a test-harness integration defect, not a strategy/model defect.
 
 **Exclusive scope:** `scripts/test_noise_band_refusal.py`, `verify/2026-11-19-994186ba/**`, and this board section only. No model, data, register, generated-site or other session-owned files are in scope.
 
-**Verification planned:** run the test directly, run full unittest discovery, and `git diff --check`. No NBA values or source claims will be changed; this task makes no claim of model validation.
+**Delivery:** The assertions now live in `main()` behind the standard executable guard, so unittest discovery imports the file without executing or exiting. Direct CLI behavior is retained. Detailed verification is recorded in `verify/2026-11-19-994186ba/report.md`.
+
+**Verification:** `python3 scripts/test_noise_band_refusal.py` — PASS (0 assertion failures); `python3 -m unittest discover -s scripts -p 'test_*.py'` — PASS (109 tests, 3 skipped); `git diff --check` — PASS. The full test run emitted non-fatal ResourceWarnings from two untouched legacy test modules. No NBA values, source claims, picks or bet gates were changed; no model/strategy validation is claimed.
