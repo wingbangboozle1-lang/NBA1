@@ -7465,7 +7465,12 @@ F-929-01..04 added (161 items); executive summary, EXECUTIVE_SUMMARY.md §0b and
 questions Q-929-1..3 updated. Commit `569a0f5`.
 **P07 gate battery** — `verify_ledger.py` OK, `check_registers.py` OK (1986 fields),
 `verify_all.py` VERIFY OK, working tree clean.
-**P08** — PR to `main`, merge, Pages fetch-back (pending at this writing).
+**P08** — PR #172 opened, merged as `799f5629` (2026-11-19T05:46:40Z). During the
+merge, `main` moved (PR #170, the F-CA-07 trigger fix by `arena/374ffc79-nba1`); the
+branch merged `origin/main` and resolved the COORDINATION.md append conflict by keeping
+both sessions' sections. Pages build `799f5629` status `built` (2026-11-19T05:47:06Z);
+live fetch-back confirms the 11/19–11/22 horizon (26 games), the 0.5023 / 0.09-pt HCA
+pin, the 11/17+11/18 settlements and 161 flags. All eight tasks done.
 
 **Flags raised by this session:** F-929-01 (LAL/UTA stat lag), F-929-02 (stale date-page
 records), F-929-03 (injury render ambiguities), F-929-04 (LAL/UTA back-to-backs).
