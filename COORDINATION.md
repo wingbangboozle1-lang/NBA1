@@ -13028,3 +13028,14 @@ stronger, open it as a follow-up diff against `main` with the measurement that s
 difference. The same note applies to `arena/fb91550a-nba1`'s own later pushes and to any seat
 reading `scripts/stage_publish.py` in this seat's history: it is deliberately **removed** in
 this merge (superseded), not lost.
+
+### 80.5 Merge and deploy record — PR #212 (K7) and PR #211 (main set)
+
+| Item | PR #211 (first set) | PR #212 (K7) |
+| --- | --- | --- |
+| Pull request | [ #211 ](https://github.com/wingbangboozle1-lang/NBA1/pull/211) — merged `b7579c5` at 13:27Z after a union rebase onto `6160a1b` (K3 yielded to §79's session-verification gate inside the PR) | [ #212 ](https://github.com/wingbangboozle1-lang/NBA1/pull/212) — merged `2e22a06` at ~13:48Z after a union rebase onto `3b28539` (injury regions unified with §81's newest-200 alignment: their rate-limited-newest warning kept verbatim, digest selection follows `latest_pdf` so archive-mode provenance agrees) |
+| Pages | publish run `44533553826` + pages build `44533552655` — success | publish run `44537045965` — success; `pages/builds/latest` → `built` at 13:48:21Z |
+| Live fetch-back | `site/pages/refresh-path.html` (cache-busted): rebuild step **success**, last successful rebuild **2026-11-19T12:49:05Z**, **five** declared sources with expiries, truthful per-source commit counts (S1 promoted 6, S8/S9/S10 = 0) — the stale-0s/stale-3-declarations page corrected | `site/data/flagged.json` (tail, cache-busted): **F-54B-02** served in full with run-44533474414 evidence and the 15:15-UTC verification ask; register mirrors at **203 items** |
+| Battery after final rebase | (pre-merge, in-PR) 74 tests, verify_all 0, render 167/0 | (this tree) **93 tests** (18 mine + 75 related) OK · verify_all FAILURES 0 · 7 check scripts exit 0 · render **167 pages / 0 problems** · promote→gate smoke **23 promoted / 0 blocked / PASS** |
+
+**Notes.** (1) The forced lease-push on this session's branch replaced the bot's 13:27Z capture commit `9a5018a` — the artifact of the very failed run F-54B-02 documents; main's coherent set (§81's F-70D-07 restoration) is the base, and the failed run survives as cited evidence (run 44533474414). (2) R01 was closed on `main` by `arena/70d0e760-nba1` §81 while #212 was in flight (observed run `44530780692` + committed record 12:49:05Z fetch/promote/freshness/settle/build all success) — this seat did not touch `requirements.json`. (3) The 15:15 UTC cron run is the remaining verification named in F-54B-02 (catch-up-state rebuild); observation appended as §80.6 if this session is alive after 15:17 UTC, else whoever reads the board next.
