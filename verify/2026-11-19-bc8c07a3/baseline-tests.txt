@@ -1,0 +1,26 @@
+# Gate + test baseline on main @ b3b19f2 (before any Z-scope edit)
+# generated 2026-11-19T05:46Z
+# harness = EXACT copy of the pages.yml step logic (PYTHONPATH=., unittest classes by module, others as files)
+
+## verify_all.py
+case 6 — the live tables agree the rule is being applied to the real batch
+  PASS  every strategy carries a noise_band_refusal block
+  PASS  the meta states the rule
+  PASS  the lucky teams in the real table are inside the band or would be refused
+
+FAILURES: 0
+
+VERIFY OK — builders, checker, and data audits all passed.
+
+## unit-test suite, pages.yml logic
+PASS  scripts.test_capture_official_ca442d3d   [python3 -m unittest scripts.test_capture_official_ca442d3d]  OK
+PASS  scripts.test_gate_roundtrip   [python3 scripts/test_gate_roundtrip.py]  ROUNDTRIP: PASS
+PASS  scripts.test_injury_diff   [python3 -m unittest scripts.test_injury_diff]  OK
+PASS  scripts.test_injury_edition_crosscheck_07920bdc   [python3 -m unittest scripts.test_injury_edition_crosscheck_07920bdc]  OK (skipped=1)
+PASS  scripts.test_minutes_shares   [python3 -m unittest scripts.test_minutes_shares]  OK
+PASS  scripts.test_noise_band_refusal   [python3 scripts/test_noise_band_refusal.py]  FAILURES: 0
+PASS  scripts.test_parse_official   [python3 -m unittest scripts.test_parse_official]  OK
+PASS  scripts.test_promote_official   [python3 -m unittest scripts.test_promote_official]  OK
+PASS  scripts.test_refresh_gate   [python3 -m unittest scripts.test_refresh_gate]  OK
+PASS  scripts.test_refresh_workflow   [python3 -m unittest scripts.test_refresh_workflow]  OK
+10 test file(s) run, 0 failing.
