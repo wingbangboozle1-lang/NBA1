@@ -631,6 +631,12 @@
    "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json",
    "publisher": "This repository (written by engine/fetch_official.py on the runner)",
    "used_for": "The per-run record whose diagnostics were discarded before this session"
+  },
+  "S74_HCA": {
+   "title": "Committed home-court pin files compared in F-HCA-01 (legacy pin, published horizon pin, §65 pin)",
+   "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_v2.json",
+   "publisher": "This repository (derived from official NBA.com standings and game-page scores captured by this project)",
+   "used_for": "The three home-court pins and their home-win-rate inputs, read from data/hca_measured.json, data/derived/horizon_lines_v2.json and data/derived/hca_pin_2026_11_17_ca442d3d.json"
   }
  },
  "refresh_2026-11-14": {
