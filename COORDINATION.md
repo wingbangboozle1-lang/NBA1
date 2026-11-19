@@ -11850,3 +11850,19 @@ The test asserted `assertIsNone(assert_full_history())` — a property of **the 
 3. §73.9 — shipped a test that asserted the environment instead of the behaviour, turning `main` red.
 
 All three are the same error in different clothes: **substituting the cheapest available measurement for the measurement the claim requires.**
+
+### 73.10 Integration record — PRs, merges, deploys, live fetch-back
+
+| Item | Result |
+| --- | --- |
+| PR #185 | https://github.com/wingbangboozle1-lang/NBA1/pull/185 — the audit, the declaration mechanism, the gate/promote/workflow fixes, the new page, three flags, R01 correction. **MERGED** as `c1bb3c6` after 12/12 CI gates green. Merged `origin/main` twice on the way (`c132a9e` PR #183, `10c287e` PR #184), each time with a `COORDINATION.md`-tail-only conflict resolved by keeping main's section verbatim and re-appending this seat's, renumbered 69→72→73. |
+| PR #187 | https://github.com/wingbangboozle1-lang/NBA1/pull/187 — §73.8, the page's own wrong history claim. **MERGED** as `035f7f1`. |
+| PR #189 | https://github.com/wingbangboozle1-lang/NBA1/pull/189 — §73.9, the red-`main` test. **MERGED** as `78d2023` after CI went green **including the unit-test step that had failed**. |
+| Pages deploy on `main` | `Publish static site to GitHub Pages` **success** on `78d2023` (run 44480246277) and `pages-build-deployment` **success** (run 44480244763); `GET /repos/…/pages` → `status: built`, `build_type: legacy`, source `main /`, latest build at commit `78d2023` |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/site/pages/refresh-path.html` serves the **corrected** page: `rebuild step (this record) skipped`, **`rebuild has EVER run — yes`**, `last successful rebuild 2026-11-15T12:43:11Z`, `run records read / skipped-or-failed since 18 / 7`, and all eight source rows with their official URLs. An earlier read of the same URL returned the pre-fix text; that was a CDN cache, confirmed by the Pages API reporting the build already at `78d2023` and by the `?v=` refetch. |
+| Gates on the merged tree | `verify_all` FAILURES: 0 · `check_site` PASS · `check_links` PASS · `check_rendered` PASS · `check_registers` 2,021 fields / 0 problems · `verify_integration` 0 errors · `verify_dashboard` OK · `verify_ledger` chain OK · **13 test files, 0 failing** (`test_refresh_gate` 22, `test_promote_official` 11, `test_refresh_workflow` 6) |
+| Suite proven under CI's own conditions | the full 13-file suite re-run inside a `git clone --depth 1`: **0 failing**, 1 honest skip |
+| Scope discipline | `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*`, `engine/fetch_official.py`, `engine/pipeline.py` — **untouched**. No ledger entry written, no settlement or horizon file changed. |
+| Still open by design | `F-F3C-01` stays open until a scheduled run is observed reaching its rebuild step; `F-F3C-03`/S1 until that parse is fixed; R01 stays **partial** for the same reason. The declarations expire **2026-12-19**. |
+
+**What this session actually delivered, in one sentence.** It found that the scheduled refresh's rebuild step had never run since 2026-11-15 because its fail-closed gate required three snapshots that no run could produce (0 commits in 884 of history, because the pages are client-rendered), replaced that unsatisfiable predicate with an evidenced, expiring, self-revoking declaration that never promotes a value, took the gate from 13 blocks to 7 all-genuine ones, published the whole measurement on a new site page and three review flags — and recorded its own three mistakes rather than hiding them.
