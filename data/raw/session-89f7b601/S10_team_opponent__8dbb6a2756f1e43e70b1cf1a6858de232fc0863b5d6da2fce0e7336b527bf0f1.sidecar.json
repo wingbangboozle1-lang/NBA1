@@ -1,0 +1,33 @@
+{
+ "name": "S10_team_opponent",
+ "url": "https://www.nba.com/stats/teams/opponent",
+ "retrieved_utc": "2026-11-19T07:02:23Z",
+ "attempts": [
+  {
+   "attempt": 1,
+   "http_status": 200,
+   "bytes": 293765,
+   "elapsed_s": 0.34
+  }
+ ],
+ "sha256": "8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1",
+ "sha256_matches_in_memory": true,
+ "artifact": "data/raw/session-89f7b601/S10_team_opponent__8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1.bin",
+ "gz_artifact": "data/raw/session-89f7b601/S10_team_opponent__8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1.json.gz",
+ "bytes": 293765,
+ "status": "stored",
+ "structure": {
+  "bytes_delivered": 293765,
+  "html_tr_elements": 12,
+  "team_links": 0,
+  "stats_team_links": 0,
+  "next_data_script": 1,
+  "rowSet": 0,
+  "resultSets": 0,
+  "leaguedash": 0,
+  "stats_nba_com": 0,
+  "rule_34": 0,
+  "looks_like_json": false
+ },
+ "content_type_guess": "html"
+}

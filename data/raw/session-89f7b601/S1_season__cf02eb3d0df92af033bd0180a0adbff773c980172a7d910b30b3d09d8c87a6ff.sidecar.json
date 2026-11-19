@@ -1,0 +1,33 @@
+{
+ "name": "S1_season",
+ "url": "https://www.nba.com/stats/teams/advanced",
+ "retrieved_utc": "2026-11-19T07:02:21Z",
+ "attempts": [
+  {
+   "attempt": 1,
+   "http_status": 200,
+   "bytes": 293688,
+   "elapsed_s": 0.35
+  }
+ ],
+ "sha256": "cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff",
+ "sha256_matches_in_memory": true,
+ "artifact": "data/raw/session-89f7b601/S1_season__cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff.bin",
+ "gz_artifact": "data/raw/session-89f7b601/S1_season__cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff.json.gz",
+ "bytes": 293688,
+ "status": "stored",
+ "structure": {
+  "bytes_delivered": 293688,
+  "html_tr_elements": 12,
+  "team_links": 0,
+  "stats_team_links": 0,
+  "next_data_script": 1,
+  "rowSet": 0,
+  "resultSets": 0,
+  "leaguedash": 0,
+  "stats_nba_com": 0,
+  "rule_34": 0,
+  "looks_like_json": false
+ },
+ "content_type_guess": "html"
+}

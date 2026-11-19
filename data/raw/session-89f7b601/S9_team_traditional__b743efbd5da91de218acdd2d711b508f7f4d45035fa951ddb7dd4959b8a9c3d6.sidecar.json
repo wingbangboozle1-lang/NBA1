@@ -1,0 +1,33 @@
+{
+ "name": "S9_team_traditional",
+ "url": "https://www.nba.com/stats/teams/traditional",
+ "retrieved_utc": "2026-11-19T07:02:22Z",
+ "attempts": [
+  {
+   "attempt": 1,
+   "http_status": 200,
+   "bytes": 293835,
+   "elapsed_s": 0.24
+  }
+ ],
+ "sha256": "b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6",
+ "sha256_matches_in_memory": true,
+ "artifact": "data/raw/session-89f7b601/S9_team_traditional__b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6.bin",
+ "gz_artifact": "data/raw/session-89f7b601/S9_team_traditional__b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6.json.gz",
+ "bytes": 293835,
+ "status": "stored",
+ "structure": {
+  "bytes_delivered": 293835,
+  "html_tr_elements": 12,
+  "team_links": 0,
+  "stats_team_links": 0,
+  "next_data_script": 1,
+  "rowSet": 0,
+  "resultSets": 0,
+  "leaguedash": 0,
+  "stats_nba_com": 0,
+  "rule_34": 0,
+  "looks_like_json": false
+ },
+ "content_type_guess": "html"
+}

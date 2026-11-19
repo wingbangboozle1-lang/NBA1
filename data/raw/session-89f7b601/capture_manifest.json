@@ -1,0 +1,277 @@
+{
+ "captured_by": "scripts/capture_official_89f7b601.py",
+ "captured_at_utc": "2026-11-19T07:02:21Z",
+ "purpose": "byte-exact bodies for the five official sources whose parsers return 0 rows, so the parse repair is developed against delivered bytes rather than recollection",
+ "note": "Counts and digests only. No official value is transcribed by this script.",
+ "results": [
+  {
+   "name": "S1_season",
+   "url": "https://www.nba.com/stats/teams/advanced",
+   "retrieved_utc": "2026-11-19T07:02:21Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": 200,
+     "bytes": 293688,
+     "elapsed_s": 0.35
+    }
+   ],
+   "sha256": "cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff",
+   "sha256_matches_in_memory": true,
+   "artifact": "data/raw/session-89f7b601/S1_season__cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff.bin",
+   "gz_artifact": "data/raw/session-89f7b601/S1_season__cf02eb3d0df92af033bd0180a0adbff773c980172a7d910b30b3d09d8c87a6ff.json.gz",
+   "bytes": 293688,
+   "status": "stored",
+   "structure": {
+    "bytes_delivered": 293688,
+    "html_tr_elements": 12,
+    "team_links": 0,
+    "stats_team_links": 0,
+    "next_data_script": 1,
+    "rowSet": 0,
+    "resultSets": 0,
+    "leaguedash": 0,
+    "stats_nba_com": 0,
+    "rule_34": 0,
+    "looks_like_json": false
+   },
+   "content_type_guess": "html"
+  },
+  {
+   "name": "S2_train",
+   "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+   "retrieved_utc": "2026-11-19T07:02:22Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": 200,
+     "bytes": 294812,
+     "elapsed_s": 0.43
+    }
+   ],
+   "sha256": "58c9764ad495f4d16aae0ac6f2e2ad4b2cfa2b3b1b4605ca4a41827f08524e85",
+   "sha256_matches_in_memory": true,
+   "artifact": "data/raw/session-89f7b601/S2_train__58c9764ad495f4d16aae0ac6f2e2ad4b2cfa2b3b1b4605ca4a41827f08524e85.bin",
+   "gz_artifact": "data/raw/session-89f7b601/S2_train__58c9764ad495f4d16aae0ac6f2e2ad4b2cfa2b3b1b4605ca4a41827f08524e85.json.gz",
+   "bytes": 294812,
+   "status": "stored",
+   "structure": {
+    "bytes_delivered": 294812,
+    "html_tr_elements": 12,
+    "team_links": 0,
+    "stats_team_links": 0,
+    "next_data_script": 1,
+    "rowSet": 0,
+    "resultSets": 0,
+    "leaguedash": 0,
+    "stats_nba_com": 0,
+    "rule_34": 0,
+    "looks_like_json": false
+   },
+   "content_type_guess": "html"
+  },
+  {
+   "name": "S8_standings",
+   "url": "https://www.nba.com/standings",
+   "retrieved_utc": "2026-11-19T07:02:22Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": 200,
+     "bytes": 225373,
+     "elapsed_s": 0.12
+    }
+   ],
+   "sha256": "5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a",
+   "sha256_matches_in_memory": true,
+   "artifact": "data/raw/session-89f7b601/S8_standings__5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a.bin",
+   "gz_artifact": "data/raw/session-89f7b601/S8_standings__5918090cf259f8cfc290465ac7ae0748e7071ceaa7d063fcb579faefbcd34d3a.json.gz",
+   "bytes": 225373,
+   "status": "stored",
+   "structure": {
+    "bytes_delivered": 225373,
+    "html_tr_elements": 0,
+    "team_links": 0,
+    "stats_team_links": 0,
+    "next_data_script": 1,
+    "rowSet": 0,
+    "resultSets": 0,
+    "leaguedash": 0,
+    "stats_nba_com": 0,
+    "rule_34": 0,
+    "looks_like_json": false
+   },
+   "content_type_guess": "html"
+  },
+  {
+   "name": "S9_team_traditional",
+   "url": "https://www.nba.com/stats/teams/traditional",
+   "retrieved_utc": "2026-11-19T07:02:22Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": 200,
+     "bytes": 293835,
+     "elapsed_s": 0.24
+    }
+   ],
+   "sha256": "b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6",
+   "sha256_matches_in_memory": true,
+   "artifact": "data/raw/session-89f7b601/S9_team_traditional__b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6.bin",
+   "gz_artifact": "data/raw/session-89f7b601/S9_team_traditional__b743efbd5da91de218acdd2d711b508f7f4d45035fa951ddb7dd4959b8a9c3d6.json.gz",
+   "bytes": 293835,
+   "status": "stored",
+   "structure": {
+    "bytes_delivered": 293835,
+    "html_tr_elements": 12,
+    "team_links": 0,
+    "stats_team_links": 0,
+    "next_data_script": 1,
+    "rowSet": 0,
+    "resultSets": 0,
+    "leaguedash": 0,
+    "stats_nba_com": 0,
+    "rule_34": 0,
+    "looks_like_json": false
+   },
+   "content_type_guess": "html"
+  },
+  {
+   "name": "S10_team_opponent",
+   "url": "https://www.nba.com/stats/teams/opponent",
+   "retrieved_utc": "2026-11-19T07:02:23Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": 200,
+     "bytes": 293765,
+     "elapsed_s": 0.34
+    }
+   ],
+   "sha256": "8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1",
+   "sha256_matches_in_memory": true,
+   "artifact": "data/raw/session-89f7b601/S10_team_opponent__8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1.bin",
+   "gz_artifact": "data/raw/session-89f7b601/S10_team_opponent__8dbb6a2756f1e43e70b1cf1a6858de232fc0863b5d6da2fce0e7336b527bf0f1.json.gz",
+   "bytes": 293765,
+   "status": "stored",
+   "structure": {
+    "bytes_delivered": 293765,
+    "html_tr_elements": 12,
+    "team_links": 0,
+    "stats_team_links": 0,
+    "next_data_script": 1,
+    "rowSet": 0,
+    "resultSets": 0,
+    "leaguedash": 0,
+    "stats_nba_com": 0,
+    "rule_34": 0,
+    "looks_like_json": false
+   },
+   "content_type_guess": "html"
+  },
+  {
+   "name": "A1_advanced_api",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Advanced&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
+   "retrieved_utc": "2026-11-19T07:02:23Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.1
+    },
+    {
+     "attempt": 2,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    },
+    {
+     "attempt": 3,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    }
+   ],
+   "status": "unavailable"
+  },
+  {
+   "name": "A2_traditional_api",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Traditional&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
+   "retrieved_utc": "2026-11-19T07:05:29Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    },
+    {
+     "attempt": 2,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.09
+    },
+    {
+     "attempt": 3,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.12
+    }
+   ],
+   "status": "unavailable"
+  },
+  {
+   "name": "A3_opponent_api",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Opponent&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
+   "retrieved_utc": "2026-11-19T07:08:36Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.19
+    },
+    {
+     "attempt": 2,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    },
+    {
+     "attempt": 3,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.1
+    }
+   ],
+   "status": "unavailable"
+  },
+  {
+   "name": "A4_standings_api",
+   "url": "https://stats.nba.com/stats/leaguestandings?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&SeasonYear=&IgnoreGB=N",
+   "retrieved_utc": "2026-11-19T07:11:42Z",
+   "attempts": [
+    {
+     "attempt": 1,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    },
+    {
+     "attempt": 2,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.08
+    },
+    {
+     "attempt": 3,
+     "http_status": null,
+     "error": "TimeoutError: The read operation timed out",
+     "elapsed_s": 60.11
+    }
+   ],
+   "status": "unavailable"
+  }
+ ]
+}
