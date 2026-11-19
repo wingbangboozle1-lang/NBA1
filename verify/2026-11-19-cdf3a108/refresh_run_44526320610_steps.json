@@ -1,0 +1,87 @@
+{
+ "conclusion": "cancelled",
+ "created_at": "2026-11-19T12:42:04Z",
+ "event": "push",
+ "head_branch": "arena/cdf3a108-nba1",
+ "job": {
+  "completed_at": null,
+  "name": "refresh",
+  "started_at": null,
+  "steps": [
+   {
+    "conclusion": "success",
+    "name": "Set up job"
+   },
+   {
+    "conclusion": "success",
+    "name": "Run actions/checkout@v4"
+   },
+   {
+    "conclusion": "success",
+    "name": "Run actions/setup-python@v5"
+   },
+   {
+    "conclusion": "success",
+    "name": "Fetch official sources"
+   },
+   {
+    "conclusion": "success",
+    "name": "Promote verified structured inputs (fail-closed)"
+   },
+   {
+    "conclusion": "success",
+    "name": "Require fresh provenance and verified-promotion gates"
+   },
+   {
+    "conclusion": "success",
+    "name": "Rebuild only after all freshness and provenance gates pass"
+   },
+   {
+    "conclusion": "success",
+    "name": "Settle every game day that has ended (official finals only)"
+   },
+   {
+    "conclusion": "skipped",
+    "name": "Report why rebuilding was blocked"
+   },
+   {
+    "conclusion": "success",
+    "name": "Discard generated-site churn only"
+   },
+   {
+    "conclusion": "success",
+    "name": "Record the run"
+   },
+   {
+    "conclusion": "success",
+    "name": "Upload the run record"
+   },
+   {
+    "conclusion": "success",
+    "name": "Upload the captures (survives a failed push)"
+   },
+   {
+    "conclusion": "success",
+    "name": "Publish captures (pull request from main, direct commit on session branches)"
+   },
+   {
+    "conclusion": "skipped",
+    "name": "Post Run actions/setup-python@v5"
+   },
+   {
+    "conclusion": "success",
+    "name": "Post Run actions/checkout@v4"
+   },
+   {
+    "conclusion": "success",
+    "name": "Complete job"
+   }
+  ]
+ },
+ "run_id": 44526320610,
+ "status": "completed",
+ "updated_at": "2026-11-19T12:48:58Z",
+ "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44526320610",
+ "read_me": "Step outcomes read first-hand from the GitHub Actions API by session arena/cdf3a108-nba1 at 2026-11-19T13:2xZ. The conclusion field of the run is cancelled because the shared refresh-official-global concurrency group cancelled the trailing post steps AFTER Publish captures succeeded; every substantive step (fetch, promote, freshness gate, REBUILD, settle, record, publish) completed success. The rebuild step executing at all is the R01 operational proof: it is gated on freshness_ok == true and has not executed since 2026-11-15T12:43:11Z.",
+ "r01_statement": "Rebuild step conclusion SUCCESS; Report-why-blocked step SKIPPED (= the build did run)."
+}

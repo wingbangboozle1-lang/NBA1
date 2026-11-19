@@ -161,6 +161,26 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15"
   },
   {
+   "id": "A21",
+   "question": "S-89F-02 / Q37 adoption: does the model-input lag for LAL and UTA (F-929-01, F-89F-04) move any published line, and was it adopted?",
+   "answer": "Adopted 2026-11-19 (session arena/cdf3a108-nba1). The official team-stat pages re-read at 12:2x-12:4x UTC carry 16 GP for both clubs (the 11/18 UTA 109 @ LAL 97 game is absorbed), so gates G3/G4 pass where the 05:44Z cut recorded FAIL. Three of 26 published lines move by more than a point: PHX@UTA spread -7.6 -> -6.4, SAC@LAL 22.1 -> 20.7, DAL@UTA -7.5 -> -6.3 (the other 23 move <= 0.2 on the total and 0.0 on the spread). The movements match session arena/d66245d4-nba1's independent re-price (+1.21/-1.34, -1.41/-2.19, +1.20/-1.35) to the published rounding. An amended pre-tip seal was published before the 2026-11-20T01:00Z first tip (ledger entry 18, supersedes entry 17); no pick selection changed - 26 singles with the same pick_line on every row - only four model_home_win_prob fields moved.",
+   "source": "data/official/teams_reread_2026-11-19_cdf3a108.json",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "A22",
+   "question": "R01: why had no scheduled refresh reached its rebuild step since 2026-11-15, and what closes the gap?",
+   "answer": "Three measured causes, all fixed 2026-11-19 by session arena/cdf3a108-nba1 (continuing section 73's open tail). (1) S1_season/S2_train sat in the gate's blocking failure list as an unsatisfiable requirement of the same client-rendered class as S8/S9/S10 - every recorded run parsed 0 rows and the byte-exact captures prove the page carries no table; both are now declared unreadable with evidence and a hard expiry (2026-12-19), honoured by gate, promoter and anti-rot re-checks. (2) The publish step staged its promoted outputs with ONE git add listing data/raw/standings.json first - a path that has never existed; git aborts the whole command on the first unmatched pathspec and 2>/dev/null hid it, so every verified promotion (schedule_upcoming, injuries, games_completed, data/parsed) was silently dropped from every capture commit (flag F-CDF-02); staging is now per-path. (3) The gate's S1-specific blocks (structured capture + exact-match comparison) are now declaration-aware with the staleness published. Measured after the fix: engine/promote_official.py exits 0 with 0 blocked, engine/refresh_gate.py returns PASS with five PASS BY DECLARATION entries, and the rebuild commands (engine/pipeline.py + engine/build_site.py) run to completion.",
+   "source": "data/raw/_capture_gate_report.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_capture_gate_report.json"
+  },
+  {
+   "id": "A-4EE-1",
+   "question": "When will the LAL/UTA team-stat tables catch up with the standings? (Q-929-1)",
+   "answer": "They already have. First-hand read 2026-11-19T13:2xZ: all three official tables print LAL 16 GP 13-3 and UTA 16 GP 3-13, matching the standings (G3 passes 30/30); the committed model cut was re-cut to match (F-4EE-04, data/derived/recut_2026-11-19_4eef6d3b/drift.json). Q-929-1 can be closed.",
+   "source": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
    "id": "Q37",
    "question": "Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?",
    "answer": "Owner and maximum age now exist (\u00a777 P03/P04): data/raw/team_advanced.json carries a verification block naming reader and read time (arena/70d0e760-nba1, 2026-11-19T12:4xZ), and engine/refresh_gate.py enforces a 72-hour session-read freshness bound (--max-input-age-hours) while the runner-side parse is declared unreadable. Origination-side refusal of over-age inputs remains open (Q38).",
@@ -178,6 +198,12 @@
   }
  ],
  "open": [
+  {
+   "id": "Q-929-1",
+   "question": "When will the LAL/UTA team-stat tables catch up with the standings?",
+   "what_is_missing": "The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.",
+   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
   {
    "id": "Q-929-2",
    "question": "What do the NYK@MIN and 11/20 injury rows actually say?",
@@ -468,13 +494,22 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json"
   },
   {
+   "id": "Q37",
+   "question": "Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?",
+   "what_is_missing": "The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.",
+   "how_to_answer": "Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.",
+   "blocks": "S-89F-02's gate design; any claim that a priced line rests on current inputs",
+   "source": "data/derived/recut_drift_89f7b601.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json"
+  },
+  {
    "id": "Q38",
-   "question": "Should the 72-hour session-read freshness bound also cover data/raw/players_traditional.json (consumed by engine/pipeline.py, currently carrying no verification block and no bound), and should origination refuse a horizon priced from an over-age input?",
-   "what_is_missing": "players_traditional.json has no verification block and is not gate-checked at all; the horizon builders read team_stats_recut.json without a maximum-age check, so a priced line can rest on an input older than the bound the refresh gate enforces.",
-   "how_to_answer": "Give players_traditional.json the same session-read verification treatment as team_advanced.json, and add an input-age assertion to scripts/originate_horizon_*.py that refuses to price from an input older than the declared bound.",
-   "blocks": "Any claim that published lines rest on inputs fresher than 72 hours",
-   "source": "engine/pipeline.py, scripts/originate_horizon_9ff20954.py",
-   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/pipeline.py"
+   "question": "Which sigma should published pick probabilities use - the measured margin sigma (16.714) or the measured spread-error sigma (18.303)?",
+   "what_is_missing": "Session arena/d66245d4-nba1 measured 37 decided paper singles hitting 0.3784 against a mean published pick probability of 0.7197 - the probability divides the spread by sigma of game margins where the quantity that belongs there is the sigma of the error in the spread (measured 18.303 with a +8.718-point bias). The 2026-11-19T13:00Z amendment kept the old basis for series continuity, so the published probabilities remain overconfident.",
+   "how_to_answer": "Publish both bases side by side on the picks surface and let the next settlement cycle grade calibration under log-loss; adopt the better-calibrated basis by pre-registered rule, not by judgement.",
+   "blocks": "the credibility of every published pick probability; F-CDF-04",
+   "source": "data/content/signal_diagnostics_2026-11-19_d66245d4.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json"
   },
   {
    "id": "Q39",
@@ -484,6 +519,18 @@
    "blocks": "Nothing today (both shapes pass the gate); future promote/gate divergence",
    "source": "COORD77",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
+  },
+  {
+   "id": "Q-4EE-1",
+   "question": "Should the corrected probability formula (sigma 18.303, S-4EE-01) take effect for the 2026-11-20 roll, or later?",
+   "what_is_missing": "A decision owner for pre-registration amendments. The measurement (F-4EE-06) exists; the authority to change a frozen signal does not sit with any single seat.",
+   "suggested_source": "Decision register / user review of S-4EE-01."
+  },
+  {
+   "id": "Q-4EE-2",
+   "question": "Who keeps the session-maintained advanced input fresh within its 72-hour gate (F-4EE-03)?",
+   "what_is_missing": "A standing cadence. Today each day-roll/verification session re-reads the official table; if no session runs for 72h the scheduled rebuild blocks (correctly, but silently for site visitors). A named owner or an automated reminder would close it.",
+   "suggested_source": "Coordination board ground rules / next integration seat."
   }
  ]
 }

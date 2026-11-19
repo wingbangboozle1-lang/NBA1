@@ -541,6 +541,66 @@
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
 <tr>
+<td>S-CDF-01</td>
+<td>Model honesty</td>
+<td><b>Publish both probability bases until the next settlement grades which calibrates better</b></td>
+<td>The published pick probability is overconfident (measured hit rate 0.3784 against a mean published 0.7197). Fixing it silently would break series continuity; leaving it silently keeps a number on the site that its own settlement records contradict.</td>
+<td>- Add a calibrated_probability column computed with the measured spread-error sigma (18.303) beside the current column, and pre-register that the next settlement cycle adopts the better-calibrated basis under log-loss <span class='fine'>(effort: Low - one extra field in generate_picks.py and one column in the picks builder; risk: Low - both numbers stay labelled model-internal; nothing is deleted; unlocks: Answers Q38 with evidence instead of judgement)</span><br>- Replace the basis now <span class='fine'>(effort: Low; risk: Medium - every archived probability series loses comparability without a graded reason; unlocks: A better-calibrated number today)</span><br>- Change nothing <span class='fine'>(effort: None; risk: High - the site keeps publishing numbers its own settlements refute (F-CDF-04); unlocks: Nothing)</span></td>
+<td>Option 1.</td>
+<td>Approve the dual-column publication and the log-loss adoption rule.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-02</td>
+<td>Verification</td>
+<td><b>Derive strategy-level leaderboard rows from ticket-level settlement records</b></td>
+<td>S1 carries two published records (23-9 / +11.91 vs 23-8 / +12.909) and neither can be derived from the settlement files, which grade tickets. A leaderboard that cannot be recomputed from its own evidence cannot support reward decisions.</td>
+<td>- Grade every ticket with its strategy id, aggregate to strategy totals in one derived file, and regenerate every surface from it <span class='fine'>(effort: Medium - a small aggregation script over data/settlement/**; risk: Low; unlocks: Answers Q39; makes reward tiers auditable)</span><br>- Designate one existing record as canonical and flag the other <span class='fine'>(effort: None; risk: Medium - the canonical one is still underivable; unlocks: A single number, unverified)</span></td>
+<td>Option 1.</td>
+<td>Approve the derived aggregation as the source of record.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
+</tr>
+<tr>
+<td>S-CDF-03</td>
+<td>Operations</td>
+<td><b>Adopt auto-refresh branches mechanically and make gh pr create failures loud</b></td>
+<td>The scheduled refresh publishes captures to auto/refresh-* branches and opens a PR - but the gh pr create failure is swallowed with a warning. auto/refresh-20261119-120839 held ten official injury PDFs and a full capture set with no PR until this session adopted it by hand (F-CDF-01).</td>
+<td>- Let the publish step fail visibly when gh pr create fails, and add a scheduled sweep that merges or archives any auto/refresh branch older than one run <span class='fine'>(effort: Low - two small workflow edits; risk: Low; unlocks: Captures can no longer strand silently)</span><br>- Keep the swallow-and-warn behaviour <span class='fine'>(effort: None; risk: High - the next stranded capture is found only by accident; unlocks: Nothing)</span></td>
+<td>Option 1.</td>
+<td>Approve the sweep + loud-failure change to refresh-data.yml.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>S-4EE-01</td>
+<td>Model</td>
+<td><b>Pre-register a corrected pick-probability formula (sigma 18.303) for the next roll; keep every sealed probability as published</b></td>
+<td>F-4EE-06: published probabilities divide the spread by sigma of game margins (16.714) instead of sigma of the spread error (measured 18.303). Realized hit rate 0.3784 against 0.7197 mean published probability. Changing sealed numbers would break the pre-registration discipline; the fix must be prospective.</td>
+<td>- Freeze a prereg v2 (new strategy ids or an amended freeze) whose signal uses sigma 18.303 before the next horizon's first tip, and report old-vs-new calibration side by side until v2 has 30 graded plays <span class='fine'>(effort: Medium - one formula change plus a prereg freeze and a calibration-comparison page; risk: Low - sealed probabilities stand untouched; only future picks change; unlocks: F-4EE-06; a leaderboard that ranks on honest probabilities (S-4EE-02))</span><br>- Leave the formula and let the strategy-validation gates absorb the miscalibration <span class='fine'>(effort: None; risk: High - the leaderboard keeps ranking on numbers measured to be wrong (F-4EE-06); unlocks: nothing)</span></td>
+<td>Option 1. The measurement is unambiguous and the settlement rules are unaffected (they grade the pick line, not the probability).</td>
+<td>Yes - the formula belongs to the pre-registered signal, so only an explicit decision can change it (owner: next roll/integration seat or the user).</td>
+<td class="src"><span class="na" title="source id data/content/signal_diagnostics_2026-11-19_d66245d4.json (section 72 measurement) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-02</td>
+<td>Data</td>
+<td><b>Derive one authoritative per-strategy record from the sealed tickets and reconcile README + leaderboard to it</b></td>
+<td>F-4EE-05: S1's published record differs between README (23-9 / +11.91) and docs/data/leaderboard.json (23-8 / +12.909); settlement grades tickets, not strategies, so neither is derivable.</td>
+<td>- A namespaced rollup script that reads data/settlement/** plus the pre-tip archives, attributes each graded ticket to its strategy, and writes one records file both surfaces render <span class='fine'>(effort: Medium - one script plus a builder hookup; every input is already in-repo; risk: Low - read-only over sealed files; adds a derived record; unlocks: F-4EE-05; honest leaderboard/reward ranking)</span><br>- Hand-edit one surface to match the other <span class='fine'>(effort: Low; risk: High - hides the derivation; the brief forbids unauditable values; unlocks: nothing)</span></td>
+<td>Option 1, adopted by the next strategy/leaderboard seat.</td>
+<td>No - needs an owner, not a decision.</td>
+<td class="src"><span class="na" title="source id COORDINATION.md section 72 finding 3 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-03</td>
+<td>Automation</td>
+<td><b>Decide whether a gate-passing scheduled rebuild should publish the regenerated site data or stay smoke-only (today the run discards docs/data + docs/b churn)</b></td>
+<td>The rebuild step (pipeline + build_site) now runs when gates pass, but the 'Discard generated-site churn only' step reverts docs/data and docs/b before the publish commit, so the scheduled job never updates the live site's data - sessions do, at integration. That is defensible churn control (the generated files embed wall-clock ages) but it means 'rebuild' in the brief's first requirement is validated, not published.</td>
+<td>- Keep smoke-only rebuild plus session-published site (current) <span class='fine'>(effort: None; risk: Low - site-data freshness depends on session cadence; unlocks: nothing)</span><br>- Publish the rebuilt data on gate pass, with the wall-clock fields scrubbed first <span class='fine'>(effort: Medium - a scrubber plus publish-step changes; risk: Medium - more moving parts in the auto PRs; unlocks: the brief's refresh-to-publish chain running unattended)</span></td>
+<td>Flag for the decision register; either choice is coherent, but it should be an explicit decision, not an accident of a churn filter.</td>
+<td>Yes - integration/user.</td>
+<td class="src"><span class="na" title="source id .github/workflows/refresh-data.yml (Discard generated-site churn only step) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
 <td>S-70D-01</td>
 <td>Operations</td>
 <td><b>Give the refresh workflow a queue instead of a single cancel-in-progress slot</b></td>

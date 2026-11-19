@@ -265,6 +265,12 @@ class DeclaredUnreadableTests(unittest.TestCase):
         self._declare(["S8_standings"])
         self._empty_capture("S8_standings", "_capture_S8_standings.json")
         promoter = self._promoter()
+        # The real refresh record always carries an HTTP-200 source check for a
+        # page the fetcher attempted (section 74): a parse failure with an
+        # in-run attempt is exactly what a declaration excuses.
+        promoter.checks = {"S8_standings": {"key": "S8_standings",
+                                            "url": "https://www.nba.com/standings",
+                                            "http_status": 200, "sha256": "a" * 64}}
         promoter.promote_standings()
         self.assertEqual(promoter.blocked, [])
         self.assertEqual(len(promoter.unreadable), 1)
@@ -284,12 +290,35 @@ class DeclaredUnreadableTests(unittest.TestCase):
         self.assertEqual(promoter.blocked[0]["item"], "S8_standings")
 
     def test_a_declaration_does_not_excuse_a_missing_capture_file(self):
-        """A declared page still must have been attempted this run."""
+        """A declared page with NO in-run fetch attempt still blocks.
+
+        (The fixture leaves promoter.checks empty: the fetcher never recorded
+        a source check for the page this run, so there is no attempt to
+        excuse. A missing capture WITH an in-run HTTP-200 check is a
+        different, excusable fact - see the next test; section 74.)"""
         self._declare(["S8_standings"])
         promoter = self._promoter()
         promoter.promote_standings()
         self.assertEqual(len(promoter.blocked), 1)
         self.assertEqual(promoter.unreadable, [])
+
+    def test_missing_capture_with_an_in_run_attempt_is_excused_for_declared(self):
+        """S1_season's measured state (section 74): the fetcher checks the
+        page at HTTP 200 every run, the response parses no rows, and no
+        rows-bearing capture file is written - only the evidence record."""
+        self._declare(["S1_season"])
+        with open(os.path.join(self.raw, "team_advanced.json"), "w") as fh:
+            json.dump({"cols": ["team", "gp"], "windows": []}, fh)
+        promoter = self._promoter()
+        promoter.checks = {"S1_season": {"key": "S1_season",
+                                         "url": "https://www.nba.com/stats/teams/advanced",
+                                         "http_status": 200, "sha256": "a" * 64}}
+        promoter.promote_team_advanced()
+        self.assertEqual(promoter.blocked, [])
+        self.assertTrue(any(u["item"] == "S1_season" for u in promoter.unreadable))
+        # Nothing was promoted from it: the session-maintained snapshot keeps
+        # its own verification and the gate freshness-checks that instead.
+        self.assertEqual(promoter.promoted, [])
 
     def test_exit_code_ignores_declared_items_but_not_real_blocks(self):
         import inspect
@@ -319,6 +348,11 @@ class DeclaredUnreadableTests(unittest.TestCase):
             json.dump({"status": "parse_failed",
                        "source_url": "https://www.nba.com/stats/teams/advanced"}, fh)
         promoter = self._promoter()
+        # The landed excuse rule also requires proof the run ATTEMPTED the
+        # fetch (an HTTP-200 source check) - a declaration never excuses a
+        # page that was not fetched this run.
+        promoter.checks = {"S1_season": {"http_status": 200,
+                                         "url": "https://www.nba.com/stats/teams/advanced"}}
         os.makedirs(os.path.join(self.tmp.name, "data", "raw"), exist_ok=True)
         with open(os.path.join(self.raw, "team_advanced.json"), "w") as fh:
             json.dump({"cols": [], "windows": [
@@ -338,6 +372,8 @@ class DeclaredUnreadableTests(unittest.TestCase):
                   "w") as fh:
             json.dump({"status": "parse_failed", "source_url": "u"}, fh)
         promoter = self._promoter()
+        promoter.checks = {"S1_season": {"http_status": 200,
+                                         "url": "https://www.nba.com/stats/teams/advanced"}}
         # team_advanced.json deliberately absent.
         promoter.promote_team_advanced()
         self.assertEqual(len(promoter.blocked), 1)

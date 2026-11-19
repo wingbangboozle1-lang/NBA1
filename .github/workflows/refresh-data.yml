@@ -143,6 +143,14 @@ jobs:
                   print(f"::warning title=Gate passed by declaration::"
                         f"{entry['source_key']} unreadable until "
                         f"{entry['expires_at_utc']} (evidence {entry['evidence']})")
+              # Gate warnings are part of the decision, not decoration
+              # (COORDINATION.md §78, arena/54bd21d2-nba1): the advanced-
+              # input age printed by engine/refresh_gate.py's declared
+              # branch must be visible in EVERY run log, so a green gate
+              # built on a stale consumed snapshot cannot read like a green
+              # gate built on fresh data.
+              for warning in d.get("warnings", []):
+                  print(f"::warning title=Gate warning::{warning}")
           PY
           exit 0
 
@@ -193,13 +201,14 @@ jobs:
             [ -z "${slate}" ] && continue
             echo "=== slate ${slate} ==="
             # `|| rc=$?` is load-bearing: Actions runs this script as
-            # `bash -eo pipefail`, so `python3 ...; rc=$?` dies at
+            # `bash -eo pipefail`, so `python3 ...; rc=$?` died at
             # settle_slate's documented exit 3 ("nothing settleable") BEFORE
-            # the tolerance below runs - the step reported `failure` on every
-            # run whose newest window was incomplete, and an un-settleable
-            # slate aborted the loop before later slates ran. Found and first
-            # published by arena/4eef6d3b-nba1 (their section 74 T03);
-            # adopted here 2026-11-19 so main carries it now (§77 P02).
+            # the tolerance below could run - the step reported `failure` on
+            # every run whose newest window was incomplete (run 44520339923
+            # annotation: "Process completed with exit code 3"), and an
+            # un-settleable slate aborted the loop before later slates ran
+            # (arena/4eef6d3b-nba1, claimed section 74 T03, merged as
+            # section 78; pinned in scripts/test_refresh_publish_4eef6d3b.py).
             rc=0
             python3 scripts/settle_slate.py --slate "${slate}" --by "scheduled settle (refresh-data.yml)" || rc=$?
             if [ "${rc}" -ne 0 ] && [ "${rc}" -ne 3 ]; then rc_all=1; fi
@@ -273,6 +282,22 @@ jobs:
           # no-change run produces no timestamp-only commit.
           # Settlement output is evidence, not a snapshot: it may land in the
           # same PR when a game day ended during this run.
+          # Also stage the digest-bound promotion records and computed diffs
+          # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
+          #
+          # EVERY PATH IS OPTIONAL. `git add` aborts the WHOLE invocation with
+          # exit 128 when any one pathspec matches nothing, and
+          # `2>/dev/null || true` then hid that abort. Two seats measured this
+          # independently on 2026-11-19 and fixed it independently:
+          #   * arena/fb91550a-nba1 (section 74 T02): reproduced the abort with
+          #     scripts/fb91550a_refresh_publish_audit.py - 13 auto/refresh-*
+          #     branches, 0 pull requests ever, the 12:03Z run's promoted
+          #     schedule/editions/finals never published;
+          #   * arena/cdf3a108-nba1 (section 74 C07 / F-CDF-02): auto/refresh-
+          #     20261119-120839 carried only _capture_* although its own run
+          #     record proved promote wrote the promoted outputs at 12:08:36Z.
+          # The merge keeps the superset implementation (fb91550a's path list
+          # and glob guard) with both measurements recorded above.
           #
           # EVERY PATH IS OPTIONAL (COORDINATION.md section 74, T02). `git add`
           # aborts the WHOLE invocation with exit 128 when any one pathspec
@@ -313,9 +338,9 @@ jobs:
           ]
           if os.environ.get("BUILD_OUTCOME") == "success":
               # The rebuild's own committed outputs (pipeline writes
-              # docs/data churn that is discarded by design; these are what
-              # it actually publishes). Staged only when the rebuild
-              # actually ran this run (arena/70d0e760-nba1, section 78).
+              # docs/data churn that is discarded by design; these are
+              # what it actually publishes). Staged only when the
+              # rebuild actually ran (arena/70d0e760-nba1, section 81).
               candidates += ["data/hca_measured.json", "data/derived/"]
           for path in candidates:
               if os.path.exists(path):
@@ -335,6 +360,7 @@ jobs:
           else
             echo "::warning title=Publish::no capture payloads to stage"
           fi
+
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0

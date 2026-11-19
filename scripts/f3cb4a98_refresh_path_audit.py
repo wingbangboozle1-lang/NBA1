@@ -87,6 +87,18 @@ SOURCES = {
 }
 
 
+# Keys whose capture file engine/refresh_gate.py demands when no live
+# declaration covers them: the `capture_names` loop covers S1_season,
+# S4_schedule, S5_injury_index and S8/S9/S10; S2_train's footprint is its
+# entry in the fetcher's `failed` list, excused only via DECLARED_ONLY
+# (engine/refresh_gate.py, section 78). A capture that has never existed on
+# any ref for one of these keys is a terminal gate requirement.
+GATE_CAPTURE_DEMAND = {
+    "S1_season", "S2_train", "S4_schedule", "S5_injury_index",
+    "S8_standings", "S9_team_traditional", "S10_team_opponent",
+}
+
+
 def assert_full_history():
     """Refuse to audit git history from a shallow clone.
 
@@ -356,7 +368,15 @@ def audit():
         cap_rows = capture_row_count(key, cap)
         ev_problems = evidence_problems(ev) if evidence else []
         verification = (pro or {}).get("verification") or {} if isinstance(pro, dict) else {}
-        history, history_error = (git_history_count(promoted) if promoted else (None, None))
+        # Paths must be repo-relative: `git log -- standings.json` from the
+        # repository root matches nothing (the file lives at
+        # data/raw/standings.json), so the bare spelling silently counted 0
+        # for EVERY source and made `terminal_gate_requirement` degenerate to
+        # `required_by_gate`. Fixed by session arena/54bd21d2-nba1 (§78).
+        history, history_error = (
+            git_history_count(f"data/raw/{promoted}") if promoted else (None, None))
+        capture_history, capture_history_error = (
+            git_history_count(f"data/raw/{capture}") if capture else (None, None))
         entry = {
             "key": key,
             "official_url": fetch_urls.get(key)
@@ -385,13 +405,26 @@ def audit():
             "required_by_gate": bool(promoted and promoted in gate_requires),
             "promoted_commits_in_history": history,
             "promoted_history_error": history_error,
+            "capture_commits_in_history": capture_history,
+            "capture_history_error": capture_history_error,
         }
         entry["classification"] = classify(entry)
-        # A gate requirement is terminal when the gate demands a snapshot that
-        # this repository has never contained. That is the difference between a
-        # transient failure and dead code behind a permanently-open gate.
+        # A gate requirement is terminal when the gate demands a file that
+        # this repository has never contained. Two shapes exist: a promoted
+        # snapshot (S8/S9/S10's standings/traditional/opponent) and, since
+        # section 78, a rows-bearing capture (S1_season's
+        # `_capture_S1_season.json` — demanded by the gate's structured-
+        # capture loop; S2_train's capture is demanded through its failed-
+        # list entry, which the DECLARED_ONLY set may excuse). That is the
+        # difference between a transient failure and dead code behind a
+        # permanently-open gate.
+        capture_never_existed = bool(
+            capture and not entry["capture_present"] and capture_history == 0)
+        entry["terminal_capture_requirement"] = bool(
+            capture_never_existed and key in GATE_CAPTURE_DEMAND)
         entry["terminal_gate_requirement"] = bool(
-            entry["required_by_gate"] and history == 0)
+            (entry["required_by_gate"] and history == 0)
+            or entry["terminal_capture_requirement"])
         rows.append(entry)
 
     try:
@@ -421,9 +454,10 @@ def audit():
         "built_at_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "history_warning": history_warning,
         "rule": ("Every field is read from a committed file or from git history. "
-                 "No value is inferred. A gate requirement naming a snapshot "
-                 "with zero commits in history is classified terminal, because "
-                 "no scheduled run can ever satisfy it."),
+                 "No value is inferred. A gate requirement naming a snapshot or "
+                 "a rows-bearing capture with zero commits in history is "
+                 "classified terminal, because no scheduled run can ever "
+                 "satisfy it."),
         "run_record": {
             "path": "data/raw/_last_refresh.json",
             "captured_at_utc": record.get("captured_at_utc"),

@@ -106,9 +106,19 @@ if b2:
     check(rec["index_read_window_utc"]["end"] in t2, "index banner read time disagrees with the index record")
     check("11/19/26 07:00 AM" in t2, "index banner does not show the newest PDF's printed header")
 
-# 5. The newer-edition warning is present and computed from the same record.
+# 5. The newer-edition warning is present exactly when the rows are behind the
+# newest listed edition, and computed from the same record (never typed).
+# (Amended at the 2026-11-19 merge, arena/cdf3a108-nba1: the check used to be
+# unconditional, which failed correctly-built pages whenever the promoted rows
+# WERE the newest listed edition - the state after the 07:00 AM promotion. The
+# invariant is the implication in both directions, not the banner's presence.)
 b3 = [b for b in banners if b[1].startswith("The rows on this page are not the newest")]
-check(len(b3) == 1, "warning that the rows are not the newest edition is missing")
+_nl_label = (rec.get("newest_listed") or {}).get("label")
+if _PAGE_LABEL and _nl_label and _nl_label != _PAGE_LABEL:
+    check(len(b3) == 1, "warning that the rows are not the newest edition is missing")
+else:
+    check(len(b3) == 0,
+          "a 'not the newest' warning is shown although the rows are the newest listed edition")
 
 # 6. Every relative link in the injury banners resolves.
 base = os.path.dirname(PAGE)

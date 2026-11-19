@@ -1,6 +1,6 @@
 {
- "captured_at_utc": "2026-11-19T12:42:33Z",
- "note": "Verbatim transcription of the NBA.com official Stats > Teams > Advanced table in two windows. Columns kept exactly as published. No derived or inferred values in this file. Refreshed by session-read (COORDINATION.md section 77 P04): the runner cannot parse this page and the consumed snapshot is kept honest by the gate's session-read freshness bound.",
+ "captured_at_utc": "2026-11-19T13:09:56Z",
+ "note": "Verbatim transcription of the NBA.com official Stats > Teams > Advanced table in two windows. Columns kept exactly as published. No derived or inferred values; the season_to_date window was transcribed first-hand on 2026-11-19 (runner-unreadable page — see data/raw/unreadable_sources.json), the train window was re-read and matched the previous verified cut byte for byte.",
  "cols": [
   "team",
   "gp",
@@ -23,13 +23,26 @@
   "pie",
   "poss"
  ],
+ "model_input_note": "Columns follow engine/parse_official.ADVANCED_COLS (the official page schema). data/derived/team_stats_recut.json publishes the same values under the model-input names (off_rtg/def_rtg/net_rtg).",
+ "verification": {
+  "verified": true,
+  "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
+  "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
+  "source_url": "https://www.nba.com/stats/teams/advanced",
+  "verified_at_utc": "2026-11-19T13:09:56Z",
+  "row_count": 30,
+  "response_digest": null,
+  "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
+  "evidence": "data/official/teams_reread_2026-11-19_4eef6d3b.json",
+  "corroboration": "GP/W/L cross-checked against data/official/standings_2026-11-19_929395a5.json (30/30 match) and arena/89f7b601-nba1's 08:0xZ traditional-page read; train window byte-compared against the previous verified cut (identical)"
+ },
  "windows": [
   {
    "window_id": "season_to_date",
-   "label": "2026-27 Regular Season, season to date",
+   "label": "2026-27 Regular Season, season to date (through 2026-11-18 games; 2026-11-19 slate had not tipped at read time)",
    "source_id": "S1",
-   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "retrieved_utc": "2026-11-19T12:42:33Z",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "retrieved_utc": "2026-11-19T13:09:56Z",
    "rows": [
     [
      "Los Angeles Lakers",
@@ -695,22 +708,24 @@
    "missing": [],
    "verification": {
     "verified": true,
-    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-    "source_sha256": null,
-    "verified_at_utc": "2026-11-19T12:42:33Z",
-    "verified_by": "arena/70d0e760-nba1 (platform web-fetch channel)",
-    "read_channel": "platform web-fetch (the only route from this sandbox to nba.com; byte-exact runner captures of this page are edge-denied shells)",
-    "read_window_utc": "2026-11-19T12:28-12:42Z session window (pages fetched through the platform web-fetch channel; transcription committed at the read_utc stamp)",
+    "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
+    "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
+    "source_url": "https://www.nba.com/stats/teams/advanced",
+    "verified_at_utc": "2026-11-19T13:09:56Z",
     "row_count": 30,
-    "source_capture": "data/raw/session-70d0e760/reads_2026-11-19.json"
+    "response_digest": null,
+    "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
+    "evidence": "data/official/teams_reread_2026-11-19_4eef6d3b.json",
+    "corroboration": "GP/W/L cross-checked against data/official/standings_2026-11-19_929395a5.json (30/30 match) and arena/89f7b601-nba1's 08:0xZ traditional-page read; train window byte-compared against the previous verified cut (identical)",
+    "source_capture": "data/official/teams_reread_2026-11-19_4eef6d3b.json"
    }
   },
   {
    "window_id": "train_2026-10-20_2026-11-05",
-   "label": "2026-27 Regular Season, Date From 10/20/2026 To 11/05/2026 (training window for the out-of-sample test)",
+   "label": "2026-27 Regular Season, 2026-10-20 to 2026-11-05 training window",
    "source_id": "S2",
    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-   "retrieved_utc": "2026-11-14T00:38:00Z",
+   "retrieved_utc": "2026-11-19T13:09:56Z",
    "rows": [
     [
      "Philadelphia 76ers",
@@ -1374,20 +1389,19 @@
     ]
    ],
    "missing": [],
-   "carried_forward_note": "Fixed date window (2026-10-20..2026-11-05): values cannot change. Rows carried forward unchanged from the prior capture (2026-11-14T00:38:00Z capture of the official page); this session did not re-transcribe them.",
    "verification": {
-    "carried_forward": true
+    "verified": true,
+    "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
+    "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
+    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+    "verified_at_utc": "2026-11-19T13:09:56Z",
+    "row_count": 30,
+    "response_digest": null,
+    "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
+    "evidence": "data/official/teams_reread_2026-11-19_4eef6d3b.json",
+    "corroboration": "GP/W/L cross-checked against data/official/standings_2026-11-19_929395a5.json (30/30 match) and arena/89f7b601-nba1's 08:0xZ traditional-page read; train window byte-compared against the previous verified cut (identical)",
+    "source_capture": "data/official/teams_reread_2026-11-19_4eef6d3b.json"
    }
   }
- ],
- "verification": {
-  "verified": true,
-  "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-  "source_sha256": null,
-  "verified_at_utc": "2026-11-19T12:42:33Z",
-  "verified_by": "arena/70d0e760-nba1 (platform web-fetch channel)",
-  "read_channel": "platform web-fetch (the only route from this sandbox to nba.com; byte-exact runner captures of this page are edge-denied shells)",
-  "read_window_utc": "2026-11-19T12:28-12:42Z session window (pages fetched through the platform web-fetch channel; transcription committed at the read_utc stamp)",
-  "row_count": 30
- }
+ ]
 }

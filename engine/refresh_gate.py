@@ -30,28 +30,6 @@ blocks again. Non-negotiable properties, all enforced below:
     predicate;
   * an unknown, malformed, expired or evidence-less declaration is ignored,
     and the original (blocking) requirement applies.
-
-SECTION 77 EXTENSION - RUNNER-UNREADABLE, AGENT-READABLE SOURCES
-----------------------------------------------------------------
-S1_season (and its training-window twin S2_train) proved the same shape by a
-different name: the page IS readable - the agent's fetch channel reads its 30
-server-rendered rows - but no GitHub Actions runner route reaches them. Three
-routes are measured dead (COORDINATION.md section 77.3): plain fetch delivers
-the page shell (byte-exact captures hold 0 team rows at HTTP 200), the
-stats.nba.com fallback times out on every attempt across runs, and headless
-Chromium is refused at the edge (a 309-byte denial page). Before section 77
-the gate kept S1's parse failure blocking "transient" and the build condition
-behind it (`steps.promote.outcome == 'success'`) was a second dead predicate.
-
-Two rules make the extension honest rather than permissive:
-
-  * a companion S2_train declaration excuses only its `failed` entry
-    (it carries no snapshot requirement of its own);
-  * while S1_season is declared, the consumed `data/raw/team_advanced.json`
-    must be a SESSION READ inside `--max-input-age-hours` (default 72h) with
-    an explicit verification block naming reader and time. A declaration
-    excuses the parse; it never excuses the input. Too old and the gate
-    blocks again with the read time printed.
 """
 from __future__ import annotations
 
@@ -68,13 +46,14 @@ REQUIRED = {
     "S1_season", "S4_schedule", "S5_injury_index", "S8_standings",
     "S9_team_traditional", "S10_team_opponent",
 }
-# A declared source that carries no snapshot requirement of its own but whose
-# parse failure would otherwise count as a blocking fetch failure. S2_train is
-# S1_season's own page with a training-window date filter: its failure has the
-# same structural cause and the same evidence, so while S1_season's declaration
-# is live a companion S2_train declaration excuses only its `failed` entry
-# (COORDINATION.md section 77). It never excuses anything else.
-FAILURE_ONLY = {"S2_train"}
+# How old a session-verified advanced input may be while the scheduled rebuild
+# still runs (section 74 T04). The runner can never parse the advanced page
+# (byte evidence: data/raw/_capture_evidence_S1_season.json - a client-rendered
+# shell; the stats API times out; a headless render is Akamai-denied), so the
+# value arrives by first-hand session transcription. If no session re-reads
+# the official table within this window, the gate blocks again: a stale model
+# input must never silently rebuild.
+SESSION_INPUT_MAX_AGE_HOURS = 72.0
 ALLOWED_HOSTS = {"www.nba.com", "official.nba.com", "ak-static.cms.nba.com", "stats.nba.com"}
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 PROMOTION_SENSITIVE = {
@@ -113,9 +92,11 @@ def live_declarations(base, now, by_key, parse_ok):
     one of these measured facts holds:
 
       1. the register parses and is shaped as expected;
-      2. the declaration names a source the gate actually requires (or a
-         failure-only companion such as S2_train, which excuses its `failed`
-         entry and nothing else);
+      2. the declaration names a source the gate requires, or an evidenced
+         capture source whose recorded parse failure it may excuse (a
+         non-required source such as S2_train has no snapshot requirement to
+         waive — the declaration only keeps its expected parse failure out of
+         the blocking list);
       3. `expires_at_utc` parses, is in the future, and is not absurdly far out;
       4. the fetcher checked that source in THIS run at HTTP 200 (a stale
          declaration must not mask a source that was never fetched today);
@@ -147,9 +128,10 @@ def live_declarations(base, now, by_key, parse_ok):
         if not isinstance(key, str) or not key:
             rejected.append("declaration without a source_key")
             continue
-        failure_only = key in FAILURE_ONLY
-        if key not in REQUIRED and not failure_only:
-            rejected.append(f"{key}: not a source this gate requires")
+        if key not in REQUIRED and key not in EVIDENCE:
+            rejected.append(f"{key}: not a source this gate requires (nor an "
+                            f"evidenced capture source whose parse failure it "
+                            f"may excuse)")
             continue
         try:
             expires = parse_utc(entry.get("expires_at_utc"))
@@ -183,21 +165,17 @@ def live_declarations(base, now, by_key, parse_ok):
             "review_flag": entry.get("review_flag"),
             "evidence": evidence,
             "required_snapshot": entry.get("required_snapshot"),
-            "failure_only": failure_only,
         }
     return accepted, rejected
 
 
-def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10,
-             max_input_age_hours: float = 72.0) -> list[str]:
+def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[str]:
     """Back-compatible wrapper returning only the blocking errors."""
-    return evaluate_with_report(record, now, max_age_hours,
-                                max_input_age_hours)[0]
+    return evaluate_with_report(record, now, max_age_hours)[0]
 
 
 def evaluate_with_report(record: dict, now: dt.datetime,
-                         max_age_hours: float = 10,
-                         max_input_age_hours: float = 72.0) -> tuple[list[str], dict]:
+                         max_age_hours: float = 10) -> tuple[list[str], dict]:
     """Gate decision plus the machine-readable reason for it.
 
     Returns (errors, report). `errors` empty means the rebuild may run.
@@ -357,10 +335,9 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     injury = by_key.get("injury_pdf_probe", {})
     pdf_results = injury.get("results", [])
     # A rate-limited newest edition (403/429 from ak-static) must not block
-    # verification when an earlier edition in the same run retrieved cleanly:
-    # promote binds to the newest SUCCESSFUL retrieval (flag F-CA-07's
-    # promote-side rule), and this check must bind to the same artifact or the
-    # two sides can never agree (COORDINATION.md section 77).
+    # the verification side when promote binds to the newest SUCCESSFUL
+    # retrieval (flag F-CA-07's promote-side rule): both sides must bind to
+    # the same artifact or they can never agree (arena/70d0e760-nba1, §81).
     ok_pdfs = [r for r in pdf_results if r.get("http_status") == 200]
     if not ok_pdfs:
         errors.append("no indexed injury PDF was retrieved successfully in this run")
@@ -416,13 +393,14 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     # every model input. A current page fetch alone never authorizes a rebuild.
     for rel, check_key in (("data/raw/_capture_S1_season.json", "S1_season"),
                            ("data/raw/_capture_S4_schedule.json", "S4_schedule")):
-        path = os.path.join(base, rel)
-        if check_key == "S1_season" and "S1_season" in declared:
-            # The runner cannot produce this capture at all (three measured
-            # dead routes, section 77); the declared branch in the REQUIRED
-            # loop above has already verified this run's evidence provenance,
-            # and the consumed input's freshness is enforced below.
+        if check_key == "S1_season" and check_key in declared:
+            # Runner-unreadable and declared: no rows-bearing structured
+            # capture can exist this run (the evidence record proves the
+            # response instead - handled in the loop above). Demanding one
+            # would re-introduce the unsatisfiable predicate this mechanism
+            # exists to remove. The VALUE is still freshness-gated below.
             continue
+        path = os.path.join(base, rel)
         try:
             payload = read_json(path)
         except (OSError, ValueError):
@@ -432,8 +410,12 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # section 74, T02). Previously this branch re-blocked the very
             # source the declaration had just excused, which made the
             # declaration mechanism a no-op for S1 and left the rebuild
-            # unreachable for a second, independent reason.
-            if check_key not in declared:
+            # unreachable for a second, independent reason. The warning keeps
+            # the excuse visible in the gate report (cdf3a108).
+            if check_key in declared:
+                warnings.append(f"{check_key}: no structured capture ({rel}) by "
+                                f"design (declared unreadable); nothing promoted")
+            else:
                 errors.append(f"missing/invalid structured capture: {rel}")
             continue
         if check_key == "S1_season":
@@ -441,80 +423,96 @@ def evaluate_with_report(record: dict, now: dt.datetime,
             # field is not part of the capture schema (engine/fetch_official.py
             # writes `rows`/`cols`), so testing it with `or` made this clause
             # true for EVERY well-formed capture ever written - a second latent
-            # unsatisfiable predicate, fixed here together with the missing
-            # declaration escape.
+            # unsatisfiable predicate (fb91550a), fixed here together with the
+            # missing declaration escape. A live declaration is honoured when
+            # the table is incomplete (cdf3a108, 2026-11-19 amendment: every
+            # recorded run since 2026-11-15 parsed 0 rows and the byte-exact
+            # captures prove the page is client-rendered for a plain fetch);
+            # the anti-rot rule above keeps this honest the moment rows parse.
             complete = len(payload.get("rows") or []) == 30
-            if not complete and check_key not in declared:
-                # S1 is producible through two routes (the page's own parser
-                # and the official stats.nba.com fallback), so a transient
-                # parse failure must block rather than be declared around.
-                errors.append("advanced team capture is not a complete 30-team table "
-                              "(the page's own parser and the official stats.nba.com "
-                              "fallback both failed this run)")
+            if not complete:
+                if check_key in declared:
+                    warnings.append("S1_season: structured capture is not a "
+                                    "complete 30-team table (declared "
+                                    "unreadable); the promoted snapshot stays "
+                                    "at its last verified promotion")
+                else:
+                    errors.append("advanced team capture is not a complete 30-team table "
+                                  "(the page's own parser and the official stats.nba.com "
+                                  "fallback both failed this run)")
         if check_key == "S4_schedule" and not payload.get("games") and check_key not in declared:
             errors.append("official schedule capture has no parsed game IDs")
 
-    # Advanced rows are parseable now, so compare every official row against
-    # the season-to-date model snapshot rather than trusting a change list.
-    # A DECLARED source has no capture to compare (their section 74 note):
-    # the comparison is skipped for it and the declaration's evidence record
-    # is the proof instead - EXCEPT that the consumed snapshot is still
-    # freshness-gated below (section 78: a declaration excuses the parse,
-    # never the input). The exact-match comparison applies to every
-    # non-declared source.
+    # Advanced rows: two honest paths, and the gate knows which one it is on.
+    #
+    # (a) The run parsed rows (S1 undeclared): compare every official row
+    #     against the season-to-date model snapshot rather than trusting a
+    #     change list.
+    # (b) The run could not (S1 declared runner-unreadable; claimed section
+    #     74 T04, merged as section 78 - merge collision with arena/
+    #     fb91550a-nba1's concurrent gate fix, whose bare `pass` on this
+    #     branch is replaced by the freshness check their own review
+    #     asked for: a declaration must not hide staleness): the
+    #     snapshot is session-maintained, so require its verification instead
+    #     - explicit, official-URL, first-hand, and no older than
+    #     SESSION_INPUT_MAX_AGE_HOURS - plus a complete integrity-clean
+    #     30-team table. If sessions stop re-reading the official page, this
+    #     check blocks the rebuild exactly as a stale capture would.
     if "S1_season" in declared:
-        # The runner cannot refresh team_advanced.json (S1 is declared
-        # runner-unreadable). A declaration excuses the parse - never the
-        # input: the consumed snapshot must instead be a session read inside
-        # the freshness bound, with an explicit verification block naming who
-        # read it and when. Older than the bound and the gate blocks again,
-        # with the read time printed (COORDINATION.md section 77).
         try:
             adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
-            proof = adv_snapshot.get("verification")
-            if not isinstance(proof, dict):
-                proof = next((w.get("verification")
-                              for w in adv_snapshot.get("windows", [])
-                              if isinstance(w, dict)
-                              and isinstance(w.get("verification"), dict)), None)
-            if not isinstance(proof, dict) or proof.get("verified") is not True:
-                errors.append(
-                    "consumed input data/raw/team_advanced.json has no explicit "
-                    "session-read verification block (required while S1_season "
-                    "is declared runner-unreadable)")
-            else:
-                try:
-                    read_at = parse_utc(proof.get("verified_at_utc"))
-                except (TypeError, ValueError):
-                    errors.append(
-                        "consumed input data/raw/team_advanced.json has no "
-                        "valid verification timestamp")
-                else:
-                    input_age = (now - read_at).total_seconds() / 3600
-                    if input_age < -0.05:
-                        errors.append(
-                            "consumed input data/raw/team_advanced.json is "
-                            "future-dated")
-                    elif input_age > max_input_age_hours:
-                        errors.append(
-                            f"consumed input data/raw/team_advanced.json is "
-                            f"{input_age:.1f}h old (session-read freshness "
-                            f"bound {max_input_age_hours:g}h; read "
-                            f"{proof.get('verified_at_utc')} by "
-                            f"{proof.get('verified_by', 'unknown')}): re-read "
-                            "the official page first-hand and re-promote")
-                    else:
-                        warnings.append(
-                            f"S1_season: runner-unreadable (declared); "
-                            f"consumed team_advanced.json is a session read "
-                            f"{input_age:.1f}h old "
-                            f"({proof.get('verified_at_utc')}, "
-                            f"{proof.get('verified_by', 'unknown')}) - within "
-                            f"the {max_input_age_hours:g}h bound")
         except (OSError, ValueError):
-            errors.append(
-                "consumed input data/raw/team_advanced.json is missing or "
-                "unreadable while S1_season is declared runner-unreadable")
+            adv_snapshot = None
+        if not isinstance(adv_snapshot, dict):
+            errors.append("advanced team input (session-maintained) missing or "
+                          "unreadable: data/raw/team_advanced.json")
+        else:
+            proof = adv_snapshot.get("verification") or {}
+            if proof.get("verified") is not True:
+                errors.append("advanced team input has no explicit session verification")
+            parsed_url = urlparse(str(proof.get("source_url") or ""))
+            if parsed_url.scheme != "https" or parsed_url.hostname not in ALLOWED_HOSTS:
+                errors.append("advanced team input verification source_url is not "
+                              "an official NBA host")
+            try:
+                verified_at = parse_utc(proof.get("verified_at_utc"))
+                v_age = (now - verified_at).total_seconds() / 3600
+                if v_age < -0.05 or v_age > SESSION_INPUT_MAX_AGE_HOURS:
+                    errors.append(f"advanced team input is stale: verified_at_utc is "
+                                  f"{v_age:.1f}h old (maximum "
+                                  f"{SESSION_INPUT_MAX_AGE_HOURS:g}h; read "
+                                  f"{proof.get('verified_at_utc')} by "
+                                  f"{proof.get('verified_by', 'unknown')}); re-read "
+                                  f"the official table before rebuilding")
+            except (TypeError, ValueError):
+                errors.append("advanced team input verification timestamp "
+                              "missing or invalid")
+            windows = adv_snapshot.get("windows") or []
+            season_rows, season_cols = [], []
+            for window in windows:
+                if isinstance(window, dict) and window.get("window_id") == "season_to_date":
+                    season_rows = window.get("rows") or []
+                    season_cols = window.get("cols") or adv_snapshot.get("cols") or []
+            if len(season_rows) != 30:
+                errors.append(f"advanced team input season_to_date has "
+                              f"{len(season_rows)} rows, expected 30")
+            else:
+                # Integrity without importing the parser: W + L == GP per row,
+                # resolved through the snapshot's own column list.
+                try:
+                    i_gp, i_w, i_l = (season_cols.index("gp"), season_cols.index("w"),
+                                      season_cols.index("l"))
+                    bad = [r[0] for r in season_rows
+                           if r[i_w] + r[i_l] != r[i_gp]]
+                    if bad:
+                        errors.append("advanced team input has rows where W+L != GP: "
+                                      + ", ".join(str(b) for b in bad[:5]))
+                except (ValueError, IndexError, TypeError):
+                    errors.append("advanced team input column list is missing "
+                                  "gp/w/l; the snapshot cannot be integrity-checked")
+            warnings.append("advanced team input accepted via session "
+                            "verification (runner-unreadable source, declared); "
+                            "no runner capture compared")
     else:
         try:
             adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
@@ -554,8 +552,8 @@ def evaluate_with_report(record: dict, now: dt.datetime,
         return payload
 
     require_promotion("data/raw/schedule_upcoming.json", "S4_schedule")
-    pdf_digest = pdf_results[0].get("sha256") if pdf_results else None
-    pdf_url = pdf_results[0].get("url") if pdf_results else None
+    pdf_digest = latest_pdf.get("sha256") if ok_pdfs else None
+    pdf_url = latest_pdf.get("url") if ok_pdfs else None
     require_promotion("data/raw/injuries.json", "injury_pdf_probe", pdf_digest, pdf_url)
 
     # Each current and previous-day official result capture must explicitly
@@ -625,10 +623,6 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--record", default="data/raw/_last_refresh.json")
     parser.add_argument("--max-age-hours", type=float, default=10)
-    parser.add_argument("--max-input-age-hours", type=float, default=72,
-                        help="while a consumed model input is covered by a "
-                             "runner-unreadable declaration, how old its "
-                             "session read may be (hours)")
     parser.add_argument("--now", help="ISO-8601 UTC test clock")
     args = parser.parse_args()
     root = os.environ.get("NBA1_REPO_ROOT", os.getcwd())
@@ -640,8 +634,7 @@ def main() -> int:
         errors = [f"cannot read refresh record: {exc}"]
     else:
         now = parse_utc(args.now) if args.now else dt.datetime.now(dt.timezone.utc)
-        errors, report = evaluate_with_report(record, now, args.max_age_hours,
-                                              args.max_input_age_hours)
+        errors, report = evaluate_with_report(record, now, args.max_age_hours)
     allowed = not errors
     for warning in report.get("warnings", []):
         print(f"NOTE: {warning}")

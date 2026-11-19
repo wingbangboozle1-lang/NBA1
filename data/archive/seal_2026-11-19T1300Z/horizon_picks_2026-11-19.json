@@ -1,0 +1,1192 @@
+{
+ "_meta": {
+  "title": "Horizon picks — 2026-11-19 through 2026-11-22",
+  "generated_by": "scripts/generate_picks.py (rolling window)",
+  "generated_utc": "2026-11-19T12:29Z",
+  "window_rule": "the horizon is whatever data/derived/horizon_lines.json holds; that file is produced by the rolling-slate originator from the newest official schedule capture (today + up to 3 days ahead)",
+  "lines_source": "data/derived/horizon_lines.json (scripts/originate_horizon.py)",
+  "pick_gate": {
+   "margin": 3.0,
+   "inherited_from": "data/originated_lines.json assumptions",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/originated_lines.json"
+  },
+  "validation_state": "NO strategy has passed the validation gates (Build A 0/8, Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, unfunded, zero stake. Market-comparison gates G4/G5 and prop-variance gate G-PROP remain BLOCKED (no odds feed).",
+  "parlay_pricing": {
+   "register": "data/derived/measured_rho.json",
+   "corpus_n_games": 74,
+   "corpus_window": "2026-11-06..2026-11-15",
+   "side_and_total_rho": {
+    "x": "home margin",
+    "y": "game total",
+    "r": -0.105,
+    "p_value": 0.3704,
+    "n": 74,
+    "subset": "all finals",
+    "status": "MEASURED from official final scores",
+    "why": "the rho a same-game side-and-total parlay needs"
+   },
+   "cross_game_rho": {
+    "quantity": "rho between two different games on the same date",
+    "why_not": "two games have no natural pairing, so a number would be an artefact of how the pairs were made rather than a property of the games",
+    "consequence": "cross-game parlays are published as the naive product p1 x p2 with the Frechet-Hoeffding band [max(0, p1+p2-1), min(p1, p2)]; no rho is asserted"
+   },
+   "rule": "where a rho is measurable it is used; where it is not, the price is the naive product p1 x p2 printed beside the Fréchet–Hoeffding band — R14",
+   "registers": {
+    "measured_rho_json": "scripts/measure_rho.py — side/total on a rolling finals window; carries a 'not measurable' verdict for cross-game pairs",
+    "rho_2026_27_json": "session arena/801ba27f-nba1 — cross-game 0.0142 (n_pairs 1546), teammates -0.0975 (n=374), opponents +0.0321 (n=187), side/total -0.0199 (n=190), from official box-score pages",
+    "conflict": "the two registers disagree on cross-game measurability and on the side/total value (different corpus windows); both are published, conflict flagged F136"
+   },
+   "cross_game": "price = joint under a Gaussian copula at the measured cross-game rho from rho_2026_27.json; the naive product p1 x p2 is printed beside it on every row (R14), with the Fréchet–Hoeffding band as the range any rho must respect",
+   "sgp_props": "measured teammate/opponent rho from rho_2026_27.json where present, MODEL-DERIVED fallback labelled as such; naive product printed beside the rho price on every row (R14/F90)",
+   "side_and_total": "priced with the measured rho on site/pages/roll.html section 4 from measured_rho.json (refreshed to its current 74-final corpus this session)"
+  },
+  "as_of": "ratings re-cut from the official team-stat pages read 2026-11-19T12:45Z; schedule captured 2026-11-19T06:10Z; latest injury report 11/19/26 12:30 AM (revision 11/19/26 12:30 AM, retrieved not printed (text render only))."
+ },
+ "singles": [
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600270",
+   "matchup": "GSW@MEM",
+   "line_spread_home": 8.1,
+   "line_total": 231.4,
+   "model_home_win_prob": 0.686,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MEM -8.1",
+    "gate": "G-CFG pass (|spread| 8.1 >= 3.0)",
+    "pick_prob": 0.686
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600271",
+   "matchup": "POR@MIL",
+   "line_spread_home": -19.0,
+   "line_total": 228.2,
+   "model_home_win_prob": 0.1278,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "POR -19.0",
+    "gate": "G-CFG pass (|spread| 19.0 >= 3.0)",
+    "pick_prob": 0.8722
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600272",
+   "matchup": "NYK@MIN",
+   "line_spread_home": 4.8,
+   "line_total": 211.1,
+   "model_home_win_prob": 0.613,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MIN -4.8",
+    "gate": "G-CFG pass (|spread| 4.8 >= 3.0)",
+    "pick_prob": 0.613
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600273",
+   "matchup": "LAC@SAS",
+   "line_spread_home": 16.7,
+   "line_total": 224.7,
+   "model_home_win_prob": 0.8411,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "SAS -16.7",
+    "gate": "G-CFG pass (|spread| 16.7 >= 3.0)",
+    "pick_prob": 0.8411
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600043",
+   "matchup": "CHA@ATL",
+   "line_spread_home": 12.5,
+   "line_total": 213.9,
+   "model_home_win_prob": 0.7727,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "ATL -12.5",
+    "gate": "G-CFG pass (|spread| 12.5 >= 3.0)",
+    "pick_prob": 0.7727
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600044",
+   "matchup": "ORL@BKN",
+   "line_spread_home": -5.5,
+   "line_total": 224.8,
+   "model_home_win_prob": 0.3711,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "ORL -5.5",
+    "gate": "G-CFG pass (|spread| 5.5 >= 3.0)",
+    "pick_prob": 0.6289
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600045",
+   "matchup": "IND@CLE",
+   "line_spread_home": 5.1,
+   "line_total": 231.4,
+   "model_home_win_prob": 0.6199,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "CLE -5.1",
+    "gate": "G-CFG pass (|spread| 5.1 >= 3.0)",
+    "pick_prob": 0.6199
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600046",
+   "matchup": "TOR@DET",
+   "line_spread_home": 5.4,
+   "line_total": 220.2,
+   "model_home_win_prob": 0.6267,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "DET -5.4",
+    "gate": "G-CFG pass (|spread| 5.4 >= 3.0)",
+    "pick_prob": 0.6267
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600047",
+   "matchup": "WAS@CHI",
+   "line_spread_home": -0.6,
+   "line_total": 233.8,
+   "model_home_win_prob": 0.4857,
+   "pick": {
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG pass-through (|spread| 0.6 < 3.0) — no bet",
+    "pick_prob": null
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600048",
+   "matchup": "NOP@OKC",
+   "line_spread_home": 11.5,
+   "line_total": 226.0,
+   "model_home_win_prob": 0.7543,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "OKC -11.5",
+    "gate": "G-CFG pass (|spread| 11.5 >= 3.0)",
+    "pick_prob": 0.7543
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600049",
+   "matchup": "PHX@UTA",
+   "line_spread_home": -6.4,
+   "line_total": 225.8,
+   "model_home_win_prob": 0.3509,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "PHX -6.4",
+    "gate": "G-CFG pass (|spread| 6.4 >= 3.0)",
+    "pick_prob": 0.6491
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600050",
+   "matchup": "HOU@DEN",
+   "line_spread_home": -8.3,
+   "line_total": 229.1,
+   "model_home_win_prob": 0.3097,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "HOU -8.3",
+    "gate": "G-CFG pass (|spread| 8.3 >= 3.0)",
+    "pick_prob": 0.6903
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600051",
+   "matchup": "SAC@LAL",
+   "line_spread_home": 20.7,
+   "line_total": 235.3,
+   "model_home_win_prob": 0.8922,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "LAL -20.7",
+    "gate": "G-CFG pass (|spread| 20.7 >= 3.0)",
+    "pick_prob": 0.8922
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600274",
+   "matchup": "MIL@PHI",
+   "line_spread_home": 15.8,
+   "line_total": 227.0,
+   "model_home_win_prob": 0.8278,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "PHI -15.8",
+    "gate": "G-CFG pass (|spread| 15.8 >= 3.0)",
+    "pick_prob": 0.8278
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600275",
+   "matchup": "POR@NYK",
+   "line_spread_home": -0.0,
+   "line_total": 218.3,
+   "model_home_win_prob": 0.5,
+   "pick": {
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG pass-through (|spread| 0.0 < 3.0) — no bet",
+    "pick_prob": null
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600276",
+   "matchup": "LAC@DAL",
+   "line_spread_home": 4.5,
+   "line_total": 226.9,
+   "model_home_win_prob": 0.6061,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "DAL -4.5",
+    "gate": "G-CFG pass (|spread| 4.5 >= 3.0)",
+    "pick_prob": 0.6061
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600277",
+   "matchup": "MEM@MIN",
+   "line_spread_home": 2.5,
+   "line_total": 225.2,
+   "model_home_win_prob": 0.5595,
+   "pick": {
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG pass-through (|spread| 2.5 < 3.0) — no bet",
+    "pick_prob": null
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600278",
+   "matchup": "NOP@SAS",
+   "line_spread_home": 18.5,
+   "line_total": 228.8,
+   "model_home_win_prob": 0.8658,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "SAS -18.5",
+    "gate": "G-CFG pass (|spread| 18.5 >= 3.0)",
+    "pick_prob": 0.8658
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game_id": "0022600279",
+   "matchup": "BOS@SAC",
+   "line_spread_home": -23.9,
+   "line_total": 221.5,
+   "model_home_win_prob": 0.0764,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "BOS -23.9",
+    "gate": "G-CFG pass (|spread| 23.9 >= 3.0)",
+    "pick_prob": 0.9236
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600280",
+   "matchup": "DET@ATL",
+   "line_spread_home": -3.9,
+   "line_total": 223.3,
+   "model_home_win_prob": 0.4077,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "DET -3.9",
+    "gate": "G-CFG pass (|spread| 3.9 >= 3.0)",
+    "pick_prob": 0.5923
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600281",
+   "matchup": "OKC@MIA",
+   "line_spread_home": -4.2,
+   "line_total": 229.8,
+   "model_home_win_prob": 0.4008,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "OKC -4.2",
+    "gate": "G-CFG pass (|spread| 4.2 >= 3.0)",
+    "pick_prob": 0.5992
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600282",
+   "matchup": "ORL@WAS",
+   "line_spread_home": -4.3,
+   "line_total": 222.3,
+   "model_home_win_prob": 0.3985,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "ORL -4.3",
+    "gate": "G-CFG pass (|spread| 4.3 >= 3.0)",
+    "pick_prob": 0.6015
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600283",
+   "matchup": "DEN@CHI",
+   "line_spread_home": -8.5,
+   "line_total": 233.6,
+   "model_home_win_prob": 0.3055,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "DEN -8.5",
+    "gate": "G-CFG pass (|spread| 8.5 >= 3.0)",
+    "pick_prob": 0.6945
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600284",
+   "matchup": "DAL@UTA",
+   "line_spread_home": -6.3,
+   "line_total": 220.5,
+   "model_home_win_prob": 0.3531,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "DAL -6.3",
+    "gate": "G-CFG pass (|spread| 6.3 >= 3.0)",
+    "pick_prob": 0.6469
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600285",
+   "matchup": "IND@NYK",
+   "line_spread_home": 8.5,
+   "line_total": 216.7,
+   "model_home_win_prob": 0.6945,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "NYK -8.5",
+    "gate": "G-CFG pass (|spread| 8.5 >= 3.0)",
+    "pick_prob": 0.6945
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game_id": "0022600286",
+   "matchup": "BOS@GSW",
+   "line_spread_home": -10.1,
+   "line_total": 218.1,
+   "model_home_win_prob": 0.2728,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "BOS -10.1",
+    "gate": "G-CFG pass (|spread| 10.1 >= 3.0)",
+    "pick_prob": 0.7272
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -19.0",
+   "p1": 0.872,
+   "leg2": "LAC@SAS — SAS -16.7",
+   "p2": 0.841,
+   "naive_product": 0.7334,
+   "price": 0.7341,
+   "fair_odds_at_price": 1.36,
+   "joint_lb": 0.713,
+   "joint_ub": 0.841,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.166,
+   "rho_ub": 0.881,
+   "fair_odds_lb": 1.19,
+   "fair_odds_ub": 1.4,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -19.0",
+   "p1": 0.872,
+   "leg2": "GSW@MEM — MEM -8.1",
+   "p2": 0.686,
+   "naive_product": 0.5982,
+   "price": 0.5993,
+   "fair_odds_at_price": 1.67,
+   "joint_lb": 0.558,
+   "joint_ub": 0.686,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.259,
+   "rho_ub": 0.566,
+   "fair_odds_lb": 1.46,
+   "fair_odds_ub": 1.79,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -19.0",
+   "p1": 0.872,
+   "leg2": "NYK@MIN — MIN -4.8",
+   "p2": 0.613,
+   "naive_product": 0.5345,
+   "price": 0.5357,
+   "fair_odds_at_price": 1.87,
+   "joint_lb": 0.485,
+   "joint_ub": 0.613,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.304,
+   "rho_ub": 0.482,
+   "fair_odds_lb": 1.63,
+   "fair_odds_ub": 2.06,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "leg1": "SAC@LAL — LAL -20.7",
+   "p1": 0.892,
+   "leg2": "CHA@ATL — ATL -12.5",
+   "p2": 0.773,
+   "naive_product": 0.6895,
+   "price": 0.6903,
+   "fair_odds_at_price": 1.45,
+   "joint_lb": 0.665,
+   "joint_ub": 0.773,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.189,
+   "rho_ub": 0.641,
+   "fair_odds_lb": 1.29,
+   "fair_odds_ub": 1.5,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/games?date=2026-11-20"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "leg1": "SAC@LAL — LAL -20.7",
+   "p1": 0.892,
+   "leg2": "NOP@OKC — OKC -11.5",
+   "p2": 0.754,
+   "naive_product": 0.6726,
+   "price": 0.6734,
+   "fair_odds_at_price": 1.48,
+   "joint_lb": 0.647,
+   "joint_ub": 0.754,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.198,
+   "rho_ub": 0.609,
+   "fair_odds_lb": 1.33,
+   "fair_odds_ub": 1.55,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/games?date=2026-11-20"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "leg1": "SAC@LAL — LAL -20.7",
+   "p1": 0.892,
+   "leg2": "HOU@DEN — HOU -8.3",
+   "p2": 0.69,
+   "naive_product": 0.6155,
+   "price": 0.6164,
+   "fair_odds_at_price": 1.62,
+   "joint_lb": 0.583,
+   "joint_ub": 0.69,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.233,
+   "rho_ub": 0.519,
+   "fair_odds_lb": 1.45,
+   "fair_odds_ub": 1.72,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/games?date=2026-11-20"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "leg1": "BOS@SAC — BOS -23.9",
+   "p1": 0.924,
+   "leg2": "NOP@SAS — SAS -18.5",
+   "p2": 0.866,
+   "naive_product": 0.8002,
+   "price": 0.8006,
+   "fair_odds_at_price": 1.25,
+   "joint_lb": 0.789,
+   "joint_ub": 0.866,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.113,
+   "rho_ub": 0.731,
+   "fair_odds_lb": 1.16,
+   "fair_odds_ub": 1.27,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/games?date=2026-11-21"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "leg1": "BOS@SAC — BOS -23.9",
+   "p1": 0.924,
+   "leg2": "MIL@PHI — PHI -15.8",
+   "p2": 0.828,
+   "naive_product": 0.7651,
+   "price": 0.7656,
+   "fair_odds_at_price": 1.31,
+   "joint_lb": 0.751,
+   "joint_ub": 0.828,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.131,
+   "rho_ub": 0.631,
+   "fair_odds_lb": 1.21,
+   "fair_odds_ub": 1.33,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/games?date=2026-11-21"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "leg1": "BOS@SAC — BOS -23.9",
+   "p1": 0.924,
+   "leg2": "LAC@DAL — DAL -4.5",
+   "p2": 0.606,
+   "naive_product": 0.5599,
+   "price": 0.5607,
+   "fair_odds_at_price": 1.78,
+   "joint_lb": 0.53,
+   "joint_ub": 0.606,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.232,
+   "rho_ub": 0.357,
+   "fair_odds_lb": 1.65,
+   "fair_odds_ub": 1.89,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/games?date=2026-11-21"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "leg1": "BOS@GSW — BOS -10.1",
+   "p1": 0.727,
+   "leg2": "DEN@CHI — DEN -8.5",
+   "p2": 0.695,
+   "naive_product": 0.5053,
+   "price": 0.5069,
+   "fair_odds_at_price": 1.97,
+   "joint_lb": 0.422,
+   "joint_ub": 0.695,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.406,
+   "rho_ub": 0.923,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 2.37,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/games?date=2026-11-22"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "leg1": "BOS@GSW — BOS -10.1",
+   "p1": 0.727,
+   "leg2": "IND@NYK — NYK -8.5",
+   "p2": 0.695,
+   "naive_product": 0.5053,
+   "price": 0.5069,
+   "fair_odds_at_price": 1.97,
+   "joint_lb": 0.422,
+   "joint_ub": 0.695,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.406,
+   "rho_ub": 0.923,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 2.37,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/games?date=2026-11-22"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "leg1": "BOS@GSW — BOS -10.1",
+   "p1": 0.727,
+   "leg2": "DAL@UTA — DAL -6.3",
+   "p2": 0.647,
+   "naive_product": 0.4704,
+   "price": 0.4721,
+   "fair_odds_at_price": 2.12,
+   "joint_lb": 0.374,
+   "joint_ub": 0.647,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED: rho_2026_27.json cross-game margin/margin, same date, rho = 0.0142 (n_pairs 1546, official box-score pages); re-derived first-hand from the committed finals corpus 2026-11-16 at r = 0.0120 (26 dates, 197 games). measured_rho.json records the opposing methodological verdict (cross-game pairing is an artefact of how pairs are made) — both registers published, conflict flagged F136",
+   "rho_lb": -0.453,
+   "rho_ub": 0.829,
+   "fair_odds_lb": 1.55,
+   "fair_odds_ub": 2.67,
+   "method": "legs from different games; priced at the measured cross-game rho under a Gaussian copula, with the naive product p1 x p2 printed beside it and the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] published as the range any rho must respect",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/games?date=2026-11-22"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-19",
+   "game": "GSW@MEM",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Stephen Curry (GSW) OVER 27.5",
+   "leg2": "Ty Jerome (MEM) OVER 26.5",
+   "leg1_detail": {
+    "player": "Stephen Curry",
+    "team": "GSW",
+    "line": 27.5,
+    "season_avg": 27.8,
+    "sigma": 6.063,
+    "prob_over": 0.5197,
+    "z": -0.049476733161579356
+   },
+   "leg2_detail": {
+    "player": "Ty Jerome",
+    "team": "MEM",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "joint_prob_rho": 0.2544,
+   "joint_prob_independent": 0.2493,
+   "naive_product": 0.2493,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-19",
+   "game": "NYK@MIN",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Anthony Edwards (MIN) OVER 33.5",
+   "leg2": "Jalen Brunson (NYK) OVER 26.5",
+   "leg1_detail": {
+    "player": "Anthony Edwards",
+    "team": "MIN",
+    "line": 33.5,
+    "season_avg": 33.3,
+    "sigma": 6.636,
+    "prob_over": 0.488,
+    "z": 0.030137695357103988
+   },
+   "leg2_detail": {
+    "player": "Jalen Brunson",
+    "team": "NYK",
+    "line": 26.5,
+    "season_avg": 26.0,
+    "sigma": 5.864,
+    "prob_over": 0.466,
+    "z": 0.08526788484268873
+   },
+   "joint_prob_rho": 0.2325,
+   "joint_prob_independent": 0.2274,
+   "naive_product": 0.2274,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game": "SAC@LAL",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Luka Dončić (LAL) OVER 38.5",
+   "leg2": "Darius Acuff Jr. (SAC) OVER 26.5",
+   "leg1_detail": {
+    "player": "Luka Dončić",
+    "team": "LAL",
+    "line": 38.5,
+    "season_avg": 38.6,
+    "sigma": 7.145,
+    "prob_over": 0.5056,
+    "z": -0.013996147390862166
+   },
+   "leg2_detail": {
+    "player": "Darius Acuff Jr.",
+    "team": "SAC",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "joint_prob_rho": 0.2476,
+   "joint_prob_independent": 0.2425,
+   "naive_product": 0.2425,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-20",
+   "game": "SAC@LAL",
+   "kind": "two_teammates",
+   "rho": -0.0975,
+   "rho_measured": true,
+   "rho_n": 374,
+   "leg1": "Luka Dončić (LAL) OVER 38.5",
+   "leg2": "Austin Reaves (LAL) OVER 24.5",
+   "leg1_detail": {
+    "player": "Luka Dončić",
+    "team": "LAL",
+    "line": 38.5,
+    "season_avg": 38.6,
+    "sigma": 7.145,
+    "prob_over": 0.5056,
+    "z": -0.013996147390862166
+   },
+   "leg2_detail": {
+    "player": "Austin Reaves",
+    "team": "LAL",
+    "line": 24.5,
+    "season_avg": 24.7,
+    "sigma": 5.715,
+    "prob_over": 0.514,
+    "z": -0.03499320159067526
+   },
+   "joint_prob_rho": 0.2443,
+   "joint_prob_independent": 0.2598,
+   "naive_product": 0.2598,
+   "rho_status": "MEASURED: rho_2026_27.json teammate points rho = -0.0975 (n = 374, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-20",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game": "MEM@MIN",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Ty Jerome (MEM) OVER 26.5",
+   "leg2": "Anthony Edwards (MIN) OVER 33.5",
+   "leg1_detail": {
+    "player": "Ty Jerome",
+    "team": "MEM",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "leg2_detail": {
+    "player": "Anthony Edwards",
+    "team": "MIN",
+    "line": 33.5,
+    "season_avg": 33.3,
+    "sigma": 6.636,
+    "prob_over": 0.488,
+    "z": 0.030137695357103988
+   },
+   "joint_prob_rho": 0.2392,
+   "joint_prob_independent": 0.2341,
+   "naive_product": 0.2341,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-21",
+   "game": "BOS@SAC",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Jayson Tatum (BOS) OVER 26.5",
+   "leg2": "Darius Acuff Jr. (SAC) OVER 26.5",
+   "leg1_detail": {
+    "player": "Jayson Tatum",
+    "team": "BOS",
+    "line": 26.5,
+    "season_avg": 26.3,
+    "sigma": 5.898,
+    "prob_over": 0.4865,
+    "z": 0.033912068520305615
+   },
+   "leg2_detail": {
+    "player": "Darius Acuff Jr.",
+    "team": "SAC",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "joint_prob_rho": 0.2385,
+   "joint_prob_independent": 0.2334,
+   "naive_product": 0.2334,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-21",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game": "OKC@MIA",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Giannis Antetokounmpo (MIA) OVER 27.5",
+   "leg2": "Shai Gilgeous-Alexander (OKC) OVER 29.5",
+   "leg1_detail": {
+    "player": "Giannis Antetokounmpo",
+    "team": "MIA",
+    "line": 27.5,
+    "season_avg": 27.7,
+    "sigma": 6.053,
+    "prob_over": 0.5132,
+    "z": -0.033043973924195814
+   },
+   "leg2_detail": {
+    "player": "Shai Gilgeous-Alexander",
+    "team": "OKC",
+    "line": 29.5,
+    "season_avg": 29.7,
+    "sigma": 6.267,
+    "prob_over": 0.5127,
+    "z": -0.03191199319206831
+   },
+   "joint_prob_rho": 0.2682,
+   "joint_prob_independent": 0.2631,
+   "naive_product": 0.2631,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  },
+  {
+   "date": "2026-11-22",
+   "game": "ORL@WAS",
+   "kind": "two_opponents",
+   "rho": 0.0321,
+   "rho_measured": true,
+   "rho_n": 187,
+   "leg1": "Paolo Banchero (ORL) OVER 24.5",
+   "leg2": "Anthony Davis (WAS) OVER 25.5",
+   "leg1_detail": {
+    "player": "Paolo Banchero",
+    "team": "ORL",
+    "line": 24.5,
+    "season_avg": 24.5,
+    "sigma": 5.692,
+    "prob_over": 0.5,
+    "z": 0.0
+   },
+   "leg2_detail": {
+    "player": "Anthony Davis",
+    "team": "WAS",
+    "line": 25.5,
+    "season_avg": 25.6,
+    "sigma": 5.819,
+    "prob_over": 0.5069,
+    "z": -0.01718629163135013
+   },
+   "joint_prob_rho": 0.2585,
+   "joint_prob_independent": 0.2534,
+   "naive_product": 0.2534,
+   "rho_status": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-22",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings from the official advanced page read 2026-11-19T12:45Z (games through 222 decided games (results feed through 2026-11-18)); HCA pin 0.09 pts from home win rate 0.5023 (111 of 221) read 2026-11-19T12:29Z; injury statuses from 11/19/26 12:30 AM (revision 11/19/26 12:30 AM)"
+  }
+ ],
+ "n_model_picks": 23
+}

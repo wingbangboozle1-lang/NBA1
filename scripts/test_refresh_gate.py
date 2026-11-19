@@ -411,6 +411,9 @@ class Section77Tests(unittest.TestCase):
     _declare = DeclarationTests._declare
 
     def _declare_s1(self, keys=("S1_season",), with_evidence=True):
+        # Declare the three standing pages too, so each test isolates the
+        # S1 behaviour under test instead of re-listing their requirements.
+        self._declare()
         entries = []
         for key in keys:
             entry = {"source_key": key,
@@ -440,12 +443,22 @@ class Section77Tests(unittest.TestCase):
         # runner it never exists at all. Removing it reproduces the runner.
         os.remove(os.path.join(self.root, "data/raw/_capture_S1_season.json"))
 
-    def _write_team_advanced(self, verified_at):
-        payload = {"cols": ["team", "gp"],
-                   "windows": [{"window_id": "season_to_date", "rows": []}]}
+    def _write_team_advanced(self, verified_at, source_url=URLS["S1_season"],
+                             rows=None):
+        # The landed gate (their K3 hardening) requires: explicit session
+        # verification, an official source_url, a parseable timestamp inside
+        # the 72h bound, a season_to_date window of exactly 30 rows with
+        # W+L==GP through the snapshot's own column list.
+        cols = ["team", "gp", "w", "l"]
+        if rows is None:
+            rows = [[f"Team {i:02d}", 1, 1, 0] for i in range(30)]
+        payload = {"cols": cols,
+                   "windows": [{"window_id": "season_to_date",
+                                "cols": cols, "rows": rows}]}
         if verified_at is not None:
             payload["verification"] = {
                 "verified": True, "verified_at_utc": verified_at,
+                "source_url": source_url,
                 "verified_by": "arena/70d0e760-nba1 (platform web-fetch channel)"}
         with open(os.path.join(self.root, "data/raw/team_advanced.json"),
                   "w") as fh:
@@ -459,7 +472,7 @@ class Section77Tests(unittest.TestCase):
         self.assertEqual([], [e for e in errors if "advanced" in e
                               or "S1_season" in e
                               or "structured capture" in e], errors)
-        self.assertTrue(any("within the 72h bound" in w
+        self.assertTrue(any("accepted via session verification" in w
                             for w in report["warnings"]), report["warnings"])
         self.assertIn("S1_season",
                       [d["source_key"] for d in report["declarations_applied"]])
@@ -469,7 +482,7 @@ class Section77Tests(unittest.TestCase):
         self._break_s1_parse()
         self._write_team_advanced("2026-11-12T10:00:00Z")  # 74h before NOW
         errors, _ = evaluate_with_report(self.record, NOW)
-        self.assertTrue(any("session-read freshness bound" in e
+        self.assertTrue(any("advanced team input is stale" in e
                             and "2026-11-12T10:00:00Z" in e for e in errors),
                         errors)
 
@@ -478,16 +491,19 @@ class Section77Tests(unittest.TestCase):
         self._break_s1_parse()
         self._write_team_advanced(None)
         errors, _ = evaluate_with_report(self.record, NOW)
-        self.assertTrue(any("no explicit session-read verification block" in e
+        self.assertTrue(any("no explicit session verification" in e
                             for e in errors), errors)
 
     def test_freshness_bound_is_configurable(self):
         self._declare_s1()
         self._break_s1_parse()
         self._write_team_advanced("2026-11-15T10:00:00Z")  # 2h before NOW
-        errors, _ = evaluate_with_report(self.record, NOW,
-                                         max_input_age_hours=1)
-        self.assertTrue(any("session-read freshness bound" in e
+        import engine.refresh_gate as rg
+        old_bound = rg.SESSION_INPUT_MAX_AGE_HOURS
+        rg.SESSION_INPUT_MAX_AGE_HOURS = 1.0
+        self.addCleanup(setattr, rg, "SESSION_INPUT_MAX_AGE_HOURS", old_bound)
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("advanced team input is stale" in e
                             for e in errors), errors)
 
     def test_without_the_declaration_the_old_requirement_returns(self):
@@ -516,11 +532,9 @@ class Section77Tests(unittest.TestCase):
         # The two declared failures are notes; the undeclared one still blocks.
         self.assertTrue(any("fetcher reported 1 failed" in e for e in errors),
                         errors)
-        applied = {d["source_key"]: d for d in report["declarations_applied"]}
+        applied = {d["source_key"] for d in report["declarations_applied"]}
         self.assertIn("S1_season", applied)
         self.assertIn("S2_train", applied)
-        self.assertTrue(applied["S2_train"].get("failure_only"))
-        self.assertFalse(applied["S1_season"].get("failure_only"))
 
     def test_newest_failed_injury_edition_falls_back_to_the_newest_success(self):
         """A rate-limited newest edition must not block the verification side
@@ -558,10 +572,16 @@ class AuditHistoryTests(unittest.TestCase):
         if history.get("error"):
             self.skipTest(f"history unavailable in this environment: {history['error']}")
         self.assertFalse(os.path.exists(os.path.join(audit.ROOT, ".git", "shallow")))
-        # The repository has a real success in its history (2026-11-15T12:43:11Z).
+        # The repository has real successes in its history. The floor is the
+        # 2026-11-15T12:43:11Z rebuild that section 73 measured; the value
+        # itself is history-derived and legitimately advances as rebuilds
+        # succeed (arena/4eef6d3b-nba1 section 78: the first success since
+        # then is run 44527302396 at 2026-11-19T12:49:05Z, which moved this
+        # pin - so it is now a range, not a frozen string).
         self.assertTrue(history["rebuild_has_ever_run"], history)
         self.assertGreaterEqual(history["records_read"], 5)
-        self.assertEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
+        self.assertGreaterEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
+        self.assertRegex(history["last_success_utc"], r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 
     def test_audit_reports_shallow_clones_instead_of_guessing(self):
         """The guard must DESCRIBE the checkout, and must not fail the suite.
@@ -596,3 +616,218 @@ class AuditHistoryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SessionVerifiedAdvancedTests(unittest.TestCase):
+    """Section 74 T04: the runner-unreadable, session-maintained advanced input.
+
+    The runner can never parse the official advanced table (byte evidence in
+    data/raw/_capture_evidence_S1_season.json: a 294KB shell with 0 team
+    rows), but engine/pipeline.py consumes its value, so the snapshot is kept
+    by first-hand session transcription. When S1_season is declared
+    runner-unreadable, the gate must:
+
+      * excuse the capture-shaped requirements that no run can satisfy;
+      * freshness- and provenance-check the SESSION verification instead
+        (explicit, official URL, recent, complete 30-team table with W+L==GP);
+      * return to the strict capture-equality compare the moment a run parses
+        rows (anti-rot).
+
+    Each test pins one way that could go wrong.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = self.tmp.name
+        self.old_root = os.environ.get("NBA1_REPO_ROOT")
+        os.environ["NBA1_REPO_ROOT"] = self.root
+        raw = os.path.join(self.root, "data/raw")
+        self.raw = raw
+        os.makedirs(os.path.join(raw, "injury_pdfs"), exist_ok=True)
+        pdf_rel = "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_00PM__" + PDF_DIGEST + ".pdf"
+        with open(os.path.join(self.root, pdf_rel), "wb") as fh:
+            fh.write(PDF_BYTES)
+        urls = {
+            "S1_season": "https://www.nba.com/stats/teams/advanced",
+            "S2_train": ("https://www.nba.com/stats/teams/advanced"
+                         "?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season"),
+            "S4_schedule": "https://www.nba.com/schedule",
+            "S5_injury_index": "https://official.nba.com/nba-injury-report-2026-27-season/",
+            "S8_standings": "https://www.nba.com/standings",
+            "S9_team_traditional": "https://www.nba.com/stats/teams/traditional",
+            "S10_team_opponent": "https://www.nba.com/stats/teams/opponent",
+        }
+        self.urls = urls
+        self.record = {
+            "captured_at_utc": "2026-11-15T11:55:00Z",
+            "failed": [],
+            "changed": [],
+            "source_checks": [
+                {"key": k, "url": u, "checked_at_utc": "2026-11-15T11:55:00Z",
+                 "http_status": 200, "bytes": 12345, "sha256": DIGEST}
+                for k, u in urls.items()
+            ] + [
+                {"key": "results_2026-11-15", "url": "https://www.nba.com/games?date=2026-11-15",
+                 "checked_at_utc": "2026-11-15T11:55:00Z", "http_status": 200, "sha256": DIGEST},
+                {"key": "results_2026-11-14", "url": "https://www.nba.com/games?date=2026-11-14",
+                 "checked_at_utc": "2026-11-15T11:55:00Z", "http_status": 200, "sha256": DIGEST},
+                {"key": "injury_pdf_probe", "checked_at_utc": "2026-11-15T11:55:00Z",
+                 "results": [{"edition": "Injury-Report_2026-11-15_12_00PM.pdf",
+                              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_00PM.pdf",
+                              "http_status": 200, "sha256": PDF_DIGEST,
+                              "pdf_valid": True, "artifact_path": pdf_rel}]},
+            ],
+        }
+        # Captures exactly as the fetcher leaves them for the runner: the
+        # advanced pages produce NO rows-bearing capture (only evidence), the
+        # others are complete.
+        for key, url in urls.items():
+            name = {
+                "S1_season": "_capture_S1_season.json",
+                "S2_train": "_capture_S2_train.json",
+                "S4_schedule": "_capture_S4_schedule.json",
+                "S5_injury_index": "_capture_S5_injury_index.json",
+                "S8_standings": "_capture_S8_standings.json",
+                "S9_team_traditional": "_capture_S9_team_traditional.json",
+                "S10_team_opponent": "_capture_S10_team_opponent.json",
+            }[key]
+            payload = {"source_url": url, "page_sha256": DIGEST}
+            if key == "S4_schedule":
+                payload["games"] = [{"game_id": "0022600001"}]
+            if key in ("S1_season", "S2_train", "S8_standings", "S9_team_traditional",
+                       "S10_team_opponent"):
+                # Evidence records for the runner-unreadable pages; the S1/S2
+                # family carries no rows-bearing capture at all.
+                with open(os.path.join(raw, "_capture_evidence_" + key + ".json"), "w") as fh:
+                    json.dump({"status": "parse_failed", "source_url": url,
+                               "captured_at_utc": "2026-11-15T11:55:00Z",
+                               "problems": ["html_table: no team rows in the delivered page"]}, fh)
+                if key in ("S1_season", "S2_train"):
+                    continue
+            with open(os.path.join(raw, name), "w") as fh:
+                json.dump(payload, fh)
+        for filename, source, digest, rows in (
+            ("schedule_upcoming.json", urls["S4_schedule"], DIGEST,
+             [{"game_id": "0022600001", "away": "AAA", "home": "BBB"}]),
+            ("injuries.json",
+             "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_00PM.pdf",
+             PDF_DIGEST, [{"player": "Example Player", "status": "Available"}]),
+        ):
+            payload = {"rows": rows, "verification": {"verified": True,
+                       "source_url": source, "source_sha256": digest,
+                       "verified_at_utc": "2026-11-15T11:57:00Z"}}
+            with open(os.path.join(raw, filename), "w") as fh:
+                json.dump(payload, fh)
+        for date in ("2026-11-14", "2026-11-15"):
+            payload = {"snapshot_comparison": {"mismatches": [],
+                       "promotion_candidates": [], "committed_finals_missed": []}}
+            with open(os.path.join(raw, f"_capture_results_{date}.json"), "w") as fh:
+                json.dump(payload, fh)
+        self._write_session_snapshot()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+        if self.old_root is None:
+            os.environ.pop("NBA1_REPO_ROOT", None)
+        else:
+            os.environ["NBA1_REPO_ROOT"] = self.old_root
+
+    def _write_session_snapshot(self, verified_at="2026-11-15T11:57:00Z",
+                                source_url="https://www.nba.com/stats/teams/advanced",
+                                rows=None, verified=True):
+        cols = ["team", "gp", "w", "l"]
+        if rows is None:
+            rows = [[f"Team {i:02d}", 2, 1, 1] for i in range(30)]
+        payload = {
+            "cols": cols,
+            "verification": {"verified": verified, "source_url": source_url,
+                             "verified_by": "arena/4eef6d3b-nba1 (session transcription)",
+                             "verified_at_utc": verified_at, "row_count": len(rows)},
+            "windows": [{"window_id": "season_to_date", "rows": rows, "cols": cols}],
+        }
+        with open(os.path.join(self.raw, "team_advanced.json"), "w") as fh:
+            json.dump(payload, fh)
+
+    def _declare_all(self, keys=("S1_season", "S2_train", "S8_standings",
+                                 "S9_team_traditional", "S10_team_opponent"),
+                     expires="2026-12-19T00:00:00Z"):
+        entries = [{"source_key": k, "required_snapshot": f"data/raw/{k}.json",
+                    "expires_at_utc": expires, "review_flag": "F1",
+                    "reason": "runner-unreadable, evidence on disk"} for k in keys]
+        with open(os.path.join(self.raw, "unreadable_sources.json"), "w") as fh:
+            json.dump({"declarations": entries}, fh)
+
+    def test_s1_declaration_plus_fresh_session_verification_passes(self):
+        self._declare_all()
+        errors, report = evaluate_with_report(self.record, NOW)
+        self.assertEqual(errors, [], errors)
+        applied = {d["source_key"] for d in report["declarations_applied"]}
+        self.assertIn("S1_season", applied)
+        self.assertIn("S2_train", applied)
+        self.assertTrue(any("session" in w for w in report["warnings"]))
+
+    def test_stale_session_verification_blocks(self):
+        self._declare_all()
+        self._write_session_snapshot(verified_at="2026-11-12T00:00:00Z")  # 84h old
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("advanced team input is stale" in e for e in errors), errors)
+
+    def test_missing_verification_blocks(self):
+        self._declare_all()
+        self._write_session_snapshot(verified=True)
+        with open(os.path.join(self.raw, "team_advanced.json")) as fh:
+            payload = json.load(fh)
+        payload.pop("verification")
+        with open(os.path.join(self.raw, "team_advanced.json"), "w") as fh:
+            json.dump(payload, fh)
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("no explicit session verification" in e for e in errors), errors)
+
+    def test_non_official_source_url_blocks(self):
+        self._declare_all()
+        self._write_session_snapshot(source_url="https://example.com/advanced")
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("not an official NBA host" in e for e in errors), errors)
+
+    def test_incomplete_table_blocks(self):
+        self._declare_all()
+        self._write_session_snapshot(rows=[[f"Team {i:02d}", 2, 1, 1] for i in range(29)])
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("expected 30" in e for e in errors), errors)
+
+    def test_w_plus_l_integrity_on_session_snapshot(self):
+        self._declare_all()
+        rows = [[f"Team {i:02d}", 2, 1, 1] for i in range(30)]
+        rows[7] = ["Team 07", 3, 1, 1]  # W+L != GP
+        self._write_session_snapshot(rows=rows)
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("W+L != GP" in e for e in errors), errors)
+
+    def test_s2_train_failed_entry_is_excused_only_when_declared(self):
+        self.record["failed"] = [["S1_season", "expected 30 team rows, parsed 0"],
+                                 ["S2_train", "expected 30 team rows, parsed 0"]]
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("failed source/parse checks" in e for e in errors), errors)
+        self._declare_all()
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertEqual(errors, [], errors)
+
+    def test_anti_rot_rows_bring_back_the_strict_compare(self):
+        """A run that parses rows makes the declaration stale (section 73's
+        anti-rot rule), and the normal capture-equality requirement returns."""
+        self._declare_all()
+        rows = [[f"Team {i:02d}", 2, 1, 1] for i in range(30)]
+        capture = {"source_url": self.urls["S1_season"], "page_sha256": DIGEST,
+                   "cols": ["team", "gp", "w", "l"], "row_count": 30, "rows": rows}
+        with open(os.path.join(self.raw, "_capture_S1_season.json"), "w") as fh:
+            json.dump(capture, fh)
+        # The session snapshot deliberately carries different rows, so the
+        # restored strict compare has something to catch.
+        self._write_session_snapshot(rows=[[f"Team {i:02d}", 3, 2, 1] for i in range(30)])
+        errors, report = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("DECLARATION STALE" in w for w in report["warnings"]))
+        # The snapshot rows deliberately differ from the capture rows, so the
+        # strict compare must be back in force and must fail loudly.
+        self.assertTrue(any("advanced" in e for e in errors), errors)
+        applied = {d["source_key"] for d in report["declarations_applied"]}
+        self.assertNotIn("S1_season", applied)

@@ -37,21 +37,6 @@ the exit code is not poisoned by a permanently-unsatisfiable item, and
 it may excuse anything. If a page ever does become readable, the capture
 starts carrying rows, this branch stops firing, and the normal promotion path
 takes over on its own.
-
-EXIT SEMANTICS (COORDINATION.md section 77)
--------------------------------------------
-``run()`` exits ``1`` only when ``self.blocked`` is non-empty - i.e. when an
-item that is neither producible-nor-declared failed. This matters because the
-workflow's rebuild step requires ``steps.promote.outcome == 'success'``:
-before section 77, S1_season was re-classified as an ordinary ``blocked``
-item on every runner-side parse (its capture cannot even be produced there),
-so the promote step exited 1 on **every** run and the rebuild condition was
-a second dead predicate behind the gate. S1_season/S2_train now carry
-runner-unreadable declarations with three measured dead routes (shell bytes,
-stats.nba.com timeouts, edge-denied headless renders) and the same
-evidence-plus-expiry treatment as S8/S9/S10; a declared-but-stale input is
-kept honest by the gate's session-read freshness bound on the consumed
-``team_advanced.json`` (a declaration excuses the parse, never the input).
 """
 
 from __future__ import annotations
@@ -124,22 +109,21 @@ class Promoter:
         the downstream rebuild unreachable. The declaration is re-validated
         independently by engine/refresh_gate.py; this record is the audit
         trail, not the authority.
+
+        A missing/unreadable capture counts as a parse failure of a DECLARED
+        source only when this run actually attempted the fetch (an HTTP-200
+        source check): section 74 measured S1_season/S2_train arriving as
+        shells with no rows-bearing capture file, which is the same fact as a
+        parse failure. A declared source with NO capture attempt this run
+        still blocks (section 73's rule).
         """
         declaration = self._declarations().get(item)
+        check = self.checks.get(item) or {}
+        attempted = check.get("http_status") == 200
         parse_failed = any(token in reason for token in (
-            "no parsed rows", "no header row", "capture has no", "parsed 0"))
-        if declaration and not parse_failed and "capture unreadable" in reason:
-            # A MISSING capture file is excusable only when this run's own
-            # parse-failure evidence record is on disk: a declared page must
-            # still have been attempted this run (scripts/test_promote_official
-            # .py pins the property; section 77 needs it because the runner
-            # never writes _capture_S1_season.json at all - the fetcher writes
-            # it only `if rows:`, and S1's parse never yields rows there).
-            for rel in (declaration.get("evidence") or []):
-                if isinstance(rel, str) and os.path.exists(os.path.join(ROOT, rel)):
-                    parse_failed = True
-                    break
-        if declaration and parse_failed:
+            "no parsed rows", "no header row", "capture has no", "parsed 0",
+            "capture unreadable"))
+        if declaration and parse_failed and attempted:
             self.unreadable.append({
                 "item": item,
                 "reason": reason,
@@ -290,7 +274,23 @@ class Promoter:
             try:
                 cap = read_json(cap_path)
             except (OSError, ValueError) as exc:
-                self.fail(item, f"{key} capture unreadable: {exc}")
+                # The fetcher writes _capture_<key>.json only when rows PARSE
+                # (engine/fetch_official.py, the `if rows:` branch); on a
+                # proved-unreadable page it writes the evidence record instead
+                # (see engine/refresh_gate.py's declared branch, same rule).
+                # A missing capture file is therefore the EXPECTED state of a
+                # declared source whose evidence record exists — recorded with a
+                # parse-failure reason so fail() routes it to unreadable — and an
+                # ordinary hard block otherwise (a declaration never excuses a
+                # page that was not even attempted; test_promote_official pins
+                # that property).
+                evidence_path = os.path.join(RAW, f"_capture_evidence_{key}.json")
+                if os.path.exists(evidence_path):
+                    self.fail(item, f"{key} capture has no parsed rows (the fetcher "
+                                    f"wrote {os.path.basename(evidence_path)} instead "
+                                    f"of a rows-bearing capture)")
+                else:
+                    self.fail(item, f"{key} capture unreadable: {exc}")
                 return
             rows = cap.get("rows") or []
             cols = cap.get("cols") or po.ADVANCED_COLS

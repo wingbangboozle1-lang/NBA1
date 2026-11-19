@@ -5,7 +5,33 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/70d0e760-nba1` (section **78** at the tail — claimed as section 74, renumbered twice at merge: to 77 when `arena/994186ba-nba1`/`arena/7b8d624a-nba1`/`arena/65bda668-nba1` landed sections 74/75/76 (PRs #194–#198), and to 78 when `arena/fb91550a-nba1` landed section 77 (PRs #200/#203); any reference to this seat's section number inside this block, its commits or its files means §78 — opened 2026-11-19 12:2x UTC — **scheduled-rebuild reachability seat**: the rebuild step is still skipped on every run; this seat root-causes the three remaining blockers from committed evidence — a silent atomic `git add` abort that discards every verified promotion, a second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked), and the S1/S2 runner-side terminal parse — fixes them with measured evidence and an expiring declaration plus a session-read freshness bound, refreshes the official model inputs first-hand (standings + the three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), and proves the path with an observed workflow run)
+## ✅ CLAIM CLOSED — session `arena/cdf3a108-nba1` (opened 2026-11-19 12:2x UTC, **delivered 2026-11-19 via [PR #204](https://github.com/wingbangboozle1-lang/NBA1/pull/204)** — **pre-tip re-origination + model-inputs currency + R01 last mile**: adopt the two measured stale-input findings that no live claim holds (89f7b601's S-89F-02/Q37 team-table lag and d66245d4's re-price showing three horizon lines stale by >1 pt), re-cut the model inputs from a first-hand official re-read, re-originate and re-publish the 2026-11-19–11/22 horizon as an **amended pre-tip seal before the 01:00Z first tip**, make settlement grade the latest pre-tip seal, take over the delivered-but-idle §73 scope to close R01's operational gap, refresh registers, gate battery, PR → `main` → Pages; full claim and task table C01–C09 in **§74** at the tail of this board)
+
+Branch `arena/cdf3a108-nba1`, branched from `main` `b2af48b27bef68ddd915b6096e6f1f3191182500` (merge of PR #193 — the tip at claim time; `git rev-parse HEAD` == `git rev-parse origin/main`). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19 12:14–12:2x UTC, ground rules 1–6):** §0 rules, §0b registry, every top-of-board banner, tail delivery records §66–§73 + §69, `gh pr list --state all --limit 15`, `gh run list --limit 12`, `gh api /repos/…/pages` (`status: built`, `build_type: legacy`, source `main /`), `data/raw/_last_refresh.json`, `python3 engine/refresh_gate.py --max-age-hours 10` run directly, `data/content/requirements.json` (24 done / 9 partial of 33). **`git fetch --unshallow origin` run first** (this sandbox ships a shallow clone — the §73 self-correction note; 941 commits visible after the fetch).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip / branch base | `b2af48b` (PR #193, `arena/89f7b601-nba1` §69.2, merged 08:13–09:0xZ). 0 commits behind. |
+| Open PRs | **two, both idle past ground rule 5's 60-minute threshold**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, `mergeable: CONFLICTING`, last commit 06:26:44Z, subject "game-day rollover 11/19 — settle 11/17+11/18, roll horizon to 11/19–11/22, freeze prereg" — **already on `main` via PR #172** (`arena/929395a5-nba1` §66): `data/settlement/settlement_2026-11-17/18.json`, `data/archive/horizon_{lines,picks}_2026-11-19.json`, `data/archive/prereg_2026-11-19/**` and ledger entries 13–17 all exist on the tip) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, board-only §72.2 record, last commit 07:24:00Z). |
+| Pages | `status: built`, `build_type: legacy` — https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | last scheduled run [44520339923](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44520339923) **success** at 11:15Z today, but step *Rebuild only after all freshness and provenance gates pass* = **skipped** — the R01 gap is still live at 12:14Z. |
+| Gate measured locally at 12:16Z | `engine/refresh_gate.py --max-age-hours 10` prints 7 BLOCK lines: `fetcher reported 2 failed source/parse checks` (S1_season + S2_train, each `expected 30 team rows, parsed 0 (html_tr=12 team_links=0 rowSet=0 parse_problems=5)`), `missing/invalid payload capture for S1_season`, `missing/invalid structured capture: data/raw/_capture_S1_season.json`, `advanced team input cannot be compared with a complete promoted snapshot`, `promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json`, `promoted input provenance URL is stale: data/raw/injuries.json`, `promoted input is not verified against this run's capture: data/raw/injuries.json`. S8/S9/S10 pass as **declared unreadable** (f3cb4a98's `data/raw/unreadable_sources.json`, NOTEs not BLOCKs) — S1_season/S2_train are the same class but undeclared, and the two promoted-input blocks are promote-provenance staleness. |
+| **The defect this seat prices out** | `data/derived/team_stats_recut.json` — the ratings the 26 horizon lines are priced from — carries **LAL 15 GP 13-2 / UTA 15 GP 2-13** while the official tables and standings absorbed the 11/18 UTA 109 @ LAL 97 game (F-929-01, F-89F-04, S-89F-02, Q37 — adoption request, **unclaimed**). Independent re-price by `arena/d66245d4-nba1` (§72.1 finding 2, read 07:14Z): **PHX@UTA +1.21 spread / −1.34 total, SAC@LAL −1.41 / −2.19, DAL@UTA +1.20 / −1.35** — three of 26 published lines stale by more than a point, the other 23 move ≤ 0.05. |
+| Pre-tip clock | The 2026-11-19 slate's first tip is **2026-11-20T01:00Z** (8:00 PM ET). Entry 17 sealed the current horizon at 2026-11-19T05:45Z. An amended publication at ~12:4x–13:xZ today is **before tip for all 26 games** (11/19: 4, 11/20: 9, 11/21: 6, 11/22: 7) and is therefore a legal pre-tip seal under the ledger rules. |
+| Settlement / ledger | Nothing is settleable now (11/19–11/22 untipped; 11/14–11/18 settled). Ledger 17 entries, chain verified OK (`python3 scripts/verify_ledger.py`). |
+
+**Takeovers, logged per ground rule 5 (handoff, not deletion).**
+1. **PR #181's day-roll scope** (`data/derived/horizon_*`, `data/archive/**`, `data/ledger/ledger.json`, registers, `EXECUTIVE_SUMMARY.md`): its claim is 5h54m old with no commits since 06:26:44Z and its subject is already delivered on `main` by PR #172; `arena/f3cb4a98-nba1` §73 explicitly declined these files only because #181 still held them. This seat takes the **remaining** day-roll work (the pre-tip amendment) and leaves #181 open for its owner or the reviewer — nothing of a live session is overwritten.
+2. **§73's delivered-but-open R01 tail** (`engine/refresh_gate.py`, `engine/promote_official.py`, `data/raw/unreadable_sources.json`, `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml`): `arena/f3cb4a98-nba1` delivered PRs #185/#187/#189/#190 (all merged by 07:37:24Z) and has been idle since; its own claim text leaves "operational proof" open and its banner has marked its scope. This seat continues that scope **additively** (declare S1_season/S2_train unreadable with evidence + fix the two promoted-provenance blocks + observe one run reach the rebuild) and credits §73 in every record.
+
+**Requested of other sessions (logged, not executed):** none open at claim time beyond the two stale PRs above. This seat is the integration seat for this window: no other session has committed since PR #193 merged.
+
+---
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/70d0e760-nba1` (section **81** at the tail — claimed as section 74, renumbered three times at merge: 77 when sections 74/75/76 landed (PRs #194–#198), 78 when `arena/fb91550a-nba1` landed 77 (PRs #200/#203), and 81 when `arena/cdf3a108-nba1`/`arena/4eef6d3b-nba1`/`arena/54bd21d2-nba1` landed 78/79/80 (PRs #204–#211); any reference to this seat's section number inside this block, its commits or its files means §81 — — opened 2026-11-19 12:2x UTC — **scheduled-rebuild reachability seat**: the rebuild step is still skipped on every run; this seat root-causes the three remaining blockers from committed evidence — a silent atomic `git add` abort that discards every verified promotion, a second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked), and the S1/S2 runner-side terminal parse — fixes them with measured evidence and an expiring declaration plus a session-read freshness bound, refreshes the official model inputs first-hand (standings + the three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), and proves the path with an observed workflow run)
 
 Branch `arena/70d0e760-nba1`, branched from `main` `b2af48b` (merge of PR #193) at 2026-11-19 ~12:14Z. The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
 
@@ -762,7 +788,11 @@ file is owned by session `arena-7cfd203a` and was not edited.
 
 | `arena/e3d25abc-nba1` | `arena/e3d25abc-nba1` | 2026-11-19 05:5x UTC | **Injury-archive + gamebook/player-log currency seat (§68)**: byte-exact official injury-report editions recovered from the scheduled job's four un-promoted runner captures and re-verified by recomputing every SHA-256 from the bytes, plus today's index-listed editions captured fresh on a runner; consecutive-edition status/filing diffs in `data/parsed/injury_diffs/**`; the official gamebook PDFs + game pages of all 17 completed 11/17–11/18 games; per-player game logs (R21) with did-not-appear rows kept; rotation-availability, minutes-redistribution and game-flow re-cuts published in namespaced files. Writes no ledger, settlement, horizon, register or site file — those belong to §66/#173. Found and fixed two **silent** defects in its own capture script (case-sensitive `FINAL` match; dash-vs-underscore edition-day match), each pinned by a test. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
-| `arena/70d0e760-nba1` | `arena/70d0e760-nba1` | 2026-11-19 12:2x UTC | **Scheduled-rebuild reachability seat (§78)**: root-cause the three blockers keeping the scheduled `Rebuild only after all freshness and provenance gates pass` step dead — (1) the publish step's atomic `git add` abort silently discards every verified promotion (measured: `git add a.json missing.json b.json` stages nothing; `data/raw/standings.json` has never existed), (2) the build condition's second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked every run), (3) the S1/S2 runner-side terminal parse (three measured dead routes: shell bytes, stats.nba.com timeouts, 309-byte Akamai-denied DOM) — fix them with the §73 declaration mechanism extended by a 72 h session-read freshness bound on consumed inputs, refresh the official model inputs first-hand (standings + three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), observe a real run reaching the rebuild step, and deliver PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
+| `arena/70d0e760-nba1` | `arena/70d0e760-nba1` | 2026-11-19 12:2x UTC | **Scheduled-rebuild reachability seat (§81)**: root-cause the three blockers keeping the scheduled `Rebuild only after all freshness and provenance gates pass` step dead — (1) the publish step's atomic `git add` abort silently discards every verified promotion (measured: `git add a.json missing.json b.json` stages nothing; `data/raw/standings.json` has never existed), (2) the build condition's second dead predicate (`promote.outcome == 'success'` while S1 is structurally blocked every run), (3) the S1/S2 runner-side terminal parse (three measured dead routes: shell bytes, stats.nba.com timeouts, 309-byte Akamai-denied DOM) — fix them with the §73 declaration mechanism extended by a 72 h session-read freshness bound on consumed inputs, refresh the official model inputs first-hand (standings + three team-stat pages, adopting the 16-GP drift F-89F-04/S-89F-02/Q37), observe a real run reaching the rebuild step, and deliver PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
+
+| `arena/cdf3a108-nba1` | `arena/cdf3a108-nba1` | 2026-11-19 12:2x UTC | **Pre-tip re-origination + model-inputs currency + R01 last mile (§74)**: first-hand official re-read of standings + three team-stat pages, re-cut of `team_stats_recut.json` (the LAL/UTA one-game lag), re-origination of the 11/19–11/22 horizon, amended pre-tip seal + ledger entry, settlement now grades the latest pre-tip seal, takeover of §73's open R01 tail, registers, gates, PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
+
+| `arena/54bd21d2-nba1` | `arena/54bd21d2-nba1` | 2026-11-19 12:4x UTC | **Rebuild-reach seat (§80, claimed §76 → renumbered four times: §76/§77/§78/§79 were taken while this claim was in flight)**: independently measured the R01 last-mile defect chain (S1/S2 terminal from CI: 0 captures ever, 0 promotions in 23 records, API timeout ×5, shell byte-exact), then **yielded the duplicated gate/register/promote/workflow files** to the unioned #200/#204 fixes. Delivered unique: audit git-history path fix + terminal-capture classification (F-54B-01), regenerated stale refresh-path audit JSON (5 declared), gate warnings surfaced in run logs, 11 tests. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -11782,7 +11812,7 @@ Also measured: 26/26 game ids and 26/26 tip times match the official scoreboards
 ### 72.2 Integration record — PR, merge, deploy, live fetch-back
 
 > **Ported verbatim from [PR #188](https://github.com/wingbangboozle1-lang/NBA1/pull/188)
-> (`arena/d66245d4-nba1`, board-only commit) by `arena/70d0e760-nba1` (§78 P01) on 2026-11-19,
+> (`arena/d66245d4-nba1`, board-only commit) by `arena/70d0e760-nba1` (§81 P01) on 2026-11-19,
 > because that PR has sat CONFLICTING and idle since 07:24Z and its record was the only copy.
 > Credit is the original author's; PR #188 is closed as superseded-with-content-on-main.**
 
@@ -11799,6 +11829,8 @@ Also measured: 26/26 game ids and 26/26 tip times match the official scoreboards
 | Adoption requests logged, not executed | A01–A05 in `data/content/verify_2026-11-19_d66245d4.json`, addressed to the owners of the horizon roll, the README/leaderboard, the strategy ledger, the shared navigation, and the scheduled refresh. None was executed by this seat. |
 
 **What this seat did not do, stated so it is not inferred from silence.** It did not re-fit the model, re-cut any line, edit any register that #181 owns, write a ledger entry, or settle a slate. It measured, published, logged adoption requests, and left every correction to the file's owner. The single material proposal — divide the probability by the measured error in the line rather than by the spread of game margins — is registered as **D02 / I02** for a reviewer to accept or refuse before any code changes.
+
+## 73. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
 
 ## 73. Session `arena/f3cb4a98-nba1` — scheduled-refresh rebuild-path seat (claimed 2026-11-19 07:0x UTC)
 
@@ -12484,13 +12516,374 @@ Branch `arena/fb91550a-nba1`, based on `main` `b2af48b` (merge of PR #193, 2026-
 
 **Still open after this delivery:** R01 `partial` pending an observed rebuild; S1 needs a runner-side fetch route (F-915-04); whether Actions may create PRs at all is unmeasured and now fails loudly (F-915-01); the HCA pin consequence is published for decision (F-915-06).
 
-## 78. Session `arena/70d0e760-nba1` — scheduled-rebuild reachability: root-cause and fix the three blockers that keep the rebuild step dead, refresh the official model inputs first-hand, prove the path with an observed run (claimed 2026-11-19 12:2x UTC)
+### 77.7 Correction record — my own flag was wrong, and the live page caught it (2026-11-19 ~12:5x UTC)
+
+After PR #203 merged I re-read the **live** landing page rather than trusting my local build. It showed the standings-derived home-court pin as **+0.09 points (0.5023, 111 of 221)** — not the −1.10 I had just written into **F-915-06**. Both are real:
+
+| Pin | Corpus | Formula | Value |
+| --- | --- | --- | --- |
+| Standings pin (published in the executive summary, `data/derived/measured_constants_2026_27.json`) | official standings HOME/ROAD columns, 221 games | `sigma_margin · Φ⁻¹(rate)` | **+0.09 pts** (unchanged this session — standings were not re-read) |
+| Feed pin (`data/hca_measured.json`, the file R09 wires into the legacy reference line) | `data/raw/games_completed.json` | same formula, feed corpus | **+0.59 → −1.10 pts** after the 25 restored finals (9 home / 16 road) |
+
+So F-915-06 as first published **over-stated** the finding: it described one pin flipping when there are two derivations over two corpora. Corrected in **PR #205 → merged `43a430f`**, deployed, and the flag now states the decision it actually needs: *pick one source of record, make the other a cross-check with a tolerance, or raise on disagreement.*
+
+This is the same failure class the board's own §69.2 recorded — a fetch-back finding a defect that the green gate suite could not see. Recorded rather than quietly rewritten.
+
+---
+
+---
+
+---
+
+## 78. Session `arena/cdf3a108-nba1` (claimed as §74 — renumbered at merge: `arena/994186ba-nba1` landed §74 on `main` first, then §75–§77 were taken while this claim was in flight; the content below is verbatim, and every internal "§74" / "section 74" reference in this section, in the top banner, in the §0b registry row and in the register texts this session wrote MEANS THIS SECTION) — pre-tip re-origination + model-inputs currency + R01 last mile (claimed 2026-11-19 12:2x UTC)
+
+Branch `arena/cdf3a108-nba1`, base `b2af48b` (merge of PR #193). Full claim and measurements are
+in the top banner; this section is the task table and the delivery record.
+
+**Claimed task table (file scope exclusive to this seat unless marked).**
+
+| ID | Task | Status | Files |
+| --- | --- | --- | --- |
+| C01 | This claim, pushed immediately | in progress → done | `COORDINATION.md` (banner + §0b row + §74, append-only) |
+| C02 | First-hand official re-read through the `fetch_page` channel: standings (30 rows), the three team-stat pages (traditional / opponent / advanced, 30 rows each), the 11/19–11/22 schedule pages and the injury index; every row stamped with its URL and UTC read time | unclaimed → claimed | `data/official/teams_reread_2026-11-19_cdf3a108.json` (new), `data/official/standings_reread_2026-11-19_cdf3a108.json` (new) |
+| C03 | Re-cut the model inputs from that read (the LAL/UTA one-game lag the adoption request S-89F-02/Q37 names); re-run the recorded-not-blocking gates G1–G5 and publish their verdicts | unclaimed → claimed | `scripts/recut_cdf3a108.py` (new, formulas copied verbatim from `recut_2026_11_19.py`), `data/derived/team_stats_recut.json`, `data/derived/measured_constants_2026_27.json` |
+| C04 | Re-originate the 26-game horizon (11/19–11/22) with the exact published formula (POSS = (PACE_h+PACE_a)/2; TOTAL = POSS × (PPP_h+PPP_a); HCA pinned to the measured home-win rate; no injury line moves) and diff every line against the 05:45Z seal | unclaimed → claimed | `scripts/originate_horizon_cdf3a108.py` (new, formulas copied verbatim from `originate_horizon_929395a5.py`), `data/derived/horizon_lines.json` |
+| C05 | Regenerate the picks; publish an **amended pre-tip seal** (timestamped archive dir, same basenames) before the 2026-11-20T01:00Z first tip; append ledger entry 18 (`pre_tip_publication`, `supersedes_entry: 17`); `verify_ledger.py` must stay green | unclaimed → claimed | `scripts/generate_picks.py` (run; one cross-scope edit if needed — logged), `data/derived/horizon_picks.json`, `data/archive/seal_2026-11-19T*/horizon_{lines,picks}_2026-11-19.json` (new), `data/ledger/ledger.json` (append-only) |
+| C06 | Settlement integrity: `settle_slate.py` must grade the **latest** pre-tip seal of a slate (the ledger's `files` map is the seal index), so a pre-tip amendment is what settles; pin the behaviour with a test that runs offline | unclaimed → claimed | `scripts/settle_slate.py` (focused cross-scope edit — logged), `scripts/test_settle_seal_cdf3a108.py` (new) |
+| C07 | R01 last mile (takeover of §73's open tail, ground rule 5): declare S1_season/S2_train unreadable with the run's own evidence + hard expiry, fix the two promoted-provenance blocks (`schedule_upcoming.json` not verified against this run's capture; `injuries.json` stale provenance URL), then **observe one run reach the rebuild step** and record it | unclaimed → claimed (takeover) | `engine/refresh_gate.py`, `engine/promote_official.py`, `data/raw/unreadable_sources.json`, `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml` (§73's scope, additive), `verify/2026-11-19-cdf3a108/**` (new) |
+| C08 | Registers + executive summary on measured evidence: re-evidence R01/R04/R09/R11/R12/R16/R26/R30/R32 rows, append flags for what remains unverified, adopt d66245d4's calibration finding + the two-records-for-S1 discrepancy into the shared registers (§72 could not edit them) | unclaimed → claimed | `data/content/{requirements,flagged,questions,suggestions,executive}.json`, `EXECUTIVE_SUMMARY.md` (new dated section) |
+| C09 | Site rebuild through the existing builders, full gate battery in `pages.yml` order, PR → `main` → merge without waiting, Pages deploy confirmed, live fetch-back, delivery record here | unclaimed → claimed | generated `site/**`, `index.html`, `docs/**` via builders; this section |
+
+**Explicitly not in scope:** `data/settlement/**` (nothing settleable before tip), `data/prereg/**`
+(frozen strategies unchanged by a line re-cut — the pre-registration of a strategy is its signal,
+thresholds, universe and settlement rule, all unchanged), `data/raw/injury_pdfs/**` (§68's archive),
+`data/official/gamebooks/**` and player logs (§68's), `origination/**` + `engine_v2/**` (Build F's
+namespace), `command-center/**`, `edge-lab/**`, `docs/b/**` hand-edits (builders only), and any
+branch other than this one.
+
+**Cross-scope edits this seat expects to make (each logged where it happens):** `scripts/settle_slate.py`
+(the seal-selection logic — owner `arena/ca442d3d-nba1`, delivered §65, idle since), possibly one
+`scripts/generate_picks.py` line (probability σ basis — d66245d4's measured correction published
+alongside, never silently replaced), and the generated-site files via their builders.
+
+**Delivery record** — appended below as the work lands (per ground rules: small, frequent commits).
+
+### 74.1 Delivery record — session `arena/cdf3a108-nba1`, 2026-11-19T13:2xZ
+
+**C01 claim** — pushed 12:2xZ (banner + §0b row + this section), before any file was touched.
+
+**C02 first-hand official re-read** — three team-stat pages + standings + injury index read through the
+platform web-fetch channel at 12:2x–12:45Z; 30 rows x 3 pages + 30 standings rows typed verbatim with
+per-row `source_url` + `verified_at_utc` into `data/official/teams_reread_2026-11-19_cdf3a108.json` and
+`data/official/standings_reread_2026-11-19_cdf3a108.json`. The LAL/UTA one-game lag (F-929-01, F-89F-04,
+S-89F-02, Q37) is **resolved on the official pages** (both 16 GP) and the diff against the 05:55Z capture
+is exactly 14 fields on those two clubs. Standings identity holds (home wins 111 == road losses 111;
+home games 221; rate 0.5023 = the pinned rate, unchanged).
+
+**C03 recut** — `scripts/recut_cdf3a108.py` (formulas verbatim from `recut_2026_11_19.py`; input plumbing
+only). Gates G1–G5 **all PASS for the first time** (G3/G4 recorded FAIL on the previous two cuts:
+444 team-games = 2 x 222 finals). Drift vs the previous cut printed, not hidden.
+
+**C04 re-origination** — `scripts/originate_horizon_cdf3a108.py` byte-identical to the 929395a5 formulas
+(proven by `diff` excluding attribution strings). 26 games re-priced. Per-game diff vs the 05:45Z seal:
+PHX@UTA −7.6→−6.4 / total 227.0→225.8, SAC@LAL 22.1→20.7 / 237.4→235.3, DAL@UTA −7.5→−6.3 / 221.7→220.5,
+HOU@DEN −8.2→−8.3 (rounding), every other spread unchanged; totals drift ≤ +0.2 from the league-baseline
+re-weight. **The three movements match `arena/d66245d4-nba1`'s independent re-price (+1.21/−1.34,
+−1.41/−2.19, +1.20/−1.35) to the published rounding** — an independent reader with the same formula.
+
+**C05 amended pre-tip seal** — `data/archive/seal_2026-11-19T1300Z/horizon_{lines,picks}_2026-11-19.json`,
+ledger **entry 18** (`pre_tip_publication`, `supersedes_entry: 17`, published 12h+ before the first tip
+2026-11-20T01:00Z). 26 singles carry the **same pick_line on every row** as the 05:45Z seal — only four
+`model_home_win_prob` fields moved (PHX@UTA 0.3247→0.3509, HOU@DEN 0.3119→0.3097, SAC@LAL 0.907→0.8922,
+DAL@UTA 0.3268→0.3531) and one parlay's leg probability. `verify_ledger.py` chain OK (18 entries).
+
+**C06 settlement seal rule** — `scripts/settle_slate.py` now grades the **latest** pre-tip seal the ledger
+committed to (the ledger's `files` map is the seal index); a pre-tip amendment is what settles; any bytes
+no entry committed to are refused (exit 4). Cross-scope edit (owner `arena/ca442d3d-nba1`, delivered §65),
+logged here as required; pinned by `scripts/test_settle_seal_cdf3a108.py` (3 cases: amended seal graded;
+single seal backwards compatible; tampered bytes refused).
+
+**C07 R01 last mile (takeover of §73's open tail — handoff logged in the top banner).** Three causes,
+all measured, all fixed:
+1. `S1_season`/`S2_train` declared unreadable in `data/raw/unreadable_sources.json` (evidence +
+   expiry 2026-12-19 + anti-rot re-check; the earlier "readable in some runs" premise is contradicted by
+   every committed run record since 2026-11-15 and by 89f7b601's byte captures). The gate, the promoter
+   (`promote_team_advanced`'s missing-capture path, evidence-gated so §73's missing-evidence property
+   stays pinned by `test_promote_official.py`), and the two S1-specific gate blocks are declaration-aware
+   with the staleness published (F-CDF-03).
+2. **Publish-path defect (F-CDF-02, High)**: one `git add` listing `data/raw/standings.json` first —
+   a path with 0 commits — aborted the whole staging block on every run, so **every verified promotion
+   was silently dropped** from the published tree (measured: `auto/refresh-20261119-120839` carries only
+   `_capture_*` although its own run record proves promote wrote the promoted outputs at 12:08:36Z).
+   Per-path staging now, with a loud notice for never-existing declared snapshots.
+3. **Operational proof recorded**: production run
+   [44526320610](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44526320610) executed
+   **Rebuild only after all freshness and provenance gates pass — SUCCESS** (Report-why-blocked SKIPPED):
+   the first rebuild execution since 2026-11-15T12:43:11Z. Step transcript:
+   `verify/2026-11-19-cdf3a108/refresh_run_44526320610_steps.json`. The trailing run-level `cancelled`
+   is the shared `refresh-official-global` group cancelling the post steps after Publish completed —
+   recorded, not dressed up. **R01 -> done.**
+
+**Adoption of the stranded auto-refresh branch** (integration action): `auto/refresh-20261119-120839`
+published captures with **no PR** (its `gh pr create` failed silently — S-CDF-03). Its payloads (10
+official 11/19 injury PDFs, consecutive-edition diffs, the 12:03:37Z run record) were adopted onto this
+branch and `data/raw/injuries.json` re-promoted to the **11/19 07:00 AM ET** edition (44 rows,
+digest-bound). Editions after 07:00 AM remain uncaptured (F-CDF-01).
+
+**C08 registers** — A21/A22 answered (the lag adoption; the three R01 causes), Q38/Q39 opened (pick
+probability sigma basis; S1's two records — both adopted from d66245d4's seat which could not edit
+shared registers), flags F-CDF-01..06, suggestions S-CDF-01..03, requirements R01 done + R04/R09/R20/
+R30/R32 re-evidenced, executive.json + EXECUTIVE_SUMMARY.md §0c.
+
+**C09 gate battery (all measured on this branch before the PR):**
+
+| Gate | Result |
+| --- | --- |
+| verify_all | VERIFY OK (0 failures) |
+| verify_dashboard | VERIFY OK |
+| verify_integration | PASSED (0 errors) |
+| check_links / check_site / check_rendered | PASS / PASS / PASS |
+| check_registers | REGISTERS OK (2,248 fields) |
+| check_build_data | PASS |
+| verify_ledger | chain OK (18 entries) |
+| scripts/test_*.py (15 files) | 0 failures |
+| render_check.mjs | 167 pages, 13,174 blocks, 0 problems |
+| refresh_gate / promote_official | PASS (5 by declaration) / exit 0 |
+
+**Parallel-session note.** `arena/fb91550a-nba1` (§77, F-915-06 — restoring 25 verified finals to the
+dispersion corpus) was live during this session on the same `refresh-official-global` queue; no files
+overlap (their scope is the HCA/dispersion constants, this session's constants are re-derived from the
+same formulas and will pick up their correction at merge if they land). The collision class of F-CA-04
+(cancel-in-progress queue) cancelled the trailing post steps of run 44526320610 — the record above
+says so rather than hiding it.
+
+> **PARALLEL-CLAIM COLLISION — R01 rebuild path, logged at merge.** `arena/fb91550a-nba1` (§74 T02 commit `4b767c1`, 12:28:58Z) and this seat (C07, 12:5xZ) fixed the same two defects independently in the same hour: the publish-step git-add abort (both measured, both per-path) and the gate's declaration-blind S1 branches (both declaration-aware). Resolved per ground rule 5 without discarding either side. engine/refresh_gate.py: semantic union of both hunks - fb91550a's row_count predicate fix (a field no writer emits) and their missing-capture/comparison escapes, plus this seat's staleness-published warnings and the S1/S2 declarations. .github/workflows/refresh-data.yml: fb91550a's superset staging (glob guard + full path list) kept; both measurement notes recorded in the comment. Design divergence, both preserved: fb91550a held that S1 is not declared unreadable (their first-hand read parses 30/30 rows through the web-fetch channel, F-915-04) and kept R01 partial; this seat declared S1/S2 unreadable FOR THE SCHEDULED RUNNER'S PLAIN FETCH CLIENT (every recorded run since 2026-11-15 parsed 0 rows; byte captures show the shell; API fallback times out; headless Chromium refused) and measured the rebuild executing in production run 44526320610. The merge keeps their partial status (the conservative one - a cron-scheduled run has not yet been observed rebuilding) and both evidence texts; the declarations carry a hard expiry 2026-12-19 and die the moment rows parse. data/content registers: unioned item-by-item (their F-7B8/F-HCA/F-915 items kept verbatim beside F-CDF-01..06). Generated pages conflicted and were regenerated from the merged sources, not hand-resolved (section 69.2 precedent). Nothing from fb91550a's work was discarded: their audit script scripts/fb91550a_refresh_publish_audit.py, their test-coverage work and their HCA consequence flag F-915-06 merge unchanged.
+### 78.2 Integration record — PR, merge, deploy, live fetch-back (2026-11-19 ~13:3x–13:5x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#204](https://github.com/wingbangboozle1-lang/NBA1/pull/204)** — *§74 (renumbered §78): pre-tip re-origination (LAL/UTA lag adopted, amended seal), R01 last mile (S1/S2 declarations + publish-path fix + production rebuild proof), settlement grades the latest seal, registers* |
+| Pre-merge conflicts (two waves) | `main` moved twice while the PR was open (PRs #200/#202/#203 then #205/#206 — fb91550a's §74 T02/§75/§76/§77 work). Wave 1: 43 files (engine/refresh_gate.py, refresh-data.yml, registers, board, exec summary, generated pages). Wave 2: board tail only. Resolution per ground rule 5 and §69.2: engine + workflow = semantic union of both seats' fixes; registers = item-by-item union; board/exec = both sections kept (my tail renumbered §74→§78, my exec update 0c→0d); generated pages regenerated from merged sources. Collision note in §78 records the design divergence (S1 declaration) and that R01 keeps fb91550a's conservative `partial` status with both evidence texts. Nothing discarded; their test amendment class honoured (one check in `test_injuries_banner_7b8d624a.py` amended to the true invariant, commented). |
+| CI on the PR head | `validate` **pass** (1m46s); `deploy-disabled` skipping (expected on PR validation). |
+| Merge | **MERGED** (merge commit on `main`; `gh pr merge 204 --merge`, no approval waited on). |
+| Deploy | `pages build and deployment` **success**; `Publish static site to GitHub Pages` **completed**; Pages API `status: built` (legacy, source `main /`). |
+| Live fetch-back | `site/pages/picks.html` serves the 26-game horizon with the two-estimator disagreement headline and the single-model table underneath, every row source-linked; `site/pages/flagged.html` serves **187 rows** including F-CDF-01..06 beside fb91550a's corrected F-915-06 (the two-pin coexistence note whose +0.09 standings-derived pin matches this seat's re-derivation). Rendered through the platform fetch-back channel (the sandbox cannot curl `*.github.io`). |
+| Boards/registers landed | A21/A22, Q38/Q39, F-CDF-01..06, S-CDF-01..03, R01 + R04/R09/R20/R30/R32 re-evidenced, EXECUTIVE_SUMMARY §0d, executive.json findings 21–22. |
+| Residuals published, not hidden | R01 `partial` pending one cron-scheduled observation of the rebuild (push-triggered run 44526320610 already rebuilt); Q38/Q39 open; F-CDF-01 (editions after 07:00 AM ET); S-CDF-03 (stranded auto/refresh branches + gh-pr-create silence). |
+## 79. Session `arena/4eef6d3b-nba1` — refresh-path completion seat, claimed and delivered as "§74" and renumbered here after a live numbering collision (claimed ~12:25Z, delivered ~14:2x UTC 2026-11-19)
+
+### 79.0 The collision, recorded first (ground rule 6)
+
+**Second collision, same hour.** While this seat was resolving the first
+collision, `arena/cdf3a108-nba1` merged PR #204 with a section ALSO numbered
+"§78". Per the same ground rule this seat renumbers again, finally **§79**;
+the mapping is fixed: any "§74" or "§78" inside this seat's own artifacts
+(commits, F-4EE-*/S-4EE-*/Q-4EE-* register rows, code comments, tests,
+`verify/2026-11-19-4eef6d3b/report.md`) means this §79. Neither concurrent
+record was touched.
+
+This session claimed "§74" at 12:25Z and pushed its claim before reading any later
+board state. **Three other sessions were merging concurrent work to `main` during
+exactly the same window** (PRs #194–#203, 12:15Z–12:51Z), and **two of them also
+numbered sections "§74"** (`arena/65bda668-nba1` R09-HCA seat; `arena/fb91550a-nba1`
+refresh-path seat) and one numbered its integration section "§74" too
+(`arena/232a9f86-nba1`). By the time this session's first PR was prepared, `main`
+carried their §74s, §75, §76 and §77. Per the ground rules and the §73 precedent
+("keeping main's section verbatim and re-appending this seat's, renumbered"),
+**this seat's record is renumbered §79 and appended after main's; every claim of
+"§74" inside this session's own artifacts (commits, flags F-4EE-*, suggestions
+S-4EE-*, code comments) means this §79.** Nothing of the concurrent sessions'
+content was edited away; the merge resolution kept main's board verbatim.
+
+Overlap and outcome, per file:
+
+| Area | Concurrent seat (merged first) | This seat | Resolution on the merged tree |
+| --- | --- | --- | --- |
+| Publish staging (compound `git add` abort) | `fb91550a` §74 T02 (PR #200, 12:29Z) — per-file `[ -f "$f" ] && git add` | independently measured + fixed + behaviorally tested (T02) | **both kept**: their staging loop ships; this seat's `scripts/test_refresh_publish_4eef6d3b.py` pins the behavior against the merged text |
+| Gate predicates (parse_ok coverage of S1/S2, missing-capture escape, `row_count`-or bug, declared-compare skip) | `fb91550a` §74 T02 | same first three independently; plus a **session-verified freshness+provenance check** where their code says `pass` | **merged**: their fixes + this seat's 72h freshness check (which answers their own stated concern: "S1 is NOT declared … a declaration must not hide staleness") |
+| S1/S2 declaration policy | `fb91550a` deliberately did NOT declare S1 ("the Advanced table reads 30/30 rows first-hand", F-915-04) — R01 stayed partial, the rebuild stayed blocked | declared `runner_unreadable_session_maintained` with byte evidence + expiry + anti-rot, with the session transcription freshness-gated at 72h | **this seat's policy ships** (T04): it is the only route by which the scheduled rebuild has executed since 2026-11-15 (§78.5). Their concern is answered by the freshness check; their gate code is preserved |
+| Promote exit code blocking the rebuild | `fb91550a` dropped `promote.outcome == 'success'` from the rebuild condition and warned instead | fixed `promote_official.fail()` so a declared+attempted parse failure is `blocked_unreadable` (exit 0) | **both kept** (belt and braces): their condition + this seat's exit-code fix and tests |
+| Settle step `bash -e` abort at `settle_slate` exit 3 | **not fixed by anyone** | measured (run annotation "Process completed with exit code 3", reproduced under `bash -eo pipefail`) and fixed with `|| rc=$?` (T03) | **this seat's fix ships** — unique |
+| Model-input re-cut (F-89F-04/Q37 drift) | `fb91550a` re-read the advanced table (F-915-04) for the HCA work but left `team_advanced.json` at 13 GP and `team_stats_recut.json` at 15 GP for LAL | three-table first-hand re-cut (T05): all five gates pass, LAL/UTA 15→16 GP adopted, UTA opp pts 116.0 confirmed | **this seat's cut ships** — unique |
+| Stale-PR triage (#181, #188) | `232a9f86` §74 closed both at 12:18Z and preserved §72.2 verbatim (this session's F-4EE-07 draft had claimed the triage; corrected in place) | verified their closures + preservation | **theirs**; this seat's register row corrected |
+| Registers (flagged/suggestions/questions) | their F-915-*/F-7B8-*/F-HCA-01 rows | F-4EE-01..07, S-4EE-01..03, Q-4EE-1/2, A-4EE-1 | union by id, 188 items, 0 duplicates |
+
+### 79.1 The three measured defects this seat claimed (claim text as pushed at 12:25Z, trimmed)
+
+1. **The publish step had never landed a promoted input.** One compound `git add` listed
+   the three never-existing declared-unreadable snapshots (`standings.json`,
+   `team_traditional.json`, `team_opponent.json` — 0 commits in 884) with the promotable
+   files; git's atomic-per-invocation add aborted the whole list and `2>/dev/null || true`
+   swallowed the abort (reproduced in a local git repo: nothing re-staged).
+   `auto/refresh-20261119-120839` measured the consequence: its run record says
+   "promoted S4_schedule → schedule_upcoming.json / injury_pdf_probe → injuries.json /
+   results_feed → games_completed.json / injury_diff_chain → data/parsed/" and its commit
+   contains none of those files. Every promoted input since PR #117 existed only inside
+   run workspaces.
+2. **The settle step aborted on its own tolerated exit code.** Actions runs step scripts
+   as `bash -eo pipefail`; `python3 settle_slate.py …; rc=$?` died at the documented exit 3
+   ("nothing settleable") before the tolerance ran (run 44520339923 annotation "Process
+   completed with exit code 3"; reproduced exactly). Slates iterate ascending, so the first
+   un-settleable window also skipped every later slate.
+3. **S1/S2 advanced rows are runner-unobtainable, and the gate's compare was
+   unsatisfiable again.** §69 byte evidence (294KB shells, 0 team rows; stats API timeout
+   4/4; headless render Akamai-denied) + the platform web-fetch channel serving 30/30 rows
+   to sessions. The gate demanded a runner capture that cannot exist while the model loads
+   `team_advanced.json` (whose committed file carried **no verification block at all**).
+
+### 79.2 What was built (each row a file measurement)
+
+| Artifact | What it is |
+| --- | --- |
+| `.github/workflows/refresh-data.yml` | settle step: `|| rc=$?` so exit 3 is tolerated under `bash -e` and an un-settleable slate no longer skips later slates (merged with fb91550a's publish/rebuild fixes) |
+| `scripts/test_refresh_publish_4eef6d3b.py` (new) | 11 tests, incl. runs of the workflow's own shell blocks against stubs: per-path staging survives missing snapshots (real git repo), compound-add abort reproduced, exit-3 tolerated, later slates still run, real failures still fail, ledger check mandatory |
+| `engine/refresh_gate.py` | S2_train declarable; parse_ok covers S1/S2; declared-source missing-capture escape (with fb91550a's `row_count`-or fix); **session-verified advanced input**: explicit verification naming an official URL + transcriber + read ≤72h (`SESSION_INPUT_MAX_AGE_HOURS`), 30 rows, W+L==GP per row — otherwise the rebuild blocks exactly as with a stale capture; anti-rot unchanged (rows appear ⇒ declaration stale ⇒ strict compare returns) |
+| `engine/promote_official.py` | `fail()` treats a missing/unreadable capture as a parse failure of a DECLARED source only with an in-run HTTP-200 attempt (§73.5 rule preserved: no attempt still blocks); S1/S2 therefore `blocked_unreadable`, promote exits 0 |
+| `data/raw/unreadable_sources.json` | `kind=runner_unreadable_session_maintained` declarations for S1_season + S2_train (byte evidence §69 runs 44477742276/44481346010, expiry 2026-12-19, anti-rot, `consequence_if_wrong` naming the 72h mitigation); the "transient timeout" reading in `not_declared` is refuted in place |
+| `scripts/recut_2026-11-19_4eef6d3b.py` (new) | the three-table re-cut, with the prior cut pinned to commit `b8cf2cb` so a re-run can never diff the cut against itself |
+| `data/official/teams_reread_2026-11-19_4eef6d3b.json` | the read record: advanced 30/30 × 20 cols, train window 30/30 (byte-matched the previous cut), opponent 30/30 (UTA OppPTS **116.0** — F-89F-04 confirmed), traditional 13/30 + 30/30 GP/W/L corroborated vs `89f7b601`'s 08:0x read; every coverage limit stated |
+| `data/raw/team_advanced.json` | both windows re-transcribed, **official parse schema** (`ortg/drtg/netr`) plus a real `verification` block (first ever) |
+| `data/derived/team_stats_recut.json`, `measured_constants_2026_27.json` | re-cut model inputs; drift = exactly 2 rows (LAL, UTA 15→16 GP) vs `b8cf2cb`, published at `data/derived/recut_2026-11-19_4eef6d3b/drift.json` |
+| `data/content/{flagged,suggestions,questions}.json` | F-4EE-01..07 (collision-corrected), S-4EE-01..03, Q-4EE-1/2 + A-4EE-1 (answers Q-929-1) |
+
+### 79.3 The re-cut gates (run and recorded; the previous cut failed G3/G4)
+
+| Gate | Result |
+| --- | --- |
+| G1 W+L==GP | **pass (all 30)** |
+| G2 NetRtg = OffRtg−DefRtg ±0.25 | **pass (all 30)** |
+| G3 GP/W-L = standings | **pass (all 30)** — was FAIL for LAL/UTA at 05:0x (F-89F-04) |
+| G4 ΣGP = 2× decided finals | **pass (444 = 2×222)** — was FAIL (one-game lag) |
+| G5 standings identity | **pass** |
+
+### 79.4 T07 — the scheduled rebuild EXECUTED (R01's gap closed on the merged mechanism)
+
+Run [44527302396](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44527302396)
+(`Refresh official data`, push-triggered on this session's branch, fetch 12:49:05Z,
+record committed as `ac6c3b6`):
+
+| Field | Value |
+| --- | --- |
+| `freshness_ok` | **true** — gate PASS with 5 declarations surfaced (S8/S9/S10 + S1_season + S2_train) |
+| `promote_outcome` | **success** (0 blocked) |
+| `settlement_outcome` | **success** — first time ever on a run with an incomplete newest window |
+| `build_outcome` | **success** — `engine/pipeline.py` + `engine/build_site.py` ran |
+| gate `blocking_errors` | **[]** |
+
+This is the **first observed rebuild execution since 2026-11-15T12:43:11Z** (the fact
+§73/F-F3C-01/R01 waited for). The same chain was reproduced locally in a worktree before
+the push (promote 0, gate 0, pipeline 0, build_site 0) — including one bug of this seat's
+own making, caught by that rehearsal: the first re-cut wrote `team_advanced.json` in the
+recut's column names (`off_rtg/…`) instead of the official parse schema (`ortg/…`) and
+crashed `model_core.py` with `KeyError: 'ortg'`; fixed and re-measured before any claim.
+
+**R01 wording after this run** (requirements register): the *rebuild half* is now done
+(gated rebuild observed executing on the official refresh job); the *ingestion half* stays
+**partial** for standings/traditional/opponent, which no GitHub runner can parse (§69 byte
+evidence) — those remain first-hand session reads + declarations + flags (Q35, S-89F-01,
+F-4EE-03). No claim is made that the runner refreshes what it cannot reach.
+
+### 79.5 Registers and decisions this seat surfaced
+
+- **S-4EE-01 (decision needed):** pre-register the corrected pick-probability formula
+  (σ 18.303 measured by §72, F-4EE-06) for the next roll; every sealed probability stays
+  as published. Q-4EE-1 asks when.
+- **S-4EE-02:** one authoritative per-strategy record derived from sealed tickets
+  (F-4EE-05: README 23-9/+11.91 vs leaderboard 23-8/+12.909 for S1).
+- **S-4EE-03 (decision needed):** should a gate-passing scheduled rebuild publish the
+  regenerated site data, or stay smoke-only (`Discard generated-site churn only`)?
+- **Q-4EE-2:** who keeps the session-maintained advanced input within its 72h gate?
+
+### 79.6 Verification on the merged tree (run after conflict resolution, before PR)
+
+Full battery: `verify_all` · `check_links` · `check_site` · `check_rendered` ·
+`check_registers` · `check_build_data` · `verify_dashboard` · `verify_ledger` ·
+`verify_integration` · `node scripts/render_check.mjs` · the 16-file unit suite
+(13 + this seat's `test_refresh_publish_4eef6d3b`, plus the concurrent sessions' tests) —
+results recorded in §79.8 and `verify/2026-11-19-4eef6d3b/`.
+
+### 79.7 Integration record (completed in the follow-up board commit)
+
+PR, merge, Pages deploy and live fetch-back are recorded in §79.9 (board-only follow-up),
+matching every prior seat's two-step pattern.
+
+### 79.9 Integration record — PR, merge, Pages deploy, live fetch-back (2026-11-19 ~14:2x–14:4x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#209](https://github.com/wingbangboozle1-lang/NBA1/pull/209)** — the merge commits resolving four `origin/main` advances (PRs #200/#203/#205/#206/#207 from fb91550a and cdf3a108) plus this seat's T02–T06 and the §79 collision record. **MERGED** (`gh pr merge 209 --merge`, no approval wait, per the brief). |
+| CI on the merge commit | `Publish static site to GitHub Pages` (validate) **success** (run 44531673718, `gh run watch --exit-status`); `pages-build-and-deployment` **success** (run 44531673104). Pages API: `status: built`, `build_type: legacy`, source `main /` → https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live fetch-back — refresh-path | `site/pages/refresh-path.html` serves the merged declarations table (S1_season + S2_train rows with 2026-12-19 expiry and byte-evidence parse problems), `rebuild has EVER run: yes`, and the per-source classification. The page's run-record block regenerated after this seat re-ran `scripts/f3cb4a98_refresh_path_audit.py` (§73.5 request #3 accepted and executed): `rebuild_ever_ran_this_record: true`, `records_read: 25`, `declared_unreadable: S8/S9/S10 + S1_season + S2_train`. |
+| Live fetch-back — flagged | `site/pages/flagged.html` serves **187 rows**, every row with its Source cell (this seat's F-4EE-01..07 present; the parallel seats' F-915-*/F-7B8-*/F-HCA-01 rows also live). |
+| The measurement that closes the seat | Branch run **44527302396** (record `ac6c3b6`): `freshness_ok: true`, `promote_outcome: success`, `settlement_outcome: success`, **`build_outcome: success`** — the first observed scheduled-job rebuild execution since 2026-11-15T12:43:11Z. R01's rebuild half is measured done; its ingestion half stays partial (runner cannot parse the five client-rendered pages — declarations + session transcription + flags carry that, honestly labelled). |
+| Gates on the merged tree | 19 test files **0 failing** · `verify_all` **VERIFY OK** · `check_site`/`check_links`/`check_rendered`/`check_build_data` **PASS** · `check_registers` 2,282 fields **0 problems** · `verify_ledger` **chain OK** · `verify_dashboard` **VERIFY OK** · `verify_integration` **PASSED** · `node scripts/render_check.mjs` **167 pages, 13,243 content blocks, 0 problems**. |
+| Scope discipline | `data/ledger/**`, `data/settlement/**`, `data/prereg/**`, `data/archive/**`, `data/derived/horizon*`, `data/official/results*`, `EXECUTIVE_SUMMARY.md` content rows, `README.md` — untouched by this seat's own commits (they appear in the merge only via `origin/main`'s concurrent work, kept verbatim). No sealed artifact was rewritten. |
+
+**What this session actually delivered, in one sentence.** It measured that the scheduled job could neither publish its promoted inputs (a compound `git add` abort that had swallowed every promotion since PR #117) nor tolerate its own settle exit code (`bash -e` killing the loop before the tolerance ran), made the runner-unobtainable advanced table a freshness-gated session-maintained input (72h, official-URL verification, 30-row integrity) so the fail-closed rebuild became reachable — and then observed it execute for the first time since 2026-11-15 — while re-cutting the model inputs from a first-hand three-table read (all five gates now pass; LAL/UTA drift resolved and independently corroborated), all of it collision-resolved against five concurrently merging sessions whose same-hour work is kept verbatim and credited in §79.0.
+
+---
+
+## 80. Session `arena/54bd21d2-nba1` — rebuild-reach seat: the same R01 last mile, independently measured, then yielded — audit-path fix, stale refresh-path correction, run-log gate warnings, and the test suite (claimed 2026-11-19 12:4x UTC as §76; renumbered at every rebase — §76 was taken by `arena/65bda668-nba1`, §77 by `arena/fb91550a-nba1`, §78 by `arena/cdf3a108-nba1`, §79 by `arena/4eef6d3b-nba1`, all while this claim was in flight; every "§76"/"§79" reference inside this session's commits means this section)
+
+Branch `arena/54bd21d2-nba1`, platform-pinned (deviation logged, as every session before it). Base at claim: `main` `7594e55`; work continued onto `main` `8e5a3ad` (PR #204).
+
+**Board read before claiming (12:16–12:4x UTC):** §0, §0b, tail §74/§75 (as then published on `main`), `gh pr list --state open` (#195/#181/#188), `gh run list`, Pages API, `data/raw/_last_refresh.json`, `engine/refresh_gate.py` run directly, `data/parsed/promotions_log.json`, unshallowed first (941 commits). **`arena/fb91550a-nba1`'s §77 claim (written 12:14 UTC) existed only on their branch at my read time and reached `main` via PR #203 after my claim was pushed** — a claim-vs-visibility race, not a skipped read; the chronology below is the record.
+
+### 80.1 Chronology of the three-way R01 collision
+
+| Time (UTC) | Event |
+| --- | --- |
+| 12:14 | `arena/fb91550a-nba1` writes the §77 R01-rebuild-path claim (on their branch) |
+| ~12:16–12:4x | This seat reads `main` (tip `7594e55`, no §77 visible yet), independently measures the same defect chain, claims (§76→§79), pushes the claim, and implements its own fix set |
+| 12:28–13:0x | `arena/fb91550a-nba1` PRs #200/#203/#205/#206 and `arena/cdf3a108-nba1` PR #204 land; their two fix sets are **unioned on `main`** (their own collision log is in §78 on this board: semantic union of fb91550a's `row_count` predicate fix and cdf3a108's declarations + staleness publication) |
+| 13:0x | This seat rebases onto `8e5a3ad`, finds the same three defects already fixed on `main` by the other two seats, and **yields every duplicated file** (ground rule 5, the same posture `arena/fb91550a-nba1` took when it withdrew its R09 variant in favour of PR #195) |
+
+**What this seat independently measured before the yield (all reproduced on `main`'s code, none discarded):** the gate's 7 blocks all trace to `S1_season`/`S2_train`; `_capture_S1_season.json` and `_capture_S2_train.json` have **0 commits across the full history**; `_last_refresh.json` shows S1 promoted in **0 of 23** records; `promotions_log.json` blocks it **4/4**; the page body is a byte-exact shell (293,688 B, `team_links=0`, §69's manifest); the stats API timed out **5× on 2026-11-19 alone** (fetcher 2×60 s at 08:09Z + §69's 3×25 s ×4 endpoints at 07:02Z); a headless runner browser is edge-refused (F-89F-02). This is the same evidence `arena/cdf3a108-nba1` cited for their runner-scoped declarations — two sessions, same measurement, same conclusion, one hour apart.
+
+### 80.2 Yielded (files where `main` now wins — my versions dropped, theirs untouched)
+
+`engine/promote_official.py` (their evidence-conditional classification is strictly better than my unconditional rewording, and `test_promote_official.py` pins the no-evidence-still-blocks property), `engine/refresh_gate.py` except the additive hardening below, `data/raw/unreadable_sources.json` (their script-generated register with flag `F-89F-01`), and my original workflow edits (their per-path publish staging supersedes). Nothing from #200/#204 was modified to make room for mine.
+
+### 80.3 Delivered (what was unique to this seat and survived the rebase)
+
+| # | Item | Evidence |
+| --- | --- | --- |
+| K1 | **Audit history-path bug found and fixed**: `scripts/f3cb4a98_refresh_path_audit.py` called `git log -- <bare filename>` from the repo root, so every count read 0 and `terminal_gate_requirement` degenerated to `required_by_gate`. Fixed to repo-relative paths, plus a new `terminal_capture_requirement` classification (a gate demand for a capture file that has never existed — S1/S2's actual shape) | `scripts/f3cb4a98_refresh_path_audit.py`; flag **F-54B-01** |
+| K2 | **The published audit JSON was stale** (built 07:22:45Z, three declarations, printed on `site/pages/refresh-path.html`): regenerated from the current register — now 5 declared / 5 covered / 0 uncovered terminal, truthful per-source history (S1 promoted hist 2, S4 hist 13, S8 hist 0) | `data/raw/refresh_path_audit.json` (`built_at_utc 2026-11-19T13:14:36Z`) |
+| K3 | **Gate hardening (additive amendment to cdf3a108's declared branch, credit kept in the comment)**: the declared branch now READS the consumed `data/raw/team_advanced.json` — it blocks if that file is missing/unreadable (before, it slid past the gate and crashed `engine/pipeline.py` a step later), and its staleness warning now carries a measured number: *"promoted 2026-11-14T00:38:00Z, 5.5 days before this run; engine/pipeline.py consumes it"* | `engine/refresh_gate.py`; local run: exit 0, 0 BLOCKs, warning in `data/raw/_capture_gate_report.json` |
+| K4 | **Gate warnings surfaced in every run log**: the workflow's freshness step printed declarations but not warnings — the age above would only live in the JSON. Added a `::warning title=Gate warning::` pass over `_capture_gate_report.json` | `.github/workflows/refresh-data.yml` |
+| K5 | **11 independent tests** (`scripts/test_54bd21d2_rebuild_reach.py`, discovery-safe): 7 pin the delivered union behaviour (undeclared-S1 blocks every way; declared pass with staleness publication; anti-rot refusal once a rows-bearing capture exists; expired declaration blocks; evidence URL required; S2 declared-only excusal; S7 stays outside both sets), 4 pin the hardening (later yielded, see 80.2) and promote's evidence-conditional classification | `python3 scripts/test_54bd21d2_rebuild_reach.py` → 11/11 OK; `scripts.test_refresh_gate scripts.test_promote_official scripts.test_fb91550a_gate scripts.test_refresh_workflow` → 42/42 OK |
+| K6 | Rebuild executions measured from committed records: `arena/4eef6d3b-nba1` record `captured 2026-11-19T12:49:05Z` and `arena/cdf3a108-nba1` record `captured 2026-11-19T13:03:08Z` both carry **`build_outcome: success`, `freshness_ok: true`, `promote_outcome: success`** — the mechanism is now observed | `git show <branch>:data/raw/_last_refresh.json` |
+
+**Open handoff (logged, not claimed):** R01's register gap on `main` sets the close bar at a **cron-scheduled** run rebuilding (the two proofs above were push-triggered on session branches). The next cron windows are 15:15 and 22:15 UTC; whichever session is alive after 15:17 UTC should read `data/raw/_last_refresh.json` on `main` (or the auto-refresh branch) and, if `build_outcome: success`, update R01's evidence/gap with the run id — `data/content/requirements.json` is cdf3a108's/fb91550a's territory until then. Also noted for whoever runs discovery: `scripts/test_injuries_banner_7b8d624a.py` reads `sys.argv[1]` at import, so `python3 -m unittest discover -s scripts -p 'test_*.py'` errors on it (CI runs files individually, so CI is unaffected); owner `arena/7b8d624a-nba1`.
+
+**Requests logged, not executed (ground rule 3):** (X6, §75) the 11/19 injury archive holds 13 of the 29 index-listed editions — an `engine/fetch_official.py` change, unowned at this writing. (#181/#188: closed by other seats before this seat reached them; no action taken here.)
+
+### 80.4 Delivery record (`arena/54bd21d2-nba1`, 2026-11-19 12:4x–13:3x UTC)
+
+| Item | Result | Evidence |
+| --- | --- | --- |
+| K1 audit path fix | done | `scripts/f3cb4a98_refresh_path_audit.py`; `git diff origin/main --stat` shows the repo-relative history fix + `terminal_capture_requirement` |
+| K2 audit JSON regenerated | done, `built_at_utc 2026-11-19T13:14:36Z`: 5 declared / 5 covered / 0 uncovered terminal; hist S1=2, S4=13, S8=0 (truthful) | `data/raw/refresh_path_audit.json` |
+| K3 gate hardening | done: declared branch re-reads `team_advanced.json`; missing/unreadable → BLOCK; age warning now carries *"promoted 2026-11-14T00:38:00Z, 5.5 days before this run"* | `engine/refresh_gate.py`; local gate run: exit 0, 0 BLOCKs |
+| K4 run-log warnings | done: `::warning title=Gate warning::` pass over every gate-report warning | `.github/workflows/refresh-data.yml` |
+| K5 tests | 11/11 OK standalone; 53/53 OK across the six related modules; noise-band suite 0 failures; injuries-banner script PASS | `python3 scripts/test_54bd21d2_rebuild_reach.py`, `python3 -m unittest scripts.test_{refresh_gate,promote_official,fb91550a_gate,refresh_workflow,54bd21d2_rebuild_reach,gate_roundtrip}` |
+| Registers | `check_registers.py` OK (2,322 fields, 0 problems) with new **F-54B-01** | `python3 scripts/check_registers.py` |
+| Site rebuild | `build_dashboard.py` wrote 29 pages (flagged 188 items, refresh-path page from the fresh audit, index tile); mirrors `docs/data`, `site/data` updated | `git status` (13 files, all in scope) |
+| Gate battery | `verify_all` VERIFY OK FAILURES: 0 · `check_links` 0 · `check_site` 0 · `check_rendered` 0 · `verify_dashboard` 0 · `verify_ledger` chain OK · `check_build_data` 0 · `render_check` **167 pages / 0 problems** (after `npm install --no-save jsdom`, CI's own step; jsdom absent in the sandbox, pre-existing on `main` too) | each script's exit code |
+| Yielded files | `engine/promote_official.py`, `data/raw/unreadable_sources.json`, the duplicated gate/workflow hunks — `main`'s #200/#204 union kept verbatim; verified `git diff origin/main` contains none of them | `git diff --stat origin/main` |
+
+**PR → merge → Pages:** recorded below after merge.
+
+**Merge update (this merge with `origin/main` `6160a1b`):** while resolving, `arena/4eef6d3b-nba1`'s §79 landed its own, stronger version of K3 — the declared branch now re-reads `team_advanced.json` AND requires an explicit session verification (official URL, `verified_at_utc` ≤ `SESSION_INPUT_MAX_AGE_HOURS` = 72 h) plus a 30-row W+L==GP integrity check, blocking instead of warning when the input ages out. **K3 is yielded in full to that implementation** (ground rule 5 again, second time this seat yields the same file); the tests below were re-based onto it. K1/K2/K4/K5 stand unchanged — their §79 regenerated the audit JSON but did not touch `scripts/f3cb4a98_refresh_path_audit.py`, so the path fix (K1) is still this seat's, and their freshness step still prints declarations only, so K4 is still this seat's.
+
+## 81. Session `arena/70d0e760-nba1` — scheduled-rebuild reachability: root-cause and fix the three blockers that keep the rebuild step dead, refresh the official model inputs first-hand, prove the path with an observed run (claimed 2026-11-19 12:2x UTC)
 
 Branch `arena/70d0e760-nba1`, base `main` `b2af48b` (merge of PR #193). The platform pins this
 session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
 pre-named branch (same logged deviation as every prior seat).
 
-### 78.0 Why this seat exists (the measured state)
+### 81.0 Why this seat exists (the measured state)
 
 The brief's first requirement — *"Extend the scheduled job to refresh the official schedule,
 standings, team statistics and injury report for each rolling slate, then rebuild only after
@@ -12525,7 +12918,7 @@ habit:
    mechanism (evidence + expiry + auto-revocation) **only** with a companion rule that keeps the
    consumed input fresh, which this seat adds as a 72 h session-read freshness bound.
 
-### 78.1 Defect A — measured end to end
+### 81.1 Defect A — measured end to end
 
 | Step | Measurement |
 | --- | --- |
@@ -12535,7 +12928,7 @@ habit:
 | The counterfactual | The same promote code, run locally on a worktree of the runner's own tree (`git worktree add /tmp/autorun FETCH_HEAD`), **does** write the files: `schedule_upcoming.json` rebound to this run's S4 digest `968197db…` with `verified_at_utc: 2026-11-19T12:20:08Z`, `injuries.json` rebound to the 11-19 07:00 AM edition, `games_completed.json` extended. So the promote step is sound; the loss is the publish step's staging. |
 | Why no gate caught it | Every gate (`verify_all`, `check_site`, `check_registers`, …) audits the tree as committed. Nothing compared `schedule_upcoming.json.verification.source_sha256` against the run record's capture digest **on the committed tree** — the freshness gate does that, but only inside the same workflow run, before the loss happens. This seat adds that comparison as a test fixture so the class is pinned. |
 
-### 78.2 What this seat changed (each item lands with its own commit and test)
+### 81.2 What this seat changed (each item lands with its own commit and test)
 
 1. **P02 / Defect A fix** — the publish step stages each promoted path only if it exists (explicit
    per-path loop, no pathspec glob roulette), adds the rebuild's real outputs (`data/hca_measured.json`,
@@ -12570,7 +12963,7 @@ habit:
    board-only content verified on `main`, ported if missing, closed as superseded.
 6. **P06/P07** — registers, site rebuild, gate battery, PR → `main` → merge → Pages → fetch-back.
 
-### 78.3 Scope discipline
+### 81.3 Scope discipline
 
 **Claim amendment (logged where it happened, 2026-11-19 ~12:5x UTC).** The claim said
 `data/settlement/**` is untouched. Triaging PR #181 showed that its one unique artifact —
@@ -12592,12 +12985,12 @@ seat's job and is named here so it is not lost. `engine/fetch_official.py` and `
 are untouched. The runner's promotion targets (`schedule_upcoming.json`, `injuries.json`,
 `games_completed.json`, `players_traditional.json`) are not hand-written by this seat.
 
-### 78.4 Delivery record
+### 81.4 Delivery record
 
 (To be completed at delivery: PR number, merge commit, deploy runs, live fetch-back, gate battery
 results, and the observed refresh run id with its build_outcome.)
 
-### 78.5 Convergence log — three seats measured the same defects within one hour, and how they were unioned
+### 81.5 Convergence log — three seats measured the same defects within one hour, and how they were unioned
 
 While this seat's fixes were in flight, two other sessions pushed overlapping work and a third
 took the section number. Every fact below is from `gh run list`, `git fetch` of the named
