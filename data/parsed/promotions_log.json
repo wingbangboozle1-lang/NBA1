@@ -22,25 +22,18 @@
    "source_sha256": "0d6584817bccff09c894650bcea68cfde34c4c2357838c23494a5cd779612e90"
   },
   {
-   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "promoted_at_utc": "2026-11-19T12:37:53Z",
    "kind": "evidence_only",
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_sha256": "6ab68a487193e679bed7fbf14139134a1c04cebd2ce9f3f32265295281655816"
+   "source_sha256": "406f8fdb1a84bf0c5d9718a3b9c84f70ab93aa2eff73efda547f6a476db73f7e"
   },
   {
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "kind": "evidence_only",
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_sha256": "6920c0652c0e78c766c4278038942a49b72006aa7a0e6e5b084e27a4ee37de54"
-  },
-  {
-   "promoted_at_utc": "2026-11-19T13:07:50Z",
-   "kind": "evidence_only",
-   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_sha256": "e8684a60d8c12e66327cfca9d60d9f4cd87d76cc24885e2849cb6d07e8db6656"
+   "source_sha256": "014c3098b33e44dbb0f1d8172e416bd60c547f957eb8e3ca2c4bf2a9d07c552d"
   }
  ],
  "S7_players": [
@@ -66,25 +59,18 @@
    "source_sha256": "18f822b62ffe9d00c8c734e8febb3d68ea195b99b9536c736f56c2d5b40d64fb"
   },
   {
-   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "promoted_at_utc": "2026-11-19T12:37:53Z",
    "kind": "evidence_only",
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://www.nba.com/stats/players/traditional",
-   "source_sha256": "1a8677b218a18ab5bd2f68d64ab89aceb6ce9f8592198783952d5f91fd044423"
+   "source_sha256": "463d8e5c2d8ac68a94566f947d8693542e7ebda0f0ed67444f6954d09d36f257"
   },
   {
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "kind": "evidence_only",
    "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
    "source_url": "https://www.nba.com/stats/players/traditional",
-   "source_sha256": "b31a225ecb444bda9de5db89f836505e15c75b7c633495586ae6123d6d591c61"
-  },
-  {
-   "promoted_at_utc": "2026-11-19T13:07:50Z",
-   "kind": "evidence_only",
-   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
-   "source_url": "https://www.nba.com/stats/players/traditional",
-   "source_sha256": "97c0f60dc20efc141afe162e5c28546925cbd08669d9926cb89af647881e6bf9"
+   "source_sha256": "76b13f52ea1e6e9e65379876fdbf431069a00d92f4b00ccb78dbcc0dcf6cb7d0"
   }
  ],
  "_runs": [
@@ -212,7 +198,7 @@
    ]
   },
   {
-   "promoted_at_utc": "2026-11-19T12:40:00Z",
+   "promoted_at_utc": "2026-11-19T12:37:53Z",
    "promoted_items": [
     "S4_schedule",
     "injury_diff_chain",
@@ -238,7 +224,7 @@
    "blocked": [
     {
      "item": "S1_season",
-     "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'"
+     "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/runner/work/NBA1/NBA1/data/raw/_capture_S1_season.json'"
     }
    ],
    "blocked_unreadable": [
@@ -248,39 +234,7 @@
    ]
   },
   {
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "promoted_items": [
-    "S4_schedule",
-    "injury_diff_chain",
-    "injury_pdf_probe",
-    "results 2026-11-06",
-    "results 2026-11-07",
-    "results 2026-11-08",
-    "results 2026-11-09",
-    "results 2026-11-10",
-    "results 2026-11-11",
-    "results 2026-11-12",
-    "results 2026-11-13",
-    "results 2026-11-14",
-    "results 2026-11-15",
-    "results 2026-11-16",
-    "results 2026-11-17",
-    "results 2026-11-18",
-    "results 2026-11-19",
-    "results_feed",
-    "S5_injury_index",
-    "S7_players"
-   ],
-   "blocked": [],
-   "blocked_unreadable": [
-    "S8_standings",
-    "S9_team_traditional",
-    "S10_team_opponent",
-    "S1_season"
-   ]
-  },
-  {
-   "promoted_at_utc": "2026-11-19T13:07:50Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "promoted_items": [
     "S4_schedule",
     "injury_diff_chain",
