@@ -1668,6 +1668,33 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Keep the diagnostics. Any future fetch failure must name what the document actually contained, because the alternative is spending a day re-deriving it.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>F-7B8-01</td>
+<td>Medium</td>
+<td><b>The Injuries page stated three different 'current edition' claims</b></td>
+<td>Before session arena/7b8d624a-nba1 the Injuries page carried (1) a banner calling 11/19/26 12:30 AM ET the newest official edition, which the official index no longer does (it lists 11/19 editions through 07:00 AM ET); (2) a 'consecutive-edition diff' banner whose file was the 11/17 10:15 to 10:30 AM comparison, picked by filename sort and labelled as 'against the previous stored edition'; (3) a hard-coded warning naming 11/13/26 07:30 PM ET rows and a 'latest edition read this cycle (01:30 PM ET)'. The table itself is built from the 11/16/26 09:45 AM ET edition. The three banners are now computed from stored records (scripts/build_dashboard.py, injuries section) and pinned by scripts/test_injuries_banner_7b8d624a.py, which fails on the old text. Status stays open until a reviewer confirms the live page.</td>
+<td>site/pages/injuries.html banners; the reader's understanding of which injury edition the impact figures use</td>
+<td>Review the rebuilt banners on the live page. Close this flag when the banner text matches data/official/injury_index_2026-11-19_7b8d624a.json and the 11/16 09:45 AM edition record.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-7B8-02</td>
+<td>High</td>
+<td><b>The injury table is one edition (11/16 09:45 AM) and the index lists 29 newer 11/19 editions that are not transcribed</b></td>
+<td>Measured on 2026-11-19 (session arena/7b8d624a-nba1). The table's 97 rows: 65 are dated 11/16 and 11/17, the slate covered by the 11/16/26 09:45 AM ET edition (its record: 65 rows, retrieved 2026-11-16T14:47:44Z, SHA-256 a84e58a9...). The other 32 rows are dated 11/18 and 11/19 and read 'NO ENTRY IN THE NBA OFFICIAL INJURY REPORT', because that edition does not list those games; they carry no injury claim. The official index (read 2026-11-19T12:16:36Z) lists 29 November 19 editions from 12:00 AM to 07:00 AM ET. The 07:00 AM ET PDF header reads 'Injury Report: 11/19/26 07:00 AM'. Its rows are not captured as bytes, not transcribed, and not used. The impact figures and minutes shown on the page therefore do not reflect any 11/19 edition.</td>
+<td>Injury impact, rotation minutes and the injury-adjusted reads for the 11/18-11/19 games; the freshness of every injury-dependent line on the horizon</td>
+<td>Byte-capture the 11/19 editions on the runner (the scheduled-job injury pointer, X6 on the board), store them with revision and retrieval stamps, transcribe them with the existing parser, and diff consecutive editions before any dependent line is re-priced. Do not hand-type rows.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-7B8-03</td>
+<td>Low</td>
+<td><b>Two injury PDF headers and the index page were read through a text channel, not captured as bytes</b></td>
+<td>The 11/19/26 07:00 AM ET PDF header and the 11/16/26 09:45 AM ET PDF header were read with the platform's text fetch channel (session arena/7b8d624a-nba1), and so was the 11/19 index section. Those reads confirm the printed revision time and the listing. They do not provide a SHA-256 of the bytes, and they are not reproducible from the repository. The 11/16 09:45 AM edition's bytes were hashed on a runner (record data/parsed/injury_diffs/editions/Injury-Report_2026-11-16_09_45AM.json). The reads are recorded in data/official/injury_index_2026-11-19_7b8d624a.json with their windows and the limit stated.</td>
+<td>Provenance strength of the 11/19 index listing and the two printed headers</td>
+<td>Capture the same editions on the runner with byte hashes so the index listing and printed headers become reproducible from committed bytes.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

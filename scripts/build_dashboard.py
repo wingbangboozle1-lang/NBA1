@@ -2167,131 +2167,104 @@ def main():
                      "%s. Source: %s. Rows for a team that had not filed at this edition are recorded with status "
                      "<em>NOT YET SUBMITTED</em> exactly as published; they are never filled in."
                      % (esc(injs["report"]), srclink(sources, injs["src"]))))
-    gd_path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
-    if os.path.exists(gd_path):
-        b.insert(0, banner("warn", "There is a newer official edition than the one behind these numbers",
-                           "The rows below are the <b>11/13/26 07:30 PM ET</b> edition &mdash; the one the "
-                           "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
-                           "published newer reports: the 11/14 game-day cycle is on "
-                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 16&ndash;19 Nov "
-                           "window is priced from the <b>11/16/26 09:45 AM ET</b> edition (the digest-bound promoted "
-                           "input); the newest-edition banner above shows the latest official edition read "
-                           "this cycle (01:30 PM ET) with its consecutive-edition diff - 26 added designations "
-                           "and 7 status changes still awaiting digest-bound runner promotion (flag F135). "
-                           "Those numbers do not replace the ones here: a line re-priced after it was "
-                           "frozen cannot be graded."))
-    # Newest-edition banner: report revision + retrieval time (brief requirement).
-    # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
-    # instead of a hardcoded filename, so the banner cannot go stale between passes.
-    import glob as _glob, re as _re
-
-    def _edition_sort_key(path):
-        """Rank an edition file by the DATE AND TIME in its name, newest last.
-
-        The previous implementation was a plain `sorted(...)[-1]` on the file
-        name. That is wrong in this repository in a way that was visible on the
-        published page: `injury_2026-11-15_0615PM_arena49f70042.json` (another
-        session's namespaced duplicate transcription) sorts AFTER the canonical
-        `injury_2026-11-15_0615PM.json`, because '.' (0x2E) < '_' (0x5F). The
-        banner therefore read the duplicate, which carries no revision stamp and
-        no index URL - producing a blank "Report revision" and an empty
-        `href=""` on the live Injuries page.
-
-        Fix: parse the timestamp, and when two files carry the same timestamp
-        prefer the canonical one (no `_<session>` suffix). Never infer a value
-        that is missing: a missing stamp still renders as NA.
-        """
-        name = os.path.basename(path)
-        m = _re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})[_-]?(\d{2})\s*(AM|PM)",
-                       name, _re.I)
-        if m:
-            y, mo, d, hh, mm, ap = m.groups()
-            hh = int(hh) % 12
-            if ap.upper() == "PM":
-                hh += 12
-            stamp = (int(y), int(mo), int(d), hh, int(mm))
-        else:
-            m2 = _re.search(r"_(\d{4})-(\d{2})-(\d{2})", name)
-            stamp = (int(m2.group(1)), int(m2.group(2)), int(m2.group(3)), 0, 0) if m2 else (0, 0, 0, 0, 0)
-        # Canonical files sort after namespaced duplicates at equal timestamps.
-        namespaced = 1 if _re.search(r"_\d{4}-\d{2}-\d{2}_\d{2}[_-]?\d{2}\s*(?:AM|PM)_",
-                                     name, _re.I) else 0
-        return (stamp, -namespaced)
-
-    def _newest(pattern):
-        c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
-             if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
-        if not c:
-            c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
-        return sorted(c, key=_edition_sort_key)[-1] if c else None
-
-    def _edition_label(x):
-        """Edition refs are written as a plain string by some passes and as a
-        dict by others ({'edition_id':..., 'revision':..., 'source_url':...}).
-        Rendering the dict with `esc()` leaked a raw Python repr onto the
-        published page. Render either shape as text."""
-        if isinstance(x, dict):
-            ident = x.get("edition_id") or x.get("edition") or ""
-            rev = x.get("revision")
-            return ("%s (%s)" % (ident, rev)) if (ident and rev) else (ident or "the previous stored edition")
-        if isinstance(x, str) and x.strip():
-            return x.strip()
-        return "the previous stored edition"
-
-    # Canonical index URL, used only when an edition file omits its own. It is a
-    # real, reachable official URL, not a placeholder, so the link is never empty.
-    _INDEX_FALLBACK = "https://official.nba.com/nba-injury-report-2026-27-season/"
-    newest_path = _newest("injury_2*.json")
-    if newest_path and os.path.exists(newest_path):
-        _n = load(newest_path)
-        _rows = _n.get("rows", [])
-        _players = sum(1 for r in _rows if r.get("player"))
-        _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
-        diff_note = ""
-        diff_path = _newest("injury_diff_*.json")
-        if diff_path and os.path.exists(diff_path):
-            _df = load(diff_path)
-            _c = _df.get("counts", {})
-            if _c:
-                # Two schemas exist for the same idea. `comparable_rows` is what
-                # the committed diff files actually use; `comparable_player_rows`
-                # was the name this branch looked for, so it silently reported 0
-                # on the published page. Accept both, and prefer a real number.
-                _cmp = _c.get("comparable_rows", _c.get("comparable_player_rows", 0))
-                _chg = _c.get("status_changes", 0)
-                _filed = _c.get("rows_added", len(_df.get("team_blocks_filed_since", [])))
-            else:
-                # schema written by the rolling capture passes (keyed lists)
-                _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
-                _chg = len(_df.get("changed", []))
-                _filed = len(_df.get("added", []))
-            diff_note = ("Consecutive-edition diff against <b>%s</b>: %d comparable "
-                         "player rows, %d status changes, %d rows the newer edition "
-                         "adds (<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_edition_label(_df.get("from_edition"))),
-                            _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
-        # R-42-B: `esc(None)` is an empty string, and the empty string used to land in a
-        # bare `<b>...</b>` slot. When the edition file had no revision stamp the slot was
-        # substituted with NA - an HTML <span> - through `%s` inside a string that the
-        # verifier then read as an href target (`href="<span class=...`). Fixed by
-        # substituting the span only into text position and never into a URL slot.
-        _rev = _n.get("revision_time_et")
-        _rev_cell = esc(_rev) if _rev else NA
-        _src_url = _n.get("source_url") or ""
-        # An empty index URL emitted `<a href="">`, which every link checker
-        # correctly reads as a broken internal link. Fall back to the canonical
-        # official index rather than publishing an empty href.
-        _idx_url = _n.get("index_url") or _INDEX_FALLBACK
-        b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
-                           "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
-                           "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
-                           "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
-                           "<p>%s %s</p>"
-                           % (_rev_cell, esc(_n.get("retrieved_utc")),
-                              len(_rows), _players, _nys,
-                              esc(_src_url), esc(_idx_url),
-                              diff_note,
-                              esc(_n.get("merged_cell_caveat", "")))))
+    # === Injuries banners (session arena/7b8d624a-nba1, COORDINATION §74) =====
+    # Every statement in the three banners below is computed from a stored record:
+    #   * the edition behind the table rows  -> injuries.json `report` + its parsed edition record
+    #   * its consecutive-edition diff       -> the diff whose `after` is that edition (never a name-sorted guess)
+    #   * the newest edition the index lists -> data/official/injury_index_2026-11-19_7b8d624a.json
+    # Nothing about which edition is "newest" or "in use" is typed by hand, so the banners cannot disagree.
+    import glob as _glob2, re as _re2
+    _IDX_FALLBACK = "https://official.nba.com/nba-injury-report-2026-27-season/"
+    _REPO_DIFF_DIR = "../../data/parsed/injury_diffs/"
+    _idx_path = os.path.join(ROOT, "data", "official", "injury_index_2026-11-19_7b8d624a.json")
+    _idx = load(_idx_path) if os.path.exists(_idx_path) else None
+    _rep = injs.get("report", "") or ""
+    _lm = _re2.search(r"Injury-Report_(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)", _rep)
+    _row_label = _lm.group(0) if _lm else None
+    _rev_row = None
+    if _lm:
+        _y, _mo, _d, _hh, _mi, _ap = _lm.groups()
+        _rev_row = "%s/%s/%s %s:%s %s ET" % (_mo, _d, _y[2:], _hh, _mi, _ap)
+    _ed = {}
+    _ed_path = os.path.join(ROOT, "data", "parsed", "injury_diffs", "editions", (_row_label or "x") + ".json")
+    if _row_label and os.path.exists(_ed_path):
+        _ed = load(_ed_path)
+    _hdr = {}
+    if _idx:
+        for _h in _idx.get("pdf_header_reads", []):
+            _hdr[os.path.basename(_h.get("pdf_url", ""))] = _h
+    _rows_hdr = _hdr.get("Injury-Report_%s.pdf" % _row_label[len("Injury-Report_"):], {}).get("printed_header") if _row_label else None
+    _row_src = _ed.get("source_url") or ""
+    _diff_d = {}
+    if _row_label:
+        _dfs = _glob2.glob(os.path.join(ROOT, "data", "parsed", "injury_diffs", "diff_*_to_%s.json" % _row_label))
+        if _dfs:
+            _diff_d = load(sorted(_dfs)[-1])
+            _diff_name = os.path.basename(sorted(_dfs)[-1])
+    _rows_n = len(injs.get("rows", []))
+    # Split the table by the edition's own slate. Rows dated inside the edition's slate are its entries;
+    # rows dated after it are placeholders whose status says so ("NO ENTRY IN ..."). Counted, never guessed.
+    _ed_dates = set(x[0] for x in (_ed.get("rows") or []) if isinstance(x, list) and x)
+    _rows_in_ed = sum(1 for r in injs.get("rows", []) if r.get("date") in _ed_dates)
+    _rows_noentry = sum(1 for r in injs.get("rows", []) if str(r.get("status", "")).upper().startswith("NO ENTRY"))
+    _rows_outside = _rows_n - _rows_in_ed
+    _tb = []
+    # --- banner 1: the edition behind the rows on this page --------------------
+    if _row_label and _ed:
+        _nsc = len(_diff_d.get("status_or_reason_changes", []))
+        _add = len(_diff_d.get("listed_in_after_only", []))
+        _rem = len(_diff_d.get("listed_in_before_only", []))
+        _tfc = len(_diff_d.get("team_block_filing_changes", []))
+        _prev = (_diff_d.get("before") or {}).get("label", "")
+        _diff_html = (
+            "Consecutive-edition diff into this edition (from <b>%s</b>): <b>%d</b> status or reason changes, "
+            "<b>%d</b> rows listed only in this edition, <b>%d</b> rows listed only in the previous edition, "
+            "<b>%d</b> team-block filing changes. <a href=\"%s%s\">diff file</a>."
+            % (esc(_prev), _nsc, _add, _rem, _tfc, _REPO_DIFF_DIR, esc(_diff_name))
+        ) if _diff_d else (
+            "Consecutive-edition diff into this edition: <b>none stored</b> for <b>%s</b>. No status change is claimed for it."
+            % esc(_row_label))
+        _tb.append(banner("info", "Edition behind the rows on this page: revision and retrieval time",
+                          "<p><b>Report revision (printed on the official PDF):</b> %s%s &nbsp;|&nbsp; "
+                          "<b>retrieved (UTC):</b> %s &nbsp;|&nbsp; <b>SHA-256:</b> <code>%s</code> &nbsp;|&nbsp; "
+                          "<b>rows in the edition:</b> %s &nbsp;|&nbsp; <b>table rows on this page:</b> %d (%d dated inside the edition&rsquo;s slate, %d dated after it, shown as &ldquo;no entry&rdquo; placeholders).</p>"
+                          "<p>Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
+                          "<p>%s</p>"
+                          % (esc(_rev_row), (" (header read: %s)" % esc(_rows_hdr)) if _rows_hdr else " (printed header not read)",
+                             esc(_ed.get("retrieved_at_utc") or "not recorded"),
+                             esc((_ed.get("sha256") or "not recorded")[:16]) + "&hellip;",
+                             esc(str(_ed.get("row_count", "not recorded"))), _rows_n, _rows_in_ed, _rows_outside,
+                             esc(_row_src), _IDX_FALLBACK, _diff_html)))
+    else:
+        _tb.append(banner("warn", "Edition behind the rows on this page: not recorded",
+                          "The edition named by the rows could not be matched to a stored edition record, so no "
+                          "revision or retrieval time is shown. Nothing is inferred."))
+    # --- banner 2: the newest edition the official index lists -----------------
+    if _idx:
+        _nl = _idx.get("newest_listed", {})
+        _nh = _hdr.get(os.path.basename(_nl.get("pdf_url", "")), {}).get("printed_header")
+        _win = (_idx.get("index_read_window_utc") or {}).get("end") or "not recorded"
+        _tb.append(banner("info", "Newest edition the official index lists (November 19)",
+                          "<p>The official index page, read at <b>%s</b>, lists <b>%d</b> November 19 editions, "
+                          "from 12:00 AM to <b>%s ET</b>. Newest listed: <b>%s</b>%s. "
+                          "Its rows are <b>not</b> captured as bytes and <b>not</b> transcribed on this page. "
+                          "Source: <a href=\"%s\">official.nba.com index</a> &middot; <a href=\"%s\">newest PDF</a> "
+                          "&middot; <a href=\"../../data/official/injury_index_2026-11-19_7b8d624a.json\">index record</a>.</p>"
+                          % (esc(_win), _idx.get("listed_count", 0), esc(_nl.get("time_et", "")),
+                             esc(_nl.get("label", "")),
+                             (" (printed header: <b>%s</b>)" % esc(_nh)) if _nh else " (printed header not read)",
+                             _IDX_FALLBACK, esc(_nl.get("pdf_url", "")))))
+    # --- banner 3: is the table behind a newer edition? (computed, never typed) -
+    if _idx and _row_label and _nl.get("label") and _nl.get("label") != _row_label:
+        _tb.append(banner("warn", "The rows on this page are not the newest official edition",
+                          "The entries below come from the <b>%s</b> edition, which covers the slate through its "
+                          "last dated row. The %d rows dated after that slate read &ldquo;no entry&rdquo; because that "
+                          "edition does not list those games, and they carry no injury claim. The index lists a newer "
+                          "edition, <b>%s ET</b>, that has not been transcribed here, so the impact figures and minutes "
+                          "on this page do not reflect it."
+                          % (esc(_rev_row or _row_label), _rows_outside, esc(_nl.get("time_et", "")))))
+    for _bn in reversed(_tb):
+        b.insert(0, _bn)
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))
