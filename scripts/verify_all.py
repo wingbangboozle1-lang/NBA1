@@ -59,6 +59,13 @@ run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
 run("verify_dashboard.py")   # Build D: linked or explicit no-source rows; hosts checked, values not re-fetched
+# Register schema (session arena/84264db0-nba1, COORDINATION §63; ported by arena/929395a5-nba1 §66 P02).
+# The 2026-11-17 cycle published a flag whose detail cell was a Python list; the builder coerced
+# it with str() and the live page showed "[\'Ledger entry 12 ... \']". Nothing caught it: the
+# rendered check forbids "undefined"/"NaN"/"[object Object]" and a list stringifies to none of
+# those, and the provenance check only looks at links. This asserts the registers are publishable
+# as stored, and it is proven to reject the exact defect it was written for.
+run("check_registers.py")
 # R10 noise-band refusal (session arena/23b323a3-nba1, COORDINATION §50). A gate that has
 # never rejected anything is not evidence of a gate: on the live corpus zero strategies are
 # refused, so the only way to show the refusal works is to plant a team outside the band and
