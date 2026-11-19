@@ -259,6 +259,11 @@ def probe_clock_grid():
     # archived nor already recorded as probed, take the first GRID_BATCH (15),
     # so each short-lived run fills the next slice and the chain converges.
     if os.environ.get("GRID_NEXT"):
+        global GRID_WINDOW
+        if GRID_WINDOW is None:
+            # sentinel: window filter active (skips the engine index passes)
+            # but lo/hi unset, so _in_window keeps every label
+            GRID_WINDOW = (None, None)
         recorded = set()
         for day in ("2026-11-17", "2026-11-18", "2026-11-19"):
             q = os.path.join(SESSION_DIR, "_probe_%s.json" % day)
