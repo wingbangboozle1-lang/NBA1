@@ -11558,3 +11558,12 @@ repo-wide broken-internal-link scan reports **160 HTML files, 0 broken**.
 | Pages deploy | `Publish static site to GitHub Pages` run **44471494581** → `completed / success` on `5c9fd72`; GitHub's own `pages build and deployment` run **44471492637** → `completed / success`; `GET /repos/…/pages` → `status: built`, build created `2026-11-19T06:20:52Z`, source branch `main`, path `/` |
 | Live fetch-back — **incomplete, and stated as such** | `https://wingbangboozle1-lang.github.io/NBA1/` fetched successfully and serves the built dashboard. Every *deep* path (`/NBA1/pages/player-logs.html`, `/NBA1/docs/pages/player-logs.html`, `/NBA1/pages/rotation.html`) currently returns GitHub's generic "We're having a really bad day" incident page instead of the file, and the `gh` API returned an internal error once in the same window. This is GitHub-side: the deploy pipeline reported success on the merge commit and the Pages build is `built`, but **this seat did not visually confirm the new player-log page over HTTP**, and does not claim it did. Retry after the incident clears: the path to check is `/NBA1/pages/player-logs.html` (source `main`, root `/`, so the live file is `site/pages/…` only if the workflow copies it there — otherwise `docs/pages/…`) |
 | Refresh-run observation (for X6) | `Refresh official data` run **44470620858** completed `success` at 06:13:40Z and pushed `232612e` to `main`, but `data/raw/injuries.json` **still points at `Injury-Report_2026-11-17_11_30AM`** (`verified_at 2026-11-19T05:45:10Z`), while `data/raw/injury_pdfs/` on that same commit holds the 11/19 12:45 AM edition. X6 is therefore **still open with a fresh measurement**: the promotion path works, the *currency* of the pointer is what the next run must change |
+
+**Self-correction, recorded where it happened (X9's own row carries the note).** The first version of
+the X9 row quoted MEM/CLE quarter digits from memory (30-31-34-29 / 28-30-31-32). They were wrong.
+The published file says **30/41/29/24** (124) and **37/35/27/22** (121), which is what the row now
+prints, and the commit that fixes it (`board §68.6 X9: correct the quarter digits …`) sits on top of
+the commit that introduced the error in the same PR - so the PR diff shows both. Stated here because
+the standing rule is that an irregularity is flagged, not quietly amended: this seat's own board text
+failed the same test it applies to source data, and the file - not the recollection - is the authority.
+
