@@ -1075,6 +1075,84 @@
    "decision_needed": "Approve a reachability table on the source-check page.",
    "source": "S89F_REFRESH",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+  },
+  {
+   "id": "S-CDF-01",
+   "title": "Publish both probability bases until the next settlement grades which calibrates better",
+   "category": "Model honesty",
+   "problem": "The published pick probability is overconfident (measured hit rate 0.3784 against a mean published 0.7197). Fixing it silently would break series continuity; leaving it silently keeps a number on the site that its own settlement records contradict.",
+   "options": [
+    {
+     "option": "Add a calibrated_probability column computed with the measured spread-error sigma (18.303) beside the current column, and pre-register that the next settlement cycle adopts the better-calibrated basis under log-loss",
+     "effort": "Low - one extra field in generate_picks.py and one column in the picks builder",
+     "risk": "Low - both numbers stay labelled model-internal; nothing is deleted",
+     "unlocks": "Answers Q38 with evidence instead of judgement"
+    },
+    {
+     "option": "Replace the basis now",
+     "effort": "Low",
+     "risk": "Medium - every archived probability series loses comparability without a graded reason",
+     "unlocks": "A better-calibrated number today"
+    },
+    {
+     "option": "Change nothing",
+     "effort": "None",
+     "risk": "High - the site keeps publishing numbers its own settlements refute (F-CDF-04)",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Option 1.",
+   "decision_needed": "Approve the dual-column publication and the log-loss adoption rule.",
+   "source": "S89F_DRIFT",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json"
+  },
+  {
+   "id": "S-CDF-02",
+   "title": "Derive strategy-level leaderboard rows from ticket-level settlement records",
+   "category": "Verification",
+   "problem": "S1 carries two published records (23-9 / +11.91 vs 23-8 / +12.909) and neither can be derived from the settlement files, which grade tickets. A leaderboard that cannot be recomputed from its own evidence cannot support reward decisions.",
+   "options": [
+    {
+     "option": "Grade every ticket with its strategy id, aggregate to strategy totals in one derived file, and regenerate every surface from it",
+     "effort": "Medium - a small aggregation script over data/settlement/**",
+     "risk": "Low",
+     "unlocks": "Answers Q39; makes reward tiers auditable"
+    },
+    {
+     "option": "Designate one existing record as canonical and flag the other",
+     "effort": "None",
+     "risk": "Medium - the canonical one is still underivable",
+     "unlocks": "A single number, unverified"
+    }
+   ],
+   "recommendation": "Option 1.",
+   "decision_needed": "Approve the derived aggregation as the source of record.",
+   "source": "S89F_DRIFT",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/docs/data/leaderboard.json"
+  },
+  {
+   "id": "S-CDF-03",
+   "title": "Adopt auto-refresh branches mechanically and make gh pr create failures loud",
+   "category": "Operations",
+   "problem": "The scheduled refresh publishes captures to auto/refresh-* branches and opens a PR - but the gh pr create failure is swallowed with a warning. auto/refresh-20261119-120839 held ten official injury PDFs and a full capture set with no PR until this session adopted it by hand (F-CDF-01).",
+   "options": [
+    {
+     "option": "Let the publish step fail visibly when gh pr create fails, and add a scheduled sweep that merges or archives any auto/refresh branch older than one run",
+     "effort": "Low - two small workflow edits",
+     "risk": "Low",
+     "unlocks": "Captures can no longer strand silently"
+    },
+    {
+     "option": "Keep the swallow-and-warn behaviour",
+     "effort": "None",
+     "risk": "High - the next stranded capture is found only by accident",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Option 1.",
+   "decision_needed": "Approve the sweep + loud-failure change to refresh-data.yml.",
+   "source": "S89F_REFRESH",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
   }
  ]
 }

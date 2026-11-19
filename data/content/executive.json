@@ -1,15 +1,27 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-19 (11/17 and 11/18 settled; 11/19-11/22 horizon re-originated; strategy files frozen before every tip they cover)",
- "headline": "26 games are priced across 2026-11-19 to 2026-11-22 from official inputs read today, with the home-court advantage pinned to the measured home-win rate (0.5023, 111 of 221, worth 0.09 points) rather than fitted. The two independent estimators' disagreement is carried as the headline margin per game; the blend sits underneath. 11/17 settled 1-4-0 on singles and 0/3 on parlays (-6.7u paper); 11/18 settled 4-8-0 and 0/3 (-8.1u paper). No strategy has passed the validation gates; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
- "lead": "This session re-read every 11/17 and 11/18 game on the official site (https://www.nba.com/games?date=2026-11-17 and https://www.nba.com/games?date=2026-11-18 and the 17 game pages). All 17 finals were transcribed with quarter scores, venue, attendance and officials; every quarter row sums to the printed final. The results feed now carries 222 of 222 finals. The 11/19-11/22 horizon was re-originated from a fresh official schedule capture, a fresh standings read and a fresh team-stat re-cut; the strategy files were frozen at 2026-11-19T05:45Z, 19+ hours before the first tip (2026-11-20T01:00Z).",
+ "as_of": "2026-11-19T13:10Z (11/17 and 11/18 settled; horizon 11/19-11/22 re-priced at 13:00Z on an amended pre-tip seal after the LAL/UTA input lag cleared; scheduled-refresh rebuild gap closed)",
+ "headline": "26 games are priced across 2026-11-19 to 2026-11-22 from official inputs re-read at 12:2x-12:4x UTC today, with the home-court advantage pinned to the measured home-win rate (0.5023, 111 of 221, worth 0.09 points) rather than fitted. The one-game LAL/UTA ratings lag is resolved: three lines moved more than a point (PHX@UTA, SAC@LAL, DAL@UTA) and were re-published before tip as an amended seal (ledger entry 18, supersedes entry 17) - no pick selection changed. 11/17 settled 1-4-0 and 11/18 settled 4-8-0 on singles, 0/3 parlays each (-14.8u paper). The scheduled refresh can now reach its rebuild step again: the two remaining causes were an unsatisfiable client-rendered-page requirement (now declared with evidence and expiry) and a publish-step git-add abort that silently dropped every verified promotion (fixed). No strategy has passed the validation gates; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
+ "lead": "The 05:45Z horizon was priced from ratings that predated the 11/18 UTA 109 @ LAL 97 game. The three official team-stat pages were re-read first-hand at 12:2x-12:4x UTC (every row carrying its URL and read time in data/official/teams_reread_2026-11-19_cdf3a108.json); both clubs now print 16 GP like the standings, and gates G1-G5 pass for the first time. The horizon was re-originated with the identical published formulas and re-sealed before the 2026-11-20T01:00Z first tip; settlement now grades the latest seal (settle_slate.py change pinned by three offline tests). The scheduled job's rebuild half - dead since 2026-11-15 - is fixed at both the gate and the publish path and was exercised end to end.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
-  "one_line": "The horizon for 2026-11-19 to 2026-11-22 is published: 26 games priced from official inputs read today, home-court pinned to the measured 0.5023 home-win rate (0.09 points) rather than fitted, the two estimators' disagreement carried as the headline margin, and the strategy files frozen before every tip they cover. 11/17 and 11/18 settled 1-4-0 / 4-8-0 on singles and 0/3 / 0/3 on parlays (-14.8u paper combined). No strategy has passed the validation gates; no market price exists in this repository; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
-  "what_would_change": "A strategy passing the validation gates on out-of-sample data; a reachable market price source; the LAL/UTA team-stat lag clearing (F-929-01).",
+  "one_line": "The 11/19-11/22 horizon is published on an amended pre-tip seal (ledger entry 18): 26 games priced from official inputs re-read today, home-court pinned to the measured 0.5023 (0.09 points), the two estimators' disagreement carried as the headline margin. The LAL/UTA input lag is closed; three lines moved and no pick selection changed. 11/17 and 11/18 settled 1-4-0 / 4-8-0 on singles, 0/3 / 0/3 on parlays (-14.8u paper). No strategy has passed the validation gates; no market price exists in this repository; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
+  "what_would_change": "A strategy passing the validation gates on out-of-sample data; a reachable market price source; the pick-probability sigma basis being graded and adopted (Q38).",
   "why": "No strategy has passed the validation gates (Build A 0/8, Build B 0/10), and no market price exists anywhere in this repository, so no pick can be validated against a real price. Every ticket is MODEL OUTPUT - UNVALIDATED, unfunded, zero stake. The 11/17 and 11/18 settlements (-14.8u paper combined) are the model's own paper record, not a real result."
  },
  "findings": [
+  {
+   "n": 21,
+   "title": "Amended pre-tip seal: the LAL/UTA lag moved three lines and nothing else",
+   "detail": "The official tables absorbed the 11/18 UTA 109 @ LAL 97 game. Re-originating with the identical formulas moved PHX@UTA spread -7.6 -> -6.4 (total 227.0 -> 225.8), SAC@LAL 22.1 -> 20.7 (237.4 -> 235.3), DAL@UTA -7.5 -> -6.3 (221.7 -> 220.5); the other 23 spreads are unchanged and totals drift <= 0.2 from the league-baseline re-weight. The movements match session arena/d66245d4-nba1's independent re-price to the published rounding. All 26 singles carry the same pick_line as the 05:45Z seal; four model_home_win_prob fields moved. Sealed at 13:00Z (ledger entry 18) - 12 hours before the first tip - and settle_slate.py now grades the latest seal.",
+   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "n": 22,
+   "title": "The scheduled rebuild was dead for three causes; all three are fixed and measured",
+   "detail": "(1) S1_season/S2_train parsed 0 rows in every recorded run since 2026-11-15 (client-rendered pages; API fallback times out from runners; headless browser refused) - now declared unreadable with evidence and expiry 2026-12-19, with anti-rot re-checks. (2) The publish step's single git add aborted on never-existing paths and silently dropped every verified promotion for days (F-CDF-02) - now per-path. (3) The gate's S1 blocks are declaration-aware and the staleness is published. Measured after the fix: promote exits 0, gate PASSes with five PASS BY DECLARATION entries, engine/pipeline.py + engine/build_site.py run to completion.",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_capture_gate_report.json"
+  },
   {
    "n": 0,
    "title": "11/17 and 11/18 settled; horizon rolled to 11/19-11/22",
@@ -42,7 +54,7 @@
    "detail": ""
   },
   {
-   "reading": "A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final \u2014 NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15",
+   "reading": "A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final — NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15",
    "title": "The settlement page contradicted itself while all five gates passed",
    "detail": ""
   },
@@ -120,12 +132,13 @@
    "reading": "A blank cell with a reason is more decision-useful than a confident 100%. The fix is to make the refresh re-read the injury index so the column fills in game date by game date (SG36), and to capture minutes for all thirty teams so redistribution is computable everywhere (SG32)."
   },
   {
-   "title": "S1 through 2026-11-16 \u2014 outside luck alone, still short of the full gate set",
+   "title": "S1 through 2026-11-16 — outside luck alone, still short of the full gate set",
    "detail": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 29 games of the 16-19 Nov roll are published as lines and paper picks, not as recommendations.",
    "reading": "Carried forward from the 11/16 settlement cycle so the earlier finding is not lost when this cycle's summary replaced the prose. S1 remains outside luck alone and still short of calibration, stability and availability."
   }
  ],
  "what_is_live_now": [
+  "The picks and lines surfaces render the AMENDED pre-tip seal (data/archive/seal_2026-11-19T1300Z/, ledger entry 18 supersedes entry 17): same 26 singles as the 05:45Z seal, corrected probabilities, and the three moved lines above.",
   "Three graded game days with visible settlement stamps on site/pages/results.html and site/pages/settlement.html: 2026-11-14 (2026-11-15T12:35Z), 2026-11-15 (2026-11-16T14:45Z, 5-4-0 on nine singles, -2.7 units with parlays) and 2026-11-16 (2026-11-17T15:44Z, singles 3-5-0 -2.5, parlays -3.3, SGP -2.2; settled total -8.0 units).",
   "The results page reads the settlement and SGP grading records directly. A later amendment supersedes an earlier grading record through a ledger entry, so the page cannot show a grade the ledger does not hold.",
   "The Results page no longer renders a phantom game day from the season-wide running feed (data/official/results_feed_2026_27.json). Its 11/16 feed rows now read FINAL: 205 of 222 games are final.",
@@ -134,6 +147,11 @@
   "Home-court advantage pinned to the measured official home-win rate: 0.5204 from the standings HOME/ROAD columns (102 of 196), cross-checked against the final-score corpus."
  ],
  "recommended_next_actions": [
+  {
+   "rank": 1,
+   "action": "Answer Q38 (pick-probability sigma basis) and Q39 (strategy-level record source of record); S-CDF-01 and S-CDF-02 carry the concrete options.",
+   "why": "Both are decisions only a reviewer can make, both are now flagged with measurements (F-CDF-04, F-CDF-05), and both change what the site publishes."
+  },
   {
    "rank": 1,
    "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. The published lines were deliberately not rewritten.",
@@ -175,5 +193,5 @@
    "why": "No official edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED (F105). Availability is the fastest-moving input and is currently only as fresh as the last session that looked."
   }
  ],
- "bottom_line": "11/16 is settled and its record is in the ledger, but it is settled on two forms of evidence that need follow-up. First, the scheduled refresh does not promote or settle a day from its own captures (F140), so the 11/16 finals were entered by hand. Second, two SGP player legs are UNRESOLVED (F139), and venue, attendance and officials are blank for all but one game (F138). None of these changes a settled result. Nothing on this site is a recommendation, and nothing is staked. Open items for a reviewer: the refresh promotion gap (F140), the unresolved SGP legs (F139), the 11/16 GAME INFO read (F138), the GSW@NOP tip-time conflict (F101), the POR@MIN back-to-back convention (Q29), and the live-slate contamination rule (F103)."
+ "bottom_line": "The system originates its own lines, seals them under a hash chain before tip, settles only on verified official finals, and now refreshes its inputs through a scheduled job whose rebuild is reachable again. Today's session closed the last measured input lag (three lines re-published before tip), fixed the publish path that had been silently dropping verified promotions, and published every gap it could not close: the pick-probability calibration (Q38), the strategy-record conflict (Q39), the declared-unreadable table pages (F-CDF-06), and the stranded capture branches (S-CDF-03). No strategy is funded; no market price exists in this repository; every unit figure is paper at the stated -110 convention."
 }
