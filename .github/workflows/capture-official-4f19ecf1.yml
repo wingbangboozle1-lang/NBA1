@@ -18,7 +18,12 @@ name: Capture official evidence (4f19ecf1)
 #   * it writes only data/raw/session-4f19ecf1/** (this session's capture dir),
 #     the canonical append-only content-addressed data/raw/injury_pdfs/** archive
 #     (claimed by this session in §68 G02) and its probe run record;
-#   * the fetch script refuses any host outside the four official ones.
+#   * the fetch script refuses any host outside the four official ones;
+#   * each stage commits as soon as it finishes. The 2026-11-19T06:06Z run of
+#     the single-stage version was cancelled by the runner two minutes in
+#     ("The operation was canceled" - runner shutdown/reclaim class, same
+#     symptom the board records for probe-official runs), so partial progress
+#     must survive a lost runner.
 
 on:
   push:
@@ -48,23 +53,31 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Fetch official gamebooks and injury editions
-        run: python3 scripts/capture_official_4f19ecf1.py
+      - name: Fetch official gamebooks (stage 1)
+        run: python3 scripts/capture_official_4f19ecf1.py --only gamebooks
 
-      - name: Commit the captures
+      - name: Commit gamebooks
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
-          if git diff --cached --quiet; then
-            echo "no new capture payloads - nothing committed"
-            exit 0
+          git add data/raw/session-4f19ecf1
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: 11/17-18 gamebooks (4f19ecf1 G03) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
           fi
-          git commit -m "Capture official NBA evidence: 11/17-18 gamebooks + 11/17..19 injury editions (4f19ecf1 G02/G03) [skip ci]"
-          # Rebase in case the session pushed while the run was in flight; never
-          # force, so another session's work is never discarded.
-          git pull --rebase origin arena/4f19ecf1-nba1
-          git push origin HEAD:arena/4f19ecf1-nba1
+
+      - name: Fetch official injury editions (stage 2)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury
+
+      - name: Commit injury editions
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: 11/17..19 injury editions (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
 
       - name: Upload the manifest
         if: always()

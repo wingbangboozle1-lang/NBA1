@@ -369,9 +369,27 @@ def main() -> int:
     ap.add_argument("--dates", default="2026-11-17,2026-11-18")
     ap.add_argument("--skip-gamebooks", action="store_true")
     ap.add_argument("--skip-injury", action="store_true")
+    ap.add_argument("--only", choices=("gamebooks", "injury"), default=None,
+                    help="run one stage only (the workflow commits each stage "
+                         "separately so a reclaimed runner loses no completed work)")
     args = ap.parse_args()
+    run_stamp = {"at_utc": now_utc(), "argv": " ".join(sys.argv[1:]) or "(all stages)"}
+    if args.only == "gamebooks":
+        args.skip_injury = True
+    elif args.only == "injury":
+        args.skip_gamebooks = True
 
     os.makedirs(SESSION_DIR, exist_ok=True)
+    # Stage runs commit separately; merge into an existing manifest so one
+    # stage never erases the other's records.
+    manifest_path = os.path.join(SESSION_DIR, "capture_manifest.json")
+    prior = {}
+    if os.path.exists(manifest_path):
+        try:
+            with open(manifest_path, encoding="utf-8") as fh:
+                prior = json.load(fh)
+        except ValueError:
+            prior = {}
     manifest = {
         "session": "arena/4f19ecf1-nba1",
         "coordination": "COORDINATION.md §68 (G02/G03)",
@@ -396,8 +414,19 @@ def main() -> int:
                                          "error": f"{type(exc).__name__}: {exc}"})
             log(f"injury stage FAILED: {type(exc).__name__}: {exc}")
 
-    with open(os.path.join(SESSION_DIR, "capture_manifest.json"), "w",
-              encoding="utf-8") as fh:
+    if prior:
+        for k in ("days", "gamebooks", "gamebooks_skipped_not_final", "failures"):
+            seen = {(x.get("url"), x.get("game_id"), x.get("error")) for x in manifest.get(k, [])}
+            for x in prior.get(k, []) or []:
+                if (x.get("url"), x.get("game_id"), x.get("error")) not in seen:
+                    manifest.setdefault(k, []).append(x)
+        for k in ("injury_index", "injury_editions", "clock_grid", "injury_probe"):
+            if prior.get(k) and not manifest.get(k):
+                manifest[k] = prior[k]
+        manifest["runs"] = (prior.get("runs") or []) + [run_stamp]
+    else:
+        manifest["runs"] = [run_stamp]
+    with open(manifest_path, "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, indent=1)
         fh.write("\n")
     log(f"done: {len(manifest['gamebooks'])} gamebook fetches, "
