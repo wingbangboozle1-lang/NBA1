@@ -1,14 +1,36 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-17 (11/16 settled and SGP-graded; 11/17-11/20 horizon re-originated with the measured home-court pin and the strategy files frozen before every tip they cover)",
- "headline": "30 games are priced across 2026-11-17 to 2026-11-20 from official inputs read today, with the home-court advantage pinned to the measured home-win rate (0.5196, 106 of 204, worth 0.83 points) rather than fitted. The two independent estimators disagree by a headline margin of 0.0 to a few points per game and that disagreement, not the blend, is what the site leads with. The pre-registration files for all twelve strategy families and the hash of every published line were sealed in ledger entry 12 at 15:54Z, before the first tip they cover (7:30 PM ET, 00:30Z). Nothing is staked: no strategy has passed the validation gates, and the total is gated against the measured league total (model 226.1 vs measured 227.6, gap -1.6 against a tolerance of 8.0).",
- "lead": "This session re-read every 11/16 game on the official site (https://www.nba.com/games?date=2026-11-16 and the eight game pages). The eight final scores were also matched 8 of 8 against the scheduled 11/17 capture (data/raw/_capture_results_2026-11-16.json). Quarter scores were read once per game, and venue, attendance and officials were blanked where no read confirmed them (flag F138). The scheduled refresh captured the finals but did not promote them or settle the day, so this session entered them by hand and recorded that gap as F140. Results and settlement now render every settlement record in the repository, including 11/16 and its SGP grading, from the data files themselves.",
+ "as_of": "2026-11-19 (11/17 and 11/18 settled; 11/19-11/22 horizon re-originated; strategy files frozen before every tip they cover)",
+ "headline": "26 games are priced across 2026-11-19 to 2026-11-22 from official inputs read today, with the home-court advantage pinned to the measured home-win rate (0.5023, 111 of 221, worth 0.09 points) rather than fitted. The two independent estimators' disagreement is carried as the headline margin per game; the blend sits underneath. 11/17 settled 1-4-0 on singles and 0/3 on parlays (-6.7u paper); 11/18 settled 4-8-0 and 0/3 (-8.1u paper). No strategy has passed the validation gates; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
+ "lead": "This session re-read every 11/17 and 11/18 game on the official site (https://www.nba.com/games?date=2026-11-17 and https://www.nba.com/games?date=2026-11-18 and the 17 game pages). All 17 finals were transcribed with quarter scores, venue, attendance and officials; every quarter row sums to the printed final. The results feed now carries 222 of 222 finals. The 11/19-11/22 horizon was re-originated from a fresh official schedule capture, a fresh standings read and a fresh team-stat re-cut; the strategy files were frozen at 2026-11-19T05:45Z, 19+ hours before the first tip (2026-11-20T01:00Z).",
  "verdict": {
   "status": "PROVISIONAL - not funded",
-  "one_line": "The horizon for 2026-11-17 to 2026-11-20 is published: 30 games priced from official inputs read today, home-court pinned to the measured 0.5196 home-win rate (0.83 points) rather than fitted, the two estimators' disagreement carried as the headline, 18 of the 30 games carrying a pick that survived the per-pick gates, and every strategy file plus every model-input digest sealed in ledger entry 12 at 15:54Z, before the first tip those files cover. The total is reconciled against the measured league total (model 226.1, measured 227.6, gap -1.6 within a tolerance of 8.0). Zero stakes: no strategy has passed the full validation set, and no official closing price exists to measure an edge against.",
-  "why": "The model prices a window the market cannot currently be compared against, and one record outside luck alone (S1 at 23-9 with an exact binomial p of 0.020) still fails calibration and stability. Publishing prices and a frozen pre-registration is the honest deliverable at this stage; publishing a stake would not be."
+  "one_line": "The horizon for 2026-11-19 to 2026-11-22 is published: 26 games priced from official inputs read today, home-court pinned to the measured 0.5023 home-win rate (0.09 points) rather than fitted, the two estimators' disagreement carried as the headline margin, and the strategy files frozen before every tip they cover. 11/17 and 11/18 settled 1-4-0 / 4-8-0 on singles and 0/3 / 0/3 on parlays (-14.8u paper combined). No strategy has passed the validation gates; no market price exists in this repository; every pick is MODEL OUTPUT - UNVALIDATED, zero stake.",
+  "what_would_change": "A strategy passing the validation gates on out-of-sample data; a reachable market price source; the LAL/UTA team-stat lag clearing (F-929-01).",
+  "why": "No strategy has passed the validation gates (Build A 0/8, Build B 0/10), and no market price exists anywhere in this repository, so no pick can be validated against a real price. Every ticket is MODEL OUTPUT - UNVALIDATED, unfunded, zero stake. The 11/17 and 11/18 settlements (-14.8u paper combined) are the model's own paper record, not a real result."
  },
  "findings": [
+  {
+   "n": 0,
+   "title": "11/17 and 11/18 settled; horizon rolled to 11/19-11/22",
+   "detail": "11/17: singles 1-4-0 (-3.4u), parlays 0/3 (-3.3u), total -6.7u. 11/18: singles 4-8-0 (-4.8u), parlays 0/3 (-3.3u), total -8.1u. All at the stated -110 paper convention; no market price exists, so no unit figure is a real result. Ledger 17 entries, chain verified OK. Horizon: 26 games 11/19-11/22, G-TOT pass (model mean total 225.0 vs measured 227.5).",
+   "source": "https://www.nba.com/games?date=2026-11-18",
+   "reading": "11/17: singles 1-4-0 (-3.4u), parlays 0/3 (-3.3u), total -6.7u. 11/18: singles 4-8-0 (-4.8u), parlays 0/3 (-3.3u), total -8.1u. All at the stated -110 paper convention; no market price exists, so no unit figure is a real result. Ledger 17 entries, chain verified OK. Horizon: 26 games 11/19-11/22, G-TOT pass (model mean total 225.0 vs measured 227.5)."
+  },
+  {
+   "n": 0,
+   "title": "Home-court pin re-measured: 0.5023 (111 of 221), worth 0.09 points",
+   "detail": "The measured home-win rate over 221 decided games is 0.5023, so the pinned home-court advantage is 0.09 points - effectively zero, down from the 0.83-point pin of the 11/17 window. The pin is measured from the official standings HOME/ROAD columns; there is no free parameter.",
+   "source": "https://www.nba.com/standings",
+   "reading": "The measured home-win rate over 221 decided games is 0.5023, so the pinned home-court advantage is 0.09 points - effectively zero, down from the 0.83-point pin of the 11/17 window. The pin is measured from the official standings HOME/ROAD columns; there is no free parameter."
+  },
+  {
+   "n": 0,
+   "title": "LAL and UTA team-stat rows are one game stale (F-929-01)",
+   "detail": "The advanced/traditional/opponent tables still show LAL 15 GP 13-2 and UTA 15 GP 2-13 while the standings show 16 GP 13-3 / 3-13. The recut records gates G3/G4 as FAIL rather than repairing the tables; lines for PHX@UTA and SAC@LAL on 11/20 inherit the lag.",
+   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "reading": "The advanced/traditional/opponent tables still show LAL 15 GP 13-2 and UTA 15 GP 2-13 while the standings show 16 GP 13-3 / 3-13. The recut records gates G3/G4 as FAIL rather than repairing the tables; lines for PHX@UTA and SAC@LAL on 11/20 inherit the lag."
+  },
   {
    "reading": "Nine of nine games final at https://www.nba.com/games?date=2026-11-15; quarter scores transcribed per game (six from the games page, three from the official gamebooks); every quarters row sums to its printed final; settlement graded 9 singles 5-4-0 and appended ledger entries 6 and 7, chain verified OK. Status: DONE. Source: https://www.nba.com/games?date=2026-11-15",
    "title": "11/15 settled from official finals, first-hand",
@@ -20,7 +42,7 @@
    "detail": ""
   },
   {
-   "reading": "A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final — NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15",
+   "reading": "A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final \u2014 NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15",
    "title": "The settlement page contradicted itself while all five gates passed",
    "detail": ""
   },
@@ -98,7 +120,7 @@
    "reading": "A blank cell with a reason is more decision-useful than a confident 100%. The fix is to make the refresh re-read the injury index so the column fills in game date by game date (SG36), and to capture minutes for all thirty teams so redistribution is computable everywhere (SG32)."
   },
   {
-   "title": "S1 through 2026-11-16 — outside luck alone, still short of the full gate set",
+   "title": "S1 through 2026-11-16 \u2014 outside luck alone, still short of the full gate set",
    "detail": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 29 games of the 16-19 Nov roll are published as lines and paper picks, not as recommendations.",
    "reading": "Carried forward from the 11/16 settlement cycle so the earlier finding is not lost when this cycle's summary replaced the prose. S1 remains outside luck alone and still short of calibration, stability and availability."
   }
