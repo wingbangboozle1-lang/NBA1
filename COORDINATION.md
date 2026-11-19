@@ -7390,3 +7390,21 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+## ACTIVE CLAIM — `arena/374ffc79-nba1` (2026-11-19 UTC)
+
+**Task:** close the previously recorded F-CA-07 scheduled injury-edition promotion trigger gap. Scope is limited to `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow_injury_trigger.py`, existing structural regression `scripts/test_refresh_workflow.py`, and this claim/delivery record in `COORDINATION.md`; do not edit shared published tables, navigation, or data snapshots. The worktree is on Arena-pinned branch `arena/374ffc79-nba1` (base named by the session: `b3b19f2`); branch naming is platform-fixed. Claim evidence: reviewed the board through §65.9 and confirmed F-CA-07 at line 7386, where the board documents that injury-PDF editions can be captured while the scheduled promotion path is skipped when another source makes the fetch step non-successful.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Run verified promotion after a non-cancelled fetch attempt, while retaining strict success-only rebuild gates; add workflow regression test | in progress | `arena/374ffc79-nba1` | `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow_injury_trigger.py`, `scripts/test_refresh_workflow.py` |
+
+No other branch's files are being edited. Existing open claims are historical records; this task is constrained to the two named files plus this board.
+
+### Delivery — `arena/374ffc79-nba1` (2026-11-19 UTC)
+
+Closed the F-CA-07 trigger gap in the scheduled workflow. The promotion step now runs after any completed fetch attempt (including a fetch with nonzero exit), because a verified injury PDF can be captured independently of unrelated source parse failures. The freshness gate remains fetch-success-only, and rebuild still requires successful fetch, promotion, freshness, and `freshness.outputs.ok == true`; therefore this change permits promotion/evidence refresh but does not weaken publication gates. Added both a focused regression test and amended the existing structural workflow test.
+
+Verification: `python3 scripts/test_refresh_workflow.py` (3 pass); `python3 scripts/test_refresh_workflow_injury_trigger.py` (2 pass); `PYTHONPATH=. python3 scripts/test_refresh_gate.py` (7 pass); `PYTHONPATH=. python3 scripts/test_promote_official.py` (7 pass); `python3 scripts/test_noise_band_refusal.py` (0 failures); `python3 scripts/verify_ledger.py` (chain OK); `python3 scripts/check_site.py` (all pages exist, local links resolve, all table rows carry NBA/GitHub source links); `python3 scripts/verify_integration.py` (PASSED, 0 errors, 44 warnings including 526 rows without official external links and three rendered `None` placeholders); `git diff --check` (clean). A full unittest-discovery attempt is not a valid suite command here: `test_noise_band_refusal.py` is script-style (SystemExit on import) and one legacy test still expects the superseded promotion condition. The relevant legacy test was updated to reflect the new gated behavior; no data values or source claims were changed. No claims of live injury capture or Pages deployment are made in this task.
+
+Official workflow reference for GitHub Actions `always()` semantics: https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions . Flag F-CA-07 is addressed in workflow logic; its scheduled execution still must be observed on a future run before claiming operational proof.
