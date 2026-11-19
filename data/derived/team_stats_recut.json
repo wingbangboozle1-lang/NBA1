@@ -1,8 +1,8 @@
 {
  "_meta": {
-  "title": "Team model inputs, re-cut from first-hand official reads on 2026-11-19",
-  "generated_by": "scripts/recut_2026_11_19.py",
-  "retrieved_utc": "2026-11-19T05:44Z",
+  "title": "Team model inputs, re-cut from first-hand official reads on 2026-11-19 (12:2x-12:4x UTC)",
+  "generated_by": "scripts/recut_cdf3a108.py (session arena/cdf3a108-nba1; formulas verbatim from scripts/recut_2026_11_19.py)",
+  "retrieved_utc": "2026-11-19T12:45Z",
   "sources": {
    "advanced": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "traditional": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
@@ -11,43 +11,232 @@
    "finals": "https://www.nba.com/games"
   },
   "games_through": "222 decided games (results feed through 2026-11-18)",
-  "note": "Every value is printed on the official advanced page. Nothing is fitted, imputed or adjusted. GP/W/L are shipped beside the ratings so a reader can see the sample each rating rests on. LAL and UTA ratings exclude the 11/18 game (official table lag, flag F-929-01); their rows carry gp_matches_standings=false.",
+  "note": "Every value is printed on the official advanced page. Nothing is fitted, imputed or adjusted. GP/W/L are shipped beside the ratings so a reader can see the sample each rating rests on. This cut absorbs the 11/18 UTA 109 @ LAL 97 game that the 05:44Z cut was missing (F-929-01 / F-89F-04 / S-89F-02 / Q37): LAL and UTA are 16 GP and now match the standings. The two moved rows are printed in _meta.drift_vs_previous_cut.",
+  "drift_vs_previous_cut": [
+   {
+    "team": "LAL",
+    "field": "gp",
+    "was": 15,
+    "now": 16
+   },
+   {
+    "team": "LAL",
+    "field": "l",
+    "was": 2,
+    "now": 3
+   },
+   {
+    "team": "LAL",
+    "field": "off_rtg",
+    "was": 121.6,
+    "now": 119.8
+   },
+   {
+    "team": "LAL",
+    "field": "def_rtg",
+    "was": 113.7,
+    "now": 113.2
+   },
+   {
+    "team": "LAL",
+    "field": "net_rtg",
+    "was": 7.8,
+    "now": 6.7
+   },
+   {
+    "team": "LAL",
+    "field": "pace",
+    "was": 100.14,
+    "now": 100.35
+   },
+   {
+    "team": "LAL",
+    "field": "poss",
+    "was": 1511,
+    "now": 1614
+   },
+   {
+    "team": "UTA",
+    "field": "gp",
+    "was": 15,
+    "now": 16
+   },
+   {
+    "team": "UTA",
+    "field": "w",
+    "was": 2,
+    "now": 3
+   },
+   {
+    "team": "UTA",
+    "field": "off_rtg",
+    "was": 107.2,
+    "now": 107.0
+   },
+   {
+    "team": "UTA",
+    "field": "def_rtg",
+    "was": 115.9,
+    "now": 114.5
+   },
+   {
+    "team": "UTA",
+    "field": "net_rtg",
+    "was": -8.7,
+    "now": -7.5
+   },
+   {
+    "team": "UTA",
+    "field": "pace",
+    "was": 99.95,
+    "now": 100.16
+   },
+   {
+    "team": "UTA",
+    "field": "poss",
+    "was": 1522,
+    "now": 1626
+   }
+  ],
+  "cross_page_checks": {
+   "gp_wl_mismatch": [],
+   "pts_minus_opp_vs_plusminus": [],
+   "poss_pace_residual": [
+    {
+     "team": "LAL",
+     "residual_pace_units": -0.13
+    },
+    {
+     "team": "PHI",
+     "residual_pace_units": 0.12
+    },
+    {
+     "team": "HOU",
+     "residual_pace_units": -0.03
+    },
+    {
+     "team": "SAS",
+     "residual_pace_units": 0.1
+    },
+    {
+     "team": "BOS",
+     "residual_pace_units": -0.1
+    },
+    {
+     "team": "MEM",
+     "residual_pace_units": 0.1
+    },
+    {
+     "team": "MIN",
+     "residual_pace_units": -0.07
+    },
+    {
+     "team": "DET",
+     "residual_pace_units": 0.18
+    },
+    {
+     "team": "ATL",
+     "residual_pace_units": -0.03
+    },
+    {
+     "team": "MIA",
+     "residual_pace_units": 0.17
+    },
+    {
+     "team": "OKC",
+     "residual_pace_units": 0.03
+    },
+    {
+     "team": "POR",
+     "residual_pace_units": 0.0
+    },
+    {
+     "team": "CLE",
+     "residual_pace_units": -0.04
+    },
+    {
+     "team": "DAL",
+     "residual_pace_units": 0.1
+    },
+    {
+     "team": "DEN",
+     "residual_pace_units": 0.19
+    },
+    {
+     "team": "GSW",
+     "residual_pace_units": 0.1
+    },
+    {
+     "team": "NYK",
+     "residual_pace_units": 0.28
+    },
+    {
+     "team": "PHX",
+     "residual_pace_units": -0.18
+    },
+    {
+     "team": "ORL",
+     "residual_pace_units": -0.35
+    },
+    {
+     "team": "IND",
+     "residual_pace_units": -0.17
+    },
+    {
+     "team": "NOP",
+     "residual_pace_units": -0.03
+    },
+    {
+     "team": "TOR",
+     "residual_pace_units": -0.24
+    },
+    {
+     "team": "WAS",
+     "residual_pace_units": -0.0
+    },
+    {
+     "team": "CHA",
+     "residual_pace_units": -0.0
+    },
+    {
+     "team": "CHI",
+     "residual_pace_units": -0.0
+    },
+    {
+     "team": "LAC",
+     "residual_pace_units": -0.08
+    },
+    {
+     "team": "BKN",
+     "residual_pace_units": 0.04
+    },
+    {
+     "team": "UTA",
+     "residual_pace_units": 0.16
+    },
+    {
+     "team": "MIL",
+     "residual_pace_units": 0.0
+    },
+    {
+     "team": "SAC",
+     "residual_pace_units": -0.14
+    }
+   ],
+   "poss_pace_note": "the official PACE column is not exactly POSS*48/MIN (the page's own two definitions); residuals are recorded per team, never corrected"
+  },
   "gates": {
    "G1_W_plus_L_eq_GP": "pass (all 30)",
    "G2_netrtg_eq_off_minus_def": "pass (all 30, 0.25 rounding tolerance)",
-   "G3_gp_and_wl_match_standings": "FAIL (recorded, not blocking): ['LAL: advanced 15-13-2 vs standings 16-13-3', 'UTA: advanced 15-2-13 vs standings 16-3-13'] — the official advanced table lags the standings by one game for LAL and UTA (11/18 UTA 109 @ LAL 97 missing); see flag F-929-01",
-   "G4_total_team_games_eq_2x_decided_finals": "FAIL (recorded, not blocking): 442 != 2 x 222 — same one-game lag as G3",
-   "G5_standings_identity": "pass (home wins == road losses: 111 == 111)"
+   "G3_gp_and_wl_match_standings": "pass (all 30)",
+   "G4_total_team_games_eq_2x_decided_finals": "pass (444 = 2 x 222)",
+   "G5_standings_identity": "pass (home wins == road losses: 111 == 111)",
+   "GX_cross_page": "gp/wl agree across three pages; pts-opp vs +/- within 0.2; poss/pace max |residual| 0.35 (recorded, definitional)"
   }
  },
  "rows": [
   {
-   "team": "Los Angeles Lakers",
-   "gp": 15,
-   "w": 13,
-   "l": 2,
-   "min": 725.0,
-   "off_rtg": 121.6,
-   "def_rtg": 113.7,
-   "net_rtg": 7.8,
-   "ast_pct": 58.2,
-   "ast_to": 1.47,
-   "ast_ratio": 17.4,
-   "oreb_pct": 33.9,
-   "dreb_pct": 64.3,
-   "reb_pct": 49.8,
-   "tov_pct": 16.5,
-   "efg_pct": 58.1,
-   "ts_pct": 62.4,
-   "pace": 100.14,
-   "pie": 53.8,
-   "poss": 1511,
-   "abbr": "LAL",
-   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "gp_matches_standings": false
-  },
-  {
-   "team": "Houston Rockets",
+   "team": "HOU",
    "gp": 16,
    "w": 12,
    "l": 4,
@@ -72,7 +261,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Memphis Grizzlies",
+   "team": "MEM",
    "gp": 15,
    "w": 11,
    "l": 4,
@@ -97,7 +286,32 @@
    "gp_matches_standings": true
   },
   {
-   "team": "San Antonio Spurs",
+   "team": "LAL",
+   "gp": 16,
+   "w": 13,
+   "l": 3,
+   "min": 773.0,
+   "off_rtg": 119.8,
+   "def_rtg": 113.2,
+   "net_rtg": 6.7,
+   "ast_pct": 58.8,
+   "ast_to": 1.46,
+   "ast_ratio": 17.3,
+   "oreb_pct": 33.6,
+   "dreb_pct": 65.0,
+   "reb_pct": 49.8,
+   "tov_pct": 16.5,
+   "efg_pct": 57.2,
+   "ts_pct": 61.5,
+   "pace": 100.35,
+   "pie": 53.0,
+   "poss": 1614,
+   "abbr": "LAL",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "gp_matches_standings": true
+  },
+  {
+   "team": "SAS",
    "gp": 15,
    "w": 12,
    "l": 3,
@@ -122,7 +336,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Cleveland Cavaliers",
+   "team": "CLE",
    "gp": 16,
    "w": 8,
    "l": 8,
@@ -147,7 +361,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Boston Celtics",
+   "team": "BOS",
    "gp": 15,
    "w": 11,
    "l": 4,
@@ -162,7 +376,7 @@
    "dreb_pct": 67.7,
    "reb_pct": 50.3,
    "tov_pct": 14.9,
-   "efg_pct": 54.6,
+   "efg_pct": 54.3,
    "ts_pct": 57.9,
    "pace": 96.76,
    "pie": 54.7,
@@ -172,7 +386,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Miami Heat",
+   "team": "MIA",
    "gp": 15,
    "w": 9,
    "l": 6,
@@ -197,7 +411,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Portland Trail Blazers",
+   "team": "POR",
    "gp": 14,
    "w": 9,
    "l": 5,
@@ -222,7 +436,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Phoenix Suns",
+   "team": "PHX",
    "gp": 14,
    "w": 7,
    "l": 7,
@@ -247,7 +461,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Detroit Pistons",
+   "team": "DET",
    "gp": 14,
    "w": 10,
    "l": 4,
@@ -272,7 +486,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "New York Knicks",
+   "team": "NYK",
    "gp": 14,
    "w": 8,
    "l": 6,
@@ -297,7 +511,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Philadelphia 76ers",
+   "team": "PHI",
    "gp": 16,
    "w": 13,
    "l": 3,
@@ -322,7 +536,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Minnesota Timberwolves",
+   "team": "MIN",
    "gp": 15,
    "w": 11,
    "l": 4,
@@ -347,7 +561,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Denver Nuggets",
+   "team": "DEN",
    "gp": 13,
    "w": 8,
    "l": 5,
@@ -372,7 +586,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Toronto Raptors",
+   "team": "TOR",
    "gp": 15,
    "w": 5,
    "l": 10,
@@ -397,7 +611,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Golden State Warriors",
+   "team": "GSW",
    "gp": 15,
    "w": 8,
    "l": 7,
@@ -422,7 +636,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Oklahoma City Thunder",
+   "team": "OKC",
    "gp": 15,
    "w": 9,
    "l": 6,
@@ -447,7 +661,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Atlanta Hawks",
+   "team": "ATL",
    "gp": 15,
    "w": 9,
    "l": 6,
@@ -472,7 +686,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Dallas Mavericks",
+   "team": "DAL",
    "gp": 15,
    "w": 8,
    "l": 7,
@@ -497,7 +711,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "New Orleans Pelicans",
+   "team": "NOP",
    "gp": 16,
    "w": 5,
    "l": 11,
@@ -522,7 +736,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "LA Clippers",
+   "team": "LAC",
    "gp": 13,
    "w": 4,
    "l": 9,
@@ -547,7 +761,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Orlando Magic",
+   "team": "ORL",
    "gp": 14,
    "w": 6,
    "l": 8,
@@ -572,7 +786,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Chicago Bulls",
+   "team": "CHI",
    "gp": 14,
    "w": 4,
    "l": 10,
@@ -597,7 +811,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Indiana Pacers",
+   "team": "IND",
    "gp": 15,
    "w": 5,
    "l": 10,
@@ -622,7 +836,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Brooklyn Nets",
+   "team": "BKN",
    "gp": 14,
    "w": 3,
    "l": 11,
@@ -647,7 +861,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Washington Wizards",
+   "team": "WAS",
    "gp": 16,
    "w": 5,
    "l": 11,
@@ -672,32 +886,32 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Utah Jazz",
-   "gp": 15,
-   "w": 2,
+   "team": "UTA",
+   "gp": 16,
+   "w": 3,
    "l": 13,
-   "min": 730.0,
-   "off_rtg": 107.2,
-   "def_rtg": 115.9,
-   "net_rtg": -8.7,
-   "ast_pct": 64.2,
-   "ast_to": 1.5,
-   "ast_ratio": 17.7,
-   "oreb_pct": 29.3,
+   "min": 778.0,
+   "off_rtg": 107.0,
+   "def_rtg": 114.5,
+   "net_rtg": -7.5,
+   "ast_pct": 65.0,
+   "ast_to": 1.48,
+   "ast_ratio": 17.8,
+   "oreb_pct": 29.0,
    "dreb_pct": 69.7,
    "reb_pct": 49.2,
-   "tov_pct": 16.3,
-   "efg_pct": 52.1,
-   "ts_pct": 55.9,
-   "pace": 99.95,
-   "pie": 46.4,
-   "poss": 1522,
+   "tov_pct": 16.7,
+   "efg_pct": 52.4,
+   "ts_pct": 56.2,
+   "pace": 100.16,
+   "pie": 47.2,
+   "poss": 1626,
    "abbr": "UTA",
    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "gp_matches_standings": false
+   "gp_matches_standings": true
   },
   {
-   "team": "Sacramento Kings",
+   "team": "SAC",
    "gp": 14,
    "w": 1,
    "l": 13,
@@ -722,7 +936,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Milwaukee Bucks",
+   "team": "MIL",
    "gp": 15,
    "w": 1,
    "l": 14,
@@ -747,7 +961,7 @@
    "gp_matches_standings": true
   },
   {
-   "team": "Charlotte Hornets",
+   "team": "CHA",
    "gp": 14,
    "w": 4,
    "l": 10,
