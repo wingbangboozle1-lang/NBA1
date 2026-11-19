@@ -11173,3 +11173,110 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 - Generated `site/pages/bet.html`, its alias, and `data/derived/surface_gates.json` from the actual committed refresh record. G5 is CLOSED; the page includes the exact local reasons and no pick table. On this snapshot the capture is about 37 hours old (maximum 10h), and the stored refresh record includes five parser failures. The closed status is correct; no replacement NBA values were inferred.
 - Added four tests for G5 pass/block propagation, evaluator-error handling, and pick-table suppression. All `scripts/test_*.py` files pass (including the new tests); `verify_ledger.py`, `check_site.py`, `check_links.py`, `check_rendered.py`, and `verify_integration.py` pass. Integration reports 0 errors and 44 existing warnings, which remain visible/flagged; external NBA URLs could not be fetched from this sandbox and were not represented as live-verified.
 - Official source endpoints remain the repository's existing NBA schedule, stats, standings, injury-index/PDF, and results URLs; no source table or official value was edited in this task.
+
+---
+
+## 68. Session `arena/bc8c07a3-nba1` — **re-scoped mid-cycle** (claimed 2026-11-19 05:5x UTC, re-scoped 06:4x UTC): player game logs for the 2026-11-17 slate from the official gamebooks, the 11/17 settlement's missing prop-combination grading, the full 11/18 injury-edition archive with consecutive diffs, and the repair of the five parsers that keep every scheduled rebuild blocked
+
+Branch `arena/bc8c07a3-nba1`. Base at claim time `b3b19f2` (merge of PR #169). The platform pins this
+session to this branch, so the `session-<id>/<task>` naming in the brief is satisfied by a single
+pre-named branch — the deviation every prior seat logged.
+
+### 68.0 What changed between the claim and the first edit (measured, not assumed)
+
+This seat's original claim (kept verbatim at the end of this section) proposed to settle 11/17 and
+originate the 11/19 window. **While this seat was reading the board, four other sessions went live**
+and several of them delivered exactly that work. The claim was written at 05:5x UTC against a board
+whose newest section was §65; by 06:4x UTC `main` had advanced to `9a6bfd1` with these merges:
+
+| Merge | Session | What it delivered | Consequence for this seat |
+| --- | --- | --- | --- |
+| PR #170 `71d6dfc` | `arena/374ffc79-nba1` | F-CA-07 trigger fix (`engine/promote_official.py`: an injury-only change now wakes promotion) + `scripts/test_refresh_workflow_injury_trigger.py` | **Drops this seat's Z03.** Not duplicated — theirs is on `main` and reviewed here. |
+| PR #172 `799f562` | `arena/929395a5-nba1` | Settled **11/17 and 11/18** from first-hand official finals (settlement files, ledger 13–16, results rows), rolled the horizon to **11/19–11/22**, re-cut ratings, froze pre-tip picks, ported PR #166's register gate | **Drops this seat's Z01, Z07, Z08, and the PR #166 takeover.** Their settlement files are cited, not rewritten. |
+| PR #171 `9a6bfd1` | `arena/4b88c9d2-nba1` | G5 freshness/provenance gate on the bet surface | No overlap with this seat's remaining scope. |
+
+Two further sessions were **live** at the moment of the rebase — `arena/eec70f24-nba1`
+("collision + independent cross-check for 11/17-18 settlement") and `arena/eec70f24`/`arena/9ff20954`
+refresh runs in progress. This seat therefore claims **only work no live session holds**, and its
+original claim is left on the board unchanged as the record of what was attempted first. This is
+exactly the case ground rule 5 is written for: an idle claim is not a licence to duplicate a live
+one, and a live claim is not a licence to discard an idle one's remaining scope.
+
+### 68.1 Verification of the inherited work before building on it (this seat's own reads)
+
+Nothing above is taken on trust. Measured on the rebased tree at `9a6bfd1`, from the committed files:
+
+- `data/raw/_last_refresh.json` is the record for the capture at **2026-11-17T16:36:32Z** and still
+  lists **five failed parsers** — `S1_season`, `S2_train` ("expected 30 team rows, parsed 0"),
+  `S8_standings`, `S9_team_traditional`, `S10_team_opponent` — and `build_outcome: skipped`. Every
+  scheduled run since has hit the same wall; the scheduled job is alive and failing **closed**.
+- `data/official/results_feed_2026_27.json`: 222 rows, **all 222 `game_status == 3`**, with
+  11/16 = 8, 11/17 = 5, 11/18 = 12 rows final. The feed therefore *has* 11/17 and 11/18 finals.
+- `data/settlement/` holds 11/14, 11/15, 11/16, 11/17 and 11/18 settlement files, but only
+  `sgp_grades_2026-11-16.json` (+ one amendment) — **no prop-combination grading exists for 11/17**,
+  the game day this seat's own claim identified.
+- `data/official/gamebooks/` stops at the **eight 11/16 gamebooks**; there is no 11/17 gamebook and
+  `data/official/player_game_logs_*` stops at 11/16. **R21 (per-player game logs) is one game day
+  behind**, and the 11/17 SGP grading cannot be done without those logs.
+- `data/raw/injury_pdfs/` holds **110** PDFs on `main`; none is a **2026-11-18** edition, so R04's
+  archive is a full filing day behind even though the 11/18 games are now settled.
+
+### 68.2 Re-scoped task table (this seat, and only this seat)
+
+| id | task | status | file scope |
+| --- | --- | --- | --- |
+| Z02 | **Repair the five parsers that fail closed on every scheduled run** (S1, S2, S8, S9, S10) against real runner-fetched bytes: the stats.nba.com JSON the pages call, plus the server-rendered tables. Keep fail-closed behaviour for anything unprovable. | in progress | `engine/parse_official.py`, `engine/fetch_official.py`, `scripts/test_parse_official.py`, `.github/workflows/capture-official-bc8c07a3.yml`, `scripts/capture_official_bc8c07a3.py` |
+| Z04 | **Archive the 11/18 injury editions** fetched by the scheduled job's own runners (30 byte-exact PDFs + sidecars from three `auto/refresh-*` branches), then write the consecutive-edition chain with revision time, retrieval time and status-change detection | in progress | `data/raw/injury_pdfs/**`, `data/official/injury_chain_2026-11-18.json` (new) |
+| Z05 | **Per-player game logs for the five 11/17 games** from the official gamebook PDFs (MIN, PTS, REB, AST, opponent) — the R21 gap | in progress | `data/official/gamebooks/2026-11-17_*.md` (new), `data/official/player_game_logs_2026-11-17.json` (new) |
+| Z06 | **Settle the 11/17 player-prop combinations** from those logs (a leg whose player did not play is VOID), against the pre-tip archived ticket | in progress | `data/settlement/sgp_grades_2026-11-17.json` (new) |
+| Z09 | Line-by-line verification of everything this cycle publishes; the full gate battery; 0 broken links | in progress | `verify/2026-11-19-bc8c07a3/**` |
+| Z10 | Register refresh on measured evidence, **append-only**, and only where this seat's own measurement changed the verdict | in progress | `data/content/requirements.json`, `data/content/flagged.json` |
+| Z11 | Board + executive summary update; PR → `main` → merge → confirm Pages → record the result here | in progress | `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` |
+
+**Explicitly not in this seat's scope** (held by live sessions or already delivered): settlement of
+11/17/11/18, the horizon roll, ratings re-cut, pick freezing, the bet-surface gate, the register-schema
+gate, and `engine/promote_official.py` (PR #170's fix is inherited, not re-edited here).
+
+### 68.3 Merge conflict encountered in this cycle (and how it was resolved)
+
+`git pull --rebase origin main` conflicted in **`COORDINATION.md` only** — this seat's §66 claim was
+appended at EOF, and `main` had meanwhile appended §66 (`arena/929395a5-nba1`) and §67 to the same
+EOF. Resolved by keeping **both** sides verbatim and renumbering this seat's section to **§68**; no
+other file conflicted, and nothing from any session was discarded. Two earlier `data/parsed/injury_diffs/`
+writes made by this seat's own `engine/injury_diff.py` run were reverted with `git checkout --` before
+the rebase so that files owned by other sessions carried no churn.
+
+---
+
+### 68.4 (original claim, kept verbatim as the record) Game-day-roll integration seat — 2026-11-19 05:5x UTC
+
+The claim below was committed and pushed before any file edit, as ground rule 4 requires. Blocks
+Z01, Z03, Z07, Z08 and the #166 takeover were **superseded by other sessions' merges** (§68.0) and
+are recorded here rather than silently dropped.
+
+**Measured at claim time (base `b3b19f2`):** `main` tip `b3b19f2` = this branch's base, 0 behind;
+open PRs **#166** (`arena/84264db0-nba1`, idle 37 h 50 m); Pages `status: built`, `build_type: legacy`,
+source `main:/`; scheduled refresh run **44416340578** completed/success at ~2026-11-18T23:0xZ with
+the annotation `gh pr create failed; captures are on branch auto/refresh-20261118-230153` and
+`Scheduled rebuild was skipped because fetch or freshness/provenance/promotion gates did not pass`;
+requirements register **24 done / 9 partial** of 33; flag register **156 items**, last id `F-CA-07`;
+`verify_all.py` → **VERIFY OK** (41 pages, 3,025 rows, 2,888 official-source-linked, 137 explicit
+no-source marks, 0 unmarked); the unit-test suite → **10 files, 0 failing** (recorded in
+`verify/2026-11-19-bc8c07a3/baseline-tests.txt`).
+
+**Sandbox reachability, measured:** `https://www.nba.com/schedule` → TLS `SSL_ERROR_SYSCALL`
+(curl 000), `https://official.nba.com/…` → 000, `https://github.com` → 200,
+`https://api.github.com` → 200. nba.com cannot be read from this agent; the permitted channel is
+GitHub, and the repository's own scheduled job commits official bytes there. That is the source of
+record used by this seat, and every row it publishes names the artifact.
+
+**The gap this seat set out to close:** every committed artifact stopped at game day 2026-11-16
+(`data/settlement/` held 11/14–11/16; `data/archive/horizon_picks_*` stopped at 11/17), while the
+five 11/17 games were final. The runner capture
+`auto/refresh-20261118-230153:data/raw/_capture_results_2026-11-17.json` (captured
+`2026-11-18T22:57:06Z`, `source_url https://www.nba.com/games?date=2026-11-17`, embedded JSON,
+`snapshot_match: true` on every row) records: **NYK 111 @ TOR 102** (0022600253), **POR 105 @ MIN 106**
+(254), **DET 105 @ SAS 93** (255), **CHA 114 @ LAL 118 Final/OT** (256), **UTA 132 @ LAC 107** (257) —
+and `_capture_results_2026-11-18.json` records 12 games **not final** at that time, so nothing from
+11/18 was settleable from this seat's own evidence. (Session `arena/929395a5-nba1` settled 11/18 later
+from its own first-hand reads; see §68.0.)
