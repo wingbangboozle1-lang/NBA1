@@ -12297,3 +12297,16 @@ The official schedule's own month grid confirms the per-day counts 19→4, 20→
 **Irregularity checked and resolved (not a defect).** The live landing page briefly showed **174** open flags while an earlier read of `data/content/flagged.json` showed **171**. Re-read after the rebase: the register now holds **174** items — concurrent session `arena/7b8d624a-nba1` (PR #197, the injuries-banner seat, commit `6a6f684`) added 3 flags between this seat's two reads. The committed `index.html` (174) matches the register (174) and the build reproduces it deterministically. The apparent discrepancy was a **concurrent-merge timing artifact**, verified rather than assumed. No action required.
 
 **T07 — PR, merge, deploy, record.** See the merge record appended below after the merge.
+
+**T07 — PR, merge, deploy, live fetch-back (final).**
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#201](https://github.com/wingbangboozle1-lang/NBA1/pull/201)** — *§74 final integration: stale-PR triage, first-hand official re-verification, deterministic rebuild, full gate battery, live fetch-back* (from `arena/232a9f86-nba1` to `main`) |
+| Rebases en route | two `origin/main` rebases while the PR was open (main advanced via concurrent merges PR #195, #197, #198, #199); each resolved by keeping main's board verbatim and re-appending this seat's §74 block (claim + §72.2 preservation + §74.1 delivery record). No other session's content discarded. |
+| Merge | **MERGED** 2026-11-19T12:33:05Z, merge commit **`03697b3`** (`gh pr merge 201 --merge`, no approval waited on, per the standing instruction) |
+| Pages deploy | `pages build and deployment` run [44524932440](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44524932440) → **completed / success**; `GET /repos/…/pages` → `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live fetch-back | landing page re-fetched after the deploy (cache-busted): serves 26 games in horizon (19–22 Nov), 26 originated lines, the 11/17 1-4-0 / 11/18 4-8-0 settlements, ledger 17 entries chain OK, HCA pinned to the measured 0.5023 home-win rate; the open-flag tile reads the current register count. `site/pages/flagged.html` serves its rows with resolving source links. |
+| Gates on the merged tree | `verify_all` VERIFY OK (FAILURES: 0) · `check_links` PASS · `check_site` PASS · `check_registers` OK · `check_build_data` PASS · `verify_integration` PASSED (0 errors) · `verify_ledger` chain OK · `verify_dashboard` OK · `check_rendered` PASS · `render_check` 167 pages / 0 problems · 16/16 test files pass · this seat's `verify_integration_232a9f86.py` exit 0 |
+
+**Final-integration conclusion.** The combined tree is green end to end: the site builds deterministically (0 diff), every gate passes, no internal link is broken, the ledger chain verifies, and the live site serves the current 11/19–11/22 horizon and the 11/17–11/18 settlements from official sources read first-hand this session. The nine partial requirements remain partial and are published on the Flagged for Review page with their source links; none blocks the merge. No strategy is funded; every pick is MODEL OUTPUT — UNVALIDATED, zero stake.
