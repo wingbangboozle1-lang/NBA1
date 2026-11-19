@@ -163,6 +163,24 @@
  ],
  "open": [
   {
+   "id": "Q-929-1",
+   "question": "When will the LAL/UTA team-stat tables catch up with the standings?",
+   "what_is_missing": "The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.",
+   "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "Q-929-2",
+   "question": "What do the NYK@MIN and 11/20 injury rows actually say?",
+   "what_is_missing": "The 11/19 12:30 AM ET PDF text render has blank-matchup rows (Kuminga, Pullin) and a garbled 11/20 block. Discovery: re-fetch the PDF text render or the next edition (11/19 5:00 PM ET) and diff; the 5:00 PM edition is the one teams file by 5 p.m. local the day before.",
+   "source": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "Q-929-3",
+   "question": "Does the near-zero measured home-court pin (0.09 pts) hold as the sample grows?",
+   "what_is_missing": "The 0.5023 home-win rate is measured over 221 games; the pin moves with every cycle. Discovery: track the pin across cycles; if it stays under ~0.3 points, the model should treat home court as negligible rather than a fixed constant.",
+   "source": "https://www.nba.com/standings"
+  },
+  {
    "id": "Q1",
    "question": "Does any strategy actually beat a real sportsbook?",
    "what_is_missing": "Closing prices. No book price is published by an NBA-operated source, so no official link can be attached to one (F3). Without it, 'units won' measures the model against a naive model, not against a market.",
@@ -362,7 +380,7 @@
   {
    "id": "Q27",
    "question": "Is the measured home-win rate stable enough to pin to?",
-   "what_is_missing": "A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. A third capture 2026-11-16T18:3xZ gave 0.5204 (102 of 196) once the three late 11/15 finals had landed, so three reads in one day span 0.5319 to 0.5204 — about 1.15 points of raw rate movement on a ~195-game sample. That is still within noise for a rate this size, but the stability of the measurement has still never been tracked across a season, which remains the ask.",
+   "what_is_missing": "A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. A third capture 2026-11-16T18:3xZ gave 0.5204 (102 of 196) once the three late 11/15 finals had landed, so three reads in one day span 0.5319 to 0.5204 \u2014 about 1.15 points of raw rate movement on a ~195-game sample. That is still within noise for a rate this size, but the stability of the measurement has still never been tracked across a season, which remains the ask.",
    "how_to_answer": "Record the measured home-win rate at every refresh and publish the series with its sample size, so pinning can be tested for drift instead of assumed sound.",
    "blocks": "Whether pinning HCA to one measurement beats fitting it freely",
    "source_url": "https://www.nba.com/standings"
