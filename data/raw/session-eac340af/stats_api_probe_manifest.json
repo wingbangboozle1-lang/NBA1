@@ -1,0 +1,80 @@
+{
+ "title": "Official stats-API reachability probe (F-CA-02 / R01)",
+ "generated_at_utc": "2026-11-19T07:02:06Z",
+ "allowed_hosts": [
+  "official.nba.com",
+  "stats.nba.com",
+  "www.nba.com"
+ ],
+ "headers": {
+  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+  "Accept": "application/json, text/plain, */*",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Referer": "https://www.nba.com/",
+  "Origin": "https://www.nba.com",
+  "x-nba-stats-origin": "stats",
+  "x-nba-stats-token": "true",
+  "Connection": "keep-alive",
+  "Accept-Encoding": "identity"
+ },
+ "results": [
+  {
+   "key": "S8_standings_leaguestandingsv3",
+   "official_page": "https://www.nba.com/standings",
+   "expects": "30 team rows (15 East + 15 West)",
+   "url": "https://stats.nba.com/stats/leaguestandingsv3?LeagueID=00&Season=2026-27&SeasonType=Regular+Season",
+   "requested_at_utc": "2026-11-19T07:02:06Z",
+   "http_status": null,
+   "bytes": 0,
+   "sha256": null,
+   "content_type": null,
+   "elapsed_s": 45.12,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "S9_team_traditional_leaguedashteamstats_base",
+   "official_page": "https://www.nba.com/stats/teams/traditional",
+   "expects": "30 team rows (per-game traditional team stats)",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?Conference=&DateFrom=&DateTo=&Division=&GameScope=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season=2026-27&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&StarterBench=&TeamID=0&VsConference=&VsDivision=&Weight=N",
+   "requested_at_utc": "2026-11-19T07:02:52Z",
+   "http_status": null,
+   "bytes": 0,
+   "sha256": null,
+   "content_type": null,
+   "elapsed_s": 45.12,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "S10_team_opponent_leaguedashoppstats_base",
+   "official_page": "https://www.nba.com/stats/teams/opponent",
+   "expects": "30 team rows (opponent-side per-game team stats)",
+   "url": "https://stats.nba.com/stats/leaguedashoppstats?Conference=&DateFrom=&DateTo=&Division=&GameScope=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season=2026-27&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&StarterBench=&TeamID=0&VsConference=&VsDivision=&Weight=N",
+   "requested_at_utc": "2026-11-19T07:03:37Z",
+   "http_status": null,
+   "bytes": 0,
+   "sha256": null,
+   "content_type": null,
+   "elapsed_s": 45.12,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "S1_season_leaguedashteamstats_advanced",
+   "official_page": "https://www.nba.com/stats/teams/advanced",
+   "expects": "30 team rows (per-game advanced team stats)",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?Conference=&DateFrom=&DateTo=&Division=&GameScope=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Advanced&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season=2026-27&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&StarterBench=&TeamID=0&VsConference=&VsDivision=&Weight=N",
+   "requested_at_utc": "2026-11-19T07:04:22Z",
+   "http_status": null,
+   "bytes": 0,
+   "sha256": null,
+   "content_type": null,
+   "elapsed_s": 45.09,
+   "error": "TimeoutError: The read operation timed out"
+  }
+ ],
+ "summary": {
+  "attempted": 4,
+  "http_200": 0,
+  "with_rows": 0,
+  "endpoints_that_could_close_fca_02": []
+ }
+}
