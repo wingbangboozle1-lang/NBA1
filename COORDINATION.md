@@ -11522,3 +11522,11 @@ log files; (2) the new log files publish that builder's whole expected schema
 aliases) beside their own provenance, so `player-logs.html` renders 11/18 instead of failing the
 build. `site/**` was regenerated from the merged tree (28 pages) — no page is published that the
 merged data cannot render.
+
+**One operational hazard worth the board, because it nearly cost this seat a commit:** with an
+`origin/main` merge already in the branch, `git pull --rebase origin <this branch>` flattened that
+merge and tried to replay all 23 upstream commits onto my own tail — which re-opened the
+`COORDINATION.md` tail conflict against §66/§67/§71 for no benefit (nothing new had arrived on the
+branch). The mid-rebase state advanced the remote to my second-to-last commit before `git rebase
+--abort` restored the full history; the branch is now `cd8a990` on both sides and nothing was lost.
+After merging `main`, integrate with `git fetch` + `git merge`, not `pull --rebase`.
