@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision register &mdash; 2026-11-19 &middot; NBA1</title>
+<link rel="stylesheet" href="../site/assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="../model-v2.html">Model v2 (disagreement-first)</a>
+      <a href="../picks.html">Legacy horizon picks file</a>
+      <a href="../site/pages/picks.html">Horizon</a>
+      <a href="../site/pages/strategies.html">Evidence</a>
+      <a href="../site/pages/decisions.html">Decisions</a>
+      <a href="../site/pages/suggestions.html">Suggestions</a>
+      <a href="../site/pages/flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="../site/pages/roll.html">Rolling Slate</a>
+<a href="../site/pages/projection.html">Projection Surface</a>
+<a href="../site/pages/bet-surface.html">Bet Surface (gated)</a>
+<a href="../site/pages/bet.html">Bet surface (gate state)</a>
+<a href="../site/pages/picks.html">Lines &amp; Picks</a>
+<a href="../site/pages/props.html">Player Props</a>
+<a href="../site/pages/prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="../site/pages/injuries.html">Injuries &amp; Rotation</a>
+<a href="../site/pages/gameday.html">Game-Day Injury Read</a>
+<a href="../site/pages/gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>RESULTS &amp; SETTLEMENT</h3>
+<a href="../site/pages/results.html">Official Results &amp; Settlement</a>
+<a href="../site/pages/player-logs.html">Player Game Logs</a>
+<a href="../site/pages/settlement.html">Settlement &amp; Ledger</a>
+<a href="../site/pages/injury-ledger.html">Injury PDF Ledger</a>
+<a href="../site/pages/official-feed.html">Official Result Feed</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="../site/pages/strategies.html">Strategies &amp; Leaderboard</a>
+<a href="../site/pages/validation.html">Validation Gates</a>
+<a href="../site/pages/leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="../site/pages/correlations.html">Correlations</a>
+<a href="../site/pages/luck.html">Luck &amp; Skill</a>
+<a href="../site/pages/backtest.html">Out-of-Sample Backtest</a>
+<a href="../site/pages/model.html">Model &amp; Teams</a>
+<a href="../site/pages/estimators.html">Two Estimators</a>
+<a href="../site/pages/luck-z.html">Luck as a z-score</a>
+<a href="../site/pages/parlay-pricing.html">Parlay Pricing</a>
+<a href="../site/pages/rest-travel.html">Rest, B2B &amp; Travel</a>
+<a href="../site/pages/rotation.html">Minutes Redistribution</a>
+<a href="../site/pages/brief-coverage.html">Requirements Coverage</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="../site/pages/source-check.html">Official Source Check</a>
+<a href="../site/pages/official-verify.html">Live Re-verification</a>
+<a href="../site/pages/verify-2026-11-15.html">Nov 15 re-verification</a>
+<a href="../site/pages/verify-2026-11-16.html">Nov 16 re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="../site/pages/questions.html">Open Questions</a>
+<a href="../site/pages/suggestions.html">Suggestions</a>
+<a href="../site/pages/decisions.html">Decisions: pick a path</a>
+<a href="../site/pages/requirements.html">Brief Traceability</a>
+<a href="../site/pages/flagged.html">Flagged for Review</a>
+<a href="../site/pages/sources.html">Source Register</a>
+<a href="../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="../site/pages/repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 19 NOV</h3>
+<a href="../live/live-horizon.html">Live horizon check &amp; calibration</a>
+<a href="../live/decision-register.html">Decision register</a>
+<a href="../live/requirement-coverage.html">Requirement coverage</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../verified/index.html">&#10003; What is actually true</a>
+<a href="../verified/summary.html">Executive summary</a>
+<a href="../verified/verification.html">Row-level verification</a>
+<a href="../verified/review.html">Repo review</a>
+<a href="../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="../site/pages/flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Decision register &mdash; 2026-11-19</h1>
+      <p class="sub">What must be answered before anything is changed, what information this repository does not have, and the suggestions that would produce it.</p>
+    </div>
+    <div class="banner warn"><div class="b-t">Read this before choosing a path</div><div class="b-b"><p>The published picks lose, and they lose hardest where the model is most confident. Over the 37 decided paper singles: 14-23-1, hit rate 0.378 against a 0.524 break-even, -11.30 units. The model's mean published win probability on those same tickets was 0.720, so it was 34.1 points overconfident. The most confident bucket (published probability 0.70+) went 7-11 while claiming a mean probability of 0.795.</p><p><strong>Why:</strong> Measured, not guessed: the model's probability divides its spread by the standard deviation of game margins (16.71 points), when the quantity that belongs in that division is the standard deviation of the error in its own spread. On the games already settled that error has sd 16.09 and a mean bias of +8.72 points — the model over-predicts the picked team's winning margin by 8.7 points on average. Because the pick gate keeps only |spread| &gt;= 3.0, it keeps exactly the games where that bias is largest.</p><p><strong>What it does not mean:</strong> It does not prove the model has no information. Sign accuracy was 14 of 37 at the model's own number, and the smallest bucket (3.0-5.0) actually went 4-3. It proves the model's CONFIDENCE is miscalibrated and its selection rule amplifies the error. Those are fixable; the fix is measurable; but until it is fixed no strategy on this site can be called skill.</p></div></div>
+<h2 class="sec">Questions that must be answered before a decision</h2><p class="secsub">Each names the artifact that answers it, or the artifact that would have to exist</p>
+<div class="tablewrap">
+<table class="tbl wide"
+>
+<thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>Why it blocks a decision</th>
+<th>What we have</th>
+<th>What is missing</th>
+<th>How to discover it</th>
+<th>Owner</th>
+<th>Artifact</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr id="D01">
+<td>D01</td>
+<td>Is the pick gate a skill filter or a variance filter?</td>
+<td>Every published pick, every parlay leg and every prop on this site is selected by '|model spread| &gt;= 3.0'. If that is a variance filter rather than a skill filter, the entire strategy library is measuring noise, and adding games will never fix it — the bias is in the selection rule, not the sample.</td>
+<td>37 decided singles, bucketed by |model spread|: 3.0-5.0 went 4-3, 5.0-8.0 went 1-4, 8.0-12.0 went 6-5, 12.0+ went 3-11. The ordering runs opposite to confidence.</td>
+<td>Enough games per bucket for the intervals to separate. At n=37 no bucket's Wilson interval excludes .500 except by being worse than it; the monotone ordering is suggestive and not significant.</td>
+<td>Keep settling. The diagnostic recomputes on every run: python3 scripts/signal_diagnostics_d66245d4.py. The decision rule to register NOW, before more data arrives: if the 12.0+ bucket's hit rate stays below .500 after 100 decided tickets in that bucket, retire the gate rather than tune it.</td>
+<td>the strategy-owning session</td>
+<td>data/content/signal_diagnostics_2026-11-19_d66245d4.json</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D02">
+<td>D02</td>
+<td>Should the probability be divided by the error in the line rather than by the spread of game margins?</td>
+<td>Every probability, every fair price, every parlay joint and every leaderboard LBS score inherits this denominator. If it is wrong, they are all wrong together, and a reviewer cannot rank strategies that share the same defect.</td>
+<td>Measured: sigma used = 16.714 (data/derived/measured_constants_2026_27.json); sigma implied by the model's own published probabilities = 16.595; sigma needed to cover the model's measured forecast error = 18.303. The model is using 91.3% of the sigma its own error requires.</td>
+<td>The residual error has to be measured per team, not pooled, before it can be used as a denominator: a 15-game sample has a different error scale for a team that has played 16 than for one that has played 13. That requires the team-level error table, which is not built.</td>
+<td>Extend scripts/signal_diagnostics_d66245d4.py to compute the residual per team on the 222-game results feed and publish sd(residual) per team beside GP. The feed already carries everything needed.</td>
+<td>the model-owning session</td>
+<td>data/content/signal_diagnostics_2026-11-19_d66245d4.json → residual_scale</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D03">
+<td>D03</td>
+<td>Which record is the official record for strategy S1 — 23-9 or 23-8?</td>
+<td>The competition leaderboard exists to rank strategies. Two published files disagree on the record of the top-ranked strategy by one game and by one unit of return. A reviewer cannot decide whether to fund, retire or wait for a strategy whose own record has two values.</td>
+<td>README.md: '23-9, worth +11.91 model units, exact binomial p = 0.020'. docs/data/leaderboard.json: '23-8, +12.909 units, LBS 82.0, n_graded 31'.</td>
+<td>Any per-strategy grading of the five settled slates. data/settlement/** grades tickets; nothing maps a settled ticket to a strategy. Neither figure can be reproduced from the settlement record at all.</td>
+<td>Add a strategy field to the settlement row (which strategy originated the ticket) and regenerate the leaderboard from data/settlement/**. Until then the honest answer is 'no published record of any strategy is currently reproducible'.</td>
+<td>the strategy-ledger owner</td>
+<td>data/derived/strategies.json, docs/data/leaderboard.json</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D04">
+<td>D04</td>
+<td>Are the three stale lines (PHX@UTA, SAC@LAL, DAL@UTA) safe to publish?</td>
+<td>They are stale by 1.2 to 2.2 points because the official advanced table has now absorbed the 11/18 UTA 109 @ LAL 97 game that the repo's cut predates. The repository already carries the flag (F-929-01) but publishes the lines anyway, and a reader has no way to see which lines are affected.</td>
+<td>Re-pricing every game with the model's own published formula: 23 of 26 games move by 0.05 point or less; PHX@UTA moves +1.21 spread / -1.34 total, SAC@LAL -1.41 / -2.19, DAL@UTA +1.20 / -1.35.</td>
+<td>A per-line freshness stamp. The line file carries the injury edition but not the GP of each input, so a reader cannot tell which lines rest on a superseded table.</td>
+<td>Publish gp_home/gp_away beside every line and re-cut when either moves. The horizon file already stores gp_home/gp_away — it is one field away.</td>
+<td>the horizon-roll owner</td>
+<td>data/content/verify_2026-11-19_d66245d4.json → rows.reprice</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D05">
+<td>D05</td>
+<td>Is 26 games the right horizon when the injury basis is five revisions old before tip?</td>
+<td>The brief asks for picks up to 3 days ahead. But the 11/19 lines were cut from the 12:30 AM edition and the index already lists 01:45 AM, with first tip at 8:00 PM ET. Every additional day of horizon is a day of injury information that does not exist yet.</td>
+<td>8 editions published for 11/19 by 07:16Z; the model used the 3rd. 4 games tip on 11/19, 9 on 11/20, 6 on 11/21, 7 on 11/22.</td>
+<td>Any measurement of how much a line moves per injury revision. Without it, 'freeze at T minus X hours' is a preference, not a decision.</td>
+<td>The archive now holds 154 injury editions (COORDINATION §68) and the settlement record holds the lines each was priced against. Diffing consecutive editions against the line movement gives the elasticity directly.</td>
+<td>operations + the horizon-roll owner</td>
+<td>data/content/verify_2026-11-19_d66245d4.json → injury</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D06">
+<td>D06</td>
+<td>Does the site have a single number for anything a reviewer would act on?</td>
+<td>Measured in this pass: two S1 records (D03), two strategy counts (8 in data/derived/strategies.json vs 10 in docs/data/leaderboard.json), one 6-day-old strategy ledger, and a records column wrong on 3 of 26 horizon rows. These are not model disagreements; they are the same quantity published twice with different values.</td>
+<td>All four inconsistencies are reproduced with file paths and values in verify_2026-11-19_d66245d4.json → flagged.</td>
+<td>A build gate. Nothing in scripts/verify_all.py compares two published files against each other for the same quantity.</td>
+<td>Add a cross-file consistency check: for every team/strategy id that appears in more than one published file, assert the values agree, and fail the build when they do not. This is a small script and it is the highest-value gate missing from the repository.</td>
+<td>the integration seat</td>
+<td>data/content/verify_2026-11-19_d66245d4.json → flagged</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr id="D07">
+<td>D07</td>
+<td>What would make a strategy fundable, stated in advance?</td>
+<td>The six gates exist but their stated thresholds (n &gt;= 100) are unreachable this season at the current publication rate: 39 singles in 5 slates. A reviewer is being asked to choose a path against a bar that cannot be reached before the sample the bar protects against is already irrelevant.</td>
+<td>39 published singles over 5 settled slates (about 8 per slate); 14-23-1. The largest bucket at the gate threshold holds 14.</td>
+<td>A pre-registered decision rule that is reachable. Anything that says 'wait for n=100' is a decision to decide nothing for ~12 more slates.</td>
+<td>Pre-register the rule now, before the next slate: for example, 'retire the gate if the 12.0+ bucket is below .500 at n=50 in that bucket; fund at n=50 with a Wilson lower bound above .524 after a Bonferroni correction for the number of strategies'. Either threshold is defensible; publishing neither is what makes the leaderboard undecidable.</td>
+<td>the strategy-owning session</td>
+<td>data/derived/strategies.json → gates_definition</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Information we do not have</h2><p class="secsub">Named so that 'we do not know' is a recorded state rather than a gap a reader has to infer</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Missing</th>
+<th>Consequence for a decision</th>
+<th>What would produce it</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>A sportsbook price, for any game, ever</td>
+<td>no strategy can be shown to beat a market; every 'edge' on the site is against the model's own reference line</td>
+<td>a licensed odds feed; the repository's own SG27 records that no NBA-operated source publishes one</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr>
+<td>Per-strategy attribution of settled tickets</td>
+<td>no published strategy record is reproducible (D03)</td>
+<td>a strategy field on each settlement row</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr>
+<td>Closing-line movement per injury revision</td>
+<td>the value of freezing the horizon at any particular hour is unmeasured (D05)</td>
+<td>consecutive official editions joined to consecutive line snapshots — both already archived</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr>
+<td>Team-level forecast error</td>
+<td>the probability denominator cannot be corrected per team, only pooled (D02)</td>
+<td>the 222-game results feed the repository already stores</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+<tr>
+<td>Measured same-game correlation for the prop legs</td>
+<td>SGP prices carry an unmeasured rho; the repository says so itself (correlations tier C)</td>
+<td>player-game-log pairs across enough games; the logs now cover 11/15-11/18 only</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/decision_register_2026-11-19_d66245d4.json" target="_blank" rel="noopener">register</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Suggestions, as options</h2><p class="secsub">Ordered by the size of the error they remove, not by effort. Nothing here is implemented.</p>
+<section class="card "><h2>I01 &mdash; Publish the calibration gap as the headline instead of the record</h2><p><strong>Problem.</strong> The site leads with 23-9 / 14-23-1, a number a reader cannot act on. The number that explains the record — the model was 34 points overconfident on its own picks — is buried in a file.</p><div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Option</th>
+<th>Effort</th>
+<th>Risk</th>
+<th>Unlocks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Put 'published probability vs realised hit rate' at the top of the picks page, beside the record</td>
+<td>Low — one render of an existing diagnostic</td>
+<td>None — it shows a worse number than the current headline, which is the point</td>
+<td>an honest basis for D01, D02, D07</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+<tr>
+<td>Leave the record as the headline and add the diagnostic as a footnote</td>
+<td>None</td>
+<td>High — a reader continues to see a record with no context</td>
+<td>nothing</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+</tbody></table></div><p class='fine'>Evidence: data/content/signal_diagnostics_2026-11-19_d66245d4.json</p></section>
+<section class="card "><h2>I02 &mdash; Correct the probability denominator before adding another strategy</h2><p><strong>Problem.</strong> Every probability on the site divides by 16.71 (game-margin sigma) when its own forecast error implies 18.30. Adding strategies on the current denominator multiplies a shared error.</p><div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Option</th>
+<th>Effort</th>
+<th>Risk</th>
+<th>Unlocks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Add the measured residual scale to the probability and re-publish the affected probabilities with both values shown</td>
+<td>Medium — one function, then every surface that prints a probability</td>
+<td>Low — the change is transparent if both values are printed</td>
+<td>D02; makes D01 and D07 answerable</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+<tr>
+<td>Tune the gate threshold instead</td>
+<td>Low</td>
+<td>High — it treats a miscalibrated probability as a threshold problem and cannot fix the inverted ordering</td>
+<td>nothing</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+</tbody></table></div><p class='fine'>Evidence: data/content/signal_diagnostics_2026-11-19_d66245d4.json → residual_scale</p></section>
+<section class="card "><h2>I03 &mdash; One build gate for cross-file agreement</h2><p><strong>Problem.</strong> Four quantities are published twice with different values (two S1 records, two strategy counts, one stale ledger, three wrong records). No existing gate compares published files to each other.</p><div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Option</th>
+<th>Effort</th>
+<th>Risk</th>
+<th>Unlocks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>A script that asserts every (entity, field) pair appearing in more than one published file agrees, wired into verify_all</td>
+<td>Medium — needs a map of which files may legitimately differ by timestamp</td>
+<td>Low — failures are the point</td>
+<td>D06; makes every other register trustworthy</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+<tr>
+<td>Fix the four instances by hand</td>
+<td>Low</td>
+<td>High — they recur on the next roll, which is how these four arrived</td>
+<td>D06 for one day</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+</tbody></table></div><p class='fine'>Evidence: data/content/verify_2026-11-19_d66245d4.json → flagged V-D66-01/02/03</p></section>
+<section class="card "><h2>I04 &mdash; Stamp every line with the GP of its inputs and the injury edition age</h2><p><strong>Problem.</strong> A reader cannot tell from the picks page which lines rest on a superseded team table or a stale injury report; this pass found 3 of 26 lines stale by more than a point.</p><div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Option</th>
+<th>Effort</th>
+<th>Risk</th>
+<th>Unlocks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Two extra columns on the picks page: gp_home/gp_away and 'injuries N revisions old'</td>
+<td>Low — both values are already in the files</td>
+<td>None</td>
+<td>D04, D05; makes staleness visible instead of flagged in a register</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+<tr>
+<td>Re-cut on every revision</td>
+<td>High — needs a fetch path from the sandbox that can reach the PDF host</td>
+<td>Medium</td>
+<td>D05 fully</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+</tbody></table></div><p class='fine'>Evidence: data/content/verify_2026-11-19_d66245d4.json → rows.reprice, injury</p></section>
+<section class="card "><h2>I05 &mdash; Pre-register the retirement rule, not just the funding rule</h2><p><strong>Problem.</strong> The gates say what would fund a strategy and nothing about when to stop testing one. A gate set with only an entry condition will accumulate strategies faster than it can retire them, which is how 10 strategies ended up chasing 39 tickets.</p><div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Option</th>
+<th>Effort</th>
+<th>Risk</th>
+<th>Unlocks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Add a registered retirement rule with a fixed n and a fixed statistic</td>
+<td>Low — one file, frozen before the next slate</td>
+<td>Low</td>
+<td>D07</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/strategies.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+<tr>
+<td>Keep the entry-only gate set</td>
+<td>None</td>
+<td>High — multiplicity grows with no mechanism to shrink it</td>
+<td>nothing</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/strategies.json" target="_blank" rel="noopener">evidence</a></td>
+</tr>
+</tbody></table></div><p class='fine'>Evidence: data/derived/strategies.json → gates_definition</p></section>
+<section class="card "><h2>How to use this register</h2><p>Each row above names the artifact that answers it. Nothing here should be implemented before a reviewer picks a path: the repository's standing rule is that suggestions are options, and the decision section exists so a path is chosen before code changes. I01-I05 are ordered by the size of the error they remove, not by the effort they take — I02 removes a bias that affects every number on the site, and it is not the cheapest.</p></section>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="../site/pages/sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../command-center/index.html">Command Center</a> &middot;
+      <a href="../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../desk.html">Integration Desk</a> &middot;
+      <a href="../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../site/assets/site.js"></script>
+</body>
+</html>

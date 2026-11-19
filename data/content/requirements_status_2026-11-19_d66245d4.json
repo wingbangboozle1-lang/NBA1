@@ -1,0 +1,451 @@
+{
+ "title": "Requirement-by-requirement status, 2026-11-19 (namespaced audit)",
+ "generated_by": "scripts/requirements_audit_d66245d4.py",
+ "rule": "A row is 'done' only when every artifact it names exists on disk AND this pass verified the evidence it cites. 'partial' names the gap. A row whose artifact does not exist is downgraded to 'claimed-but-missing' by the script itself, so this register cannot claim work that is not in the repository. This is a second opinion beside data/content/requirements.json (scripts/build_requirements.py), not a replacement: the two are published side by side so a reader can see where they agree.",
+ "counts": {
+  "partial": 17,
+  "done": 16
+ },
+ "rows": [
+  {
+   "id": "B01",
+   "requirement": "Scheduled job refreshes schedule, standings, team stats and injury report for each rolling slate, then rebuilds only after freshness and provenance gates pass",
+   "artifacts": [
+    ".github/workflows/refresh-data.yml",
+    "engine/refresh_gate.py",
+    "data/derived/surface_gates.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "verifier ran the same gate logic the UI shows; the gate is BLOCKED on freshness and provenance, and the bet surface is closed because of it (data/content/verify_2026-11-19_d66245d4.json)",
+   "gap": "the scheduled run still promotes an injury pointer that is not the newest archived edition (open item X6 on this board, unchanged by this seat)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+  },
+  {
+   "id": "B02",
+   "requirement": "Official per-game result feed, kept current, settled only after final scores are verified; one row per game: date, teams, final score, quarter scores",
+   "artifacts": [
+    "data/official/results_feed_2026_27.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "222 rows, 222 Final, 0 quarter-sum failures; every one of the 18 finished November days matches the official month grid exactly (rows.results_feed)",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/results_feed_2026_27.json"
+  },
+  {
+   "id": "B03",
+   "requirement": "Store every injury PDF with its timestamp and diff consecutive reports to detect status changes",
+   "artifacts": [
+    "data/raw/injury_pdfs",
+    "data/parsed/injury_diffs",
+    "engine/injury_diff.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "154 archived PDFs with 153 consecutive diffs (COORDINATION \u00a768); this seat separately confirmed the index lists 8 editions for 11/19 (rows.injury)",
+   "gap": "PDF bytes cannot be re-hashed from this sandbox; the byte audit belongs to \u00a768",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/injury_pdfs"
+  },
+  {
+   "id": "B04",
+   "requirement": "Freeze a pre-registration file per strategy before its first bet: signal, thresholds, universe, settlement rule",
+   "artifacts": [
+    "data/prereg",
+    "data/archive/prereg_2026-11-19",
+    "scripts/freeze_prereg.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "verify_ledger.py confirms every superseded live-path pre-registration is preserved byte-frozen in data/archive/prereg_<date>/",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg"
+  },
+  {
+   "id": "B05",
+   "requirement": "Tamper-evident ledger: hash each published pick, publish the hash before tip, verify after settlement",
+   "artifacts": [
+    "data/ledger/ledger.json",
+    "scripts/verify_ledger.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "17 entries, chain verifies (exit 0), head 4d8f1693...; entry 17 is the pre-tip publication for the 11/19 slate",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json"
+  },
+  {
+   "id": "B06",
+   "requirement": "Split the site into 'projection' (safe to publish now) and 'bet' (gated) surfaces; never mix them",
+   "artifacts": [
+    "site/pages/projection.html",
+    "site/pages/bet-surface.html",
+    "site/pages/bet.html",
+    "data/derived/surface_gates.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "both surfaces exist and the bet surface is fail-closed: its gates are BLOCKED so it shows no picks",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/projection.html"
+  },
+  {
+   "id": "B07",
+   "requirement": "Two independent estimators; publish their disagreement as the primary confidence signal, blend underneath",
+   "artifacts": [
+    "data/estimator_a.json",
+    "data/estimator_b.json",
+    "data/disagreement.json",
+    "site/pages/estimators.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "the estimators page exists and the picks page prints disagreement as its headline",
+   "gap": "this seat did not re-derive the two estimators; that is a model task, not a verification task",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/estimator_a.json"
+  },
+  {
+   "id": "B08",
+   "requirement": "Pin home-court advantage to the measured home-win rate instead of fitting it",
+   "artifacts": [
+    "data/derived/hca_pin_2026_11_17_ca442d3d.json",
+    "data/derived/measured_constants_2026_27.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "measured home win rate 0.5023 -> HCA 0.09 points, applied on every one of the 26 horizon rows (home_court_applied: true)",
+   "gap": "the pin is applied, but the measured rate is 0.5023 while an independent read of the standings gives 111 home wins in 221 games (0.5023) - consistent",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/hca_pin_2026_11_17_ca442d3d.json"
+  },
+  {
+   "id": "B09",
+   "requirement": "Report luck as a z-score per team and refuse to publish a strategy leaning on a team outside the noise band",
+   "artifacts": [
+    "data/luck_zscores.json",
+    "site/pages/luck-z.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "data/derived/strategies.json carries a noise_band_refusal block per strategy and the refusal test suite passes (13 test files, 0 failing)",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/luck_zscores.json"
+  },
+  {
+   "id": "B10",
+   "requirement": "Compute rest, back-to-back and 3-in-4 from the official schedule and add travel distance from a sourced arena-coordinate table",
+   "artifacts": [
+    "data/derived/rest_travel_2026_27.json",
+    "data/arenas.json",
+    "site/pages/rest-travel.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "rest and travel rows exist and render",
+   "gap": "arena COORDINATES come from Wikipedia, not an NBA-published table (the repository's own flag F109) - a sourced approximation, not an official value",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rest_travel_2026_27.json"
+  },
+  {
+   "id": "B11",
+   "requirement": "Model minutes redistribution explicitly: top-8 minutes shares and replacement shares when a player is out",
+   "artifacts": [
+    "data/derived/minutes_redistribution_2026-11-19_e3d25abc.json",
+    "data/derived/minutes_shares.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "382 one-player-out scenarios with recipients weighted by the minutes those teammates actually played",
+   "gap": "measured absences exist for a two-day window only; the file states this in window_limits rather than estimating across it",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/minutes_redistribution_2026-11-19_e3d25abc.json"
+  },
+  {
+   "id": "B12",
+   "requirement": "Publish the disagreement between the two estimators as the headline and the blend underneath",
+   "artifacts": [
+    "site/pages/picks.html",
+    "site/pages/estimators.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "picks page headline is the disagreement; the record is secondary",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html"
+  },
+  {
+   "id": "B13",
+   "requirement": "Price every parlay with the measured rho and print the naive product next to it",
+   "artifacts": [
+    "data/derived/measured_rho.json",
+    "site/pages/parlay-pricing.html",
+    "data/derived/horizon_picks.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "12 parlays and 8 SGP candidates priced on the published horizon; measured rho register present with corpus n=74",
+   "gap": "the prop-leg rho is still tier C (unmeasured); the repository says so itself",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/measured_rho.json"
+  },
+  {
+   "id": "B14",
+   "requirement": "Put rotation availability on the picks page as its own column",
+   "artifacts": [
+    "site/pages/picks.html",
+    "data/derived/availability_2026-11-17_18_e3d25abc.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "the availability column is on the picks page and the availability file records 136 out/not-available declarations with 0 contradictions",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html"
+  },
+  {
+   "id": "B15",
+   "requirement": "Market-anchored prior: blend the model line with the closing line, weighted by measured out-of-sample log-loss",
+   "artifacts": [
+    "data/derived/market_anchor.json",
+    "scripts/market_anchor.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "the weighting is implemented and measured; the blend is 100% model because no closing line exists",
+   "gap": "BLOCKED on the input: no NBA-operated source publishes a closing line, so the market half cannot be built (the repository's own F98)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/market_anchor.json"
+  },
+  {
+   "id": "B16",
+   "requirement": "Model the total as possessions x points-per-possession, not as an average of team scoring averages",
+   "artifacts": [
+    "data/derived/horizon_lines.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "recomputed all 26 totals from the published formula: 26/26 reproduce the published total to within 0.06 point (rows.reprice.formula_verdict)",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines.json"
+  },
+  {
+   "id": "B17",
+   "requirement": "Show the injury-report revision time and retrieval time in the Injuries page banner",
+   "artifacts": [
+    "site/pages/injuries.html",
+    "data/official/injury_editions_2026-11-19_e3d25abc.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "the editions file carries revision and retrieval stamps per edition",
+   "gap": "this seat did not re-render the banner to see both fields; it verified the underlying file, not the pixel",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/injuries.html"
+  },
+  {
+   "id": "B18",
+   "requirement": "Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible",
+   "artifacts": [
+    "data/settlement",
+    "data/ledger/ledger.json",
+    "site/pages/settlement.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "five slates settled 11/14-11/18; each settlement file carries settled_at_utc and a per-game official URL",
+   "gap": "11/17 and 11/18 were both settled at 2026-11-19T06:00Z - i.e. 11/17 settled a day late, which is what the 'as soon as each game day ends' clause asks to avoid",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement"
+  },
+  {
+   "id": "B19",
+   "requirement": "Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs",
+   "artifacts": [
+    "data/official/teams_inputs_2026-11-19_9ff20954.json",
+    "data/derived/team_stats_recut.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "all three pages are stored for 11/19 and the advanced table was independently re-read here: 30/30 rows, 2 differ, both the documented one-game lag (F-929-01)",
+   "gap": "the lag is now measurable in points: 3 of 26 lines move by more than 1 point when repriced (V-D66-05)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/teams_inputs_2026-11-19_9ff20954.json"
+  },
+  {
+   "id": "B20",
+   "requirement": "Capture per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players who appear on an injury report",
+   "artifacts": [
+    "data/official/player_game_logs_2026-11-17.json",
+    "data/official/player_game_logs_2026-11-18.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "437 player rows over 17 games for 11/17-11/18, with DNP rows kept (COORDINATION \u00a768)",
+   "gap": "the log set covers four game days, so a per-player variance estimate rests on very few observations",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/player_game_logs_2026-11-17.json"
+  },
+  {
+   "id": "B21",
+   "requirement": "Generate picks for every upcoming slate up to 3 days in advance using originated lines",
+   "artifacts": [
+    "data/derived/horizon_picks.json",
+    "data/derived/horizon_lines.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "26 games across 11/19-11/22; 26 singles, 12 parlays, 8 SGP candidates, every line reproduced from the published formula",
+   "gap": "the horizon is 4 calendar days (today + 3), which is the brief's wording; the injury basis for the near day is 5 revisions old (V-D66-04)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks.json"
+  },
+  {
+   "id": "B22",
+   "requirement": "Track how injuries affect rotation minutes and production, and provide game-flow analysis",
+   "artifacts": [
+    "data/derived/game_flow_2026-11-19_e3d25abc.json",
+    "data/derived/injury_impact.json",
+    "site/pages/gameflow.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "17 games of quarter lines, halves and OT; rotation and availability files present",
+   "gap": "production effects rest on a two-day window",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/game_flow_2026-11-19_e3d25abc.json"
+  },
+  {
+   "id": "B23",
+   "requirement": "Determine correlation values",
+   "artifacts": [
+    "data/derived/measured_rho.json",
+    "data/derived/correlations.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "side-and-total rho measured at -0.105 with p=0.37 on n=74 - i.e. not distinguishable from zero at this sample",
+   "gap": "prop-leg correlation remains unmeasured (tier C)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/measured_rho.json"
+  },
+  {
+   "id": "B24",
+   "requirement": "Remove luck from the equation and build selectively skill-based strategies",
+   "artifacts": [
+    "data/derived/strategies.json",
+    "data/luck_zscores.json",
+    "scripts/test_noise_band_refusal.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "the noise-band refusal is implemented and tested; but this pass measured the opposite of skill: 14-23-1 with a -34 point calibration gap",
+   "gap": "MATERIAL: the published picks are not merely unproven, they are anti-calibrated; the highest-confidence bucket is the worst (data/content/signal_diagnostics_2026-11-19_d66245d4.json)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/strategies.json"
+  },
+  {
+   "id": "B25",
+   "requirement": "Executive summary outlining important details",
+   "artifacts": [
+    "EXECUTIVE_SUMMARY.md",
+    "data/content/executive.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "present and linked from every page",
+   "gap": "the summary still leads with an S1 record that disagrees with docs/data/leaderboard.json (V-D66-02)",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/EXECUTIVE_SUMMARY.md"
+  },
+  {
+   "id": "B26",
+   "requirement": "A suggestions section so a reviewer can choose a path before changes are implemented",
+   "artifacts": [
+    "site/pages/suggestions.html",
+    "site/pages/decisions.html",
+    "data/content/suggestions.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "39 suggestions and a decisions page already exist; this seat adds five more (I01-I05) tied to measured errors in a namespaced register",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/suggestions.html"
+  },
+  {
+   "id": "B27",
+   "requirement": "A clear list of questions, information and answers needed before a decision, with suggestions to discover missing information",
+   "artifacts": [
+    "live/decision-register.html",
+    "site/pages/decision-register.html",
+    "data/content/decision_register_2026-11-19_d66245d4.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "7 questions, 5 named information gaps, 5 suggestions, each with the artifact that answers it",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/live/decision-register.html"
+  },
+  {
+   "id": "B28",
+   "requirement": "Review the repo line by line, verifying from official sources, with links for manual review, and flag irregularities",
+   "artifacts": [
+    "data/content/verify_2026-11-19_d66245d4.json",
+    "live/live-horizon.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "111 field-level checks against seven official NBA pages read first-hand today; 6 flags, 1 of them a withdrawn false positive of this seat's own",
+   "gap": "this is a horizon-and-settlement pass, not every line of the repository; the model internals were re-derived from their published formula but not re-fitted",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json"
+  },
+  {
+   "id": "B29",
+   "requirement": "Create a GitHub Pages site: clean landing page, subpages by category, dashboard-like, every entry in a readable table with sources",
+   "artifacts": [
+    "index.html",
+    "site/pages",
+    "live/live-horizon.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "164 HTML pages build; 0 broken internal links repo-wide; every table row carries an official or repository-artifact source link (verify_dashboard: 0 unmarked rows of 3218)",
+   "gap": "the two new pages are reachable from the shared nav; the rest of the site's navigation is unchanged",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html"
+  },
+  {
+   "id": "B30",
+   "requirement": "Verification: every table row must have a source link; leave unconfirmed values blank and flagged, never infer",
+   "artifacts": [
+    "scripts/verify_dashboard.py",
+    "scripts/verify_all.py"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "verify_dashboard.py passes on 43 pages / 3218 rows with 0 unmarked; this seat's own pages were rewritten to comply rather than exempted",
+   "gap": "the gate checks provenance structure, not that a source still says what the row claims; stated by the gate itself",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_dashboard.py"
+  },
+  {
+   "id": "B31",
+   "requirement": "Read COORDINATION.md, claim a task, keep scopes non-overlapping, commit and push the claim, log cross-scope requests",
+   "artifacts": [
+    "COORDINATION.md"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "\u00a772 claim written and pushed before any work (commit 4d4a45a); 5 adoption requests logged instead of editing PR #181's files",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
+  },
+  {
+   "id": "B32",
+   "requirement": "Create a PR, merge without waiting, confirm Pages, record the PR and merge result on the board, publish flagged items on a Flagged for Review page",
+   "artifacts": [
+    "COORDINATION.md",
+    "live/live-horizon.html"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "this table is written before delivery; the delivery record is appended to \u00a772 with the PR number and merge commit when it runs",
+   "gap": "pending at the time this file was written",
+   "status": "partial",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
+  },
+  {
+   "id": "B33",
+   "requirement": "No manual input from the user; work autonomously and verify every value",
+   "artifacts": [
+    "data/content/verify_2026-11-19_d66245d4.json"
+   ],
+   "artifacts_missing": [],
+   "evidence_2026_11_19": "every value on the new pages is either an official read or a script computation; none was typed from memory",
+   "gap": "none found in this pass",
+   "status": "done",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/verify_2026-11-19_d66245d4.json"
+  }
+ ]
+}
