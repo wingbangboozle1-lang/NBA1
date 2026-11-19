@@ -56,10 +56,13 @@ const row = `<tr><td>Runtime row</td><td><a href="https://www.nba.com/games">NBA
         self.assertEqual(len(rows), 3)
         self.assertEqual([row["line"] for row in rows], [5, 6, 7])
         self.assertEqual(rows[0]["status"], "official_link_present_not_value_verified")
+        self.assertEqual(rows[0]["review_status"], "value_not_verified")
         self.assertEqual(rows[0]["official_nba_links"], ["https://www.nba.com/games?date=2026-11-19"])
         self.assertEqual(rows[1]["status"], "unverified_non_nba_or_insecure_link_only")
+        self.assertEqual(rows[1]["review_status"], "official_source_review_required")
         self.assertEqual(rows[1]["external_links"], ["https://github.com/example/project"])
         self.assertEqual(rows[2]["status"], "unverified_no_external_source_link")
+        self.assertEqual(rows[2]["review_status"], "official_source_review_required")
         self.assertIn("Missing-source row", rows[2]["row_text"])
 
     def test_script_template_is_separate_not_counted_as_static_or_verified(self):
@@ -70,6 +73,7 @@ const row = `<tr><td>Runtime row</td><td><a href="https://www.nba.com/games">NBA
         self.assertTrue(dynamic["dynamic_template"])
         self.assertEqual(dynamic["line"], 11)
         self.assertEqual(dynamic["status"], "not_evaluated_dynamic_template")
+        self.assertEqual(dynamic["review_status"], "rendered_dom_audit_required")
         self.assertEqual(dynamic["official_nba_links"], [])
         self.assertEqual(dynamic["literal_official_nba_link_candidates"], ["https://www.nba.com/games"])
 
@@ -89,14 +93,18 @@ class RepositoryReportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "index.html").write_text(
-                "<table><tbody><tr><td>unknown</td></tr></tbody></table>\n",
+                '<table><tbody><tr><td>unknown</td></tr></tbody></table>\n'
+                '<script>const row = `<tr><td>runtime</td><td><a href="https://www.nba.com/games">NBA</a></td></tr>`;</script>\n',
                 encoding="utf-8",
             )
             report = audit_repository(root, generated_at_utc="2026-11-19T07:00:00Z")
             self.assertEqual(report["counts"]["html_files"], 1)
             self.assertEqual(report["counts"]["static_rows"], 1)
             self.assertEqual(report["counts"]["unverified_no_external_source_link"], 1)
+            self.assertEqual(report["counts"]["dynamic_template_rows_not_rendered"], 1)
             self.assertEqual(report["unverified_rows"][0]["file"], "index.html")
+            self.assertEqual(report["unverified_rows"][0]["review_status"], "official_source_review_required")
+            self.assertEqual(report["dynamic_template_rows"][0]["review_status"], "rendered_dom_audit_required")
             self.assertEqual(len(report["files"][0]["sha256"]), 64)
             self.assertIn("No outbound requests", report["method"]["network_access"])
 
@@ -107,6 +115,10 @@ class RepositoryReportTests(unittest.TestCase):
             md = markdown_path.read_text(encoding="utf-8")
             self.assertIn("Unverified static table rows", md)
             self.assertIn("index.html:1", md)
+            self.assertIn("official_source_review_required", md)
+            self.assertIn("rendered_dom_audit_required", md)
+            self.assertIn("Literal HTTPS NBA link candidates", md)
+            self.assertIn('href="https://www.nba.com/games"', md)
             self.assertIn("no external source link", md)
 
     def test_existing_non_nba_href_remains_clickable_for_review(self):

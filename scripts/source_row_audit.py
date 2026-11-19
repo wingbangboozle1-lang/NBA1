@@ -64,21 +64,25 @@ def _row_record(row_html: str, file: str, line: int, *, dynamic: bool = False) -
     nba_links = [url for url in links if is_official_nba_https(url)]
     if dynamic:
         status = "not_evaluated_dynamic_template"
+        review_status = "rendered_dom_audit_required"
         reason = "The row is inside a script; its final source link depends on runtime data and was not evaluated."
         official_links = []
         literal_nba_candidates = nba_links
     elif nba_links:
         status = "official_link_present_not_value_verified"
+        review_status = "value_not_verified"
         reason = "A direct HTTPS NBA link is present; the linked page/value was not fetched or compared."
         official_links = nba_links
         literal_nba_candidates = []
     elif links:
         status = "unverified_non_nba_or_insecure_link_only"
+        review_status = "official_source_review_required"
         reason = "The row has external link(s), but none is a direct HTTPS NBA source."
         official_links = []
         literal_nba_candidates = []
     else:
         status = "unverified_no_external_source_link"
+        review_status = "official_source_review_required"
         reason = "The row has no external source link."
         official_links = []
         literal_nba_candidates = []
@@ -89,6 +93,7 @@ def _row_record(row_html: str, file: str, line: int, *, dynamic: bool = False) -
         "file": file,
         "line": line,
         "status": status,
+        "review_status": review_status,
         "reason": reason,
         "row_text": text[:800],
         "external_links": links,
@@ -275,14 +280,14 @@ def render_markdown(report: dict) -> str:
         out += [
             "Each row below is unresolved for official NBA provenance. Existing non-NBA links are shown but are not treated as NBA evidence.",
             "",
-            "| File:line | Status | Rendered row text | Existing external links |",
-            "|---|---|---|---|",
+            "| File:line | Link classification | Review status | Rendered row text | Existing external links |",
+            "|---|---|---|---|---|",
         ]
         for row in report["unverified_rows"]:
             links = "<br>".join(_md_existing_link(url) for url in row["external_links"]) or "—"
             out.append(
                 f"| `{_md_cell(row['file'])}:{row['line']}` | `{row['status']}` | "
-                f"{_md_cell(row['row_text'])} | {links} |"
+                f"`{row['review_status']}` | {_md_cell(row['row_text'])} | {links} |"
             )
 
     out += ["", "## Dynamic row templates requiring rendered-DOM review", ""]
@@ -290,11 +295,17 @@ def render_markdown(report: dict) -> str:
         out.append("No table-row markup was found inside script blocks in this snapshot.")
     else:
         out += [
-            "These are source-code templates, not rendered rows. Their final link fields are data-dependent and were not inferred.",
+            "These are source-code templates, not rendered rows. Final links are data-dependent; any literal NBA URL below is only a candidate, not evidence that the runtime row uses it.",
             "",
-            "| File:line | Template text |",
-            "|---|---|",
+            "| File:line | Link classification | Review status | Template text | Literal HTTPS NBA link candidates |",
+            "|---|---|---|---|---|",
         ]
         for row in report["dynamic_template_rows"]:
-            out.append(f"| `{_md_cell(row['file'])}:{row['line']}` | {_md_cell(row['row_text'])} |")
+            candidates = "<br>".join(
+                _md_existing_link(url) for url in row["literal_official_nba_link_candidates"]
+            ) or "—"
+            out.append(
+                f"| `{_md_cell(row['file'])}:{row['line']}` | `{row['status']}` | "
+                f"`{row['review_status']}` | {_md_cell(row['row_text'])} | {candidates} |"
+            )
     return "\n".join(out) + "\n"
