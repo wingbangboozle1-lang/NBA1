@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-19T12:49:05Z",
+ "captured_at_utc": "2026-11-19T13:15:14Z",
  "window": "2026-11-19 through 2026-11-22 (parsed from the official schedule/games pages this run)",
  "note": "Official NBA.com schedule rows parsed verbatim this run. Cells the capture did not carry are marked per-cell in field_provenance (carried_forward = value kept from the previous verified snapshot; blank_unverified = the official pages served no readable value and none was inferred).",
  "record_sources": {
@@ -472,8 +472,8 @@
  "verification": {
   "verified": true,
   "source_url": "https://www.nba.com/schedule",
-  "source_sha256": "0b5e0c13e3a429331013ce821e497fab9917482ab1aef462c990f693134a5a37",
-  "verified_at_utc": "2026-11-19T12:53:44Z",
+  "source_sha256": "707d281358eb16174b39fa8d9e85ef6c9c73ec8e2a9ff37a07430a18b6685e6c",
+  "verified_at_utc": "2026-11-19T13:19:53Z",
   "verified_by": "engine/promote_official.py",
   "parsed_via": null,
   "fallback_sources": [
@@ -481,29 +481,29 @@
     "date": "2026-11-19",
     "url": "https://www.nba.com/games?date=2026-11-19",
     "http_status": 200,
-    "bytes": 346689,
-    "sha256": "91064f98cfe26b73246f73f4f284e564fcbec835b019ff1ed2d22f121b29c587"
+    "bytes": 346709,
+    "sha256": "68aa83f6787251cc763c21ab4ee3c91f35edc8e852a35e8c0c4cc2ba63382929"
    },
    {
     "date": "2026-11-20",
     "url": "https://www.nba.com/games?date=2026-11-20",
     "http_status": 200,
-    "bytes": 359496,
-    "sha256": "60281940eb3eb9782ed2152bbcd0e2459627657169b41d9c02a0ba7899ffc7b9"
+    "bytes": 359272,
+    "sha256": "e534e29d43f7be52dce2353f773f33a448537e5e0b858b7ce65b817bcce49325"
    },
    {
     "date": "2026-11-21",
     "url": "https://www.nba.com/games?date=2026-11-21",
     "http_status": 200,
-    "bytes": 324656,
-    "sha256": "efc57868cc9a481cf455170d2cc265a3ce07da96790524ccffa24b934a65042d"
+    "bytes": 321542,
+    "sha256": "4173c5eb3ee250874af5459cdf901af7a423598d2a3ce8fab4b9bd17685e101f"
    },
    {
     "date": "2026-11-22",
     "url": "https://www.nba.com/games?date=2026-11-22",
     "http_status": 200,
-    "bytes": 330159,
-    "sha256": "2ac89151869328115f73d9a91c56a07c7e38a7d1833c8eaf9fd50c3b9587c220"
+    "bytes": 330248,
+    "sha256": "173622d85f248890cdaafa271d2bcacf6b17c0ac7388d2c3214806b2282fd73c"
    }
   ],
   "row_count": 26
