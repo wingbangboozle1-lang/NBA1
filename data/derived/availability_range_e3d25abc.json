@@ -1,0 +1,5725 @@
+{
+ "title": "Availability window: each player's injury-report lines and box-score appearances across the two archived game days",
+ "generated_by": "scripts/e3d25abc_availability.py",
+ "generated_at_utc": "2026-11-19T06:03:46Z",
+ "note": "One row per (player, day) from the report side, joined to the log side. Players with no report line are not listed here - they are in data/official/player_game_logs_*.json, which is the complete box-score record. This file is the availability column, not the log.",
+ "players_with_more_than_one_declaration": 20,
+ "by_player": [
+  {
+   "player": "Achiuwa, Precious",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Left Lower Leg Contusion",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Adebayo, Bam",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Right Hip Impingement",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Ajayi, Michael",
+   "team": "Charlotte Hornets",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Aldama, Santi",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Probable",
+     "detail": "Injury/Illness - Left Ankle Sprain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Avdija, Deni",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Left Foot Inflammation / Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Awaka, Tobe",
+   "team": "Chicago Bulls",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Disc Irritation",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Banchero, Paolo",
+   "team": "Orlando Magic",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right High Ankle Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Barlow, Dominick",
+   "team": "Philadelphia 76ers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Low Back Stress Reaction",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Barnes, Scottie",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Available",
+     "detail": "Injury/Illness - Illness",
+     "logged": true
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Groin Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Barrett, RJ",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Right Hamstring Tightness / Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Beal, Bradley",
+   "team": "LA Clippers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Beekman, Reece",
+   "team": "Washington Wizards",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right AC Joint Injury",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Beringer, Joan",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Available",
+     "detail": "Injury/Illness - Face Mask",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Biberovic, Tarik",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Heel Bursitis",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Bilodeau, Tyler",
+   "team": "Brooklyn Nets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Bittle, Nate",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Foot Avulsion Fracture",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Foot Avulsion Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Bona, Adem",
+   "team": "Philadelphia 76ers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Cervical Spine Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Boswell, Kylan",
+   "team": "Charlotte Hornets",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Brown, Jaylen",
+   "team": "Philadelphia 76ers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Brown, Maliq",
+   "team": "San Antonio Spurs",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Bufkin, Kobe",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Butler III, Jimmy",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right ACL Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Capela, Clint",
+   "team": "Houston Rockets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Ankle Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Carlson, Branden",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Available",
+     "detail": "Injury/Illness - Face Mask",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Castro, Rafael",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Champagnie, Justin",
+   "team": "Washington Wizards",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Foot Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Christie, Max",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Left Ankle Sprain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Clark, Jaylen",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Clayton Jr., Walter",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Probable",
+     "detail": "Injury/Illness - Right Ankle Sprain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Copeland, Quadir",
+   "team": "Houston Rockets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Cunningham, Cade",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Right Knee Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Curry, Stephen",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Oblique Tear",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "de Larrea, Sergio",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Dia, Malik",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Probable",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Dieng, Ousmane",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Finger Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "DiVincenzo, Donte",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Duren, Jalen",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hamstring Strain",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Edwards, Anthony",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Arthroscopy",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Flemings, Kingston",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Lumbar Strain",
+     "logged": null
+    }
+   ]
+  },
+  {
+   "player": "Furphy, Johnny",
+   "team": "Indiana Pacers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right ACL Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Gardner, Myron",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hamstring Tightness / Soreness",
+     "logged": null
+    }
+   ]
+  },
+  {
+   "player": "Gillespie, Ja'Kobi",
+   "team": "San Antonio Spurs",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Goldin, Vladislav",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Green, Draymond",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Right Elbow Inflammation / Soreness",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Grimes, Quentin",
+   "team": "Los Angeles Lakers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Available",
+     "detail": "Injury/Illness - Right Finger Splint",
+     "logged": true
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Right Finger Splint",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Gueye, Mouhamed",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Foot Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Haliburton, Tyrese",
+   "team": "Indiana Pacers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Harris, Tobias",
+   "team": "San Antonio Spurs",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Calf Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Hayes, Jaxson",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Strain",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Left Knee Strain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Holland II, Ronald",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Holmes II, DaRon",
+   "team": "Denver Nuggets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Holmgren, Chet",
+   "team": "Oklahoma City Thunder",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee/ Injury Recovery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Horford, Al",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Bilateral Low Back Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Hukporti, Ariel",
+   "team": "Philadelphia 76ers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Hunter, De'Andre",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Left Hip Soreness / Tightness",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Ingram, Brandon",
+   "team": "LA Clippers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Heel Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Ingram, Harrison",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Isaac, Jonathan",
+   "team": "Orlando Magic",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Jackson Jr., Jaren",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right MCL Tear",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right MCL Tear",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Jackson, GG",
+   "team": "Memphis Grizzlies",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left 5th Metatarsal Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Jefferson, Joshua",
+   "team": "Brooklyn Nets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Jerome, Ty",
+   "team": "Memphis Grizzlies",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hip Impingement",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Joe, Isaiah",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hip Contusion",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Right Hip Contusion",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Jones, Kam",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Jovic, Nikola",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Illness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Kessler, Walker",
+   "team": "Los Angeles Lakers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Lower Leg Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Knueppel, Kon",
+   "team": "Charlotte Hornets",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Krejci, Vit",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Ankle Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Kuminga, Jonathan",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Shoulder Contusion",
+     "logged": null
+    }
+   ]
+  },
+  {
+   "player": "Landale, Jock",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hip Inflammation",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Larsson, Pelle",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Illness",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Lawal, Tobi",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Doubtful",
+     "detail": "Injury/Illness - Right Groin Tightness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Leonard, Kawhi",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Injury Management",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Lively II, Dereck",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Foot Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Markkanen, Lauri",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hand Fracture",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Hand Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Markovic, Bogoljub",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Martin, Caleb",
+   "team": "Dallas Mavericks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Right Thumb Splint",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Mathurin, Bennedict",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Plantar Fasciitis",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "McCollum, CJ",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Calf Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "McConnell, T.J.",
+   "team": "Indiana Pacers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Right Hamstring Strain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "McCullar Jr., Kevin",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "McGowens, Bryce",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Elbow Infection",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Merrill, Sam",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Right Elbow Injury Management",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Miller, Jordan",
+   "team": "LA Clippers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Rotator Cuff Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Mitchell, Dillon",
+   "team": "Boston Celtics",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Mobley, Evan",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Great Toe Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Mogbo, Jonathan",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Moody, Moses",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Morant, Ja",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Murphy III, Trey",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Bilateral Patellar Tendinopathy",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Murray, Dejounte",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Ankle Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nance, Pete",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nelson, Grant",
+   "team": "Brooklyn Nets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nelson, Izaiyah",
+   "team": "Orlando Magic",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Ankle Injury Recovery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nembhard, Andrew",
+   "team": "Indiana Pacers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hip Soreness / Tightness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nembhard, Ryan",
+   "team": "Denver Nuggets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Newell, Asa",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Great Toe Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Niederhauser, Yanic Konan",
+   "team": "LA Clippers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Lisfranc Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Nurkic, Jusuf",
+   "team": "Utah Jazz",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Right Foot; 2nd Plantar Plate Tear",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Foot; 2nd Plantar Plate Tear",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Okorie, Ebuka",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Okpara, Felix",
+   "team": "Washington Wizards",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Onyenso, Ugonna",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Pedulla, Sean",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Penda, Noah",
+   "team": "Orlando Magic",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Partially Torn Hamstring",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Phillips, Julian",
+   "team": "Houston Rockets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Pierre Jr., Jaron",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Probable",
+     "detail": "G League - Two-Way",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Pippen Jr., Scotty",
+   "team": "Memphis Grizzlies",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Lumbar Disc Herniation",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Porzingis, Kristaps",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Not With Team",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Powell, Drake",
+   "team": "Brooklyn Nets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Prince, Taurean",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Soreness",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Pullin, Zyon",
+   "team": "Minnesota Timberwolves",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Quadriceps Contusion",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Quaintance, Jayden",
+   "team": "San Antonio Spurs",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Raynaud, Maxime",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Patella Subluxation",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Reaves, Austin",
+   "team": "Los Angeles Lakers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Heel Contusion / Bone Bruise",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Heel Contusion / Bone Bruise",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Reese, Julian",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Probable",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Robinson, Duncan",
+   "team": "Detroit Pistons",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Quadriceps Strain",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Quadriceps Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Robinson, Orlando",
+   "team": "Chicago Bulls",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Rollins, Ryan",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Illness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Ryan, Cormac",
+   "team": "Milwaukee Bucks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Saraf, Ben",
+   "team": "Brooklyn Nets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Saunders, Richie",
+   "team": "Memphis Grizzlies",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Schroder, Dennis",
+   "team": "Charlotte Hornets",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Sellers, Jaylin",
+   "team": "Chicago Bulls",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Sharpe, Shaedon",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Meniscus Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Sheppard, Ben",
+   "team": "Indiana Pacers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Meniscus Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Simmons, Ben",
+   "team": "Sacramento Kings",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Smith, Malachi",
+   "team": "Toronto Raptors",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    },
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "G League - Two-Way",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Sorber, Thomas",
+   "team": "Oklahoma City Thunder",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Knee Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Steinbach, Hannes",
+   "team": "Charlotte Hornets",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "G League - On Assignment",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Stewart, Isaiah",
+   "team": "Memphis Grizzlies",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Illness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Strawther, Julian",
+   "team": "Denver Nuggets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Knee Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Thompson, Amen",
+   "team": "Houston Rockets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Left Knee Soreness",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Thompson, Klay",
+   "team": "Miami Heat",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "Injury/Illness - Left Ankle Sprain",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Tomlin, Nae'Qwan",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Low Back Stress Reaction",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Tyson, Jaylon",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Ankle Injury Management",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Udeh Jr., Ernest",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Veesaar, Henri",
+   "team": "Atlanta Hawks",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right ACL Tear",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Vukcevic, Tristan",
+   "team": "Washington Wizards",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hip Impingement",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Wade, Dean",
+   "team": "Philadelphia 76ers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Left Hamstring Tightness / Soreness",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Wallace, Cason",
+   "team": "Oklahoma City Thunder",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Shoulder Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Watford, Trendon",
+   "team": "New Orleans Pelicans",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Ankle Sprain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Watkins, Jamir",
+   "team": "Washington Wizards",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left ACL Repair / Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Watson, Peyton",
+   "team": "Cleveland Cavaliers",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Doubtful",
+     "detail": "Injury/Illness - Low Back Contusion",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Whitmore, Cam",
+   "team": "Denver Nuggets",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Williams, Amari",
+   "team": "Boston Celtics",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "G League - Two-Way",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Williams, Brandon",
+   "team": "Golden State Warriors",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Hamstring Strain",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Williams, Jalen",
+   "team": "Oklahoma City Thunder",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Ankle Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Williams, Jaylin",
+   "team": "Oklahoma City Thunder",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Questionable",
+     "detail": "Injury/Illness - Low Back Spasms",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Williams, Mark",
+   "team": "Phoenix Suns",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Left Shoulder Surgery",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Williams, Patrick",
+   "team": "Chicago Bulls",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Available",
+     "detail": "-",
+     "logged": true
+    }
+   ]
+  },
+  {
+   "player": "Wilson, Caleb",
+   "team": "Chicago Bulls",
+   "declarations": [
+    {
+     "date": "2026-11-18",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Metacarpal Fracture",
+     "logged": false
+    }
+   ]
+  },
+  {
+   "player": "Youngblood, Chris",
+   "team": "Portland Trail Blazers",
+   "declarations": [
+    {
+     "date": "2026-11-17",
+     "status": "Out",
+     "detail": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+     "logged": false
+    }
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "07:30",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Barnes, Scottie",
+   "status": "Available",
+   "detail": "Injury/Illness - Illness",
+   "logged": true,
+   "minutes": "34:06",
+   "points": 20,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 34:06 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "07:30",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Foot Avulsion Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "07:30",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "07:30",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "McCullar Jr., Kevin",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "07:30",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Smith, Malachi",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Joe, Isaiah",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hip Contusion",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Quadriceps Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "tricode": null,
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "tricode": null,
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "tricode": null,
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Calf Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "tricode": null,
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Avdija, Deni",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Left Foot Inflammation / Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Carlson, Branden",
+   "status": "Available",
+   "detail": "Injury/Illness - Face Mask",
+   "logged": true,
+   "minutes": "14:24",
+   "points": 6,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 14:24 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Ankle Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Morant, Ja",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Meniscus Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "tricode": null,
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "detail": "Injury/Illness - Face Mask",
+   "logged": true,
+   "minutes": "25:30",
+   "points": 3,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 25:30 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Arthroscopy",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "Kuminga, Jonathan",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Shoulder Contusion",
+   "logged": null,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "name matched a player on another team; treated as unresolved, not as a confirmation"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "08:00",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "tricode": null,
+   "player": "Pullin, Zyon",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Quadriceps Contusion",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "detail": "Injury/Illness - Right MCL Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hand Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Right Foot; 2nd Plantar Plate Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "tricode": null,
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "tricode": null,
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Heel Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "tricode": null,
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Rotator Cuff Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "10:30",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "tricode": null,
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Lisfranc Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "tricode": null,
+   "player": "Ajayi, Michael",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "tricode": null,
+   "player": "Boswell, Kylan",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "tricode": null,
+   "player": "Knueppel, Kon",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "tricode": null,
+   "player": "Schroder, Dennis",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "tricode": null,
+   "player": "Steinbach, Hannes",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "tricode": null,
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "detail": "Injury/Illness - Right Finger Splint",
+   "logged": true,
+   "minutes": "41:33",
+   "points": 47,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 41:33 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "tricode": null,
+   "player": "Kessler, Walker",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Lower Leg Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "edition": "Injury-Report_2026-11-17_06_00PM",
+   "game_date": "2026-11-17",
+   "tipoff_et": "11:00",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "tricode": null,
+   "player": "Reaves, Austin",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Heel Contusion / Bone Bruise",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets",
+   "tricode": null,
+   "player": "Capela, Clint",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Ankle Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets",
+   "tricode": null,
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets",
+   "tricode": null,
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets",
+   "tricode": null,
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Left Knee Soreness",
+   "logged": true,
+   "minutes": "31:21",
+   "points": 15,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 31:21 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers",
+   "tricode": null,
+   "player": "Furphy, Johnny",
+   "status": "Out",
+   "detail": "Injury/Illness - Right ACL Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers",
+   "tricode": null,
+   "player": "Haliburton, Tyrese",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers",
+   "tricode": null,
+   "player": "McConnell, T.J.",
+   "status": "Available",
+   "detail": "Injury/Illness - Right Hamstring Strain",
+   "logged": true,
+   "minutes": "18:28",
+   "points": 14,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 18:28 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers",
+   "tricode": null,
+   "player": "Nembhard, Andrew",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hip Soreness / Tightness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers",
+   "tricode": null,
+   "player": "Sheppard, Ben",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Meniscus Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies",
+   "tricode": null,
+   "player": "Jackson, GG",
+   "status": "Out",
+   "detail": "Injury/Illness - Left 5th Metatarsal Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies",
+   "tricode": null,
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hip Impingement",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies",
+   "tricode": null,
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "detail": "Injury/Illness - Lumbar Disc Herniation",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies",
+   "tricode": null,
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies",
+   "tricode": null,
+   "player": "Stewart, Isaiah",
+   "status": "Out",
+   "detail": "Injury/Illness - Illness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Merrill, Sam",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Right Elbow Injury Management",
+   "logged": true,
+   "minutes": "22:57",
+   "points": 7,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 22:57 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Great Toe Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "detail": "Injury/Illness - Low Back Stress Reaction",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Tyson, Jaylon",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Ankle Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Udeh Jr., Ernest",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers",
+   "tricode": null,
+   "player": "Watson, Peyton",
+   "status": "Doubtful",
+   "detail": "Injury/Illness - Low Back Contusion",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Dieng, Ousmane",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Finger Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Jones, Kam",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Markovic, Bogoljub",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Nance, Pete",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Rollins, Ryan",
+   "status": "Out",
+   "detail": "Injury/Illness - Illness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks",
+   "tricode": null,
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Adebayo, Bam",
+   "status": "Available",
+   "detail": "Injury/Illness - Right Hip Impingement",
+   "logged": true,
+   "minutes": "30:24",
+   "points": 26,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 30:24 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Gardner, Myron",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "logged": null,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "name matched a player on another team; treated as unresolved, not as a confirmation"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Jovic, Nikola",
+   "status": "Available",
+   "detail": "Injury/Illness - Illness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Larsson, Pelle",
+   "status": "Available",
+   "detail": "Injury/Illness - Illness",
+   "logged": true,
+   "minutes": "14:53",
+   "points": 4,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 14:53 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat",
+   "tricode": null,
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "detail": "Injury/Illness - Left Ankle Sprain",
+   "logged": true,
+   "minutes": "23:18",
+   "points": 13,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 23:18 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers",
+   "tricode": null,
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "detail": "Injury/Illness - Low Back Stress Reaction",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers",
+   "tricode": null,
+   "player": "Bona, Adem",
+   "status": "Out",
+   "detail": "Injury/Illness - Cervical Spine Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers",
+   "tricode": null,
+   "player": "Brown, Jaylen",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers",
+   "tricode": null,
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers",
+   "tricode": null,
+   "player": "Wade, Dean",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Left Hamstring Tightness / Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic",
+   "tricode": null,
+   "player": "Banchero, Paolo",
+   "status": "Out",
+   "detail": "Injury/Illness - Right High Ankle Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic",
+   "tricode": null,
+   "player": "Isaac, Jonathan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic",
+   "tricode": null,
+   "player": "Nelson, Izaiyah",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Ankle Injury Recovery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:00",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic",
+   "tricode": null,
+   "player": "Penda, Noah",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Partially Torn Hamstring",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls",
+   "tricode": null,
+   "player": "Awaka, Tobe",
+   "status": "Out",
+   "detail": "Injury/Illness - Disc Irritation",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls",
+   "tricode": null,
+   "player": "Robinson, Orlando",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls",
+   "tricode": null,
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls",
+   "tricode": null,
+   "player": "Williams, Patrick",
+   "status": "Available",
+   "detail": "-",
+   "logged": true,
+   "minutes": "13:17",
+   "points": 2,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 13:17 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls",
+   "tricode": null,
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Metacarpal Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets",
+   "tricode": null,
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets",
+   "tricode": null,
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets",
+   "tricode": null,
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets",
+   "tricode": null,
+   "player": "Powell, Drake",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets",
+   "tricode": null,
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards",
+   "tricode": null,
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "detail": "Injury/Illness - Right AC Joint Injury",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards",
+   "tricode": null,
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Foot Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards",
+   "tricode": null,
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards",
+   "tricode": null,
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hip Impingement",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards",
+   "tricode": null,
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "detail": "Injury/Illness - Left ACL Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Barnes, Scottie",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Groin Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Barrett, RJ",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Foot Avulsion Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "McCullar Jr., Kevin",
+   "status": "Available",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "07:30",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors",
+   "tricode": null,
+   "player": "Smith, Malachi",
+   "status": "Available",
+   "detail": "G League - Two-Way",
+   "logged": true,
+   "minutes": "8:15",
+   "points": 0,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 8:15 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Castro, Rafael",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Flemings, Kingston",
+   "status": "Out",
+   "detail": "Injury/Illness - Lumbar Strain",
+   "logged": null,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "name matched a player on another team; treated as unresolved, not as a confirmation"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Gueye, Mouhamed",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Foot Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Landale, Jock",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hip Inflammation",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "McCollum, CJ",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Calf Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Newell, Asa",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Great Toe Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks",
+   "tricode": null,
+   "player": "Veesaar, Henri",
+   "status": "Out",
+   "detail": "Injury/Illness - Right ACL Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder",
+   "tricode": null,
+   "player": "Holmgren, Chet",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee/ Injury Recovery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder",
+   "tricode": null,
+   "player": "Sorber, Thomas",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder",
+   "tricode": null,
+   "player": "Wallace, Cason",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Shoulder Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder",
+   "tricode": null,
+   "player": "Williams, Jalen",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Ankle Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder",
+   "tricode": null,
+   "player": "Williams, Jaylin",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Low Back Spasms",
+   "logged": true,
+   "minutes": "15:43",
+   "points": 3,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 15:43 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Cunningham, Cade",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Right Knee Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Joe, Isaiah",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Right Hip Contusion",
+   "logged": true,
+   "minutes": "15:32",
+   "points": 11,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 15:32 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Soreness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons",
+   "tricode": null,
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Quadriceps Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Dia, Malik",
+   "status": "Probable",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Probable' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Plantar Fasciitis",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Elbow Infection",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "detail": "Injury/Illness - Bilateral Patellar Tendinopathy",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Ankle Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Pierre Jr., Jaron",
+   "status": "Probable",
+   "detail": "G League - Two-Way",
+   "logged": true,
+   "minutes": "17:14",
+   "points": 7,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Probable' and played 17:14 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Reese, Julian",
+   "status": "Probable",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Probable' and did not play - a scratch not escalated to Out on the report"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans",
+   "tricode": null,
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Ankle Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "detail": "Injury/Illness - Right ACL Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Oblique Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Green, Draymond",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Right Elbow Inflammation / Soreness",
+   "logged": true,
+   "minutes": "23:00",
+   "points": 3,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 23:00 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Horford, Al",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Bilateral Low Back Injury Management",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Moody, Moses",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "detail": "Not With Team",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors",
+   "tricode": null,
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Hamstring Strain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Aldama, Santi",
+   "status": "Probable",
+   "detail": "Injury/Illness - Left Ankle Sprain",
+   "logged": true,
+   "minutes": "5:59",
+   "points": 0,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Probable' and played 5:59 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Heel Bursitis",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Christie, Max",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Left Ankle Sprain",
+   "logged": true,
+   "minutes": "8:25",
+   "points": 5,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 8:25 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Clayton Jr., Walter",
+   "status": "Probable",
+   "detail": "Injury/Illness - Right Ankle Sprain",
+   "logged": true,
+   "minutes": "27:07",
+   "points": 8,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Probable' and played 27:07 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Knee Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Lawal, Tobi",
+   "status": "Doubtful",
+   "detail": "Injury/Illness - Right Groin Tightness",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Foot Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "08:00",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks",
+   "tricode": null,
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "detail": "Injury/Illness - Right Thumb Splint",
+   "logged": true,
+   "minutes": "19:50",
+   "points": 8,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 19:50 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Boston Celtics",
+   "tricode": null,
+   "player": "Mitchell, Dillon",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Boston Celtics",
+   "tricode": null,
+   "player": "Williams, Amari",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets",
+   "tricode": null,
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "detail": "G League - On Assignment",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets",
+   "tricode": null,
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets",
+   "tricode": null,
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Knee Sprain",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "09:30",
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets",
+   "tricode": null,
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Phoenix Suns",
+   "tricode": null,
+   "player": "Williams, Mark",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Shoulder Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Achiuwa, Precious",
+   "status": "Available",
+   "detail": "Injury/Illness - Left Lower Leg Contusion",
+   "logged": true,
+   "minutes": "7:47",
+   "points": 0,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 7:47 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Hunter, De'Andre",
+   "status": "Available",
+   "detail": "Injury/Illness - Left Hip Soreness / Tightness",
+   "logged": true,
+   "minutes": "35:19",
+   "points": 7,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 35:19 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Mogbo, Jonathan",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Pedulla, Sean",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Raynaud, Maxime",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Patella Subluxation",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings",
+   "tricode": null,
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Hayes, Jaxson",
+   "status": "Questionable",
+   "detail": "Injury/Illness - Left Knee Strain",
+   "logged": true,
+   "minutes": "25:21",
+   "points": 6,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Questionable' and played 25:21 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "detail": "G League - Two-Way",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "detail": "Injury/Illness - Right MCL Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Hand Fracture",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz",
+   "tricode": null,
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "detail": "Injury/Illness - Right Foot; 2nd Plantar Plate Tear",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Los Angeles Lakers",
+   "tricode": null,
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "detail": "Injury/Illness - Right Finger Splint",
+   "logged": true,
+   "minutes": "35:28",
+   "points": 20,
+   "rows_matched": 1,
+   "join": "name-only",
+   "notes": [
+    "listed 'Available' and played 35:28 min - as declared"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "edition": "Injury-Report_2026-11-18_05_45PM",
+   "game_date": "2026-11-18",
+   "tipoff_et": "10:00",
+   "matchup": "UTA@LAL",
+   "team": "Los Angeles Lakers",
+   "tricode": null,
+   "player": "Reaves, Austin",
+   "status": "Out",
+   "detail": "Injury/Illness - Left Heel Contusion / Bone Bruise",
+   "logged": false,
+   "minutes": null,
+   "points": null,
+   "rows_matched": 0,
+   "join": "no log row",
+   "notes": [
+    "no row for this name on that day's official game page - either not on the active/inactive list the page prints, or the game is not one the page covers"
+   ]
+  }
+ ],
+ "per_day": {
+  "2026-11-17": {
+   "edition_used": "Injury-Report_2026-11-17_06_00PM",
+   "edition_retrieved_at_utc": "2026-11-17T22:58:31Z",
+   "edition_sha256": "e94d856e026f7fdba6b6dccedb85659f23aa3c2c10403cabde86e18ec850e412",
+   "edition_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_06_00PM.pdf",
+   "rows_on_that_game_date": 46,
+   "unparsed_regions": 0,
+   "report_regions_skipped": [],
+   "teams_with_rows": 9,
+   "players_logged": 4,
+   "players_declared_out": 41,
+   "irregularities": 0,
+   "no_counterpart": 40,
+   "players_34plus_minutes_not_on_the_report": 18,
+   "unreported_heavy_minutes": [
+    {
+     "player": "Anunoby, OG",
+     "team": "NYK",
+     "minutes": "35:48",
+     "game_id": "0022600253"
+    },
+    {
+     "player": "Towns, Karl-Anthony",
+     "team": "NYK",
+     "minutes": "36:26",
+     "game_id": "0022600253"
+    },
+    {
+     "player": "Brunson, Jalen",
+     "team": "NYK",
+     "minutes": "34:26",
+     "game_id": "0022600253"
+    },
+    {
+     "player": "Barrett, RJ",
+     "team": "TOR",
+     "minutes": "38:41",
+     "game_id": "0022600253"
+    },
+    {
+     "player": "McDaniels, Jaden",
+     "team": "MIN",
+     "minutes": "36:47",
+     "game_id": "0022600254"
+    },
+    {
+     "player": "Dosunmu, Ayo",
+     "team": "MIN",
+     "minutes": "39:17",
+     "game_id": "0022600254"
+    },
+    {
+     "player": "Huerter, Kevin",
+     "team": "DET",
+     "minutes": "36:18",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Jenkins, Daniss",
+     "team": "DET",
+     "minutes": "38:15",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Cunningham, Cade",
+     "team": "DET",
+     "minutes": "37:30",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Vassell, Devin",
+     "team": "SAS",
+     "minutes": "35:42",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Harper, Dylan",
+     "team": "SAS",
+     "minutes": "34:32",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Fox, De'Aaron",
+     "team": "SAS",
+     "minutes": "34:22",
+     "game_id": "0022600255"
+    },
+    {
+     "player": "Reid, Naz",
+     "team": "CHA",
+     "minutes": "41:30",
+     "game_id": "0022600256"
+    },
+    {
+     "player": "Diabat\u00e9, Moussa",
+     "team": "CHA",
+     "minutes": "38:06",
+     "game_id": "0022600256"
+    },
+    {
+     "player": "O'Neale, Royce",
+     "team": "CHA",
+     "minutes": "33:60",
+     "game_id": "0022600256"
+    },
+    {
+     "player": "Don\u010di\u0107, Luka",
+     "team": "LAL",
+     "minutes": "42:20",
+     "game_id": "0022600256"
+    },
+    {
+     "player": "George, Keyonte",
+     "team": "UTA",
+     "minutes": "35:06",
+     "game_id": "0022600257"
+    },
+    {
+     "player": "Sensabaugh, Brice",
+     "team": "UTA",
+     "minutes": "34:40",
+     "game_id": "0022600257"
+    }
+   ]
+  },
+  "2026-11-18": {
+   "edition_used": "Injury-Report_2026-11-18_05_45PM",
+   "edition_retrieved_at_utc": "2026-11-18T22:57:06Z",
+   "edition_sha256": "97281ddb2797d7e0cbe6e46114f2374850d958b0d0297b7e17738cfe3aa70841",
+   "edition_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_05_45PM.pdf",
+   "rows_on_that_game_date": 126,
+   "unparsed_regions": 0,
+   "report_regions_skipped": [],
+   "teams_with_rows": 24,
+   "players_logged": 20,
+   "players_declared_out": 95,
+   "irregularities": 0,
+   "no_counterpart": 99,
+   "players_34plus_minutes_not_on_the_report": 31,
+   "unreported_heavy_minutes": [
+    {
+     "player": "Mitchell, Donovan",
+     "team": "CLE",
+     "minutes": "35:26",
+     "game_id": "0022600258"
+    },
+    {
+     "player": "Harden, James",
+     "team": "CLE",
+     "minutes": "35:31",
+     "game_id": "0022600258"
+    },
+    {
+     "player": "Mitchell, Davion",
+     "team": "MIA",
+     "minutes": "35:56",
+     "game_id": "0022600260"
+    },
+    {
+     "player": "Edgecombe, VJ",
+     "team": "PHI",
+     "minutes": "43:15",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "Embiid, Joel",
+     "team": "PHI",
+     "minutes": "36:13",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "Simons, Anfernee",
+     "team": "PHI",
+     "minutes": "38:03",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "Black, Anthony",
+     "team": "ORL",
+     "minutes": "36:57",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "Wagner, Franz",
+     "team": "ORL",
+     "minutes": "35:54",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "Bane, Desmond",
+     "team": "ORL",
+     "minutes": "37:57",
+     "game_id": "0022600261"
+    },
+    {
+     "player": "George, Kyshawn",
+     "team": "WAS",
+     "minutes": "40:03",
+     "game_id": "0022600263"
+    },
+    {
+     "player": "Davis, Anthony",
+     "team": "WAS",
+     "minutes": "34:06",
+     "game_id": "0022600263"
+    },
+    {
+     "player": "Dybantsa, AJ",
+     "team": "WAS",
+     "minutes": "38:23",
+     "game_id": "0022600263"
+    },
+    {
+     "player": "Walter, Ja'Kobe",
+     "team": "TOR",
+     "minutes": "37:52",
+     "game_id": "0022600263"
+    },
+    {
+     "player": "Quickley, Immanuel",
+     "team": "TOR",
+     "minutes": "34:11",
+     "game_id": "0022600263"
+    },
+    {
+     "player": "Huerter, Kevin",
+     "team": "DET",
+     "minutes": "36:09",
+     "game_id": "0022600264"
+    },
+    {
+     "player": "Thompson, Ausar",
+     "team": "DET",
+     "minutes": "34:04",
+     "game_id": "0022600264"
+    },
+    {
+     "player": "Green, Javonte",
+     "team": "DET",
+     "minutes": "35:17",
+     "game_id": "0022600264"
+    },
+    {
+     "player": "Jenkins, Daniss",
+     "team": "DET",
+     "minutes": "36:14",
+     "game_id": "0022600264"
+    },
+    {
+     "player": "Bey, Saddiq",
+     "team": "NOP",
+     "minutes": "41:31",
+     "game_id": "0022600264"
+    },
+    {
+     "player": "Daniels, Dyson",
+     "team": "ATL",
+     "minutes": "37:02",
+     "game_id": "0022600265"
+    },
+    {
+     "player": "Okongwu, Onyeka",
+     "team": "ATL",
+     "minutes": "35:54",
+     "game_id": "0022600265"
+    },
+    {
+     "player": "Gilgeous-Alexander, Shai",
+     "team": "OKC",
+     "minutes": "36:02",
+     "game_id": "0022600265"
+    },
+    {
+     "player": "Tatum, Jayson",
+     "team": "BOS",
+     "minutes": "37:10",
+     "game_id": "0022600266"
+    },
+    {
+     "player": "White, Derrick",
+     "team": "BOS",
+     "minutes": "35:15",
+     "game_id": "0022600266"
+    },
+    {
+     "player": "Joki\u0107, Nikola",
+     "team": "DEN",
+     "minutes": "38:39",
+     "game_id": "0022600266"
+    },
+    {
+     "player": "Braun, Christian",
+     "team": "DEN",
+     "minutes": "34:52",
+     "game_id": "0022600266"
+    },
+    {
+     "player": "Murray, Jamal",
+     "team": "DEN",
+     "minutes": "38:03",
+     "game_id": "0022600266"
+    },
+    {
+     "player": "George, Keyonte",
+     "team": "UTA",
+     "minutes": "38:53",
+     "game_id": "0022600268"
+    },
+    {
+     "player": "Mykhailiuk, Svi",
+     "team": "UTA",
+     "minutes": "34:20",
+     "game_id": "0022600268"
+    },
+    {
+     "player": "Don\u010di\u0107, Luka",
+     "team": "LAL",
+     "minutes": "36:53",
+     "game_id": "0022600268"
+    },
+    {
+     "player": "Acuff Jr., Darius",
+     "team": "SAC",
+     "minutes": "35:02",
+     "game_id": "0022600269"
+    }
+   ]
+  }
+ }
+}

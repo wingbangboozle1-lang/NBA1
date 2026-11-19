@@ -1,0 +1,657 @@
+{
+ "title": "Game-flow table from official quarter scores, 2026-11-17 / 18",
+ "generated_by": "scripts/e3d25abc_game_logs.py",
+ "generated_at_utc": "2026-11-19T06:01:12Z",
+ "rule": "Every field is arithmetic on the quarter line printed by the official page (halves = Q1+Q2 vs Q3+Q4; sign flips count quarters in which the leading side changed). In-game momentum before the quarter boundary is not available from the stored artifacts and is not claimed.",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "final": "111-102",
+   "quarters_away": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "quarters_home": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 54,
+    "first_half_home": 50,
+    "second_half_away": 57,
+    "second_half_home": 52
+   },
+   "largest_quarter_margin": 12,
+   "quarter_margin_sequence": [
+    -6,
+    10,
+    -7,
+    12
+   ],
+   "sign_flips_between_quarters": 3,
+   "decided_by": 9,
+   "total_points": 213,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_NYKTOR__9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5.pdf"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "final": "105-106",
+   "quarters_away": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "quarters_home": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 48,
+    "first_half_home": 49,
+    "second_half_away": 57,
+    "second_half_home": 57
+   },
+   "largest_quarter_margin": 12,
+   "quarter_margin_sequence": [
+    -12,
+    11,
+    1,
+    -1
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 1,
+   "total_points": 211,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_PORMIN__c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6.pdf"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "final": "105-93",
+   "quarters_away": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "quarters_home": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 55,
+    "first_half_home": 54,
+    "second_half_away": 50,
+    "second_half_home": 39
+   },
+   "largest_quarter_margin": 8,
+   "quarter_margin_sequence": [
+    -7,
+    8,
+    5,
+    6
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 12,
+   "total_points": 198,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_DETSAS__31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e.pdf"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "final": "114-118",
+   "quarters_away": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "quarters_home": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "ot_periods": 1,
+   "halves": {
+    "first_half_away": 66,
+    "first_half_home": 59,
+    "second_half_away": 48,
+    "second_half_home": 59
+   },
+   "largest_quarter_margin": 13,
+   "quarter_margin_sequence": [
+    4,
+    3,
+    6,
+    -13,
+    -4
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 4,
+   "total_points": 232,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_CHALAL__6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5.pdf"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "final": "132-107",
+   "quarters_away": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "quarters_home": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 58,
+    "first_half_home": 62,
+    "second_half_away": 74,
+    "second_half_home": 45
+   },
+   "largest_quarter_margin": 23,
+   "quarter_margin_sequence": [
+    6,
+    -10,
+    6,
+    23
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 25,
+   "total_points": 239,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_UTALAC__5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "matchup": "MEM@CLE",
+   "final": "124-121",
+   "quarters_away": [
+    30,
+    41,
+    29,
+    24
+   ],
+   "quarters_home": [
+    37,
+    35,
+    27,
+    22
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 71,
+    "first_half_home": 72,
+    "second_half_away": 53,
+    "second_half_home": 49
+   },
+   "largest_quarter_margin": 7,
+   "quarter_margin_sequence": [
+    -7,
+    6,
+    2,
+    2
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 3,
+   "total_points": 245,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/mem-vs-cle-0022600258",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_MEMCLE__88e043b03d501a1fbbbcd7c13bd71142216ff14e8a009b0711e5a53883e542d7.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "matchup": "HOU@IND",
+   "final": "119-104",
+   "quarters_away": [
+    39,
+    23,
+    31,
+    26
+   ],
+   "quarters_home": [
+    28,
+    18,
+    30,
+    28
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 62,
+    "first_half_home": 46,
+    "second_half_away": 57,
+    "second_half_home": 58
+   },
+   "largest_quarter_margin": 11,
+   "quarter_margin_sequence": [
+    11,
+    5,
+    1,
+    -2
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 15,
+   "total_points": 223,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/hou-vs-ind-0022600259",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_HOUIND__166be96af4f1e79ae54c751bcb380bf1a7826129ee2be74315f5513f18d019e6.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "matchup": "MIL@MIA",
+   "final": "130-137",
+   "quarters_away": [
+    23,
+    25,
+    38,
+    44
+   ],
+   "quarters_home": [
+    34,
+    40,
+    38,
+    25
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 48,
+    "first_half_home": 74,
+    "second_half_away": 82,
+    "second_half_home": 63
+   },
+   "largest_quarter_margin": 19,
+   "quarter_margin_sequence": [
+    -11,
+    -15,
+    0,
+    19
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 7,
+   "total_points": 267,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/mil-vs-mia-0022600260",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_MILMIA__8f82f5e5f729381da5a5f060cee98b11492e4b6ef6f97c23723596d99deb9a3d.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "matchup": "PHI@ORL",
+   "final": "121-116",
+   "quarters_away": [
+    27,
+    37,
+    28,
+    29
+   ],
+   "quarters_home": [
+    40,
+    29,
+    28,
+    19
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 64,
+    "first_half_home": 69,
+    "second_half_away": 57,
+    "second_half_home": 47
+   },
+   "largest_quarter_margin": 13,
+   "quarter_margin_sequence": [
+    -13,
+    8,
+    0,
+    10
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 5,
+   "total_points": 237,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/phi-vs-orl-0022600261",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_PHIORL__f9a3eb9221790b37d530984960ce60817a59c473e89f164983650a510fec2f83.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "matchup": "CHI@BKN",
+   "final": "137-107",
+   "quarters_away": [
+    37,
+    39,
+    35,
+    26
+   ],
+   "quarters_home": [
+    21,
+    30,
+    26,
+    30
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 76,
+    "first_half_home": 51,
+    "second_half_away": 61,
+    "second_half_home": 56
+   },
+   "largest_quarter_margin": 16,
+   "quarter_margin_sequence": [
+    16,
+    9,
+    9,
+    -4
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 30,
+   "total_points": 244,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/chi-vs-bkn-0022600262",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_CHIBKN__d945dc1ccb4d1072a9ff00dcab8422b91a52ee9b981dbe8f48f4d6730a55720f.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "matchup": "WAS@TOR",
+   "final": "103-99",
+   "quarters_away": [
+    29,
+    20,
+    29,
+    25
+   ],
+   "quarters_home": [
+    23,
+    24,
+    32,
+    20
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 49,
+    "first_half_home": 47,
+    "second_half_away": 54,
+    "second_half_home": 52
+   },
+   "largest_quarter_margin": 6,
+   "quarter_margin_sequence": [
+    6,
+    -4,
+    -3,
+    5
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 4,
+   "total_points": 202,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/was-vs-tor-0022600263",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_WASTOR__3abdb410fcb3aca60295cd1304b40eee8cf0b7e462674dae499df5675dfaa347.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "matchup": "DET@NOP",
+   "final": "122-109",
+   "quarters_away": [
+    31,
+    36,
+    25,
+    30
+   ],
+   "quarters_home": [
+    31,
+    29,
+    26,
+    23
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 67,
+    "first_half_home": 60,
+    "second_half_away": 55,
+    "second_half_home": 49
+   },
+   "largest_quarter_margin": 7,
+   "quarter_margin_sequence": [
+    0,
+    7,
+    -1,
+    7
+   ],
+   "sign_flips_between_quarters": 3,
+   "decided_by": 13,
+   "total_points": 231,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/det-vs-nop-0022600264",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_DETNOP__368bb0272db681dd1f377524dbd6731181d7c79c75148d8e5c580026b8fb43a6.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "matchup": "ATL@OKC",
+   "final": "117-112",
+   "quarters_away": [
+    31,
+    33,
+    19,
+    34
+   ],
+   "quarters_home": [
+    29,
+    22,
+    32,
+    29
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 64,
+    "first_half_home": 51,
+    "second_half_away": 53,
+    "second_half_home": 61
+   },
+   "largest_quarter_margin": 13,
+   "quarter_margin_sequence": [
+    2,
+    11,
+    -13,
+    5
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 5,
+   "total_points": 229,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/atl-vs-okc-0022600265",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_ATLOKC__f5af5544dcfd53a90ba56f3bbfa43c475fe383094b97c540aa8e6d3d61760914.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "matchup": "BOS@DEN",
+   "final": "101-105",
+   "quarters_away": [
+    30,
+    31,
+    19,
+    21
+   ],
+   "quarters_home": [
+    24,
+    25,
+    31,
+    25
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 61,
+    "first_half_home": 49,
+    "second_half_away": 40,
+    "second_half_home": 56
+   },
+   "largest_quarter_margin": 12,
+   "quarter_margin_sequence": [
+    6,
+    6,
+    -12,
+    -4
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 4,
+   "total_points": 206,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/bos-vs-den-0022600266",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_BOSDEN__a5c8dee254c293513d0896439b3c31e19f1ceab1a1623803efc40099c333a243.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL",
+   "final": "94-116",
+   "quarters_away": [
+    25,
+    24,
+    23,
+    22
+   ],
+   "quarters_home": [
+    35,
+    27,
+    30,
+    24
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 49,
+    "first_half_home": 62,
+    "second_half_away": 45,
+    "second_half_home": 54
+   },
+   "largest_quarter_margin": 10,
+   "quarter_margin_sequence": [
+    -10,
+    -3,
+    -7,
+    -2
+   ],
+   "sign_flips_between_quarters": 0,
+   "decided_by": 22,
+   "total_points": 210,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/gsw-vs-dal-0022600267",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_GSWDAL__031e8260ba1ae320402a4eb8946fc1e45a8208b0eac543e9eecfa872c481f12b.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "matchup": "UTA@LAL",
+   "final": "109-97",
+   "quarters_away": [
+    29,
+    27,
+    22,
+    31
+   ],
+   "quarters_home": [
+    34,
+    20,
+    22,
+    21
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 56,
+    "first_half_home": 54,
+    "second_half_away": 53,
+    "second_half_home": 43
+   },
+   "largest_quarter_margin": 10,
+   "quarter_margin_sequence": [
+    -5,
+    7,
+    0,
+    10
+   ],
+   "sign_flips_between_quarters": 2,
+   "decided_by": 12,
+   "total_points": 206,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/uta-vs-lal-0022600268",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_UTALAL__62cfffdd1042cfeac475aad27994d8acc2dcd4b6c17c2a3c89682d06e11c29d5.pdf"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "matchup": "PHX@SAC",
+   "final": "128-107",
+   "quarters_away": [
+    36,
+    29,
+    34,
+    29
+   ],
+   "quarters_home": [
+    31,
+    29,
+    24,
+    23
+   ],
+   "ot_periods": 0,
+   "halves": {
+    "first_half_away": 65,
+    "first_half_home": 60,
+    "second_half_away": 63,
+    "second_half_home": 47
+   },
+   "largest_quarter_margin": 10,
+   "quarter_margin_sequence": [
+    5,
+    0,
+    10,
+    6
+   ],
+   "sign_flips_between_quarters": 1,
+   "decided_by": 21,
+   "total_points": 235,
+   "pace_note": "possessions are not printed on the official box score page; no pace figure is invented here",
+   "source": "https://www.nba.com/game/phx-vs-sac-0022600269",
+   "source_gamebook": "data/raw/session-e3d25abc/gamebooks/2026-11-18/2026-11-18_PHXSAC__6cda62931abf7c7c04ee1e44a6c00604f540c3e63fe5e6701194982ea4b223c0.pdf"
+  }
+ ]
+}

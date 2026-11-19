@@ -1,0 +1,212 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-18_11_00AM.pdf",
+  "label": "Injury-Report_2026-11-18_11_00AM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_11_00AM.pdf",
+  "retrieved_at_utc": "2026-11-18T16:04:46Z",
+  "sha256": "b7c52178a1232bc9b11fd9c0f52afcdea661bbe10415115f3fc8257210bc1972",
+  "rows": 114
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-18_03_30PM.pdf",
+  "label": "Injury-Report_2026-11-18_03_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_03_30PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "140f9e70617731b92dcd06cf4cc5f3aa593c1ba8b4d7484578fb8215a8998ea1",
+  "rows": 128
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Atlanta Hawks",
+   "player": "Castro, Rafael",
+   "before_status": "Doubtful",
+   "after_status": "Out",
+   "before_reason": "G League - Two-Way",
+   "after_reason": "G League - Two-Way",
+   "before_matchup": "ATL@OKC",
+   "after_matchup": "ATL@OKC"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "before_status": "Doubtful",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Right Ankle Injury Management",
+   "after_reason": "Injury/Illness - Right Ankle Injury Management",
+   "before_matchup": "MEM@CLE",
+   "after_matchup": "MEM@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "before_status": "Questionable",
+   "after_status": "Doubtful",
+   "before_reason": "Injury/Illness - Low Back Contusion",
+   "after_reason": "Injury/Illness - Low Back Contusion",
+   "before_matchup": "MEM@CLE",
+   "after_matchup": "MEM@CLE"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Adebayo, Bam",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Right Hip Impingement",
+   "after_reason": "Injury/Illness - Right Hip Impingement",
+   "before_matchup": "MIL@MIA",
+   "after_matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Gardner, Myron",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "after_reason": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "before_matchup": "MIL@MIA",
+   "after_matchup": "MIL@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Illness",
+   "after_reason": "Injury/Illness - Illness",
+   "before_matchup": "MIL@MIA",
+   "after_matchup": "MIL@MIA"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh Jr., Ernest",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "MEM@CLE"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Cunningham, Cade",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Knee Soreness",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Hip Contusion",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Soreness",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Quadriceps Strain",
+   "matchup": "DET@NOP"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Rollins, Ryan",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "MIL@MIA"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Wade, Dean",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Hamstring Tightness / Soreness",
+   "matchup": "PHI@ORL"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Barnes, Scottie",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Groin Injury Management",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Barrett, RJ",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Hamstring Tightness / Soreness",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Avulsion Fracture",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "McCullar Jr., Kevin",
+   "status": "Available",
+   "reason": "G League - Two-Way",
+   "matchup": "WAS@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Smith, Malachi",
+   "status": "Available",
+   "reason": "G League - Two-Way",
+   "matchup": "WAS@TOR"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "matchup": "MEM@CLE"
+  }
+ ],
+ "team_block_filing_changes": []
+}

@@ -66,7 +66,29 @@ class RealPdfTests(unittest.TestCase):
                 break
 
     def test_rows_extracted(self):
-        self.assertGreater(self.rec["row_count"], 50)
+        # A row-count floor pinned to "whatever PDF is newest" is a calendar trap,
+        # not a parser test.  Before roughly 09:00 ET the report lists only the
+        # games whose teams have submitted yet, so the 2026-11-19 12:45 AM edition
+        # legitimately holds 44 rows where the 2026-11-18 17:45 edition holds 126.
+        # The same defect is recorded for the transcription test below (F-DFA-02):
+        # a slate roll or an early edition is not a regression.  So the floor is
+        # asserted against the newest *late-day* edition, and the newest edition of
+        # any hour is asserted for the invariant that always holds: it parses, it
+        # yields rows, and nothing in it is unparsed.  (Pinned by session
+        # arena/e3d25abc-nba1, COORDINATION §68.5, after the 11/19 capture tripped it.)
+        paths = sorted(glob.glob(os.path.join(PDF_DIR, "*.pdf")),
+                       key=lambda p: ij.edition_key(os.path.basename(p)))
+        late = None
+        for p in reversed(paths):
+            key = ij.edition_key(os.path.basename(p))
+            if isinstance(key, tuple) and len(key) == 2 and key[1] >= 1500:
+                late = p
+                break
+        self.assertIsNotNone(late, "no archived edition at or after 15:00 ET to size against")
+        self.assertGreater(ij.load_edition(late)["row_count"], 50)
+        self.assertGreaterEqual(self.rec["row_count"], 1)
+        self.assertEqual(len(self.rec.get("unparsed") or []), 0,
+                         "the newest archived edition reports cells the parser could not read")
 
     def test_wrapped_reason_matches_independent_transcription(self):
         # Furphy's reason wraps across three text lines around his name row;

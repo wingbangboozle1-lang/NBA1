@@ -1,0 +1,81 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_05_15PM.pdf",
+  "label": "Injury-Report_2026-11-17_05_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_05_15PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "6e5db894a020ecc3b4aca3d032dffb9b315c0209e6aba31bc4a21a16efd79c00",
+  "rows": 126
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-17_05_30PM.pdf",
+  "label": "Injury-Report_2026-11-17_05_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_05_30PM.pdf",
+  "retrieved_at_utc": "2026-11-17T22:58:31Z",
+  "sha256": "996589fd91fb4bbafb25c7d42f4c08d1458e21c80b6e309fccb8ef4f664d1c13",
+  "rows": 133
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [
+  {
+   "team": "Dallas Mavericks",
+   "player": "Aldama, Santi",
+   "status": "Probable",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Bursitis",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Christie, Max",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Clayton Jr., Walter",
+   "status": "Probable",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Lawal, Tobi",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Groin Tightness",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Thumb Splint",
+   "matchup": "GSW@DAL"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Sprain",
+   "matchup": "GSW@DAL"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

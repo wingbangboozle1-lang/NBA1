@@ -1,0 +1,45 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-18_04_00PM.pdf",
+  "label": "Injury-Report_2026-11-18_04_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_04_00PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "32006365d42816c9919c4814a284e197d4b23ded7eb194f322fe3be0b9d54c8b",
+  "rows": 134
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-18_04_15PM.pdf",
+  "label": "Injury-Report_2026-11-18_04_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-18_04_15PM.pdf",
+  "retrieved_at_utc": "2026-11-18T22:57:06Z",
+  "sha256": "342041919f2bd26d39e67e975976258991f2346917744a48bc2d486d85b39425",
+  "rows": 134
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Sacramento Kings",
+   "player": "Achiuwa, Precious",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Left Lower Leg Contusion",
+   "after_reason": "Injury/Illness - Left Lower Leg Contusion",
+   "before_matchup": "PHX@SAC",
+   "after_matchup": "PHX@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Hunter, De'Andre",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Left Hip Soreness / Tightness",
+   "after_reason": "Injury/Illness - Left Hip Soreness / Tightness",
+   "before_matchup": "PHX@SAC",
+   "after_matchup": "PHX@SAC"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}
