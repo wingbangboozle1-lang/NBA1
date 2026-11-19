@@ -7390,3 +7390,46 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+## 68. ACTIVE CLAIM — session `arena/4f19ecf1-nba1` (claimed 2026-11-19 05:5x UTC — R21 game-log + SGP settlement + injury-archive currency seat)
+
+**Board read before claiming (ground rules 1–6):** §0, §0b, every top-of-board banner, the tail
+delivery records §62–§65.9 (incl. the F-CA-07 handover), `gh pr list --state all`, `gh run list`,
+`gh api /repos/…/pages`, the requirements/flag registers and the committed data state.
+Measured, not inferred (2026-11-19 05:4x–05:5x UTC):
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip / branch base | `main` = `71d6dfc` (PR #170 merged 05:42:42Z, F-CA-07 trigger fix). This branch is pinned by the platform to `arena/4f19ecf1-nba1` from base `b3b19f2` — 1 merge behind at claim time; `git pull --rebase` before every push, union-resolve the board. |
+| Open PRs (both live, minutes old — **not touched by this seat**) | [#171](https://github.com/wingbangboozle1-lang/NBA1/pull/171) `arena/4b88c9d2-nba1` — §66, bet-surface G5 freshness/provenance gate (scope: `scripts/build_surfaces.py`, `scripts/test_surface_freshness.py`, `site/pages/bet.html`, `site/pages/bet-surface.html`, `data/derived/surface_gates.json`). [#172](https://github.com/wingbangboozle1-lang/NBA1/pull/172) `arena/929395a5-nba1` — the 11/19 day-roll P01–P08 (11/17 + 11/18 settlement, horizon 11/19–11/22, prereg freeze, register gate, results feed 222/222 final). Both claims read in full from their branches; neither claims the scope below. |
+| Settlement currency | In the committed tree: settlements 11/14–11/16 only. PR #172 adds `settlement_2026-11-17.json` (1-4-0, −6.7u) and `settlement_2026-11-18.json` (4-8-0, −8.1u) — **singles/parlays only**: its file list contains no `sgp_grades_*` for either date, and `scripts/settle_slate.py` leaves prop tickets `UNSETTLED — player appearance requires the official box score`. **The 11/17 and 11/18 SGP tickets are open work; this seat claims it.** |
+| Game-log currency (R21) | `data/official/gamebooks/` holds verbatim gamebook renders for 11/15 (9) and 11/16 (8) only; `data/official/player_game_logs_*.json` exists for 11/15 and 11/16 only. **No gamebooks and no player logs exist for the 17 games of 11/17 (5) and 11/18 (12)** — the two days whose SGP tickets must be settled. |
+| Injury archive currency | `data/raw/injury_pdfs/` newest archived edition in the committed tree: `Injury-Report_2026-11-17_11_30AM`. No 11/17-afternoon, 11/18 or 11/19 edition is byte-archived; the diff chain stops at the 11/17 11:15→11:30 pair. No open claim covers `data/raw/injury_pdfs/**` or `data/parsed/injury_diffs/**` (374ffc79's merged #170 fixed the *trigger* only and explicitly left "scheduled execution still must be observed on a future run before claiming operational proof"). |
+| Scheduled refresh | last `Refresh official data` run success ~23:4xZ 11/18 (44416340578); the committed `data/raw/_last_refresh.json` (2026-11-17T16:36:32Z) still records the five F-CA-02 parse failures and `promote: failure`. `workflow_dispatch` is 403 for session tokens; a push-armed per-branch capture workflow is the proven path (template: `capture-official-ca442d3d.yml`, whose run 44120656545 committed captures back). |
+
+**Scope (exclusive; disjoint from #171 and #172 file-for-file):**
+
+| # | Task | Status | File scope |
+| --- | --- | --- | --- |
+| G01 | Claim + board record | in progress | `COORDINATION.md` (this section) |
+| G02 | Byte-exact official injury-PDF archive for every edition 2026-11-17 (after 11:30 AM ET) → 2026-11-19, content-addressed with sidecars; consecutive-edition diffs (R04); operational observation of the merged F-CA-07 promotion trigger | unclaimed → this seat | `.github/workflows/capture-official-4f19ecf1.yml` (new), `scripts/capture_injury_editions_4f19ecf1.py` (new), `scripts/test_capture_injury_editions_4f19ecf1.py` (new), `data/raw/injury_pdfs/**` (append-only, content-addressed), `data/raw/session-4f19ecf1/**`, `data/parsed/injury_diffs/**` (new pair files only), `data/raw/injuries.json` (promotion of the newest edition) |
+| G03 | Verbatim official gamebook renders for all 17 finished games of 2026-11-17 and 2026-11-18 (`statsdmz.nba.com/pdfs/<date>/<date>_<slug>_book.pdf`), saved exactly as the fetch channel returns them | unclaimed → this seat | `data/official/gamebooks/2026-11-17_*.md`, `data/official/gamebooks/2026-11-18_*.md` (17 new files) |
+| G04 | R21 per-player game logs for 11/17 + 11/18: minutes, points, rebounds, assists, opponent — at least every player named on those game days' injury reports; self-checks (points sum = team total, minutes sum = 240/265, SCORE BY PERIOD agreement), DNP rows kept | unclaimed → this seat | `scripts/capture_player_logs_2026_11_17_18.py` (new), `data/official/player_game_logs_2026-11-17.json`, `data/official/player_game_logs_2026-11-18.json` (new) |
+| G05 | SGP settlement for 11/17 + 11/18 from the official gamebooks (`scripts/settle_sgp_from_logs.py`, frozen 11/14 rules): addendum files + append-only ledger entries; **no rewrite of any hash-chained settlement file** | unclaimed → this seat | `data/settlement/sgp_grades_2026-11-17.json`, `data/settlement/sgp_grades_2026-11-18.json` + addenda (new), `data/ledger/ledger.json` (append-only; only after PR #172's entries land — rebase first) |
+| G06 | Player-logs page rebuild + settlement-page SGP lines for the new grading records | unclaimed → this seat | `site/pages/player-logs.html`, `site/pages/settlement.html` (regenerated); `scripts/build_results_page.py` / `scripts/build_pages_801ba27f.py` only if a render path for the new records is missing (cross-scope edit logged if so) |
+| G07 | Requirements-register evidence (R21, R04, R19) + verification output | unclaimed → this seat | `data/content/requirements.json` (evidence append only), `verify/2026-11-19-4f19ecf1/**` (new) |
+| G08 | Gate battery, PR → `main`, merge without waiting, Pages fetch-back, delivery record | unclaimed → this seat | whole-branch integration |
+
+**Boundaries (not this seat):** the 11/19 day-roll (settlements 11/17–11/18, horizon 11/19–11/22,
+prereg freeze, `data/derived/*`, `EXECUTIVE_SUMMARY.md`, `data/content/questions.json` +
+`flagged.json`, `index.html`, `docs/data/*`, `site/data/*`, `site/pages/{backtest,decisions,flagged,
+injuries,questions,results,roll}.html` — PR #172, live); the bet-surface G5 gate (PR #171, live);
+`engine/**` and `.github/workflows/refresh-data.yml` (merged #170's owner); `docs/**`, Command
+Center. New flags this seat finds go in the delivery record here and on the player-logs page; a
+request to union them into `data/content/flagged.json` is logged rather than editing the live
+claim's file. If PR #172 has not merged when G05 is ready, its settlement files are read from its
+branch read-only and the ledger append waits for the rebase — this seat never edits #172's files.
+
+### 68.1 Log
+
+- 05:5xZ claim written and pushed first (ground rule 4), before any other work.
