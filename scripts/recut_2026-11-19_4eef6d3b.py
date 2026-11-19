@@ -43,6 +43,10 @@ import os
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# The commit carrying the cut this script replaces (arena/929395a5-nba1's 05:0x
+# recut, landed with the 12:37Z refresh captures). The drift report is always
+# measured against THIS baseline, never against a re-run of itself.
+PREV_CUT_COMMIT = "b8cf2cb"
 NOW = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 READ_AT = "2026-11-19T13:2xZ (platform web-fetch channel; per-page read times in the read record)"
 
@@ -57,6 +61,13 @@ SRC_GAMES = "https://www.nba.com/games"
 COLS = ["team", "gp", "w", "l", "min", "off_rtg", "def_rtg", "net_rtg", "ast_pct", "ast_to",
         "ast_ratio", "oreb_pct", "dreb_pct", "reb_pct", "tov_pct", "efg_pct", "ts_pct",
         "pace", "pie", "poss"]
+# team_advanced.json keeps the official parse schema (engine/parse_official.ADVANCED_COLS
+# names: ortg/drtg/netr); team_stats_recut.json keeps the model-input names
+# (off_rtg/def_rtg/net_rtg). Same values, two published schemas - never mix them.
+ADV_COLS = ["team", "gp", "w", "l", "min", "ortg", "drtg", "netr", "ast_pct", "ast_to",
+            "ast_ratio", "oreb_pct", "dreb_pct", "reb_pct", "tov_pct", "efg_pct", "ts_pct",
+            "pace", "pie", "poss"]
+RENAME = {"off_rtg": "ortg", "def_rtg": "drtg", "net_rtg": "netr"}
 
 ABBR = {"Atlanta Hawks": "ATL", "Boston Celtics": "BOS", "Brooklyn Nets": "BKN",
         "Charlotte Hornets": "CHA", "Chicago Bulls": "CHI", "Cleveland Cavaliers": "CLE",
@@ -269,7 +280,18 @@ def main():
     print("G5", "pass" if g5_ok else "FAIL/UNKNOWN")
 
     # ---------------- drift against the previous cut (F-89F-04 / Q37)
-    prev = load("data/derived/team_stats_recut.json")
+    # The previous cut is read from the last commit BEFORE this re-cut, not
+    # from the working file: a re-run of this script must never diff the cut
+    # against itself and silently report "no drift".
+    import subprocess
+    try:
+        prev = json.loads(subprocess.run(
+            ["git", "show", f"{PREV_CUT_COMMIT}:data/derived/team_stats_recut.json"],
+            capture_output=True, text=True, check=True).stdout)
+        prev_origin = f"committed cut at {PREV_CUT_COMMIT}"
+    except Exception:
+        prev = load("data/derived/team_stats_recut.json")
+        prev_origin = "working-tree cut (git unavailable)"
     prev_by = {r["abbr"]: r for r in prev["rows"]}
     drift = []
     for r in ADV:
@@ -289,6 +311,7 @@ def main():
         "generated_by": "scripts/recut_2026-11-19_4eef6d3b.py",
         "compared_at_utc": NOW,
         "previous_cut_generated": prev.get("_meta", {}).get("retrieved_utc"),
+        "previous_cut_origin": prev_origin,
         "rows_changed": len(drift),
         "rows_unchanged": 30 - len(drift),
         "drift": drift,
@@ -336,7 +359,10 @@ def main():
                 "season_to_date window was transcribed first-hand on 2026-11-19 (runner-unreadable "
                 "page — see data/raw/unreadable_sources.json), the train window was re-read and "
                 "matched the previous verified cut byte for byte.",
-        "cols": COLS,
+        "cols": ADV_COLS,
+        "model_input_note": ("Columns follow engine/parse_official.ADVANCED_COLS (the official "
+                             "page schema). data/derived/team_stats_recut.json publishes the same "
+                             "values under the model-input names (off_rtg/def_rtg/net_rtg)."),
         "verification": verification,
         "windows": [
             {

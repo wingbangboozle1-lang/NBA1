@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-19T12:39:09Z",
+ "captured_at_utc": "2026-11-19T12:48:05Z",
  "note": "Verbatim transcription of the NBA.com official Stats > Teams > Advanced table in two windows. Columns kept exactly as published. No derived or inferred values; the season_to_date window was transcribed first-hand on 2026-11-19 (runner-unreadable page — see data/raw/unreadable_sources.json), the train window was re-read and matched the previous verified cut byte for byte.",
  "cols": [
   "team",
@@ -7,9 +7,9 @@
   "w",
   "l",
   "min",
-  "off_rtg",
-  "def_rtg",
-  "net_rtg",
+  "ortg",
+  "drtg",
+  "netr",
   "ast_pct",
   "ast_to",
   "ast_ratio",
@@ -23,12 +23,13 @@
   "pie",
   "poss"
  ],
+ "model_input_note": "Columns follow engine/parse_official.ADVANCED_COLS (the official page schema). data/derived/team_stats_recut.json publishes the same values under the model-input names (off_rtg/def_rtg/net_rtg).",
  "verification": {
   "verified": true,
   "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
   "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
   "source_url": "https://www.nba.com/stats/teams/advanced",
-  "verified_at_utc": "2026-11-19T12:39:09Z",
+  "verified_at_utc": "2026-11-19T12:48:05Z",
   "row_count": 30,
   "response_digest": null,
   "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
@@ -41,7 +42,7 @@
    "label": "2026-27 Regular Season, season to date (through 2026-11-18 games; 2026-11-19 slate had not tipped at read time)",
    "source_id": "S1",
    "source_url": "https://www.nba.com/stats/teams/advanced",
-   "retrieved_utc": "2026-11-19T12:39:09Z",
+   "retrieved_utc": "2026-11-19T12:48:05Z",
    "rows": [
     [
      "Los Angeles Lakers",
@@ -710,7 +711,7 @@
     "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
     "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
     "source_url": "https://www.nba.com/stats/teams/advanced",
-    "verified_at_utc": "2026-11-19T12:39:09Z",
+    "verified_at_utc": "2026-11-19T12:48:05Z",
     "row_count": 30,
     "response_digest": null,
     "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
@@ -724,7 +725,7 @@
    "label": "2026-27 Regular Season, 2026-10-20 to 2026-11-05 training window",
    "source_id": "S2",
    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-   "retrieved_utc": "2026-11-19T12:39:09Z",
+   "retrieved_utc": "2026-11-19T12:48:05Z",
    "rows": [
     [
      "Philadelphia 76ers",
@@ -1393,7 +1394,7 @@
     "verified_by": "arena/4eef6d3b-nba1 (session first-hand transcription)",
     "channel": "platform web-fetch channel — the GitHub runner cannot parse this page (client-rendered shell; byte evidence data/raw/_capture_evidence_S1_season.json)",
     "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-    "verified_at_utc": "2026-11-19T12:39:09Z",
+    "verified_at_utc": "2026-11-19T12:48:05Z",
     "row_count": 30,
     "response_digest": null,
     "response_digest_note": "the web-fetch channel returns rendered text; no byte digest exists. Row provenance is the read record below.",
