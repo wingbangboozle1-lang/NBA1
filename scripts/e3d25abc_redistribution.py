@@ -272,7 +272,7 @@ def main() -> int:
                  f"archived window; {unmeasurable} player(s) appear on only one of the two days "
                  "and are left blank with the reason, not filled\n")
         fh.write(f"* **{sum(1 for g in per_game for sc in g['scenarios'] if sc['declared_out_for_the_next_slate'])}"
-                 " scenario(s) match a player the newest archived report declares out for the "
+                 " scenario(s)** match a player the newest archived report declares out for the "
                  f"{NEXT_SLATE} slate — those are the ones the model feeds on\n")
         fh.write(f"* next-slate table: {sum(len(v) for v in forward.values())} team-entries across "
                  f"{len(forward)} team(s); {len(still_missing)} declared-out name(s) with no "

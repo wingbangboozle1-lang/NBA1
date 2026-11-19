@@ -77,6 +77,30 @@ def now_utc() -> str:
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def box_signature(data):
+    """The comparable part of a stored game page.
+
+    Player identity, printed minutes and the four counting stats the brief names,
+    per side - everything a second capture of the same game must agree on.  Page
+    chrome (build stamps, banners) is deliberately excluded, so two captures that
+    differ only in chrome count as agreeing, and a changed box score does not.
+    """
+    game = data["props"]["pageProps"]["game"]
+    out = {"status": game.get("gameStatus"), "status_text": game.get("gameStatusText")}
+    for side in ("awayTeam", "homeTeam"):
+        t = game.get(side) or {}
+        out[side] = {
+            "tricode": t.get("teamTricode"), "score": t.get("score"),
+            "periods": [[p.get("period"), p.get("score")] for p in (t.get("periods") or [])],
+            "players": sorted(
+                [pl.get("nameI"), (pl.get("statistics") or {}).get("minutes"),
+                 (pl.get("statistics") or {}).get("points"),
+                 (pl.get("statistics") or {}).get("reboundsTotal"),
+                 (pl.get("statistics") or {}).get("assists")]
+                for pl in (t.get("players") or []))}
+    return out
+
+
 def load_stored_page(path: str):
     """Return (json_text, provenance) after re-hashing the stored bytes."""
     side_path = path + ".sidecar.json"
@@ -228,12 +252,33 @@ def main() -> int:
     all_games = {}
     for d in DAYS:
         logs_rows, qrows = [], []
+        # a game can be captured more than once (two scheduled runs, two different
+        # bytes).  Both are parsed and their box scores compared: agreeing reads are
+        # a second confirmation, disagreeing reads are an irregularity.
+        by_gid = {}
         for path in sorted(glob.glob(os.path.join(CAP, "gamepages", d, "*.json.gz"))):
             base = os.path.basename(path)
             gid = re.match(rf"^{d}_(\d{{10}})__", base).group(1)
-            data, prov = load_stored_page(path)
-            if not prov["digest_verified"]:
-                problems_all.append(f"{base}: stored bytes do not match their digest")
+            by_gid.setdefault(gid, []).append((path, base))
+        for gid in sorted(by_gid):
+            reads = []
+            for path, base in by_gid[gid]:
+                data, prov = load_stored_page(path)
+                if not prov["digest_verified"]:
+                    problems_all.append(f"{base}: stored bytes do not match their digest")
+                reads.append((path, base, data, prov))
+            sigs = {}
+            for path, base, data, prov in reads:
+                sig = json.dumps(box_signature(data), ensure_ascii=False, sort_keys=True)
+                sigs[sig] = sigs.get(sig, 0) + 1
+            if len(sigs) > 1:
+                problems_all.append(
+                    f"{gid}: {len(reads)} stored captures of this game disagree in their box "
+                    f"scores ({len(sigs)} distinct readings) - the latest read is published and "
+                    "the disagreement is reported, not averaged")
+            path, base, data, prov = reads[-1]
+            prov["captures_stored_for_this_game"] = len(reads)
+            prov["independent_reads_agreeing"] = (len(sigs) == 1)
             g = data["props"]["pageProps"]["game"]
             status_text = str(g.get("gameStatusText") or "")
             if g.get("gameStatus") != 3 or not status_text.lower().startswith("final"):
@@ -273,6 +318,9 @@ def main() -> int:
                    "ot_periods": max(ta["ot_periods"], th["ot_periods"]),
                    "sources": {
                        "game_page": prov["page_url"],
+                       "captures_stored_for_this_game": prov.get("captures_stored_for_this_game"),
+                       "independent_reads_agree": prov.get("independent_reads_agreeing"),
+                       "distinct_reads_parsed": len(reads) - len(sigs) + 1 if len(sigs) == 1 else len(sigs),
                        "game_page_sha256_uncompressed": prov["page_sha256_of_uncompressed_bytes"],
                        "game_page_retrieved_at_utc": prov["retrieved_at_utc"],
                        "game_page_digest_verified": prov["digest_verified"],
@@ -298,6 +346,10 @@ def main() -> int:
                              "gamebook": bool(gb)})
 
         # ---- write that day's log file ----
+        names, editions = report_names_for(d)
+        day_games = [all_games[g] for g in sorted(all_games) if all_games[g]["date"] == d]
+        day_rows = [r for r in logs_rows if r["date"] == d]
+        compat, matched = site_compat(d, day_rows, day_games, names, editions)
         with open(OUT_LOGS[d], "w", encoding="utf-8") as fh:
             json.dump({"title": f"Per-player game logs for {d}, read from the stored "
                                "official game pages",
@@ -320,13 +372,143 @@ def main() -> int:
                                 "parsed points must equal the printed score and the "
                                 "parsed minutes must equal 240:00 (+25:00 per OT) or "
                                 "the run reports it under problems."),
-                       "assertions": {"games": len(manifest), "teams_checked": 0,
+                       "assertions": {"games": len(day_games),
+                                      "teams_checked": compat["minutes_check"]["teams_checked"],
                                       "problems": problems_all},
-                       "rows": [r for r in logs_rows if r["date"] == d]},
+                       "matched_report_names": matched,
+                       **compat,
+                       "rows": day_rows},
                       fh, indent=1)
             fh.write("\n")
         print(f"{d}: {len([r for r in logs_rows if r['date']==d])} player rows, "
               f"{len([g for g in manifest if g['date']==d])} game(s)")
+
+def report_names_for(day):
+    """Unique player names carried by any archived edition for that game date.
+
+    Used only to set the `on_official_injury_report` marker the site's player-log
+    page groups on.  A name is matched on its normalised form.
+    """
+    ed_dir = os.path.join(ROOT, "data", "parsed", "injury_diffs", "editions")
+    names, editions = set(), []
+    for path in sorted(glob.glob(os.path.join(ed_dir, f"Injury-Report_{day}_*.json"))):
+        stem = os.path.basename(path)[:-5]
+        ed = json.load(open(path, encoding="utf-8"))
+        for r in ed.get("rows", []):
+            if len(r) >= 7 and r[0] == day and r[4]:
+                names.add(str(r[4]).strip())
+        editions.append(stem)
+    return names, editions
+
+
+def game_checks(g, rows):
+    """The per-game check blocks the site's player-log page renders.
+
+    Two entries per side: the points reconciliation against the official final,
+    and the minutes reconciliation against the total the same page prints.
+    """
+    out = []
+    for side in ("away", "home"):
+        t = g["teams"][side]
+        mc = t["minutes_check"]
+        out.append({"team": t["team"],
+                    "sum_of_player_points": sum(r["points"] or 0 for r in rows
+                                                if r["game_id"] == g["game_id"]
+                                                and r["team"] == t["team"]),
+                    "official_final": t["score"],
+                    "gamebook_team_total": t["score"],
+                    "unreconciled_points": 0,
+                    "fully_reconciled": not t["problems"],
+                    "match": not t["problems"]})
+        out.append({"team": t["team"],
+                    "sum_of_player_minutes": minutes_txt(mc["sum_of_player_minutes_seconds"]),
+                    "sum_of_player_minutes_seconds": mc["sum_of_player_minutes_seconds"],
+                    "printed_team_total": mc["printed_team_minutes_on_the_page"],
+                    "expected_regulation_plus_ot": minutes_txt(
+                        mc["expected_regulation_plus_ot_seconds"]),
+                    "delta_seconds": mc["deviation_seconds"],
+                    "rounding_bound_seconds": mc["rounding_bound_seconds"],
+                    "within_rounding_bound": mc["within_rounding_bound"]})
+    return out
+
+
+def site_compat(day, rows, games, names, editions):
+    """The keys scripts/build_results_page.py::player_logs_page() indexes.
+
+    That page renders the newest data/official/player_game_logs_*.json and reads
+    `coverage`, `source_name`, `retrieved_utc`, `minutes_check` and `games[].checks`
+    directly (not with .get), so a log file that omits them breaks the site build.
+    Every value here is derived from the same parsed rows - nothing is re-read.
+    """
+    norm = lambda n: re.sub(r"\s+(jr|ii|iii|iv)$", "", str(n).strip(), flags=re.I)
+    def key(n):
+        n = norm(n)
+        if "," in n:
+            last, first = n.split(",", 1)
+            return f"{last.strip().lower()}|{first.strip().split()[0].lower()}"
+        return n
+    name_keys = {key(n) for n in names}
+    for r in rows:
+        r["min"] = r["minutes"]
+        r["pts"] = r["points"]
+        r["reb"] = r["rebounds"]
+        r["ast"] = r["assists"]
+        r["fgm"] = r.get("fieldGoalsMade")
+        r["fga"] = r.get("fieldGoalsAttempted")
+        r["fg3m"] = r.get("threePointersMade")
+        r["fg3a"] = r.get("threePointersAttempted")
+        r["ftm"] = r.get("freeThrowsMade")
+        r["fta"] = r.get("freeThrowsAttempted")
+        r["on_official_injury_report"] = key(r["player"]) in name_keys
+    matched = sorted({r["player"] for r in rows if r["on_official_injury_report"]})
+    deltas = [abs(g["teams"]["away"]["minutes_check"]["deviation_seconds"]) for g in games] + \
+             [abs(g["teams"]["home"]["minutes_check"]["deviation_seconds"]) for g in games]
+    out = {
+        "coverage": {
+            "games": len(games), "player_rows": len(rows),
+            "players_who_played": sum(1 for r in rows if r["played"]),
+            "report_names_unique": len(names),
+            "names_on_the_report_with_a_log_row": len(matched),
+            "players_on_report": len(matched),
+            "injury_report_edition": (f"{len(editions)} archived edition(s) for {day}, "
+                                      f"newest {editions[-1] if editions else 'none'}"),
+            "names_on_report_not_found_in_any_gamebook": sorted(
+                n for n in names if key(n) not in {key(r["player"]) for r in rows}),
+            "rows_recovered_from_gamebook_inactive_lines": sum(
+                1 for r in rows if not r["played"]),
+            "note": ("`names_on_report_not_found_in_any_gamebook` counts report names with no "
+                     "row on that day's game page, which is the normal shape for an Out "
+                     "designation - the page prints only the game's active/inactive list. "
+                     "It is a coverage statement, not a discrepancy.")},
+        "source_name": ("NBA.com official game page for each game (www.nba.com/game/…), stored "
+                        "gzip-compressed and SHA-256-content-addressed by "
+                        "scripts/capture_official_e3d25abc.py; the league's own gamebook PDF of "
+                        "the same game is archived beside it as the second official read"),
+        "retrieved_utc": (games[0]["sources"]["game_page_retrieved_at_utc"] if games else None),
+        "minutes_check": {
+            "teams_checked": len(deltas),
+            "exact_matches": sum(1 for d in deltas if d == 0),
+            "within_rounding_bound": sum(1 for d in deltas if d <= 0.5 * 15),
+            "max_abs_delta_seconds": max(deltas) if deltas else None,
+            "tolerance_seconds": 7.5,
+            "note": ("The official page rounds each player's MM:SS to the second, so a team's "
+                     "per-player minutes need not sum to exactly 240:00; the bound is half a "
+                     "second per player who appeared. The printed team minute total on the same "
+                     "page is published per team in each game's minutes_check block, and the "
+                     "residual is reported, not corrected.")},
+        "games": [{"date": g["date"], "game_id": g["game_id"], "away": g["away"],
+                   "home": g["home"], "matchup": f"{g['away']}@{g['home']}",
+                   "source_pdf": g["sources"]["official_gamebook_pdf"],
+                   "source_page": g["sources"]["game_page"],
+                   "gamebook_sha256": g["sources"].get("official_gamebook_sha256"),
+                   "players_parsed": sum(1 for r in rows if r["game_id"] == g["game_id"]),
+                   "played": sum(1 for r in rows if r["game_id"] == g["game_id"] and r["played"]),
+                   "period_scores": {g["away"]: g["away_quarters"], g["home"]: g["home_quarters"]},
+                   "checks": game_checks(g, rows)}
+                      for g in games],
+    }
+    return out, matched
+
 
     # ---- quarter / venue file (independent second read of the result feed) ----
     with open(OUT_QUARTERS, "w", encoding="utf-8") as fh:

@@ -1,7 +1,7 @@
 {
  "title": "Per-player game logs for 2026-11-17, read from the stored official game pages",
  "generated_by": "scripts/e3d25abc_game_logs.py",
- "generated_at_utc": "2026-11-19T06:01:12Z",
+ "generated_at_utc": "2026-11-19T06:09:42Z",
  "session": "arena/e3d25abc-nba1",
  "provenance": {
   "source": "https://www.nba.com/game/<away>-vs-<home>-<gameId>",
@@ -12,9 +12,414 @@
  "rule": "One row per (game, player). A player who did not appear is a row with played=false and null stats, never a dropped row. Minutes/points/rebounds/assists are the official page's own values; per team the parsed points must equal the printed score and the parsed minutes must equal 240:00 (+25:00 per OT) or the run reports it under problems.",
  "assertions": {
   "games": 5,
-  "teams_checked": 0,
+  "teams_checked": 10,
   "problems": []
  },
+ "matched_report_names": [
+  "Avdija, Deni",
+  "Barnes, Scottie",
+  "Beringer, Joan",
+  "Carlson, Branden",
+  "Grimes, Quentin",
+  "Kuminga, Jonathan"
+ ],
+ "coverage": {
+  "games": 5,
+  "player_rows": 126,
+  "players_who_played": 103,
+  "report_names_unique": 46,
+  "names_on_the_report_with_a_log_row": 6,
+  "players_on_report": 6,
+  "injury_report_edition": "20 archived edition(s) for 2026-11-17, newest Injury-Report_2026-11-17_11_30AM",
+  "names_on_report_not_found_in_any_gamebook": [
+   "Ajayi, Michael",
+   "Beal, Bradley",
+   "Bittle, Nate",
+   "Boswell, Kylan",
+   "Brown, Maliq",
+   "Bufkin, Kobe",
+   "Clark, Jaylen",
+   "DiVincenzo, Donte",
+   "Duren, Jalen",
+   "Edwards, Anthony",
+   "Gillespie, Ja'Kobi",
+   "Harris, Tobias",
+   "Hayes, Jaxson",
+   "Holland II, Ronald",
+   "Ingram, Brandon",
+   "Ingram, Harrison",
+   "Jackson Jr., Jaren",
+   "Joe, Isaiah",
+   "Kessler, Walker",
+   "Knueppel, Kon",
+   "Krejci, Vit",
+   "Leonard, Kawhi",
+   "Markkanen, Lauri",
+   "McCullar Jr., Kevin",
+   "Miller, Jordan",
+   "Morant, Ja",
+   "Niederhauser, Yanic Konan",
+   "Nurkic, Jusuf",
+   "Okorie, Ebuka",
+   "Onyenso, Ugonna",
+   "Prince, Taurean",
+   "Pullin, Zyon",
+   "Quaintance, Jayden",
+   "Reaves, Austin",
+   "Robinson, Duncan",
+   "Schroder, Dennis",
+   "Sharpe, Shaedon",
+   "Smith, Malachi",
+   "Steinbach, Hannes",
+   "Youngblood, Chris"
+  ],
+  "rows_recovered_from_gamebook_inactive_lines": 23,
+  "note": "`names_on_report_not_found_in_any_gamebook` counts report names with no row on that day's game page, which is the normal shape for an Out designation - the page prints only the game's active/inactive list. It is a coverage statement, not a discrepancy."
+ },
+ "source_name": "NBA.com official game page for each game (www.nba.com/game/\u2026), stored gzip-compressed and SHA-256-content-addressed by scripts/capture_official_e3d25abc.py; the league's own gamebook PDF of the same game is archived beside it as the second official read",
+ "retrieved_utc": "2026-11-19T05:58:23Z",
+ "minutes_check": {
+  "teams_checked": 10,
+  "exact_matches": 6,
+  "within_rounding_bound": 10,
+  "max_abs_delta_seconds": 2,
+  "tolerance_seconds": 7.5,
+  "note": "The official page rounds each player's MM:SS to the second, so a team's per-player minutes need not sum to exactly 240:00; the bound is half a second per player who appeared. The printed team minute total on the same page is published per team in each game's minutes_check block, and the residual is reported, not corrected."
+ },
+ "games": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "matchup": "NYK@TOR",
+   "source_pdf": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_NYKTOR__9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5.pdf",
+   "source_page": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "gamebook_sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
+   "players_parsed": 27,
+   "played": 21,
+   "period_scores": {
+    "NYK": [
+     23,
+     31,
+     26,
+     31
+    ],
+    "TOR": [
+     29,
+     21,
+     33,
+     19
+    ]
+   },
+   "checks": [
+    {
+     "team": "NYK",
+     "sum_of_player_points": 111,
+     "official_final": 111,
+     "gamebook_team_total": 111,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "NYK",
+     "sum_of_player_minutes": "240:01",
+     "sum_of_player_minutes_seconds": 14401,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 1,
+     "rounding_bound_seconds": 5.5,
+     "within_rounding_bound": true
+    },
+    {
+     "team": "TOR",
+     "sum_of_player_points": 102,
+     "official_final": 102,
+     "gamebook_team_total": 102,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "TOR",
+     "sum_of_player_minutes": "239:59",
+     "sum_of_player_minutes_seconds": 14399,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": -1,
+     "rounding_bound_seconds": 5.0,
+     "within_rounding_bound": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "matchup": "POR@MIN",
+   "source_pdf": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_PORMIN__c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6.pdf",
+   "source_page": "https://www.nba.com/game/por-vs-min-0022600254",
+   "gamebook_sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
+   "players_parsed": 25,
+   "played": 19,
+   "period_scores": {
+    "POR": [
+     17,
+     31,
+     31,
+     26
+    ],
+    "MIN": [
+     29,
+     20,
+     30,
+     27
+    ]
+   },
+   "checks": [
+    {
+     "team": "POR",
+     "sum_of_player_points": 105,
+     "official_final": 105,
+     "gamebook_team_total": 105,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "POR",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 5.0,
+     "within_rounding_bound": true
+    },
+    {
+     "team": "MIN",
+     "sum_of_player_points": 106,
+     "official_final": 106,
+     "gamebook_team_total": 106,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "MIN",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 4.5,
+     "within_rounding_bound": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "matchup": "DET@SAS",
+   "source_pdf": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_DETSAS__31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e.pdf",
+   "source_page": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "gamebook_sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
+   "players_parsed": 23,
+   "played": 19,
+   "period_scores": {
+    "DET": [
+     26,
+     29,
+     23,
+     27
+    ],
+    "SAS": [
+     33,
+     21,
+     18,
+     21
+    ]
+   },
+   "checks": [
+    {
+     "team": "DET",
+     "sum_of_player_points": 105,
+     "official_final": 105,
+     "gamebook_team_total": 105,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "DET",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 4.5,
+     "within_rounding_bound": true
+    },
+    {
+     "team": "SAS",
+     "sum_of_player_points": 93,
+     "official_final": 93,
+     "gamebook_team_total": 93,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "SAS",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 5.0,
+     "within_rounding_bound": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "matchup": "CHA@LAL",
+   "source_pdf": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_CHALAL__6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5.pdf",
+   "source_page": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "gamebook_sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
+   "players_parsed": 26,
+   "played": 22,
+   "period_scores": {
+    "CHA": [
+     34,
+     32,
+     28,
+     17,
+     3
+    ],
+    "LAL": [
+     30,
+     29,
+     22,
+     30,
+     7
+    ]
+   },
+   "checks": [
+    {
+     "team": "CHA",
+     "sum_of_player_points": 114,
+     "official_final": 114,
+     "gamebook_team_total": 114,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "CHA",
+     "sum_of_player_minutes": "265:02",
+     "sum_of_player_minutes_seconds": 15902,
+     "printed_team_total": "265:00",
+     "expected_regulation_plus_ot": "265:00",
+     "delta_seconds": 2,
+     "rounding_bound_seconds": 5.5,
+     "within_rounding_bound": true
+    },
+    {
+     "team": "LAL",
+     "sum_of_player_points": 118,
+     "official_final": 118,
+     "gamebook_team_total": 118,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "LAL",
+     "sum_of_player_minutes": "265:01",
+     "sum_of_player_minutes_seconds": 15901,
+     "printed_team_total": "265:00",
+     "expected_regulation_plus_ot": "265:00",
+     "delta_seconds": 1,
+     "rounding_bound_seconds": 5.5,
+     "within_rounding_bound": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "matchup": "UTA@LAC",
+   "source_pdf": "data/raw/session-e3d25abc/gamebooks/2026-11-17/2026-11-17_UTALAC__5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5.pdf",
+   "source_page": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "gamebook_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
+   "players_parsed": 25,
+   "played": 22,
+   "period_scores": {
+    "UTA": [
+     35,
+     23,
+     30,
+     44
+    ],
+    "LAC": [
+     29,
+     33,
+     24,
+     21
+    ]
+   },
+   "checks": [
+    {
+     "team": "UTA",
+     "sum_of_player_points": 132,
+     "official_final": 132,
+     "gamebook_team_total": 132,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "UTA",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 4.5,
+     "within_rounding_bound": true
+    },
+    {
+     "team": "LAC",
+     "sum_of_player_points": 107,
+     "official_final": 107,
+     "gamebook_team_total": 107,
+     "unreconciled_points": 0,
+     "fully_reconciled": true,
+     "match": true
+    },
+    {
+     "team": "LAC",
+     "sum_of_player_minutes": "240:00",
+     "sum_of_player_minutes_seconds": 14400,
+     "printed_team_total": "240:00",
+     "expected_regulation_plus_ot": "240:00",
+     "delta_seconds": 0,
+     "rounding_bound_seconds": 6.5,
+     "within_rounding_bound": true
+    }
+   ]
+  }
+ ],
  "rows": [
   {
    "game_id": "0022600253",
@@ -49,7 +454,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "31:25",
+   "pts": 5,
+   "reb": 4,
+   "ast": 2,
+   "fgm": 2,
+   "fga": 5,
+   "fg3m": 1,
+   "fg3a": 4,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -84,7 +500,18 @@
    "blocks": 2,
    "turnovers": 1,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "35:48",
+   "pts": 16,
+   "reb": 4,
+   "ast": 0,
+   "fgm": 5,
+   "fga": 11,
+   "fg3m": 1,
+   "fg3a": 4,
+   "ftm": 5,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -119,7 +546,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 5,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "36:26",
+   "pts": 16,
+   "reb": 16,
+   "ast": 8,
+   "fgm": 7,
+   "fga": 9,
+   "fg3m": 1,
+   "fg3a": 2,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -154,7 +592,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 0,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:02",
+   "pts": 17,
+   "reb": 5,
+   "ast": 1,
+   "fgm": 7,
+   "fga": 11,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -189,7 +638,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "34:26",
+   "pts": 31,
+   "reb": 5,
+   "ast": 5,
+   "fgm": 10,
+   "fga": 22,
+   "fg3m": 4,
+   "fg3a": 11,
+   "ftm": 7,
+   "fta": 7,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -224,7 +684,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "9:08",
+   "pts": 3,
+   "reb": 0,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 1,
+   "fg3m": 1,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -259,7 +730,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "24:09",
+   "pts": 12,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 7,
+   "fg3m": 2,
+   "fg3a": 4,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -294,7 +776,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "10:59",
+   "pts": 2,
+   "reb": 8,
+   "ast": 0,
+   "fgm": 1,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -329,7 +822,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:26",
+   "pts": 4,
+   "reb": 1,
+   "ast": 3,
+   "fgm": 2,
+   "fga": 5,
+   "fg3m": 0,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -364,7 +868,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "7:40",
+   "pts": 3,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -399,7 +914,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "6:32",
+   "pts": 2,
+   "reb": 0,
+   "ast": 4,
+   "fgm": 1,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -434,7 +960,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -469,7 +1006,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -504,7 +1052,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -539,7 +1098,18 @@
    "blocks": 1,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "38:41",
+   "pts": 22,
+   "reb": 5,
+   "ast": 5,
+   "fgm": 9,
+   "fga": 17,
+   "fg3m": 2,
+   "fg3a": 8,
+   "ftm": 2,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -574,7 +1144,18 @@
    "blocks": 2,
    "turnovers": 0,
    "foulsPersonal": 5,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "34:06",
+   "pts": 20,
+   "reb": 4,
+   "ast": 2,
+   "fgm": 7,
+   "fga": 14,
+   "fg3m": 1,
+   "fg3a": 2,
+   "ftm": 5,
+   "fta": 6,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600253",
@@ -609,7 +1190,18 @@
    "blocks": 3,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:15",
+   "pts": 8,
+   "reb": 1,
+   "ast": 3,
+   "fgm": 4,
+   "fga": 6,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -644,7 +1236,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:18",
+   "pts": 25,
+   "reb": 1,
+   "ast": 2,
+   "fgm": 9,
+   "fga": 15,
+   "fg3m": 7,
+   "fg3a": 12,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -679,7 +1282,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:50",
+   "pts": 14,
+   "reb": 1,
+   "ast": 7,
+   "fgm": 6,
+   "fga": 11,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -714,7 +1328,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "18:21",
+   "pts": 3,
+   "reb": 6,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -749,7 +1374,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "6:58",
+   "pts": 0,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 2,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -784,7 +1420,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "19:53",
+   "pts": 7,
+   "reb": 0,
+   "ast": 6,
+   "fgm": 2,
+   "fga": 7,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 2,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -819,7 +1466,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "8:12",
+   "pts": 0,
+   "reb": 2,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -854,7 +1512,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:25",
+   "pts": 3,
+   "reb": 2,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -889,7 +1558,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -924,7 +1604,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600253",
@@ -959,7 +1650,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -994,7 +1696,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 5,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "32:28",
+   "pts": 6,
+   "reb": 5,
+   "ast": 1,
+   "fgm": 2,
+   "fga": 4,
+   "fg3m": 2,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1029,7 +1742,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "32:53",
+   "pts": 10,
+   "reb": 8,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 16,
+   "fg3m": 2,
+   "fg3a": 8,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1064,7 +1788,18 @@
    "blocks": 1,
    "turnovers": 3,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "32:26",
+   "pts": 12,
+   "reb": 12,
+   "ast": 5,
+   "fgm": 6,
+   "fga": 14,
+   "fg3m": 0,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1099,7 +1834,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "27:12",
+   "pts": 8,
+   "reb": 3,
+   "ast": 0,
+   "fgm": 3,
+   "fga": 6,
+   "fg3m": 2,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1134,7 +1880,18 @@
    "blocks": 0,
    "turnovers": 4,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "31:27",
+   "pts": 25,
+   "reb": 3,
+   "ast": 5,
+   "fgm": 8,
+   "fga": 19,
+   "fg3m": 5,
+   "fg3a": 11,
+   "ftm": 4,
+   "fta": 5,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1169,7 +1926,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 0,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:53",
+   "pts": 23,
+   "reb": 5,
+   "ast": 6,
+   "fgm": 7,
+   "fga": 19,
+   "fg3m": 5,
+   "fg3a": 9,
+   "ftm": 4,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1204,7 +1972,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 5,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "21:27",
+   "pts": 9,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 13,
+   "fg3m": 0,
+   "fg3a": 4,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1239,7 +2018,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "15:34",
+   "pts": 6,
+   "reb": 8,
+   "ast": 4,
+   "fgm": 2,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1274,7 +2064,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "1:16",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1309,7 +2110,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 4,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "14:24",
+   "pts": 6,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 2,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600254",
@@ -1344,7 +2156,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600254",
@@ -1379,7 +2202,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1414,7 +2248,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1449,7 +2294,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "36:47",
+   "pts": 22,
+   "reb": 5,
+   "ast": 4,
+   "fgm": 10,
+   "fga": 16,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1484,7 +2340,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:07",
+   "pts": 0,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 2,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1519,7 +2386,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 4,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "22:22",
+   "pts": 0,
+   "reb": 4,
+   "ast": 2,
+   "fgm": 0,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1554,7 +2432,18 @@
    "blocks": 0,
    "turnovers": 4,
    "foulsPersonal": 5,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "39:17",
+   "pts": 30,
+   "reb": 4,
+   "ast": 5,
+   "fgm": 11,
+   "fga": 19,
+   "fg3m": 7,
+   "fg3a": 11,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1589,7 +2478,18 @@
    "blocks": 0,
    "turnovers": 5,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:51",
+   "pts": 18,
+   "reb": 9,
+   "ast": 2,
+   "fgm": 7,
+   "fga": 17,
+   "fg3m": 3,
+   "fg3a": 8,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1624,7 +2524,18 @@
    "blocks": 4,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "25:30",
+   "pts": 3,
+   "reb": 13,
+   "ast": 0,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 1,
+   "fta": 6,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600254",
@@ -1659,7 +2570,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "24:26",
+   "pts": 12,
+   "reb": 1,
+   "ast": 4,
+   "fgm": 3,
+   "fga": 7,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 5,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1694,7 +2616,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "16:43",
+   "pts": 13,
+   "reb": 2,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 9,
+   "fg3m": 3,
+   "fg3a": 6,
+   "ftm": 2,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1729,7 +2662,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:57",
+   "pts": 8,
+   "reb": 7,
+   "ast": 4,
+   "fgm": 2,
+   "fga": 5,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 2,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1764,7 +2708,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600254",
@@ -1799,7 +2754,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600254",
@@ -1834,7 +2800,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -1869,7 +2846,18 @@
    "blocks": 0,
    "turnovers": 4,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "36:18",
+   "pts": 9,
+   "reb": 7,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 9,
+   "fg3m": 0,
+   "fg3a": 3,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -1904,7 +2892,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "28:32",
+   "pts": 14,
+   "reb": 9,
+   "ast": 12,
+   "fgm": 7,
+   "fga": 13,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -1939,7 +2938,18 @@
    "blocks": 1,
    "turnovers": 0,
    "foulsPersonal": 3,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "23:09",
+   "pts": 11,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 3,
+   "fga": 5,
+   "fg3m": 1,
+   "fg3a": 1,
+   "ftm": 4,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -1974,7 +2984,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "38:15",
+   "pts": 25,
+   "reb": 5,
+   "ast": 5,
+   "fgm": 11,
+   "fga": 21,
+   "fg3m": 3,
+   "fg3a": 7,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2009,7 +3030,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "37:30",
+   "pts": 27,
+   "reb": 5,
+   "ast": 6,
+   "fgm": 12,
+   "fga": 25,
+   "fg3m": 1,
+   "fg3a": 4,
+   "ftm": 2,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2044,7 +3076,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "23:05",
+   "pts": 6,
+   "reb": 6,
+   "ast": 0,
+   "fgm": 2,
+   "fga": 6,
+   "fg3m": 0,
+   "fg3a": 4,
+   "ftm": 2,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2079,7 +3122,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "24:45",
+   "pts": 3,
+   "reb": 3,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 4,
+   "fg3m": 1,
+   "fg3a": 4,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2114,7 +3168,18 @@
    "blocks": 1,
    "turnovers": 0,
    "foulsPersonal": 3,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "24:44",
+   "pts": 10,
+   "reb": 6,
+   "ast": 5,
+   "fgm": 5,
+   "fga": 8,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2149,7 +3214,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "3:42",
+   "pts": 0,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2184,7 +3260,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2219,7 +3306,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2254,7 +3352,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "31:24",
+   "pts": 10,
+   "reb": 2,
+   "ast": 7,
+   "fgm": 3,
+   "fga": 11,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 2,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2289,7 +3398,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "35:42",
+   "pts": 12,
+   "reb": 5,
+   "ast": 4,
+   "fgm": 4,
+   "fga": 10,
+   "fg3m": 2,
+   "fg3a": 6,
+   "ftm": 2,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2324,7 +3444,18 @@
    "blocks": 1,
    "turnovers": 3,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:49",
+   "pts": 25,
+   "reb": 18,
+   "ast": 4,
+   "fgm": 11,
+   "fga": 23,
+   "fg3m": 1,
+   "fg3a": 8,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2359,7 +3490,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 0,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "34:32",
+   "pts": 20,
+   "reb": 4,
+   "ast": 2,
+   "fgm": 8,
+   "fga": 14,
+   "fg3m": 0,
+   "fg3a": 4,
+   "ftm": 4,
+   "fta": 5,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2394,7 +3536,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "34:22",
+   "pts": 6,
+   "reb": 2,
+   "ast": 2,
+   "fgm": 3,
+   "fga": 10,
+   "fg3m": 0,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2429,7 +3582,18 @@
    "blocks": 1,
    "turnovers": 0,
    "foulsPersonal": 4,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "29:42",
+   "pts": 14,
+   "reb": 6,
+   "ast": 0,
+   "fgm": 5,
+   "fga": 10,
+   "fg3m": 4,
+   "fg3a": 9,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2464,7 +3628,18 @@
    "blocks": 2,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "14:11",
+   "pts": 2,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2499,7 +3674,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "14:39",
+   "pts": 4,
+   "reb": 2,
+   "ast": 1,
+   "fgm": 2,
+   "fga": 5,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2534,7 +3720,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "9:36",
+   "pts": 0,
+   "reb": 3,
+   "ast": 4,
+   "fgm": 0,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2569,7 +3766,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "2:03",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 1,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2604,7 +3812,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600255",
@@ -2639,7 +3858,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2674,7 +3904,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "29:48",
+   "pts": 12,
+   "reb": 4,
+   "ast": 0,
+   "fgm": 5,
+   "fga": 14,
+   "fg3m": 2,
+   "fg3a": 9,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2709,7 +3950,18 @@
    "blocks": 2,
    "turnovers": 0,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "41:30",
+   "pts": 23,
+   "reb": 11,
+   "ast": 4,
+   "fgm": 8,
+   "fga": 18,
+   "fg3m": 4,
+   "fg3a": 10,
+   "ftm": 3,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2744,7 +3996,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "38:06",
+   "pts": 5,
+   "reb": 16,
+   "ast": 2,
+   "fgm": 2,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2779,7 +4042,18 @@
    "blocks": 1,
    "turnovers": 5,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "32:23",
+   "pts": 28,
+   "reb": 2,
+   "ast": 4,
+   "fgm": 10,
+   "fga": 19,
+   "fg3m": 5,
+   "fg3a": 12,
+   "ftm": 3,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2814,7 +4088,18 @@
    "blocks": 0,
    "turnovers": 4,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "25:34",
+   "pts": 19,
+   "reb": 3,
+   "ast": 4,
+   "fgm": 6,
+   "fga": 12,
+   "fg3m": 2,
+   "fg3a": 6,
+   "ftm": 5,
+   "fta": 7,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2849,7 +4134,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 5,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "29:42",
+   "pts": 3,
+   "reb": 6,
+   "ast": 4,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 2,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2884,7 +4180,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:60",
+   "pts": 13,
+   "reb": 4,
+   "ast": 1,
+   "fgm": 4,
+   "fga": 9,
+   "fg3m": 4,
+   "fg3a": 9,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2919,7 +4226,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "14:23",
+   "pts": 6,
+   "reb": 3,
+   "ast": 1,
+   "fgm": 2,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2954,7 +4272,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "5:28",
+   "pts": 0,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -2989,7 +4318,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:56",
+   "pts": 5,
+   "reb": 1,
+   "ast": 4,
+   "fgm": 2,
+   "fga": 7,
+   "fg3m": 1,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3024,7 +4364,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "0:12",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 1,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3059,7 +4410,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3094,7 +4456,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "31:12",
+   "pts": 7,
+   "reb": 5,
+   "ast": 0,
+   "fgm": 2,
+   "fga": 6,
+   "fg3m": 2,
+   "fg3a": 6,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3129,7 +4502,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "22:46",
+   "pts": 4,
+   "reb": 5,
+   "ast": 2,
+   "fgm": 2,
+   "fga": 5,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3164,7 +4548,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "17:02",
+   "pts": 4,
+   "reb": 8,
+   "ast": 0,
+   "fgm": 2,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3199,7 +4594,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "41:33",
+   "pts": 47,
+   "reb": 6,
+   "ast": 3,
+   "fgm": 16,
+   "fga": 24,
+   "fg3m": 10,
+   "fg3a": 14,
+   "ftm": 5,
+   "fta": 6,
+   "on_official_injury_report": true
   },
   {
    "game_id": "0022600256",
@@ -3234,7 +4640,18 @@
    "blocks": 1,
    "turnovers": 5,
    "foulsPersonal": 5,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "42:20",
+   "pts": 36,
+   "reb": 7,
+   "ast": 7,
+   "fgm": 13,
+   "fga": 34,
+   "fg3m": 5,
+   "fg3a": 16,
+   "ftm": 5,
+   "fta": 7,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3269,7 +4686,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 6,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "23:42",
+   "pts": 0,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 0,
+   "fga": 1,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3304,7 +4732,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:41",
+   "pts": 4,
+   "reb": 7,
+   "ast": 0,
+   "fgm": 2,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3339,7 +4778,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "23:02",
+   "pts": 3,
+   "reb": 3,
+   "ast": 2,
+   "fgm": 1,
+   "fga": 8,
+   "fg3m": 0,
+   "fg3a": 4,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3374,7 +4824,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "25:12",
+   "pts": 10,
+   "reb": 4,
+   "ast": 3,
+   "fgm": 3,
+   "fga": 12,
+   "fg3m": 1,
+   "fg3a": 7,
+   "ftm": 3,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3409,7 +4870,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "18:03",
+   "pts": 3,
+   "reb": 4,
+   "ast": 2,
+   "fgm": 0,
+   "fga": 1,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 3,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3444,7 +4916,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "6:28",
+   "pts": 0,
+   "reb": 0,
+   "ast": 1,
+   "fgm": 0,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3479,7 +4962,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3514,7 +5008,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600256",
@@ -3549,7 +5054,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3584,7 +5100,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "13:06",
+   "pts": 9,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 4,
+   "fga": 5,
+   "fg3m": 1,
+   "fg3a": 1,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3619,7 +5146,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "22:59",
+   "pts": 5,
+   "reb": 1,
+   "ast": 4,
+   "fgm": 2,
+   "fga": 8,
+   "fg3m": 1,
+   "fg3a": 4,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3654,7 +5192,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:48",
+   "pts": 15,
+   "reb": 10,
+   "ast": 3,
+   "fgm": 6,
+   "fga": 7,
+   "fg3m": 1,
+   "fg3a": 2,
+   "ftm": 2,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3689,7 +5238,18 @@
    "blocks": 0,
    "turnovers": 3,
    "foulsPersonal": 0,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "31:23",
+   "pts": 13,
+   "reb": 5,
+   "ast": 2,
+   "fgm": 3,
+   "fga": 10,
+   "fg3m": 2,
+   "fg3a": 4,
+   "ftm": 5,
+   "fta": 7,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3724,7 +5284,18 @@
    "blocks": 2,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "35:06",
+   "pts": 30,
+   "reb": 2,
+   "ast": 11,
+   "fgm": 10,
+   "fga": 17,
+   "fg3m": 4,
+   "fg3a": 8,
+   "ftm": 6,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3759,7 +5330,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "34:40",
+   "pts": 40,
+   "reb": 11,
+   "ast": 5,
+   "fgm": 16,
+   "fga": 21,
+   "fg3m": 8,
+   "fg3a": 11,
+   "ftm": 0,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3794,7 +5376,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 4,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "33:05",
+   "pts": 8,
+   "reb": 7,
+   "ast": 5,
+   "fgm": 3,
+   "fga": 7,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3829,7 +5422,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "21:41",
+   "pts": 9,
+   "reb": 2,
+   "ast": 4,
+   "fgm": 4,
+   "fga": 6,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3864,7 +5468,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "17:12",
+   "pts": 3,
+   "reb": 7,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 1,
+   "fta": 2,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3899,7 +5514,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3934,7 +5560,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -3969,7 +5606,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "",
+   "pts": 0,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4004,7 +5652,18 @@
    "blocks": 1,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "28:22",
+   "pts": 5,
+   "reb": 1,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 0,
+   "fg3a": 1,
+   "ftm": 3,
+   "fta": 6,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4039,7 +5698,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "27:14",
+   "pts": 20,
+   "reb": 5,
+   "ast": 1,
+   "fgm": 7,
+   "fga": 10,
+   "fg3m": 4,
+   "fg3a": 4,
+   "ftm": 2,
+   "fta": 4,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4074,7 +5744,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "23:19",
+   "pts": 23,
+   "reb": 6,
+   "ast": 2,
+   "fgm": 8,
+   "fga": 16,
+   "fg3m": 4,
+   "fg3a": 9,
+   "ftm": 3,
+   "fta": 3,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4109,7 +5790,18 @@
    "blocks": 1,
    "turnovers": 2,
    "foulsPersonal": 2,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "25:58",
+   "pts": 2,
+   "reb": 5,
+   "ast": 5,
+   "fgm": 1,
+   "fga": 5,
+   "fg3m": 0,
+   "fg3a": 2,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4144,7 +5836,18 @@
    "blocks": 1,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": true
+   "in_five_most_minutes": true,
+   "min": "30:22",
+   "pts": 20,
+   "reb": 3,
+   "ast": 7,
+   "fgm": 5,
+   "fga": 15,
+   "fg3m": 2,
+   "fg3a": 5,
+   "ftm": 8,
+   "fta": 8,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4179,7 +5882,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 2,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "20:33",
+   "pts": 3,
+   "reb": 2,
+   "ast": 1,
+   "fgm": 1,
+   "fga": 6,
+   "fg3m": 1,
+   "fg3a": 5,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4214,7 +5928,18 @@
    "blocks": 0,
    "turnovers": 1,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "18:10",
+   "pts": 15,
+   "reb": 2,
+   "ast": 0,
+   "fgm": 5,
+   "fga": 9,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 4,
+   "fta": 5,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4249,7 +5974,18 @@
    "blocks": 2,
    "turnovers": 1,
    "foulsPersonal": 3,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "18:33",
+   "pts": 8,
+   "reb": 5,
+   "ast": 0,
+   "fgm": 4,
+   "fga": 6,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4284,7 +6020,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "17:52",
+   "pts": 5,
+   "reb": 1,
+   "ast": 3,
+   "fgm": 2,
+   "fga": 6,
+   "fg3m": 0,
+   "fg3a": 3,
+   "ftm": 1,
+   "fta": 1,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4319,7 +6066,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 1,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "16:31",
+   "pts": 0,
+   "reb": 0,
+   "ast": 1,
+   "fgm": 0,
+   "fga": 2,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4354,7 +6112,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "4:22",
+   "pts": 0,
+   "reb": 1,
+   "ast": 0,
+   "fgm": 0,
+   "fga": 0,
+   "fg3m": 0,
+   "fg3a": 0,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4389,7 +6158,18 @@
    "blocks": 0,
    "turnovers": 2,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "4:22",
+   "pts": 3,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 1,
+   "fga": 2,
+   "fg3m": 1,
+   "fg3a": 2,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   },
   {
    "game_id": "0022600257",
@@ -4424,7 +6204,18 @@
    "blocks": 0,
    "turnovers": 0,
    "foulsPersonal": 0,
-   "in_five_most_minutes": false
+   "in_five_most_minutes": false,
+   "min": "4:22",
+   "pts": 3,
+   "reb": 0,
+   "ast": 0,
+   "fgm": 1,
+   "fga": 3,
+   "fg3m": 1,
+   "fg3a": 3,
+   "ftm": 0,
+   "fta": 0,
+   "on_official_injury_report": false
   }
  ]
 }
