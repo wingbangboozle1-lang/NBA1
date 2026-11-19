@@ -1,43 +1,61 @@
 {
  "gate": "refresh freshness + provenance",
- "run_at_utc": "2026-11-19T08:14:27Z",
+ "run_at_utc": "2026-11-19T12:42:33Z",
  "max_age_hours": 10.0,
- "ok": false,
- "blocking_errors": [
-  "fetcher reported 2 failed source/parse checks",
-  "missing/invalid payload capture for S1_season",
-  "missing/invalid structured capture: data/raw/_capture_S1_season.json",
-  "advanced team input cannot be compared with a complete promoted snapshot"
- ],
+ "ok": true,
+ "blocking_errors": [],
  "declarations_applied": [
   {
    "source_key": "S8_standings",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "review_flag": "F1",
    "evidence": "data/raw/_capture_evidence_S8_standings.json",
-   "required_snapshot": "data/raw/standings.json"
+   "required_snapshot": "data/raw/standings.json",
+   "failure_only": false
   },
   {
    "source_key": "S9_team_traditional",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "review_flag": "F1",
    "evidence": "data/raw/_capture_evidence_S9_team_traditional.json",
-   "required_snapshot": "data/raw/team_traditional.json"
+   "required_snapshot": "data/raw/team_traditional.json",
+   "failure_only": false
   },
   {
    "source_key": "S10_team_opponent",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "review_flag": "F1",
    "evidence": "data/raw/_capture_evidence_S10_team_opponent.json",
-   "required_snapshot": "data/raw/team_opponent.json"
+   "required_snapshot": "data/raw/team_opponent.json",
+   "failure_only": false
+  },
+  {
+   "source_key": "S1_season",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "review_flag": "F-70D-01",
+   "evidence": "data/raw/_capture_evidence_S1_season.json",
+   "required_snapshot": "data/raw/team_advanced.json",
+   "failure_only": false
+  },
+  {
+   "source_key": "S2_train",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "review_flag": "F-70D-01",
+   "evidence": "data/raw/_capture_evidence_S2_train.json",
+   "required_snapshot": "(none - failure-only companion of S1_season)",
+   "failure_only": true
   }
  ],
  "warnings": [
+  "declared source failed as expected: S1_season: expected 30 team rows, parsed 0 (html_tr=12 team_links=0 rowSet=0 parse_problems=5) (evidence data/raw/_capture_evidence_S1_season.json)",
+  "declared source failed as expected: S2_train: expected 30 team rows, parsed 0 (html_tr=12 team_links=0 rowSet=0 parse_problems=5) (evidence data/raw/_capture_evidence_S2_train.json)",
   "declared source failed as expected: S8_standings: no standings rows parsed (html_tr=0 team_links=0 problems_total=3) ['html_table: East: parsed 0 teams, expected 15', 'html_table: West: parsed 0 teams, expected 15', 'next_data: no standings-like team records found in __NEXT_DATA__'] (evidence data/raw/_capture_evidence_S8_standings.json)",
   "declared source failed as expected: S9_team_traditional: no traditional team rows parsed (html_tr=12 team_links=0 problems_total=6) [\"html_table: row with 7 cells did not resolve to a club (first cell '1')\", \"html_table: row with 7 cells did not resolve to a club (first cell '8')\", \"html_table: row with 7 cells did not resolve to a club (first cell '15')\", 'html_table: 10 rows in total did not resolve to a club', 'html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S9_team_traditional.json)",
   "declared source failed as expected: S10_team_opponent: no opponent team rows parsed (html_tr=12 team_links=0 problems_total=6) [\"html_table: row with 7 cells did not resolve to a club (first cell '1')\", \"html_table: row with 7 cells did not resolve to a club (first cell '8')\", \"html_table: row with 7 cells did not resolve to a club (first cell '15')\", 'html_table: 10 rows in total did not resolve to a club', 'html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S10_team_opponent.json)",
   "S10_team_opponent: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S10_team_opponent.json",
+  "S1_season: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S1_season.json",
   "S8_standings: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S8_standings.json",
-  "S9_team_traditional: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S9_team_traditional.json"
+  "S9_team_traditional: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S9_team_traditional.json",
+  "S1_season: runner-unreadable (declared); consumed team_advanced.json is a session read 0.0h old (2026-11-19T12:42:33Z, arena/70d0e760-nba1 (platform web-fetch channel)) - within the 72h bound"
  ]
 }

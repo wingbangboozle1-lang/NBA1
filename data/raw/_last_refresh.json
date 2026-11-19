@@ -323,6 +323,106 @@
    "item": "S7_players",
    "promoted_at_utc": "2026-11-19T08:14:27Z",
    "detail": "digest-bound evidence record written (no model input)"
+  },
+  {
+   "item": "S4_schedule",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "26 games -> data/raw/schedule_upcoming.json; 22 source-register entries added"
+  },
+  {
+   "item": "injury_diff_chain",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "Injury-Report_2026-11-19_02_45AM -> Injury-Report_2026-11-19_03_00AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-19_02_45AM_to_Injury-Report_2026-11-19_03_00AM.json"
+  },
+  {
+   "item": "injury_pdf_probe",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "44 rows from Injury-Report_2026-11-19_03_00AM -> data/raw/injuries.json"
+  },
+  {
+   "item": "results 2026-11-06",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-07",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-08",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-09",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "8 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-10",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "6 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-11",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "10 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-12",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "4 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-13",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-14",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "5 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-15",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-16",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "8 finals reconciled (8 new this run)"
+  },
+  {
+   "item": "results 2026-11-17",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "5 finals reconciled (13 new this run)"
+  },
+  {
+   "item": "results 2026-11-18",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "12 finals reconciled (25 new this run)"
+  },
+  {
+   "item": "results 2026-11-19",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "0 finals reconciled (25 new this run)"
+  },
+  {
+   "item": "results_feed",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "25 finals appended -> data/raw/games_completed.json"
+  },
+  {
+   "item": "S5_injury_index",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "digest-bound evidence record written (no model input)"
+  },
+  {
+   "item": "S7_players",
+   "promoted_at_utc": "2026-11-19T12:41:46Z",
+   "detail": "digest-bound evidence record written (no model input)"
   }
  ],
  "unreadable": [
@@ -345,6 +445,13 @@
    "reason": "capture has no parsed rows",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "review_flag": "F1",
+   "detail": "declared unreadable by data/raw/unreadable_sources.json: the page is client-rendered, so no runner capture can produce this snapshot. Nothing was promoted."
+  },
+  {
+   "item": "S1_season",
+   "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "review_flag": "F-70D-01",
    "detail": "declared unreadable by data/raw/unreadable_sources.json: the page is client-rendered, so no runner capture can produce this snapshot. Nothing was promoted."
   }
  ],
