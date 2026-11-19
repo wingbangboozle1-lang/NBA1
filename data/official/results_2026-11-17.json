@@ -1,0 +1,210 @@
+{
+ "title": "Official per-game results feed — 2026-11-17 (finals verified from official NBA game pages)",
+ "captured_by": "arena/eec70f24-nba1",
+ "retrieved_utc": "2026-11-19T00:00Z",
+ "rule": "One row per game. A row is marked FINAL only when the official game page prints Final and its LINESCORES quarters sum to the printed final (asserted per row before writing). Nothing is inferred; attendance and officials are left null because they were not read for every row.",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL",
+   "away_pts": 111,
+   "home_pts": 102,
+   "away_quarters": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "home_quarters": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "quarters_sum_check": "away 23+31+26+31=111 ✓, home 29+21+33+19=102 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "7:30 PM ET",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T00:00Z",
+   "verified_by_reads": [
+    "arena/eec70f24-nba1: official date page https://www.nba.com/games?date=2026-11-17 (status and final points, fetch_page)",
+    "arena/eec70f24-nba1: LINESCORES table on the official game page https://www.nba.com/game/nyk-vs-tor-0022600253 (fetch_page chunk 2 of 3), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "status, away_pts, home_pts read on the date page and the game page (agree); quarter scores read once on the game page"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 93,
+   "away_quarters": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "home_quarters": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "quarters_sum_check": "away 26+29+23+27=105 ✓, home 33+21+18+21=93 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "8:00 PM",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_box_score_url": "https://www.nba.com/game/det-vs-sas-0022600255/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T00:00Z",
+   "verified_by_reads": [
+    "arena/eec70f24-nba1: official date page https://www.nba.com/games?date=2026-11-17 (status and final points, fetch_page)",
+    "arena/eec70f24-nba1: LINESCORES table on the official game page https://www.nba.com/game/det-vs-sas-0022600255 (fetch_page chunk 2 of 3), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "status, away_pts, home_pts read on the date page and the game page (agree); quarter scores read once on the game page"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 106,
+   "away_quarters": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "home_quarters": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "quarters_sum_check": "away 17+31+31+26=105 ✓, home 29+20+30+27=106 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "8:00 PM",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_box_score_url": "https://www.nba.com/game/por-vs-min-0022600254/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T00:00Z",
+   "verified_by_reads": [
+    "arena/eec70f24-nba1: official date page https://www.nba.com/games?date=2026-11-17 (status and final points, fetch_page)",
+    "arena/eec70f24-nba1: LINESCORES table on the official game page https://www.nba.com/game/por-vs-min-0022600254 (fetch_page chunk 2 of 3), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "status, away_pts, home_pts read on the date page and the game page (agree); quarter scores read once on the game page"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "status": "FINAL",
+   "away_pts": 132,
+   "home_pts": 107,
+   "away_quarters": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "home_quarters": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "quarters_sum_check": "away 35+23+30+44=132 ✓, home 29+33+24+21=107 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "10:30 PM",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_box_score_url": "https://www.nba.com/game/uta-vs-lac-0022600257/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T00:00Z",
+   "verified_by_reads": [
+    "arena/eec70f24-nba1: official date page https://www.nba.com/games?date=2026-11-17 (status and final points, fetch_page)",
+    "arena/eec70f24-nba1: LINESCORES table on the official game page https://www.nba.com/game/uta-vs-lac-0022600257 (fetch_page chunk 2 of 3), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "status, away_pts, home_pts read on the date page and the game page (agree); quarter scores read once on the game page"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "status": "FINAL",
+   "away_pts": 114,
+   "home_pts": 118,
+   "away_quarters": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "home_quarters": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "quarters_sum_check": "away 34+32+28+17+3=114 ✓, home 30+29+22+30+7=118 ✓",
+   "ot_periods": 1,
+   "final_label": "Final/OT",
+   "tip_et": "11:00 PM",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_box_score_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T00:00Z",
+   "verified_by_reads": [
+    "arena/eec70f24-nba1: official date page https://www.nba.com/games?date=2026-11-17 (status and final points, fetch_page)",
+    "arena/eec70f24-nba1: LINESCORES table on the official game page https://www.nba.com/game/cha-vs-lal-0022600256 (fetch_page chunk 2 of 3), quarters sum to final"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "status, away_pts, home_pts read on the date page and the game page (agree); quarter scores read once on the game page"
+  }
+ ]
+}

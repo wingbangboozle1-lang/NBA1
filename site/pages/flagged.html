@@ -114,6 +114,42 @@
 <th class="src">Source</th>
 </tr></thead><tbody>
 <tr>
+<td>F-EJ-01</td>
+<td>Medium</td>
+<td><b>Quarter scores for 11/17 and 11/18 were read once per game (single fetch), not twice</b></td>
+<td>Opened 2026-11-19 by arena/eec70f24-nba1. Final points were read on the official date page (https://www.nba.com/games?date=2026-11-17 and ?date=2026-11-18) and on each game page; they agree for all 17 games. LINESCORES (quarter scores) were read once per game, from the game page (chunk 2 of 3). Every row's quarters sum to its printed final (asserted before writing). Attendance and officials were left null in data/official/results_2026-11-1(7, 8).json because they were not transcribed for every row. Source links: https://www.nba.com/games?date=2026-11-17 , https://www.nba.com/games?date=2026-11-18 , and the 17 game pages listed in those files.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-17 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-EJ-02</td>
+<td>High</td>
+<td><b>Scheduled capture for 11/17 and 11/18 was taken before tip-off and still shows 'not final'</b></td>
+<td>Opened 2026-11-19 by arena/eec70f24-nba1. data/raw/_capture_results_2026-11-17.json and _capture_results_2026-11-18.json were captured 2026-11-17T16:36:32Z, before those games were played; every game in both files is listed under not_final. The finals in data/official/results_2026-11-1(7, 8).json were read directly from the official pages on 2026-11-19 and are not taken from that capture. The scheduled refresh did not re-capture finals for these dates, which is the same gap as F-CA-07 (promotion never reached).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-18 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-EJ-03</td>
+<td>Medium</td>
+<td><b>Settlement stamp on the Settlement page: the 11/16 record still prints 'dates still open' for 11/16–11/18</b></td>
+<td>Opened 2026-11-19 by arena/eec70f24-nba1. The 11/16 slate settlement record (data/settlement/settlement_2026-11-16.json, written 2026-11-17T15:44Z) was accurate when written. The page now also shows the 11/17 slate stamp (settled 2026-11-19T05:43Z from finals for 2026-11-17 and 2026-11-18, ledger entries 13 and 14). Both stamps are kept as recorded; the older one is not edited. 11/16 finals are still settled only as a slate-level record; the 11/16 slate was not re-settled here.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-16 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-EJ-04</td>
+<td>Medium</td>
+<td><b>Pre-tip publication for the 11/17–11/20 window does not cover the 11/19 and 11/20 slates in settled form</b></td>
+<td>Opened 2026-11-19 by arena/eec70f24-nba1. 11/17 and 11/18 settled cleanly from the sealed archive (ledger entry 12, sha c99bbd1b…). The 11/19 slate (4 games) and the 11/20 slate (9 games) remain in the open window and are not settled; the 11/19 games had not started at the time of this run. No pick was changed.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-19 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
 <td>F1</td>
 <td>Medium</td>
 <td><b>NBA.com standings table is not machine-readable</b></td>

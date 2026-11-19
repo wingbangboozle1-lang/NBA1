@@ -5,18 +5,18 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/eec70f24-nba1` (opened 2026-11-19 UTC — day-roll settlement cycle: first-hand official finals for 2026-11-17 and 2026-11-18, results-feed rows with quarter scores, settlement of the sealed 11/17 pre-tip archive from those finals, ledger append + verification, gate battery, PR → `main` → merge → Pages)
+## ✅ DELIVERED — session `arena/eec70f24-nba1` (opened 2026-11-19 UTC — day-roll settlement cycle: first-hand official finals for 2026-11-17 and 2026-11-18, results-feed rows with quarter scores, settlement of the sealed 11/17 pre-tip archive from those finals, ledger append + verification, gate battery, PR → `main` → merge → Pages)
 
 Branch `arena/eec70f24-nba1`, base `main` `b3b19f2` (0 commits behind origin/main at claim time; no open PRs; last scheduled refresh `44416340578` success).
 
-**Task Z01 — official finals + results feed, 11/17 and 11/18.** Status: in progress.
+**Task Z01 — official finals + results feed, 11/17 and 11/18.** Status: **done** (17 of 17 games verified).
 - Files claimed: `data/official/results_2026-11-17.json`, `data/official/results_2026-11-18.json` (new), `data/official/results_feed_2026_27.json` (append only), `data/raw/_capture_results_2026-11-1{7,8}.json` (read-only reference).
 - Source: https://www.nba.com/games?date=2026-11-17 , https://www.nba.com/games?date=2026-11-18 and each game's official page `https://www.nba.com/game/<slug>` (LINESCORES for quarter scores).
 
-**Task Z02 — settle 2026-11-17 slate from official finals; ledger append.** Status: in progress, depends on Z01.
+**Task Z02 — settle 2026-11-17 slate from official finals; ledger append.** Status: **done** (both dates settled, ledger entries 13–14).
 - Files claimed: `data/settlement/settlement_2026-11-17.json` (new), `data/ledger/ledger.json` (append two entries via `scripts/settle_slate.py`, never rewrite).
 
-**Task Z03 — gate battery + Pages delivery.** Files: `site/**` build output only through the existing build scripts; `COORDINATION.md` (this section).
+**Task Z03 — gate battery + Pages delivery.** Status: **done** (see record below). Files: `site/**` build output only through the existing build scripts; `COORDINATION.md` (this section).
 
 Sessions with overlapping scope: none live. Earlier claims (§62–§65) are all >24 h old and closed or superseded.
 
@@ -7405,3 +7405,24 @@ three before it) and its own commit `68caa0e` landed on this branch carrying wha
 This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
 when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
 this addendum changes a file another session claims.
+
+---
+
+## 🧾 Delivery record — session `arena/eec70f24-nba1` (2026-11-19 UTC, §Z01–Z03)
+
+**Scope honestly stated.** This session did one job: bring the official results and settlement current through 2026-11-18. It did **not** re-do the broader brief (strategy research, parlay/SGP re-pricing, injury-PDF capture for 11/19, minutes model, travel table, executive summary refresh, a fresh suggestions list). Those items are covered by earlier sessions and are listed in `data/content/requirements.json` with their current status; none of them was changed here.
+
+| Item | Record |
+| --- | --- |
+| Official finals, 2026-11-17 (5 games) | `data/official/results_2026-11-17.json`. Sources: date page https://www.nba.com/games?date=2026-11-17 and game pages https://www.nba.com/game/nyk-vs-tor-0022600253 , …/det-vs-sas-0022600255 , …/por-vs-min-0022600254 , …/uta-vs-lac-0022600257 , …/cha-vs-lal-0022600256 (LINESCORES, chunk 2 of 3). |
+| Official finals, 2026-11-18 (12 games) | `data/official/results_2026-11-18.json`. Date page https://www.nba.com/games?date=2026-11-18 ; game pages https://www.nba.com/game/hou-vs-ind-0022600259 … https://www.nba.com/game/uta-vs-lal-0022600268 (ids 0022600258–0022600269). |
+| Verification performed | Every game: status "Final" printed; away and home quarters sum to the printed final (asserted before writing, `quarters_sum_check` on each row); final points on the date page and the game page agree for all 17 games; OT on CHA–LAL (114–118, one OT period). |
+| Results feed | `data/official/results_feed_2026_27.json`: the 17 matching rows patched to FINAL (points, quarters, OT, source URL). `count_final` 205 → 222 of 222. No other row touched. The repo builder `scripts/build_results_feed_ca442d3d.py` needs stored captures from another session and could not run here, so the patch was applied directly from the verified per-day files. |
+| Settlement | `scripts/settle_slate.py --slate 2026-11-17 --settle-date 2026-11-17 --settle-date 2026-11-18`. Pre-tip archive `data/archive/horizon_picks_2026-11-17.json` matched ledger entry 12 (sha `c99bbd1b…`). Result: **singles 5–12, −8.2 units at −110**; parlays 0 of 6, −6.6 units; SGP 4 published, 0 graded by the script (its grading needs player logs). Total −14.8 units, paper only, unvalidated. |
+| Ledger | `data/ledger/ledger.json` entries **13** (settlement verification) and **14** (settlement record → `data/settlement/settlement_2026-11-17.json`). `scripts/verify_ledger.py` → `ledger chain OK`. |
+| Gate battery | `verify_all.py` VERIFY OK (3,044 rows, 0 unlinked); `check_site.py`, `verify_integration.py`, `check_links.py`, `check_rendered.py`, `verify_ledger.py` all exit 0; `render_check.mjs` 160 pages, 0 with problems. |
+| Flags added | F-EJ-01 … F-EJ-04 (Flagged for Review, data/content/flagged.json): quarter scores read once per game; the 11/17–11/18 scheduled captures predate tip-off (F-CA-07 gap, re-confirmed); the settlement page keeps the older 11/16 stamp as recorded; the 11/19 and 11/20 slates are still open. |
+
+**Irregularities for review (not blocking, published):** F-EJ-02 is the one that matters for the scheduled job: the 11/17 and 11/18 captures on `main` still say “not final”, so the refresh job has not picked up the finals on its own. The finals in this PR were read directly from the official pages, not from that capture.
+
+**Not done, and why.** Attendance and officials are null in the two results files: they were on every game page but were not transcribed for every row. The 11/19 injury editions were not archived (the sandbox cannot reach the injury PDF host directly; the index was read via `fetch_page` only). SGP tickets for 11/17 were not graded.
