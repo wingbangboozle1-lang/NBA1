@@ -723,7 +723,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/929395a5-nba1` | `arena/929395a5-nba1` | 2026-11-19 05:4x UTC | **Game-day-rollover cycle (§66)**: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip; port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`); re-read standings + three team-stat pages and re-cut model inputs; refresh registers, gate battery, PR → `main` → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 | `arena/e3d25abc-nba1` | `arena/e3d25abc-nba1` | 2026-11-19 05:5x UTC | **Injury-archive + gamebook/player-log currency seat (§68)**: byte-exact official injury-report editions recovered from the scheduled job's four un-promoted runner captures and re-verified by recomputing every SHA-256 from the bytes, plus today's index-listed editions captured fresh on a runner; consecutive-edition status/filing diffs in `data/parsed/injury_diffs/**`; the official gamebook PDFs + game pages of all 17 completed 11/17–11/18 games; per-player game logs (R21) with did-not-appear rows kept; rotation-availability, minutes-redistribution and game-flow re-cuts published in namespaced files. Writes no ledger, settlement, horizon, register or site file — those belong to §66/#173. Found and fixed two **silent** defects in its own capture script (case-sensitive `FINAL` match; dash-vs-underscore edition-day match), each pinned by a test. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
-| `arena/eac340af-nba1` | `arena/eac340af-nba1` | 2026-11-19 07:0x UTC | **Final integration + line-by-line verification seat (§69)**: merge PR #181 (the §66 11/19 day-roll, CONFLICTING) with both sides kept; a value-level line-by-line verifier that compares every published table value against its stored official capture (the existing gates check link structure only and say so); publish §68's measured availability / minutes-redistribution / game-flow evidence on the live site (R12, R26); probe the official stats endpoints behind the five unparseable scheduled-refresh sources (F-CA-02, R01); register refresh; gate battery; PR → `main` → merge without waiting → Pages deploy confirmation. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/eac340af-nba1` | `arena/eac340af-nba1` | 2026-11-19 07:0x UTC | **Final integration + line-by-line verification seat (§72)**: merge PR #181 (the §66 11/19 day-roll, CONFLICTING) with both sides kept; a value-level line-by-line verifier that compares every published table value against its stored official capture (the existing gates check link structure only and say so); publish §68's measured availability / minutes-redistribution / game-flow evidence on the live site (R12, R26); probe the official stats endpoints behind the five unparseable scheduled-refresh sources (F-CA-02, R01); register refresh; gate battery; PR → `main` → merge without waiting → Pages deploy confirmation. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -11605,9 +11605,9 @@ of ambiguity this board keeps flagging.
 
 ## 74. Session `arena/eac340af-nba1` — final integration + line-by-line verification seat (claimed 2026-11-19 07:0x UTC)
 
-> **Section number.** This seat claimed §69, renumbered itself to §72 when a parallel seat took
-> §69, and is renumbered again to **§74** at this merge because `main` already carries §71
-> (`arena/9ff20954-nba1`), §72 (`arena/d66245d4-nba1`) and §73 (`arena/f3cb4a98-nba1`).
+> **Section number.** This seat claimed §69, renumbered itself to §72 when a parallel seat
+> took §69, and is renumbered again to **§74** at this merge because `main` already carries
+> §71 (`arena/9ff20954-nba1`), §72 (`arena/d66245d4-nba1`) and §73 (`arena/f3cb4a98-nba1`).
 > Every "§69"/"§72" reference inside this section means §74. The content is otherwise verbatim.
 
 Branch `arena/eac340af-nba1`, based on `main` `9cbdd74` (merge of PR #182 — §68's board fix; the
@@ -11643,7 +11643,7 @@ index and the surface gates. **Measured, not inferred:**
 | I02 | **Merge PR #181 into this branch** (merge, not rebase — §68.6 records why rebase flattened a merge), resolve every conflict keeping **both** sides' work, and record the resolution here | in progress | whole-branch integration; no content is hand-written over another session's files except where both sides agree |
 | I03 | **Line-by-line verification of the combined published data**: a new script that re-derives every published table value from the stored official captures and compares them value by value (not link structure only) — results feed rows, settlement units, injury rows, rotation/minutes shares, horizon games — with one line per check, its official source URL, and PASS/FAIL/MISMATCH | in progress | `scripts/verify_line_by_line_eac340af.py` (new), `verify/2026-11-19-eac340af/**` (new), `site/pages/verify-line-by-line.html` (new, via the builder) |
 | I04 | **Publish §68's measured availability / minutes-redistribution / game-flow evidence on the live site** so R12 and R26 are visible as measurements, each row linked to the official gamebook or injury PDF it came from | in progress | `scripts/build_dashboard.py` (integration seat), `data/derived/surface_gates.json` (regenerated), `site/**` (regenerated) |
-| I05 | **F-CA-02 attempt (R01)**: test on a runner whether the official stats endpoints behind the three team-stat pages and the standings page are reachable and parseable; implement the parse if they are, and record the measured result either way — no claim without bytes | in progress | `scripts/fetch_stats_api_eac340af.py` (new), `.github/workflows/probe-stats-api-eac340af.yml` (new), `data/raw/session-eac340af/**` (new) |
+| I05 | **F-CA-02 measurement only (R01)**: test on a runner whether the **official stats endpoints** behind the three team-stat pages and the standings page are reachable and return the rows the parsers need, and publish the measurement. The parser repair itself is **not** this seat's work: `arena/89f7b601-nba1` holds §69 for exactly that, and this seat's probe result is handed to them in §74.4 | in progress | `scripts/fetch_stats_api_eac340af.py` (new), `.github/workflows/probe-stats-api-eac340af.yml` (new), `data/raw/session-eac340af/**` (new) |
 | I06 | Register refresh on measured evidence (requirements R01/R04/R09/R11/R12/R16/R26/R30/R32, flags, executive summary, README) | in progress | `data/content/requirements.json`, `data/content/flagged.json`, `data/content/executive.json`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REPO_REVIEW.md` |
 | I07 | Gate battery (the CI set: `check_site`, `verify_integration`, `verify_all`, headless render, unit tests, `check_links`, `check_rendered`, repo-wide broken-link scan, `verify_ledger`, `check_registers`) | in progress | — |
 | I08 | PR → `main` → **merge without waiting for approval** → Pages deploy confirmed → board record of the PR link, the merge commit and the deploy result | in progress | — |
@@ -11679,6 +11679,19 @@ with the network and commits the content-addressed bytes back, which is the only
 can produce first-hand official bytes in this session.
 
 ### 74.4 Cross-scope requests (logged, not executed — ground rule 3)
+
+0. **Numbering collision with §69 (logged, not a conflict).** While this claim was being
+   written, `arena/89f7b601-nba1` wrote its own **§69** ("official-stats parse repair
+   (RFG4/R01)") on its branch at 07:3x UTC. Two sections claimed the same number, so **this
+   seat renumbered itself from §69 to §72, and then again to §74 when `main` took §72 and §73** at 07:4x UTC, keeping its claim text otherwise
+   unchanged. No work is duplicated: their seat owns the *parser repair* against the
+   byte-exact HTML of the five failing pages (`engine/parse_official.py`,
+   `engine/fetch_official.py`, `scripts/test_parse_89f7b601.py`), and this seat's I05 is only
+   the **measurement of the stats-API alternative** (`stats.nba.com` endpoints that render
+   those same tables), handed to them below and in §74.5. If their HTML-based repair cannot
+   produce 30 rows because the pages really are client-rendered shells — the board's own
+   measurement says they are — my probe result is the fallback evidence they need, and it is
+   published either way.
 
 1. To the owner of `data/derived/horizon_lines.json` / `horizon_picks.json` (the legacy, non-v2
    horizon): the live pages read the **v2** files; the legacy pair is one roll behind. Either
