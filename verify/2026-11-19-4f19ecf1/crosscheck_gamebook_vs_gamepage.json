@@ -1,0 +1,1395 @@
+{
+ "title": "Two-reader audit: gamebook-PDF logs vs game-page logs, 2026-11-17/18",
+ "generated_by": "scripts/crosscheck_gamebook_logs_4f19ecf1.py",
+ "session": "arena/4f19ecf1-nba1 (§72)",
+ "reader_a": "data/official/player_game_logs_2026-11-1[78].json — session arena/e3d25abc-nba1 (PR #179), nba.com game-page __NEXT_DATA__",
+ "reader_b": "data/official/player_game_logs_2026-11-1[78]_gamebook_4f19ecf1.json — session arena/4f19ecf1-nba1, byte-exact official gamebook PDFs",
+ "rule": "Rows joined by date + game_id + normalized player name (surname-only gamebook rows matched by containment within the same game). Every stat both files carry is compared; disagreements are published verbatim and never reconciled by hand.",
+ "results": [
+  {
+   "date": "2026-11-17",
+   "rows_gamebook": 168,
+   "rows_game_page": 126,
+   "matched_rows": 126,
+   "identical_rows": 126,
+   "compared_fields": 1545,
+   "one_sided_field_notes": 126,
+   "one_sided_field_labels": [
+    "ast",
+    "blk",
+    "dreb",
+    "fg3a",
+    "fg3m",
+    "fga",
+    "fgm",
+    "fta",
+    "ftm",
+    "oreb",
+    "pf",
+    "plus_minus",
+    "pts",
+    "reb",
+    "stl",
+    "tov"
+   ],
+   "disagreements": [],
+   "only_in_gamebook": [
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "NYK",
+     "player": "Akins",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "NYK",
+     "player": "Knecht",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "NYK",
+     "player": "Nickel",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "TOR",
+     "player": "Bittle",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Foot Avulsion Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "TOR",
+     "player": "Leonard",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "TOR",
+     "player": "McCullar Jr.",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two- Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600253",
+     "team": "TOR",
+     "player": "Smith",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "MIN",
+     "player": "Broome",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "MIN",
+     "player": "Clark",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "MIN",
+     "player": "DiVincenzo",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Achilles Tendon Repair / Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "MIN",
+     "player": "Edwards",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Arthroscopy",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "MIN",
+     "player": "Pullin",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Quadriceps Contusion",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "POR",
+     "player": "Krejčí",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Ankle Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "POR",
+     "player": "Morant",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "POR",
+     "player": "Sharpe",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Meniscus Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600254",
+     "team": "POR",
+     "player": "Youngblood",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Heel Contusion / Bone Bruise",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Duren",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Holland II",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Joe",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hip Contusion",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Okorie",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Onyenso",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Prince",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Soreness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "DET",
+     "player": "Robinson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Quadriceps Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "SAS",
+     "player": "Brown",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "SAS",
+     "player": "Gillespie",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "SAS",
+     "player": "Harris",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Calf Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "SAS",
+     "player": "Jones Garcia",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600255",
+     "team": "SAS",
+     "player": "Quaintance",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Ajayi",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Allen",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Concussion-like symptoms",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Boswell",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Hall",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Knueppel",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "CHA",
+     "player": "Steinbach",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "LAL",
+     "player": "Kaluma",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "LAL",
+     "player": "Kessler",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Lower Leg Soreness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "LAL",
+     "player": "Mañon",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600256",
+     "team": "LAL",
+     "player": "Reaves",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Heel Contusion / Bone Bruise",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600257",
+     "team": "UTA",
+     "player": "Bufkin",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600257",
+     "team": "UTA",
+     "player": "Hayes",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600257",
+     "team": "UTA",
+     "player": "Ingram",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-17",
+     "game_id": "0022600257",
+     "team": "UTA",
+     "player": "Jackson Jr. (Injury/Illness - Right MCL",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    }
+   ],
+   "only_in_game_page": []
+  },
+  {
+   "date": "2026-11-18",
+   "rows_gamebook": 416,
+   "rows_game_page": 311,
+   "matched_rows": 311,
+   "identical_rows": 311,
+   "compared_fields": 4185,
+   "one_sided_field_notes": 311,
+   "one_sided_field_labels": [
+    "ast",
+    "blk",
+    "dreb",
+    "fg3a",
+    "fg3m",
+    "fga",
+    "fgm",
+    "fta",
+    "ftm",
+    "oreb",
+    "pf",
+    "plus_minus",
+    "pts",
+    "reb",
+    "stl",
+    "tov"
+   ],
+   "disagreements": [],
+   "only_in_gamebook": [
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "CLE",
+     "player": "Mobley",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Great Toe Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "CLE",
+     "player": "Tomlin",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Low Back Stress Reaction",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "CLE",
+     "player": "Tyson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Ankle Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "CLE",
+     "player": "Udeh Jr.",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "CLE",
+     "player": "Watson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Low Back Contusion",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "MEM",
+     "player": "Jackson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left 5th Metatarsal Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "MEM",
+     "player": "Jerome",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hip Impingement",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "MEM",
+     "player": "Pippen Jr.",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Lumbar Disc Herniation",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "MEM",
+     "player": "Saunders",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600258",
+     "team": "MEM",
+     "player": "Stewart",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Illness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "HOU",
+     "player": "Capela",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Ankle Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "HOU",
+     "player": "Copeland",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "HOU",
+     "player": "Phillips",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "IND",
+     "player": "Furphy",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right ACL Repair / Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "IND",
+     "player": "Haliburton",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "IND",
+     "player": "Nembhard",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hip Soreness / Tightness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600259",
+     "team": "IND",
+     "player": "Sheppard",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Meniscus Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIA",
+     "player": "Goldin",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIA",
+     "player": "Johnson",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Dieng",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Finger Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Jones",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Marković",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Nance",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Rollins",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Illness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600260",
+     "team": "MIL",
+     "player": "Ryan",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "ORL",
+     "player": "Banchero",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right High Ankle Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "ORL",
+     "player": "Castleton",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "ORL",
+     "player": "Isaac",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "ORL",
+     "player": "Nelson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Ankle Injury Recovery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "ORL",
+     "player": "Penda",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Partially Torn Hamstring",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "PHI",
+     "player": "Barlow",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Low Back Stress Reaction",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "PHI",
+     "player": "Bona",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Cervical Spine Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "PHI",
+     "player": "Brown",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600261",
+     "team": "PHI",
+     "player": "Hukporti",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Achilles Tendon Rupture / Tear",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "BKN",
+     "player": "Bilodeau",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "BKN",
+     "player": "Jefferson",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "BKN",
+     "player": "Nelson",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "BKN",
+     "player": "Powell",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "BKN",
+     "player": "Saraf",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "CHI",
+     "player": "Awaka",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Disc Irritation",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "CHI",
+     "player": "Hawkins",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "CHI",
+     "player": "Robinson",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "CHI",
+     "player": "Sellers",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600262",
+     "team": "CHI",
+     "player": "Wilson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Metacarpal Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "TOR",
+     "player": "Barnes",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Groin Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "TOR",
+     "player": "Barrett",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hamstring Tightness / Soreness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "TOR",
+     "player": "Bittle",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Foot Avulsion Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "TOR",
+     "player": "Leonard",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "WAS",
+     "player": "Beekman",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right AC Joint Injury",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "WAS",
+     "player": "Champagnie",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Foot Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "WAS",
+     "player": "Okpara",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "WAS",
+     "player": "Vukčević",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hip Impingement",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600263",
+     "team": "WAS",
+     "player": "Watkins",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left ACL Repair / Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Duren",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Holland II",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Okorie",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Onyenso",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Prince",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Soreness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "DET",
+     "player": "Robinson",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Quadriceps Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "NOP",
+     "player": "Mathurin",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Plantar Fasciitis",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "NOP",
+     "player": "McGowens",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Elbow Infection",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "NOP",
+     "player": "Murphy III",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Bilateral Patellar Tendinopathy",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "NOP",
+     "player": "Murray",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Ankle Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600264",
+     "team": "NOP",
+     "player": "Watford",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Ankle Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "Castro",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "Gueye",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Foot Fracture",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "Landale",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Hip Inflﬂammation",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "McCollum",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Calf Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "Newell",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Great Toe Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "ATL",
+     "player": "Veesaar",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right ACL Tear",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Dix",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Holmgren",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee/ Injury Recovery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Peavy",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Sorber",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Knee Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Wallace",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Shoulder Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600265",
+     "team": "OKC",
+     "player": "Williams",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Ankle Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "BOS",
+     "player": "Carter",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "BOS",
+     "player": "Mitchell",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "BOS",
+     "player": "Williams",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "DEN",
+     "player": "Holmes II",
+     "played": false,
+     "dnp_note": "Inactive - G League - On Assignment",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "DEN",
+     "player": "Nembhard",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "DEN",
+     "player": "Strawther",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Knee Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600266",
+     "team": "DEN",
+     "player": "Whitmore",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "DAL",
+     "player": "Biberović",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Heel Bursitis), de Larrea (Injury/Illness - Right Knee Sprain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "DAL",
+     "player": "Howard",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "DAL",
+     "player": "Lawal",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Groin Tightness",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "DAL",
+     "player": "Lively II",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Foot Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Butler III",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right ACL Repair / Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Curry",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Oblique Tear",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Horford",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Bilateral Low Back Injury Management",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Moody",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Patellar Tendon Repair / Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Porziņģis",
+     "played": false,
+     "dnp_note": "Inactive - Not With Team",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600267",
+     "team": "GSW",
+     "player": "Williams",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Hamstring Strain",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600268",
+     "team": "UTA",
+     "player": "Bufkin",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600268",
+     "team": "UTA",
+     "player": "Ingram",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600268",
+     "team": "UTA",
+     "player": "Jackson Jr.",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right MCL Tear",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600268",
+     "team": "UTA",
+     "player": "Markkanen (Injury/Illness - Right Hand",
+     "played": false,
+     "dnp_note": "Inactive - reason not printed on the Inactive line",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "PHX",
+     "player": "Reath",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "PHX",
+     "player": "Spencer",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "PHX",
+     "player": "Timme",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "PHX",
+     "player": "Williams",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Left Shoulder Surgery",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "SAC",
+     "player": "Mogbo",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "SAC",
+     "player": "Pedulla",
+     "played": false,
+     "dnp_note": "Inactive - G League - Two-Way",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "SAC",
+     "player": "Raynaud",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Patella Subluxation",
+     "pts": null
+    },
+    {
+     "date": "2026-11-18",
+     "game_id": "0022600269",
+     "team": "SAC",
+     "player": "Simmons",
+     "played": false,
+     "dnp_note": "Inactive - Injury/Illness - Right Achilles Tendon Repair / Surgery",
+     "pts": null
+    }
+   ],
+   "only_in_game_page": []
+  }
+ ]
+}
