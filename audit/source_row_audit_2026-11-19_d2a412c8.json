@@ -1,6 +1,6 @@
 {
   "title": "Static HTML table-row source-link audit",
-  "generated_at_utc": "2026-11-19T07:24:15Z",
+  "generated_at_utc": "2026-11-19T07:27:04Z",
   "scope": "Every .html file under the repository root, excluding Git and dependency/build directories.",
   "method": {
     "official_link_rule": "A static data row is link-present only if it contains an anchor to an HTTPS host equal to nba.com or ending in .nba.com.",
@@ -11,9 +11,9 @@
   },
   "counts": {
     "html_files": 167,
-    "static_rows": 9851,
+    "static_rows": 9853,
     "official_link_present_not_value_verified": 9127,
-    "unverified_non_nba_or_insecure_link_only": 444,
+    "unverified_non_nba_or_insecure_link_only": 446,
     "unverified_no_external_source_link": 280,
     "dynamic_template_rows_not_rendered": 10
   },
@@ -1145,10 +1145,10 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "sha256": "4e673bea7671e489b8de159535d0756bbf6c21cb12ddefa136e9ce1e1e2c8403",
-      "static_rows": 15,
+      "sha256": "18c13f9166094fcc24a5479ab4831279f9a6ed96ddd11de6361f72c550963050",
+      "static_rows": 17,
       "official_link_present_not_value_verified": 8,
-      "unverified_non_nba_or_insecure_link_only": 7,
+      "unverified_non_nba_or_insecure_link_only": 9,
       "unverified_no_external_source_link": 0,
       "dynamic_template_rows_not_rendered": 0
     },
@@ -1199,7 +1199,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "sha256": "4bf08c1355f9b8370c9a37a39b43966b4708f23e966ef585085fd292e19e4ae7",
+      "sha256": "9d7c868ce5de4143ec693b44b9c207aaa1034fa70d483b2442146f9a6d58f90a",
       "static_rows": 115,
       "official_link_present_not_value_verified": 108,
       "unverified_non_nba_or_insecure_link_only": 0,
@@ -7513,7 +7513,7 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 113,
+      "line": 118,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7527,7 +7527,7 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 118,
+      "line": 123,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7541,7 +7541,7 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 123,
+      "line": 128,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7555,7 +7555,7 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 128,
+      "line": 133,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7569,7 +7569,7 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 133,
+      "line": 138,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
@@ -7583,11 +7583,11 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 138,
+      "line": 143,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
-      "row_text": "rebuild step skipped refresh-data.yml",
+      "row_text": "rebuild step (this record) skipped refresh-data.yml",
       "external_links": [
         "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
       ],
@@ -7597,11 +7597,39 @@
     },
     {
       "file": "site/pages/refresh-path.html",
-      "line": 143,
+      "line": 148,
       "status": "unverified_non_nba_or_insecure_link_only",
       "review_status": "official_source_review_required",
       "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
-      "row_text": "rebuild has ever run no data/raw/_last_refresh.json",
+      "row_text": "rebuild has EVER run yes data/raw/_last_refresh.json",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 153,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "last successful rebuild 2026-11-15T12:43:11Z data/raw/_last_refresh.json",
+      "external_links": [
+        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+      ],
+      "official_nba_links": [],
+      "literal_official_nba_link_candidates": [],
+      "dynamic_template": false
+    },
+    {
+      "file": "site/pages/refresh-path.html",
+      "line": 158,
+      "status": "unverified_non_nba_or_insecure_link_only",
+      "review_status": "official_source_review_required",
+      "reason": "The row has external link(s), but none is a direct HTTPS NBA source.",
+      "row_text": "run records read / skipped-or-failed since 18 / 7 data/raw/_last_refresh.json",
       "external_links": [
         "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
       ],
@@ -8711,7 +8739,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 565,
+      "line": 570,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8723,7 +8751,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 572,
+      "line": 577,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8735,7 +8763,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 579,
+      "line": 584,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8747,7 +8775,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 586,
+      "line": 591,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8759,7 +8787,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 593,
+      "line": 598,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8771,7 +8799,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 1403,
+      "line": 1408,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
@@ -8783,7 +8811,7 @@
     },
     {
       "file": "site/pages/roll.html",
-      "line": 1409,
+      "line": 1414,
       "status": "unverified_no_external_source_link",
       "review_status": "official_source_review_required",
       "reason": "The row has no external source link.",
