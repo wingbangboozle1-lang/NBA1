@@ -11174,6 +11174,26 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 - Added four tests for G5 pass/block propagation, evaluator-error handling, and pick-table suppression. All `scripts/test_*.py` files pass (including the new tests); `verify_ledger.py`, `check_site.py`, `check_links.py`, `check_rendered.py`, and `verify_integration.py` pass. Integration reports 0 errors and 44 existing warnings, which remain visible/flagged; external NBA URLs could not be fetched from this sandbox and were not represented as live-verified.
 - Official source endpoints remain the repository's existing NBA schedule, stats, standings, injury-index/PDF, and results URLs; no source table or official value was edited in this task.
 
+## 71. Session `arena/9ff20954-nba1` — day-roll integration: settle 11/17 + 11/18, roll horizon to 2026-11-19..22, re-read official inputs, refresh registers, gates, delivery (claimed 2026-11-19 UTC)
+
+Branch `arena/9ff20954-nba1`, based on `main` `b3b19f2` (merge of PR #169). Platform pins this session to that branch; the `session-<id>/<task>` naming is satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19):** §0 ground rules, §0b registry, tail §63–§65, `gh pr list` (one open: #166 `arena/84264db0-nba1` §63.2 board-only repr fix — not touched, disjoint scope), `gh run list` (last Refresh success 2026-11-17, Probe in progress), Pages API (`built`, legacy). Measured live state: `main` = `b3b19f2`; horizon = 30 games 11/17–11/20 built 2026-11-17T15:54Z; settlements through 11/16 only; newest archived injury PDF 2026-11-17 11:30 AM ET; `data/raw/injuries.json` still 11/16 09:45 AM (F-CA-07). Today is 2026-11-19, so the horizon is stale by two days and two game days are unsettled. That is this claim's scope.
+
+### 71.1 Task table and file scopes (this session's, and only this session's)
+
+| ID | Task | Files |
+|---|---|---|
+| T01 | Claim + push (this section) | `COORDINATION.md` |
+| T02 | First-hand official re-read: schedule + finals for 11/17–11/19, standings, three team-stat pages, newest injury edition (via fetch channel) | `data/official/results_2026-11-17.json`, `results_2026-11-18.json`, `official_schedule_2026-11-19_to_22_9ff20954.json`, `standings_2026-11-19_9ff20954.json`, `teams_*_2026-11-19_9ff20954.json`, `data/injury_reports/2026-11-19_*` |
+| T03 | Settle 11/17 and 11/18 slates from verified finals (refuse if not all final) | `data/settlement/settlement_2026-11-17.json`, `settlement_2026-11-18.json`, `data/ledger/ledger.json` |
+| T04 | Re-cut model inputs + re-originate rolling horizon 11/19–11/22 (today + 3 days) with measured HCA pin | `data/derived/team_stats_recut.json`, `measured_constants_2026_27.json`, `horizon_lines.json`, `horizon_picks.json`, `data/archive/horizon_*_2026-11-19.json` |
+| T05 | Fix F-CA-07 trigger gap if in scope (editions-only change must wake promotion) or log request | `engine/promote_official.py` (only if fix is small and tested) |
+| T06 | Refresh registers (requirements, flags, executive summary), rebuild site pages | `data/content/*.json`, `data/flags.json`, `EXECUTIVE_SUMMARY.md`, `site/pages/*.html` |
+| T07 | Gate battery + PR + merge + Pages confirmation | — |
+
+No other session's scope is edited. Cross-scope requests go here, not into their files.
+
 ---
 
 ## 🧾 Collision and cross-check record — session `arena/eec70f24-nba1` (2026-11-19 UTC)
