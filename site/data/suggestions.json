@@ -997,6 +997,36 @@
    "decision_needed": "Approve lifting F138 game by game.",
    "source": "verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json",
    "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_CHICLE_book.pdf"
+  },
+  {
+   "id": "S40",
+   "title": "Gate the freshness of every promoted input against the newest capture in the repository",
+   "category": "Verification",
+   "problem": "Three of this session's findings are the same failure in different clothes: the shared injury register stayed on the 11/16 09:45 AM edition while 11/19 editions sat archived (F-CA-07), estimator B's 11/19 rows still carried pre-11/17 records and that same stale edition (F-39B-04), and the /stats team tables were an hour behind the standings (F-39B-01). Each is invisible to a builder that simply consumes whatever file is present, and each was found only by comparing a file against a newer artefact the repository already holds.",
+   "options": [
+    {
+     "option": "Add scripts/check_input_freshness.py: for each promoted input, fail if a strictly newer capture of the same kind exists (injury editions under data/raw/injury_pdfs/ by edition timestamp; results feed vs the newest date in data/official/results_*.json; each estimator file's window vs the published horizon window)",
+     "effort": "Medium — three comparisons, all already computable from filenames and file contents",
+     "risk": "Low — it can only report; nothing is rewritten",
+     "unlocks": "F-CA-07, F-39B-01 and F-39B-04 become machine-checkable instead of hand-found"
+    },
+    {
+     "option": "Keep relying on each cycle to re-read and notice",
+     "effort": "None",
+     "risk": "High — three of these lapses were caught by a human reading pages against sources",
+     "unlocks": "Nothing new"
+    },
+    {
+     "option": "Auto-refresh the stale files in place (promote the newest edition inside the builder)",
+     "effort": "Low",
+     "risk": "High — a builder that silently changes its own inputs breaks the ledger's digest-to-file binding, which is the whole point of the freeze",
+     "unlocks": "Nothing that the first option does not do more safely"
+    }
+   ],
+   "recommendation": "Option 1, as a read-only gate added to verify_all.py's audit set. The repository's rule is to measure and report, not to quietly refresh.",
+   "decision_needed": "Which of the promoted inputs the gate is allowed to require, and whether a stale input blocks a Pages build or only flags on the page",
+   "source": "session arena/39b70241-nba1 (COORDINATION.md §66), findings F-39B-01/04 and F-CA-07",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-19-39b70241/y04_roll_gates.json"
   }
  ]
 }

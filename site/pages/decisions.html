@@ -304,6 +304,14 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
+<tr id="Q34">
+<td>Q34</td>
+<td>Should a first-hand injury edition be promoted by whichever branch captured it, or only by the scheduled refresh?</td>
+<td>F-CA-07 documents that the shared refresh archives editions but never promotes an editions-only change, so data/raw/injuries.json can sit a day and dozens of editions behind while a capture pass is green. This session solved its own need on its own branch (scripts/y04_roll_2026_11_19_39b70241.py promotes the byte-exact 12:45 AM 11/19 edition and the ledger hashes the promoted file), which is correct for a horizon build but leaves the shared register lagging for every other consumer. Two mechanisms now exist and nothing in the repo says which one is authoritative.</td>
+<td>Either teach the promote step to treat a new archived edition as a `changed` source (the one-line fix the refresh owner proposed in F-CA-07) and retire branch-scoped promotion, or state in the brief that each cycle promotes the edition it reads and add a gate that fails when data/raw/injuries.json names an older edition than the newest file under data/raw/injury_pdfs/. The gate is checkable today: the newest archived edition is Injury-Report_2026-11-19_12_45AM.pdf.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id COORDINATION.md §65 (F-CA-07) and this session's capture manifest is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q4">
 <td>Q4</td>
 <td>How much of a team does an injury actually cost?</td>
@@ -345,7 +353,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">28 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">29 open, 21 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -707,6 +715,15 @@
 <td><b>Publish the referee crew and attendance the gamebooks already print</b></td>
 <td>F138 blanked attendance and officials for all eight 11/16 games because one session could not confirm them. A second independent read of the same gamebook PDFs confirms them for at least CHI@CLE (19432, sellout, three officials named) and ORL@BOS (three officials named). The cells are on the official document; only the pipeline connection is missing.</td>
 <td>Take option 2. Every filled cell has two independent reads and an official PDF link; the games whose gamebook printed no attendance stay blank and stay flagged.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S40</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>Gate the freshness of every promoted input against the newest capture in the repository</b></td>
+<td>Three of this session's findings are the same failure in different clothes: the shared injury register stayed on the 11/16 09:45 AM edition while 11/19 editions sat archived (F-CA-07), estimator B's 11/19 rows still carried pre-11/17 records and that same stale edition (F-39B-04), and the /stats team tables were an hour behind the standings (F-39B-01). Each is invisible to a builder that simply consumes whatever file is present, and each was found only by comparing a file against a newer artefact the repository already holds.</td>
+<td>Option 1, as a read-only gate added to verify_all.py's audit set. The repository's rule is to measure and report, not to quietly refresh.</td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>

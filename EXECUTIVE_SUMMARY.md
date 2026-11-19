@@ -9,6 +9,53 @@ number here is traceable to an official source; the source for each claim is nam
 Where a value could not be confirmed it is described as unconfirmed rather than filled in.
 
 ---
+## 0c. Update — 2026-11-19T05:40–06:30Z, session `arena/39b70241-nba1` (read this first)
+
+**The 11/17 + 11/18 slate is settled in full — prop tickets included — and the horizon has
+rolled to 2026-11-19 .. 11-22.** Where sections 0a/0/0b and 1–8 describe earlier vintages of
+the same files, this block and the data files supersede them.
+
+| Item | Was | Is now | Source |
+| --- | --- | --- | --- |
+| Results feed | 205 decided games through 11/16 | **222 of 222 rows Final through 2026-11-18**, each quarter sum re-checked against the printed final, 444 team-games = 2 × 222 (gate GA8) | <https://www.nba.com/games?date=2026-11-18> · `data/official/results_feed_2026_27.json` |
+| 11/17-slate settlement | four SGPs left UNSETTLED because no box score was captured | **settled and graded**: 17 singles 5-12-0 (−8.2u), 6 parlays 0-6 (−6.6u), 4 SGPs 1-2 with 1 void (−1.1u) → **6-20-1, −15.90 paper units** | `data/settlement/settlement_2026-11-17.json`, `data/settlement/sgp_grades_2026-11-17.json` |
+| The four prop tickets | open | Dončić 36 vs O38.5 **loses** (Reaves inactive → VOID); Brunson 31 **wins** but Barnes 20 vs O23.5 **loses**; Flagg 33 **wins** (Curry out with an oblique tear → VOID); Banchero inactive **and** Maxey a coach's-decision DNP → **ticket void, no stake** | each player's row on the game's official box-score page, plus those pages' own *Inactive Players* blocks |
+| Home-court pin | 0.83 pts (106 of 204, rate 0.5196) | **0.09 pts** (111 of 221, rate 0.5023) — measured, not fitted. Home teams went 2-5 on 11/17 and 3-12 on 11/18, and the arithmetic ties exactly (106+5=111, 204+17=221) | `data/derived/measured_constants_2026_11_19_39b70241.json` |
+| Horizon | 11/17..11/20, 30 games | **11/19..11/22, 26 games** priced from inputs read at 05:4xZ today; 23 singles past the 3.0 gate, 12 parlays, 8 SGP candidates; prereg frozen pre-tip at ledger entry 15 (18h50m before 01:00Z) | `data/derived/horizon_lines.json`, `data/prereg/Prereg_index.json` |
+| Injury input | text render, `raw_pdf_sha256: null` (F-X13) | the **newest edition (11/19 12:45 AM ET) captured byte-exactly by this branch's runner** with a measured sha256, and the promoted file the horizon consumed carries that hash — F-X13 is closed for this window | run `44468125114`, `data/official/injury_20261119_1245AM_39b70241.json` |
+
+**Two things a reader should not mistake for model improvement.** First, the pin's 0.74-point
+fall is one 17-game swing at n=221; at this sample size a single night is visible in the
+constants, which is why flag F-39B-02 asks for the pin to be quoted with an interval. Second,
+the two estimators no longer overlap past tonight:
+
+| Game | A (this branch, 222 games) | B (validated engine, frozen 11/16) | Gap | p(home) A vs B |
+| --- | --- | --- | --- | --- |
+| 2026-11-19 GSW@MEM | +8.1 / 231.3 | -0.9 / 233.2 | +9.0 spread, -1.9 total | 0.686 vs 0.480 |
+| 2026-11-19 POR@MIL | -19.0 / 228.1 | -23.1 / 233.6 | +4.1 spread, -5.5 total | 0.128 vs 0.092 |
+| 2026-11-19 NYK@MIN | +4.8 / 211.0 | +6.0 / 218.9 | -1.2 spread, -7.9 total | 0.613 vs 0.635 |
+| 2026-11-19 LAC@SAS | +16.7 / 224.6 | +13.9 / 228.3 | +2.8 spread, -3.7 total | 0.841 vs 0.788 |
+
+B's rows for these dates still carry pre-11/17 records (GSW 8-5 where the official pre-game
+line is 8-7) and name `INJURY-REPORT_2026-11-16_09_45AM` as their availability source, so the
+9.0-point gap on GSW@MEM mixes estimator method with input age — published as measured, not
+decomposed (F-39B-04, and `verify/2026-11-19-39b70241/estimator_disagreement.json`).
+
+**One real discrepancy was surfaced, not repaired.** The official advanced/traditional/opponent
+tables print GP 15 for LAL and UTA an hour after their 16th game ended, while the standings
+print 13-3 and 3-13. Gate GA3 therefore **FAILS for those two clubs** and the roll's A3b
+reports it. The lag was proved rather than assumed: dropping each club's *newest* game
+reproduces the page's own opponent-Pts cell exactly, dropping the oldest does not. GP/W-L ship
+from the standings, the ratings ship as printed with the sample named, and nothing was
+smoothed to make a gate go green (F-39B-01).
+
+**Still not true, and not claimed:** no strategy is funded; no market price exists anywhere in
+this repository, so every unit figure is paper at a stated −110 convention; the SGP "win" pays
+the frozen +1.10 convention, not a priced number; and 11/19 itself is deliberately unsettled —
+`settle_slate.py` exits 3 for it because no official results file can exist before the games
+are played.
+
+---
 
 ## 0a. Update — 2026-11-16T14:40–15:20Z, session `arena/23b323a3-nba1` (read this first)
 

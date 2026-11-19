@@ -100,7 +100,7 @@
       <h1>Brief traceability</h1>
       <p class="sub">Every requirement in the brief, checked against the repository. Done, partial, missing or blocked, with the gap stated and a link to the evidence.</p>
     </div>
-    <section class="card"><p><b>Status counts</b></p><div class="tiles"><div class="tile"><div class="tile-n">24</div><div class="tile-l">Done</div></div><div class="tile"><div class="tile-n">9</div><div class="tile-l">Partial</div></div><div class="tile"><div class="tile-n">0</div><div class="tile-l">Missing</div></div><div class="tile"><div class="tile-n">0</div><div class="tile-l">Blocked</div></div></div><ul class="tnote"><li><b>Done</b> &mdash; Implemented and evidenced in this repository.</li><li><b>Partial</b> &mdash; Implemented in part; the gap is stated.</li><li><b>Missing</b> &mdash; Not found in the repository by search.</li><li><b>Blocked</b> &mdash; Cannot be built: the source it needs is not available.</li></ul><p class="tnote">Repository links are code and data evidence in this repository. NBA.com links are the official pages the data was read from. No row fills a value that the repository does not contain. Full register: <a href="../../data/content/requirements.json">requirements.json</a>.</p></section><div class="tablewrap">
+    <section class="card"><p><b>Status counts</b></p><div class="tiles"><div class="tile"><div class="tile-n">26</div><div class="tile-l">Done</div></div><div class="tile"><div class="tile-n">10</div><div class="tile-l">Partial</div></div><div class="tile"><div class="tile-n">0</div><div class="tile-l">Missing</div></div><div class="tile"><div class="tile-n">0</div><div class="tile-l">Blocked</div></div></div><ul class="tnote"><li><b>Done</b> &mdash; Implemented and evidenced in this repository.</li><li><b>Partial</b> &mdash; Implemented in part; the gap is stated.</li><li><b>Missing</b> &mdash; Not found in the repository by search.</li><li><b>Blocked</b> &mdash; Cannot be built: the source it needs is not available.</li></ul><p class="tnote">Repository links are code and data evidence in this repository. NBA.com links are the official pages the data was read from. No row fills a value that the repository does not contain. Full register: <a href="../../data/content/requirements.json">requirements.json</a>.</p></section><div class="tablewrap">
 <table class="tbl "
  id="requirements"
 >
@@ -376,8 +376,32 @@
 <td>Board is long and has many sessions&#x27; records.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md" target="_blank" rel="noopener">Coordination board (repo)</a></td>
 </tr>
+<tr>
+<td><b>R34</b></td>
+<td>A game day that has ended is settled from official finals the same cycle, and the horizon is rolled forward before the next first tip.</td>
+<td><span class="pill ok">Done</span></td>
+<td>2026-11-19, session arena/39b70241-nba1: the 11/17 and 11/18 finals were read first-hand, promoted into data/official/results_2026-11-17.json / _11-18.json and into the feed; data/settlement/settlement_2026-11-17.json records 17 singles 5-12-0 (-8.2u) and 6 parlays 0-6 (-6.6u); the four open SGPs were closed the same day by data/settlement/sgp_grades_2026-11-17.json (1-2, 1 void, -1.1u), so the slate stands at -15.90 paper units. Ledger entries 13-16 chain the settlement, the grading and the pre-tip freeze of the new window (11/19-11/22, 26 games, frozen at 2026-11-19T06:25Z, 18h50m before the 01:00Z tip), and scripts/verify_ledger.py reports the chain OK.</td>
+<td>the 11/19 games tip at 01:00Z on 11/20; that date is a later cycle&#x27;s settlement, and settle_slate.py already refuses to write for it (dry run exits 3 with &#x27;no official results file&#x27; named per date)</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-17.json" target="_blank" rel="noopener">Settlement 11/17 slate</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/sgp_grades_2026-11-17.json" target="_blank" rel="noopener">SGP grading addendum</a></td>
+</tr>
+<tr>
+<td><b>R35</b></td>
+<td>Every origination input is re-read first-hand each cycle, and a table that lags is reported as lagging rather than patched into agreement.</td>
+<td><span class="pill ok">Done</span></td>
+<td>advanced / traditional / opponent / standings pages read 2026-11-19T05:4xZ and transcribed row by row (data/official/teams_inputs_2026-11-19_39b70241.json, data/official/standings_2026-11-19_0546Z_39b70241.json); gates GA1-GA9 and A1-A9 in verify/2026-11-19-39b70241/. The one genuine disagreement — the three /stats team tables print GP 15 for LAL and UTA while the standings and the finals corpus both record 16 — was resolved by arithmetic, not by editing: excluding each club&#x27;s newest game reproduces the page&#x27;s own opponent-Pts cell exactly (A6), so the tables simply have not folded 11/18 in. GP/W-L ship from the standings, the ratings ship as printed, and each affected row names the sample its rating rests on.</td>
+<td>the league does not publish the rebuild cadence of the /stats team tables, so the lag can only be observed from this kind of cross-check; the next cycle re-reads and reports again</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-19-39b70241/readback_report.json" target="_blank" rel="noopener">Readback gates GA1-GA9</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-19-39b70241/y04_roll_gates.json" target="_blank" rel="noopener">Roll gates A1-A9</a></td>
+</tr>
+<tr>
+<td><b>R36</b></td>
+<td>The two estimators of a line are published as two estimators, with their disagreement stated rather than averaged away.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>for the 2026-11-19 window the two model files overlap on 4 of 4 games (the validated engine&#x27;s own table holds 29 rows spanning 2026-11-19=4). The gaps are recomputed from the two files by this script into verify/2026-11-19-39b70241/estimator_disagreement.json: the widest gap is 9.0 points of spread on GSW@MEM (2026-11-19): A +8.1 vs B -0.9.</td>
+<td>the second estimator&#x27;s file stops at 11/19 and its rows still carry the pre-11/17 inputs (e.g. GSW listed 8-5 and the injury edition named INJURY-REPORT_2026-11-16_09_45AM, against tonight&#x27;s official 8-7 and the 12:45 AM 11/19 edition), so from 11/20 there is one line, not two — the disagreement cannot be stated for games B never priced</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/docs/data/lines.json" target="_blank" rel="noopener">Estimator B lines (validated engine)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-19-39b70241/estimator_disagreement.json" target="_blank" rel="noopener">Disagreement table</a></td>
+</tr>
 </tbody></table></div>
-<p class="tnote">33 requirements traced to repository evidence, 24 done, 9 partial, 0 missing, 0 blocked.</p>
+<p class="tnote">36 requirements traced to repository evidence, 26 done, 10 partial, 0 missing, 0 blocked.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no

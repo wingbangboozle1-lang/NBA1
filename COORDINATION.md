@@ -7399,11 +7399,42 @@ Branch `arena/39b70241-nba1`, based on `main` `b3b19f2` (merge of PR #169). Plat
 
 | ID | Task | Status | File scope (exclusive) |
 |----|------|--------|------------------------|
-| Y01 | Board read, claim committed+pushed before any other edit | in progress | COORDINATION.md §66 |
-| Y02 | First-hand official re-read: 11/17 + 11/18 finals (date, teams, final, quarter scores), 11/19–11/22 schedule, standings, three team-stat pages, newest injury edition | pending | data/official/results_feed_2026-11-19_*.json, data/official/schedule_2026-11-19_to_22.json, data/official/standings_2026-11-19*.json, data/official/teams_{traditional,opponent,advanced}_2026-11-19*.json, data/official/injury_2026-11-19*.json, verify/2026-11-19-39b70241/** |
-| Y03 | Settle 11/17 + 11/18 slates from official finals; ledger hash verify; settlement stamps | pending | data/settlement/settlement_2026-11-17.json, data/settlement/settlement_2026-11-18.json, data/ledger/ledger.json (append only), site/pages/settlement.html (via builder) |
-| Y04 | Roll horizon to 11/19–11/22 (today + up to 3 days): re-originate lines (measured HCA pin, possessions×PPP total, disagreement headline), generate gated picks, freeze prereg before tip | pending | data/derived/horizon_lines.json, data/derived/horizon_picks.json, data/prereg/**, scripts/originate_horizon_39b70241.py (new), scripts/generate_picks.py (window only if needed) |
-| Y05 | Refresh registers + executive summary on measured evidence; add flags for anything unconfirmed | pending | data/content/requirements.json, data/content/flagged.json, data/content/questions.json, data/content/suggestions.json, EXECUTIVE_SUMMARY.md, README.md, REPO_REVIEW.md (via builders) |
+| Y01 | Board read, claim committed+pushed before any other edit | **done** (`c280bb3`) | COORDINATION.md §66 |
+| Y02 | First-hand official re-read: 11/17 + 11/18 finals (date, teams, final, quarter scores), 11/19–11/22 schedule, standings, three team-stat pages, newest injury edition | **done** — finals + schedule + standings + three stat pages at 05:4xZ (`ad80854`, `dd9a1e6`); the injury edition needed a runner (the sandbox cannot reach the PDF host), so `scripts/capture_injury_39b70241.py` + `.github/workflows/capture-injury-39b70241.yml` captured all four 11/19 editions byte-exactly in run 44468125114 and `scripts/y04_roll_2026_11_19_39b70241.py` promoted the 12:45 AM one | data/official/results_feed_2026-11-19_*.json, data/official/schedule_2026-11-19_to_22.json, data/official/standings_2026-11-19*.json, data/official/teams_{traditional,opponent,advanced}_2026-11-19*.json, data/official/injury_2026-11-19*.json, verify/2026-11-19-39b70241/** |
+| Y03 | Settle 11/17 + 11/18 slates from official finals; ledger hash verify; settlement stamps | **done** — finals promoted into the unsuffixed layout and the feed (222/222 Final), `settle_slate.py` wrote `settlement_2026-11-17.json` (ledger 13-14), and the four open SGPs were closed the same cycle from official box-score rows plus the box pages' Inactive Players blocks: `data/settlement/sgp_grades_2026-11-17.json`, ledger entry 16, slate line 6-20-1 for −15.90 paper units | data/settlement/settlement_2026-11-17.json, data/settlement/settlement_2026-11-18.json, data/ledger/ledger.json (append only), site/pages/settlement.html (via builder) |
+| Y04 | Roll horizon to 11/19–11/22 (today + up to 3 days): re-originate lines (measured HCA pin, possessions×PPP total, disagreement headline), generate gated picks, freeze prereg before tip | **done** — `scripts/originate_horizon_39b70241.py` (a copy of the 11/17 originator, inputs only) priced 26 games, G-TOT pass (model 225.0 vs measured 227.5), 23 singles / 12 parlays / 8 SGP candidates, prereg frozen at ledger entry 15 with the first tip 18h50m later; disagreement headline = widest spread gap 9.0 pts (GSW@MEM, A +8.1 vs B −0.9) | data/derived/horizon_lines.json, data/derived/horizon_picks.json, data/prereg/**, scripts/originate_horizon_39b70241.py (new), scripts/generate_picks.py (window only if needed) |
+| Y05 | Refresh registers + executive summary on measured evidence; add flags for anything unconfirmed | **done** — `scripts/update_registers_39b70241.py` appended R34/R35/R36, F-39B-01…04, A21, Q34, S40, annotated R02/R04/R21 and F-CA-07 without touching their owners' text, refreshed `data/content/executive.json`, and opened EXECUTIVE_SUMMARY.md with a 0c block; all numbers recomputed from the files, disagreement table at `verify/2026-11-19-39b70241/estimator_disagreement.json` | data/content/requirements.json, data/content/flagged.json, data/content/questions.json, data/content/suggestions.json, EXECUTIVE_SUMMARY.md, README.md, REPO_REVIEW.md (via builders) |
 | Y06 | Gates (verify_all, check_site, verify_ledger, check_links), PR → main, merge without waiting, Pages fetch-back, record here | pending | whole-branch integration |
 
 **Boundaries:** `docs/**`, `command-center/**` (other builds, read-only), PR #166's branch (disposition noted, not edited), Pages `build_type` flip (owner setting). R16 stays blocked: no NBA-operated closing-line source exists; nothing fabricated.
+
+**Findings recorded (05:4x–06:3xZ):**
+
+* **GA3 fails, and stays failing on purpose.** The advanced/traditional/opponent tables print GP 15 for
+  LAL and UTA an hour after their 16th game ended; the standings and the finals corpus both say 16. The lag
+  was proved, not assumed — excluding each club's *newest* game reproduces the page's own opponent-Pts cell
+  exactly (roll gate A6), so the tables have not folded 11/18 in. GP/W-L ship from the standings, ratings
+  ship as printed with the sample named, and each affected row carries a note. Filed as F-39B-01.
+* **The home-court pin fell 0.83 → 0.09** because home teams went 5-12 over the two newly settled slates
+  (106/204 → 111/221, and 111−106 = 5, 221−204 = 17 exactly). Measured, not smoothed; filed as F-39B-02
+  with the request that the pin be quoted with an interval at this sample size.
+* **Both VOID-leg conventions were tested against real tickets.** Two legs voided because the player was
+  inactive (Reaves, Curry), one because he was active and a coach's-decision DNP (Maxey), and one ticket was
+  voided outright because *both* legs voided (Banchero inactive + Maxey DNP). A VOID leg is removed, never
+  auto-won — the frozen rule from `settlement_2026-11-14.json` held without amendment.
+* **Estimator B does not reach past 11/19** and its 11/19 rows still carry pre-11/17 records and the
+  11/16 09:45 AM injury edition, so from 11/20 the site has one line per game while its pages describe two
+  estimators (F-39B-04). The 9.0-point gap on tonight's GSW@MEM is therefore part method, part input age,
+  and is published as a single measured number rather than decomposed.
+* **Ledger canonicalisation is a real interface, not an implementation detail.** The SGP addendum's first
+  draft hashed its entry with compact JSON separators while `verify_ledger.py` and `freeze_prereg.py` use
+  `json.dumps(sort_keys=True)` defaults — the chain verified internally and still reported `head mismatch`.
+  Fixed in the script and in the file; recorded so the next session does not rediscover it.
+
+**Left open deliberately:** the 11/19 date itself (four games tipping 01:00Z on 11/20) has no official
+results file, so `settle_slate.py --slate 2026-11-19` exits 3 — the designed behaviour, verified by hand.
+Per-player game logs for 11/17 and 11/18 were **not** captured as `player_game_logs_*.json`; the props were
+graded from official box-score pages read through the fetch channel, so the grades are re-checkable against
+the same URL but are not reproducible from committed bytes (R21's gap, and the reason `Y05`'s next action 5
+asks for the log capture).
+

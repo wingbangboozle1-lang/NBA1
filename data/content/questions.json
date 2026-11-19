@@ -159,6 +159,13 @@
    "answer": "Measured on the official final-score corpus: home points against away points 0.0823; margin against total -0.0115; home points against total 0.732. The first two are near zero, so legs on different games are close to independent and the naive product is nearly right for cross-game parlays. Home points against total at 0.732 is not, which is exactly the same-game-parlay case - so the site prints the rho-priced figure next to the naive product and lets the difference show, rather than withholding the price.",
    "source": "data/derived/model_report_v2.json (measured_correlations)",
    "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "id": "A21",
+   "question": "Does a prop ticket stay open forever if no per-player game log was captured for its date?",
+   "answer": "No — it stays open only while there is no official read. scripts/settle_slate.py correctly refused to grade the four 11/17-slate SGPs because it had no box score for that slate in that run; the same day this session read each leg's box-score row (or the box page's Inactive Players block) and appended data/settlement/sgp_grades_2026-11-17.json without touching the hash-chained settlement file. Under the frozen rule a player who did not appear is VOID and removed, a remaining OVER leg wins only if actual > line, and a ticket whose legs are all VOID is voided with no stake. Result: CHA@LAL lost (Dončić 36 vs 38.5, Reaves inactive), NYK@TOR lost (Brunson 31 won, Barnes 20 lost), GSW@DAL won (Flagg 33, Curry inactive), PHI@ORL void (Banchero inactive and Maxey a coach's-decision DNP) — net -1.10 paper units, and the slate closes at 6 won, 20 lost, 1 void for -15.90u.",
+   "source": "data/settlement/sgp_grades_2026-11-17.json (ledger entry 16)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/sgp_grades_2026-11-17.json"
   }
  ],
  "open": [
@@ -420,6 +427,16 @@
    "priority": "Medium",
    "source": "data/ledger/ledger.json entry 12",
    "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "id": "Q34",
+   "question": "Should a first-hand injury edition be promoted by whichever branch captured it, or only by the scheduled refresh?",
+   "what_is_missing": "F-CA-07 documents that the shared refresh archives editions but never promotes an editions-only change, so data/raw/injuries.json can sit a day and dozens of editions behind while a capture pass is green. This session solved its own need on its own branch (scripts/y04_roll_2026_11_19_39b70241.py promotes the byte-exact 12:45 AM 11/19 edition and the ledger hashes the promoted file), which is correct for a horizon build but leaves the shared register lagging for every other consumer. Two mechanisms now exist and nothing in the repo says which one is authoritative.",
+   "how_to_answer": "Either teach the promote step to treat a new archived edition as a `changed` source (the one-line fix the refresh owner proposed in F-CA-07) and retire branch-scoped promotion, or state in the brief that each cycle promotes the edition it reads and add a gate that fails when data/raw/injuries.json names an older edition than the newest file under data/raw/injury_pdfs/. The gate is checkable today: the newest archived edition is Injury-Report_2026-11-19_12_45AM.pdf.",
+   "blocks": "R04's promotion half, and any consumer that reads data/raw/injuries.json instead of a dated capture",
+   "priority": "medium",
+   "source": "COORDINATION.md §65 (F-CA-07) and this session's capture manifest",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-19-39b70241/injury_capture_manifest_2026-11-19.json"
   }
  ]
 }

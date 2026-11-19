@@ -1,12 +1,12 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-17 (11/16 settled and SGP-graded; 11/17-11/20 horizon re-originated with the measured home-court pin and the strategy files frozen before every tip they cover)",
- "headline": "30 games are priced across 2026-11-17 to 2026-11-20 from official inputs read today, with the home-court advantage pinned to the measured home-win rate (0.5196, 106 of 204, worth 0.83 points) rather than fitted. The two independent estimators disagree by a headline margin of 0.0 to a few points per game and that disagreement, not the blend, is what the site leads with. The pre-registration files for all twelve strategy families and the hash of every published line were sealed in ledger entry 12 at 15:54Z, before the first tip they cover (7:30 PM ET, 00:30Z). Nothing is staked: no strategy has passed the validation gates, and the total is gated against the measured league total (model 226.1 vs measured 227.6, gap -1.6 against a tolerance of 8.0).",
- "lead": "This session re-read every 11/16 game on the official site (https://www.nba.com/games?date=2026-11-16 and the eight game pages). The eight final scores were also matched 8 of 8 against the scheduled 11/17 capture (data/raw/_capture_results_2026-11-16.json). Quarter scores were read once per game, and venue, attendance and officials were blanked where no read confirmed them (flag F138). The scheduled refresh captured the finals but did not promote them or settle the day, so this session entered them by hand and recorded that gap as F140. Results and settlement now render every settlement record in the repository, including 11/16 and its SGP grading, from the data files themselves.",
+ "as_of": "2026-11-19 (11/17 and 11/18 settled and SGP-graded the same cycle; the horizon is re-originated for 11/19-11/22 on inputs read at 05:4xZ, with the strategy files frozen into the ledger 18h50m before tonight's first tip)",
+ "headline": "26 games are priced across 2026-11-19 to 2026-11-22 from official inputs re-read this morning, with home-court advantage pinned to the measured home-win rate — 111 of 221 non-neutral home games, 0.5023, worth 0.09 points, down 0.74 from yesterday because home teams went 5-12 over the two newly settled slates — and the second estimator now only reaches 11/19, so from 11/20 there is one line per game rather than two (F-39B-04).",
+ "lead": "This session read all 17 games of the 2026-11-17 and 2026-11-18 slates first-hand (each game's own official page, quarter by quarter, every quarter sum checked against the printed final), promoted them into the results feed — 222 rows, 222 Final — and settled the sealed 11/17 slate: 17 singles 5-12-0 for -8.2 units, 6 parlays 0-6 for -6.6, and the four published SGPs closed the same day at 1-2 with 1 void for -1.1, -15.90 units overall. No strategy is funded and no ticket was ever staked: the whole record is MODEL OUTPUT at a stated paper convention.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
-  "one_line": "The horizon for 2026-11-17 to 2026-11-20 is published: 30 games priced from official inputs read today, home-court pinned to the measured 0.5196 home-win rate (0.83 points) rather than fitted, the two estimators' disagreement carried as the headline, 18 of the 30 games carrying a pick that survived the per-pick gates, and every strategy file plus every model-input digest sealed in ledger entry 12 at 15:54Z, before the first tip those files cover. The total is reconciled against the measured league total (model 226.1, measured 227.6, gap -1.6 within a tolerance of 8.0). Zero stakes: no strategy has passed the full validation set, and no official closing price exists to measure an edge against.",
-  "why": "The model prices a window the market cannot currently be compared against, and one record outside luck alone (S1 at 23-9 with an exact binomial p of 0.020) still fails calibration and stability. Publishing prices and a frozen pre-registration is the honest deliverable at this stage; publishing a stake would not be."
+  "one_line": "The horizon for 2026-11-19 to 2026-11-22 is published: 26 games priced from official inputs read at 05:4xZ today, home-court pinned to the measured 0.5023 home-win rate (0.09 points) rather than fitted, 23 of 26 games carrying a pick that survived the per-pick gate (3.0 points), 12 two-leg parlays and 8 SGP candidates priced with the measured rho and the naive product printed beside it, and every prereg file plus every model-input digest sealed in ledger entry 15 at 2026-11-19T06:25Z — 18h50m before the first tip those files cover. The total still reconciles against the measured league total (model 225.0 against measured 227.5, gate G-TOT tolerance 8.0).",
+  "why": "the model prices a window the market cannot be compared against, and this cycle changed no part of that: the gates that would fund a strategy need a closing price (G4/G5) and prop-variance inputs (G-PROP), and neither source exists in this repository, so R16 stays blocked. Publishing prices, a settlement and a frozen pre-registration is the honest deliverable at this stage; publishing a stake would not be. One record does now carry a graded SGP line (1-2, 1 void, -1.10u), which is a record, not evidence."
  },
  "findings": [
   {
@@ -104,54 +104,38 @@
   }
  ],
  "what_is_live_now": [
-  "Three graded game days with visible settlement stamps on site/pages/results.html and site/pages/settlement.html: 2026-11-14 (2026-11-15T12:35Z), 2026-11-15 (2026-11-16T14:45Z, 5-4-0 on nine singles, -2.7 units with parlays) and 2026-11-16 (2026-11-17T15:44Z, singles 3-5-0 -2.5, parlays -3.3, SGP -2.2; settled total -8.0 units).",
-  "The results page reads the settlement and SGP grading records directly. A later amendment supersedes an earlier grading record through a ledger entry, so the page cannot show a grade the ledger does not hold.",
-  "The Results page no longer renders a phantom game day from the season-wide running feed (data/official/results_feed_2026_27.json). Its 11/16 feed rows now read FINAL: 205 of 222 games are final.",
-  "Originated spreads, totals and fair moneylines for 29 games across 2026-11-16 to 2026-11-19. The pick window and the line window are the same three days.",
-  "Two estimators per game with their disagreement published as the headline confidence signal (max 1.37 pp, mean 0.45 pp, gate 4.0 pp) and the blend underneath.",
-  "Home-court advantage pinned to the measured official home-win rate: 0.5204 from the standings HOME/ROAD columns (102 of 196), cross-checked against the final-score corpus."
+  "Four graded game days with visible settlement stamps: 2026-11-14, 2026-11-15 (5-4-0), 2026-11-16, and now 2026-11-17 settled through 2026-11-18 — 17 singles 5-12-0 (-8.2u), 6 parlays 0-6 (-6.6u), 4 SGPs 1-2-0 with 1 void (-1.1u), -15.90 paper units, stamped from the finals read at 05:46Z.",
+  "The 11/19-11/22 horizon: 26 games, 23 singles, 12 parlays, 8 SGP candidates, all MODEL OUTPUT — UNVALIDATED at zero stake, frozen pre-tip at ledger entry 15.",
+  "Ledger: 16 entries, chain verified (scripts/verify_ledger.py -> 'ledger chain OK'); the 11/17 settlement is entry 13-14, the SGP grading entry 16, the pre-tip freeze entry 15.",
+  "Injury inputs: the newest official edition (2026-11-19 12:45 AM ET) is archived byte-exactly by this branch's runner with a measured sha256, and the promoted file the horizon consumed carries that hash — the first window in the repository where F-X13 does not apply.",
+  "Verification: scripts/verify_all.py -> FAILURES: 0; the readback gates for today's reads report GA3 FAIL (LAL/UTA one-game table lag) and every other gate pass, by design rather than by repair."
  ],
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. The published lines were deliberately not rewritten.",
-   "why": "Executed by session arena/95c1cb23-nba1. The two editions, the diff, the impact re-computation and the row-level verification are in data/derived/gameday_read.json, one source URL per row. The residual finding is F47: the availability layer cannot see most of what was filed."
+   "action": "DONE 2026-11-19T06:25Z: settle 11/17 + 11/18 from official finals, close the four open SGPs, roll the horizon to 11/19-11/22 and freeze the strategy files before tip.",
+   "why": "Executed by session arena/39b70241-nba1 — ledger entries 13-16, data/settlement/settlement_2026-11-17.json and data/settlement/sgp_grades_2026-11-17.json. The 11/19 date is deliberately left open: settle_slate.py exits 3 for it because no official results file exists yet."
   },
   {
    "rank": 2,
-   "action": "Complete the minutes input, per club, so the availability layer can see a rotation instead of a top-50 slice",
-   "why": "It is what turns the 0.00 columns into numbers, and it unlocks Q3, Q12 and Q20 (SG20, F47)."
+   "action": "Settle the 2026-11-19 slate (4 games) after 01:00Z, and extend the same cycle to 11/20's 9 Cup games",
+   "why": "The window is published and frozen for exactly these dates; the 11/20 slate is the largest in the horizon and the first whose injury rows do not exist at build time."
   },
   {
    "rank": 3,
-   "action": "Capture the 11/16, 11/17 and 11/18 injury-report editions as they are published",
-   "why": "The 11/15/26 06:15 AM ET edition is captured (101 rows; its 11/16 team blocks print NOT YET SUBMITTED, exactly as the reporting deadlines predict). Each remaining edition should be stored with its revision and retrieval time and diffed against the previous one, as was done for 11/15 (F74)."
+   "action": "Close F-39B-04: re-cut estimator B's window, or state in the pages that the two-estimator comparison ends on 11/19",
+   "why": "Right now the roll page's disagreement column for tonight compares a model on 222 games with one frozen at 205 games and records two days stale — the gap is 9.0 points of spread on GSW@MEM (2026-11-19): A +8.1 vs B -0.9 at its widest on the overlap, and a reader cannot tell how much of that is age and how much is method."
   },
   {
    "rank": 4,
-   "action": "Settle the 2026-11-15 slate from official finals at game-day end and keep the per-game result feed current",
-   "why": "The standing ledger rule: verify final scores from official box scores - one row per game with date, teams, final score and quarter scores in data/official/results_2026-11-15.json - then grade the pre-tip record against them and extend the hash chain. Verified finals for games already complete are recorded as they land; nothing is settled before the official page marks it final."
+   "action": "Adopt S40's freshness gate before the next game-day rollover",
+   "why": "Three of today's findings are the same class of lapse, and all three were caught by hand."
   },
   {
    "rank": 5,
-   "action": "Log real closing prices",
-   "why": "Until this exists, nothing here can be called profitable - only better than a naive model. It is also the missing input for the market-anchored prior (blend the model line with the closing line, weighted by measured out-of-sample log-loss). Everything else is optimisation of an unvalidated target."
-  },
-  {
-   "rank": 6,
-   "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
-   "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again."
-  },
-  {
-   "rank": 7,
-   "action": "Capture per-player minutes for all 30 teams, then re-run the gates.",
-   "why": "Eleven of twenty-five picks are held back by the capture rather than by the model (F106). Until the capture is complete the redistribution gate measures whether data exists, not whether the line is sound."
-  },
-  {
-   "rank": 8,
-   "action": "Re-read the injury index inside the scheduled refresh so availability fills in per game date.",
-   "why": "No official edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED (F105). Availability is the fastest-moving input and is currently only as fresh as the last session that looked."
+   "action": "Capture per-player game logs for 11/17 and 11/18 (the two dates R21 still lacks)",
+   "why": "scripts/settle_sgp_from_logs.py is ready and the 11/16 file shows the schema; with logs the box-page grades would be reproducible from committed bytes instead of a page read."
   }
  ],
- "bottom_line": "11/16 is settled and its record is in the ledger, but it is settled on two forms of evidence that need follow-up. First, the scheduled refresh does not promote or settle a day from its own captures (F140), so the 11/16 finals were entered by hand. Second, two SGP player legs are UNRESOLVED (F139), and venue, attendance and officials are blank for all but one game (F138). None of these changes a settled result. Nothing on this site is a recommendation, and nothing is staked. Open items for a reviewer: the refresh promotion gap (F140), the unresolved SGP legs (F139), the 11/16 GAME INFO read (F138), the GSW@NOP tip-time conflict (F101), the POR@MIN back-to-back convention (Q29), and the live-slate contamination rule (F103)."
+ "bottom_line": "The slate closed clean and the new window is sealed before its first tip, which is what the process is for. What it does not buy is evidence that any strategy works: the record is -15.90 paper units over 27 tickets, every gate that could fund a strategy still needs a price this repository cannot reach, and two of today's findings (the 0.74-point pin move, the one-game table lag) are reminders that at 222 games a single night is visible in the constants. Nothing here is staked, and nothing here should be read as an edge."
 }

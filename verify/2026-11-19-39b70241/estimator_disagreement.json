@@ -1,0 +1,71 @@
+{
+ "title": "Estimator A (this branch's originator) vs estimator B (docs/data/lines.json), 2026-11-19 window",
+ "generated_by": "scripts/update_registers_39b70241.py",
+ "generated_utc": "2026-11-19T06:25Z",
+ "a_file": "data/derived/horizon_lines.json (26 games, 2026-11-19..2026-11-22)",
+ "b_file": "docs/data/lines.json (29 rows, per day 2026-11-19=4)",
+ "sign_convention": "both files state the HOME team's margin in points, positive = home favoured; spread_gap = A - B, so a positive number means this session's model is more bullish on the home side",
+ "rows": [
+  {
+   "date": "2026-11-19",
+   "game_id": 22600270,
+   "matchup": "GSW@MEM",
+   "a_spread_home": 8.1,
+   "b_spread_home": -0.9,
+   "spread_gap": 9.0,
+   "a_total": 231.3,
+   "b_total": 233.2,
+   "total_gap": -1.9,
+   "a_p_home": 0.686,
+   "b_p_home": 0.48,
+   "b_records_in_file": "8-5 / 9-4",
+   "b_injury_edition_in_file": "NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": 22600271,
+   "matchup": "POR@MIL",
+   "a_spread_home": -19.0,
+   "b_spread_home": -23.1,
+   "spread_gap": 4.1,
+   "a_total": 228.1,
+   "b_total": 233.6,
+   "total_gap": -5.5,
+   "a_p_home": 0.1278,
+   "b_p_home": 0.092,
+   "b_records_in_file": "9-3 / 1-13",
+   "b_injury_edition_in_file": "NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": 22600272,
+   "matchup": "NYK@MIN",
+   "a_spread_home": 4.8,
+   "b_spread_home": 6.0,
+   "spread_gap": -1.2,
+   "a_total": 211.0,
+   "b_total": 218.9,
+   "total_gap": -7.9,
+   "a_p_home": 0.613,
+   "b_p_home": 0.635,
+   "b_records_in_file": "7-6 / 9-4",
+   "b_injury_edition_in_file": "NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": 22600273,
+   "matchup": "LAC@SAS",
+   "a_spread_home": 16.7,
+   "b_spread_home": 13.9,
+   "spread_gap": 2.8,
+   "a_total": 224.6,
+   "b_total": 228.3,
+   "total_gap": -3.7,
+   "a_p_home": 0.8411,
+   "b_p_home": 0.788,
+   "b_records_in_file": "4-8 / 12-2",
+   "b_injury_edition_in_file": "NO ENTRY IN THE NBA OFFICIAL INJURY REPORT, INJURY-REPORT_2026-11-16_09_45AM"
+  }
+ ],
+ "honesty": "B's rows for these dates were built from 2026-11-16 inputs (its own files say so: records 8-5/1-13 etc. and the INJURY-REPORT_2026-11-16_09_45AM edition), so the gap mixes estimator method with input age. Printed as measured, not decomposed — nothing here attributes a part of the gap to either cause."
+}

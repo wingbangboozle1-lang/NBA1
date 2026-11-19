@@ -1527,6 +1527,51 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no official source">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-39B-01</td>
+<td>Medium</td>
+<td><b>Two of thirty /stats team tables (LAL, UTA) still cover 15 games an hour after their 16th ended, while the standings page already shows 16</b></td>
+<td>read 2026-11-19T05:4xZ: the advanced, traditional and opponent tables all print GP 15 for Los Angeles and Utah; the standings print 13-3 and 3-13, and the finals corpus contains 16 decided games for each (LAL 118-114 vs CHA on 11/17, then 97-109 vs UTA on 11/18). The lag was proved rather than assumed: for both clubs the page's opponent-Pts cell reproduces exactly when that club's newest game is excluded and does not when the oldest is, which is the signature of a table that has not folded the last result in. GA3 in verify/2026-11-19-39b70241/readback_report.json therefore FAILS, and the roll gate A3b REPORTS it; no rating was adjusted to make the gate green, and the sum of the tables' own GP (442) is published beside the standings' 444.</td>
+<td>data/derived/team_stats_recut_2026-11-19_39b70241.json (two rows carry a note), the 11/19-11/22 horizon lines for any game involving LAL or UTA (tonight: none; 11/20 SAC@LAL and 11/22 DAL@UTA do), and the HCA pin, whose home-win count is taken from the standings and is unaffected</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-39B-02</td>
+<td>Medium</td>
+<td><b>The home-court pin moved 0.74 points in one cycle (0.83 -&gt; 0.09) on 17 new games; a one-day estimate is that volatile at 222 games</b></td>
+<td>the pin is measured, never fitted: sigma_margin x Phi^-1(home win rate). The rate went from 106/204 (0.5196) to 111/221 (0.5023) because home teams went 2-5 on 2026-11-17 and 3-12 on 2026-11-18 — 5 wins in the 17 newly decided games, and the arithmetic ties exactly (106+5=111, 204+17=221). sigma_margin also moved, 16.868 -&gt; 16.714. The consequence for the published window is real: every spread now carries 0.09 points of home advantage instead of 0.83, which flips no pick on its own but moves each line's margin by ~0.74. Nothing here should be read as a model improvement; it is the same estimator on a slightly different sample, and a 17-game swing of this size argues for quoting the pin with its interval.</td>
+<td>data/derived/measured_constants_2026_11_19_39b70241.json, data/derived/horizon_lines.json (all 26 games), data/derived/horizon_picks.json</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-39B-03</td>
+<td>Low</td>
+<td><b>One VOID leg (Curry, 2026-11-18 GSW@DAL) is graded from the official gamebook's inactive list rather than the box-score page's own Inactive Players block</b></td>
+<td>the other three VOID/loss legs cite the box-score pages directly, and for CHA@LAL and PHI@ORL those pages print the inactive list themselves, which is what closed them. For GSW@DAL this session read the gamebook PDF (https://statsdmz.nba.com/pdfs/20261118/20261118_GSWDAL_book.pdf: 'Inactive: Warriors - ... Curry (Injury/Illness - Right Oblique Tear)') and the box-score table (no Curry row), but not the box page's inactive block. Same official source class the 11/16 SGP grading used, so the grade is not in doubt; it is recorded because the evidence class differs.</td>
+<td>data/settlement/sgp_grades_2026-11-17.json (ticket 3 of 4)</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-39B-04</td>
+<td>Medium</td>
+<td><b>Estimator B stops on 11/19 and its rows for that day still carry pre-11/17 inputs, so from 11/20 the site has one line per game while the pages describe two estimators</b></td>
+<td>docs/data/lines.json holds 29 rows covering 11/16 to 11/19 only. Its four 11/19 rows list GSW 8-5 and MIL 1-13 against the official pre-game 8-7 and 1-14 read this morning, and every one of them names INJURY-REPORT_2026-11-16_09_45AM as the availability source — three days behind tonight's 12:45 AM edition. The disagreement for tonight is therefore between A re-cut on 222 games and B frozen at 205; it should be read as an estimator-age difference as much as a modelling one. Widest spread gap on the overlap: 9.0 points on GSW@MEM (table in verify/2026-11-19-39b70241/estimator_disagreement.json).</td>
+<td>docs/data/lines.json, the two-estimator section of site/pages/roll.html</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-39B-05</td>
+<td>Low</td>
+<td><b>The injury-parser unit test asserted an absolute row floor, so a legitimately small slate made the CI test gate red</b></td>
+<td>scripts/test_injury_diff.py:RealPdfTests.test_rows_extracted required row_count &gt; 50 of whatever edition is newest in data/raw/injury_pdfs/. This branch's runner captured the four 2026-11-19 editions, whose newest (12:45 AM ET) covers tonight's four games and parses 44 rows — the parser is fine, the fixture's assumption was not, and the failure would have blocked the scheduled test gate for a non-defect.</td>
+<td>scripts/test_injury_diff.py, and the CI step 'Run the unit-test suite' in .github/workflows/pages.yml</td>
+<td>replaced the absolute floor with the structural invariant (&gt;= one block per club per game in the edition, computed from the parsed matchup column), so the test now fails only on a real drop. The pinned 11/15 fixture class, which is what F-X01 was about, still asserts its exact 87-row count and is untouched.</td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

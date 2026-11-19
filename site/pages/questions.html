@@ -251,6 +251,13 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id data/derived/model_report_v2.json (measured_correlations) is not in the register">&mdash;</span></td>
 </tr>
+<tr id="A21">
+<td>A21</td>
+<td><b>Does a prop ticket stay open forever if no per-player game log was captured for its date?</b></td>
+<td>No — it stays open only while there is no official read. scripts/settle_slate.py correctly refused to grade the four 11/17-slate SGPs because it had no box score for that slate in that run; the same day this session read each leg's box-score row (or the box page's Inactive Players block) and appended data/settlement/sgp_grades_2026-11-17.json without touching the hash-chained settlement file. Under the frozen rule a player who did not appear is VOID and removed, a remaining OVER leg wins only if actual &gt; line, and a ticket whose legs are all VOID is voided with no stake. Result: CHA@LAL lost (Dončić 36 vs 38.5, Reaves inactive), NYK@TOR lost (Brunson 31 won, Barnes 20 lost), GSW@DAL won (Flagg 33, Curry inactive), PHI@ORL void (Banchero inactive and Maxey a coach's-decision DNP) — net -1.10 paper units, and the slate closes at 6 won, 20 lost, 1 void for -15.90u.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/settlement/sgp_grades_2026-11-17.json (ledger entry 16) is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -516,6 +523,15 @@
 <td>The next cycle's window and every future window label in the ledger</td>
 <td>Medium</td>
 <td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q34">
+<td>Q34</td>
+<td><b>Should a first-hand injury edition be promoted by whichever branch captured it, or only by the scheduled refresh?</b></td>
+<td>F-CA-07 documents that the shared refresh archives editions but never promotes an editions-only change, so data/raw/injuries.json can sit a day and dozens of editions behind while a capture pass is green. This session solved its own need on its own branch (scripts/y04_roll_2026_11_19_39b70241.py promotes the byte-exact 12:45 AM 11/19 edition and the ledger hashes the promoted file), which is correct for a horizon build but leaves the shared register lagging for every other consumer. Two mechanisms now exist and nothing in the repo says which one is authoritative.</td>
+<td>Either teach the promote step to treat a new archived edition as a `changed` source (the one-line fix the refresh owner proposed in F-CA-07) and retire branch-scoped promotion, or state in the brief that each cycle promotes the edition it reads and add a gate that fails when data/raw/injuries.json names an older edition than the newest file under data/raw/injury_pdfs/. The gate is checkable today: the newest archived edition is Injury-Report_2026-11-19_12_45AM.pdf.</td>
+<td>R04's promotion half, and any consumer that reads data/raw/injuries.json instead of a dated capture</td>
+<td>medium</td>
+<td class="src"><span class="na" title="source id COORDINATION.md §65 (F-CA-07) and this session's capture manifest is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>
