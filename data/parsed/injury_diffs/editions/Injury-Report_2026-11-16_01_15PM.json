@@ -41,7 +41,7 @@
    "Chicago Bulls",
    "Sellers, Jaylin",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -113,7 +113,7 @@
    "Cleveland Cavaliers",
    "Udeh, Jr., Ernest",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -140,7 +140,52 @@
    "Memphis Grizzlies",
    "Jackson, GG",
    "Out",
-   "Injury/Illness - Left 5th Metatarsal"
+   "Injury/Illness - Left 5th Metatarsal Fracture"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Jerome, Ty",
+   "Out",
+   "Injury/Illness - Right Hip Soreness"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Pippen Jr., Scotty",
+   "Out",
+   "Injury/Illness - Lumbar Disc Herniation"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Post, Quinten",
+   "Questionable",
+   "Injury/Illness - Concussion Protocol"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Saunders, Richie",
+   "Out",
+   "Injury/Illness - Right Knee Surgery"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Stewart, Isaiah",
+   "Out",
+   "Injury/Illness - Illness"
   ],
   [
    "2026-11-16",
@@ -176,7 +221,7 @@
    "Washington Wizards",
    "Okpara, Felix",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -266,7 +311,7 @@
    "Houston Rockets",
    "Copeland, Quadir",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -275,7 +320,7 @@
    "Houston Rockets",
    "Phillips, Julian",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -302,7 +347,7 @@
    "Miami Heat",
    "Goldin, Vladislav",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -383,7 +428,7 @@
    "Brooklyn Nets",
    "Bilodeau, Tyler",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -401,7 +446,7 @@
    "Brooklyn Nets",
    "Nelson, Grant",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -482,7 +527,7 @@
    "New Orleans Pelicans",
    "Dia, Malik",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -527,7 +572,25 @@
    "New Orleans Pelicans",
    "Pierre Jr., Jaron",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
+  ],
+  [
+   "2026-11-16",
+   "08:00",
+   "GSW@NOP",
+   "New Orleans Pelicans",
+   "Reese, Julian",
+   "Questionable",
+   "G League - Two-Way"
+  ],
+  [
+   "2026-11-16",
+   "08:00",
+   "GSW@NOP",
+   "New Orleans Pelicans",
+   "Watford, Trendon",
+   "Out",
+   "Injury/Illness - Right Ankle Sprain"
   ],
   [
    "2026-11-16",
@@ -626,7 +689,7 @@
    "Denver Nuggets",
    "Nembhard, Ryan",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -644,7 +707,7 @@
    "Denver Nuggets",
    "Whitmore, Cam",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-17",
@@ -737,6 +800,33 @@
    ""
   ]
  ],
- "row_count": 80,
- "unparsed": []
+ "row_count": 87,
+ "unparsed": [],
+ "row_audit": {
+  "line_parser_rows": 80,
+  "line_parser_player_rows": 69,
+  "cell_reader_rows": 87,
+  "cell_reader_player_rows": 76,
+  "cell_reader_audit": {
+   "clipped_cells": 623,
+   "columns_detected": 7,
+   "cell_rows_assembled": 87,
+   "player_rows": 76,
+   "block_rows": 11,
+   "unassigned_text": [],
+   "unassigned_count": 0
+  },
+  "selected": "clipped-cell reader (engine/injury_cells.py)",
+  "rows_only_in_cell_reader": [
+   "Memphis Grizzlies | Jerome, Ty",
+   "Memphis Grizzlies | Pippen Jr., Scotty",
+   "Memphis Grizzlies | Post, Quinten",
+   "Memphis Grizzlies | Saunders, Richie",
+   "Memphis Grizzlies | Stewart, Isaiah",
+   "New Orleans Pelicans | Reese, Julian",
+   "New Orleans Pelicans | Watford, Trendon"
+  ],
+  "rows_only_in_line_parser": [],
+  "silent_drop_detected": false
+ }
 }

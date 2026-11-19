@@ -6,7 +6,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "3eb296327e704125cc28cd62c7e59ed0ca5830457bb0c6fd86619929272d61d4",
-  "rows": 89
+  "rows": 98
  },
  "after": {
   "edition": "Injury-Report_2026-11-15_04_00PM__0522cbd3b3e7ddb6.pdf",
@@ -71,6 +71,18 @@
   {
    "team": "Boston Celtics",
    "player": "Cenac Jr., Christopher",
+   "status": "Questionable",
+   "matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "status": "Questionable",
+   "matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
    "status": "Questionable",
    "matchup": "DAL@BOS"
   },
@@ -279,6 +291,18 @@
    "matchup": "LAL@PHX"
   },
   {
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "matchup": "LAL@PHX"
+  },
+  {
    "team": "Milwaukee Bucks",
    "player": "Dieng, Ousmane",
    "status": "Out",
@@ -393,6 +417,12 @@
    "matchup": "SAS@UTA"
   },
   {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "matchup": "SAS@UTA"
+  },
+  {
    "team": "Toronto Raptors",
    "player": "Barnes, Scottie",
    "status": "Questionable",
@@ -486,6 +516,30 @@
    "team": "Washington Wizards",
    "player": "Johnson, Tre",
    "status": "Questionable",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Sarr, Alex",
+   "status": "Available",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
    "matchup": "HOU@WAS"
   }
  ],

@@ -17,5 +17,20 @@
  ],
  "rows": [],
  "row_count": 0,
- "unparsed": []
+ "unparsed": [],
+ "row_audit": {
+  "line_parser_rows": 0,
+  "line_parser_player_rows": 0,
+  "cell_reader_rows": 0,
+  "cell_reader_player_rows": 0,
+  "cell_reader_audit": {
+   "clipped_cells": 707,
+   "columns_detected": 0,
+   "error": "no header row found - the page does not draw the report's own column headers"
+  },
+  "selected": "line parser (word bands)",
+  "rows_only_in_cell_reader": [],
+  "rows_only_in_line_parser": [],
+  "silent_drop_detected": false
+ }
 }

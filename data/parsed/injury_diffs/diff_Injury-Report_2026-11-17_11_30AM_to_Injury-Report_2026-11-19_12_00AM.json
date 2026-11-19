@@ -1,0 +1,294 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-17_11_30AM.pdf",
+  "label": "Injury-Report_2026-11-17_11_30AM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_11_30AM.pdf",
+  "retrieved_at_utc": "2026-11-17T16:36:32Z",
+  "sha256": "bf4999010bc126c5887f96e46ace635dca2c2582c88b2381c925a4b7fee20ea3",
+  "rows": 59
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-19_12_00AM.pdf",
+  "label": "Injury-Report_2026-11-19_12_00AM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_00AM.pdf",
+  "retrieved_at_utc": "2026-11-19T05:52:29Z",
+  "sha256": "8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee",
+  "rows": 44
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [
+  {
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "LAC@SAS"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Kuminga, Jonathan",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Shoulder Contusion",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "player": "Pullin, Zyon",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Quadriceps Contusion",
+   "matchup": "NYK@MIN"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Avdija, Deni",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Foot Inflammation / Soreness",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Camara, Toumani",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Abdominal Soreness",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Carlson, Branden",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Fracture",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Meniscus Surgery",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Williams III, Robert",
+   "status": "Out",
+   "reason": "Rest",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+   "matchup": "POR@MIL"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Harper, Dylan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Soreness",
+   "matchup": "LAC@SAS"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "Charlotte Hornets",
+   "player": "Ajayi, Michael",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Boswell, Kylan",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Knueppel, Kon",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Schroder, Dennis",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Steinbach, Hannes",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Doubtful",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "Detroit Pistons",
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "matchup": "DET@SAS"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Kessler, Walker",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Reaves, Austin",
+   "status": "Out",
+   "matchup": "CHA@LAL"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "matchup": "NYK@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "matchup": "NYK@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "McCullar Jr., Kevin",
+   "status": "Out",
+   "matchup": "NYK@TOR"
+  },
+  {
+   "team": "Toronto Raptors",
+   "player": "Smith, Malachi",
+   "status": "Out",
+   "matchup": "NYK@TOR"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "matchup": "UTA@LAC"
+  }
+ ],
+ "team_block_filing_changes": []
+}

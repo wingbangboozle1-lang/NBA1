@@ -6,7 +6,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_45PM.pdf",
   "retrieved_at_utc": "2026-11-16T18:25:44Z",
   "sha256": "d6f290cd7a66f6c09d28ad1df7077d2a8d9cfe24b4a1be06eedff8baf90ce81b",
-  "rows": 65
+  "rows": 73
  },
  "after": {
   "edition": "Injury-Report_2026-11-16_01_00PM.pdf",
@@ -14,7 +14,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_00PM.pdf",
   "retrieved_at_utc": "2026-11-16T18:25:44Z",
   "sha256": "e0dbe404b34b616c0acb18427966dad7058ac3e4a743cd76ea46f7e8c7550152",
-  "rows": 80
+  "rows": 87
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [
@@ -24,7 +24,17 @@
    "before_status": "Out",
    "after_status": "Out",
    "before_reason": "Injury/Illness - Left Foot Injury",
-   "after_reason": "Injury/Illness - Left 5th Metatarsal",
+   "after_reason": "Injury/Illness - Left 5th Metatarsal Fracture",
+   "before_matchup": "MEM@WAS",
+   "after_matchup": "MEM@WAS"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Illness",
+   "after_reason": "Injury/Illness - Illness",
    "before_matchup": "MEM@WAS",
    "after_matchup": "MEM@WAS"
   }
@@ -48,14 +58,14 @@
    "team": "Houston Rockets",
    "player": "Copeland, Quadir",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "HOU@MIA"
   },
   {
    "team": "Houston Rockets",
    "player": "Phillips, Julian",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "HOU@MIA"
   },
   {
@@ -71,13 +81,6 @@
    "status": "Questionable",
    "reason": "Injury/Illness - Left Knee Soreness",
    "matchup": "HOU@MIA"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Pierre Jr., Jaron",
-   "status": "Questionable",
-   "reason": "G League - Two- Way",
-   "matchup": "GSW@NOP"
   },
   {
    "team": "Philadelphia 76ers",
@@ -139,7 +142,7 @@
    "team": "Washington Wizards",
    "player": "Okpara, Felix",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "MEM@WAS"
   },
   {

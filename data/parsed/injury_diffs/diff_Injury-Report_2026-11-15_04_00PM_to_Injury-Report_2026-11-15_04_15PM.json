@@ -14,7 +14,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "98541686730bc6500d7edb93bde995ed0b34cf8dc9ecdae8ab56776fa3d557fa",
-  "rows": 109
+  "rows": 119
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [],
@@ -30,7 +30,7 @@
    "team": "Atlanta Hawks",
    "player": "Gilbert, Keshon",
    "status": "Out",
-   "reason": "Injury/Illness - Left Knee Inflammation; Non- Surgical Procedure",
+   "reason": "Injury/Illness - Left Knee Inflammation; Non-Surgical Procedure",
    "matchup": "ATL@MIL"
   },
   {
@@ -65,14 +65,14 @@
    "team": "Atlanta Hawks",
    "player": "Wilson, Jalen",
    "status": "Doubtful",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "ATL@MIL"
   },
   {
    "team": "Boston Celtics",
    "player": "Carter, Devin",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "DAL@BOS"
   },
   {
@@ -83,17 +83,31 @@
    "matchup": "DAL@BOS"
   },
   {
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "matchup": "DAL@BOS"
+  },
+  {
    "team": "Charlotte Hornets",
    "player": "Ajayi, Michael",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
    "team": "Charlotte Hornets",
    "player": "Boswell, Kylan",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
@@ -135,7 +149,7 @@
    "team": "Chicago Bulls",
    "player": "Sellers, Jaylin",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHI@CLE"
   },
   {
@@ -149,7 +163,7 @@
    "team": "Chicago Bulls",
    "player": "Wilson, Caleb",
    "status": "Out",
-   "reason": "Injury/Illness - Right Metacarpal",
+   "reason": "Injury/Illness - Right Metacarpal Fracture",
    "matchup": "CHI@CLE"
   },
   {
@@ -226,14 +240,14 @@
    "team": "Houston Rockets",
    "player": "Copeland, Quadir",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "HOU@WAS"
   },
   {
    "team": "Houston Rockets",
    "player": "Phillips, Julian",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "HOU@WAS"
   },
   {
@@ -310,7 +324,7 @@
    "team": "LA Clippers",
    "player": "Martinelli, Nick",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
@@ -356,6 +370,20 @@
    "matchup": "LAL@PHX"
   },
   {
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Orbital Laceration",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "LAL@PHX"
+  },
+  {
    "team": "Milwaukee Bucks",
    "player": "Dieng, Ousmane",
    "status": "Out",
@@ -366,7 +394,7 @@
    "team": "Milwaukee Bucks",
    "player": "Jones, Kam",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "ATL@MIL"
   },
   {
@@ -380,7 +408,7 @@
    "team": "Milwaukee Bucks",
    "player": "Nance, Pete",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "ATL@MIL"
   },
   {
@@ -388,6 +416,13 @@
    "player": "Rollins, Ryan",
    "status": "Questionable",
    "reason": "Injury/Illness - Illness",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "reason": "G League - Two-Way",
    "matchup": "ATL@MIL"
   },
   {
@@ -492,7 +527,7 @@
    "team": "Phoenix Suns",
    "player": "Timme, Drew",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "LAL@PHX"
   },
   {
@@ -513,7 +548,7 @@
    "team": "Sacramento Kings",
    "player": "Mogbo, Jonathan",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "OKC@SAC"
   },
   {
@@ -527,7 +562,7 @@
    "team": "Sacramento Kings",
    "player": "Pedulla, Sean",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "OKC@SAC"
   },
   {
@@ -548,7 +583,7 @@
    "team": "San Antonio Spurs",
    "player": "Brown, Maliq",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -562,7 +597,7 @@
    "team": "San Antonio Spurs",
    "player": "Gillespie, Ja'Kobi",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -570,6 +605,13 @@
    "player": "Harris, Tobias",
    "status": "Out",
    "reason": "Injury/Illness - Left Calf Strain",
+   "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
    "matchup": "SAS@UTA"
   },
   {
@@ -597,28 +639,28 @@
    "team": "Toronto Raptors",
    "player": "McCullar Jr., Kevin",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "NYK@TOR"
   },
   {
    "team": "Toronto Raptors",
    "player": "Smith, Malachi",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "NYK@TOR"
   },
   {
    "team": "Utah Jazz",
    "player": "Alexander, Trey",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
    "team": "Utah Jazz",
    "player": "Bufkin, Kobe",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -632,7 +674,7 @@
    "team": "Utah Jazz",
    "player": "Ingram, Harrison",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -682,6 +724,34 @@
    "player": "Johnson, Tre",
    "status": "Questionable",
    "reason": "Injury/Illness - Low Back Soreness",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Sarr, Alex",
+   "status": "Available",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery",
    "matchup": "HOU@WAS"
   }
  ],

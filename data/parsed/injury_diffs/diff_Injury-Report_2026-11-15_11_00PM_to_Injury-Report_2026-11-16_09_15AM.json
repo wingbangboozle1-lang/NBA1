@@ -6,7 +6,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_00PM.pdf",
   "retrieved_at_utc": "2026-11-16T04:07:04Z",
   "sha256": "c28666e0d6460b986f502f243350bed35ca3e3b06bf8b196e38692eaf35ecbc4",
-  "rows": 142
+  "rows": 160
  },
  "after": {
   "edition": "Injury-Report_2026-11-16_09_15AM.pdf",
@@ -14,54 +14,11 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_15AM.pdf",
   "retrieved_at_utc": "2026-11-16T18:25:44Z",
   "sha256": "2ae3cc90586e2ad45d174d4c599bcb87185f7b6c3ecf68821d3a9efc7105075b",
-  "rows": 65
+  "rows": 72
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [],
- "listed_in_after_only": [
-  {
-   "team": "Brooklyn Nets",
-   "player": "Saraf, Ben",
-   "status": "Out",
-   "reason": "G League - On Assignment",
-   "matchup": "PHI@BKN"
-  },
-  {
-   "team": "Chicago Bulls",
-   "player": "Sellers, Jaylin",
-   "status": "Out",
-   "reason": "G League - Two- Way",
-   "matchup": "CHI@CLE"
-  },
-  {
-   "team": "Chicago Bulls",
-   "player": "Smith, Jalen",
-   "status": "Questionable",
-   "reason": "Injury/Illness - Left Finger Sprain",
-   "matchup": "CHI@CLE"
-  },
-  {
-   "team": "Chicago Bulls",
-   "player": "Wilson, Caleb",
-   "status": "Out",
-   "reason": "Injury/Illness - Right Metacarpal Fracture",
-   "matchup": "CHI@CLE"
-  },
-  {
-   "team": "Portland Trail Blazers",
-   "player": "Sharpe, Shaedon",
-   "status": "Out",
-   "reason": "Injury/Illness - Right Knee Surgery",
-   "matchup": "POR@MIN"
-  },
-  {
-   "team": "Portland Trail Blazers",
-   "player": "Youngblood, Chris",
-   "status": "Out",
-   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise",
-   "matchup": "POR@MIN"
-  }
- ],
+ "listed_in_after_only": [],
  "listed_in_before_only": [
   {
    "team": "Atlanta Hawks",
@@ -114,6 +71,18 @@
   {
    "team": "Boston Celtics",
    "player": "Cenac Jr., Christopher",
+   "status": "Available",
+   "matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "status": "Available",
+   "matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
    "status": "Available",
    "matchup": "DAL@BOS"
   },
@@ -322,22 +291,16 @@
    "matchup": "LAL@PHX"
   },
   {
-   "team": "Memphis Grizzlies",
-   "player": "Jerome, Ty",
-   "status": "Out",
-   "matchup": "MEM@WAS"
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "matchup": "LAL@PHX"
   },
   {
-   "team": "Memphis Grizzlies",
-   "player": "Pippen Jr., Scotty",
-   "status": "Out",
-   "matchup": "MEM@WAS"
-  },
-  {
-   "team": "Memphis Grizzlies",
-   "player": "Post, Quinten",
-   "status": "Questionable",
-   "matchup": "MEM@WAS"
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "matchup": "LAL@PHX"
   },
   {
    "team": "Milwaukee Bucks",
@@ -370,16 +333,10 @@
    "matchup": "ATL@MIL"
   },
   {
-   "team": "New Orleans Pelicans",
-   "player": "Reese, Julian",
-   "status": "Questionable",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Watford, Trendon",
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
    "status": "Out",
-   "matchup": "GSW@NOP"
+   "matchup": "ATL@MIL"
   },
   {
    "team": "Oklahoma City Thunder",
@@ -526,6 +483,12 @@
    "matchup": "SAS@UTA"
   },
   {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "matchup": "SAS@UTA"
+  },
+  {
    "team": "Toronto Raptors",
    "player": "Barnes, Scottie",
    "status": "Available",
@@ -618,6 +581,30 @@
   {
    "team": "Washington Wizards",
    "player": "Johnson, Tre",
+   "status": "Out",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Out",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Sarr, Alex",
+   "status": "Available",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
    "status": "Out",
    "matchup": "HOU@WAS"
   }

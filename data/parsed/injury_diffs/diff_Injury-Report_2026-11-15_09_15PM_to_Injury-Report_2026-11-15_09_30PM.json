@@ -6,7 +6,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_15PM.pdf",
   "retrieved_at_utc": "2026-11-16T02:45:04Z",
   "sha256": "06a1c3640db8bcd7d5c0079071aa84320c55f33dc66e69351a9015a4815793e1",
-  "rows": 110
+  "rows": 125
  },
  "after": {
   "edition": "Injury-Report_2026-11-15_09_30PM.pdf",
@@ -14,7 +14,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_30PM.pdf",
   "retrieved_at_utc": "2026-11-16T02:45:04Z",
   "sha256": "bee0f4fc581e87490304b0fa1317bb79fe5821df320e98b69ad8c1304d46f391",
-  "rows": 142
+  "rows": 160
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [],
@@ -23,14 +23,14 @@
    "team": "Charlotte Hornets",
    "player": "Ajayi, Michael",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
    "team": "Charlotte Hornets",
    "player": "Boswell, Kylan",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
@@ -69,6 +69,27 @@
    "matchup": "CHI@CLE"
   },
   {
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Finger Sprain",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Metacarpal Fracture",
+   "matchup": "CHI@CLE"
+  },
+  {
    "team": "LA Clippers",
    "player": "Beal, Bradley",
    "status": "Out",
@@ -86,7 +107,7 @@
    "team": "LA Clippers",
    "player": "Martinelli, Nick",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "CHA@LAC"
   },
   {
@@ -102,6 +123,27 @@
    "status": "Out",
    "reason": "Injury/Illness - Right Lisfranc Surgery",
    "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Orbital Laceration",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "ATL@MIL"
   },
   {
    "team": "Oklahoma City Thunder",
@@ -149,7 +191,7 @@
    "team": "Phoenix Suns",
    "player": "Timme, Drew",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "LAL@PHX"
   },
   {
@@ -184,7 +226,7 @@
    "team": "Sacramento Kings",
    "player": "Mogbo, Jonathan",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "OKC@SAC"
   },
   {
@@ -198,7 +240,7 @@
    "team": "Sacramento Kings",
    "player": "Pedulla, Sean",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "OKC@SAC"
   },
   {
@@ -219,7 +261,7 @@
    "team": "San Antonio Spurs",
    "player": "Brown, Maliq",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -233,7 +275,7 @@
    "team": "San Antonio Spurs",
    "player": "Gillespie, Ja'Kobi",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "SAS@UTA"
   },
   {
@@ -242,8 +284,40 @@
    "status": "Out",
    "reason": "Injury/Illness - Left Calf Strain",
    "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "matchup": "SAS@UTA"
   }
  ],
- "listed_in_before_only": [],
+ "listed_in_before_only": [
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "matchup": "ATL@MIL"
+  }
+ ],
  "team_block_filing_changes": []
 }

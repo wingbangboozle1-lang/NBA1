@@ -1,0 +1,66 @@
+{
+ "session": "arena/39b70241-nba1",
+ "purpose": "COORDINATION \u00a766 / Y02 - byte-exact capture of the official injury-report editions covering the 2026-11-19 - 2026-11-22 slate, so the Injuries banner cites an edition this session retrieved and hashed, and so consecutive-edition diffs can detect status changes on the slate's own day rolls (R03, R23).",
+ "run_at_utc": "2026-11-19T05:52:29Z",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "index_sha256": "b74b51c2d7dece3d6d83756db8a66ba16c195dcb30611dd8e903a37e6b36c297",
+ "editions_listed_on_index": 4,
+ "newest_listed_on_index": "Injury-Report_2026-11-19_12_45AM.pdf",
+ "newest_edition_per_day_in_range": {
+  "2026-11-19": "Injury-Report_2026-11-19_12_45AM.pdf"
+ },
+ "editions_archived_before_run": 108,
+ "editions_fetched_this_run": [
+  "Injury-Report_2026-11-19_12_45AM.pdf",
+  "Injury-Report_2026-11-19_12_30AM.pdf",
+  "Injury-Report_2026-11-19_12_15AM.pdf",
+  "Injury-Report_2026-11-19_12_00AM.pdf"
+ ],
+ "results": [
+  {
+   "edition": "Injury-Report_2026-11-19_12_45AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_45AM.pdf",
+   "attempts": 1,
+   "http_status": 200,
+   "bytes": 87302,
+   "sha256": "91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33",
+   "stored": true,
+   "artifact": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_45AM__91002377f7653e4c96aaa7c3293c70f3a36ceaf000cbd2be2349205831ccea33.pdf",
+   "error": null
+  },
+  {
+   "edition": "Injury-Report_2026-11-19_12_30AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_30AM.pdf",
+   "attempts": 1,
+   "http_status": 200,
+   "bytes": 87322,
+   "sha256": "14a511bfabd6666c0c07b6248fda2fbca46a566dcab0c11e13268a6081fe4a15",
+   "stored": true,
+   "artifact": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_30AM__14a511bfabd6666c0c07b6248fda2fbca46a566dcab0c11e13268a6081fe4a15.pdf",
+   "error": null
+  },
+  {
+   "edition": "Injury-Report_2026-11-19_12_15AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_15AM.pdf",
+   "attempts": 1,
+   "http_status": 200,
+   "bytes": 87198,
+   "sha256": "5571ebd0eeca2d5e16b70eaf123b845bf50a248c7020a19c0ea2363a692564a2",
+   "stored": true,
+   "artifact": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_15AM__5571ebd0eeca2d5e16b70eaf123b845bf50a248c7020a19c0ea2363a692564a2.pdf",
+   "error": null
+  },
+  {
+   "edition": "Injury-Report_2026-11-19_12_00AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_00AM.pdf",
+   "attempts": 1,
+   "http_status": 200,
+   "bytes": 87159,
+   "sha256": "8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee",
+   "stored": true,
+   "artifact": "data/raw/injury_pdfs/Injury-Report_2026-11-19_12_00AM__8b516e44bd666b4da7196b7b9e7eb250228f3c8f5e6c8ced043c5d58be1bb5ee.pdf",
+   "error": null
+  }
+ ],
+ "note": "A non-200 status is recorded as unavailable to this client at this time.  ak-static.cms.nba.com answers 403 both for editions that are not published yet and, intermittently, for editions a browser opens, so no status here is treated as proof of absence."
+}
