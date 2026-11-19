@@ -2,7 +2,7 @@
  "title": "Scheduled refresh publish-path audit",
  "built_by": "scripts/f3cb4a98_refresh_path_audit.py",
  "session": "arena/f3cb4a98-nba1",
- "built_at_utc": "2026-11-19T07:12:57Z",
+ "built_at_utc": "2026-11-19T07:22:45Z",
  "history_warning": null,
  "rule": "Every field is read from a committed file or from git history. No value is inferred. A gate requirement naming a snapshot with zero commits in history is classified terminal, because no scheduled run can ever satisfy it.",
  "run_record": {
@@ -40,7 +40,71 @@
    "S8_standings",
    "S9_team_traditional"
   ],
-  "rebuild_ever_ran": false
+  "rebuild_ever_ran_this_record": false,
+  "rebuild_history": {
+   "records_read": 18,
+   "successes": [
+    {
+     "captured_at_utc": "2026-11-14T01:27:52Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T01:35:08Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T01:40:17Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T01:50:38Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T01:55:55Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T01:59:11Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T02:05:32Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-14T10:51:04Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    },
+    {
+     "captured_at_utc": "2026-11-15T12:43:11Z",
+     "build_outcome": "success",
+     "freshness_ok": null,
+     "promote_outcome": null
+    }
+   ],
+   "skipped_or_failed_after_last_success": 7,
+   "error": null,
+   "method": "git show <sha>:data/raw/_last_refresh.json for every commit that touched the file",
+   "last_success_utc": "2026-11-15T12:43:11Z",
+   "rebuild_has_ever_run": true
+  }
  },
  "sources": [
   {

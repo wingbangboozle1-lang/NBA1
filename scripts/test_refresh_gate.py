@@ -393,5 +393,32 @@ class DeclarationTests(unittest.TestCase):
         self.assertTrue(any("stale" in e for e in errors))
 
 
+class AuditHistoryTests(unittest.TestCase):
+    """The audit must read git history, not infer it from one run record.
+
+    This session published "rebuild has ever run: no" on the live site from
+    the CURRENT record's `build_outcome: skipped`. That is not evidence about
+    2026-11-14, and it was wrong (COORDINATION.md section 73.2). These tests
+    pin the two ways the mistake could return.
+    """
+
+    def test_audit_reads_history_rather_than_the_current_record(self):
+        import importlib
+        audit = importlib.import_module("scripts.f3cb4a98_refresh_path_audit")
+        history = audit.rebuild_history()
+        if history.get("error"):
+            self.skipTest(f"history unavailable in this environment: {history['error']}")
+        # The repository has a real success in its history (2026-11-15T12:43:11Z).
+        self.assertTrue(history["rebuild_has_ever_run"], history)
+        self.assertGreaterEqual(history["records_read"], 5)
+        self.assertEqual(history["last_success_utc"], "2026-11-15T12:43:11Z")
+
+    def test_audit_refuses_a_shallow_clone(self):
+        import importlib
+        audit = importlib.import_module("scripts.f3cb4a98_refresh_path_audit")
+        self.assertIsNone(audit.assert_full_history(),
+                          "this checkout must be unshallowed for the audit to be trusted")
+
+
 if __name__ == "__main__":
     unittest.main()
