@@ -3,7 +3,7 @@
  "session": "arena/f3cb4a98-nba1",
  "board": "COORDINATION.md section 69",
  "purpose": "A fail-closed gate needs a way to say 'this source cannot be read by our client, and here is the proof' without also saying 'therefore publish anyway'. This register records that declaration per source, with the measured evidence that justifies it and a hard expiry. engine/refresh_gate.py permits a rebuild while a declaration is live; the moment it expires the gate blocks again. Nothing here relaxes a requirement for a source that IS readable, and nothing here promotes any value: a declared source contributes no model input.",
- "rule": "A declaration is admissible only if (a) the fetcher checked the source in the same run at HTTP 200, (b) a bounded parse-failure evidence record exists on disk, and (c) the promoted snapshot the gate would otherwise require has no commits in the repository's history (so the requirement is terminal rather than transient). Every field is measured by scripts/f3cb4a98_refresh_path_audit.py; none is typed by hand.",
+ "rule": "A declaration is admissible only if (a) the fetcher checked the source in the same run at HTTP 200, (b) a bounded parse-failure evidence record exists on disk, and (c) the blocked state is measured terminal rather than transient. Terminal is measured, not asserted: either the promoted snapshot the gate would otherwise require has no commits in the repository's history (the original rule, section 69), or every committed run record since the source began being tracked shows the same parse failure with no success (the section 77 amendment - rule (c) as written could not express 'the runner has never parsed this page since it started failing, although our own client reads it', which is what scripts/70d0e760_s1_streak.py measures for S1_season/S2_train: 24 of 24 committed run records, 2026-11-14T01:27:52Z through 2026-11-19T12:03:37Z, carry the failure, 0 successes). Every field is measured by scripts/f3cb4a98_refresh_path_audit.py or scripts/70d0e760_s1_streak.py; none is typed by hand.",
  "why_needed": "engine/refresh_gate.py requires data/raw/standings.json, data/raw/team_traditional.json and data/raw/team_opponent.json before the scheduled rebuild may run. Those three files have 0 commits across the repository's 884-commit history because the pages they come from are client-rendered: the runner's own committed evidence shows the captured standings page contains 0 <tr> rows and the captured traditional page contains 0 /stats/team/ links (only 12 date-picker rows). engine/promote_official.py writes those snapshots only when rows parse, so the requirement can never be met and the rebuild step behind it has been dead code since gate commit 25bfcea (2026-11-15T11:38Z) landed after the last successful rebuild at 12:43:11Z that same day.",
  "does_not_change": [
   "The three snapshots are still required once they are producible: the declaration is checked against live parse success every run, and a declared source whose capture begins to parse rows fails the gate rather than being skipped.",
@@ -55,20 +55,52 @@
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration.",
    "consequence_if_wrong": "A rebuild could run without a fresh opponent table. Mitigated by: not consumed by engine/pipeline.py; the requirement brief's 'opponent' input is cited on the site from the last verified first-hand read, which is unchanged by this declaration."
+  },
+  {
+   "source_key": "S1_season",
+   "official_url": "https://www.nba.com/stats/teams/advanced",
+   "required_snapshot": "data/raw/team_advanced.json",
+   "runner_client": "unreachable-by-every-measured-route",
+   "reason": "The official advanced team table is readable - the agent's fetch channel reads its 30 server-rendered rows (COORDINATION.md sections 69 and 73 first-hand reads) - but no GitHub Actions runner route reaches them. Three routes are measured dead: (1) plain fetch delivers the page shell - the byte-exact captures in data/raw/session-89f7b601/ hold 0 team rows at HTTP 200 (0 '/team/' links, 0 rowSet, 12 date-picker <tr> only); (2) the official stats.nba.com fallback times out on every attempt - the committed evidence record shows TimeoutError x2 per run and section 69 measured 4 endpoints x 3 attempts, all TimeoutError; (3) headless Chromium is refused at the edge - data/raw/session-89f7b601/render/S1_season_*.rendered.dom is a 309-byte Akamai denial with n_tables 0. The no-success streak is 24 of 24 committed run records from 2026-11-14T01:27:52Z (scripts/70d0e760_s1_streak.py).",
+   "evidence": [
+    "data/raw/_capture_evidence_S1_season.json",
+    "data/raw/session-89f7b601/capture_manifest.json",
+    "data/raw/session-89f7b601/render/S1_season__5953f7c7f9d1f15db65d5f18975447542773c6c7b1bf3f353529e919f26fbfde.sidecar.json",
+    "data/raw/session-70d0e760/s1_parse_streak.json"
+   ],
+   "review_flag": "F-70D-01",
+   "declared_at_utc": "2026-11-19T13:05:00Z",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "expiry_rule": "Re-test at expiry and on every run: if a runner-side capture yields 30 parsed rows, delete this declaration - the gate will then require the snapshot normally (the anti-rot rule already refuses a stale declaration once the capture parses).",
+   "input_freshness_bound_hours": 72,
+   "consequence_if_wrong": "A rebuild could run without a runner-fresh advanced snapshot. Mitigated by: while this declaration is live, engine/refresh_gate.py requires the consumed data/raw/team_advanced.json to be a SESSION READ inside 72 hours with an explicit verification block naming reader and time - a declaration excuses the parse, never the input - and the run log and the Flagged for Review page print the input's read time beside the declaration."
+  },
+  {
+   "source_key": "S2_train",
+   "official_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+   "required_snapshot": "(none - failure-only companion of S1_season)",
+   "runner_client": "unreachable-by-every-measured-route",
+   "reason": "S1_season's own page with a training-window date filter: same delivery, same three dead routes, same 24-of-24 failure streak. It carries no snapshot requirement of its own; this declaration excuses only its entry in the run record's failed[] list (engine/refresh_gate.py FAILURE_ONLY).",
+   "evidence": [
+    "data/raw/_capture_evidence_S2_train.json",
+    "data/raw/session-70d0e760/s1_parse_streak.json"
+   ],
+   "review_flag": "F-70D-01",
+   "declared_at_utc": "2026-11-19T13:05:00Z",
+   "expires_at_utc": "2026-12-19T00:00:00Z",
+   "expiry_rule": "Re-test at expiry and on every run: if a runner-side capture yields 30 parsed rows, delete this declaration - the gate will then require the snapshot normally (the anti-rot rule already refuses a stale declaration once the capture parses).",
+   "input_freshness_bound_hours": 72,
+   "consequence_if_wrong": "A transient S2_train parse failure would stop counting against the fetch step. Mitigated by: the anti-rot rule re-tests every run, the declaration expires 2026-12-19, and S2_train alone can never excuse anything beyond its own failed[] entry.",
+   "failure_only": true
   }
  ],
  "not_declared": [
   {
-   "source_key": "S1_season",
-   "why_not": "This one IS readable in some runs — engine/fetch_official.py parses the same page with its own parser and falls back to the official stats.nba.com API. The committed evidence record shows the API timed out on both attempts in this run, which is transient, not terminal. A timeout must block, and does."
-  },
-  {
-   "source_key": "S2_train",
-   "why_not": "Same transient timeout as S1_season; also not required by the gate."
-  },
-  {
    "source_key": "S7_players",
    "why_not": "Not required by the gate's promoted_paths block; its capture is evidence-only by design."
   }
+ ],
+ "superseded_notes": [
+  "The previous not_declared entries for S1_season/S2_train ('readable in some runs ... transient timeout') are withdrawn on measurement (COORDINATION.md section 77.3): the stats.nba.com fallback has timed out on every attempt in every one of the 24 committed run records (scripts/70d0e760_s1_streak.json), the delivered page bytes contain 0 team rows in byte-exact captures, and the headless route is refused at the edge. 'Readable in some runs' described the agent's fetch channel, not the runner - the distinction this declaration now encodes."
  ]
 }

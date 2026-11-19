@@ -30,6 +30,28 @@ blocks again. Non-negotiable properties, all enforced below:
     predicate;
   * an unknown, malformed, expired or evidence-less declaration is ignored,
     and the original (blocking) requirement applies.
+
+SECTION 77 EXTENSION - RUNNER-UNREADABLE, AGENT-READABLE SOURCES
+----------------------------------------------------------------
+S1_season (and its training-window twin S2_train) proved the same shape by a
+different name: the page IS readable - the agent's fetch channel reads its 30
+server-rendered rows - but no GitHub Actions runner route reaches them. Three
+routes are measured dead (COORDINATION.md section 77.3): plain fetch delivers
+the page shell (byte-exact captures hold 0 team rows at HTTP 200), the
+stats.nba.com fallback times out on every attempt across runs, and headless
+Chromium is refused at the edge (a 309-byte denial page). Before section 77
+the gate kept S1's parse failure blocking "transient" and the build condition
+behind it (`steps.promote.outcome == 'success'`) was a second dead predicate.
+
+Two rules make the extension honest rather than permissive:
+
+  * a companion S2_train declaration excuses only its `failed` entry
+    (it carries no snapshot requirement of its own);
+  * while S1_season is declared, the consumed `data/raw/team_advanced.json`
+    must be a SESSION READ inside `--max-input-age-hours` (default 72h) with
+    an explicit verification block naming reader and time. A declaration
+    excuses the parse; it never excuses the input. Too old and the gate
+    blocks again with the read time printed.
 """
 from __future__ import annotations
 
@@ -46,6 +68,13 @@ REQUIRED = {
     "S1_season", "S4_schedule", "S5_injury_index", "S8_standings",
     "S9_team_traditional", "S10_team_opponent",
 }
+# A declared source that carries no snapshot requirement of its own but whose
+# parse failure would otherwise count as a blocking fetch failure. S2_train is
+# S1_season's own page with a training-window date filter: its failure has the
+# same structural cause and the same evidence, so while S1_season's declaration
+# is live a companion S2_train declaration excuses only its `failed` entry
+# (COORDINATION.md section 77). It never excuses anything else.
+FAILURE_ONLY = {"S2_train"}
 ALLOWED_HOSTS = {"www.nba.com", "official.nba.com", "ak-static.cms.nba.com", "stats.nba.com"}
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 PROMOTION_SENSITIVE = {
@@ -84,7 +113,9 @@ def live_declarations(base, now, by_key, parse_ok):
     one of these measured facts holds:
 
       1. the register parses and is shaped as expected;
-      2. the declaration names a source the gate actually requires;
+      2. the declaration names a source the gate actually requires (or a
+         failure-only companion such as S2_train, which excuses its `failed`
+         entry and nothing else);
       3. `expires_at_utc` parses, is in the future, and is not absurdly far out;
       4. the fetcher checked that source in THIS run at HTTP 200 (a stale
          declaration must not mask a source that was never fetched today);
@@ -116,7 +147,8 @@ def live_declarations(base, now, by_key, parse_ok):
         if not isinstance(key, str) or not key:
             rejected.append("declaration without a source_key")
             continue
-        if key not in REQUIRED:
+        failure_only = key in FAILURE_ONLY
+        if key not in REQUIRED and not failure_only:
             rejected.append(f"{key}: not a source this gate requires")
             continue
         try:
@@ -151,17 +183,21 @@ def live_declarations(base, now, by_key, parse_ok):
             "review_flag": entry.get("review_flag"),
             "evidence": evidence,
             "required_snapshot": entry.get("required_snapshot"),
+            "failure_only": failure_only,
         }
     return accepted, rejected
 
 
-def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10) -> list[str]:
+def evaluate(record: dict, now: dt.datetime, max_age_hours: float = 10,
+             max_input_age_hours: float = 72.0) -> list[str]:
     """Back-compatible wrapper returning only the blocking errors."""
-    return evaluate_with_report(record, now, max_age_hours)[0]
+    return evaluate_with_report(record, now, max_age_hours,
+                                max_input_age_hours)[0]
 
 
 def evaluate_with_report(record: dict, now: dt.datetime,
-                         max_age_hours: float = 10) -> tuple[list[str], dict]:
+                         max_age_hours: float = 10,
+                         max_input_age_hours: float = 72.0) -> tuple[list[str], dict]:
     """Gate decision plus the machine-readable reason for it.
 
     Returns (errors, report). `errors` empty means the rebuild may run.
@@ -218,7 +254,9 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     # Resolve declared-unreadable sources now, before any per-source verdict,
     # so that every later check can ask "is this source excused, and by what?"
     parse_ok = {}
-    for key, capture in (("S8_standings", "_capture_S8_standings.json"),
+    for key, capture in (("S1_season", "_capture_S1_season.json"),
+                         ("S2_train", "_capture_S2_train.json"),
+                         ("S8_standings", "_capture_S8_standings.json"),
                          ("S9_team_traditional", "_capture_S9_team_traditional.json"),
                          ("S10_team_opponent", "_capture_S10_team_opponent.json")):
         try:
@@ -312,10 +350,22 @@ def evaluate_with_report(record: dict, now: dt.datetime,
 
     injury = by_key.get("injury_pdf_probe", {})
     pdf_results = injury.get("results", [])
-    if not pdf_results or pdf_results[0].get("http_status") != 200:
-        errors.append("latest indexed injury PDF was not retrieved successfully")
+    # A rate-limited newest edition (403/429 from ak-static) must not block
+    # verification when an earlier edition in the same run retrieved cleanly:
+    # promote binds to the newest SUCCESSFUL retrieval (flag F-CA-07's
+    # promote-side rule), and this check must bind to the same artifact or the
+    # two sides can never agree (COORDINATION.md section 77).
+    ok_pdfs = [r for r in pdf_results if r.get("http_status") == 200]
+    if not ok_pdfs:
+        errors.append("no indexed injury PDF was retrieved successfully in this run")
     else:
-        latest_pdf = pdf_results[0]
+        latest_pdf = ok_pdfs[0]
+        if pdf_results and pdf_results[0] is not latest_pdf:
+            warnings.append(
+                f"newest indexed injury edition {pdf_results[0].get('url', '?')} "
+                f"was not retrieved (status {pdf_results[0].get('http_status')}); "
+                f"promotion and verification bind to "
+                f"{latest_pdf.get('url', '?')}")
         if not SHA256_RE.fullmatch(str(latest_pdf.get("sha256", ""))):
             errors.append("latest indexed injury PDF has no valid SHA-256")
         if latest_pdf.get("pdf_valid") is not True:
@@ -361,6 +411,12 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     for rel, check_key in (("data/raw/_capture_S1_season.json", "S1_season"),
                            ("data/raw/_capture_S4_schedule.json", "S4_schedule")):
         path = os.path.join(base, rel)
+        if check_key == "S1_season" and "S1_season" in declared:
+            # The runner cannot produce this capture at all (three measured
+            # dead routes, section 77); the declared branch in the REQUIRED
+            # loop above has already verified this run's evidence provenance,
+            # and the consumed input's freshness is enforced below.
+            continue
         try:
             payload = read_json(path)
         except (OSError, ValueError):
@@ -380,19 +436,73 @@ def evaluate_with_report(record: dict, now: dt.datetime,
 
     # Advanced rows are parseable now, so compare every official row against
     # the season-to-date model snapshot rather than trusting a change list.
-    try:
-        adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
-        adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
-        season_window = next(w for w in adv_snapshot.get("windows", [])
-                             if w.get("window_id") == "season_to_date")
-        cols = adv_capture.get("cols", [])
-        snap_cols = adv_snapshot.get("cols", [])
-        captured_rows = {row[0]: row for row in adv_capture.get("rows", [])}
-        promoted_rows = {row[0]: row for row in season_window.get("rows", [])}
-        if cols != snap_cols or captured_rows != promoted_rows or len(captured_rows) != 30:
-            errors.append("advanced team capture does not exactly match the promoted season-to-date rows")
-    except (OSError, ValueError, KeyError, StopIteration, TypeError, IndexError):
-        errors.append("advanced team input cannot be compared with a complete promoted snapshot")
+    if "S1_season" in declared:
+        # The runner cannot refresh team_advanced.json (S1 is declared
+        # runner-unreadable). A declaration excuses the parse - never the
+        # input: the consumed snapshot must instead be a session read inside
+        # the freshness bound, with an explicit verification block naming who
+        # read it and when. Older than the bound and the gate blocks again,
+        # with the read time printed (COORDINATION.md section 77).
+        try:
+            adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
+            proof = adv_snapshot.get("verification")
+            if not isinstance(proof, dict):
+                proof = next((w.get("verification")
+                              for w in adv_snapshot.get("windows", [])
+                              if isinstance(w, dict)
+                              and isinstance(w.get("verification"), dict)), None)
+            if not isinstance(proof, dict) or proof.get("verified") is not True:
+                errors.append(
+                    "consumed input data/raw/team_advanced.json has no explicit "
+                    "session-read verification block (required while S1_season "
+                    "is declared runner-unreadable)")
+            else:
+                try:
+                    read_at = parse_utc(proof.get("verified_at_utc"))
+                except (TypeError, ValueError):
+                    errors.append(
+                        "consumed input data/raw/team_advanced.json has no "
+                        "valid verification timestamp")
+                else:
+                    input_age = (now - read_at).total_seconds() / 3600
+                    if input_age < -0.05:
+                        errors.append(
+                            "consumed input data/raw/team_advanced.json is "
+                            "future-dated")
+                    elif input_age > max_input_age_hours:
+                        errors.append(
+                            f"consumed input data/raw/team_advanced.json is "
+                            f"{input_age:.1f}h old (session-read freshness "
+                            f"bound {max_input_age_hours:g}h; read "
+                            f"{proof.get('verified_at_utc')} by "
+                            f"{proof.get('verified_by', 'unknown')}): re-read "
+                            "the official page first-hand and re-promote")
+                    else:
+                        warnings.append(
+                            f"S1_season: runner-unreadable (declared); "
+                            f"consumed team_advanced.json is a session read "
+                            f"{input_age:.1f}h old "
+                            f"({proof.get('verified_at_utc')}, "
+                            f"{proof.get('verified_by', 'unknown')}) - within "
+                            f"the {max_input_age_hours:g}h bound")
+        except (OSError, ValueError):
+            errors.append(
+                "consumed input data/raw/team_advanced.json is missing or "
+                "unreadable while S1_season is declared runner-unreadable")
+    else:
+        try:
+            adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
+            adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
+            season_window = next(w for w in adv_snapshot.get("windows", [])
+                                 if w.get("window_id") == "season_to_date")
+            cols = adv_capture.get("cols", [])
+            snap_cols = adv_snapshot.get("cols", [])
+            captured_rows = {row[0]: row for row in adv_capture.get("rows", [])}
+            promoted_rows = {row[0]: row for row in season_window.get("rows", [])}
+            if cols != snap_cols or captured_rows != promoted_rows or len(captured_rows) != 30:
+                errors.append("advanced team capture does not exactly match the promoted season-to-date rows")
+        except (OSError, ValueError, KeyError, StopIteration, TypeError, IndexError):
+            errors.append("advanced team input cannot be compared with a complete promoted snapshot")
 
     def require_promotion(path: str, source_key: str, digest: str | None = None,
                           url: str | None = None) -> dict | None:
@@ -489,6 +599,10 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--record", default="data/raw/_last_refresh.json")
     parser.add_argument("--max-age-hours", type=float, default=10)
+    parser.add_argument("--max-input-age-hours", type=float, default=72,
+                        help="while a consumed model input is covered by a "
+                             "runner-unreadable declaration, how old its "
+                             "session read may be (hours)")
     parser.add_argument("--now", help="ISO-8601 UTC test clock")
     args = parser.parse_args()
     root = os.environ.get("NBA1_REPO_ROOT", os.getcwd())
@@ -500,7 +614,8 @@ def main() -> int:
         errors = [f"cannot read refresh record: {exc}"]
     else:
         now = parse_utc(args.now) if args.now else dt.datetime.now(dt.timezone.utc)
-        errors, report = evaluate_with_report(record, now, args.max_age_hours)
+        errors, report = evaluate_with_report(record, now, args.max_age_hours,
+                                              args.max_input_age_hours)
     allowed = not errors
     for warning in report.get("warnings", []):
         print(f"NOTE: {warning}")

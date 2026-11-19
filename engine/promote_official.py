@@ -37,6 +37,21 @@ the exit code is not poisoned by a permanently-unsatisfiable item, and
 it may excuse anything. If a page ever does become readable, the capture
 starts carrying rows, this branch stops firing, and the normal promotion path
 takes over on its own.
+
+EXIT SEMANTICS (COORDINATION.md section 77)
+-------------------------------------------
+``run()`` exits ``1`` only when ``self.blocked`` is non-empty - i.e. when an
+item that is neither producible-nor-declared failed. This matters because the
+workflow's rebuild step requires ``steps.promote.outcome == 'success'``:
+before section 77, S1_season was re-classified as an ordinary ``blocked``
+item on every runner-side parse (its capture cannot even be produced there),
+so the promote step exited 1 on **every** run and the rebuild condition was
+a second dead predicate behind the gate. S1_season/S2_train now carry
+runner-unreadable declarations with three measured dead routes (shell bytes,
+stats.nba.com timeouts, edge-denied headless renders) and the same
+evidence-plus-expiry treatment as S8/S9/S10; a declared-but-stale input is
+kept honest by the gate's session-read freshness bound on the consumed
+``team_advanced.json`` (a declaration excuses the parse, never the input).
 """
 
 from __future__ import annotations
@@ -113,6 +128,17 @@ class Promoter:
         declaration = self._declarations().get(item)
         parse_failed = any(token in reason for token in (
             "no parsed rows", "no header row", "capture has no", "parsed 0"))
+        if declaration and not parse_failed and "capture unreadable" in reason:
+            # A MISSING capture file is excusable only when this run's own
+            # parse-failure evidence record is on disk: a declared page must
+            # still have been attempted this run (scripts/test_promote_official
+            # .py pins the property; section 77 needs it because the runner
+            # never writes _capture_S1_season.json at all - the fetcher writes
+            # it only `if rows:`, and S1's parse never yields rows there).
+            for rel in (declaration.get("evidence") or []):
+                if isinstance(rel, str) and os.path.exists(os.path.join(ROOT, rel)):
+                    parse_failed = True
+                    break
         if declaration and parse_failed:
             self.unreadable.append({
                 "item": item,

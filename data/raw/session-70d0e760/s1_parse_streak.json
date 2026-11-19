@@ -1,0 +1,210 @@
+{
+ "title": "S1_season / S2_train runner-side parse streak",
+ "measured_by": "scripts/70d0e760_s1_streak.py",
+ "purpose": "Declaration evidence for data/raw/unreadable_sources.json (COORDINATION.md section 77): proves the S1/S2 parse failure is terminal for the GitHub Actions runner (every committed run record since the first failure) rather than a transient timeout.",
+ "method": "data/raw/_last_refresh.json read from every commit that ever touched it; a run counts as a parse failure when the source key appears in the record's failed[] list.",
+ "commits_touching_record": 24,
+ "records_parsed": 24,
+ "s1_records_with_parse_failure": 24,
+ "s2_records_with_parse_failure": 24,
+ "s1_records_checked_http": 13,
+ "s1_records_http_200": 13,
+ "first_record_utc": "2026-11-14T01:27:52Z",
+ "last_record_utc": "2026-11-19T12:03:37Z",
+ "first_failure_utc": "2026-11-14T01:27:52Z",
+ "last_failure_utc": "2026-11-19T12:03:37Z",
+ "records": [
+  {
+   "commit": "2100d42683a1669a63cbfd2aa7e942f6d18f1bad",
+   "captured_at_utc": "2026-11-14T01:27:52Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "daf46ab01222c787596242063843b6fd1d33a769",
+   "captured_at_utc": "2026-11-14T01:35:08Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "5e4998c66e7cb2a443b3d33995a419ca3de28532",
+   "captured_at_utc": "2026-11-14T01:40:17Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "97d6c53985aa8194f80021b965c18822b520e8c0",
+   "captured_at_utc": "2026-11-14T01:50:38Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "edc89b35d5271778149ec1c5915d5301269a2264",
+   "captured_at_utc": "2026-11-14T01:55:55Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "e8630676ff15dd1e5d51af3d09162edcfcbfe8fc",
+   "captured_at_utc": "2026-11-14T01:59:11Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "df10a0de537bbe01c27ede8003c9bbfed6be9214",
+   "captured_at_utc": "2026-11-14T02:05:32Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "20f7c6014a9515ffc3b6eb7067a7d113fe455b22",
+   "captured_at_utc": "2026-11-14T10:51:04Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "0e0a0f79e8ba59e2d5fccc736b2f3d1e3b3b213f",
+   "captured_at_utc": "2026-11-14T19:25:52Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "e6bbce8bc6c6a31e3df458bf9bbb0ebb6728b991",
+   "captured_at_utc": "2026-11-14T19:40:43Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "55d7b48eb6d7f7287daa3bf164b203ad2d5b9bc3",
+   "captured_at_utc": "2026-11-15T12:43:11Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": null,
+   "S2_http_status": null
+  },
+  {
+   "commit": "de56324311819853ae8e62a618571fbf4486e752",
+   "captured_at_utc": "2026-11-16T02:45:04Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "28e7c719993a0b87539b42fc0271ed49640e1f63",
+   "captured_at_utc": "2026-11-16T14:31:41Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "b790a9077d1f33d3d4f5b9ee98fca025468b1107",
+   "captured_at_utc": "2026-11-16T14:47:44Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "993c2bb673583d04ceb4bbffea08f35f2c2fb95a",
+   "captured_at_utc": "2026-11-16T15:16:51Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "4bf3401edb39fc66374a68fc75d051cf41bda21d",
+   "captured_at_utc": "2026-11-16T15:16:51Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "7bbd9febfea3316280705c205e56bd8064d89c0b",
+   "captured_at_utc": "2026-11-16T15:16:51Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "9a8752ecc98b0eedd6731050d2f6ba7243348131",
+   "captured_at_utc": "2026-11-16T15:30:05Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "68caa0ecaa2d0effa5bca0d111357e02a0030830",
+   "captured_at_utc": "2026-11-17T16:36:32Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "232612e4ef5bdf7b252b7c892056a9c4c1cb11f3",
+   "captured_at_utc": "2026-11-19T06:13:47Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "0443386a3ea5c9cff4e2fd2ba3e4c2afdef7fe8c",
+   "captured_at_utc": "2026-11-19T07:40:34Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "f6a16872f35ec17834757f8986b69bf02dc8e318",
+   "captured_at_utc": "2026-11-19T07:56:12Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "35de10f3feab78c33b619d3b7ea320fbe5e7f2f8",
+   "captured_at_utc": "2026-11-19T08:09:58Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  },
+  {
+   "commit": "159110c8ab0cc82ae7a3745e1aaeff99ffd5f6b7",
+   "captured_at_utc": "2026-11-19T12:03:37Z",
+   "S1_season_failed": true,
+   "S2_train_failed": true,
+   "S1_http_status": 200,
+   "S2_http_status": 200
+  }
+ ]
+}
