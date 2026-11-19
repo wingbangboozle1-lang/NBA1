@@ -11658,3 +11658,25 @@ None. Every published value traces to an official NBA source (nba.com, official.
 
 ### Handoff
 This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd746` with no uncommitted changes. All verification gates pass. Ready for integration: create PR from this branch to `main`, merge, confirm GitHub Pages deploys successfully.
+
+---
+
+### §71.2 Deployment record (2026-11-19)
+
+| Step | Result |
+| --- | --- |
+| PR created | #183 — `arena/cd06f005-nba1` → `main` |
+| PR merged | `gh pr merge 183 --merge` → merged on `main` |
+| Pages build | `pages build and deployment` run **44476653003** → `completed / success` |
+| Pages status | `GET /repos/…/pages` → `status: built`, `build_type: legacy`, source `main` path `/` |
+| Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |
+
+All verification gates passed before merge:
+- `scripts/verify_all.py` → VERIFY OK (0 failures)
+- `scripts/check_links.py` → PASS
+- `scripts/check_rendered.py` → PASS
+- Repo-wide broken-internal-link scan → 0 broken links
+- `engine/pipeline.py` → all site data built
+- `engine/build_site.py` → 17 pages in `docs/b/pages/`
+
+Session claim complete. Branch `arena/cd06f005-nba1` merged into `main`. Site live on GitHub Pages.
