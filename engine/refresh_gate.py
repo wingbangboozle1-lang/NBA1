@@ -46,6 +46,14 @@ REQUIRED = {
     "S1_season", "S4_schedule", "S5_injury_index", "S8_standings",
     "S9_team_traditional", "S10_team_opponent",
 }
+# How old a session-verified advanced input may be while the scheduled rebuild
+# still runs (section 74 T04). The runner can never parse the advanced page
+# (byte evidence: data/raw/_capture_evidence_S1_season.json - a client-rendered
+# shell; the stats API times out; a headless render is Akamai-denied), so the
+# value arrives by first-hand session transcription. If no session re-reads
+# the official table within this window, the gate blocks again: a stale model
+# input must never silently rebuild.
+SESSION_INPUT_MAX_AGE_HOURS = 72.0
 ALLOWED_HOSTS = {"www.nba.com", "official.nba.com", "ak-static.cms.nba.com", "stats.nba.com"}
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
 PROMOTION_SENSITIVE = {
@@ -374,6 +382,13 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     # every model input. A current page fetch alone never authorizes a rebuild.
     for rel, check_key in (("data/raw/_capture_S1_season.json", "S1_season"),
                            ("data/raw/_capture_S4_schedule.json", "S4_schedule")):
+        if check_key == "S1_season" and check_key in declared:
+            # Runner-unreadable and declared: no rows-bearing structured
+            # capture can exist this run (the evidence record proves the
+            # response instead - handled in the loop above). Demanding one
+            # would re-introduce the unsatisfiable predicate this mechanism
+            # exists to remove. The VALUE is still freshness-gated below.
+            continue
         path = os.path.join(base, rel)
         try:
             payload = read_json(path)
@@ -417,18 +432,74 @@ def evaluate_with_report(record: dict, now: dt.datetime,
         if check_key == "S4_schedule" and not payload.get("games") and check_key not in declared:
             errors.append("official schedule capture has no parsed game IDs")
 
-    # Advanced rows are parseable now, so compare every official row against
-    # the season-to-date model snapshot rather than trusting a change list.
-    # A DECLARED source has no capture to compare (section 74): the comparison
-    # is skipped for it and the declaration's evidence record is the proof
-    # instead (fb91550a). The staleness it leaves behind is published in the
-    # gate report rather than passed over silently (cdf3a108). The comparison
-    # still applies to every non-declared source.
+    # Advanced rows: two honest paths, and the gate knows which one it is on.
+    #
+    # (a) The run parsed rows (S1 undeclared): compare every official row
+    #     against the season-to-date model snapshot rather than trusting a
+    #     change list.
+    # (b) The run could not (S1 declared runner-unreadable; claimed section
+    #     74 T04, merged as section 78 - merge collision with arena/
+    #     fb91550a-nba1's concurrent gate fix, whose bare `pass` on this
+    #     branch is replaced by the freshness check their own review
+    #     asked for: a declaration must not hide staleness): the
+    #     snapshot is session-maintained, so require its verification instead
+    #     - explicit, official-URL, first-hand, and no older than
+    #     SESSION_INPUT_MAX_AGE_HOURS - plus a complete integrity-clean
+    #     30-team table. If sessions stop re-reading the official page, this
+    #     check blocks the rebuild exactly as a stale capture would.
     if "S1_season" in declared:
-        warnings.append("advanced team comparison skipped by live declaration "
-                        "(S1_season unreadable); data/raw/team_advanced.json "
-                        "stays at its last verified promotion and is published "
-                        "as stale")
+        try:
+            adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
+        except (OSError, ValueError):
+            adv_snapshot = None
+        if not isinstance(adv_snapshot, dict):
+            errors.append("advanced team input (session-maintained) missing or "
+                          "unreadable: data/raw/team_advanced.json")
+        else:
+            proof = adv_snapshot.get("verification") or {}
+            if proof.get("verified") is not True:
+                errors.append("advanced team input has no explicit session verification")
+            parsed_url = urlparse(str(proof.get("source_url") or ""))
+            if parsed_url.scheme != "https" or parsed_url.hostname not in ALLOWED_HOSTS:
+                errors.append("advanced team input verification source_url is not "
+                              "an official NBA host")
+            try:
+                verified_at = parse_utc(proof.get("verified_at_utc"))
+                v_age = (now - verified_at).total_seconds() / 3600
+                if v_age < -0.05 or v_age > SESSION_INPUT_MAX_AGE_HOURS:
+                    errors.append(f"advanced team input is stale: verified_at_utc is "
+                                  f"{v_age:.1f}h old (maximum "
+                                  f"{SESSION_INPUT_MAX_AGE_HOURS:g}h); re-read the "
+                                  f"official table before rebuilding")
+            except (TypeError, ValueError):
+                errors.append("advanced team input verification timestamp "
+                              "missing or invalid")
+            windows = adv_snapshot.get("windows") or []
+            season_rows, season_cols = [], []
+            for window in windows:
+                if isinstance(window, dict) and window.get("window_id") == "season_to_date":
+                    season_rows = window.get("rows") or []
+                    season_cols = window.get("cols") or adv_snapshot.get("cols") or []
+            if len(season_rows) != 30:
+                errors.append(f"advanced team input season_to_date has "
+                              f"{len(season_rows)} rows, expected 30")
+            else:
+                # Integrity without importing the parser: W + L == GP per row,
+                # resolved through the snapshot's own column list.
+                try:
+                    i_gp, i_w, i_l = (season_cols.index("gp"), season_cols.index("w"),
+                                      season_cols.index("l"))
+                    bad = [r[0] for r in season_rows
+                           if r[i_w] + r[i_l] != r[i_gp]]
+                    if bad:
+                        errors.append("advanced team input has rows where W+L != GP: "
+                                      + ", ".join(str(b) for b in bad[:5]))
+                except (ValueError, IndexError, TypeError):
+                    errors.append("advanced team input column list is missing "
+                                  "gp/w/l; the snapshot cannot be integrity-checked")
+            warnings.append("advanced team input accepted via session "
+                            "verification (runner-unreadable source, declared); "
+                            "no runner capture compared")
     else:
         try:
             adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))

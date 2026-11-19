@@ -173,6 +173,12 @@
    "answer": "Three measured causes, all fixed 2026-11-19 by session arena/cdf3a108-nba1 (continuing section 73's open tail). (1) S1_season/S2_train sat in the gate's blocking failure list as an unsatisfiable requirement of the same client-rendered class as S8/S9/S10 - every recorded run parsed 0 rows and the byte-exact captures prove the page carries no table; both are now declared unreadable with evidence and a hard expiry (2026-12-19), honoured by gate, promoter and anti-rot re-checks. (2) The publish step staged its promoted outputs with ONE git add listing data/raw/standings.json first - a path that has never existed; git aborts the whole command on the first unmatched pathspec and 2>/dev/null hid it, so every verified promotion (schedule_upcoming, injuries, games_completed, data/parsed) was silently dropped from every capture commit (flag F-CDF-02); staging is now per-path. (3) The gate's S1-specific blocks (structured capture + exact-match comparison) are now declaration-aware with the staleness published. Measured after the fix: engine/promote_official.py exits 0 with 0 blocked, engine/refresh_gate.py returns PASS with five PASS BY DECLARATION entries, and the rebuild commands (engine/pipeline.py + engine/build_site.py) run to completion.",
    "source": "data/raw/_capture_gate_report.json",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_capture_gate_report.json"
+  },
+  {
+   "id": "A-4EE-1",
+   "question": "When will the LAL/UTA team-stat tables catch up with the standings? (Q-929-1)",
+   "answer": "They already have. First-hand read 2026-11-19T13:2xZ: all three official tables print LAL 16 GP 13-3 and UTA 16 GP 3-13, matching the standings (G3 passes 30/30); the committed model cut was re-cut to match (F-4EE-04, data/derived/recut_2026-11-19_4eef6d3b/drift.json). Q-929-1 can be closed.",
+   "source": "https://www.nba.com/stats/teams/advanced"
   }
  ],
  "open": [
@@ -497,6 +503,18 @@
    "blocks": "any reward-tier decision on the leaderboard; F-CDF-05",
    "source": "docs/data/leaderboard.json",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/docs/data/leaderboard.json"
+  },
+  {
+   "id": "Q-4EE-1",
+   "question": "Should the corrected probability formula (sigma 18.303, S-4EE-01) take effect for the 2026-11-20 roll, or later?",
+   "what_is_missing": "A decision owner for pre-registration amendments. The measurement (F-4EE-06) exists; the authority to change a frozen signal does not sit with any single seat.",
+   "suggested_source": "Decision register / user review of S-4EE-01."
+  },
+  {
+   "id": "Q-4EE-2",
+   "question": "Who keeps the session-maintained advanced input fresh within its 72-hour gate (F-4EE-03)?",
+   "what_is_missing": "A standing cadence. Today each day-roll/verification session re-reads the official table; if no session runs for 72h the scheduled rebuild blocks (correctly, but silently for site visitors). A named owner or an automated reminder would close it.",
+   "suggested_source": "Coordination board ground rules / next integration seat."
   }
  ]
 }

@@ -1920,6 +1920,83 @@
    "detail": "This repo carries TWO different home-court measurements, and restoring 25 finals changed only one of them, so a reader can now meet two numbers that disagree. (a) The standings pin, published in the executive summary and in data/derived/measured_constants_2026_27.json, is measured from the official standings HOME/ROAD columns and is 0.5023 (111 of 221) -> **+0.09 points**. It did NOT change, because standings were not re-read this session. (b) The feed pin, the one R09 actually wires into the legacy reference line via engine/model_core.measured_hca_points reading data/hca_measured.json, is measured over data/raw/games_completed.json: with 74 finals 38-36 (0.5135) -> **+0.59 points**; with the 25 restored finals (9 home wins, 16 road wins) it is 47-52 (0.4747) -> **-1.10 points**. Neither number is hand-chosen and neither formula is wrong; they answer slightly different questions over slightly different corpora, and the feed one is now negative, which is unusual enough to need a decision rather than a silent publication. The initial version of this flag said the pin 'flips from +0.59 to -1.10' as if a single pin existed; that wording was corrected after reading the live page, which was still (correctly) showing +0.09. Decision needed: pick ONE home-court source of record, state which, and make the other a cross-check that must agree within a tolerance or raise.",
    "source": "S74_HCA",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/hca_measured.json"
+  },
+  {
+   "id": "F-4EE-01",
+   "severity": "High",
+   "status": "resolved",
+   "title": "The refresh job's publish step had never once landed a promoted input: a compound git add with three never-existing paths aborted staging of every promoted file",
+   "detail": "Session arena/4eef6d3b-nba1, COORDINATION section 74. The publish step staged the digest-bound promoted inputs (schedule_upcoming.json, injuries.json, games_completed.json, team_advanced.json, data/parsed/) with ONE `git add` that also listed the three declared-unreadable snapshots (standings.json, team_traditional.json, team_opponent.json - 0 commits in 884 of repository history). Git's add is atomic per invocation: one unmatched pathspec aborts the whole list ('fatal: pathspec ... did not match any files'), and the step's `2>/dev/null || true` swallowed the abort. Measured on auto/refresh-2026-11-19-120839: the run record says 'promoted' for S4_schedule/injury_pdf_probe/results_feed/injury_diff_chain and the commit contains none of those files. Since the step landed (PR #117 era), promoted inputs existed only inside run workspaces. Fixed by per-path staging; pinned by scripts/test_refresh_publish_4eef6d3b.py; live proof: commit b8cf2cb (12:37Z run) is the first ever to carry them. COLLISION RECORD: session arena/fb91550a-nba1 found and fixed the same defect concurrently (PR #200, merged 12:29Z; its commit 4b767c1 names the same four never-existing paths and the same atomic-add abort). Both fixes meet on the merged tree: fb91550a's per-file staging loop is kept, and this session's behavioral tests (scripts/test_refresh_publish_4eef6d3b.py) pin it. Nothing of either fix is discarded.",
+   "affected": ".github/workflows/refresh-data.yml (Publish captures step)",
+   "source": "Run 44520339923 and branch auto/refresh-2026-11-19-120839 (git diff main...FETCH_HEAD), reproduced in a local git repo",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/tree/auto/refresh-2026-11-19-120839",
+   "suggested_action": "None - fixed twice, independently, the same hour (this session's T02 and fb91550a's T02). Reviewers can diff either branch's tests against the merged workflow."
+  },
+  {
+   "id": "F-4EE-02",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "The settle step died on the exact exit code its own logic says to tolerate: bash -e aborted the loop at settle_slate's exit 3 before the tolerance ran",
+   "detail": "Session arena/4eef6d3b-nba1, COORDINATION section 74. The step runs `python3 scripts/settle_slate.py ...; rc=$?; if [ rc != 0 ] && [ rc != 3 ]; then rc_all=1; fi`, but GitHub Actions runs step scripts as `bash -eo pipefail`, so a documented exit 3 ('nothing settleable') killed the shell at the command. Run 44520339923 annotation: 'Process completed with exit code 3'; reproduced exactly with `bash -eo pipefail` on the step's own script. Consequences: (a) settlement_outcome: failure on every run whose newest window is incomplete; (b) a sort-order landmine - slates iterate ascending, so the first un-settleable window skipped every later slate. Fixed with `|| rc=$?`; pinned by scripts/test_refresh_publish_4eef6d3b.py (which runs the real step script against stubs). COLLISION RECORD: main's concurrent fix (PR #200) wrapped the promote step and re-authorised the rebuild on the gate alone but left the settle step's `rc=$?` abort in place - this bug's fix is unique to this session and lands with the merge.",
+   "affected": ".github/workflows/refresh-data.yml (Settle step); scripts/settle_slate.py unaffected",
+   "source": "Run 44520339923 annotations + local bash -eo pipefail reproduction",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44520339923",
+   "suggested_action": "None - fixed in this session's T03 (the only fix that addresses it)."
+  },
+  {
+   "id": "F-4EE-03",
+   "severity": "Medium",
+   "status": "open",
+   "title": "S1/S2 (official advanced team table) are runner-unreadable: the model's advanced input is now session-maintained, freshness-gated at 72 hours, and declared with evidence and an expiry",
+   "detail": "Session arena/4eef6d3b-nba1, COORDINATION section 74. Byte evidence (section 69, run 44477742276): the runner receives a 294KB client-rendered shell with 0 team rows; the stats.nba.com data endpoint times out 4/4 from Actions; a headless render is Akamai-denied. The same table serves 30 rows to the platform web-fetch channel (sections 73.6 and this session's 2026-11-19T13:2xZ re-read). The model consumes team_advanced.json, so its value is maintained by first-hand session transcription with an explicit verification block (source URL, transcriber, read time), and engine/refresh_gate.py now accepts it ONLY within SESSION_INPUT_MAX_AGE_HOURS (72h) and only with a complete 30-row W+L==GP table. If sessions stop re-reading the official page, the gate blocks again. Declarations for S1_season/S2_train in data/raw/unreadable_sources.json expire 2026-12-19 and self-revoke if a run parses rows. COLLISION RECORD: session arena/fb91550a-nba1 made the gate declaration-ready for S1 (anti-rot coverage, missing-capture escape, row_count-or bug) but deliberately did NOT declare S1 ('S1 is NOT declared unreadable: the Advanced table reads 30/30 rows first-hand', F-915-04), leaving the rebuild blocked and R01 partial. This session's declaration adds exactly the freshness+provenance check that answers fb91550a's stated concern (a declaration must not hide staleness): the session transcription is accepted only within 72h and only with an official-URL verification and a complete 30-row W+L==GP table. On this session's branch the scheduled run 44527302396 then rebuilt: freshness_ok true, build_outcome success - the first rebuild execution since 2026-11-15T12:43:11Z.",
+   "affected": "data/raw/team_advanced.json, data/raw/unreadable_sources.json, engine/refresh_gate.py, engine/promote_official.py",
+   "source": "Section 69 byte captures + this session's first-hand re-read (data/official/teams_reread_2026-11-19_4eef6d3b.json)",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Review the declaration's consequence_if_wrong field and the 72h bound; re-test at the 2026-12-19 expiry."
+  },
+  {
+   "id": "F-4EE-04",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "F-89F-04/Q37: the committed model cut carried stale 15-GP LAL/UTA rows - the 2026-11-19 three-table re-read adopted the official 16-GP rows and the drift is published",
+   "detail": "Session arena/4eef6d3b-nba1, COORDINATION section 74. First-hand re-read of the three official team-stat pages on 2026-11-19T13:2xZ: advanced season_to_date 30/30 rows, training window 30/30 (byte-matched the previous cut), opponent 30/30 (UTA opponent points now print 116.0, confirming the 117.3 -> 116.0 drift note), traditional GP/W/L 30/30 corroborated against arena/89f7b601-nba1's 08:0x read. Re-cut gates: G1..G5 all pass - G3 (30/30 standings match) and G4 (444 = 2 x 222 finals) now pass where they failed at 05:0x. Drift vs the previous cut = exactly 2 rows (LAL, UTA); published at data/derived/recut_2026-11-19_4eef6d3b/drift.json. The sealed 11/19-11/22 horizon is untouched; the new cut feeds the NEXT roll.",
+   "affected": "data/derived/team_stats_recut.json, data/raw/team_advanced.json, data/derived/measured_constants_2026_27.json",
+   "source": "https://www.nba.com/stats/teams/advanced + /traditional + /opponent, read 2026-11-19T13:2xZ",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "None for this cut; the next horizon roll prices from it."
+  },
+  {
+   "id": "F-4EE-05",
+   "severity": "Medium",
+   "status": "open",
+   "title": "Two published records exist for the same strategy (S1: README 23-9 / +11.91 vs docs/data/leaderboard.json 23-8 / +12.909) and neither is derivable from the settlement files",
+   "detail": "Measured by session arena/d66245d4-nba1 (COORDINATION section 72, finding 3) and registered here for tracking. data/settlement/** grades TICKETS, not strategies, so no authoritative per-strategy record exists; README.md and docs/data/leaderboard.json disagree on S1's record and units. This feeds the brief's leaderboard/reward requirement, which cannot rank strategies on contradictory records.",
+   "affected": "README.md, docs/data/leaderboard.json, data/settlement/**",
+   "source": "Section 72 signal-diagnostics read (verify/2026-11-19-d66245d4/report.md)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md",
+   "suggested_action": "Build a strategy-level rollup keyed by settlement tickets (S-4EE-02) and reconcile both surfaces to it."
+  },
+  {
+   "id": "F-4EE-06",
+   "severity": "High",
+   "status": "open",
+   "title": "Published pick probabilities are miscalibrated: the spread is divided by sigma of game margins (16.714) where sigma of the spread error (18.303) belongs; 37 decided singles went 14-23-1 against 0.5238 break-even",
+   "detail": "Measured by session arena/d66245d4-nba1 (COORDINATION section 72, finding 1) and registered here for tracking. Mean published pick probability on decided paper singles was 0.7197 against a realized 0.3784 hit rate (-0.3413 gap); the 0.70+ bucket went 7-11 while claiming 0.795. Root cause measured: the probability divides the spread by sigma of game margins (16.714) instead of sigma of the error in the spread (measured sd 16.093 with mean bias +8.718; required sigma 18.303). The |spread| >= 3.0 gate keeps exactly the games where the bias is largest. The sealed horizon's published probabilities stand (pre-registration); the fix is prospective only.",
+   "affected": "engine/estimator_*.py / probability formula, data/derived/horizon_picks.json (published values stand)",
+   "source": "Section 72 signal diagnostics (data/content/signal_diagnostics_2026-11-19_d66245d4.json)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/signal_diagnostics_2026-11-19_d66245d4.json",
+   "suggested_action": "Decide S-4EE-01: pre-register a corrected probability formula for future picks before the next roll."
+  },
+  {
+   "id": "F-4EE-07",
+   "severity": "Low",
+   "status": "resolved",
+   "title": "Two stale CONFLICTING pull requests (#181, #188) were triaged and closed at 12:18Z by session arena/232a9f86-nba1's integration seat (PR #201); this session verified the closures and the content preservation",
+   "detail": "Corrected record (the original draft of this row, written before this session's first push, claimed the triage as its own T08; the board's parallel sessions had already done it - the claim was pushed at ~12:25Z and 232a9f86 closed both PRs at 12:18Z). PR #181's deliverables are on main via the PR #172/#179/#180/#182 chain (verified: its horizon archives are an independent re-derivation, superseded by main's settled chain). PR #188's unique content (the section 72.2 integration record) was NOT on main and was preserved verbatim by 232a9f86 into COORDINATION.md ('preserved from stale-PR #188'). This session re-verified both closures and that main carries the ported 72.2 record. No content lost.",
+   "affected": "GitHub pull requests #181, #188 (closed 2026-11-19T12:18Z by arena/232a9f86-nba1)",
+   "source": "gh pr view/diff/close (2026-11-19)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/pulls?q=is%3Apr+is%3Aclosed",
+   "suggested_action": "None - closed with evidence; record corrected here per the ground rule to record collisions."
   }
  ]
 }

@@ -1,0 +1,162 @@
+{
+ "title": "Model-input drift, previous cut -> 2026-11-19T13:2xZ first-hand re-read",
+ "generated_by": "scripts/recut_2026-11-19_4eef6d3b.py",
+ "compared_at_utc": "2026-11-19T13:09:56Z",
+ "previous_cut_generated": "2026-11-19T05:44Z",
+ "previous_cut_origin": "committed cut at b8cf2cb",
+ "rows_changed": 2,
+ "rows_unchanged": 28,
+ "drift": [
+  {
+   "abbr": "LAL",
+   "fields": {
+    "gp": {
+     "from": 15,
+     "to": 16
+    },
+    "l": {
+     "from": 2,
+     "to": 3
+    },
+    "min": {
+     "from": 725.0,
+     "to": 773.0
+    },
+    "off_rtg": {
+     "from": 121.6,
+     "to": 119.8
+    },
+    "def_rtg": {
+     "from": 113.7,
+     "to": 113.2
+    },
+    "net_rtg": {
+     "from": 7.8,
+     "to": 6.7
+    },
+    "ast_pct": {
+     "from": 58.2,
+     "to": 58.8
+    },
+    "ast_to": {
+     "from": 1.47,
+     "to": 1.46
+    },
+    "ast_ratio": {
+     "from": 17.4,
+     "to": 17.3
+    },
+    "oreb_pct": {
+     "from": 33.9,
+     "to": 33.6
+    },
+    "dreb_pct": {
+     "from": 64.3,
+     "to": 65.0
+    },
+    "efg_pct": {
+     "from": 58.1,
+     "to": 57.2
+    },
+    "ts_pct": {
+     "from": 62.4,
+     "to": 61.5
+    },
+    "pace": {
+     "from": 100.14,
+     "to": 100.35
+    },
+    "pie": {
+     "from": 53.8,
+     "to": 53.0
+    },
+    "poss": {
+     "from": 1511,
+     "to": 1614
+    }
+   }
+  },
+  {
+   "abbr": "UTA",
+   "fields": {
+    "gp": {
+     "from": 15,
+     "to": 16
+    },
+    "w": {
+     "from": 2,
+     "to": 3
+    },
+    "min": {
+     "from": 730.0,
+     "to": 778.0
+    },
+    "off_rtg": {
+     "from": 107.2,
+     "to": 107.0
+    },
+    "def_rtg": {
+     "from": 115.9,
+     "to": 114.5
+    },
+    "net_rtg": {
+     "from": -8.7,
+     "to": -7.5
+    },
+    "ast_pct": {
+     "from": 64.2,
+     "to": 65.0
+    },
+    "ast_to": {
+     "from": 1.5,
+     "to": 1.48
+    },
+    "ast_ratio": {
+     "from": 17.7,
+     "to": 17.8
+    },
+    "oreb_pct": {
+     "from": 29.3,
+     "to": 29.0
+    },
+    "tov_pct": {
+     "from": 16.3,
+     "to": 16.7
+    },
+    "efg_pct": {
+     "from": 52.1,
+     "to": 52.4
+    },
+    "ts_pct": {
+     "from": 55.9,
+     "to": 56.2
+    },
+    "pace": {
+     "from": 99.95,
+     "to": 100.16
+    },
+    "pie": {
+     "from": 46.4,
+     "to": 47.2
+    },
+    "poss": {
+     "from": 1522,
+     "to": 1626
+    }
+   }
+  }
+ ],
+ "opponent_table_note": {
+  "uta_opp_pts_previous_cut_note": 117.3,
+  "uta_opp_pts_official_now": 116.0,
+  "source_url": "https://www.nba.com/stats/teams/opponent",
+  "resolves": "F-89F-04 / Q37: the previous cut predates the 11/18 UTA 109 @ LAL 97 game; the official opponent table now prints 116.0 for UTA opponent points (read this cycle). The value is adopted only in this drift record and the read record; team_stats_recut.json carries the advanced columns the model reads."
+ },
+ "gates": {
+  "G1_W_plus_L_eq_GP": "pass (all 30)",
+  "G2_netrtg_eq_off_minus_def": "pass (all 30, 0.25 rounding tolerance)",
+  "G3_gp_and_wl_match_standings": "pass (all 30)",
+  "G4_total_team_games_eq_2x_decided_finals": "pass (444 = 2 x 222)",
+  "G5_standings_identity": "pass"
+ }
+}

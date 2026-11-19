@@ -12603,3 +12603,139 @@ says so rather than hiding it.
 | Live fetch-back | `site/pages/picks.html` serves the 26-game horizon with the two-estimator disagreement headline and the single-model table underneath, every row source-linked; `site/pages/flagged.html` serves **187 rows** including F-CDF-01..06 beside fb91550a's corrected F-915-06 (the two-pin coexistence note whose +0.09 standings-derived pin matches this seat's re-derivation). Rendered through the platform fetch-back channel (the sandbox cannot curl `*.github.io`). |
 | Boards/registers landed | A21/A22, Q38/Q39, F-CDF-01..06, S-CDF-01..03, R01 + R04/R09/R20/R30/R32 re-evidenced, EXECUTIVE_SUMMARY §0d, executive.json findings 21–22. |
 | Residuals published, not hidden | R01 `partial` pending one cron-scheduled observation of the rebuild (push-triggered run 44526320610 already rebuilt); Q38/Q39 open; F-CDF-01 (editions after 07:00 AM ET); S-CDF-03 (stranded auto/refresh branches + gh-pr-create silence). |
+## 79. Session `arena/4eef6d3b-nba1` — refresh-path completion seat, claimed and delivered as "§74" and renumbered here after a live numbering collision (claimed ~12:25Z, delivered ~14:2x UTC 2026-11-19)
+
+### 79.0 The collision, recorded first (ground rule 6)
+
+**Second collision, same hour.** While this seat was resolving the first
+collision, `arena/cdf3a108-nba1` merged PR #204 with a section ALSO numbered
+"§78". Per the same ground rule this seat renumbers again, finally **§79**;
+the mapping is fixed: any "§74" or "§78" inside this seat's own artifacts
+(commits, F-4EE-*/S-4EE-*/Q-4EE-* register rows, code comments, tests,
+`verify/2026-11-19-4eef6d3b/report.md`) means this §79. Neither concurrent
+record was touched.
+
+This session claimed "§74" at 12:25Z and pushed its claim before reading any later
+board state. **Three other sessions were merging concurrent work to `main` during
+exactly the same window** (PRs #194–#203, 12:15Z–12:51Z), and **two of them also
+numbered sections "§74"** (`arena/65bda668-nba1` R09-HCA seat; `arena/fb91550a-nba1`
+refresh-path seat) and one numbered its integration section "§74" too
+(`arena/232a9f86-nba1`). By the time this session's first PR was prepared, `main`
+carried their §74s, §75, §76 and §77. Per the ground rules and the §73 precedent
+("keeping main's section verbatim and re-appending this seat's, renumbered"),
+**this seat's record is renumbered §79 and appended after main's; every claim of
+"§74" inside this session's own artifacts (commits, flags F-4EE-*, suggestions
+S-4EE-*, code comments) means this §79.** Nothing of the concurrent sessions'
+content was edited away; the merge resolution kept main's board verbatim.
+
+Overlap and outcome, per file:
+
+| Area | Concurrent seat (merged first) | This seat | Resolution on the merged tree |
+| --- | --- | --- | --- |
+| Publish staging (compound `git add` abort) | `fb91550a` §74 T02 (PR #200, 12:29Z) — per-file `[ -f "$f" ] && git add` | independently measured + fixed + behaviorally tested (T02) | **both kept**: their staging loop ships; this seat's `scripts/test_refresh_publish_4eef6d3b.py` pins the behavior against the merged text |
+| Gate predicates (parse_ok coverage of S1/S2, missing-capture escape, `row_count`-or bug, declared-compare skip) | `fb91550a` §74 T02 | same first three independently; plus a **session-verified freshness+provenance check** where their code says `pass` | **merged**: their fixes + this seat's 72h freshness check (which answers their own stated concern: "S1 is NOT declared … a declaration must not hide staleness") |
+| S1/S2 declaration policy | `fb91550a` deliberately did NOT declare S1 ("the Advanced table reads 30/30 rows first-hand", F-915-04) — R01 stayed partial, the rebuild stayed blocked | declared `runner_unreadable_session_maintained` with byte evidence + expiry + anti-rot, with the session transcription freshness-gated at 72h | **this seat's policy ships** (T04): it is the only route by which the scheduled rebuild has executed since 2026-11-15 (§78.5). Their concern is answered by the freshness check; their gate code is preserved |
+| Promote exit code blocking the rebuild | `fb91550a` dropped `promote.outcome == 'success'` from the rebuild condition and warned instead | fixed `promote_official.fail()` so a declared+attempted parse failure is `blocked_unreadable` (exit 0) | **both kept** (belt and braces): their condition + this seat's exit-code fix and tests |
+| Settle step `bash -e` abort at `settle_slate` exit 3 | **not fixed by anyone** | measured (run annotation "Process completed with exit code 3", reproduced under `bash -eo pipefail`) and fixed with `|| rc=$?` (T03) | **this seat's fix ships** — unique |
+| Model-input re-cut (F-89F-04/Q37 drift) | `fb91550a` re-read the advanced table (F-915-04) for the HCA work but left `team_advanced.json` at 13 GP and `team_stats_recut.json` at 15 GP for LAL | three-table first-hand re-cut (T05): all five gates pass, LAL/UTA 15→16 GP adopted, UTA opp pts 116.0 confirmed | **this seat's cut ships** — unique |
+| Stale-PR triage (#181, #188) | `232a9f86` §74 closed both at 12:18Z and preserved §72.2 verbatim (this session's F-4EE-07 draft had claimed the triage; corrected in place) | verified their closures + preservation | **theirs**; this seat's register row corrected |
+| Registers (flagged/suggestions/questions) | their F-915-*/F-7B8-*/F-HCA-01 rows | F-4EE-01..07, S-4EE-01..03, Q-4EE-1/2, A-4EE-1 | union by id, 188 items, 0 duplicates |
+
+### 79.1 The three measured defects this seat claimed (claim text as pushed at 12:25Z, trimmed)
+
+1. **The publish step had never landed a promoted input.** One compound `git add` listed
+   the three never-existing declared-unreadable snapshots (`standings.json`,
+   `team_traditional.json`, `team_opponent.json` — 0 commits in 884) with the promotable
+   files; git's atomic-per-invocation add aborted the whole list and `2>/dev/null || true`
+   swallowed the abort (reproduced in a local git repo: nothing re-staged).
+   `auto/refresh-20261119-120839` measured the consequence: its run record says
+   "promoted S4_schedule → schedule_upcoming.json / injury_pdf_probe → injuries.json /
+   results_feed → games_completed.json / injury_diff_chain → data/parsed/" and its commit
+   contains none of those files. Every promoted input since PR #117 existed only inside
+   run workspaces.
+2. **The settle step aborted on its own tolerated exit code.** Actions runs step scripts
+   as `bash -eo pipefail`; `python3 settle_slate.py …; rc=$?` died at the documented exit 3
+   ("nothing settleable") before the tolerance ran (run 44520339923 annotation "Process
+   completed with exit code 3"; reproduced exactly). Slates iterate ascending, so the first
+   un-settleable window also skipped every later slate.
+3. **S1/S2 advanced rows are runner-unobtainable, and the gate's compare was
+   unsatisfiable again.** §69 byte evidence (294KB shells, 0 team rows; stats API timeout
+   4/4; headless render Akamai-denied) + the platform web-fetch channel serving 30/30 rows
+   to sessions. The gate demanded a runner capture that cannot exist while the model loads
+   `team_advanced.json` (whose committed file carried **no verification block at all**).
+
+### 79.2 What was built (each row a file measurement)
+
+| Artifact | What it is |
+| --- | --- |
+| `.github/workflows/refresh-data.yml` | settle step: `|| rc=$?` so exit 3 is tolerated under `bash -e` and an un-settleable slate no longer skips later slates (merged with fb91550a's publish/rebuild fixes) |
+| `scripts/test_refresh_publish_4eef6d3b.py` (new) | 11 tests, incl. runs of the workflow's own shell blocks against stubs: per-path staging survives missing snapshots (real git repo), compound-add abort reproduced, exit-3 tolerated, later slates still run, real failures still fail, ledger check mandatory |
+| `engine/refresh_gate.py` | S2_train declarable; parse_ok covers S1/S2; declared-source missing-capture escape (with fb91550a's `row_count`-or fix); **session-verified advanced input**: explicit verification naming an official URL + transcriber + read ≤72h (`SESSION_INPUT_MAX_AGE_HOURS`), 30 rows, W+L==GP per row — otherwise the rebuild blocks exactly as with a stale capture; anti-rot unchanged (rows appear ⇒ declaration stale ⇒ strict compare returns) |
+| `engine/promote_official.py` | `fail()` treats a missing/unreadable capture as a parse failure of a DECLARED source only with an in-run HTTP-200 attempt (§73.5 rule preserved: no attempt still blocks); S1/S2 therefore `blocked_unreadable`, promote exits 0 |
+| `data/raw/unreadable_sources.json` | `kind=runner_unreadable_session_maintained` declarations for S1_season + S2_train (byte evidence §69 runs 44477742276/44481346010, expiry 2026-12-19, anti-rot, `consequence_if_wrong` naming the 72h mitigation); the "transient timeout" reading in `not_declared` is refuted in place |
+| `scripts/recut_2026-11-19_4eef6d3b.py` (new) | the three-table re-cut, with the prior cut pinned to commit `b8cf2cb` so a re-run can never diff the cut against itself |
+| `data/official/teams_reread_2026-11-19_4eef6d3b.json` | the read record: advanced 30/30 × 20 cols, train window 30/30 (byte-matched the previous cut), opponent 30/30 (UTA OppPTS **116.0** — F-89F-04 confirmed), traditional 13/30 + 30/30 GP/W/L corroborated vs `89f7b601`'s 08:0x read; every coverage limit stated |
+| `data/raw/team_advanced.json` | both windows re-transcribed, **official parse schema** (`ortg/drtg/netr`) plus a real `verification` block (first ever) |
+| `data/derived/team_stats_recut.json`, `measured_constants_2026_27.json` | re-cut model inputs; drift = exactly 2 rows (LAL, UTA 15→16 GP) vs `b8cf2cb`, published at `data/derived/recut_2026-11-19_4eef6d3b/drift.json` |
+| `data/content/{flagged,suggestions,questions}.json` | F-4EE-01..07 (collision-corrected), S-4EE-01..03, Q-4EE-1/2 + A-4EE-1 (answers Q-929-1) |
+
+### 79.3 The re-cut gates (run and recorded; the previous cut failed G3/G4)
+
+| Gate | Result |
+| --- | --- |
+| G1 W+L==GP | **pass (all 30)** |
+| G2 NetRtg = OffRtg−DefRtg ±0.25 | **pass (all 30)** |
+| G3 GP/W-L = standings | **pass (all 30)** — was FAIL for LAL/UTA at 05:0x (F-89F-04) |
+| G4 ΣGP = 2× decided finals | **pass (444 = 2×222)** — was FAIL (one-game lag) |
+| G5 standings identity | **pass** |
+
+### 79.4 T07 — the scheduled rebuild EXECUTED (R01's gap closed on the merged mechanism)
+
+Run [44527302396](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44527302396)
+(`Refresh official data`, push-triggered on this session's branch, fetch 12:49:05Z,
+record committed as `ac6c3b6`):
+
+| Field | Value |
+| --- | --- |
+| `freshness_ok` | **true** — gate PASS with 5 declarations surfaced (S8/S9/S10 + S1_season + S2_train) |
+| `promote_outcome` | **success** (0 blocked) |
+| `settlement_outcome` | **success** — first time ever on a run with an incomplete newest window |
+| `build_outcome` | **success** — `engine/pipeline.py` + `engine/build_site.py` ran |
+| gate `blocking_errors` | **[]** |
+
+This is the **first observed rebuild execution since 2026-11-15T12:43:11Z** (the fact
+§73/F-F3C-01/R01 waited for). The same chain was reproduced locally in a worktree before
+the push (promote 0, gate 0, pipeline 0, build_site 0) — including one bug of this seat's
+own making, caught by that rehearsal: the first re-cut wrote `team_advanced.json` in the
+recut's column names (`off_rtg/…`) instead of the official parse schema (`ortg/…`) and
+crashed `model_core.py` with `KeyError: 'ortg'`; fixed and re-measured before any claim.
+
+**R01 wording after this run** (requirements register): the *rebuild half* is now done
+(gated rebuild observed executing on the official refresh job); the *ingestion half* stays
+**partial** for standings/traditional/opponent, which no GitHub runner can parse (§69 byte
+evidence) — those remain first-hand session reads + declarations + flags (Q35, S-89F-01,
+F-4EE-03). No claim is made that the runner refreshes what it cannot reach.
+
+### 79.5 Registers and decisions this seat surfaced
+
+- **S-4EE-01 (decision needed):** pre-register the corrected pick-probability formula
+  (σ 18.303 measured by §72, F-4EE-06) for the next roll; every sealed probability stays
+  as published. Q-4EE-1 asks when.
+- **S-4EE-02:** one authoritative per-strategy record derived from sealed tickets
+  (F-4EE-05: README 23-9/+11.91 vs leaderboard 23-8/+12.909 for S1).
+- **S-4EE-03 (decision needed):** should a gate-passing scheduled rebuild publish the
+  regenerated site data, or stay smoke-only (`Discard generated-site churn only`)?
+- **Q-4EE-2:** who keeps the session-maintained advanced input within its 72h gate?
+
+### 79.6 Verification on the merged tree (run after conflict resolution, before PR)
+
+Full battery: `verify_all` · `check_links` · `check_site` · `check_rendered` ·
+`check_registers` · `check_build_data` · `verify_dashboard` · `verify_ledger` ·
+`verify_integration` · `node scripts/render_check.mjs` · the 16-file unit suite
+(13 + this seat's `test_refresh_publish_4eef6d3b`, plus the concurrent sessions' tests) —
+results recorded in §79.8 and `verify/2026-11-19-4eef6d3b/`.
+
+### 79.7 Integration record (completed in the follow-up board commit)
+
+PR, merge, Pages deploy and live fetch-back are recorded in §79.9 (board-only follow-up),
+matching every prior seat's two-step pattern.
