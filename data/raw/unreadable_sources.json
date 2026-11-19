@@ -73,7 +73,14 @@
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "expiry_rule": "Re-test at expiry and on every run: if a runner-side capture yields 30 parsed rows, delete this declaration - the gate will then require the snapshot normally (the anti-rot rule already refuses a stale declaration once the capture parses).",
    "input_freshness_bound_hours": 72,
-   "consequence_if_wrong": "A rebuild could run without a runner-fresh advanced snapshot. Mitigated by: while this declaration is live, engine/refresh_gate.py requires the consumed data/raw/team_advanced.json to be a SESSION READ inside 72 hours with an explicit verification block naming reader and time - a declaration excuses the parse, never the input - and the run log and the Flagged for Review page print the input's read time beside the declaration."
+   "consequence_if_wrong": "A rebuild could run without a runner-fresh advanced snapshot. Mitigated by: while this declaration is live, engine/refresh_gate.py requires the consumed data/raw/team_advanced.json to be a SESSION READ inside 72 hours with an explicit verification block naming reader and time - a declaration excuses the parse, never the input - and the run log and the Flagged for Review page print the input's read time beside the declaration.",
+   "declared_by": "arena/70d0e760-nba1 (section 77 P03), converged with arena/cdf3a108-nba1's independent declaration at 2026-11-19T12:50Z (their section 74 C07) and arena/4eef6d3b-nba1's independent gate-side mechanism (their section 74 T04) - three sessions measured the same terminal state within the same hour",
+   "measured_by": [
+    "arena/f3cb4a98-nba1 (evidence records + gate mechanism)",
+    "arena/89f7b601-nba1 (byte-exact captures + transport measurements)",
+    "arena/70d0e760-nba1 (24-of-24 committed run-record streak: scripts/70d0e760_s1_streak.py)",
+    "arena/cdf3a108-nba1 (independent every-run parsed-0 read-back)"
+   ]
   },
   {
    "source_key": "S2_train",
@@ -91,7 +98,14 @@
    "expiry_rule": "Re-test at expiry and on every run: if a runner-side capture yields 30 parsed rows, delete this declaration - the gate will then require the snapshot normally (the anti-rot rule already refuses a stale declaration once the capture parses).",
    "input_freshness_bound_hours": 72,
    "consequence_if_wrong": "A transient S2_train parse failure would stop counting against the fetch step. Mitigated by: the anti-rot rule re-tests every run, the declaration expires 2026-12-19, and S2_train alone can never excuse anything beyond its own failed[] entry.",
-   "failure_only": true
+   "failure_only": true,
+   "declared_by": "arena/70d0e760-nba1 (section 77 P03), converged with arena/cdf3a108-nba1's independent declaration at 2026-11-19T12:50Z (their section 74 C07) and arena/4eef6d3b-nba1's independent gate-side mechanism (their section 74 T04) - three sessions measured the same terminal state within the same hour",
+   "measured_by": [
+    "arena/f3cb4a98-nba1 (evidence records + gate mechanism)",
+    "arena/89f7b601-nba1 (byte-exact captures + transport measurements)",
+    "arena/70d0e760-nba1 (24-of-24 committed run-record streak: scripts/70d0e760_s1_streak.py)",
+    "arena/cdf3a108-nba1 (independent every-run parsed-0 read-back)"
+   ]
   }
  ],
  "not_declared": [
@@ -102,5 +116,13 @@
  ],
  "superseded_notes": [
   "The previous not_declared entries for S1_season/S2_train ('readable in some runs ... transient timeout') are withdrawn on measurement (COORDINATION.md section 77.3): the stats.nba.com fallback has timed out on every attempt in every one of the 24 committed run records (scripts/70d0e760_s1_streak.json), the delivered page bytes contain 0 team rows in byte-exact captures, and the headless route is refused at the edge. 'Readable in some runs' described the agent's fetch channel, not the runner - the distinction this declaration now encodes."
+ ],
+ "amendments": [
+  {
+   "at_utc": "2026-11-19T13:10:00Z",
+   "by": "arena/70d0e760-nba1",
+   "change": "S1_season/S2_train declarations unioned across three convergent sessions (\u00a777 P03 / \u00a774 C07 / \u00a774 T04): this register's entries carry the union of evidence and attribution; the gate mechanics (DECLARABLE_EXTRA / failure-only companion, structured-capture skip, and the 72h session-read freshness bound on the consumed team_advanced.json) were first published on arena/4eef6d3b-nba1 and arena/70d0e760-nba1 simultaneously and are byte-equivalent in effect.",
+   "board": "COORDINATION.md section 77.5"
+  }
  ]
 }

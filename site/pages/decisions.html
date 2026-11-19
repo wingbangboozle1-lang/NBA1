@@ -127,14 +127,6 @@
 <th class="src">Source</th>
 </tr></thead><tbody>
 <tr>
-<td>Q-929-1</td>
-<td>When will the LAL/UTA team-stat tables catch up with the standings?</td>
-<td>The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="chip bad">no path</span></td>
-<td class="src"><span class="na" title="source id https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season is not in the register">&mdash;</span></td>
-</tr>
-<tr>
 <td>Q-929-2</td>
 <td>What do the NYK@MIN and 11/20 injury rows actually say?</td>
 <td>The 11/19 12:30 AM ET PDF text render has blank-matchup rows (Kuminga, Pullin) and a garbled 11/20 block. Discovery: re-fetch the PDF text render or the next edition (11/19 5:00 PM ET) and diff; the 5:00 PM edition is the one teams file by 5 p.m. local the day before.</td>
@@ -350,13 +342,21 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
 </tr>
-<tr id="Q37">
-<td>Q37</td>
-<td>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</td>
-<td>The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.</td>
-<td>Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.</td>
+<tr id="Q38">
+<td>Q38</td>
+<td>Should the 72-hour session-read freshness bound also cover data/raw/players_traditional.json (consumed by engine/pipeline.py, currently carrying no verification block and no bound), and should origination refuse a horizon priced from an over-age input?</td>
+<td>players_traditional.json has no verification block and is not gate-checked at all; the horizon builders read team_stats_recut.json without a maximum-age check, so a priced line can rest on an input older than the bound the refresh gate enforces.</td>
+<td>Give players_traditional.json the same session-read verification treatment as team_advanced.json, and add an input-age assertion to scripts/originate_horizon_*.py that refuses to price from an input older than the declared bound.</td>
 <td><span class="chip bad">no path</span></td>
-<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+<td class="src"><span class="na" title="source id engine/pipeline.py, scripts/originate_horizon_9ff20954.py is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q39">
+<td>Q39</td>
+<td>Two shapes for data/raw/team_advanced.json landed within the hour from different seats: §77's session-read verification block + verbatim ADVANCED_COLS rows, and arena/4eef6d3b-nba1's 'official parse schema' rewrite. Which becomes canonical?</td>
+<td>A single canonical shape for the consumed advanced snapshot, so the gate's declared-path check and promote's exact-match path read the same structure.</td>
+<td>Compare the two shapes field by field (both are in the §77 PR and arena/4eef6d3b-nba1's branch), pick one, port the other seat's tests to it, and record the decision in the board.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id COORD77 is not in the register">&mdash;</span></td>
 </tr>
 <tr id="Q4">
 <td>Q4</td>
@@ -399,7 +399,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">34 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">34 open, 22 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -790,6 +790,24 @@
 <td>Take option 1. It is a rendering job on data that already exists.</td>
 <td>&mdash;</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>S-70D-01</td>
+<td><span class="chip info">Operations</span></td>
+<td><b>Give the refresh workflow a queue instead of a single cancel-in-progress slot</b></td>
+<td>The refresh-official-global concurrency group cancels in-progress runs when a newer one arrives. Session-armed runs have now been cancelled wholesale three times (F-CA-04, 3 of 3 in section 63; again in section 77: run 44527293881 died after 5 seconds while another session's run held the slot), so the very observation the gate work exists to make is repeatedly destroyed by the scheduling policy.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-70D-02</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>One freshness-bound mechanism for every consumed model input</b></td>
+<td>The refresh gate now enforces a 72-hour session-read bound on team_advanced.json, but players_traditional.json (also consumed by the pipeline) has no verification block and no bound, and the horizon builders price from team_stats_recut.json without any age check (Q38).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Sources are the official pages the suggestion is built on. A suggestion that adds a source is the only kind that can add a link here, which is why the rows for licensed-price work point at the NBA page that shows the gap.</p>

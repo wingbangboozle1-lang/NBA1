@@ -1075,6 +1075,50 @@
    "decision_needed": "Approve a reachability table on the source-check page.",
    "source": "S89F_REFRESH",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
+  },
+  {
+   "id": "S-70D-01",
+   "title": "Give the refresh workflow a queue instead of a single cancel-in-progress slot",
+   "category": "Operations",
+   "problem": "The refresh-official-global concurrency group cancels in-progress runs when a newer one arrives. Session-armed runs have now been cancelled wholesale three times (F-CA-04, 3 of 3 in section 63; again in section 77: run 44527293881 died after 5 seconds while another session's run held the slot), so the very observation the gate work exists to make is repeatedly destroyed by the scheduling policy.",
+   "options": [
+    {
+     "option": "Replace cancel-in-progress with a queued concurrency group (cancel-in-progress: false) and keep the 30-minute timeout",
+     "effort": "Low - one workflow key",
+     "risk": "Low - runs queue instead of clobbering; the timeout still bounds the worst case",
+     "unlocks": "Observed-run evidence becomes actually observable on shared days"
+    },
+    {
+     "option": "Keep the single slot",
+     "effort": "None",
+     "risk": "Medium - every parallel session day silently loses its refresh observations",
+     "unlocks": "-"
+    }
+   ],
+   "source": "REFRESH_WORKFLOW",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+  },
+  {
+   "id": "S-70D-02",
+   "title": "One freshness-bound mechanism for every consumed model input",
+   "category": "Verification",
+   "problem": "The refresh gate now enforces a 72-hour session-read bound on team_advanced.json, but players_traditional.json (also consumed by the pipeline) has no verification block and no bound, and the horizon builders price from team_stats_recut.json without any age check (Q38).",
+   "options": [
+    {
+     "option": "Declare a single INPUT_MAX_AGE policy in one module and have the gate, the pipeline and the origination builders all read it",
+     "effort": "Medium",
+     "risk": "Low",
+     "unlocks": "One rule to review instead of three near-copies; over-age inputs fail loudly at every consumer"
+    },
+    {
+     "option": "Leave each consumer to grow its own check",
+     "effort": "None",
+     "risk": "High - the checks drift apart exactly like the declarations did",
+     "unlocks": "-"
+    }
+   ],
+   "source": "engine/refresh_gate.py",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py"
   }
  ]
 }

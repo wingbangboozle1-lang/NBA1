@@ -257,6 +257,20 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id data/derived/model_report_v2.json (measured_correlations) is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>Q37</td>
+<td><b>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</b></td>
+<td>Owner and maximum age now exist (§77 P03/P04): data/raw/team_advanced.json carries a verification block naming reader and read time (arena/70d0e760-nba1, 2026-11-19T12:4xZ), and engine/refresh_gate.py enforces a 72-hour session-read freshness bound (--max-input-age-hours) while the runner-side parse is declared unreadable. Origination-side refusal of over-age inputs remains open (Q38).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/raw/team_advanced.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-1</td>
+<td><b>When will the LAL/UTA team-stat tables catch up with the standings?</b></td>
+<td>Caught up on 2026-11-19: the official pages print 16 GP for both LAL (13-3) and UTA (3-13), agreeing with the standings; the model-input re-cut at 12:4xZ adopted the change with full column-level diffs (data/official/recut_drift_2026-11-19_70d0e760.json). F-89F-04 / S-89F-02 closed.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/official/recut_drift_2026-11-19_70d0e760.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -271,15 +285,6 @@
 <th>Priority</th>
 <th class="src">Source</th>
 </tr></thead><tbody>
-<tr>
-<td>Q-929-1</td>
-<td><b>When will the LAL/UTA team-stat tables catch up with the standings?</b></td>
-<td>The advanced/traditional/opponent tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). Discovery: re-read https://www.nba.com/stats/teams/advanced on the next cycle; if the tables have caught up, re-run scripts/recut_2026_11_19.py gates G3/G4 and close F-929-01.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="source id https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season is not in the register">&mdash;</span></td>
-</tr>
 <tr>
 <td>Q-929-2</td>
 <td><b>What do the NYK@MIN and 11/20 injury rows actually say?</b></td>
@@ -568,14 +573,23 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id data/official/standings_corroboration_89f7b601.json is not in the register">&mdash;</span></td>
 </tr>
-<tr id="Q37">
-<td>Q37</td>
-<td><b>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</b></td>
-<td>The 06:00Z read and the 08:00Z read of the same official page differ by one game for two clubs. No owner is recorded for the file, and no cadence is recorded for how often it must be re-verified relative to a horizon being priced. The drift check can therefore pass now and be stale by tip.</td>
-<td>Record an owner and a maximum age for the model input, the same way the refresh gate records one for the raw captures, and make origination refuse a horizon priced from an input older than that.</td>
-<td>S-89F-02's gate design; any claim that a priced line rests on current inputs</td>
+<tr id="Q38">
+<td>Q38</td>
+<td><b>Should the 72-hour session-read freshness bound also cover data/raw/players_traditional.json (consumed by engine/pipeline.py, currently carrying no verification block and no bound), and should origination refuse a horizon priced from an over-age input?</b></td>
+<td>players_traditional.json has no verification block and is not gate-checked at all; the horizon builders read team_stats_recut.json without a maximum-age check, so a priced line can rest on an input older than the bound the refresh gate enforces.</td>
+<td>Give players_traditional.json the same session-read verification treatment as team_advanced.json, and add an input-age assertion to scripts/originate_horizon_*.py that refuses to price from an input older than the declared bound.</td>
+<td>Any claim that published lines rest on inputs fresher than 72 hours</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="source id data/derived/recut_drift_89f7b601.json is not in the register">&mdash;</span></td>
+<td class="src"><span class="na" title="source id engine/pipeline.py, scripts/originate_horizon_9ff20954.py is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q39">
+<td>Q39</td>
+<td><b>Two shapes for data/raw/team_advanced.json landed within the hour from different seats: §77's session-read verification block + verbatim ADVANCED_COLS rows, and arena/4eef6d3b-nba1's 'official parse schema' rewrite. Which becomes canonical?</b></td>
+<td>A single canonical shape for the consumed advanced snapshot, so the gate's declared-path check and promote's exact-match path read the same structure.</td>
+<td>Compare the two shapes field by field (both are in the §77 PR and arena/4eef6d3b-nba1's branch), pick one, port the other seat's tests to it, and record the decision in the board.</td>
+<td>Nothing today (both shapes pass the gate); future promote/gate divergence</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id COORD77 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

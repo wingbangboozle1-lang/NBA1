@@ -540,6 +540,26 @@
 <td>Approve a reachability table on the source-check page.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>S-70D-01</td>
+<td>Operations</td>
+<td><b>Give the refresh workflow a queue instead of a single cancel-in-progress slot</b></td>
+<td>The refresh-official-global concurrency group cancels in-progress runs when a newer one arrives. Session-armed runs have now been cancelled wholesale three times (F-CA-04, 3 of 3 in section 63; again in section 77: run 44527293881 died after 5 seconds while another session's run held the slot), so the very observation the gate work exists to make is repeatedly destroyed by the scheduling policy.</td>
+<td>- Replace cancel-in-progress with a queued concurrency group (cancel-in-progress: false) and keep the 30-minute timeout <span class='fine'>(effort: Low - one workflow key; risk: Low - runs queue instead of clobbering; the timeout still bounds the worst case; unlocks: Observed-run evidence becomes actually observable on shared days)</span><br>- Keep the single slot <span class='fine'>(effort: None; risk: Medium - every parallel session day silently loses its refresh observations; unlocks: -)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id REFRESH_WORKFLOW is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-70D-02</td>
+<td>Verification</td>
+<td><b>One freshness-bound mechanism for every consumed model input</b></td>
+<td>The refresh gate now enforces a 72-hour session-read bound on team_advanced.json, but players_traditional.json (also consumed by the pipeline) has no verification block and no bound, and the horizon builders price from team_stats_recut.json without any age check (Q38).</td>
+<td>- Declare a single INPUT_MAX_AGE policy in one module and have the gate, the pipeline and the origination builders all read it <span class='fine'>(effort: Medium; risk: Low; unlocks: One rule to review instead of three near-copies; over-age inputs fail loudly at every consumer)</span><br>- Leave each consumer to grow its own check <span class='fine'>(effort: None; risk: High - the checks drift apart exactly like the declarations did; unlocks: -)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id engine/refresh_gate.py is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

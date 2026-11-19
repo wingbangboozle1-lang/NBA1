@@ -598,12 +598,12 @@
 <tr>
 <td>G5_freshness_provenance</td>
 <td>engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours)</td>
-<td>['fetcher reported 2 failed source/parse checks', 'missing/invalid payload capture for S1_season', 'missing/invalid structured capture: data/raw/_capture_S1_season.json', 'advanced team input cannot be compared with a complete promoted snapshot', &quot;promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json&quot;, 'promoted input provenance URL is stale: data/raw/injuries.json', &quot;promoted input is not verified against this run's capture: data/raw/injuries.json&quot;]</td>
-<td><b>CLOSED</b></td>
+<td>PASS</td>
+<td>PASS</td>
 <td class="src"><span class="na" title="computed from a repository file, not an official value: no official link applies">&mdash;</span> data/raw/_last_refresh.json + engine/refresh_gate.py</td>
 </tr>
 </tbody></table></div>
-<p class="tnote">Fail-closed rule (scripts/build_surfaces.py): the bet PAGES render picks only when ALL four gates pass — <b>currently closed by G1_validation, G2_sample_floor, G5_freshness_provenance</b>. Gate data: data/derived/surface_gates.json, regenerated with the site. Open the gated pages: <a href="bet-surface.html">bet-surface.html</a> (index link) or <a href="bet.html">bet.html</a> — both are written by the same builder from the same gate data, so they cannot disagree.</p>
+<p class="tnote">Fail-closed rule (scripts/build_surfaces.py): the bet PAGES render picks only when ALL four gates pass — <b>currently closed by G1_validation, G2_sample_floor</b>. Gate data: data/derived/surface_gates.json, regenerated with the site. Open the gated pages: <a href="bet-surface.html">bet-surface.html</a> (index link) or <a href="bet.html">bet.html</a> — both are written by the same builder from the same gate data, so they cannot disagree.</p>
 <div class="tablewrap">
 <table class="tbl "
 >

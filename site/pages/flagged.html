@@ -1668,6 +1668,51 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Keep the diagnostics. Any future fetch failure must name what the document actually contained, because the alternative is spending a day re-deriving it.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>F-70D-01</td>
+<td>High</td>
+<td><b>S1/S2 official tables are runner-unreadable but agent-readable: declared, with a freshness bound on the input</b></td>
+<td>The official Teams Advanced page (S1_season) and its training-window twin (S2_train) return HTTP 200 to a GitHub Actions runner with ZERO team rows in the bytes (three measured dead routes: page-shell delivery with 12 date-picker &lt;tr&gt; and 0 team links, stats.nba.com API TimeoutError on every recorded attempt, headless Chromium refused at the Akamai edge with a 309-byte denial DOM). Every one of the 24 committed run records since 2026-11-14T01:27Z shows the same parse failure and zero successes (scripts/70d0e760_s1_streak.py). The SAME pages are readable through the agent's fetch channel. Declared in data/raw/unreadable_sources.json with evidence and expiry 2026-12-19; while the declaration is live the gate requires the consumed data/raw/team_advanced.json to be a session read inside 72 hours with an explicit verification block (reader + timestamp) - a declaration excuses the parse, never the input.</td>
+<td>engine/refresh_gate.py, engine/promote_official.py, data/raw/team_advanced.json, R01</td>
+<td>Review the declaration at its 2026-12-19 expiry; if a runner-side capture ever yields 30 rows, delete it and let normal promotion take over (the gate auto-refuses a stale declaration when the capture parses).</td>
+<td class="src"><span class="na" title="source id S1_PARSE_STREAK is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-70D-02</td>
+<td>High</td>
+<td><b>The publish step's atomic git add silently discarded every verified promotion of every scheduled run</b></td>
+<td>The publish step staged all promoted inputs in ONE git add whose first pathspec, data/raw/standings.json, has never existed in the repository's history. git's add aborts the entire invocation on an unmatched pathspec (reproduced in a scratch repo: `git add a.json missing.json b.json` stages nothing), and `2&gt;/dev/null || true` hid the fatal. Measured consequence on run 44520339923 (2026-11-19T12:08Z): the record claimed '26 games -&gt; schedule_upcoming.json', '44 rows -&gt; injuries.json', '25 finals appended -&gt; games_completed.json' and none of those files changed in the committed tree - the gate then correctly refused the stale promoted inputs run after run. Fixed by per-file existence-checked staging (scripts/stage_publish.py) with regression tests; independently found and first published by arena/4eef6d3b-nba1 (their section 74 T02, shell-loop variant).</td>
+<td>.github/workflows/refresh-data.yml publish step; every auto/refresh-* branch; data/raw/{schedule_upcoming,injuries,games_completed,sources}.json staleness</td>
+<td>None - fixed and pinned by scripts/test_refresh_workflow.py (PublishStagingTests). Reviewers may read run 44520339923's record against its tree to see the mismatch.</td>
+<td class="src"><span class="na" title="source id REFRESH_RUN_44520339923 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-70D-03</td>
+<td>Medium</td>
+<td><b>SGP grading addendum for the 2026-11-17 slate adopted from unmerged PR #181; needs settlement-owner verification</b></td>
+<td>PR #181 (arena/39b70241-nba1, CONFLICTING, &gt;6h idle) held the only copy of data/settlement/sgp_grades_2026-11-17.json - the grading of the four open SGPs (CHA@LAL two_teammates, NYK@TOR / GSW@DAL / PHI@ORL two_opponents) from official box-score pages. It was adopted byte-exact onto main's lineage (git show &lt;#181 head&gt;:... unchanged; commit cbc0c97) so closing the PR could not lose it. The addendum is self-describing (it does not rewrite the hash-chained settlement file) and is NOT yet ledger-anchored.</td>
+<td>data/settlement/sgp_grades_2026-11-17.json; the SGP rows of the 11/17 strategy records</td>
+<td>The settlement owner should re-verify the four tickets' legs against the official box scores and either anchor the addendum in the ledger or restate it.</td>
+<td class="src"><span class="na" title="source id PR181 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-70D-04</td>
+<td>Medium</td>
+<td><b>The settle step aborted its slate loop at exit 3 under bash -eo pipefail</b></td>
+<td>The scheduled settle loop ran `python3 scripts/settle_slate.py ...; rc=$?` under GitHub Actions' `bash -eo pipefail`: settle_slate's documented exit 3 ('nothing settleable') killed the step before the tolerance below could run, so the step reported failure whenever the newest window was incomplete and an un-settleable slate aborted the loop before later slates were tried. Found and first published by arena/4eef6d3b-nba1 (their section 74 T03); adopted here (`|| rc=$?`) so main carries it now.</td>
+<td>.github/workflows/refresh-data.yml settle step</td>
+<td>None - fixed; the fix and its rationale are in the workflow comments.</td>
+<td class="src"><span class="na" title="source id REFRESH_WORKFLOW is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-70D-05</td>
+<td>Medium</td>
+<td><b>Coordoration hazard: three in-flight session branches are based on pre-#194 main and diff it as deletions</b></td>
+<td>While section 77 was in flight, sessions arena/cdf3a108-nba1, arena/4eef6d3b-nba1 and arena/fb91550a-nba1 pushed branches that independently implement overlapping parts of the same fix set (S1/S2 declarations, the publish-step git add abort, the team-stats re-cut). Their bases predate PRs #194-#198, so their diffs against current main show #194-#198's files (scripts/test_hca_wiring_65bda668.py, scripts/test_injuries_banner_7b8d624a.py, verify/2026-11-19-994186ba/report.md) as DELETIONS. Section 77.5 records the union decision and the per-seat merge guidance so a rebase does not silently revert other sessions' landed work.</td>
+<td>COORDINATION.md merge discipline; branches arena/cdf3a108-nba1, arena/4eef6d3b-nba1, arena/fb91550a-nba1</td>
+<td>Each in-flight seat rebases onto main after §77 lands, keeps both sides' data verbatim, ports its tests to the landed implementations where they are equivalent, and keeps its unique findings (§77.5 lists them).</td>
+<td class="src"><span class="na" title="source id COORD77 is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
