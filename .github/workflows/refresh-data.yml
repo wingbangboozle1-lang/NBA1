@@ -271,6 +271,7 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
         run: |
           set -u
           git config user.name  "nba1-bot"
@@ -318,6 +319,7 @@ jobs:
           import os
           candidates = [
               "data/raw/games_completed.json",       # results feed (R03)
+              "data/raw/sources.json",               # source register the promoter updates
               "data/raw/schedule_upcoming.json",     # promoted schedule (R01)
               "data/raw/injuries.json",              # promoted injury edition
               "data/raw/injury_diffs.json",
@@ -334,6 +336,12 @@ jobs:
               "data/raw/injury_pdfs/",
               "data/raw/_capture_injury_probe.json",
           ]
+          if os.environ.get("BUILD_OUTCOME") == "success":
+              # The rebuild's own committed outputs (pipeline writes
+              # docs/data churn that is discarded by design; these are
+              # what it actually publishes). Staged only when the
+              # rebuild actually ran (arena/70d0e760-nba1, section 81).
+              candidates += ["data/hca_measured.json", "data/derived/"]
           for path in candidates:
               if os.path.exists(path):
                   print(path)

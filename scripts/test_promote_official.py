@@ -326,6 +326,60 @@ class DeclaredUnreadableTests(unittest.TestCase):
         self.assertIn("return 1 if self.blocked else 0", source)
         self.assertNotIn("self.unreadable", source.split("return 1 if")[1][:40])
 
+    def test_missing_capture_with_run_evidence_is_excused(self):
+        """Section 77: the runner never writes _capture_S1_season.json at all.
+
+        The fetcher writes _capture_<key>.json only `if rows:`, so on a
+        runner-unreadable page the capture is absent BY CONSTRUCTION - but
+        the run's own parse-failure evidence record proves the page was
+        fetched and attempted. Declaration + evidence present -> recorded,
+        not blocked. Declaration + no evidence -> still blocked (the
+        property pinned by the test above).
+        """
+        with open(os.path.join(self.raw, "unreadable_sources.json"), "w") as fh:
+            json.dump({"declarations": [
+                {"source_key": "S1_season", "expires_at_utc": "2026-12-19T00:00:00Z",
+                 "review_flag": "F-70D-01",
+                 "evidence": ["data/raw/_capture_evidence_S1_season.json"]}]}, fh)
+        os.makedirs(os.path.join(self.raw, "..", ".."), exist_ok=True)
+        evidence_dir = os.path.join(self.tmp.name, "data", "raw")
+        with open(os.path.join(evidence_dir, "_capture_evidence_S1_season.json"),
+                  "w") as fh:
+            json.dump({"status": "parse_failed",
+                       "source_url": "https://www.nba.com/stats/teams/advanced"}, fh)
+        promoter = self._promoter()
+        # The landed excuse rule also requires proof the run ATTEMPTED the
+        # fetch (an HTTP-200 source check) - a declaration never excuses a
+        # page that was not fetched this run.
+        promoter.checks = {"S1_season": {"http_status": 200,
+                                         "url": "https://www.nba.com/stats/teams/advanced"}}
+        os.makedirs(os.path.join(self.tmp.name, "data", "raw"), exist_ok=True)
+        with open(os.path.join(self.raw, "team_advanced.json"), "w") as fh:
+            json.dump({"cols": [], "windows": [
+                {"window_id": "season_to_date", "rows": []}]}, fh)
+        promoter.promote_team_advanced()
+        self.assertEqual(promoter.blocked, [])
+        self.assertEqual(len(promoter.unreadable), 1)
+
+    def test_missing_consumed_snapshot_still_blocks_with_a_declaration(self):
+        """A declaration excuses the parse, never the consumed input."""
+        with open(os.path.join(self.raw, "unreadable_sources.json"), "w") as fh:
+            json.dump({"declarations": [
+                {"source_key": "S1_season", "expires_at_utc": "2026-12-19T00:00:00Z",
+                 "review_flag": "F-70D-01",
+                 "evidence": ["data/raw/_capture_evidence_S1_season.json"]}]}, fh)
+        with open(os.path.join(self.raw, "_capture_evidence_S1_season.json"),
+                  "w") as fh:
+            json.dump({"status": "parse_failed", "source_url": "u"}, fh)
+        promoter = self._promoter()
+        promoter.checks = {"S1_season": {"http_status": 200,
+                                         "url": "https://www.nba.com/stats/teams/advanced"}}
+        # team_advanced.json deliberately absent.
+        promoter.promote_team_advanced()
+        self.assertEqual(len(promoter.blocked), 1)
+        self.assertIn("existing snapshot unreadable",
+                      promoter.blocked[0]["reason"])
+
 
 if __name__ == "__main__":
     unittest.main()

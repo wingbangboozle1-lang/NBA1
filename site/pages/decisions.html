@@ -384,11 +384,11 @@
 </tr>
 <tr id="Q39">
 <td>Q39</td>
-<td>What is the source of record for strategy-level results? S1 currently carries two published records (README 23-9 / +11.91u vs docs/data/leaderboard.json 23-8 / +12.909u).</td>
-<td>Settlement files grade TICKETS, not strategies, so neither record can be derived from data/settlement/** as it stands. Two surfaces publish different numbers and no rule names the winner.</td>
-<td>Derive strategy totals from the ticket-level settlement rows (each ticket names its strategy family), regenerate the leaderboard from them, and retire the underivable record.</td>
+<td>Two shapes for data/raw/team_advanced.json landed within the hour from different seats: §77's session-read verification block + verbatim ADVANCED_COLS rows, and arena/4eef6d3b-nba1's 'official parse schema' rewrite. Which becomes canonical?</td>
+<td>A single canonical shape for the consumed advanced snapshot, so the gate's declared-path check and promote's exact-match path read the same structure.</td>
+<td>Compare the two shapes field by field (both are in the §77 PR and arena/4eef6d3b-nba1's branch), pick one, port the other seat's tests to it, and record the decision in the board.</td>
 <td><span class="chip bad">no path</span></td>
-<td class="src"><span class="na" title="source id docs/data/leaderboard.json is not in the register">&mdash;</span></td>
+<td class="src"><span class="na" title="source id COORD77 is not in the register">&mdash;</span></td>
 </tr>
 <tr id="Q4">
 <td>Q4</td>
@@ -431,7 +431,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">38 open, 23 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">38 open, 25 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -874,6 +874,24 @@
 <td><b>Decide whether a gate-passing scheduled rebuild should publish the regenerated site data or stay smoke-only (today the run discards docs/data + docs/b churn)</b></td>
 <td>The rebuild step (pipeline + build_site) now runs when gates pass, but the 'Discard generated-site churn only' step reverts docs/data and docs/b before the publish commit, so the scheduled job never updates the live site's data - sessions do, at integration. That is defensible churn control (the generated files embed wall-clock ages) but it means 'rebuild' in the brief's first requirement is validated, not published.</td>
 <td>Flag for the decision register; either choice is coherent, but it should be an explicit decision, not an accident of a churn filter.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-70D-01</td>
+<td><span class="chip info">Operations</span></td>
+<td><b>Give the refresh workflow a queue instead of a single cancel-in-progress slot</b></td>
+<td>The refresh-official-global concurrency group cancels in-progress runs when a newer one arrives. Session-armed runs have now been cancelled wholesale three times (F-CA-04, 3 of 3 in section 63; again in section 77: run 44527293881 died after 5 seconds while another session's run held the slot), so the very observation the gate work exists to make is repeatedly destroyed by the scheduling policy.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-70D-02</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>One freshness-bound mechanism for every consumed model input</b></td>
+<td>The refresh gate now enforces a 72-hour session-read bound on team_advanced.json, but players_traditional.json (also consumed by the pipeline) has no verification block and no bound, and the horizon builders price from team_stats_recut.json without any age check (Q38).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>

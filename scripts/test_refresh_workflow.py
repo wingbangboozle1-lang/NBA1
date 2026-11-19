@@ -4,6 +4,7 @@ These are structural checks against the workflow source; the behavior of the
 freshness/provenance calculation itself is exercised by test_refresh_gate.py.
 """
 from pathlib import Path
+import os
 import unittest
 
 
@@ -70,8 +71,10 @@ class RefreshWorkflowTests(unittest.TestCase):
         # If the bot cannot stage it, a live declaration could be silently
         # reverted by the next automated commit and the gate would block again.
         publish = self.text.split("name: Publish captures", 1)[1]
-        self.assertIn("data/raw/unreadable_sources.json", publish)
-        self.assertIn("data/raw/refresh_path_audit.json", publish)
+        for path in ("data/raw/unreadable_sources.json",
+                     "data/raw/refresh_path_audit.json",
+                     "data/raw/sources.json"):
+            self.assertIn(path, publish)
 
     def test_the_gate_step_cannot_fail_the_job_on_a_declaration_note(self):
         """The gate keeps its own exit code out of the step's status.
@@ -84,6 +87,97 @@ class RefreshWorkflowTests(unittest.TestCase):
         self.assertIn("exit 0", freshness)
         build = self.text.split("id: build", 1)[1].split("\n      - name:", 1)[0]
         self.assertIn("steps.freshness.outputs.ok == 'true'", build)
+
+
+class PublishStagingTests(unittest.TestCase):
+    """The atomic `git add` abort defect and its landed fix.
+
+    Measured (sections 74 T02 and 78.1 independently): `git add
+    a.json missing.json b.json` stages NOTHING and the publish step hid that
+    behind `2>/dev/null || true`, so every verified promotion of every
+    scheduled run was silently discarded while the run record claimed
+    `promoted`. The landed fix stages each path in its own `git add`,
+    warns on absent paths, and expands globs only when they match. These
+    tests pin the mechanism in the workflow source and the underlying git
+    property that made the old form fatal.
+    """
+
+    def test_publish_staging_is_per_path_and_tolerates_absent_paths(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        publish = text.split("name: Publish captures", 1)[1]
+        # Per-path adds inside the candidates loop.
+        self.assertIn('git add -- "$p"', publish)
+        self.assertIn("Publish path absent", publish)
+        # Globs are expanded only when non-empty (an empty glob is also an
+        # unmatched pathspec and would abort the add).
+        self.assertIn("compgen -G", publish)
+        # The defect's exact shape must not reappear: a multi-pathspec
+        # git add where one absent path aborts the batch.
+        self.assertNotIn("git add data/raw/standings.json", publish)
+
+    def test_rebuild_outputs_are_staged_only_when_the_rebuild_ran(self):
+        publish = WORKFLOW.read_text(encoding="utf-8").split(
+            "name: Publish captures", 1)[1]
+        self.assertIn('BUILD_OUTCOME: ${{ steps.build.outcome }}', publish)
+        self.assertIn('os.environ.get("BUILD_OUTCOME") == "success"', publish)
+        self.assertIn("data/hca_measured.json", publish)
+        self.assertIn("data/derived/", publish)
+
+    def test_every_script_the_workflow_calls_actually_exists(self):
+        """A missing helper is not a loud failure - python exits 2 on a file
+        that is not there, and the run failed at the LAST step while every
+        earlier step showed green (observed run 44530780692, section 78).
+        One call site of a superseded helper survived its deletion; this
+        check makes that class impossible to ship."""
+        import re
+        repo = Path(__file__).resolve().parents[1]
+        for wf in sorted((repo / ".github" / "workflows").glob("*.yml")):
+            for ref in re.findall(r"python3\s+(scripts/[\w./-]+\.py)", wf.read_text(encoding="utf-8")):
+                self.assertTrue((repo / ref).exists(),
+                                f"{wf.name} calls {ref}, which does not exist")
+
+    def test_git_add_is_atomic_per_invocation(self):
+        """The root cause, pinned: one unmatched pathspec voids the batch.
+
+        This is a property of git itself; it is why the publish step must
+        never batch paths with possibly-absent pathspecs. If a future edit
+        re-batches the add, the two tests above catch the workflow text and
+        this test documents why the old text was fatal.
+        """
+        import subprocess
+        import tempfile
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = tmp.name
+        for args in (["git", "init", "-q"],
+                     ["git", "config", "user.email", "t@t"],
+                     ["git", "config", "user.name", "t"]):
+            subprocess.run(args, cwd=root, check=True, capture_output=True)
+        for name in ("a.json", "b.json"):
+            with open(os.path.join(root, name), "w") as fh:
+                fh.write("{}")
+        subprocess.run(["git", "add", "-A"], cwd=root, check=True,
+                       capture_output=True)
+        subprocess.run(["git", "commit", "-qm", "init"], cwd=root, check=True,
+                       capture_output=True)
+        for name in ("a.json", "b.json"):
+            with open(os.path.join(root, name), "w") as fh:
+                fh.write("{changed}")
+        # THE defect, reproduced verbatim: one missing pathspec, whole batch
+        # aborted silently.
+        subprocess.run(["git", "add", "a.json", "missing.json", "b.json"],
+                       cwd=root, capture_output=True)
+        out = subprocess.run(["git", "diff", "--cached", "--name-only"],
+                             cwd=root, capture_output=True, text=True)
+        self.assertEqual(out.stdout.strip(), "",
+                         "expected the batch to abort atomically")
+        # The landed pattern: one add per existing path.
+        for name in ("a.json", "b.json"):
+            subprocess.run(["git", "add", "--", name], cwd=root, check=True,
+                           capture_output=True)
+        out = subprocess.run(["git", "diff", "--cached", "--name-only"],
+                             cwd=root, capture_output=True, text=True)
+        self.assertEqual(sorted(out.stdout.split()), ["a.json", "b.json"])
 
 
 if __name__ == "__main__":

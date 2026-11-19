@@ -278,6 +278,20 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="source id https://www.nba.com/stats/teams/advanced is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>Q37</td>
+<td><b>Who owns data/derived/team_stats_recut.json, and is one drift check per cycle enough for an input that moves intraday?</b></td>
+<td>Owner and maximum age now exist (§77 P03/P04): data/raw/team_advanced.json carries a verification block naming reader and read time (arena/70d0e760-nba1, 2026-11-19T12:4xZ), and engine/refresh_gate.py enforces a 72-hour session-read freshness bound (--max-input-age-hours) while the runner-side parse is declared unreadable. Origination-side refusal of over-age inputs remains open (Q38).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/raw/team_advanced.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q-929-1</td>
+<td><b>When will the LAL/UTA team-stat tables catch up with the standings?</b></td>
+<td>Caught up on 2026-11-19: the official pages print 16 GP for both LAL (13-3) and UTA (3-13), agreeing with the standings; the model-input re-cut at 12:4xZ adopted the change with full column-level diffs (data/official/recut_drift_2026-11-19_70d0e760.json). F-89F-04 / S-89F-02 closed.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/official/recut_drift_2026-11-19_70d0e760.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -609,12 +623,12 @@
 </tr>
 <tr id="Q39">
 <td>Q39</td>
-<td><b>What is the source of record for strategy-level results? S1 currently carries two published records (README 23-9 / +11.91u vs docs/data/leaderboard.json 23-8 / +12.909u).</b></td>
-<td>Settlement files grade TICKETS, not strategies, so neither record can be derived from data/settlement/** as it stands. Two surfaces publish different numbers and no rule names the winner.</td>
-<td>Derive strategy totals from the ticket-level settlement rows (each ticket names its strategy family), regenerate the leaderboard from them, and retire the underivable record.</td>
-<td>any reward-tier decision on the leaderboard; F-CDF-05</td>
+<td><b>Two shapes for data/raw/team_advanced.json landed within the hour from different seats: §77's session-read verification block + verbatim ADVANCED_COLS rows, and arena/4eef6d3b-nba1's 'official parse schema' rewrite. Which becomes canonical?</b></td>
+<td>A single canonical shape for the consumed advanced snapshot, so the gate's declared-path check and promote's exact-match path read the same structure.</td>
+<td>Compare the two shapes field by field (both are in the §77 PR and arena/4eef6d3b-nba1's branch), pick one, port the other seat's tests to it, and record the decision in the board.</td>
+<td>Nothing today (both shapes pass the gate); future promote/gate divergence</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="source id docs/data/leaderboard.json is not in the register">&mdash;</span></td>
+<td class="src"><span class="na" title="source id COORD77 is not in the register">&mdash;</span></td>
 </tr>
 <tr>
 <td>Q-4EE-1</td>

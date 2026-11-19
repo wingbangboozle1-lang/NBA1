@@ -334,10 +334,21 @@ def evaluate_with_report(record: dict, now: dt.datetime,
 
     injury = by_key.get("injury_pdf_probe", {})
     pdf_results = injury.get("results", [])
-    if not pdf_results or pdf_results[0].get("http_status") != 200:
-        errors.append("latest indexed injury PDF was not retrieved successfully")
+    # A rate-limited newest edition (403/429 from ak-static) must not block
+    # the verification side when promote binds to the newest SUCCESSFUL
+    # retrieval (flag F-CA-07's promote-side rule): both sides must bind to
+    # the same artifact or they can never agree (arena/70d0e760-nba1, §81).
+    ok_pdfs = [r for r in pdf_results if r.get("http_status") == 200]
+    if not ok_pdfs:
+        errors.append("no indexed injury PDF was retrieved successfully in this run")
     else:
-        latest_pdf = pdf_results[0]
+        latest_pdf = ok_pdfs[0]
+        if pdf_results and pdf_results[0] is not latest_pdf:
+            warnings.append(
+                f"newest indexed injury edition {pdf_results[0].get('url', '?')} "
+                f"was not retrieved (status {pdf_results[0].get('http_status')}); "
+                f"promotion and verification bind to "
+                f"{latest_pdf.get('url', '?')}")
         if not SHA256_RE.fullmatch(str(latest_pdf.get("sha256", ""))):
             errors.append("latest indexed injury PDF has no valid SHA-256")
         if latest_pdf.get("pdf_valid") is not True:
@@ -469,8 +480,10 @@ def evaluate_with_report(record: dict, now: dt.datetime,
                 if v_age < -0.05 or v_age > SESSION_INPUT_MAX_AGE_HOURS:
                     errors.append(f"advanced team input is stale: verified_at_utc is "
                                   f"{v_age:.1f}h old (maximum "
-                                  f"{SESSION_INPUT_MAX_AGE_HOURS:g}h); re-read the "
-                                  f"official table before rebuilding")
+                                  f"{SESSION_INPUT_MAX_AGE_HOURS:g}h; read "
+                                  f"{proof.get('verified_at_utc')} by "
+                                  f"{proof.get('verified_by', 'unknown')}); re-read "
+                                  f"the official table before rebuilding")
             except (TypeError, ValueError):
                 errors.append("advanced team input verification timestamp "
                               "missing or invalid")
@@ -539,8 +552,8 @@ def evaluate_with_report(record: dict, now: dt.datetime,
         return payload
 
     require_promotion("data/raw/schedule_upcoming.json", "S4_schedule")
-    pdf_digest = pdf_results[0].get("sha256") if pdf_results else None
-    pdf_url = pdf_results[0].get("url") if pdf_results else None
+    pdf_digest = latest_pdf.get("sha256") if ok_pdfs else None
+    pdf_url = latest_pdf.get("url") if ok_pdfs else None
     require_promotion("data/raw/injuries.json", "injury_pdf_probe", pdf_digest, pdf_url)
 
     # Each current and previous-day official result capture must explicitly

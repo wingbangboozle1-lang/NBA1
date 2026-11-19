@@ -1,0 +1,266 @@
+{
+ "title": "SGP grading addendum — 2026-11-17 slate (2026-11-17 and 2026-11-18 games)",
+ "generated_utc": "2026-11-19T06:20Z",
+ "generated_by": "arena/39b70241-nba1 (scripts/sgp_addendum_2026_11_19_39b70241.py)",
+ "does_not_rewrite": "data/settlement/settlement_2026-11-17.json (hash-chained, left as written)",
+ "rules": {
+  "single": "grade from published pick_line text \"TEAM -x.x\": cover if team wins by more than x.x, PUSH at exactly x.x, else LOSS; units paper -110 (WIN +1.00, LOSS -1.10, PUSH 0.00); gate failures NO BET 0.00",
+  "parlay": "every leg must WIN; any losing leg loses stake 1.10; WIN pays the published fair-odds band lower bound",
+  "sgp": "legs are player props (Over/Under). A leg whose player did not play is VOID and removed; remaining legs settle at the ticket price frozen at publication (joint_prob_rho as fair price; G-PROP blocked, no market price). Any losing leg loses the stake (1.10).",
+  "finals_source": "data/official/results_2026-11-14.json — official game pages (LINESCORES), quarters sum to finals (asserted at capture)",
+  "source": "grading rules copied verbatim from data/settlement/settlement_2026-11-14.json (frozen)"
+ },
+ "tickets": [
+  {
+   "date": "2026-11-17",
+   "game": "CHA@LAL",
+   "kind": "two_teammates",
+   "legs": [
+    {
+     "leg": "Luka Dončić (LAL) OVER 38.5",
+     "result": "LOSS",
+     "actual_pts": 36,
+     "evidence_grade": "BOX_TABLE",
+     "evidence": "official box-score page for 0022600256 (2026-11-17 CHA@LAL, FINAL 118-114): Dončić 42:20, 13-34 FG, 5-16 3PT, 5-7 FT, 7 REB, 7 AST, 1 STL, 1 BLK, 5 TO, 5 PF, +2 — 36 points. 36 <= 38.5, so the OVER loses. (The game page's own recap sentence “After scoring at least 40 points in seven games already this season, Luka Doncic took a back seat with 36” agrees with the box row, so the leg does not rest on recap text.)",
+     "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score"
+    },
+    {
+     "leg": "Austin Reaves (LAL) OVER 24.5",
+     "result": "VOID",
+     "actual_pts": null,
+     "evidence_grade": "BOX_INACTIVE_LIST",
+     "evidence": "the same official box-score page closes with an “Inactive Players” block printing “LAL: Chris Manon, Austin Reaves, Walker Kessler, Arthur Kaluma”, and Reaves has no row in the Lakers table; the official gamebook for the same game (fetched in this session) gives the reason: “Reaves (Injury/Illness - Left Heel Contusion / Bone Bruise)”. A leg whose player did not appear is VOID and removed under the frozen rule.",
+     "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score"
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2443,
+   "frozen_price_independent_printed_beside": null,
+   "previous_state": "UNSETTLED — player appearance requires the official box score",
+   "previous_why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "result": "LOSS",
+   "units": -1.1,
+   "why": "a determinate losing leg loses the 1.10-unit stake, whatever the other leg did (VOID legs are removed first, never auto-won)",
+   "rho_provenance": "MEASURED: rho_2026_27.json teammate points rho = -0.0975 (n = 374, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "leg_details_from_prereg": {
+    "leg1_detail": {
+     "player": "Luka Dončić",
+     "team": "LAL",
+     "line": 38.5,
+     "season_avg": 38.6,
+     "sigma": 7.145,
+     "prob_over": 0.5056,
+     "z": -0.013996147390862166
+    },
+    "leg2_detail": {
+     "player": "Austin Reaves",
+     "team": "LAL",
+     "line": 24.5,
+     "season_avg": 24.7,
+     "sigma": 5.715,
+     "prob_over": 0.514,
+     "z": -0.03499320159067526
+    }
+   }
+  },
+  {
+   "date": "2026-11-17",
+   "game": "NYK@TOR",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg": "Jalen Brunson (NYK) OVER 26.5",
+     "result": "WIN",
+     "actual_pts": 31,
+     "evidence_grade": "BOX_TABLE",
+     "evidence": "official box-score page for 0022600253 (2026-11-17 NYK@TOR, FINAL 111-102): Brunson 34:26, 10-22 FG, 4-11 3PT, 7-7 FT, 5 REB, 5 AST, 0 STL, 1 BLK, 2 TO, 2 PF, +4 — 31 points > 26.5.",
+     "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score"
+    },
+    {
+     "leg": "Scottie Barnes (TOR) OVER 23.5",
+     "result": "LOSS",
+     "actual_pts": 20,
+     "evidence_grade": "BOX_TABLE",
+     "evidence": "official box-score page for 0022600253: Barnes 34:06, 7-14 FG, 1-2 3PT, 5-6 FT, 4 REB, 2 AST, 0 STL, 2 BLK, 0 TO, 5 PF, -8 — 20 points <= 23.5.",
+     "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score"
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2381,
+   "frozen_price_independent_printed_beside": null,
+   "previous_state": "UNSETTLED — player appearance requires the official box score",
+   "previous_why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "result": "LOSS",
+   "units": -1.1,
+   "why": "a determinate losing leg loses the 1.10-unit stake, whatever the other leg did (VOID legs are removed first, never auto-won)",
+   "rho_provenance": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "leg_details_from_prereg": {
+    "leg1_detail": {
+     "player": "Jalen Brunson",
+     "team": "NYK",
+     "line": 26.5,
+     "season_avg": 26.0,
+     "sigma": 5.864,
+     "prob_over": 0.466,
+     "z": 0.08526788484268873
+    },
+    "leg2_detail": {
+     "player": "Scottie Barnes",
+     "team": "TOR",
+     "line": 23.5,
+     "season_avg": 23.5,
+     "sigma": 5.575,
+     "prob_over": 0.5,
+     "z": 0.0
+    }
+   }
+  },
+  {
+   "date": "2026-11-18",
+   "game": "GSW@DAL",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg": "Cooper Flagg (DAL) OVER 24.5",
+     "result": "WIN",
+     "actual_pts": 33,
+     "evidence_grade": "BOX_TABLE",
+     "evidence": "official box-score page for 0022600267 (2026-11-18 GSW@DAL, FINAL 116-94): Flagg 33:59, 11-15 FG, 3-5 3PT, 8-8 FT, 5 REB, 9 AST, 4 STL, 0 BLK, 5 TO, 3 PF, +32 — 33 points > 24.5. The page's own recap headline (“Flagg's 33 paces Mavs”) agrees with the row.",
+     "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267/box-score"
+    },
+    {
+     "leg": "Stephen Curry (GSW) OVER 27.5",
+     "result": "VOID",
+     "actual_pts": null,
+     "evidence_grade": "GAMEBOOK",
+     "evidence": "official gamebook for 2026-11-18 GSW@DAL, inactive list: “Inactive: Warriors - … Curry (Injury/Illness - Right Oblique Tear)”; Curry has no row in the Warriors table on the box-score page either. VOID leg, removed. (The box page's own “Inactive Players” block was not re-read for this game in this session — see flag F-Y01.)",
+     "source_url": "https://statsdmz.nba.com/pdfs/20261118/20261118_GSWDAL_book.pdf"
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2686,
+   "frozen_price_independent_printed_beside": null,
+   "previous_state": "UNSETTLED — player appearance requires the official box score",
+   "previous_why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "result": "WIN",
+   "units": 1.1,
+   "why": "remaining leg(s) won; paid +1.10 paper units, the frozen SGP convention this repo's own scripts/settle_sgp_from_logs.py used for the 2026-11-16 slate (no market price exists, so the frozen price joint_prob_rho 0.2686 is printed beside the ticket, never as a payout)",
+   "rho_provenance": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "leg_details_from_prereg": {
+    "leg1_detail": {
+     "player": "Cooper Flagg",
+     "team": "DAL",
+     "line": 24.5,
+     "season_avg": 24.6,
+     "sigma": 5.704,
+     "prob_over": 0.507,
+     "z": -0.01753212692490268
+    },
+    "leg2_detail": {
+     "player": "Stephen Curry",
+     "team": "GSW",
+     "line": 27.5,
+     "season_avg": 27.8,
+     "sigma": 6.063,
+     "prob_over": 0.5197,
+     "z": -0.049476733161579356
+    }
+   }
+  },
+  {
+   "date": "2026-11-18",
+   "game": "PHI@ORL",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg": "Paolo Banchero (ORL) OVER 24.5",
+     "result": "VOID",
+     "actual_pts": null,
+     "evidence_grade": "BOX_INACTIVE_LIST",
+     "evidence": "the same box-score page's “Inactive Players” block prints “ORL: Noah Penda, Izaiyah Nelson, Colin Castleton, Paolo Banchero, Jonathan Isaac”, and Banchero has no row in the Magic table (its printed TOTALS are 44-84 FG, 19-37 3PT, 9-17 FT, 37 REB, 31 AST, 116 PTS — the final score, so no row is missing). VOID leg, removed.",
+     "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261/box-score"
+    },
+    {
+     "leg": "Tyrese Maxey (PHI) OVER 26.5",
+     "result": "VOID",
+     "actual_pts": null,
+     "evidence_grade": "BOX_TABLE",
+     "evidence": "official box-score page for 0022600261 (2026-11-18 PHI@ORL, FINAL 121-116) prints Maxey's row as “DNP - Coach's Decision” — active (he is not in the “Inactive Players” block, which reads “PHI: Jaylen Brown, Ariel Hukporti, Dominick Barlow, Adem Bona”) but he did not appear, so the leg is VOID.",
+     "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261/box-score"
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2618,
+   "frozen_price_independent_printed_beside": null,
+   "previous_state": "UNSETTLED — player appearance requires the official box score",
+   "previous_why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
+   "result": "VOID",
+   "units": 0.0,
+   "why": "every leg VOID (the named player did not appear) — the frozen rule voids the ticket with no stake",
+   "rho_provenance": "MEASURED: rho_2026_27.json opponent leading-scorer points rho = 0.0321 (n = 187, official box-score pages). The box scores behind that n are not committed to this repository (only nine gamebooks are), so the value cannot be re-derived inside the tree — provenance published on the row, limitation flagged F136. The naive product is printed beside the rho price on every row",
+   "leg_details_from_prereg": {
+    "leg1_detail": {
+     "player": "Paolo Banchero",
+     "team": "ORL",
+     "line": 24.5,
+     "season_avg": 24.5,
+     "sigma": 5.692,
+     "prob_over": 0.5,
+     "z": 0.0
+    },
+    "leg2_detail": {
+     "player": "Tyrese Maxey",
+     "team": "PHI",
+     "line": 26.5,
+     "season_avg": 26.7,
+     "sigma": 5.942,
+     "prob_over": 0.5134,
+     "z": -0.03365708694418178
+    }
+   }
+  }
+ ],
+ "combined_with_sealed_settlement": {
+  "sealed_settlement_units": -14.8,
+  "sealed_record": "5-12-0",
+  "addendum_units": -1.1,
+  "slate_total_units": -15.9,
+  "slate_line_by_family": "singles 5-12 (-8.2u), parlays 0-6 (-6.6u), SGPs 1-2 with 1 void (-1.1u); 27 tickets in total",
+  "note": "the sealed file's `record` field counts the 17 singles only (5-12); its parlay and SGP lines sit in their own keys. With this addendum the 11/17-11/18 slate stands at 6 won, 20 lost and 1 void for -15.90 paper units. The sealed file is not rewritten — this is arithmetic on published numbers, printed here so a reader does not have to add them up"
+ },
+ "not_graded_legs": [],
+ "summary": {
+  "tickets": 4,
+  "won": 1,
+  "lost": 2,
+  "void": 1,
+  "unsettled": 0,
+  "legs_void": 4,
+  "legs_graded": 4,
+  "units": -1.1
+ },
+ "validation_note": "Paper, unfunded, zero-stake output. Every ticket here was published as MODEL OUTPUT — UNVALIDATED; grading it does not make any strategy funded.",
+ "flags": [
+  {
+   "id": "F-Y01",
+   "severity": "low",
+   "item": "Curry's VOID leg rests on the gamebook inactive list, not on a re-read of the box page's own Inactive Players block.",
+   "detail": "the gamebook is the same official source class this repo used to grade the 2026-11-16 slate's props, and Curry has no row in the box-score table either, so the grade is not in doubt; it is recorded here because the evidence grade differs from the other three VOID/loss legs, which cite the box-score page directly"
+  },
+  {
+   "id": "F-Y02",
+   "severity": "medium",
+   "item": "No market price exists for these tickets, so the WIN payout is the frozen +1.10 convention, not a priced number.",
+   "detail": "the frozen joint probability under the measured rho (printed beside each ticket as frozen_price_joint_prob_rho) is the model's own number; with no sportsbook price in this repository a won ticket cannot be paid at anything but the convention the 2026-11-16 SGP addendum used"
+  },
+  {
+   "id": "F-Y03",
+   "severity": "high",
+   "item": "Every ticket graded here is MODEL OUTPUT — UNVALIDATED, unfunded, zero stake.",
+   "detail": "grading a paper ticket settles the record, not the strategy: no family has passed the validation gates (Build A 0/8, Build B 0/10), and the bet surface stays gated closed"
+  }
+ ],
+ "sources": [
+  "https://statsdmz.nba.com/pdfs/20261118/20261118_GSWDAL_book.pdf",
+  "https://www.nba.com/game/cha-vs-lal-0022600256/box-score",
+  "https://www.nba.com/game/gsw-vs-dal-0022600267/box-score",
+  "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score",
+  "https://www.nba.com/game/phi-vs-orl-0022600261/box-score"
+ ]
+}
