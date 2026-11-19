@@ -1,6 +1,6 @@
 {
  "captured_by": "scripts/capture_official_89f7b601.py",
- "captured_at_utc": "2026-11-19T07:15:01Z",
+ "captured_at_utc": "2026-11-19T07:20:38Z",
  "purpose": "byte-exact bodies for the five official sources whose parsers return 0 rows, so the parse repair is developed against delivered bytes rather than recollection",
  "note": "Counts and digests only. No official value is transcribed by this script.",
  "results": [
@@ -177,25 +177,25 @@
   {
    "name": "A1_advanced_api",
    "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Advanced&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
-   "retrieved_utc": "2026-11-19T07:15:01Z",
+   "retrieved_utc": "2026-11-19T07:20:38Z",
    "attempts": [
     {
      "attempt": 1,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.22
+     "elapsed_s": 25.21
     },
     {
      "attempt": 2,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.32
+     "elapsed_s": 25.09
     },
     {
      "attempt": 3,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.14
+     "elapsed_s": 25.17
     }
    ],
    "status": "unavailable"
@@ -203,25 +203,25 @@
   {
    "name": "A2_traditional_api",
    "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Traditional&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
-   "retrieved_utc": "2026-11-19T07:16:22Z",
+   "retrieved_utc": "2026-11-19T07:21:59Z",
    "attempts": [
     {
      "attempt": 1,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.3
+     "elapsed_s": 25.07
     },
     {
      "attempt": 2,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.22
+     "elapsed_s": 25.06
     },
     {
      "attempt": 3,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.26
+     "elapsed_s": 25.11
     }
    ],
    "status": "unavailable"
@@ -229,25 +229,25 @@
   {
    "name": "A3_opponent_api",
    "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Opponent&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&TeamID=0&Period=0&DateFrom=&DateTo=&GameSegment=&Location=&Outcome=&SeasonSegment=&VsConference=&VsDivision=&Conference=&Division=&GameScope=&PlayerExperience=&PlayerPosition=&StarterBench=&PaceAdjust=N&PlusMinus=N&Rank=N",
-   "retrieved_utc": "2026-11-19T07:17:44Z",
+   "retrieved_utc": "2026-11-19T07:23:21Z",
    "attempts": [
     {
      "attempt": 1,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.3
+     "elapsed_s": 25.09
     },
     {
      "attempt": 2,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.15
+     "elapsed_s": 25.16
     },
     {
      "attempt": 3,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.21
+     "elapsed_s": 25.17
     }
    ],
    "status": "unavailable"
@@ -255,25 +255,25 @@
   {
    "name": "A4_standings_api",
    "url": "https://stats.nba.com/stats/leaguestandings?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&SeasonYear=&IgnoreGB=N",
-   "retrieved_utc": "2026-11-19T07:19:06Z",
+   "retrieved_utc": "2026-11-19T07:24:42Z",
    "attempts": [
     {
      "attempt": 1,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.14
+     "elapsed_s": 25.07
     },
     {
      "attempt": 2,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.13
+     "elapsed_s": 25.08
     },
     {
      "attempt": 3,
      "http_status": null,
      "error": "TimeoutError: The read operation timed out",
-     "elapsed_s": 25.19
+     "elapsed_s": 25.11
     }
    ],
    "status": "unavailable"
