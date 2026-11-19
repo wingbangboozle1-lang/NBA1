@@ -702,6 +702,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/d361b9a5-nba1` | `arena/d361b9a5-nba1` | 2026-11-16 02:15 UTC | Takeover of stale PR #117 (§46 RFG4: structured official parsers, digest-bound verified promotion, injury-PDF diffs; idle >75 min) + first-hand official verification pass + gate suite + PR/merge/delivery (§49, claimed as §47 — renumbered at merge). Platform pins this session to its branch (deviation logged, as above). PR #114 deliberately left for its owner/integration seat (558-commit re-cut; decision logged in §49). |
 | `arena/abac961f-nba1` | `arena/abac961f-nba1` | 2026-11-15 23:40 UTC | RFG4 only: structured official parsers, verified promotion records, consecutive injury-PDF status diffs (§46). Not the integration seat — `arena/513516f6-nba1` (§41) holds it. Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2042a559-nba1` | `arena/2042a559-nba1` | 2026-11-16 14:2x UTC | Session §50: measured minutes shares from official gamebooks (R12), projection/bet surface split with computed gates (R07), 11/15 results-feed completion from official game pages (R02), travel distance held blank and flagged (R11), register + flags update, verification, PR/merge/Pages record. Platform pins this session to its branch. |
+| `arena/65bda668-nba1` | `arena/65bda668-nba1` | 2026-11-19 12:1x UTC | **R09 residual seat (§76)**: replace the literal `flat_hca=2.0` at the legacy `reference_line` call sites (`engine/pipeline.py` x2, `engine/validate.py` x2) with the measured home-court pin read from `data/hca_measured.json`, failing loudly when it is absent; add a CI test. Publishes no model number: the generated Flagged, Requirements, Sources and index-tile outputs change only by the new flag F-HCA-01 and the R09 text (§76.3). In progress. |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
@@ -12142,4 +12143,54 @@ Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The plat
 - **Not verified in this seat:** a rendered pixel check of the banner (the fetch channel returns text, not a screenshot); the link targets were checked by `check_links.py` and by the test, not by a browser.
 
 **Open after this merge (unchanged, flagged):** F-7B8-01 (open until a reviewer confirms the page), F-7B8-02 (the 11/19 editions are untranscribed; needs the runner's byte-capture path, X6), F-7B8-03 (text-channel reads, no bytes). The standings and three team-stat tables remain blocked (F1 / S-89F-01).
+
+---
+
+## 76. Session `arena/65bda668-nba1` — R09 residual: measured HCA through the legacy reference line (claimed 2026-11-19 12:1x UTC)
+
+**Board read before claiming (2026-11-19 12:1x UTC, ground rules 1–6):** §0 ground rules, §0b registry, tail delivery record §69.2, `git fetch origin`, `gh pr list --state open` (two OPEN: #181 `arena/39b70241-nba1`, CONFLICTING since 06:26Z; #188 `arena/d66245d4-nba1`, last touch 07:24Z — both idle >60 min, neither claims R09), `gh run list` (latest `Refresh official data` success; `Publish static site` success on `b2af48b`), `data/content/requirements.json` (R09 `partial`, gap text names `engine/model_core.py:reference_line` `flat_hca = 2.0`).
+
+**Measured at claim time (first-hand, in this sandbox):**
+- `engine/model_core.py:165` — `def reference_line(table, home, away, flat_hca=2.0)`.
+- `engine/pipeline.py:232` and `:285`, `engine/validate.py:161` and `:187` — each calls `reference_line(..., flat_hca=2.0)`. The pipeline's own pin (§65 N04) overrides the *fitted* `params["hca"]` but never reaches these four calls.
+- `data/hca_measured.json` — `hca_points` 0.59, `home_win_rate` 0.5135, `games` 74 (the last pipeline write). Other pins exist in the repo (0.71 horizon, 0.72 §65 re-measure); **F-CA-03** already flags that there is no named corpus of record. This seat does not resolve F-CA-03; it reads whichever file the pipeline last wrote, and says so.
+
+**Scope and non-goals.** Code change: the four literal `2.0` call sites read one helper; the helper raises if the file is missing (no silent fallback to 2.0). No `data/derived/*`, horizon, ledger, prereg, or settlement file is touched, and no published model number changes — the legacy pipeline is not re-run. The shared registers (`data/content/flagged.json`: one appended flag F-HCA-01; `data/content/requirements.json`: R09 evidence and gap text; `data/raw/sources.json`: source S74_HCA) and their generated pages are regenerated by `scripts/build_dashboard.py` (diff limited to those outputs and the index flag tile 174→175 (on the then-current main)).
+
+**File scope:** `engine/model_core.py` (helper only), `engine/pipeline.py`, `engine/validate.py`, `scripts/test_hca_wiring_65bda668.py` (new), `data/content/requirements.json` (R09 evidence text only), `COORDINATION.md` (this section and the §0b row).
+
+### 76.1 Claim-time measurements
+
+- `engine/model_core.py:165` `reference_line(..., flat_hca=2.0)`; call sites `engine/pipeline.py` (2) and `engine/validate.py` (2) passed the literal.
+- `data/hca_measured.json`: 0.59 pts, home-win rate 0.5135 over 74 games (legacy pin).
+- Board read: §0, §0b, §69.2, `git fetch origin` (main `b2af48b`), `gh pr list` (#181 CONFLICTING; #188 OPEN, idle since 07:24Z — neither touches R09), `gh run list`.
+
+### 76.2 Work and checks
+
+| Item | Result |
+| --- | --- |
+| Helper `measured_hca_points()` (no fallback; raises on missing/malformed) and `reference_line` default `flat_hca=None` | done — `engine/model_core.py` |
+| Four call sites read the helper | done — `engine/pipeline.py`, `engine/validate.py`; `grep flat_hca=2.0 engine scripts` = 0 |
+| CI test `scripts/test_hca_wiring_65bda668.py` (6 checks) | **6/6 pass on this branch; 5 of 6 fail on the pre-§76 code** (measured by stashing `engine/` and re-running). The one test that passes on the old code is the explicit-override test, which guards the `flat_hca=` override path that §76 keeps |
+| Full `scripts/test_*.py` loop vs unmodified baseline | identical except the new test; two pre-existing failures on both states: `test_refresh_gate.py`, `test_surface_freshness.py` (the known refresh-gate block, R01) |
+| `engine` import smoke (`validate`, `pipeline`) | import ok |
+| `scripts/check_registers.py`, `check_build_data.py`, `check_links.py`, `check_site.py`, `verify_all.py` | all pass |
+| Generated outputs | `scripts/build_dashboard.py` run; diff = 13 files, all the flag/requirement/source surfaces + index tile 174→175 (on the then-current main). No model number, horizon, ledger or settlement file changed. |
+| New flag | **F-HCA-01** (Medium, open): three committed home-court pins disagree — legacy 0.59 (0.5135/74), published horizon **0.10** (0.5023/221, `horizon_lines_v2.json` `_meta.home_court_anchor`), §65 0.72 (0.5171, recomputed 16.868·Φ⁻¹(0.5171) = 0.723). The R09 register text still quoted 0.71 for the horizon; §76 corrects that text. |
+
+### 76.3 Verification and sources
+
+- Recomputed the three pins with Φ⁻¹ (stdlib `NormalDist`): 0.589 / 0.096 / 0.723 — matches the files as rounded (0.59 / 0.10 / 0.72).
+- Source key `S74_HCA` (repository artifacts, same pattern as §69.2) so the flag's link renders; rendered page confirmed it links to `data/derived/horizon_lines_v2.json`.
+- **External official sources: none consulted in this seat.** No new NBA.com value was read or entered; every number above comes from committed repository files.
+
+### 76.4 Irregularities for review (not fixed here)
+
+- **F-HCA-01** above — the published horizon's home edge (0.10 pts) and the legacy line's (0.59 pts) differ, and no corpus of record is named (F-CA-03 still open).
+- The legacy pipeline's outputs (`docs/data/backtest.json`, `validation.json`) still carry the numbers from its last run; they have not been regenerated with the wired value.
+- `data/hca_measured.json` is rewritten by `engine/pipeline.py` on every run, so the legacy value will move with each run; this seat did not run the pipeline.
+
+### 76.5 Status
+
+Work complete on branch `arena/65bda668-nba1`; delivery record and PR follow in §76.6.
 

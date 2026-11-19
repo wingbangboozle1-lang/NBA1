@@ -1695,6 +1695,15 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Capture the same editions on the runner with byte hashes so the index listing and printed headers become reproducible from committed bytes.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
+<tr>
+<td>F-HCA-01</td>
+<td>Medium</td>
+<td><b>Three committed home-court pins disagree; the published horizon uses 0.10 pts, not the 0.71 pts its requirement text describes</b></td>
+<td>Measured first-hand from the committed files on 2026-11-19 (§76). (1) data/hca_measured.json (legacy engine pin, written by engine/pipeline.py): home-win rate 0.5135 over 74 games, sigma 17.409, 0.59 pts. (2) data/derived/horizon_lines_v2.json (the published horizon): home-win rate 0.5023 over 221 final-score games, sigma 16.68, 0.10 pts. (3) data/derived/hca_pin_2026_11_17_ca442d3d.json (§65): home-win rate 0.5171, sigma 16.868, which recomputes to 0.72 pts. The formula is the same in all three; the corpora differ. §76 wired the legacy reference line to read pin (1) instead of a literal 2.0 (requirement R09), so the legacy line and the published horizon now carry different home edges. No corpus of record is named, and the requirement text for R09 still quotes the earlier 0.71. Requested: name one corpus of record and regenerate every pin from it. This flag does not change any published number.</td>
+<td>R09 (home-court pin); horizon home_court_anchor; legacy reference line; F-CA-03</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_v2.json" target="_blank" rel="noopener">S74_HCA</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
