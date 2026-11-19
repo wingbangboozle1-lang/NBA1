@@ -12206,3 +12206,94 @@ Work complete on branch `arena/65bda668-nba1`; delivery record and PR follow in 
 | Deploy | `pages build and deployment` **success** and `Publish static site to GitHub Pages` **success** on `267f15f` (run 44524012017); Pages API `status: built`, `build_type: legacy`, source `main`. |
 | Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` serves **175 rows**, and the last chunk carries **F-HCA-01** with its source link to `S74_HCA`. Fetched through the platform fetch channel (sandbox TCP to `*.github.io` is not used). |
 | Open after this seat | The brief's wider R09 item (one named corpus of record for home-court advantage, F-CA-03/F-HCA-01); the legacy pipeline has not been re-run with the wired value. |
+
+## 🔑 ACTIVE CLAIM — session `arena/232a9f86-nba1` (opened 2026-11-19 ~12:15 UTC — **final integration seat**: triage the two stale open PRs, first-hand official re-verification of the live 11/19–11/22 horizon and the 11/17–11/18 settlements, deterministic site rebuild, full gate battery, no-broken-links confirmation, PR → `main` → merge → Pages, delivery record)
+
+Branch `arena/232a9f86-nba1`, at `main` tip `b2af48b` (merge of PR #193, the §69.2 board record) at claim time. Platform pins this session to this single pre-named branch; the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
+
+**Board read before claiming (2026-11-19 12:1x UTC, ground rules 1–6):** §0 ground rules, §0b registry, the tail delivery records §66–§73, `gh pr list --state all` (**two OPEN**, both `mergeable: CONFLICTING`), `gh run list`, `gh api /repos/…/pages` (`status: built`, `build_type: legacy`, source `main /`), and the live data files (`data/derived/horizon_lines.json`, `data/content/requirements.json`, `data/settlement/*`).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip | `b2af48b` = merge of PR #193 (§69.2 board record), 2026-11-19T08:26:07Z |
+| Open PRs | **two, both CONFLICTING**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, 100 files — the 11/17+11/18 game-day rollover, **already on `main`** via PR #172/#179/#180/#182) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, board-only `COORDINATION.md` — §72.2 delivery record, superseded by later records) |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live horizon | `data/derived/horizon_lines.json` = **26 games, 2026-11-19..2026-11-22**, generated 2026-11-19T05:45Z (today + 3 days, measured HCA pin applied) |
+| Settlements | `data/settlement/` carries 11/14, 11/15, 11/16, **11/17, 11/18** — current through the last completed game day |
+| Requirements | 33 rows: **24 done / 9 partial / 0 missing / 0 blocked** (R01, R04, R09, R11, R12, R16, R26, R30, R32) |
+| Registers | flagged 171 · suggestions 42 · questions 20 answered / 34 open |
+
+**Why this seat exists.** The brief's closing instruction is a **final integration session**: once every task is done, merge the branches, re-verify the combined data line by line, confirm the site builds with no broken links, and publish to GitHub Pages; then open a PR from the integration branch to `main`, merge it without waiting, confirm the deploy, and record the PR link and merge result here. The last three delivery seats (§71, §72, §73, §69) each landed a slice; none ran the closing pass over the *combined* tree, and two stale PRs (#181, #188) are still open and CONFLICTING against the current tip. This seat is that closing pass.
+
+**File scope of this seat (integration; regenerates, does not hand-edit data):** `COORDINATION.md` (this claim + delivery record), the **generated** site/data outputs rebuilt deterministically from the merged sources (`index.html`, `site/**`, `docs/data/**`, `data/derived/surface_gates.json`), any **first-hand verification artifacts** this seat reads (`verify/2026-11-19-232a9f86/**`), and PR/merge/deploy bookkeeping. **Not hand-edited:** `data/ledger/**`, `data/settlement/**`, `data/derived/horizon*`, `data/archive/**`, `data/prereg/**`, `data/official/results*`, `data/content/*.json` (registers are only appended if this seat makes a new, evidence-backed finding — otherwise left to their owners).
+
+**Task table (this session's, and only this session's):**
+
+| ID | Task | Files |
+|---|---|---|
+| T01 | Claim + push (this section) | `COORDINATION.md` |
+| T02 | Triage the two stale open PRs: close #181 as superseded (content already on `main`), resolve #188 (board-only) | PR bookkeeping, `COORDINATION.md` |
+| T03 | First-hand official re-verification of the live 11/19–11/22 horizon (schedule + team records) and the 11/17–11/18 settlements, via the fetch channel | `verify/2026-11-19-232a9f86/**` |
+| T04 | Deterministic rebuild of every generated site/data artifact from the merged sources | generated outputs only |
+| T05 | Full gate battery on the combined tree (`verify_all`, `check_site`, `check_links`, `check_rendered`, `check_registers`, `check_build_data`, `verify_integration`, `verify_ledger`, `verify_dashboard`, `test_*.py`) | gate outputs |
+| T06 | No-broken-links + live-site fetch-back confirmation | gate outputs, `COORDINATION.md` |
+| T07 | PR from this branch to `main` → merge → confirm Pages deploy → record delivery | PR bookkeeping, `COORDINATION.md` |
+
+No other session's scope is edited. Cross-scope needs are logged here, not written into their files.
+
+## 72.2 Integration record — PR, merge, deploy, live fetch-back (preserved from stale-PR #188, board-only; content not on main at §72.1, retained verbatim by the final-integration seat rather than discarded)
+
+### 72.2 Integration record — PR, merge, deploy, live fetch-back
+
+| Item | Result |
+| --- | --- |
+| Pull request | **[#184](https://github.com/wingbangboozle1-lang/NBA1/pull/184)** — "§72: independent horizon verification — inverted calibration measured and explained, 3 stale lines, 2 conflicting strategy records, decision register + 3 published pages" |
+| Checks on the PR head | run [44477854732](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44477854732) → **completed / success**, `validate` pass in 1m47s; `deploy-disabled` skipped by design (the single-deploy-path rule) |
+| Merge | **MERGED** 2026-11-19T07:15:35Z, merge commit **`10c287e`** (`gh pr merge 184 --merge`, no approval waited on, per the standing instruction) |
+| Pages deploy | `Publish static site to GitHub Pages` run [44478237021](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44478237021) → **success** on `10c287e`; `GET /repos/…/pages` → `status: built`, `build_type: legacy`, source `main` |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/live/live-horizon.html` and `…/live/decision-register.html` both fetched and read after the deploy; the 26-row check table, the bucket tables, the calibration card and the D01–D07 register render with their source links |
+| **Defect found on the live site by reading it, and fixed** | The first fetch-back showed the calibration card printing `('` before its paragraph and `',)` after it, plus a literal `**` in a subtitle: `bd.card()` had been passed a one-element tuple instead of a string. Fixed in **PR [#186](https://github.com/wingbangboozle1-lang/NBA1/pull/186)** (merged 07:21:10Z, merge commit **`b8addd2`**), rebuilt at both published depths, and re-fetched with a cache-buster: stray `'` sequences **0**, stray tuple punctuation **0**, subtitle reads "stored in the settlement files". The first fetch after the merge still served the cached copy, which is why the re-fetch carries `?v=2` — stated because the first fetch-back would otherwise look like a failure of the deploy. |
+| Gates re-run on the merged head | `verify_all` **VERIFY OK** · `verify_dashboard` **VERIFY OK** (3,268 rows, 0 unmarked) · `check_links` **PASS** · `check_rendered` **PASS** · `verify_integration` **PASSED** (0 errors, 166 HTML files, 18,014 links) · `verify_ledger` **ledger chain OK** · **13 test files, 0 failing** · repo-wide broken-internal-link scan **166 pages, 0 broken** |
+| Flagged items | **Non-blocking**, published with source links on `live/live-horizon.html` (§Flagged for review) and in `data/content/verify_2026-11-19_d66245d4.json`. Five open findings (V-D66-01..04 plus the re-price finding) and one withdrawn (V-D66-05 → V-D66-06 numbering in the file). |
+| Adoption requests logged, not executed | A01–A05 in `data/content/verify_2026-11-19_d66245d4.json`, addressed to the owners of the horizon roll, the README/leaderboard, the strategy ledger, the shared navigation, and the scheduled refresh. None was executed by this seat. |
+
+**What this seat did not do, stated so it is not inferred from silence.** It did not re-fit the model, re-cut any line, edit any register that #181 owns, write a ledger entry, or settle a slate. It measured, published, logged adoption requests, and left every correction to the file's owner. The single material proposal — divide the probability by the measured error in the line rather than by the spread of game margins — is registered as **D02 / I02** for a reviewer to accept or refuse before any code changes.
+
+### 74.1 Delivery record — final integration (2026-11-19 ~12:15–13:0x UTC)
+
+**T02 — stale-PR triage (both closed, no content lost).**
+- [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, 100 files, CONFLICTING) **closed as superseded**. Its subject — settle 11/17+11/18, roll the horizon to 11/19-11/22, freeze prereg, refresh registers — is already on `main` via PR #172 and PRs #179/#180/#182. Verified at close: `data/derived/horizon_lines.json` = 26 games 2026-11-19..11-22; `data/settlement/` carries 11/17 and 11/18; prereg frozen. No unique content lost.
+- [#188](https://github.com/wingbangboozle1-nba1/pull/188) (`arena/d66245d4-nba1`, board-only `COORDINATION.md`, CONFLICTING) **closed as superseded**. Its unique content — the §72.2 integration record for PR #184/#186 — was **not on `main`** (main carried §72.1 only). Rather than discard it, this seat preserved §72.2 verbatim into the board (see the "preserved from stale-PR #188" block above). No content lost.
+- After the rebase onto the advancing `main`, both closures stand; no open PRs remained from this seat's triage.
+
+**T03 — first-hand official re-verification (artifact: `verify/2026-11-19-232a9f86/`).**
+`verify_integration_232a9f86.py` (+ `verify_report.json`), run on the rebased tree, exit 0:
+| Check | Result | Official source |
+| --- | --- | --- |
+| HORIZON — 26 games in `data/derived/horizon_lines.json` vs the official NBA.com date pages | **26/26 matched**, 0 unmatched, 0 official games missing | https://www.nba.com/games?date=2026-11-19 , `…-11-20`, `…-11-21`, `…-11-22` (read 2026-11-19) |
+| RESULTS FEED — `data/official/results_2026-11-{17,18}.json`, 17 rows | **17/17 FINAL**, every printed quarter score sums to the printed final (incl. the 5-quarter OT game CHA@LAL 114-118) | https://www.nba.com/game/nyk-vs-tor-0022600253 (11/18 finals re-read first-hand; all 12 agree) |
+| LEDGER — `scripts/verify_ledger.py` | **ledger chain OK**, 17 entries | `data/ledger/ledger.json` |
+The official schedule's own month grid confirms the per-day counts 19→4, 20→9, 21→6, 22→7 (= 26), matching the horizon's `window_rule`.
+
+**T04 — deterministic rebuild.** `python3 scripts/build_dashboard.py` regenerated all 29 pages + assets + data on the combined tree with **0 file changes** (byte-identical to committed). The site is already built from the current sources; no hand-editing of generated output was needed.
+
+**T05 — full gate battery (all measured on the rebased combined tree, `main` `7594e55`).**
+| Gate | Result |
+| --- | --- |
+| `scripts/verify_all.py` | **VERIFY OK**, FAILURES: 0 |
+| `scripts/check_links.py` | **RESULT: PASS** |
+| `scripts/check_site.py` | **PASS** — all pages exist, links resolve, every table row has an official source link |
+| `scripts/check_registers.py` | **REGISTERS OK** — 2,128 fields, 0 problems |
+| `scripts/check_build_data.py` | **PASS** — 70 pages, 495 page→data references resolve |
+| `scripts/verify_integration.py` | **PASSED** — 0 errors (50 warnings published on Flagged) |
+| `scripts/verify_ledger.py` | **ledger chain OK** |
+| `scripts/verify_dashboard.py` | **VERIFY OK** — 0 unmarked rows |
+| `scripts/check_rendered.py` | **PASS** |
+| `scripts/render_check.mjs` | **167 pages, 13,141 content blocks, 11,390 rendered rows, 0 problems** |
+| `scripts/test_*.py` (PYTHONPATH=.) | **15/15 files pass, 0 failing** |
+
+**T06 — no broken links + live fetch-back.** `check_links` PASS and `render_check` 0 problems confirm no broken internal links. Live fetch-back via the fetch channel: the landing page serves 26 games (19–22 Nov), 26 originated lines, the 11/17 1-4-0 / 11/18 4-8-0 settlements, ledger 17 entries chain OK, HCA pinned to the measured 0.5023 home-win rate; `site/pages/flagged.html` serves its rows with resolving source links (F1→S9, F2→S7, …), closing the §69.2 source-link concern.
+
+**Irregularity checked and resolved (not a defect).** The live landing page briefly showed **174** open flags while an earlier read of `data/content/flagged.json` showed **171**. Re-read after the rebase: the register now holds **174** items — concurrent session `arena/7b8d624a-nba1` (PR #197, the injuries-banner seat, commit `6a6f684`) added 3 flags between this seat's two reads. The committed `index.html` (174) matches the register (174) and the build reproduces it deterministically. The apparent discrepancy was a **concurrent-merge timing artifact**, verified rather than assumed. No action required.
+
+**T07 — PR, merge, deploy, record.** See the merge record appended below after the merge.
