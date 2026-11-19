@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-19T12:53:44Z",
- "report": "NBA Official Injury Report, Injury-Report_2026-11-19_07_45AM",
+ "captured_at_utc": "2026-11-19T13:41:22Z",
+ "report": "NBA Official Injury Report, Injury-Report_2026-11-19_08_30AM",
  "source_id": "S5",
- "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_45AM.pdf",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_08_30AM.pdf",
  "note": "Parsed verbatim from the archived official PDF listed in `verification`; cells that could not be read are listed under unparsed in data/parsed/injury_diffs/editions/ and never inferred.",
  "cols": [
   "game_date",
@@ -414,15 +414,15 @@
  "unparsed": [],
  "verification": {
   "verified": true,
-  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_45AM.pdf",
-  "source_sha256": "849f3aa751497be5f70737bb6a213537bbe0591f619b30cb815eea4a60491249",
-  "verified_at_utc": "2026-11-19T12:53:44Z",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_08_30AM.pdf",
+  "source_sha256": "176eda5f379a9d415ed5adc7d40b9afb6544da22dc6fe1441343f5618df723fd",
+  "verified_at_utc": "2026-11-19T13:41:22Z",
   "verified_by": "engine/promote_official.py",
-  "edition": "Injury-Report_2026-11-19_07_45AM.pdf",
-  "pdf_sha256": "849f3aa751497be5f70737bb6a213537bbe0591f619b30cb815eea4a60491249",
+  "edition": "Injury-Report_2026-11-19_08_30AM.pdf",
+  "pdf_sha256": "176eda5f379a9d415ed5adc7d40b9afb6544da22dc6fe1441343f5618df723fd",
   "row_count": 44,
   "unparsed_cells": 0,
-  "source_capture": "data/raw/injury_pdfs/Injury-Report_2026-11-19_07_45AM__849f3aa751497be5f70737bb6a213537bbe0591f619b30cb815eea4a60491249.pdf",
+  "source_capture": "data/raw/injury_pdfs/Injury-Report_2026-11-19_08_30AM__176eda5f379a9d415ed5adc7d40b9afb6544da22dc6fe1441343f5618df723fd.pdf",
   "row_audit": {
    "line_parser_rows": 42,
    "line_parser_player_rows": 21,
