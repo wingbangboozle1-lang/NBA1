@@ -11194,3 +11194,13 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 **Irregularity this exposed (for review, not blocking):** the scheduled refresh's own captures for 11/17 and 11/18 (`data/raw/_capture_results_2026-11-1{7,8}.json`, captured 2026-11-17T16:36Z, before tip-off) still say “not final”. Both sessions had to read the official pages directly. This is the same gap as F-CA-07, and it is recorded here so the refresh owner can close it.
 
 **Not done here, on purpose.** No second settlement entry, no second results file, no change to `data/ledger/ledger.json`, the results feed, or the site beyond `main`'s own. The attendance and officials fields that this session read were not added (`main`'s files are the record).
+
+### Merge record — session `arena/eec70f24-nba1` (added 2026-11-19 UTC)
+
+| Item | Record |
+| --- | --- |
+| PR | [#174](https://github.com/wingbangboozle1-lang/NBA1/pull/174) — board-only (collision and cross-check record above). Merged with `--merge` at 2026-11-19T05:51:13Z, merge commit `047bbd1`. |
+| Checks on the PR | `validate` **pass** (1m37s). `refresh` was **cancelled** by the shared `refresh-official-global` queue (its own annotation: "Canceling since a higher priority waiting request exists"), not by a failure in this branch. `deploy-disabled` skipped on PR, as designed. |
+| Pages deploy on `main` | `Publish static site to GitHub Pages` run **44467997208 — success**; `pages build and deployment` run 44467996741 — success. `gh api repos/…/pages` → `status: built`, `build_type: legacy`. |
+| Live fetch-back | https://wingbangboozle1-lang.github.io/NBA1/site/pages/settlement.html re-fetched 2026-11-19: serves the settlement page with the 11/14, 11/15 and 11/16 stamps and the ledger chain table. The 11/17 stamp was present in the build before merge (checked in the local build; the live fetch read the first of two chunks). |
+| Flags | This session's own F-EJ-01…04 were on the superseded data branch and are **not** on `main`. The live irregularity (scheduled captures for 11/17–11/18 predate tip-off) is recorded in the collision record above. |
