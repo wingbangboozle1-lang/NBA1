@@ -1,0 +1,2331 @@
+{
+ "title": "Independent verification of the live horizon — 2026-11-19",
+ "generated_by": "scripts/verify_horizon_d66245d4.py",
+ "generated_utc": "2026-11-19",
+ "rule": "Every value below is either read first-hand from an official NBA page on 2026-11-19 through the fetch channel and compared with what this repository publishes, or computed by this script from repository files with the computation stated. Nothing is transcribed from memory, inferred, or filled in.",
+ "sandbox_note": "this sandbox cannot open a TLS connection to www.nba.com (curl exits 35, SSL_ERROR_SYSCALL); official reads were made through the platform fetch channel. Byte-exact PDF capture needs an Actions runner and is out of this seat's scope.",
+ "flagged": [
+  {
+   "id": "V-D66-01",
+   "title": "Three horizon rows print the wrong record for two teams",
+   "detail": "LAL is printed 13-2 where the official standings say 13-3; UTA is printed 2-13 where they say 3-13. All 26 game ids and all 26 tip times match the official scoreboards, so the schedule is right and the defect is confined to the records column. The model does not read this column, so no line moved because of it.",
+   "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home",
+   "severity": "cosmetic to the model, material to a reader",
+   "status": "flagged"
+  },
+  {
+   "id": "V-D66-02",
+   "title": "Two different published records for the same strategy",
+   "detail": "README.md headlines S1 as 23-9 worth +11.91 units; docs/data/leaderboard.json carries S1 as 23-8 worth +12.909 units, LBS 82.0, n_graded 31. The two numbers differ by a game and by a unit. Neither can be reproduced from data/settlement/**, because the settlement files grade tickets, not strategies.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md",
+   "severity": "material - the leaderboard is the competition scoreboard",
+   "status": "flagged"
+  },
+  {
+   "id": "V-D66-03",
+   "title": "The strategy ledger is six days stale and predates 25 settled picks",
+   "detail": "data/derived/strategies.json is generated_utc 2026-11-13, lists 8 strategies and states 'the largest graded set is 14 bets'. The repository now holds 5 settled slates and 39 published singles (14-23-1). docs/data/leaderboard.json lists 10 strategies, so the two registers also disagree on how many strategies exist.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/strategies.json",
+   "severity": "material",
+   "status": "flagged"
+  },
+  {
+   "id": "V-D66-04",
+   "title": "Lines were priced off an injury edition five revisions old",
+   "detail": "The official index read at 07:16Z lists eight editions for 2026-11-19, the newest 01:45 AM ET. data/derived/horizon_lines.json names 12:30 AM ET as its injury input. First tip is 8:00 PM ET, so five revisions exist that no published line reflects.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "severity": "material for any bet-surface use; that surface is gated closed",
+   "status": "flagged"
+  },
+  {
+   "id": "V-D66-05",
+   "title": "Three games of the 26 move by more than a point when repriced with the current official table",
+   "detail": "The official advanced table has now absorbed the 11/18 UTA 109 @ LAL 97 game, which the repo's cut predates (its own flag F-929-01 records the lag). Repricing with the model's own published formula moves PHX@UTA by +1.21 on the spread and -1.34 on the total, SAC@LAL by -1.41 and -2.19, DAL@UTA by +1.20 and -1.35. The other 23 games move by 0.05 point or less. The defect is exactly the two teams the file already flags, and it is now measurable in points rather than described as a lag.",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "severity": "material - those three lines are stale by more than a point",
+   "status": "flagged"
+  },
+  {
+   "id": "V-D66-06",
+   "title": "WITHDRAWN - a suspected missing page that measured clean",
+   "detail": "This seat briefly believed scripts/build_dashboard.py built no site/pages/strategies.html while the nav linked to it. Measured afterwards on this tree: the builder writes it at line 2394, the file exists, all 39 nav page entries exist on disk, and every external nav target resolves. The belief was wrong and is recorded rather than deleted, because this seat's own claims get the same scrutiny as the data. No defect existed and nothing was fixed.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/build_dashboard.py",
+   "severity": "none - false positive, withdrawn",
+   "status": "withdrawn"
+  }
+ ],
+ "adoption_requests": [
+  {
+   "id": "A01",
+   "to": "owner of data/derived/horizon_*.json (arena/39b70241-nba1, open PR #181)",
+   "request": "Re-cut the PHX@UTA, SAC@LAL and DAL@UTA lines from the current advanced table, or print the reading timestamp and the GP of each input beside each line.",
+   "evidence": "V-D66-05, rows.reprice"
+  },
+  {
+   "id": "A02",
+   "to": "owner of README.md and docs/data/leaderboard.json",
+   "request": "Publish one S1 record with its derivation, or publish none.",
+   "evidence": "V-D66-02"
+  },
+  {
+   "id": "A03",
+   "to": "owner of data/derived/strategies.json / scripts/strategies.py",
+   "request": "Regenerate the strategy register from data/settlement/** so strategy count and records come from settled tickets instead of a 2026-11-13 cut.",
+   "evidence": "V-D66-03"
+  },
+  {
+   "id": "A04",
+   "to": "next site/integration seat",
+   "request": "This seat publishes site/pages/live-horizon.html and site/pages/decision-register.html from a namespaced builder rather than editing scripts/build_dashboard.py, which PR #181's tree also touches. Wire them into the shared navigation when that branch lands.",
+   "evidence": "site/pages/live-horizon.html, scripts/build_verify_d66245d4_site.py"
+  },
+  {
+   "id": "A05",
+   "to": "owner of the scheduled refresh",
+   "request": "Gate the rebuild on injury-edition currency as well as freshness: a line whose injury basis is older than the newest index edition should be marked, not published as current.",
+   "evidence": "V-D66-04"
+  }
+ ],
+ "old_ledger_vs_settlement": {
+  "readme_headline": "S1 (side edge) 23-9, +11.91 model units, exact binomial p = 0.020",
+  "leaderboard_json": "S1 'Side edge vs reference' 23-8, +12.909 units, LBS 82.0, n_graded 31",
+  "measured_from_settlement": "no strategy-level grading of the five settled slates exists in data/settlement/**, so neither figure is reproducible from the settlement record",
+  "verdict": "two published numbers for the same strategy do not agree with each other and neither is derivable from the settled tickets"
+ },
+ "reads": {
+  "advanced": {
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "read_at_utc": "2026-11-19T07:14Z"
+  },
+  "standings": {
+   "url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home",
+   "read_at_utc": "2026-11-19T07:10Z"
+  },
+  "games": {
+   "url": "https://www.nba.com/games?date=%s",
+   "read_at_utc": "2026-11-19T06:59Z-07:08Z"
+  },
+  "injury_index": {
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "read_at_utc": "2026-11-19T07:16Z"
+  }
+ },
+ "counts": {
+  "reprice_games": 26,
+  "reprice_moved_ge_half_point": 3,
+  "formula_rows_pass": 26,
+  "ratings_rows": 30,
+  "ratings_mismatch": 2,
+  "standings_rows": 30,
+  "standings_mismatch": 0,
+  "slate_days": 4,
+  "slate_days_mismatch": 0,
+  "games": 26,
+  "games_id_or_tip_mismatch": 0,
+  "records_rows": 26,
+  "records_mismatch": 3,
+  "results_feed_rows": 222,
+  "results_feed_days_checked": 18,
+  "results_feed_quarter_sum_failures": 0,
+  "passes": 111,
+  "problems": 5
+ },
+ "verdict": "ATTENTION",
+ "problems": [
+  "3 of 26 games move by >= 0.5 point when repriced with the official advanced table as read at 2026-11-19T07:14Z: PHX@UTA spread +1.21 / total -1.34, SAC@LAL spread -1.41 / total -2.19, DAL@UTA spread +1.20 / total -1.35",
+  "2026-11-20 PHX@UTA records: [{'team': 'UTA', 'repo': '2-13', 'official': '3-13'}]",
+  "2026-11-20 SAC@LAL records: [{'team': 'LAL', 'repo': '13-2', 'official': '13-3'}]",
+  "2026-11-22 DAL@UTA records: [{'team': 'UTA', 'repo': '2-13', 'official': '3-13'}]",
+  "lines priced off injury edition '11/19/26 12:30 AM'; the official index lists '01:45AM' as the newest edition for 2026-11-19 (source https://official.nba.com/nba-injury-report-2026-27-season/)"
+ ],
+ "injury": {
+  "basis_in_repo": "11/19/26 12:30 AM",
+  "editions_on_index_for_1119": [
+   "12:00AM",
+   "12:15AM",
+   "12:30AM",
+   "12:45AM",
+   "01:00AM",
+   "01:15AM",
+   "01:30AM",
+   "01:45AM"
+  ],
+  "newest": "01:45AM",
+  "verdict": "STALE",
+  "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "pdf_bytes_rehashed": false,
+  "why_not": "sandbox cannot reach ak-static.cms.nba.com; the byte-level archive audit belongs to COORDINATION §68, not to this seat"
+ },
+ "rows": {
+  "ratings": [
+   {
+    "team": "ATL",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 112.8,
+     "def_rtg": 110.8,
+     "pace": 103.71
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 112.8,
+     "def_rtg": 110.8,
+     "pace": 103.71
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "BKN",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 110.5,
+     "def_rtg": 119.0,
+     "pace": 99.51
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 110.5,
+     "def_rtg": 119.0,
+     "pace": 99.51
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "BOS",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 117.0,
+     "def_rtg": 106.0,
+     "pace": 96.76
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 117.0,
+     "def_rtg": 106.0,
+     "pace": 96.76
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "CHA",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 103.1,
+     "def_rtg": 113.7,
+     "pace": 96.43
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 103.1,
+     "def_rtg": 113.7,
+     "pace": 96.43
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "CHI",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 111.1,
+     "def_rtg": 119.1,
+     "pace": 103.8
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 111.1,
+     "def_rtg": 119.1,
+     "pace": 103.8
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "CLE",
+    "verdict": "PASS",
+    "official": {
+     "gp": 16,
+     "off_rtg": 117.5,
+     "def_rtg": 115.5,
+     "pace": 100.01
+    },
+    "repo": {
+     "gp": 16,
+     "off_rtg": 117.5,
+     "def_rtg": 115.5,
+     "pace": 100.01
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "DAL",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 112.3,
+     "def_rtg": 113.4,
+     "pace": 99.97
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 112.3,
+     "def_rtg": 113.4,
+     "pace": 99.97
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "DEN",
+    "verdict": "PASS",
+    "official": {
+     "gp": 13,
+     "off_rtg": 114.3,
+     "def_rtg": 113.8,
+     "pace": 98.02
+    },
+    "repo": {
+     "gp": 13,
+     "off_rtg": 114.3,
+     "def_rtg": 113.8,
+     "pace": 98.02
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "DET",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 114.9,
+     "def_rtg": 108.9,
+     "pace": 98.78
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 114.9,
+     "def_rtg": 108.9,
+     "pace": 98.78
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "GSW",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 113.4,
+     "def_rtg": 112.8,
+     "pace": 99.41
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 113.4,
+     "def_rtg": 112.8,
+     "pace": 99.41
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "HOU",
+    "verdict": "PASS",
+    "official": {
+     "gp": 16,
+     "off_rtg": 121.1,
+     "def_rtg": 112.1,
+     "pace": 97.41
+    },
+    "repo": {
+     "gp": 16,
+     "off_rtg": 121.1,
+     "def_rtg": 112.1,
+     "pace": 97.41
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "IND",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 110.7,
+     "def_rtg": 113.6,
+     "pace": 100.9
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 110.7,
+     "def_rtg": 113.6,
+     "pace": 100.9
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "LAC",
+    "verdict": "PASS",
+    "official": {
+     "gp": 13,
+     "off_rtg": 111.4,
+     "def_rtg": 117.0,
+     "pace": 99.74
+    },
+    "repo": {
+     "gp": 13,
+     "off_rtg": 111.4,
+     "def_rtg": 117.0,
+     "pace": 99.74
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "LAL",
+    "verdict": "MISMATCH",
+    "official": {
+     "gp": 16,
+     "off_rtg": 119.8,
+     "def_rtg": 113.2,
+     "pace": 100.35
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 121.6,
+     "def_rtg": 113.7,
+     "pace": 100.14
+    },
+    "diffs": {
+     "off_rtg": {
+      "official": 119.8,
+      "repo": 121.6
+     },
+     "def_rtg": {
+      "official": 113.2,
+      "repo": 113.7
+     },
+     "pace": {
+      "official": 100.35,
+      "repo": 100.14
+     }
+    },
+    "gp_note": "official GP 16 vs repo GP 15 — the official advanced table has since absorbed the game the repo's cut predates",
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "MEM",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 120.6,
+     "def_rtg": 111.9,
+     "pace": 100.27
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 120.6,
+     "def_rtg": 111.9,
+     "pace": 100.27
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "MIA",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 116.9,
+     "def_rtg": 116.7,
+     "pace": 102.19
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 116.9,
+     "def_rtg": 116.7,
+     "pace": 102.19
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "MIL",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 106.7,
+     "def_rtg": 119.7,
+     "pace": 101.0
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 106.7,
+     "def_rtg": 119.7,
+     "pace": 101.0
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "MIN",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 114.5,
+     "def_rtg": 104.0,
+     "pace": 101.23
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 114.5,
+     "def_rtg": 104.0,
+     "pace": 101.23
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "NOP",
+    "verdict": "PASS",
+    "official": {
+     "gp": 16,
+     "off_rtg": 111.7,
+     "def_rtg": 118.9,
+     "pace": 101.3
+    },
+    "repo": {
+     "gp": 16,
+     "off_rtg": 111.7,
+     "def_rtg": 118.9,
+     "pace": 101.3
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "NYK",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 114.8,
+     "def_rtg": 109.0,
+     "pace": 94.87
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 114.8,
+     "def_rtg": 109.0,
+     "pace": 94.87
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "OKC",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 113.0,
+     "def_rtg": 108.7,
+     "pace": 99.17
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 113.0,
+     "def_rtg": 108.7,
+     "pace": 99.17
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "ORL",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 111.3,
+     "def_rtg": 114.0,
+     "pace": 97.84
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 111.3,
+     "def_rtg": 114.0,
+     "pace": 97.84
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "PHI",
+    "verdict": "PASS",
+    "official": {
+     "gp": 16,
+     "off_rtg": 114.5,
+     "def_rtg": 111.8,
+     "pace": 99.88
+    },
+    "repo": {
+     "gp": 16,
+     "off_rtg": 114.5,
+     "def_rtg": 111.8,
+     "pace": 99.88
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "PHX",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 115.6,
+     "def_rtg": 116.8,
+     "pace": 98.89
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 115.6,
+     "def_rtg": 116.8,
+     "pace": 98.89
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "POR",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 116.2,
+     "def_rtg": 110.2,
+     "pace": 100.71
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 116.2,
+     "def_rtg": 110.2,
+     "pace": 100.71
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "SAC",
+    "verdict": "PASS",
+    "official": {
+     "gp": 14,
+     "off_rtg": 106.9,
+     "def_rtg": 120.4,
+     "pace": 100.93
+    },
+    "repo": {
+     "gp": 14,
+     "off_rtg": 106.9,
+     "def_rtg": 120.4,
+     "pace": 100.93
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "SAS",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 118.1,
+     "def_rtg": 107.0,
+     "pace": 98.35
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 118.1,
+     "def_rtg": 107.0,
+     "pace": 98.35
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "TOR",
+    "verdict": "PASS",
+    "official": {
+     "gp": 15,
+     "off_rtg": 113.7,
+     "def_rtg": 113.1,
+     "pace": 98.09
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 113.7,
+     "def_rtg": 113.1,
+     "pace": 98.09
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "UTA",
+    "verdict": "MISMATCH",
+    "official": {
+     "gp": 16,
+     "off_rtg": 107.0,
+     "def_rtg": 114.5,
+     "pace": 100.16
+    },
+    "repo": {
+     "gp": 15,
+     "off_rtg": 107.2,
+     "def_rtg": 115.9,
+     "pace": 99.95
+    },
+    "diffs": {
+     "off_rtg": {
+      "official": 107.0,
+      "repo": 107.2
+     },
+     "def_rtg": {
+      "official": 114.5,
+      "repo": 115.9
+     },
+     "pace": {
+      "official": 100.16,
+      "repo": 99.95
+     }
+    },
+    "gp_note": "official GP 16 vs repo GP 15 — the official advanced table has since absorbed the game the repo's cut predates",
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "team": "WAS",
+    "verdict": "PASS",
+    "official": {
+     "gp": 16,
+     "off_rtg": 109.9,
+     "def_rtg": 117.1,
+     "pace": 99.46
+    },
+    "repo": {
+     "gp": 16,
+     "off_rtg": 109.9,
+     "def_rtg": 117.1,
+     "pace": 99.46
+    },
+    "diffs": null,
+    "gp_note": null,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   }
+  ],
+  "standings": [
+   {
+    "team": "ATL",
+    "verdict": "PASS",
+    "official": [
+     9,
+     6
+    ],
+    "repo": [
+     9,
+     6
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "BKN",
+    "verdict": "PASS",
+    "official": [
+     3,
+     11
+    ],
+    "repo": [
+     3,
+     11
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "BOS",
+    "verdict": "PASS",
+    "official": [
+     11,
+     4
+    ],
+    "repo": [
+     11,
+     4
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "CHA",
+    "verdict": "PASS",
+    "official": [
+     4,
+     10
+    ],
+    "repo": [
+     4,
+     10
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "CHI",
+    "verdict": "PASS",
+    "official": [
+     4,
+     10
+    ],
+    "repo": [
+     4,
+     10
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "CLE",
+    "verdict": "PASS",
+    "official": [
+     8,
+     8
+    ],
+    "repo": [
+     8,
+     8
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "DAL",
+    "verdict": "PASS",
+    "official": [
+     8,
+     7
+    ],
+    "repo": [
+     8,
+     7
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "DEN",
+    "verdict": "PASS",
+    "official": [
+     8,
+     5
+    ],
+    "repo": [
+     8,
+     5
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "DET",
+    "verdict": "PASS",
+    "official": [
+     10,
+     4
+    ],
+    "repo": [
+     10,
+     4
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "GSW",
+    "verdict": "PASS",
+    "official": [
+     8,
+     7
+    ],
+    "repo": [
+     8,
+     7
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "HOU",
+    "verdict": "PASS",
+    "official": [
+     12,
+     4
+    ],
+    "repo": [
+     12,
+     4
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "IND",
+    "verdict": "PASS",
+    "official": [
+     5,
+     10
+    ],
+    "repo": [
+     5,
+     10
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "LAC",
+    "verdict": "PASS",
+    "official": [
+     4,
+     9
+    ],
+    "repo": [
+     4,
+     9
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "LAL",
+    "verdict": "PASS",
+    "official": [
+     13,
+     3
+    ],
+    "repo": [
+     13,
+     3
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "MEM",
+    "verdict": "PASS",
+    "official": [
+     11,
+     4
+    ],
+    "repo": [
+     11,
+     4
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "MIA",
+    "verdict": "PASS",
+    "official": [
+     9,
+     6
+    ],
+    "repo": [
+     9,
+     6
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "MIL",
+    "verdict": "PASS",
+    "official": [
+     1,
+     14
+    ],
+    "repo": [
+     1,
+     14
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "MIN",
+    "verdict": "PASS",
+    "official": [
+     11,
+     4
+    ],
+    "repo": [
+     11,
+     4
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "NOP",
+    "verdict": "PASS",
+    "official": [
+     5,
+     11
+    ],
+    "repo": [
+     5,
+     11
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "NYK",
+    "verdict": "PASS",
+    "official": [
+     8,
+     6
+    ],
+    "repo": [
+     8,
+     6
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "OKC",
+    "verdict": "PASS",
+    "official": [
+     9,
+     6
+    ],
+    "repo": [
+     9,
+     6
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "ORL",
+    "verdict": "PASS",
+    "official": [
+     6,
+     8
+    ],
+    "repo": [
+     6,
+     8
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "PHI",
+    "verdict": "PASS",
+    "official": [
+     13,
+     3
+    ],
+    "repo": [
+     13,
+     3
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "PHX",
+    "verdict": "PASS",
+    "official": [
+     7,
+     7
+    ],
+    "repo": [
+     7,
+     7
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "POR",
+    "verdict": "PASS",
+    "official": [
+     9,
+     5
+    ],
+    "repo": [
+     9,
+     5
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "SAC",
+    "verdict": "PASS",
+    "official": [
+     1,
+     13
+    ],
+    "repo": [
+     1,
+     13
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "SAS",
+    "verdict": "PASS",
+    "official": [
+     12,
+     3
+    ],
+    "repo": [
+     12,
+     3
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "TOR",
+    "verdict": "PASS",
+    "official": [
+     5,
+     10
+    ],
+    "repo": [
+     5,
+     10
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "UTA",
+    "verdict": "PASS",
+    "official": [
+     3,
+     13
+    ],
+    "repo": [
+     3,
+     13
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "team": "WAS",
+    "verdict": "PASS",
+    "official": [
+     5,
+     11
+    ],
+    "repo": [
+     5,
+     11
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   }
+  ],
+  "slate": [
+   {
+    "date": "2026-11-19",
+    "official_count": 4,
+    "month_grid_count": 4,
+    "repo_count": 4,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-19"
+   },
+   {
+    "date": "2026-11-20",
+    "official_count": 9,
+    "month_grid_count": 9,
+    "repo_count": 9,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-21",
+    "official_count": 6,
+    "month_grid_count": 6,
+    "repo_count": 6,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-22",
+    "official_count": 7,
+    "month_grid_count": 7,
+    "repo_count": 7,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   }
+  ],
+  "games": [
+   {
+    "date": "2026-11-19",
+    "game_id": "0022600270",
+    "matchup": "GSW@MEM",
+    "official_matchup": "GSW@MEM",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "8-7 / 11-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-19"
+   },
+   {
+    "date": "2026-11-19",
+    "game_id": "0022600271",
+    "matchup": "POR@MIL",
+    "official_matchup": "POR@MIL",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "9-5 / 1-14",
+    "source_url": "https://www.nba.com/games?date=2026-11-19"
+   },
+   {
+    "date": "2026-11-19",
+    "game_id": "0022600272",
+    "matchup": "NYK@MIN",
+    "official_matchup": "NYK@MIN",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "8-6 / 11-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-19"
+   },
+   {
+    "date": "2026-11-19",
+    "game_id": "0022600273",
+    "matchup": "LAC@SAS",
+    "official_matchup": "LAC@SAS",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "4-9 / 12-3",
+    "source_url": "https://www.nba.com/games?date=2026-11-19"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600043",
+    "matchup": "CHA@ATL",
+    "official_matchup": "CHA@ATL",
+    "repo_tip_et": "7:00 PM ET",
+    "official_tip_et": "7:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "4-10 / 9-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600044",
+    "matchup": "ORL@BKN",
+    "official_matchup": "ORL@BKN",
+    "repo_tip_et": "7:30 PM ET",
+    "official_tip_et": "7:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "6-8 / 3-11",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600045",
+    "matchup": "IND@CLE",
+    "official_matchup": "IND@CLE",
+    "repo_tip_et": "7:30 PM ET",
+    "official_tip_et": "7:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-10 / 8-8",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600046",
+    "matchup": "TOR@DET",
+    "official_matchup": "TOR@DET",
+    "repo_tip_et": "7:30 PM ET",
+    "official_tip_et": "7:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-10 / 10-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600047",
+    "matchup": "WAS@CHI",
+    "official_matchup": "WAS@CHI",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-11 / 4-10",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600048",
+    "matchup": "NOP@OKC",
+    "official_matchup": "NOP@OKC",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-11 / 9-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600049",
+    "matchup": "PHX@UTA",
+    "official_matchup": "PHX@UTA",
+    "repo_tip_et": "9:30 PM ET",
+    "official_tip_et": "9:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "7-7 / 2-13",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600050",
+    "matchup": "HOU@DEN",
+    "official_matchup": "HOU@DEN",
+    "repo_tip_et": "10:00 PM ET",
+    "official_tip_et": "10:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "12-4 / 8-5",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-20",
+    "game_id": "0022600051",
+    "matchup": "SAC@LAL",
+    "official_matchup": "SAC@LAL",
+    "repo_tip_et": "10:00 PM ET",
+    "official_tip_et": "10:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "1-13 / 13-2",
+    "source_url": "https://www.nba.com/games?date=2026-11-20"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600274",
+    "matchup": "MIL@PHI",
+    "official_matchup": "MIL@PHI",
+    "repo_tip_et": "1:00 PM ET",
+    "official_tip_et": "1:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "1-14 / 13-3",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600275",
+    "matchup": "POR@NYK",
+    "official_matchup": "POR@NYK",
+    "repo_tip_et": "7:30 PM ET",
+    "official_tip_et": "7:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "9-5 / 8-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600276",
+    "matchup": "LAC@DAL",
+    "official_matchup": "LAC@DAL",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "4-9 / 8-7",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600277",
+    "matchup": "MEM@MIN",
+    "official_matchup": "MEM@MIN",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "11-4 / 11-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600278",
+    "matchup": "NOP@SAS",
+    "official_matchup": "NOP@SAS",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-11 / 12-3",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-21",
+    "game_id": "0022600279",
+    "matchup": "BOS@SAC",
+    "official_matchup": "BOS@SAC",
+    "repo_tip_et": "10:00 PM ET",
+    "official_tip_et": "10:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "11-4 / 1-13",
+    "source_url": "https://www.nba.com/games?date=2026-11-21"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600280",
+    "matchup": "DET@ATL",
+    "official_matchup": "DET@ATL",
+    "repo_tip_et": "3:30 PM ET",
+    "official_tip_et": "3:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "10-4 / 9-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600281",
+    "matchup": "OKC@MIA",
+    "official_matchup": "OKC@MIA",
+    "repo_tip_et": "6:00 PM ET",
+    "official_tip_et": "6:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "9-6 / 9-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600282",
+    "matchup": "ORL@WAS",
+    "official_matchup": "ORL@WAS",
+    "repo_tip_et": "7:00 PM ET",
+    "official_tip_et": "7:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "6-8 / 5-11",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600283",
+    "matchup": "DEN@CHI",
+    "official_matchup": "DEN@CHI",
+    "repo_tip_et": "7:00 PM ET",
+    "official_tip_et": "7:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "8-5 / 4-10",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600284",
+    "matchup": "DAL@UTA",
+    "official_matchup": "DAL@UTA",
+    "repo_tip_et": "7:00 PM ET",
+    "official_tip_et": "7:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "8-7 / 2-13",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600285",
+    "matchup": "IND@NYK",
+    "official_matchup": "IND@NYK",
+    "repo_tip_et": "8:00 PM ET",
+    "official_tip_et": "8:00 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "5-10 / 8-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   },
+   {
+    "date": "2026-11-22",
+    "game_id": "0022600286",
+    "matchup": "BOS@GSW",
+    "official_matchup": "BOS@GSW",
+    "repo_tip_et": "8:30 PM ET",
+    "official_tip_et": "8:30 PM ET",
+    "id_verdict": "PASS",
+    "tip_verdict": "PASS",
+    "venue": "unverified — the scoreboard card does not print the venue",
+    "repo_records": "11-4 / 8-7",
+    "source_url": "https://www.nba.com/games?date=2026-11-22"
+   }
+  ],
+  "records": [
+   {
+    "date": "2026-11-19",
+    "matchup": "GSW@MEM",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "POR@MIL",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "NYK@MIN",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "LAC@SAS",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "CHA@ATL",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "ORL@BKN",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "IND@CLE",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "TOR@DET",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "WAS@CHI",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "NOP@OKC",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "PHX@UTA",
+    "verdict": "MISMATCH",
+    "diffs": [
+     {
+      "team": "UTA",
+      "repo": "2-13",
+      "official": "3-13"
+     }
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "HOU@DEN",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "SAC@LAL",
+    "verdict": "MISMATCH",
+    "diffs": [
+     {
+      "team": "LAL",
+      "repo": "13-2",
+      "official": "13-3"
+     }
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "MIL@PHI",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "POR@NYK",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "LAC@DAL",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "MEM@MIN",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "NOP@SAS",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "BOS@SAC",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DET@ATL",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "OKC@MIA",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "ORL@WAS",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DEN@CHI",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DAL@UTA",
+    "verdict": "MISMATCH",
+    "diffs": [
+     {
+      "team": "UTA",
+      "repo": "2-13",
+      "official": "3-13"
+     }
+    ],
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "IND@NYK",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "BOS@GSW",
+    "verdict": "PASS",
+    "diffs": null,
+    "source_url": "https://www.nba.com/standings?GroupTeam=league&Season=2026-27&Section=home"
+   }
+  ],
+  "reprice": [
+   {
+    "date": "2026-11-19",
+    "matchup": "GSW@MEM",
+    "repo_line_spread_home": 8.1,
+    "repo_line_total": 231.3,
+    "recomputed_spread": 8.13,
+    "recomputed_total": 231.3,
+    "formula_residual_spread": 0.03,
+    "formula_residual_total": -0.0,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 8.13,
+    "new_total": 231.3,
+    "delta_spread": 0.03,
+    "delta_total": -0.0,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "POR@MIL",
+    "repo_line_spread_home": -19.0,
+    "repo_line_total": 228.1,
+    "recomputed_spread": -19.02,
+    "recomputed_total": 228.09,
+    "formula_residual_spread": -0.02,
+    "formula_residual_total": -0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -19.02,
+    "new_total": 228.09,
+    "delta_spread": -0.02,
+    "delta_total": -0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "NYK@MIN",
+    "repo_line_spread_home": 4.8,
+    "repo_line_total": 211.0,
+    "recomputed_spread": 4.77,
+    "recomputed_total": 210.97,
+    "formula_residual_spread": -0.03,
+    "formula_residual_total": -0.03,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 4.77,
+    "new_total": 210.97,
+    "delta_spread": -0.03,
+    "delta_total": -0.03,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-19",
+    "matchup": "LAC@SAS",
+    "repo_line_spread_home": 16.7,
+    "repo_line_total": 224.6,
+    "recomputed_spread": 16.65,
+    "recomputed_total": 224.61,
+    "formula_residual_spread": -0.05,
+    "formula_residual_total": 0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 16.65,
+    "new_total": 224.61,
+    "delta_spread": -0.05,
+    "delta_total": 0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "CHA@ATL",
+    "repo_line_spread_home": 12.5,
+    "repo_line_total": 213.8,
+    "recomputed_spread": 12.45,
+    "recomputed_total": 213.81,
+    "formula_residual_spread": -0.05,
+    "formula_residual_total": 0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 12.45,
+    "new_total": 213.81,
+    "delta_spread": -0.05,
+    "delta_total": 0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "ORL@BKN",
+    "repo_line_spread_home": -5.5,
+    "repo_line_total": 224.7,
+    "recomputed_spread": -5.54,
+    "recomputed_total": 224.68,
+    "formula_residual_spread": -0.04,
+    "formula_residual_total": -0.02,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -5.54,
+    "new_total": 224.68,
+    "delta_spread": -0.04,
+    "delta_total": -0.02,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "IND@CLE",
+    "repo_line_spread_home": 5.1,
+    "repo_line_total": 231.3,
+    "recomputed_spread": 5.07,
+    "recomputed_total": 231.31,
+    "formula_residual_spread": -0.03,
+    "formula_residual_total": 0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 5.07,
+    "new_total": 231.31,
+    "delta_spread": -0.03,
+    "delta_total": 0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "TOR@DET",
+    "repo_line_spread_home": 5.4,
+    "repo_line_total": 220.1,
+    "recomputed_spread": 5.41,
+    "recomputed_total": 220.1,
+    "formula_residual_spread": 0.01,
+    "formula_residual_total": -0.0,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 5.41,
+    "new_total": 220.1,
+    "delta_spread": 0.01,
+    "delta_total": -0.0,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "WAS@CHI",
+    "repo_line_spread_home": -0.6,
+    "repo_line_total": 233.7,
+    "recomputed_spread": -0.62,
+    "recomputed_total": 233.71,
+    "formula_residual_spread": -0.02,
+    "formula_residual_total": 0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -0.62,
+    "new_total": 233.71,
+    "delta_spread": -0.02,
+    "delta_total": 0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "NOP@OKC",
+    "repo_line_spread_home": 11.5,
+    "repo_line_total": 225.9,
+    "recomputed_spread": 11.52,
+    "recomputed_total": 225.89,
+    "formula_residual_spread": 0.02,
+    "formula_residual_total": -0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 11.52,
+    "new_total": 225.89,
+    "delta_spread": 0.02,
+    "delta_total": -0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "PHX@UTA",
+    "repo_line_spread_home": -7.6,
+    "repo_line_total": 227.0,
+    "recomputed_spread": -7.59,
+    "recomputed_total": 227.05,
+    "formula_residual_spread": 0.01,
+    "formula_residual_total": 0.05,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": true,
+    "repriced_teams": [
+     "UTA"
+    ],
+    "new_spread": -6.39,
+    "new_total": 225.66,
+    "delta_spread": 1.21,
+    "delta_total": -1.34,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "HOU@DEN",
+    "repo_line_spread_home": -8.2,
+    "repo_line_total": 229.0,
+    "recomputed_spread": -8.25,
+    "recomputed_total": 228.97,
+    "formula_residual_spread": -0.05,
+    "formula_residual_total": -0.03,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -8.25,
+    "new_total": 228.97,
+    "delta_spread": -0.05,
+    "delta_total": -0.03,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-20",
+    "matchup": "SAC@LAL",
+    "repo_line_spread_home": 22.1,
+    "repo_line_total": 237.4,
+    "recomputed_spread": 22.11,
+    "recomputed_total": 237.36,
+    "formula_residual_spread": 0.01,
+    "formula_residual_total": -0.04,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": true,
+    "repriced_teams": [
+     "LAL"
+    ],
+    "new_spread": 20.69,
+    "new_total": 235.21,
+    "delta_spread": -1.41,
+    "delta_total": -2.19,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "MIL@PHI",
+    "repo_line_spread_home": 15.8,
+    "repo_line_total": 226.9,
+    "recomputed_spread": 15.81,
+    "recomputed_total": 226.86,
+    "formula_residual_spread": 0.01,
+    "formula_residual_total": -0.04,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 15.81,
+    "new_total": 226.86,
+    "delta_spread": 0.01,
+    "delta_total": -0.04,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "POR@NYK",
+    "repo_line_spread_home": -0.0,
+    "repo_line_total": 218.1,
+    "recomputed_spread": -0.04,
+    "recomputed_total": 218.14,
+    "formula_residual_spread": -0.04,
+    "formula_residual_total": 0.04,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -0.04,
+    "new_total": 218.14,
+    "delta_spread": -0.04,
+    "delta_total": 0.04,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "LAC@DAL",
+    "repo_line_spread_home": 4.5,
+    "repo_line_total": 226.7,
+    "recomputed_spread": 4.54,
+    "recomputed_total": 226.75,
+    "formula_residual_spread": 0.04,
+    "formula_residual_total": 0.05,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 4.54,
+    "new_total": 226.75,
+    "delta_spread": 0.04,
+    "delta_total": 0.05,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "MEM@MIN",
+    "repo_line_spread_home": 2.5,
+    "repo_line_total": 225.1,
+    "recomputed_spread": 2.49,
+    "recomputed_total": 225.08,
+    "formula_residual_spread": -0.01,
+    "formula_residual_total": -0.02,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 2.49,
+    "new_total": 225.08,
+    "delta_spread": -0.01,
+    "delta_total": -0.02,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "NOP@SAS",
+    "repo_line_spread_home": 18.5,
+    "repo_line_total": 228.6,
+    "recomputed_spread": 18.47,
+    "recomputed_total": 228.63,
+    "formula_residual_spread": -0.03,
+    "formula_residual_total": 0.03,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 18.47,
+    "new_total": 228.63,
+    "delta_spread": -0.03,
+    "delta_total": 0.03,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-21",
+    "matchup": "BOS@SAC",
+    "repo_line_spread_home": -23.9,
+    "repo_line_total": 221.4,
+    "recomputed_spread": -23.91,
+    "recomputed_total": 221.37,
+    "formula_residual_spread": -0.01,
+    "formula_residual_total": -0.03,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -23.91,
+    "new_total": 221.37,
+    "delta_spread": -0.01,
+    "delta_total": -0.03,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DET@ATL",
+    "repo_line_spread_home": -3.9,
+    "repo_line_total": 223.2,
+    "recomputed_spread": -3.9,
+    "recomputed_total": 223.15,
+    "formula_residual_spread": 0.0,
+    "formula_residual_total": -0.05,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -3.9,
+    "new_total": 223.15,
+    "delta_spread": 0.0,
+    "delta_total": -0.05,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "OKC@MIA",
+    "repo_line_spread_home": -4.2,
+    "repo_line_total": 229.7,
+    "recomputed_spread": -4.17,
+    "recomputed_total": 229.71,
+    "formula_residual_spread": 0.03,
+    "formula_residual_total": 0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -4.17,
+    "new_total": 229.71,
+    "delta_spread": 0.03,
+    "delta_total": 0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "ORL@WAS",
+    "repo_line_spread_home": -4.3,
+    "repo_line_total": 222.2,
+    "recomputed_spread": -4.3,
+    "recomputed_total": 222.19,
+    "formula_residual_spread": 0.0,
+    "formula_residual_total": -0.01,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -4.3,
+    "new_total": 222.19,
+    "delta_spread": 0.0,
+    "delta_total": -0.01,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DEN@CHI",
+    "repo_line_spread_home": -8.5,
+    "repo_line_total": 233.5,
+    "recomputed_spread": -8.53,
+    "recomputed_total": 233.45,
+    "formula_residual_spread": -0.03,
+    "formula_residual_total": -0.05,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -8.53,
+    "new_total": 233.45,
+    "delta_spread": -0.03,
+    "delta_total": -0.05,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "DAL@UTA",
+    "repo_line_spread_home": -7.5,
+    "repo_line_total": 221.7,
+    "recomputed_spread": -7.48,
+    "recomputed_total": 221.7,
+    "formula_residual_spread": 0.02,
+    "formula_residual_total": 0.0,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": true,
+    "repriced_teams": [
+     "UTA"
+    ],
+    "new_spread": -6.3,
+    "new_total": 220.35,
+    "delta_spread": 1.2,
+    "delta_total": -1.35,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "IND@NYK",
+    "repo_line_spread_home": 8.5,
+    "repo_line_total": 216.5,
+    "recomputed_spread": 8.5,
+    "recomputed_total": 216.54,
+    "formula_residual_spread": -0.0,
+    "formula_residual_total": 0.04,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": 8.5,
+    "new_total": 216.54,
+    "delta_spread": -0.0,
+    "delta_total": 0.04,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "date": "2026-11-22",
+    "matchup": "BOS@GSW",
+    "repo_line_spread_home": -10.1,
+    "repo_line_total": 217.9,
+    "recomputed_spread": -10.08,
+    "recomputed_total": 217.94,
+    "formula_residual_spread": 0.02,
+    "formula_residual_total": 0.04,
+    "formula_verdict": "PASS",
+    "repriced_with_official_ratings": false,
+    "repriced_teams": [],
+    "new_spread": -10.08,
+    "new_total": 217.94,
+    "delta_spread": 0.02,
+    "delta_total": 0.04,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   }
+  ],
+  "results_feed": [
+   {
+    "date": "2026-11-01",
+    "feed_rows": 4,
+    "official_games": 4,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-01"
+   },
+   {
+    "date": "2026-11-02",
+    "feed_rows": 15,
+    "official_games": 15,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-02"
+   },
+   {
+    "date": "2026-11-03",
+    "feed_rows": 0,
+    "official_games": 0,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-03"
+   },
+   {
+    "date": "2026-11-04",
+    "feed_rows": 14,
+    "official_games": 14,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-04"
+   },
+   {
+    "date": "2026-11-05",
+    "feed_rows": 2,
+    "official_games": 2,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-05"
+   },
+   {
+    "date": "2026-11-06",
+    "feed_rows": 9,
+    "official_games": 9,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-06"
+   },
+   {
+    "date": "2026-11-07",
+    "feed_rows": 7,
+    "official_games": 7,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-07"
+   },
+   {
+    "date": "2026-11-08",
+    "feed_rows": 7,
+    "official_games": 7,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-08"
+   },
+   {
+    "date": "2026-11-09",
+    "feed_rows": 8,
+    "official_games": 8,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-09"
+   },
+   {
+    "date": "2026-11-10",
+    "feed_rows": 6,
+    "official_games": 6,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-10"
+   },
+   {
+    "date": "2026-11-11",
+    "feed_rows": 10,
+    "official_games": 10,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   {
+    "date": "2026-11-12",
+    "feed_rows": 4,
+    "official_games": 4,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   {
+    "date": "2026-11-13",
+    "feed_rows": 9,
+    "official_games": 9,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   {
+    "date": "2026-11-14",
+    "feed_rows": 5,
+    "official_games": 5,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   {
+    "date": "2026-11-15",
+    "feed_rows": 9,
+    "official_games": 9,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   {
+    "date": "2026-11-16",
+    "feed_rows": 8,
+    "official_games": 8,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "date": "2026-11-17",
+    "feed_rows": 5,
+    "official_games": 5,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-17"
+   },
+   {
+    "date": "2026-11-18",
+    "feed_rows": 12,
+    "official_games": 12,
+    "verdict": "PASS",
+    "source_url": "https://www.nba.com/games?date=2026-11-18"
+   }
+  ]
+ }
+}
