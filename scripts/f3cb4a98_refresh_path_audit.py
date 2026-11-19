@@ -310,7 +310,24 @@ def audit():
             entry["required_by_gate"] and history == 0)
         rows.append(entry)
 
-    terminal = [r for r in rows if r["terminal_gate_requirement"]]
+    try:
+        register = read_json(os.path.join(RAW, "unreadable_sources.json"))
+    except (OSError, ValueError):
+        register = {}
+    declared = {}
+    for entry in (register.get("declarations") or []):
+        if isinstance(entry, dict) and isinstance(entry.get("source_key"), str):
+            declared[entry["source_key"]] = entry
+    for row in rows:
+        decl = declared.get(row["key"])
+        row["declared_unreadable"] = decl is not None
+        row["declaration_expires_at_utc"] = (decl or {}).get("expires_at_utc")
+        # A terminal requirement that a live, evidence-backed declaration
+        # covers is no longer terminal: the gate can now pass without it.
+        row["terminal_uncovered"] = bool(
+            row["terminal_gate_requirement"] and decl is None)
+
+    terminal = [r for r in rows if r["terminal_uncovered"]]
     unreadable = [r for r in rows if r["classification"] == "unreadable"]
     readable = [r for r in rows if r["classification"] == "readable"]
     return {
@@ -338,6 +355,10 @@ def audit():
             "readable": [r["key"] for r in readable],
             "unreadable": [r["key"] for r in unreadable],
             "terminal_gate_requirements": [r["key"] for r in terminal],
+            "terminal_now_covered_by_declaration": [
+                r["key"] for r in rows
+                if r["terminal_gate_requirement"] and r["declared_unreadable"]],
+            "declared_unreadable": sorted(declared),
             "rebuild_ever_ran": record.get("build_outcome") not in (None, "skipped"),
         },
         "sources": rows,
@@ -375,6 +396,12 @@ def render(payload):
         f"unreadable (shell proved)   : {', '.join(s['unreadable']) or '(none)'}",
         f"TERMINAL gate requirements  : {', '.join(s['terminal_gate_requirements']) or '(none)'}",
     ]
+    if s.get("terminal_now_covered_by_declaration"):
+        lines += [
+            "",
+            "Covered by a live declaration (gate no longer demands the snapshot):",
+            "  " + ", ".join(s["terminal_now_covered_by_declaration"]),
+        ]
     if s["terminal_gate_requirements"]:
         lines += [
             "",

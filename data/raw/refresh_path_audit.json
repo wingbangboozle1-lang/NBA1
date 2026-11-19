@@ -2,7 +2,7 @@
  "title": "Scheduled refresh publish-path audit",
  "built_by": "scripts/f3cb4a98_refresh_path_audit.py",
  "session": "arena/f3cb4a98-nba1",
- "built_at_utc": "2026-11-19T07:08:03Z",
+ "built_at_utc": "2026-11-19T07:10:24Z",
  "history_warning": null,
  "rule": "Every field is read from a committed file or from git history. No value is inferred. A gate requirement naming a snapshot with zero commits in history is classified terminal, because no scheduled run can ever satisfy it.",
  "run_record": {
@@ -29,7 +29,13 @@
    "S8_standings",
    "S9_team_traditional"
   ],
-  "terminal_gate_requirements": [
+  "terminal_gate_requirements": [],
+  "terminal_now_covered_by_declaration": [
+   "S10_team_opponent",
+   "S8_standings",
+   "S9_team_traditional"
+  ],
+  "declared_unreadable": [
    "S10_team_opponent",
    "S8_standings",
    "S9_team_traditional"
@@ -66,7 +72,10 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": true
+   "terminal_gate_requirement": true,
+   "declared_unreadable": true,
+   "declaration_expires_at_utc": "2026-12-19T00:00:00Z",
+   "terminal_uncovered": false
   },
   {
    "key": "S1_season",
@@ -96,7 +105,10 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": false
+   "terminal_gate_requirement": false,
+   "declared_unreadable": false,
+   "declaration_expires_at_utc": null,
+   "terminal_uncovered": false
   },
   {
    "key": "S2_train",
@@ -126,7 +138,10 @@
    "promoted_commits_in_history": null,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": false
+   "terminal_gate_requirement": false,
+   "declared_unreadable": false,
+   "declaration_expires_at_utc": null,
+   "terminal_uncovered": false
   },
   {
    "key": "S4_schedule",
@@ -155,7 +170,10 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "readable",
-   "terminal_gate_requirement": false
+   "terminal_gate_requirement": false,
+   "declared_unreadable": false,
+   "declaration_expires_at_utc": null,
+   "terminal_uncovered": false
   },
   {
    "key": "S5_injury_index",
@@ -182,7 +200,10 @@
    "promoted_commits_in_history": null,
    "promoted_history_error": null,
    "classification": "readable",
-   "terminal_gate_requirement": false
+   "terminal_gate_requirement": false,
+   "declared_unreadable": false,
+   "declaration_expires_at_utc": null,
+   "terminal_uncovered": false
   },
   {
    "key": "S7_players",
@@ -209,7 +230,10 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": false
+   "terminal_gate_requirement": false,
+   "declared_unreadable": false,
+   "declaration_expires_at_utc": null,
+   "terminal_uncovered": false
   },
   {
    "key": "S8_standings",
@@ -241,7 +265,10 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": true
+   "terminal_gate_requirement": true,
+   "declared_unreadable": true,
+   "declaration_expires_at_utc": "2026-12-19T00:00:00Z",
+   "terminal_uncovered": false
   },
   {
    "key": "S9_team_traditional",
@@ -272,10 +299,15 @@
    "promoted_commits_in_history": 0,
    "promoted_history_error": null,
    "classification": "unreadable",
-   "terminal_gate_requirement": true
+   "terminal_gate_requirement": true,
+   "declared_unreadable": true,
+   "declaration_expires_at_utc": "2026-12-19T00:00:00Z",
+   "terminal_uncovered": false
   }
  ],
  "gate_required_snapshots": {
+  "S1_season": "_capture_evidence_S1_season.json",
+  "S2_train": "_capture_evidence_S2_train.json",
   "S8_standings": "standings.json",
   "S9_team_traditional": "team_traditional.json",
   "S10_team_opponent": "team_opponent.json"
