@@ -1920,6 +1920,16 @@
    "detail": "This repo carries TWO different home-court measurements, and restoring 25 finals changed only one of them, so a reader can now meet two numbers that disagree. (a) The standings pin, published in the executive summary and in data/derived/measured_constants_2026_27.json, is measured from the official standings HOME/ROAD columns and is 0.5023 (111 of 221) -> **+0.09 points**. It did NOT change, because standings were not re-read this session. (b) The feed pin, the one R09 actually wires into the legacy reference line via engine/model_core.measured_hca_points reading data/hca_measured.json, is measured over data/raw/games_completed.json: with 74 finals 38-36 (0.5135) -> **+0.59 points**; with the 25 restored finals (9 home wins, 16 road wins) it is 47-52 (0.4747) -> **-1.10 points**. Neither number is hand-chosen and neither formula is wrong; they answer slightly different questions over slightly different corpora, and the feed one is now negative, which is unusual enough to need a decision rather than a silent publication. The initial version of this flag said the pin 'flips from +0.59 to -1.10' as if a single pin existed; that wording was corrected after reading the live page, which was still (correctly) showing +0.09. Decision needed: pick ONE home-court source of record, state which, and make the other a cross-check that must agree within a tolerance or raise.",
    "source": "S74_HCA",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/hca_measured.json"
+  },
+  {
+   "id": "F-54B-01",
+   "severity": "Medium",
+   "title": "The refresh-path audit counted git history with bare filenames (always 0) and its JSON was stale at publish time",
+   "detail": "scripts/f3cb4a98_refresh_path_audit.py called `git log -- <bare filename>` from the repository root, so every history count read 0 for files that live under data/raw/ - `terminal_gate_requirement` therefore degenerated to `required_by_gate` and would have called ANY required-but-present snapshot 'terminal' the moment one was missing from a checkout. The published data/raw/refresh_path_audit.json (and the site's refresh-path page built from it) was also stale: built 2026-11-19T07:22:45Z by arena/f3cb4a98-nba1, it still showed three declared sources after arena/cdf3a108-nba1's register extended S1_season and S2_train. Fixed in this PR (arena/54bd21d2-nba1, section 79): repo-relative paths, a terminal-capture-requirement classification for never-produced capture files (S1_season/S2_train), and the audit regenerated from the current register. Open until a reviewer confirms the live refresh-path page shows five declared sources and truthful per-source history counts.",
+   "affected": "site/pages/refresh-path.html (data/raw/refresh_path_audit.json)",
+   "source": "git history measurement in session arena/54bd21d2-nba1 (section 79): git log --all -- data/raw/_capture_S1_season.json = 0 commits across 943; data/raw/refresh_path_audit.json built_at_utc 2026-11-19T07:22:45Z while data/raw/unreadable_sources.json already declared five sources",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/f3cb4a98_refresh_path_audit.py",
+   "suggested_action": "Re-run python3 scripts/f3cb4a98_refresh_path_audit.py after any register change and rebuild the dashboard; both are done in this PR."
   }
  ]
 }

@@ -143,6 +143,14 @@ jobs:
                   print(f"::warning title=Gate passed by declaration::"
                         f"{entry['source_key']} unreadable until "
                         f"{entry['expires_at_utc']} (evidence {entry['evidence']})")
+              # Gate warnings are part of the decision, not decoration
+              # (COORDINATION.md §78, arena/54bd21d2-nba1): the advanced-
+              # input age printed by engine/refresh_gate.py's declared
+              # branch must be visible in EVERY run log, so a green gate
+              # built on a stale consumed snapshot cannot read like a green
+              # gate built on fresh data.
+              for warning in d.get("warnings", []):
+                  print(f"::warning title=Gate warning::{warning}")
           PY
           exit 0
 

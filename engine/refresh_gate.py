@@ -425,10 +425,28 @@ def evaluate_with_report(record: dict, now: dt.datetime,
     # gate report rather than passed over silently (cdf3a108). The comparison
     # still applies to every non-declared source.
     if "S1_season" in declared:
-        warnings.append("advanced team comparison skipped by live declaration "
-                        "(S1_season unreadable); data/raw/team_advanced.json "
-                        "stays at its last verified promotion and is published "
-                        "as stale")
+        # The staleness the declaration leaves behind is published with its
+        # MEASURED size (§78, arena/54bd21d2-nba1, additive amendment to
+        # cdf3a108's branch): the gate reads the consumed snapshot itself and
+        # reports how old it is, so "published as stale" carries a number a
+        # reviewer can judge. And a declared source never excuses the
+        # CONSUMED file: if data/raw/team_advanced.json is missing or
+        # unreadable, engine/pipeline.py would crash on it a step later — the
+        # gate fails closed here instead, with the reason.
+        try:
+            adv_snapshot = read_json(os.path.join(base, "data/raw/team_advanced.json"))
+            stamp = parse_utc(adv_snapshot.get("captured_at_utc"))
+            age_days = (run_time - stamp).total_seconds() / 86400.0
+            warnings.append("advanced team comparison skipped by live declaration "
+                            "(S1_season unreadable); data/raw/team_advanced.json "
+                            "stays at its last verified promotion and is published "
+                            f"as stale (promoted "
+                            f"{adv_snapshot.get('captured_at_utc')}, {age_days:.1f} "
+                            "days before this run; engine/pipeline.py consumes it)")
+        except (OSError, ValueError, TypeError):
+            errors.append("S1_season is declared but the consumed advanced "
+                          "snapshot data/raw/team_advanced.json is missing or "
+                          "unreadable - the rebuild would fail on it")
     else:
         try:
             adv_capture = read_json(os.path.join(base, "data/raw/_capture_S1_season.json"))
