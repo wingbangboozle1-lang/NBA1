@@ -11659,7 +11659,7 @@ None. Every published value traces to an official NBA source (nba.com, official.
 ### Handoff
 This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd746` with no uncommitted changes. All verification gates pass. Ready for integration: create PR from this branch to `main`, merge, confirm GitHub Pages deploys successfully.
 
-## 72. ACTIVE CLAIM — session `arena/d2a412c8-nba1` — reproducible row-level official-source audit (claimed 2026-11-19 07:00 UTC)
+## 73. ACTIVE CLAIM — session `arena/d2a412c8-nba1` — reproducible row-level official-source audit (claimed 2026-11-19 07:00 UTC)
 
 **Task.** Close an auditability gap in the publication checks without editing shared model data or generated site pages: enumerate actual static HTML table rows that do not carry a direct HTTPS NBA source link, distinguish those from JavaScript template markup, and write a line-numbered review artifact. An NBA link in a row is evidence of a link only; this task will not claim the row's value was fetched or verified. Rows without a verifiable NBA source remain explicitly unverified; no URL or value will be inferred.
 
@@ -11667,13 +11667,13 @@ This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd7
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| Produce a reproducible audit of static table rows and dynamic-template rows, with exact file/line, link classification, and no invented sources | in progress | `arena/d2a412c8-nba1` | `scripts/source_row_audit.py`, `scripts/audit_source_rows.py`, `scripts/test_source_row_audit.py`, `scripts/verify_integration.py`, `audit/source_row_audit_2026-11-19_d2a412c8.{json,md}`, this board |
+| Produce a reproducible audit of static table rows and dynamic-template rows, with exact file/line, link classification, and no invented sources | done | `arena/d2a412c8-nba1` | `scripts/source_row_audit.py`, `scripts/audit_source_rows.py`, `scripts/test_source_row_audit.py`, `scripts/verify_integration.py`, `audit/source_row_audit_2026-11-19_d2a412c8.{json,md}`, this board |
 
 **Merge-conflict record.** After the claim commit was pushed, `origin/main` advanced from `9cbdd74` to `c132a9e` via PR #183 (`arena/cd06f005-nba1`). `git merge origin/main` produced one content conflict at the end of this shared board only. Resolved by retaining the full §71 integration-seat record from `origin/main` and this §72 claim verbatim; no implementation or other session record was discarded. The first independent run of the pre-change `scripts/verify_integration.py` on the common tree reports 44 warnings and counts 9,050/9,595 rows with an official NBA link; the 9,595 denominator includes 10 `<tr>` templates inside scripts. The final scan below separates those templates from actual static rows (9,585) and retains unresolved rows as review items. Neither count is a claim that browser-rendered values were checked.
 
 **Scope boundary.** The report is an audit artifact, not a site/data promotion. Publishing it into `site/pages/flagged.html` or any shared navigation/data register is deliberately not in this scope; the integration seat must do that after outstanding claims have landed. No external NBA URL is fetched by the row scanner.
 
-### 72.1 Delivery — reproducible audit and remaining integration request (2026-11-19 07:11 UTC)
+### 73.1 Delivery — reproducible audit and remaining integration request (2026-11-19 07:14 UTC)
 
 **Completed in the claimed scope.** Added the pure scanner `scripts/source_row_audit.py`, CLI `scripts/audit_source_rows.py`, eight unit tests, and a JSON + Markdown snapshot with line-numbered rows and per-HTML SHA-256 hashes. The scanner accepts only HTTPS `nba.com` or subdomain links as an official NBA link; a matching link is explicitly **not** treated as proof of reachability or value accuracy. It performs no network requests, fills no links, and changes no published NBA value. `scripts/verify_integration.py` I4 now checks static rows with that rule, prints file + line + a text excerpt for findings, and excludes script-template markup from the static count while reporting the number of templates separately. Its final message no longer claims every warning is already on the Flagged page.
 
@@ -11694,3 +11694,7 @@ This session's claim is complete. The branch `arena/cd06f005-nba1` is at `9cbdd7
 **Cross-scope request (logged, not executed).** After PR #181 and the active official-capture claims finish, the final integration seat should add the audit report to the site's **Flagged for Review** surface, keep each unresolved row blank/unverified until a human or automated official comparison supports it, and add rendered-DOM official-host checking for the ten dynamic templates. Do not mark the 535 rows verified merely because a repo/GitHub link exists. Requests for manual source re-check can use the repository's official endpoint references: https://www.nba.com/schedule , https://www.nba.com/games , https://www.nba.com/standings , https://www.nba.com/stats/teams/advanced , https://www.nba.com/stats/teams/traditional , https://www.nba.com/stats/teams/opponent , and https://official.nba.com/nba-injury-report-2026-27-season/ . These links were not fetched by this audit.
 
 The source-row-audit task itself is **done**. No shared site page, navigation, source-data snapshot, ledger, or register was changed. The Flagged-page publication request remains open for the integration seat.
+
+### 73.2 Parallel-board numbering collision (2026-11-19 07:14 UTC)
+
+After this task's commit, `gh pr list --state open` showed PR #184 (`arena/d66245d4-nba1`), whose title/claim uses §72 for independent horizon verification. Its changed-file list does not include `scripts/source_row_audit.py`, `scripts/audit_source_rows.py`, `scripts/test_source_row_audit.py` or `scripts/verify_integration.py`; the only common path is the shared board. To avoid duplicate section IDs, this audit record is renumbered §73. The board merge remains append-only; no PR #184 files were edited.
