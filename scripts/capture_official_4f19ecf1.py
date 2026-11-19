@@ -319,10 +319,26 @@ def probe_clock_grid():
     # own recorded outcome; 5 workers keep wall time bounded when the CDN is
     # slow (measured 2026-11-19T06:48Z on this repo's runner: sequential probes
     # averaged ~50 s each) while staying far below any page-level request rate.
-    from concurrent.futures import ThreadPoolExecutor
+    # Hard wall-clock cap on the probe pool: the CDN can "slow-drip" a response
+    # past urllib socket timeouts (observed 2026-11-19: one probe >3 min), so
+    # bound the whole window and abandon stragglers; their threads die with the
+    # process. Storage happens inside _probe_edition, so anything finished
+    # before the cap is already on disk.
+    from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FutTimeout
     with ThreadPoolExecutor(max_workers=5) as pool:
-        for rec in pool.map(_probe_edition, todo):
-            results.append(rec)
+        futs = {pool.submit(_probe_edition, lbl): lbl for lbl in todo}
+        done, pending = set(), set(futs)
+        try:
+            for fut in as_completed(futs, timeout=150):
+                results.append(fut.result())
+                done.add(fut)
+        except FutTimeout:
+            pass
+        for fut in futs:
+            if fut in done:
+                continue
+            fut.cancel()
+            results.append({"label": futs[fut], "outcome": "probe_timeout(abandoned)"})
     return results
 
 
