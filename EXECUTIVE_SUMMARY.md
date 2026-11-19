@@ -1,6 +1,6 @@
 # Executive summary — NBA1 line origination and strategy lab
 
-**As of** 2026-11-16 (UTC) · **Sessions** `arena/934ca56f-nba1` (original), `arena/dfef26dc-nba1`
+**As of** 2026-11-19 (UTC) · **Sessions** `arena/934ca56f-nba1` (original), `arena/929395a5-nba1`
 (this update) · **Live site** <https://wingbangboozle1-lang.github.io/NBA1/>
 
 This document states what the system does, what it has actually established, what it has
@@ -10,6 +10,42 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
+## 0b. Update — 2026-11-19T05:45Z, session `arena/929395a5-nba1` (read this first)
+
+**11/17 and 11/18 are settled, and the horizon has rolled to 11/19–11/22.** Every other
+section of this document that describes 11/17 or 11/18 as pending is superseded by this
+one, and by the data files that now carry the later observation.
+
+| Item | Was | Is now | Official source |
+| --- | --- | --- | --- |
+| 11/17 games final | 0 of 5 at the 11/17 capture | **5 of 5** | <https://www.nba.com/games?date=2026-11-17> |
+| 11/17 finals | — | **NYK 111–TOR 102, DET 105–SAS 93, POR 105–MIN 106, UTA 132–LAC 107, CHA 114–LAL 118 (OT)** | [game pages](https://www.nba.com/game/cha-vs-lal-0022600256) |
+| 11/18 games final | 0 of 12 at the 11/17 capture | **12 of 12** | <https://www.nba.com/games?date=2026-11-18> |
+| 11/18 finals | — | **HOU 119–IND 104, PHI 121–ORL 116, MIL 130–MIA 137, MEM 124–CLE 121, CHI 137–BKN 107, WAS 103–TOR 99, DET 122–NOP 109, ATL 117–OKC 112, BOS 101–DEN 105, GSW 94–DAL 116, UTA 109–LAL 97, PHX 128–SAC 107** | [game pages](https://www.nba.com/game/uta-vs-lal-0022600268) |
+| 11/17 settlement | refused (0 final) | **SETTLED**, record **1-4-0** singles, **0/3** parlays, **−6.7u** paper at −110 | `data/settlement/settlement_2026-11-17.json` |
+| 11/18 settlement | refused (0 final) | **SETTLED**, record **4-8-0** singles, **0/3** parlays, **−8.1u** paper at −110 | `data/settlement/settlement_2026-11-18.json` |
+| Results feed | 205 of 222 final | **222 of 222 final**, quarter-sum failures `[]` | `data/official/results_feed_2026_27.json` |
+| Ledger | 12 entries | **17 entries**, chain verified OK | `python3 scripts/verify_ledger.py` |
+| Horizon | 2026-11-17 to 2026-11-20 (30 games) | **2026-11-19 to 2026-11-22 (26 games)** | [schedule](https://www.nba.com/schedule?date=2026-11-19) |
+| Home-court pin | 0.83 points (0.5196, 106 of 204) | **0.09 points (0.5023, 111 of 221)** | [standings](https://www.nba.com/standings) |
+| Pre-tip freeze | 2026-11-17T15:54Z | **2026-11-19T05:45Z**, 19+ hours before the first tip (2026-11-20T01:00Z) | `data/ledger/ledger.json` entry 17 |
+
+**Four irregularities were found by reading the official pages, not by a gate.** All gates
+were green while all four were live.
+
+| Finding | What it was | Status |
+| --- | --- | --- |
+| **F-929-01** | The advanced/traditional/opponent team tables are one game behind the standings for LAL and UTA (missing 11/18 UTA 109 @ LAL 97). The recut records gates G3/G4 as FAIL rather than repairing the tables. | Open; lines for PHX@UTA and SAC@LAL on 11/20 inherit the lag. [source](https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season) |
+| **F-929-02** | The 11/20 and 11/22 date pages print stale UTA 2-13 / LAL 13-2 records. | Open; the capture records the printed records verbatim and names the standings as the record of record. [source](https://www.nba.com/games?date=2026-11-20) |
+| **F-929-03** | The 11/19 12:30 AM ET injury PDF text render has blank-matchup rows (Kuminga, Pullin) and a garbled 11/20 block. | Open; garbled rows recorded as NOT YET SUBMITTED per the printed text; no row invented or dropped. [source](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_12_30AM.pdf) |
+| **F-929-04** | LAL and UTA both played back-to-back on 11/17 and 11/18. | Open (informational); the rest model reads the finals corpus, so both show rest_days=0. [source](https://www.nba.com/games?date=2026-11-18) |
+
+**What is still not true, and is not being claimed:** no strategy is funded; no market price
+exists anywhere in this repository, so every unit figure is a paper figure at a stated −110
+convention; the LAL/UTA ratings are one game stale (F-929-01); and the 11/20 injury rows
+beyond ORL@BKN are garbled in the render (F-929-03).
+
+---
 ## 0a. Update — 2026-11-16T14:40–15:20Z, session `arena/23b323a3-nba1` (read this first)
 
 **The 2026-11-15 slate is complete and settled.** Every other section of this document that
