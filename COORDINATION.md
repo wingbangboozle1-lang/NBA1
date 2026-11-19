@@ -11425,9 +11425,9 @@ made** (ground rule 3).
 | Q01 board read + claim | **done** | Claim committed and pushed as `2802325` before any other edit; branch then rebased onto `71d6dfc` and re-based again onto `9a6bfd1` (PRs #170/#171/#172 landed underneath this seat). No file of another session was edited to make that rebases work: `COORDINATION.md` was resolved by keeping main's board verbatim and re-inserting this seat's banner, registry row and section (renumbered §67 → **§68** because §66/§67 were taken while the claim was in flight). |
 | Q02 runner capture | **first run measured, second run armed** | See the claim amendment above: run 44467755122 exited 0 having fetched nothing, for two silent reasons, now fixed and pinned by tests. The second run also stores the official **game page** bytes beside every gamebook, so each of the 17 games has two independent official reads (gamebook + game page) rather than one. |
 | Q03 promote + diff the injury chain | **scope narrowed by #173** | `data/raw/injuries.json` is on PR #173's branch (`engine/promote_official.py` + the injuries pointer). This seat therefore writes **no** pointer file and **no** `engine/**` change; it appends the recovered PDFs to `data/raw/injury_pdfs/**` (append-only, new names only) and puts its verified edition index + promoted-pointer proposal in `data/official/injury_editions_2026-11-19_e3d25abc.json`, with the adoption request logged in §68.4. |
-| Q04 gamebooks → per-player logs | **in progress** | No other session touched `data/official/gamebooks/**` or `data/official/player_game_logs_*`; 11/17 and 11/18 have no book in the repo at all, so this is pure gap-filling. |
-| Q05 rotation / minutes / game-flow re-cut | **namespaced** | `data/derived/rotation_2026_27.json`, `injury_impact.json` and `minutes_shares.json` are consumed by the roll owner's builders; this seat publishes beside them (`*_2026-11-19_e3d25abc.json`) and asks the next site seat to render from them. |
-| Q06 line-by-line verification | **in progress** | Cross-checked against PR #174's independent 17-game read once their board record lands; disagreement would be published, not averaged. |
+| Q04 gamebooks → per-player logs | **done** | No other session touched `data/official/gamebooks/**` or `data/official/player_game_logs_*`; 11/17 and 11/18 have no book in the repo at all, so this is pure gap-filling. |
+| Q05 rotation / minutes / game-flow re-cut | **done (namespaced)** | `data/derived/rotation_2026_27.json`, `injury_impact.json` and `minutes_shares.json` are consumed by the roll owner's builders; this seat publishes beside them (`*_2026-11-19_e3d25abc.json`) and asks the next site seat to render from them. |
+| Q06 line-by-line verification | **done** | Cross-checked against PR #174's independent 17-game read once their board record lands; disagreement would be published, not averaged. |
 | Q07 cross-scope requests | **done** (see §68.4) | |
 | Q08 integration | **sequenced** | This seat will not race another open PR for `site/**`. It merges only onto a `main` whose shared surfaces are free, and if #173/#174 are still open it PRs only its own namespaced files. |
 
@@ -11440,3 +11440,85 @@ made** (ground rule 3).
 | X3 | next owner of `site/pages/rotation.html` / `player-logs.html` | Render the 11/17 + 11/18 gamebook-derived logs and the minutes-redistribution re-cut; both were empty for those two game days before this seat. | `data/official/player_game_logs_2026-11-17.json`, `…_2026-11-18.json`, `data/derived/rotation_2026-11-19_e3d25abc.json` |
 | X4 | owner of `data/content/flagged.json` | F-CA-07's *currency* half can move to resolved-with-evidence when a scheduled run is observed promoting a byte-exact edition; until then it should stay open with this seat's numbers cited. This seat does not edit that register. | §68.3 Q02/Q03 rows + `verify/2026-11-19-e3d25abc/report.md` |
 | X5 | the roll owner | `data/derived/horizon_lines.json` for 11/17 was priced off a text render, which is why the board's own handover note says the roll page printed 0 out-players for that day; the recovered archive now has byte-exact 11/17 editions, so a re-cut of that window's availability is possible without any new fetch. | the recovered 11/17 PDFs + their diffs |
+| X6 | owner of `engine/promote_official.py` / the scheduled refresh (currently `arena/9ff20954-nba1`'s §71 surface) | Let the next refresh run promote the **newest archived edition** so `data/raw/injuries.json` stops pointing at 2026-11-17 11:30 AM ET while 2026-11-19 12:45 AM ET is already on disk and digest-verified. This seat deliberately did not hand-edit that pointer: its `verified_by` stamp has to come from an engine run. | `data/official/injury_editions_2026-11-19_e3d25abc.json` (`newest_verified_edition` = `Injury-Report_2026-11-19_12_45AM`, 87,302 bytes, `91002377…`); the archived 11/17 11:30 AM file this seat holds re-hashes to exactly the digest main's pointer already publishes, so the promotion path is proven, not assumed |
+| X7 | next owner of `scripts/build_results_page.py` / `site/pages/rotation.html` | `player_logs_page()` renders only `cands[-1]`, so the log page shows one game day (now 2026-11-18) even though 11/15–11/18 are all captured. Requested: iterate every `player_game_logs_*.json`, or state on the page which single day it is. Not done here because it is another seat's builder and this seat's edits were limited to what a failing build required. | four log files present, 11/15 (304 rows), 11/16 (207), 11/17 (126), 11/18 (311) |
+
+### 68.5 Delivery record (2026-11-19, ~06:2x UTC) — every number below is a file measurement, not a plan
+
+**Q02 capture (run 44468266677, `completed`/`success`).** Manifest: `run_at_utc 2026-11-19T05:53:49Z`;
+injury index 200 editions listed, 4 for the day, newest `Injury-Report_2026-11-19_12_45AM.pdf`;
+`per_day_counts {"2026-11-19": 4}`; **17 gamebooks, all with a `sha256`**; 11/17 5/5 Final,
+11/18 12/12 Final; `failures: 0`. The manifest is real because the two silent-green bugs found in
+the first run (case-sensitive `Final`, non-dashed date filter) are fixed and pinned by
+`scripts/test_e3d25abc_capture_parse.py` (12 tests).
+
+**Q03 injury archive + chain.** `data/raw/injury_pdfs/` holds **154 PDFs / 152 distinct editions**
+(11/15 ×83, 11/16 ×17, 11/17 ×20, 11/18 ×30, 11/19 ×4), 40 recovered from the four
+`origin/auto/refresh-*` refs and 4 fresh. `engine/injury_diff.py` parsed **154 editions with no
+row disagreement between its two readers**, producing 154 `editions/*.json` and **153 consecutive
+`diff_*.json`**. `scripts/e3d25abc_verify_archive.py` re-reads **every** archived PDF: 154 files
+audited, **154 clean, 0 problems** — recomputed SHA-256 == filename digest == sidecar digest,
+`%PDF-` signature, byte count, a retrieval stamp, an official host, and sidecar-vs-filename
+edition agreement. Two findings are published, not deleted: 2 duplicated-edition files on 11/15
+(byte-identical, one full-digest and one 16-hex name) and the 2 self-to-self diffs they create.
+Coverage gaps are recorded per day (11/15 12 missing 15-min slots, 11/16 16, 11/17 16,
+11/18 23, 11/19 0) — the index only lists the current day, so those slots cannot be backfilled
+and no file was invented for them.
+
+**Main's pointer, independently verified.** #173 merged while this seat worked, so
+`data/raw/injuries.json` now carries `verification.source_sha256 = bf499901…20ea3`. This seat
+re-hashed the archived bytes named by that pointer —
+`Injury-Report_2026-11-17_11_30AM__bf4999….pdf`, 90,115 bytes — and the digest **matches**, so the
+byte-exactness half of F-9FF-01 is closed with evidence from a second seat. What remains open is
+*currency*: the promoted pointer names an 11/17 11:30 AM ET edition while this archive already
+holds 11/19 12:45 AM ET (`91002377…`). This seat does **not** hand-edit that pointer — a
+`verified_by: engine/promote_official.py` stamp must come from an engine run, not from a hand — and
+instead logs X6 below.
+
+**Q04 per-player logs (`data/official/player_game_logs_2026-11-17.json`, `…_2026-11-18.json`).**
+The stored `__NEXT_DATA__` game document turned out to carry no `boxScores`/`linescore` key, so the
+logs come from `props.pageProps.game.{awayTeam,homeTeam}.players`. **437 player rows** over
+**17 games** (126 + 311), 387 who appeared and 50 kept as `played: false` rows with the page's own
+DNP/DND comment — never dropped. Per team, the parsed points must equal the printed final and the
+parsed minutes must lie within half a second per player of 240:00 (+25:00 per OT); **0 assertion
+failures**. The capture stored **two** byte-distinct captures of every game (two scheduled runs);
+both are parsed and compared — **17/17 agree in their box scores**, so the second read is published
+as confirmation rather than double-counted (the first version of this script did double-count, and
+the doubled row counts were the tell). Cross-checked against the settlement seat's
+`data/official/results_2026-11-17.json` / `…_18.json`: **17 of 17 games agree on the score and on
+every quarter** (`verify/2026-11-19-e3d25abc/game-logs.md`).
+
+**Q04 availability column (`data/derived/availability_2026-11-17_18_e3d25abc.json`).** For each
+day, the *latest archived edition named for that day* (11/17 06:00 PM, 11/18 05:45 PM ET) is joined
+by name+team to that day's box score: 172 report rows for those two game dates, **136 out /
+not-available declarations, all 136 absent from the floor — 0 contradictions**, 17 cleared-and-played,
+and **3 cleared-but-sat** (TOR `McCullar`, NOP `Dia`, `Reese`) recorded as a coach's decision, not a
+contradiction, because an availability line promises eligibility and not minutes. 11/17's report
+covers **9 of the 10 teams** that played.
+
+**Q05 re-cuts, all namespaced.** `data/derived/rotation_2026-11-19_e3d25abc.json` — 34 team-games
+with players-used, top-8 share, five-most-minutes share and the DNP/inactive list;
+`data/derived/game_flow_2026-11-19_e3d25abc.json` — 17 games of quarter lines, halves,
+largest quarter margin, sign flips, OT count and attendance/arena/officials, all from the same
+stored page (quarter scores also published in
+`data/official/game_quarters_2026-11-17_18_e3d25abc.json`);
+`data/derived/minutes_redistribution_2026-11-19_e3d25abc.json` — **382 one-player-out scenarios**
+whose recipients are weighted by the minutes those teammates actually played in that same game (no
+constant, no league average), plus **12 measured absence-vs-production contrasts** (e.g. DET
+`Cunningham`: 37:30 / 27-5-6 on 11/17, DNP-coach's decision on 11/18) and the forward table for the
+11/19 slate. 341 players and 14 next-slate out-names have no second archived day, so their delta is
+**blank with the reason printed** — the honest answer for a two-day window, and it is stated in
+`window_limits.why_so_few_measured` rather than papered over with an estimate.
+
+**Q07/Q08 gates and integration.** `python3 scripts/verify_all.py` → **VERIFY OK** (builders,
+checker, data audits) after this branch merged `origin/main` (`6ddade2`, PRs #173–#178) with
+`COORDINATION.md` as its only conflict, resolved by keeping main's sections verbatim and
+re-appending §68. `scripts/check_links.py` → **RESULT: PASS**. Two integration-seat edits came out
+of making the merged site build, both logged here because they touch another seat's file:
+(1) `scripts/build_results_page.py` now falls back to a date-free `coverage.players_on_report` key,
+because its two hard-coded 11/15–11/16 edition keys rendered "None players named" against the new
+log files; (2) the new log files publish that builder's whole expected schema
+(`coverage`, `source_name`, `retrieved_utc`, `minutes_check`, `games[].checks`, per-row stat
+aliases) beside their own provenance, so `player-logs.html` renders 11/18 instead of failing the
+build. `site/**` was regenerated from the merged tree (28 pages) — no page is published that the
+merged data cannot render.

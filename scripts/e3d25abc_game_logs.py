@@ -331,6 +331,9 @@ def main() -> int:
             if gb:
                 gbytes = open(gb[0], "rb").read()
                 rec["sources"]["official_gamebook_pdf"] = os.path.relpath(gb[0], ROOT).replace(os.sep, "/")
+                rec["sources"]["gamebook_url"] = (
+                    "https://statsdmz.nba.com/pdfs/%s/%s_%s%s_book.pdf"
+                    % (d.replace("-", ""), d.replace("-", ""), rec["away"], rec["home"]))
                 rec["sources"]["official_gamebook_sha256"] = hashlib.sha256(gbytes).hexdigest()
                 rec["sources"]["official_gamebook_bytes"] = len(gbytes)
             else:
@@ -448,7 +451,17 @@ def site_compat(day, rows, games, names, editions):
             return f"{last.strip().lower()}|{first.strip().split()[0].lower()}"
         return n
     name_keys = {key(n) for n in names}
+    src = {g["game_id"]: g["sources"] for g in games}
     for r in rows:
+        g0 = src.get(r["game_id"], {})
+        # the site's log table links every row to its source document; the PDF is
+        # the archived official gamebook, the page is the stored game page.
+        r["source_pdf"] = g0.get("gamebook_url") or g0.get("game_page")
+        r["source_gamebook_url"] = g0.get("gamebook_url")
+        r["source_text"] = g0.get("official_gamebook_pdf")  # committed archive copy
+        r["source_sha256"] = g0.get("official_gamebook_sha256")
+        r["source_page_sha256"] = g0.get("game_page_sha256_of_uncompressed_bytes")
+        r["dnp_note"] = r.get("comment")
         r["min"] = r["minutes"]
         r["pts"] = r["points"]
         r["reb"] = r["rebounds"]
@@ -498,8 +511,12 @@ def site_compat(day, rows, games, names, editions):
                      "residual is reported, not corrected.")},
         "games": [{"date": g["date"], "game_id": g["game_id"], "away": g["away"],
                    "home": g["home"], "matchup": f"{g['away']}@{g['home']}",
-                   "source_pdf": g["sources"]["official_gamebook_pdf"],
+                   # hrefs on the published page must resolve, so the linked value
+                   # is the league's own document URL; the committed archive copy
+                   # (which is what was hashed and parsed) is named beside it.
+                   "source_pdf": g["sources"].get("gamebook_url") or g["sources"]["game_page"],
                    "source_page": g["sources"]["game_page"],
+                   "source_archive": g["sources"]["official_gamebook_pdf"],
                    "gamebook_sha256": g["sources"].get("official_gamebook_sha256"),
                    "players_parsed": sum(1 for r in rows if r["game_id"] == g["game_id"]),
                    "played": sum(1 for r in rows if r["game_id"] == g["game_id"] and r["played"]),

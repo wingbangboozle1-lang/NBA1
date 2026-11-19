@@ -1,6 +1,6 @@
 # Explicit top-8 minutes redistribution — 2026-11-17 / 11-18
 
-Built by `scripts/e3d25abc_redistribution.py` (§68 Q05) at 2026-11-19T06:09:49Z.
+Built by `scripts/e3d25abc_redistribution.py` (§68 Q05) at 2026-11-19T06:12:18Z.
 
 * 34 team-games, **382 one-player-out scenarios**, each sized from that game's own minutes (recipients weighted by the minutes they actually played), with `top8_share_before` / `top8_share_after` printed beside it
 * **12** measured absence-vs-production contrasts exist in the archived window; 341 player(s) appear on only one of the two days and are left blank with the reason, not filled
