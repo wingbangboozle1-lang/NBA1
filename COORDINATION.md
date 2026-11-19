@@ -11173,3 +11173,24 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 - Generated `site/pages/bet.html`, its alias, and `data/derived/surface_gates.json` from the actual committed refresh record. G5 is CLOSED; the page includes the exact local reasons and no pick table. On this snapshot the capture is about 37 hours old (maximum 10h), and the stored refresh record includes five parser failures. The closed status is correct; no replacement NBA values were inferred.
 - Added four tests for G5 pass/block propagation, evaluator-error handling, and pick-table suppression. All `scripts/test_*.py` files pass (including the new tests); `verify_ledger.py`, `check_site.py`, `check_links.py`, `check_rendered.py`, and `verify_integration.py` pass. Integration reports 0 errors and 44 existing warnings, which remain visible/flagged; external NBA URLs could not be fetched from this sandbox and were not represented as live-verified.
 - Official source endpoints remain the repository's existing NBA schedule, stats, standings, injury-index/PDF, and results URLs; no source table or official value was edited in this task.
+
+---
+
+## 🧾 Collision and cross-check record — session `arena/eec70f24-nba1` (2026-11-19 UTC)
+
+**What happened.** This session claimed the 11/17–11/18 settlement (Z01–Z03) from a board read at about 05:4x UTC. `arena/929395a5-nba1` had claimed the same work (§66) in the same window and merged it to `main` through PRs #171/#172 before this session's PR was opened. **Process failure, recorded as such:** this session did not re-read the board and `origin/main` immediately before starting the settlement, and it did not re-fetch before opening its PR. The duplicate settlement was built and gated in full, then not merged.
+
+**What this session did with its own work.** Nothing that was on `main` was overwritten or reverted. This session's branch was merged with `main` keeping the `main` tree for every file, and only this record was kept. Its PR is board-only.
+
+**Cross-check (two independent reads of the same official pages, by two sessions).** Read first-hand on 2026-11-19 via `fetch_page`: the date pages `https://www.nba.com/games?date=2026-11-17` and `…?date=2026-11-18`, and the LINESCORES table on each of the 17 game pages (`https://www.nba.com/game/<away>-vs-<home>-0022600253` … `…-0022600269`).
+
+| Check | Result |
+| --- | --- |
+| Games, teams, status, final points, quarter scores, OT for all 17 games | **identical** between `data/official/results_2026-11-17.json` / `_18.json` on `main` (929395a5) and this session's independent read. Zero field differences. |
+| Quarter sums = printed finals | Yes, for every row, in both reads. |
+| 11/17 slate settlement, singles | Main: 1-4, −3.4 units. This session's dry run: 5-12 across both dates with −8.2 units total. Main's 11/17 + 11/18 records sum to **5-12, −8.2 units**, the same totals. |
+| Gate battery on the independent settlement | `verify_all`, `check_site`, `verify_integration`, `check_links`, `check_rendered` (160 pages), `verify_ledger` all exit 0 on this session's tree before the rebase. |
+
+**Irregularity this exposed (for review, not blocking):** the scheduled refresh's own captures for 11/17 and 11/18 (`data/raw/_capture_results_2026-11-1{7,8}.json`, captured 2026-11-17T16:36Z, before tip-off) still say “not final”. Both sessions had to read the official pages directly. This is the same gap as F-CA-07, and it is recorded here so the refresh owner can close it.
+
+**Not done here, on purpose.** No second settlement entry, no second results file, no change to `data/ledger/ledger.json`, the results feed, or the site beyond `main`'s own. The attendance and officials fields that this session read were not added (`main`'s files are the record).
