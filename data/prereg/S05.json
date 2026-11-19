@@ -8,7 +8,7 @@
   "selection": "season_avg - 0.5",
   "prob_over_min": 0.5
  },
- "universe": "all 30 games on the official 2026-11-17 .. 2026-11-20 slate (data/raw/official_schedule_capture_2026-11-17.json: 2026-11-17=5, 2026-11-18=12, 2026-11-19=4, 2026-11-20=9); source file data/raw/official_schedule_capture_2026-11-17.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
+ "universe": "all 26 games on the official 2026-11-19 .. 2026-11-22 slate (data/raw/official_schedule_capture_2026-11-19.json: 2026-11-19=4, 2026-11-20=9, 2026-11-21=6, 2026-11-22=7); source file data/raw/official_schedule_capture_2026-11-19.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
  "exact_settlement_rule": "Settle from the official box-score points row for that player in that game (Over wins if pts > line; ties at .5 impossible with the half-line). Player inactive = VOID leg. Price: -110 paper convention.",
  "price_status": "No licensed two-sided price exists (no odds feed; F-W07). Spread/total tickets settle on the repo's paper -110 convention (stake 1.10 to win 1.00). Moneyline strategies record W/L only; unit ROI stays blank until a price exists. SGP tickets settle at the model's published joint_prob_rho as fair price.",
  "validation_gates": {
@@ -22,22 +22,22 @@
   "status_2026_11_15": "NO strategy has passed (Build A 0/8, Build B 0/10). All tickets are MODEL OUTPUT — UNVALIDATED, unfunded, zero stake."
  },
  "definition_ref": "data/derived/horizon_picks.json sgp_candidates[] leg construction",
- "frozen_at_utc": "2026-11-17T15:54Z",
+ "frozen_at_utc": "2026-11-19T05:45Z",
  "frozen_by": "arena/161f1638-nba1",
- "slate_window": "2026-11-17 .. 2026-11-20",
- "games_in_universe": 30,
- "first_tip_of_universe_utc": "2026-11-18T00:30Z",
- "first_game_tipping": "2026-11-17 NYK@TOR (7:30 PM ET)",
+ "slate_window": "2026-11-19 .. 2026-11-22",
+ "games_in_universe": 26,
+ "first_tip_of_universe_utc": "2026-11-20T01:00Z",
+ "first_game_tipping": "2026-11-19 GSW@MEM (8:00 PM ET)",
  "frozen_before_first_tip": true,
- "hours_before_first_tip": 8.6,
+ "hours_before_first_tip": 19.25,
  "input_digests_sha256": {
-  "data/derived/horizon_picks.json": "c99bbd1ba9eff2a17ac42d9354b2fd7bfc11bb2fee3ff5d76b8d2a93c2725f20",
-  "data/derived/horizon_lines.json": "132b2a8773f43252936a550cf10d9843dd469a8e3d85155f9f98c9802f601337",
-  "data/derived/team_stats_recut.json": "109bdc0e93d92a59e2bd45fda189dc12ce6e94a9374eec06d9ac8d2d81430949",
-  "data/derived/measured_constants_2026_27.json": "87d025a9067a8641efdca6721cbe7f2bebee58a0f471284fbf2e12873dd5fd25",
-  "data/raw/official_schedule_capture_2026-11-17.json": "45e767cdfd4d88f3cd9d258eb3078a685fb7ae65c8df9a5c702aaf19c6d3d0b0",
-  "data/official/injury_2026-11-17_1030AM_84264db0.json": "ff5994e096fa4edfc9ec4043b2523708b123a92c38dac1980f70bff4ea306e2e",
-  "data/official/results_2026-11-16.json": "00404b1c493cc71421ccea351415f681523f6083e5bb20b784922535b4ba605a",
-  "data/settlement/settlement_2026-11-16.json": "101dc06334df17769ee99407d028dd1cf1336ed77f58ca14ca17953c4237b77b"
+  "data/derived/horizon_picks.json": "ac9d7f812001348b79067bc4ff236931bee8d65df8970e89c328f7502c3392d6",
+  "data/derived/horizon_lines.json": "4a27310eeb604e8df8bffbb4eb76234316533a448ef350dd1dce77910ee7d1ed",
+  "data/derived/team_stats_recut.json": "5ac9a68d21aff08b25ed9b037a161842150b551ce0e2ee4d443f811532db91a5",
+  "data/derived/measured_constants_2026_27.json": "5d2b18269cbe0d9e2c4eddbc85606da7b3ed89b91630f8af45438fd178d5277c",
+  "data/raw/official_schedule_capture_2026-11-19.json": "ed2f905a6b81a3ac237c2ef9b161e662df2f7105e5022f4fd48fe06f1c09bfc7",
+  "data/official/injury_2026-11-19_1230AM_929395a5.json": "aa7f2bf39e1358ead3893350e66b7b55ce788f343fe3e73c57e286d29a840db6",
+  "data/official/results_2026-11-18.json": "e783215f2fe34b149e4a494321dfc4a151b8892e10be6b79c99821c0e286c3ab",
+  "data/settlement/settlement_2026-11-18.json": "ebd42ceeeb333d54dc10de013009b5b14bc4355a0e3a3238d27f3c3ff0720669"
  }
 }
