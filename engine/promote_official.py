@@ -394,10 +394,16 @@ class Promoter:
         item = "injury_pdf_probe"
         probe = self.checks.get(item)
         results = (probe or {}).get("results") or []
-        if not results or results[0].get("http_status") != 200:
+        # Newest first (fetch_official sorts them). A rate-limited newest
+        # edition (HTTP 403/429 from ak-static) must not block promotion when
+        # an older edition in the same run retrieved cleanly: promote the
+        # newest SUCCESSFUL retrieval instead of failing the whole item
+        # (flag F-CA-07: an edition-only change must still reach promotion).
+        ok_results = [r for r in results if r.get("http_status") == 200]
+        if not ok_results:
             self.fail(item, "no successful injury-PDF retrieval in this run")
             return
-        latest = results[0]
+        latest = ok_results[0]
         art = os.path.join(ROOT, latest.get("artifact_path", ""))
         if ij is None or not os.path.exists(art):
             self.fail(item, f"archived PDF missing or extractor unavailable: {art}")
