@@ -115,7 +115,7 @@
 <div class="tile"><div class="tile-v">0</div><div class="tile-l">Blocks NOT YET SUBMITTED</div><div class="tile-s">clubs that had not filed when the edition was cut</div></div>
 <div class="tile"><div class="tile-v">0.5135</div><div class="tile-l">Measured home-win rate</div><div class="tile-s">38 of 74 official finals</div></div>
 </div>
-<div class="banner warn"><div class="b-t">Two independent estimators &mdash; their disagreement is the headline</div><div class="b-b"><p>Every game below carries a line from <b>two models built from the same official inputs by different code</b>: estimator A is <code>scripts/originate_horizon.py</code> (this page), estimator B is <code>engine/pipeline.py</code> (the out-of-sample-validated build). The <b>disagreement column is the first number shown</b>, and the two spreads sit underneath it &mdash; not a blend, because averaging two models whose errors have not been measured against each other would hide the one signal we can read.</p><p>On the <b>4 games both models cover</b> (they overlap on 2026-11-19), the mean absolute disagreement is <b>4.28 points</b> and the largest is <b>9.0</b>; on 1 of them the two disagree about which team is the favourite. Note the vintage difference: estimator B's ratings window is its own published cut, estimator A's is the re-cut above, so some of the gap is input age, not model opinion. Choosing between them is open decision <a href="decisions.html">F26</a>.</p></div></div><p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference (A &minus; B) is <b>+3.68 points</b>, A favours the home side by that much, i.e. B's home-side edge is now the smaller of the two. B's line is built with a <b>home-court advantage pinned to the measured home-win rate, +0.59 points</b> (rate 0.5135 over 74 official completed games, sigma_margin 17.409312; the fitted value +3.508 points, t = 1.539, is recorded as a diagnostic and <b>not applied</b> - requirement R09) and a back-to-back penalty of 6.262 points; estimator A applies <b>neither</b>, because no official page publishes either number. The applied home-court term accounts for 16% of the mean gap. Home court is now the smaller of the two claims: pinning it removed 2.92 points of B's home-side edge, which is why the mean signed gap moved when the pin was wired in.</p>
+<div class="banner warn"><div class="b-t">Two independent estimators &mdash; their disagreement is the headline</div><div class="b-b"><p>Every game below carries a line from <b>two models built from the same official inputs by different code</b>: estimator A is <code>scripts/originate_horizon.py</code> (this page), estimator B is <code>engine/pipeline.py</code> (the out-of-sample-validated build). The <b>disagreement column is the first number shown</b>, and the two spreads sit underneath it &mdash; not a blend, because averaging two models whose errors have not been measured against each other would hide the one signal we can read.</p><p>On the <b>26 games both models cover</b> (they overlap on 2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22), the mean absolute disagreement is <b>3.87 points</b> and the largest is <b>11.8</b>; on 3 of them the two disagree about which team is the favourite. Note the vintage difference: estimator B's ratings window is its own published cut, estimator A's is the re-cut above, so some of the gap is input age, not model opinion. Choosing between them is open decision <a href="decisions.html">F26</a>.</p></div></div><p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference (A &minus; B) is <b>+1.89 points</b>, A favours the home side by that much, i.e. B's home-side edge is now the smaller of the two. B's line is built with a <b>home-court advantage pinned to the measured home-win rate, -1.10 points</b> (rate 0.4747 over 99 official completed games, sigma_margin 17.409312; the fitted value +3.508 points, t = 1.539, is recorded as a diagnostic and <b>not applied</b> - requirement R09) and a back-to-back penalty of 6.262 points; estimator A applies <b>neither</b>, because no official page publishes either number. The applied home-court term accounts for 58% of the mean gap. Home court is now the smaller of the two claims: pinning it removed 2.41 points of B's home-side edge, which is why the mean signed gap moved when the pin was wired in.</p>
 <section id="projection-surface" data-surface="projection"><h2 class="sec">1. The board &mdash; 26 games, 2026-11-19 to 2026-11-22</h2><p class="secsub">Projection surface (safe to publish): originated lines, the two-estimator disagreement as the headline, rotation availability and rest. Model output only — no picks, no prices, no stakes. Spread is home minus away; positive means the home team is favoured. Possessions, points, spread and total are DERIVED by the printed formula. This legacy line set applies no home-court advantage (F84 / window flag F-W02); the v2 lines on the projection surface apply the measured 0.87 pts from the official standings home-win rate 0.5204 (re-derived 2026-11-16, COORDINATION §61 W01), published in section 5 below.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -148,8 +148,8 @@
 <td>-218</td>
 <td>no official report covers this date yet</td>
 <td>5d / 4d</td>
-<td>-0.9</td>
-<td>9.0</td>
+<td>-2.6</td>
+<td>10.7</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -164,8 +164,8 @@
 <td>+682</td>
 <td>no official report covers this date yet</td>
 <td>5d / 3d</td>
-<td>-23.1</td>
-<td>4.1</td>
+<td>-24.8</td>
+<td>5.8</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -180,8 +180,8 @@
 <td>-158</td>
 <td>no official report covers this date yet</td>
 <td>3d / 4d</td>
-<td>6.0</td>
-<td>1.2</td>
+<td>4.3</td>
+<td>0.5</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -196,8 +196,8 @@
 <td>-529</td>
 <td>no official report covers this date yet</td>
 <td>3d / 3d</td>
-<td>13.9</td>
-<td>2.8</td>
+<td>12.2</td>
+<td>4.5</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -212,8 +212,8 @@
 <td>-339</td>
 <td>no official report covers this date yet</td>
 <td>4d / 4d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>9.6</td>
+<td>2.9</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -228,8 +228,8 @@
 <td>+169</td>
 <td>no official report covers this date yet</td>
 <td>6d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-1.3</td>
+<td>4.2</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -244,8 +244,8 @@
 <td>-163</td>
 <td>no official report covers this date yet</td>
 <td>4d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>2.1</td>
+<td>3.0</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -260,8 +260,8 @@
 <td>-167</td>
 <td>no official report covers this date yet</td>
 <td>4d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>3.2</td>
+<td>2.2</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -276,8 +276,8 @@
 <td>+105</td>
 <td>no official report covers this date yet</td>
 <td>4d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-8.2</td>
+<td>7.6</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -292,8 +292,8 @@
 <td>-307</td>
 <td>no official report covers this date yet</td>
 <td>5d / 4d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>8.0</td>
+<td>3.5</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -308,8 +308,8 @@
 <td>+207</td>
 <td>no official report covers this date yet</td>
 <td>4d / 4d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-7.4</td>
+<td>0.2</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -324,8 +324,8 @@
 <td>+220</td>
 <td>no official report covers this date yet</td>
 <td>4d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-7.8</td>
+<td>0.4</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -340,8 +340,8 @@
 <td>-975</td>
 <td>no official report covers this date yet</td>
 <td>4d / 4d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>15.1</td>
+<td>7.0</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-20" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -356,8 +356,8 @@
 <td>-480</td>
 <td>no official report covers this date yet</td>
 <td>1d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>11.8</td>
+<td>4.0</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -372,8 +372,8 @@
 <td>-100</td>
 <td>no official report covers this date yet</td>
 <td>1d / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-1.4</td>
+<td>1.4</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -388,8 +388,8 @@
 <td>-153</td>
 <td>no official report covers this date yet</td>
 <td>1d / 5d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>4.1</td>
+<td>0.4</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -404,8 +404,8 @@
 <td>-127</td>
 <td>no official report covers this date yet</td>
 <td>1d / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>5.1</td>
+<td>2.6</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -420,8 +420,8 @@
 <td>-645</td>
 <td>no official report covers this date yet</td>
 <td>0d B2B / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>19.8</td>
+<td>1.3</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -436,8 +436,8 @@
 <td>+1208</td>
 <td>no official report covers this date yet</td>
 <td>5d / 0d B2B</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-26.2</td>
+<td>2.3</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-21" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -452,8 +452,8 @@
 <td>+145</td>
 <td>no official report covers this date yet</td>
 <td>1d / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-5.1</td>
+<td>1.2</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -468,8 +468,8 @@
 <td>+149</td>
 <td>no official report covers this date yet</td>
 <td>1d / 7d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-8.2</td>
+<td>4.0</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -484,8 +484,8 @@
 <td>+150</td>
 <td>no official report covers this date yet</td>
 <td>1d / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-1.8</td>
+<td>2.5</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -500,8 +500,8 @@
 <td>+227</td>
 <td>no official report covers this date yet</td>
 <td>1d / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-13.4</td>
+<td>4.9</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -516,8 +516,8 @@
 <td>+205</td>
 <td>no official report covers this date yet</td>
 <td>0d B2B / 1d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-4.8</td>
+<td>2.7</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -532,8 +532,8 @@
 <td>-227</td>
 <td>no official report covers this date yet</td>
 <td>1d / 0d B2B</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>-0.5</td>
+<td>9.0</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 <tr>
@@ -548,8 +548,8 @@
 <td>+266</td>
 <td>no official report covers this date yet</td>
 <td>0d B2B / 2d</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1.7</td>
+<td>11.8</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-22" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
 </tr>
 </tbody></table></div>
@@ -598,7 +598,7 @@
 <tr>
 <td>G5_freshness_provenance</td>
 <td>engine.refresh_gate.evaluate passes at render time (fresh official captures, provenance, promotion, and PDF integrity; max age 10 hours)</td>
-<td>['fetcher reported 2 failed source/parse checks', 'missing/invalid payload capture for S1_season', 'missing/invalid structured capture: data/raw/_capture_S1_season.json', 'advanced team input cannot be compared with a complete promoted snapshot', &quot;promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json&quot;, 'promoted input provenance URL is stale: data/raw/injuries.json', &quot;promoted input is not verified against this run's capture: data/raw/injuries.json&quot;]</td>
+<td>['fetcher reported 2 failed source/parse checks', 'missing/invalid payload capture for S1_season', 'missing/invalid structured capture: data/raw/_capture_S1_season.json', 'advanced team input cannot be compared with a complete promoted snapshot', 'promoted input provenance URL is stale: data/raw/injuries.json', &quot;promoted input is not verified against this run's capture: data/raw/injuries.json&quot;]</td>
 <td><b>CLOSED</b></td>
 <td class="src"><span class="na" title="computed from a repository file, not an official value: no official link applies">&mdash;</span> data/raw/_last_refresh.json + engine/refresh_gate.py</td>
 </tr>

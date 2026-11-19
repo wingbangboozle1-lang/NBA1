@@ -1704,6 +1704,51 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_v2.json" target="_blank" rel="noopener">S74_HCA</a></td>
 </tr>
+<tr>
+<td>F-915-01</td>
+<td>High</td>
+<td><b>The scheduled refresh's publish step could never publish anything: a git add naming four paths that cannot exist aborted every commit, for 13 runs</b></td>
+<td>The 'Publish captures' step ran one `git add` over a fixed list containing data/raw/standings.json, team_traditional.json and team_opponent.json (all three declared unreadable, so their snapshots cannot exist) plus data/raw/_capture_S1_season.json (0 commits in the repository's entire history). `git add` aborts the WHOLE invocation with exit 128 when any one pathspec matches nothing (measured by scripts/fb91550a_refresh_publish_audit.py, which runs the command), and the step's `2&gt;/dev/null || true` hid the abort. Every scheduled run therefore committed nothing and 13 auto/refresh-* branches carry 0 pull requests. The 12:03Z run on 2026-11-19 is the proof of cost: its record lists 20 promoted items including 25 reconciled finals, a 26-game schedule and two injury editions, and not one of them reached main. Fixed in this session by staging only paths that exist, one at a time.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>F-915-02</td>
+<td>High</td>
+<td><b>The scheduled rebuild step had three independent unsatisfiable predicates, not one</b></td>
+<td>Section 69 found and fixed the first (a required snapshot nothing can produce). Measuring the gate line by line found two more, each sufficient on its own to keep the rebuild step from ever running: (a) the step required `promote.outcome == success`, but engine/promote_official.py exits 1 whenever ANY item is blocked, so one permanently blocked item disabled the rebuild forever regardless of the freshness gate; (b) the S1 completeness test read `payload.get('row_count')`, a field no writer emits, joined by `or` to the row count, making it true for every well-formed capture. A fourth latent defect: the declaration mechanism had no effect on S1 because the missing-capture branch and the snapshot-comparison step both re-blocked it, and the anti-rot check did not even measure S1. All four are fixed and covered by scripts/test_fb91550a_gate.py; three of those tests fail on the pre-change gate.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>F-915-03</td>
+<td>Medium</td>
+<td><b>The scheduled run's own record said 22 source-register entries were added; its own sources.json contains none of them</b></td>
+<td>The 12:03Z record reads '26 games -&gt; data/raw/schedule_upcoming.json; 22 source-register entries added', but the same run's committed data/raw/sources.json has none of the 22 S4_&lt;game_id&gt; keys (measured 0/22). This is why promoting the schedule here made three rows render a blank Source cell and fail check_site: the register half of the promotion did not travel. The 22 entries were added by this session from the schedule's own game ids and the league's own URL pattern, which were then read back first-hand (https://www.nba.com/game/cha-vs-atl-0022600043 resolves and names the fixture).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>F-915-04</td>
+<td>Medium</td>
+<td><b>R01 is NOT declarable: S1 (team advanced) IS readable first-hand, so the rebuild must be fixed by fetching, not by declaring it unreadable</b></td>
+<td>The natural shortcut was to add S1_season to data/raw/unreadable_sources.json, exactly as S8/S9/S10 are. That would be false, so it was refused. Read through the platform fetch channel on 2026-11-19, https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season returns the complete 30-row Advanced table with headers GP/POSS/PIE (Los Angeles Lakers first, 16 GP, 1,614 possessions), current through 2026-11-18. The scheduled runner cannot read it because its plain HTTP client receives only client-rendered shells and the official stats.nba.com fallback times out from the runner; the page itself is fine. The correct next step is therefore a runner-side fetch route (fetch channel/proxy or a pre-computed capture), not a declaration. Until then R01 stays partial by design: the gate blocks on S1, which is the gate working.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
+<tr>
+<td>F-915-05</td>
+<td>Low</td>
+<td><b>PR #181 closed as a conflicting duplicate; R09 yielded to a parallel session, logged rather than merged twice</b></td>
+<td>Two conflicts were resolved this session without discarding anyone's work. (1) PR #181 (arena/39b70241-nba1) was CONFLICTING over 300 files and its whole subject - 11/17+11/18 settlement, the 11/19-11/22 roll, the SGP grades - is already on main by PR #172 (§66), with ledger entries 15-17 and every settlement file present; merging it would append a second divergent settlement and fork the hash chain. Its comment records the evidence; it was already closed when this seat went to close it. (2) Session arena/65bda668-nba1 opened PR #195 doing the same R09 fix on the same four call sites while this seat was implementing it. This seat withdrew its R09 change completely and logged the yield on the board; the one substantive difference (their pin read RAISES when missing; ours returned 0.0 and said NOT APPLIED) is recorded on COORDINATION.md because the stricter choice is a policy decision.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

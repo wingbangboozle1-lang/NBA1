@@ -90,9 +90,39 @@ jobs:
         # client-rendered sources fail parsing. The rebuild remains strictly
         # gated on fetch success and the freshness gate below, so this only
         # refreshes verified evidence; it cannot publish stale model inputs.
+        #
+        # WHY `|| true` (COORDINATION.md section 74, T02). promote_official.py
+        # exits 1 whenever ANY single item is blocked - by design, so that a
+        # blocked item is loud. But the rebuild step used to require
+        # `promote.outcome == 'success'`, which meant one permanently blocked
+        # item (S1_season, whose capture has never existed) disabled the rebuild
+        # for every run forever, independently of the freshness gate that is
+        # supposed to make that decision. The gate below is the authoritative
+        # check: it re-reads the promotion records and blocks unless every
+        # required input is verified against THIS run's capture. The step now
+        # reports its blocked items as an annotation and lets the gate decide.
         if: always() && steps.fetch.outcome != 'cancelled' && steps.fetch.outcome != 'skipped'
         continue-on-error: true
-        run: python3 engine/promote_official.py
+        run: |
+          python3 engine/promote_official.py
+          rc=$?
+          if [ "${rc}" -ne 0 ]; then
+            echo "::warning title=Promotion blocked items::promote_official.py exited ${rc}: at least one item stayed unpromoted. The freshness gate below decides whether the rebuild may run; this is not a pass."
+          fi
+          # Stage the promotion records here, at the moment they are written,
+          # and only the ones that exist. The publish step used to do this with
+          # a fixed list containing paths that can never exist, and a `git add`
+          # naming any absent path aborts entirely (measured: exit 128), which
+          # is how 13 consecutive scheduled runs published no promoted input.
+          for f in data/raw/schedule_upcoming.json data/raw/injuries.json \
+                   data/raw/games_completed.json data/raw/injury_diffs.json \
+                   data/raw/refresh_publish_audit.json; do
+            [ -f "$f" ] && git add -- "$f" && echo "staged ${f}"
+          done
+          for d in data/parsed data/raw/injury_pdfs; do
+            [ -d "$d" ] && git add -- "$d" && echo "staged ${d}/"
+          done
+          exit 0
 
       - name: Require fresh provenance and verified-promotion gates
         id: freshness
@@ -125,7 +155,13 @@ jobs:
         # successful completion of the promotion step that writes the verified
         # inputs. Neither continue-on-error step may be treated as a pass merely
         # because the workflow itself continues to settlement and reporting.
-        if: steps.fetch.outcome == 'success' && steps.promote.outcome == 'success' && steps.freshness.outcome == 'success' && steps.freshness.outputs.ok == 'true'
+        # The freshness gate is the single authority on whether a rebuild may
+        # run: it re-reads this run's promotion records and refuses unless every
+        # required input is verified against this run's capture digest. It does
+        # NOT depend on promote's exit code (section 74): that code is 1
+        # whenever one permanently blocked item exists, which made this step
+        # unreachable in all 13 scheduled runs to date.
+        if: steps.fetch.outcome == 'success' && steps.freshness.outcome == 'success' && steps.freshness.outputs.ok == 'true'
         continue-on-error: true
         run: |
           python3 engine/pipeline.py
@@ -228,16 +264,61 @@ jobs:
           # no-change run produces no timestamp-only commit.
           # Settlement output is evidence, not a snapshot: it may land in the
           # same PR when a game day ended during this run.
-          git add data/raw/_capture_*.json data/raw/injury_pdfs/ \
-                  data/settlement/ data/ledger/ledger.json 2>/dev/null || true
-
-          # Also stage the digest-bound promotion records and computed diffs
-          # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
-          git add data/raw/standings.json data/raw/team_traditional.json \
-                  data/raw/team_opponent.json data/raw/team_advanced.json \
-                  data/raw/unreadable_sources.json data/raw/refresh_path_audit.json \
-                  data/raw/schedule_upcoming.json data/raw/injuries.json \
-                  data/raw/games_completed.json data/parsed/ 2>/dev/null || true
+          #
+          # EVERY PATH IS OPTIONAL (COORDINATION.md section 74, T02). `git add`
+          # aborts the WHOLE invocation with exit 128 when any one pathspec
+          # matches nothing, and `2>/dev/null || true` then hid that abort.
+          # Four of the paths this step used to name cannot exist while a source
+          # is declared unreadable (`standings.json`, `team_traditional.json`,
+          # `team_opponent.json`) or has never once parsed
+          # (`_capture_S1_season.json`, `_capture_S2_train.json`): measured 0
+          # commits across the full history by
+          # scripts/fb91550a_refresh_publish_audit.py. Consequence: for 13
+          # scheduled runs (every auto/refresh-* branch, 0 pull requests ever)
+          # the publish step committed NOTHING - nine of those branches hold
+          # only injury PDFs, and the 12:03Z run's promoted schedule (26 games),
+          # 2 injury editions and 25 reconciled finals were never published.
+          # Read the path list out of a file and skip absent paths, so one
+          # missing snapshot can no longer suppress every other artefact. A
+          # skipped path is printed, not hidden.
+          python3 - <<'PY' | while IFS= read -r p; do
+          import os
+          candidates = [
+              "data/raw/games_completed.json",       # results feed (R03)
+              "data/raw/schedule_upcoming.json",     # promoted schedule (R01)
+              "data/raw/injuries.json",              # promoted injury edition
+              "data/raw/injury_diffs.json",
+              "data/raw/standings.json",
+              "data/raw/team_traditional.json",
+              "data/raw/team_opponent.json",
+              "data/raw/team_advanced.json",
+              "data/raw/unreadable_sources.json",
+              "data/raw/refresh_path_audit.json",
+              "data/raw/refresh_publish_audit.json",
+              "data/parsed/",
+              "data/settlement/",
+              "data/ledger/ledger.json",
+              "data/raw/injury_pdfs/",
+              "data/raw/_capture_injury_probe.json",
+          ]
+          for path in candidates:
+              if os.path.exists(path):
+                  print(path)
+              else:
+                  print(f"::warning title=Publish path absent::"
+                        f"{path} does not exist in this run; skipped, not an error",
+                        file=__import__("sys").stderr)
+          PY
+            git add -- "$p"
+          done
+          # Capture payloads are globbed separately: a glob that matches nothing
+          # is also a pathspec error, so it is expanded by the shell only when
+          # at least one file is there.
+          if compgen -G "data/raw/_capture_*.json" > /dev/null; then
+            git add -- data/raw/_capture_*.json
+          else
+            echo "::warning title=Publish::no capture payloads to stage"
+          fi
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0
@@ -298,10 +379,22 @@ jobs:
             git checkout -b "${BRANCH}"
             git commit -m "${MSG}"
             git push -u origin "${BRANCH}" || { echo "::warning::push of ${BRANCH} failed; captures are in the run artifact"; exit 0; }
-            gh pr create --base main --head "${BRANCH}" \
-              --title "chore(refresh): official captures $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-              --body-file /tmp/pr_body.md \
-              || echo "::warning::gh pr create failed; captures are on branch ${BRANCH} and in the run artifact"
+            # COORDINATION.md section 74 (T02): every one of the 13 scheduled
+            # branches that exist to date has ZERO pull requests against it, so
+            # no capture this job ever produced reached main. A failed PR is
+            # therefore a failed refresh, not a warning to scroll past - it
+            # exits non-zero and the run goes red, while the branch and the run
+            # artifact still preserve the evidence.
+            if ! gh pr create --base main --head "${BRANCH}" \
+                 --title "chore(refresh): official captures $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+                 --body-file /tmp/pr_body.md; then
+              echo "::error title=Refresh captures stranded::gh pr create failed for ${BRANCH}."
+              echo "The captures are committed on ${BRANCH} and in the run artifact, but"
+              echo "nothing reached main. Check that this repository allows GitHub Actions"
+              echo "to create pull requests (Settings > Actions > General > Workflow"
+              echo "permissions) - that setting is outside any session token's reach."
+              exit 1
+            fi
             exit 0
           fi
 
