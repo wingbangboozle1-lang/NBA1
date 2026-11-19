@@ -40,10 +40,10 @@
   "games": 5,
   "player_rows": 168,
   "players_who_played": 103,
-  "distinct_rows_on_injury_report": 30,
-  "players_on_2026_11_17_report": 30,
-  "injury_report_edition": "Injury-Report_2026-11-17_11_30AM (data/raw/injury_pdfs/, byte-exact archive)",
-  "report_names_unique": 32,
+  "distinct_rows_on_injury_report": 64,
+  "players_on_2026_11_17_report": 64,
+  "injury_report_edition": "Injury-Report_2026-11-17_06_00PM (data/raw/injury_pdfs/, byte-exact archive)",
+  "report_names_unique": 127,
   "rows_excluded_as_unparsable": 0
  },
  "minutes_check": {
@@ -855,7 +855,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
    "source_pdf_sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
    "source_text": "data/official/gamebooks/2026-11-17_NYKTOR.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Jose Alvarado",
@@ -954,7 +954,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "James Wiseman",
@@ -1053,7 +1053,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
    "source_pdf_sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
    "source_text": "data/official/gamebooks/2026-11-17_NYKTOR.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Collin Murray-Boyles",
@@ -1086,7 +1086,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
    "source_pdf_sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
    "source_text": "data/official/gamebooks/2026-11-17_NYKTOR.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Ja'Kobe Walter",
@@ -1284,7 +1284,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
    "source_pdf_sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
    "source_text": "data/official/gamebooks/2026-11-17_NYKTOR.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Allen Graves",
@@ -1416,7 +1416,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Akins",
@@ -1911,7 +1911,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_PORMIN_book.pdf",
    "source_pdf_sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
    "source_text": "data/official/gamebooks/2026-11-17_PORMIN.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Micah Potter",
@@ -1977,7 +1977,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_PORMIN_book.pdf",
    "source_pdf_sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
    "source_text": "data/official/gamebooks/2026-11-17_PORMIN.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Deni Avdija",
@@ -2010,7 +2010,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "John Tonje",
@@ -2142,7 +2142,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_PORMIN_book.pdf",
    "source_pdf_sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
    "source_text": "data/official/gamebooks/2026-11-17_PORMIN.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Rudy Gobert",
@@ -2274,7 +2274,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_PORMIN_book.pdf",
    "source_pdf_sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
    "source_text": "data/official/gamebooks/2026-11-17_PORMIN.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Terrence Shannon Jr",
@@ -2439,7 +2439,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Rocco Zikarsky",
@@ -2538,7 +2538,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Sharpe",
@@ -2571,7 +2571,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Youngblood",
@@ -2604,7 +2604,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Broome",
@@ -2670,7 +2670,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "DiVincenzo",
@@ -2703,7 +2703,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Edwards",
@@ -2736,7 +2736,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Pullin",
@@ -2769,7 +2769,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Kevin Huerter",
@@ -2835,7 +2835,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_DETSAS_book.pdf",
    "source_pdf_sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
    "source_text": "data/official/gamebooks/2026-11-17_DETSAS.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "John Collins",
@@ -2967,7 +2967,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_DETSAS_book.pdf",
    "source_pdf_sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
    "source_text": "data/official/gamebooks/2026-11-17_DETSAS.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Chaz Lanier",
@@ -3099,7 +3099,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Tolu Smith",
@@ -3330,7 +3330,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_DETSAS_book.pdf",
    "source_pdf_sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
    "source_text": "data/official/gamebooks/2026-11-17_DETSAS.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Luke Kornet",
@@ -3462,7 +3462,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_DETSAS_book.pdf",
    "source_pdf_sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
    "source_text": "data/official/gamebooks/2026-11-17_DETSAS.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Jordan McLaughlin",
@@ -3891,7 +3891,7 @@
    "blk": null,
    "plus_minus": null,
    "pts": null,
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Quaintance",
@@ -3957,7 +3957,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_CHALAL_book.pdf",
    "source_pdf_sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
    "source_text": "data/official/gamebooks/2026-11-17_CHALAL.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Naz Reid",
@@ -4023,7 +4023,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_CHALAL_book.pdf",
    "source_pdf_sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
    "source_text": "data/official/gamebooks/2026-11-17_CHALAL.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Brandon Miller",
@@ -4188,7 +4188,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_CHALAL_book.pdf",
    "source_pdf_sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
    "source_text": "data/official/gamebooks/2026-11-17_CHALAL.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Tidjane Salaün",
@@ -4551,7 +4551,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_CHALAL_book.pdf",
    "source_pdf_sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
    "source_text": "data/official/gamebooks/2026-11-17_CHALAL.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Sandro Mamukelashvili",
@@ -5145,7 +5145,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
    "source_pdf_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
    "source_text": "data/official/gamebooks/2026-11-17_UTALAC.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Ace Bailey",
@@ -5541,7 +5541,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
    "source_pdf_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
    "source_text": "data/official/gamebooks/2026-11-17_UTALAC.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Rui Hachimura",
@@ -5739,7 +5739,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
    "source_pdf_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
    "source_text": "data/official/gamebooks/2026-11-17_UTALAC.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Keaton Wagler",
@@ -5871,7 +5871,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
    "source_pdf_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
    "source_text": "data/official/gamebooks/2026-11-17_UTALAC.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Nick Martinelli",
@@ -5904,7 +5904,7 @@
    "source_pdf": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
    "source_pdf_sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
    "source_text": "data/official/gamebooks/2026-11-17_UTALAC.md",
-   "on_official_injury_report": false
+   "on_official_injury_report": true
   },
   {
    "player": "Baba Miller",
