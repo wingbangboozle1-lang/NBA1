@@ -1,76 +1,21 @@
 {
- "captured_at_utc": "2026-11-19T07:40:34Z",
+ "captured_at_utc": "2026-11-19T07:56:12Z",
  "results": [
   {
-   "edition": "Injury-Report_2026-11-19_02_30AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_02_30AM.pdf",
-   "http_status": 200,
-   "bytes": 87322,
-   "sha256": "f85c23660be30d0758327e771a356db3373ce7b2d5a0d59efbc87cc611521a75",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_02_30AM__f85c23660be30d0758327e771a356db3373ce7b2d5a0d59efbc87cc611521a75.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_02_15AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_02_15AM.pdf",
-   "http_status": 200,
-   "bytes": 87289,
-   "sha256": "6d419419c15b68579f0677958b3f2c3977635825729b19c505d9f1b274693ce6",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_02_15AM__6d419419c15b68579f0677958b3f2c3977635825729b19c505d9f1b274693ce6.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_02_00AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_02_00AM.pdf",
-   "http_status": 200,
-   "bytes": 87160,
-   "sha256": "38f20c8b9a65344244364ba4c8e388832732a92f7c4b5e49f1cd10e7bc0f6905",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_02_00AM__38f20c8b9a65344244364ba4c8e388832732a92f7c4b5e49f1cd10e7bc0f6905.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_01_45AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_01_45AM.pdf",
+   "edition": "Injury-Report_2026-11-19_02_45AM.pdf",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_02_45AM.pdf",
    "http_status": 200,
    "bytes": 87396,
-   "sha256": "1d0a9bb18050edfda1791ccc767f5814594989c14c7cb0abbb59531040c1324a",
+   "sha256": "ec614b998602268edda186d3128bb8bbae41440b8df9022895175cfac24d7e45",
    "attempts": 1,
    "listed_on_official_index": true,
    "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_01_45AM__1d0a9bb18050edfda1791ccc767f5814594989c14c7cb0abbb59531040c1324a.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_01_30AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_01_30AM.pdf",
-   "http_status": 200,
-   "bytes": 87322,
-   "sha256": "3f5579906765b2048b7863d671020e2c37a2831889a6d4187beef7d65a492e80",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_01_30AM__3f5579906765b2048b7863d671020e2c37a2831889a6d4187beef7d65a492e80.pdf"
-  },
-  {
-   "edition": "Injury-Report_2026-11-19_01_15AM.pdf",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_01_15AM.pdf",
-   "http_status": 200,
-   "bytes": 87289,
-   "sha256": "9707189817380a438940441aac27cc34db7a2f7903a5a517b43def8ef4033c72",
-   "attempts": 1,
-   "listed_on_official_index": true,
-   "pdf_valid": true,
-   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_01_15AM__9707189817380a438940441aac27cc34db7a2f7903a5a517b43def8ef4033c72.pdf"
+   "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_02_45AM__ec614b998602268edda186d3128bb8bbae41440b8df9022895175cfac24d7e45.pdf"
   }
  ],
- "editions_listed_on_index": 11,
- "newest_listed": "Injury-Report_2026-11-19_02_30AM.pdf",
- "editions_already_archived": 153,
+ "editions_listed_on_index": 12,
+ "newest_listed": "Injury-Report_2026-11-19_02_45AM.pdf",
+ "editions_already_archived": 159,
  "method": "index-driven: every edition listed by official.nba.com, newest first, capped per run, already-archived editions skipped because captures are content-addressed",
  "note": "HTTP status only. 403 from ak-static.cms.nba.com has been observed both for editions that exist to a browser and for editions that are not published yet; it is recorded as unavailable at capture time, not as proof of absence."
 }

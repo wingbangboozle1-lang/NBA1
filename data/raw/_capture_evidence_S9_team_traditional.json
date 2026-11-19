@@ -1,8 +1,12 @@
 {
- "captured_at_utc": "2026-11-16T14:31:41Z",
+ "captured_at_utc": "2026-11-19T07:56:12Z",
  "source_url": "https://www.nba.com/stats/teams/traditional",
  "status": "parse_failed",
  "problems": [
+  "html_table: row with 7 cells did not resolve to a club (first cell '1')",
+  "html_table: row with 7 cells did not resolve to a club (first cell '8')",
+  "html_table: row with 7 cells did not resolve to a club (first cell '15')",
+  "html_table: 10 rows in total did not resolve to a club",
   "html_table: no header row with a Team column found",
   "next_data: no team-table structure found in JSON"
  ],
