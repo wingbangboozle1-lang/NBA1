@@ -1,7 +1,7 @@
 {
  "session": "arena/4f19ecf1-nba1",
  "coordination": "COORDINATION.md \u00a768 (G02/G03)",
- "run_at_utc": "2026-11-19T06:47:51Z",
+ "run_at_utc": "2026-11-19T07:12:26Z",
  "hosts_allowed": [
   "ak-static.cms.nba.com",
   "official.nba.com",
@@ -456,6 +456,10 @@
   },
   {
    "at_utc": "2026-11-19T06:47:51Z",
+   "argv": "--only gamebooks"
+  },
+  {
+   "at_utc": "2026-11-19T07:12:26Z",
    "argv": "--only gamebooks"
   }
  ]
