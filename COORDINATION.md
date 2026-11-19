@@ -5,6 +5,30 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/cdf3a108-nba1` (opened 2026-11-19 12:2x UTC — **pre-tip re-origination + model-inputs currency + R01 last mile**: adopt the two measured stale-input findings that no live claim holds (89f7b601's S-89F-02/Q37 team-table lag and d66245d4's re-price showing three horizon lines stale by >1 pt), re-cut the model inputs from a first-hand official re-read, re-originate and re-publish the 2026-11-19–11/22 horizon as an **amended pre-tip seal before the 01:00Z first tip**, make settlement grade the latest pre-tip seal, take over the delivered-but-idle §73 scope to close R01's operational gap, refresh registers, gate battery, PR → `main` → Pages; full claim and task table C01–C09 in **§74** at the tail of this board)
+
+Branch `arena/cdf3a108-nba1`, branched from `main` `b2af48b27bef68ddd915b6096e6f1f3191182500` (merge of PR #193 — the tip at claim time; `git rev-parse HEAD` == `git rev-parse origin/main`). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-19 12:14–12:2x UTC, ground rules 1–6):** §0 rules, §0b registry, every top-of-board banner, tail delivery records §66–§73 + §69, `gh pr list --state all --limit 15`, `gh run list --limit 12`, `gh api /repos/…/pages` (`status: built`, `build_type: legacy`, source `main /`), `data/raw/_last_refresh.json`, `python3 engine/refresh_gate.py --max-age-hours 10` run directly, `data/content/requirements.json` (24 done / 9 partial of 33). **`git fetch --unshallow origin` run first** (this sandbox ships a shallow clone — the §73 self-correction note; 941 commits visible after the fetch).
+
+| Observation at claim time | Measurement |
+| --- | --- |
+| `main` tip / branch base | `b2af48b` (PR #193, `arena/89f7b601-nba1` §69.2, merged 08:13–09:0xZ). 0 commits behind. |
+| Open PRs | **two, both idle past ground rule 5's 60-minute threshold**: [#181](https://github.com/wingbangboozle1-lang/NBA1/pull/181) (`arena/39b70241-nba1`, `mergeable: CONFLICTING`, last commit 06:26:44Z, subject "game-day rollover 11/19 — settle 11/17+11/18, roll horizon to 11/19–11/22, freeze prereg" — **already on `main` via PR #172** (`arena/929395a5-nba1` §66): `data/settlement/settlement_2026-11-17/18.json`, `data/archive/horizon_{lines,picks}_2026-11-19.json`, `data/archive/prereg_2026-11-19/**` and ledger entries 13–17 all exist on the tip) and [#188](https://github.com/wingbangboozle1-lang/NBA1/pull/188) (`arena/d66245d4-nba1`, board-only §72.2 record, last commit 07:24:00Z). |
+| Pages | `status: built`, `build_type: legacy` — https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | last scheduled run [44520339923](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44520339923) **success** at 11:15Z today, but step *Rebuild only after all freshness and provenance gates pass* = **skipped** — the R01 gap is still live at 12:14Z. |
+| Gate measured locally at 12:16Z | `engine/refresh_gate.py --max-age-hours 10` prints 7 BLOCK lines: `fetcher reported 2 failed source/parse checks` (S1_season + S2_train, each `expected 30 team rows, parsed 0 (html_tr=12 team_links=0 rowSet=0 parse_problems=5)`), `missing/invalid payload capture for S1_season`, `missing/invalid structured capture: data/raw/_capture_S1_season.json`, `advanced team input cannot be compared with a complete promoted snapshot`, `promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json`, `promoted input provenance URL is stale: data/raw/injuries.json`, `promoted input is not verified against this run's capture: data/raw/injuries.json`. S8/S9/S10 pass as **declared unreadable** (f3cb4a98's `data/raw/unreadable_sources.json`, NOTEs not BLOCKs) — S1_season/S2_train are the same class but undeclared, and the two promoted-input blocks are promote-provenance staleness. |
+| **The defect this seat prices out** | `data/derived/team_stats_recut.json` — the ratings the 26 horizon lines are priced from — carries **LAL 15 GP 13-2 / UTA 15 GP 2-13** while the official tables and standings absorbed the 11/18 UTA 109 @ LAL 97 game (F-929-01, F-89F-04, S-89F-02, Q37 — adoption request, **unclaimed**). Independent re-price by `arena/d66245d4-nba1` (§72.1 finding 2, read 07:14Z): **PHX@UTA +1.21 spread / −1.34 total, SAC@LAL −1.41 / −2.19, DAL@UTA +1.20 / −1.35** — three of 26 published lines stale by more than a point, the other 23 move ≤ 0.05. |
+| Pre-tip clock | The 2026-11-19 slate's first tip is **2026-11-20T01:00Z** (8:00 PM ET). Entry 17 sealed the current horizon at 2026-11-19T05:45Z. An amended publication at ~12:4x–13:xZ today is **before tip for all 26 games** (11/19: 4, 11/20: 9, 11/21: 6, 11/22: 7) and is therefore a legal pre-tip seal under the ledger rules. |
+| Settlement / ledger | Nothing is settleable now (11/19–11/22 untipped; 11/14–11/18 settled). Ledger 17 entries, chain verified OK (`python3 scripts/verify_ledger.py`). |
+
+**Takeovers, logged per ground rule 5 (handoff, not deletion).**
+1. **PR #181's day-roll scope** (`data/derived/horizon_*`, `data/archive/**`, `data/ledger/ledger.json`, registers, `EXECUTIVE_SUMMARY.md`): its claim is 5h54m old with no commits since 06:26:44Z and its subject is already delivered on `main` by PR #172; `arena/f3cb4a98-nba1` §73 explicitly declined these files only because #181 still held them. This seat takes the **remaining** day-roll work (the pre-tip amendment) and leaves #181 open for its owner or the reviewer — nothing of a live session is overwritten.
+2. **§73's delivered-but-open R01 tail** (`engine/refresh_gate.py`, `engine/promote_official.py`, `data/raw/unreadable_sources.json`, `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml`): `arena/f3cb4a98-nba1` delivered PRs #185/#187/#189/#190 (all merged by 07:37:24Z) and has been idle since; its own claim text leaves "operational proof" open and its banner has marked its scope. This seat continues that scope **additively** (declare S1_season/S2_train unreadable with evidence + fix the two promoted-provenance blocks + observe one run reach the rebuild) and credits §73 in every record.
+
+**Requested of other sessions (logged, not executed):** none open at claim time beyond the two stale PRs above. This seat is the integration seat for this window: no other session has committed since PR #193 merged.
+
+---
 ## 🔑 ACTIVE CLAIM — session `arena/f3cb4a98-nba1` (section **73** at the tail — renumbered from 69 at merge because §69–§72 were taken while this claim was in flight; every "§69"/"§72" inside this block means §73) (opened 2026-11-19 07:0x UTC — **scheduled-refresh rebuild-path seat**: the scheduled job has never once reached its own rebuild step, and this seat proves why from committed evidence, removes the impossible predicate from the fail-closed gate, and makes the publish path honest and exercised)
 
 Branch `arena/f3cb4a98-nba1`, branched from `main` `9cbdd74` (merge of PR #182) at 2026-11-19 07:00Z. The platform pins this session to this single pre-named branch, so the brief's `session-<id>/<task>` naming is satisfied by it (deviation logged, as every session before this one logged it).
@@ -723,6 +747,8 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/929395a5-nba1` | `arena/929395a5-nba1` | 2026-11-19 05:4x UTC | **Game-day-rollover cycle (§66)**: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip; port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`); re-read standings + three team-stat pages and re-cut model inputs; refresh registers, gate battery, PR → `main` → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 | `arena/e3d25abc-nba1` | `arena/e3d25abc-nba1` | 2026-11-19 05:5x UTC | **Injury-archive + gamebook/player-log currency seat (§68)**: byte-exact official injury-report editions recovered from the scheduled job's four un-promoted runner captures and re-verified by recomputing every SHA-256 from the bytes, plus today's index-listed editions captured fresh on a runner; consecutive-edition status/filing diffs in `data/parsed/injury_diffs/**`; the official gamebook PDFs + game pages of all 17 completed 11/17–11/18 games; per-player game logs (R21) with did-not-appear rows kept; rotation-availability, minutes-redistribution and game-flow re-cuts published in namespaced files. Writes no ledger, settlement, horizon, register or site file — those belong to §66/#173. Found and fixed two **silent** defects in its own capture script (case-sensitive `FINAL` match; dash-vs-underscore edition-day match), each pinned by a test. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+
+| `arena/cdf3a108-nba1` | `arena/cdf3a108-nba1` | 2026-11-19 12:2x UTC | **Pre-tip re-origination + model-inputs currency + R01 last mile (§74)**: first-hand official re-read of standings + three team-stat pages, re-cut of `team_stats_recut.json` (the LAL/UTA one-game lag), re-origination of the 11/19–11/22 horizon, amended pre-tip seal + ledger entry, settlement now grades the latest pre-tip seal, takeover of §73's open R01 tail, registers, gates, PR → `main` → Pages. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -12056,3 +12082,38 @@ follow. Not proven, and left explicitly unproven: **no scheduled refresh run has
 the rebuild step**, so R01 stays `partial`; and the standings page and the three team-stat tables remain
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
+
+---
+
+## 74. Session `arena/cdf3a108-nba1` — pre-tip re-origination + model-inputs currency + R01 last mile (claimed 2026-11-19 12:2x UTC)
+
+Branch `arena/cdf3a108-nba1`, base `b2af48b` (merge of PR #193). Full claim and measurements are
+in the top banner; this section is the task table and the delivery record.
+
+**Claimed task table (file scope exclusive to this seat unless marked).**
+
+| ID | Task | Status | Files |
+| --- | --- | --- | --- |
+| C01 | This claim, pushed immediately | in progress → done | `COORDINATION.md` (banner + §0b row + §74, append-only) |
+| C02 | First-hand official re-read through the `fetch_page` channel: standings (30 rows), the three team-stat pages (traditional / opponent / advanced, 30 rows each), the 11/19–11/22 schedule pages and the injury index; every row stamped with its URL and UTC read time | unclaimed → claimed | `data/official/teams_reread_2026-11-19_cdf3a108.json` (new), `data/official/standings_reread_2026-11-19_cdf3a108.json` (new) |
+| C03 | Re-cut the model inputs from that read (the LAL/UTA one-game lag the adoption request S-89F-02/Q37 names); re-run the recorded-not-blocking gates G1–G5 and publish their verdicts | unclaimed → claimed | `scripts/recut_cdf3a108.py` (new, formulas copied verbatim from `recut_2026_11_19.py`), `data/derived/team_stats_recut.json`, `data/derived/measured_constants_2026_27.json` |
+| C04 | Re-originate the 26-game horizon (11/19–11/22) with the exact published formula (POSS = (PACE_h+PACE_a)/2; TOTAL = POSS × (PPP_h+PPP_a); HCA pinned to the measured home-win rate; no injury line moves) and diff every line against the 05:45Z seal | unclaimed → claimed | `scripts/originate_horizon_cdf3a108.py` (new, formulas copied verbatim from `originate_horizon_929395a5.py`), `data/derived/horizon_lines.json` |
+| C05 | Regenerate the picks; publish an **amended pre-tip seal** (timestamped archive dir, same basenames) before the 2026-11-20T01:00Z first tip; append ledger entry 18 (`pre_tip_publication`, `supersedes_entry: 17`); `verify_ledger.py` must stay green | unclaimed → claimed | `scripts/generate_picks.py` (run; one cross-scope edit if needed — logged), `data/derived/horizon_picks.json`, `data/archive/seal_2026-11-19T*/horizon_{lines,picks}_2026-11-19.json` (new), `data/ledger/ledger.json` (append-only) |
+| C06 | Settlement integrity: `settle_slate.py` must grade the **latest** pre-tip seal of a slate (the ledger's `files` map is the seal index), so a pre-tip amendment is what settles; pin the behaviour with a test that runs offline | unclaimed → claimed | `scripts/settle_slate.py` (focused cross-scope edit — logged), `scripts/test_settle_seal_cdf3a108.py` (new) |
+| C07 | R01 last mile (takeover of §73's open tail, ground rule 5): declare S1_season/S2_train unreadable with the run's own evidence + hard expiry, fix the two promoted-provenance blocks (`schedule_upcoming.json` not verified against this run's capture; `injuries.json` stale provenance URL), then **observe one run reach the rebuild step** and record it | unclaimed → claimed (takeover) | `engine/refresh_gate.py`, `engine/promote_official.py`, `data/raw/unreadable_sources.json`, `scripts/test_refresh_gate.py`, `.github/workflows/refresh-data.yml` (§73's scope, additive), `verify/2026-11-19-cdf3a108/**` (new) |
+| C08 | Registers + executive summary on measured evidence: re-evidence R01/R04/R09/R11/R12/R16/R26/R30/R32 rows, append flags for what remains unverified, adopt d66245d4's calibration finding + the two-records-for-S1 discrepancy into the shared registers (§72 could not edit them) | unclaimed → claimed | `data/content/{requirements,flagged,questions,suggestions,executive}.json`, `EXECUTIVE_SUMMARY.md` (new dated section) |
+| C09 | Site rebuild through the existing builders, full gate battery in `pages.yml` order, PR → `main` → merge without waiting, Pages deploy confirmed, live fetch-back, delivery record here | unclaimed → claimed | generated `site/**`, `index.html`, `docs/**` via builders; this section |
+
+**Explicitly not in scope:** `data/settlement/**` (nothing settleable before tip), `data/prereg/**`
+(frozen strategies unchanged by a line re-cut — the pre-registration of a strategy is its signal,
+thresholds, universe and settlement rule, all unchanged), `data/raw/injury_pdfs/**` (§68's archive),
+`data/official/gamebooks/**` and player logs (§68's), `origination/**` + `engine_v2/**` (Build F's
+namespace), `command-center/**`, `edge-lab/**`, `docs/b/**` hand-edits (builders only), and any
+branch other than this one.
+
+**Cross-scope edits this seat expects to make (each logged where it happens):** `scripts/settle_slate.py`
+(the seal-selection logic — owner `arena/ca442d3d-nba1`, delivered §65, idle since), possibly one
+`scripts/generate_picks.py` line (probability σ basis — d66245d4's measured correction published
+alongside, never silently replaced), and the generated-site files via their builders.
+
+**Delivery record** — appended below as the work lands (per ground rules: small, frequent commits).
