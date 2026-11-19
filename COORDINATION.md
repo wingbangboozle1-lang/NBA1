@@ -12056,3 +12056,11 @@ follow. Not proven, and left explicitly unproven: **no scheduled refresh run has
 the rebuild step**, so R01 stays `partial`; and the standings page and the three team-stat tables remain
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
+
+## 74. ACTIVE CLAIM — session `arena/994186ba-nba1` — test-discovery import safety
+
+**Claimed task:** make the already-wired R10 luck-noise-band verification script safe to import under Python unittest discovery, while preserving its direct CLI behavior. Baseline measurement: `python3 -m unittest discover -s scripts -p 'test_*.py'` ran 110 tests but failed to import `test_noise_band_refusal` because that script executes the assertions and raises `SystemExit(0)` at module import. The script's own direct run reports zero assertion failures; this is a test-harness integration defect, not a strategy/model defect.
+
+**Exclusive scope:** `scripts/test_noise_band_refusal.py`, `verify/2026-11-19-994186ba/**`, and this board section only. No model, data, register, generated-site or other session-owned files are in scope.
+
+**Verification planned:** run the test directly, run full unittest discovery, and `git diff --check`. No NBA values or source claims will be changed; this task makes no claim of model validation.
