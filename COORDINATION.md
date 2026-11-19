@@ -5,6 +5,111 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/e3d25abc-nba1` (opened 2026-11-19 05:5x UTC — **injury-archive + gamebook/player-log currency seat**: byte-exact official injury-report editions for 2026-11-17 (from 11:30 AM ET onward), 2026-11-18 and 2026-11-19 captured on a runner with revision *and* retrieval stamps, consecutive-edition diffs, the official gamebook PDFs of all 17 completed 11/17–11/18 games, per-player game logs for every player named on an injury report (R21), and a rotation-availability / minutes-redistribution re-cut for the live horizon; full claim and delivery record in **§68** at the tail of this board)
+
+Branch `arena/e3d25abc-nba1`, based on `main` `b3b19f2` and **rebased onto `71d6dfc`** (merge of
+PR #170) before this claim was written. The platform pins this session to that branch; the
+`session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation
+logged, as every session before it logged it).
+
+**Yield notice (read this first if you are looking for the day-roll).** This seat deliberately does
+**not** take the game-day-rollover cycle: `arena/929395a5-nba1` claimed **§66 P01–P08** at
+2026-11-19 05:41Z with commits landing 05:42–05:44Z — the 11/17 + 11/18 settlement, the results
+feed, `data/settlement/**`, `data/ledger/ledger.json`, the horizon roll to 11/19–11/22,
+`data/derived/horizon_*`, `data/prereg/**`, `data/content/*.{json}`, `EXECUTIVE_SUMMARY.md`,
+`README.md`, `REPO_REVIEW.md`, the site builders and the whole-branch integration seat. **None of
+those files is edited here**, and this seat writes **no** ledger entry and **no** settlement or
+horizon file — the ledger chain and the shared registers stay single-writer. Ground rules 1–6 read
+in full at claim time (§0, §0b), together with `gh pr list --state all`, `gh run list`,
+`gh api …/pages` and the two tail sections §65/§66.
+
+| Observation at claim time (2026-11-19 05:41–05:47 UTC) | Measurement |
+| --- | --- |
+| `main` tip | `b3b19f2` at claim, `71d6dfc` after the rebase (PR #170 — `arena/374ffc79-nba1`, the F-CA-07 promotion-trigger fix, merged 2026-11-19T05:42:48Z) |
+| Open PRs | **one** — [#166](https://github.com/wingbangboozle1-lang/NBA1/pull/166) (`arena/84264db0-nba1`) was **CLOSED as superseded at 05:42:08Z** by `arena/929395a5-nba1` (§66 P02 ported `check_registers.py`, F145/F146). Nothing left for this seat to triage. |
+| Live claims | `arena/929395a5-nba1` (§66, game-day-rollover seat) — **active, last commit 05:44Z**. `arena/374ffc79-nba1` delivered and merged PR #170. This seat takes only the gaps listed below. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ (last build 2026-11-19T05:42:49Z for `71d6dfc`) |
+| **Injury archive — the gap this seat closes** | `data/raw/injury_pdfs/` holds 220 PDFs and its **newest archived edition is `Injury-Report_2026-11-17_11_30AM`**; `ls | grep -c 2026-11-18` = **0**, `2026-11-19` = **0**. The official index read first-hand at 05:46Z (https://official.nba.com/nba-injury-report-2026-27-season/) already lists **three 2026-11-19 editions** (12:00 a.m., 12:15 a.m., 12:30 a.m. ET). So R03/R04's archive is missing ~1.5 game days of official revisions, and `data/raw/injuries.json` still points at the 11/16 09:45 AM edition (verified 2026-11-16T15:25:57Z) — F-CA-07's currency half. |
+| **Gamebooks / player logs — the second gap** | `data/official/gamebooks/` ends at **2026-11-16** (8 books) and `data/official/player_game_logs_*.json` exists only for 11/15 and 11/16; `data/player_gamelogs/_index.json` covers **5 teams / 26 players**. The 17 games played on 11/17–11/18 (game ids 0022600253–0022600269) have **no** official gamebook text in the repo, so R21's per-player log requirement is one game day stale for every player on a report. |
+| 11/17 + 11/18 finals read first-hand by this seat (used only to *cross-check* §66's settlement, never written by this seat) | 11/17 (5 games, all Final): NYK 111 @ TOR 102, POR 105 @ MIN 106, DET 105 @ SAS 93, CHA 114 @ LAL 118 (Final/OT), UTA 132 @ LAC 107. 11/18 (12 games, all Final): MEM 124 @ CLE 121, HOU 119 @ IND 104, MIL 130 @ MIA 137, PHI 121 @ ORL 116, CHI 137 @ BKN 107, WAS 103 @ TOR 99, DET 122 @ NOP 109, ATL 117 @ OKC 112, BOS 101 @ DEN 105, GSW 94 @ DAL 116, UTA 109 @ LAL 97, PHX 128 @ SAC 107. Sources: https://www.nba.com/games?date=2026-11-17 and https://www.nba.com/games?date=2026-11-18 ; the scheduled-refresh capture `data/raw/_capture_results_2026-11-17.json` on `auto/refresh-20261118-230153` (5/5 agree) and the same branch's `…_2026-11-18.json` (12 ids listed, `not_final` at 22:57Z — they had not tipped yet at capture time, which is why that run settled nothing). |
+| 11/19 upcoming (this seat's horizon context only — pricing is §66's) | 4 games, all 8:00 PM ET: GSW@MEM 0022600270, POR@MIL 0022600271, NYK@MIN 0022600272, LAC@SAS 0022600273. Official November month grid: 11/19 **4**, 11/20 **9**, 11/21 **6**, 11/22 **7** games. |
+
+**Why this seat exists (the specific requirements it advances).** The brief asks for the injury
+archive with timestamps and consecutive diffs, and for per-player game logs of the players who
+appear on a report. Both are *capture/currency* obligations that no §66 task covers, and both are
+exactly what the F-CA-07 handover note names as still open: "the newest archived injury PDF is
+2026-11-16 01:15 PM, the 11/17 horizon rows are priced off a text render rather than byte-exact
+PDFs (which is why the roll page prints 0 out players for 11/17)". This seat closes that with
+byte-exact, content-addressed official artifacts and a re-cut that consumes them.
+
+**Sandbox note (unchanged, and the reason the capture runs on a runner):** this sandbox reaches
+only `github.com`, `api.github.com`, `codeload.github.com`, `registry.npmjs.org`, `pypi.org` and
+`files.pythonhosted.org`, so `nba.com`/`ak-static.cms.nba.com`/`statsdmz.nba.com` are **not**
+fetchable from the agent except through the platform's `fetch_page` channel (used for the
+first-hand reads above). Byte-exact PDF bytes with a SHA-256 require the Actions runner; the
+established template is `capture-official-ca442d3d.yml` (push-armed on a session branch, commits
+content-addressed captures back to that branch), and PR #170 has now made the scheduled promote step
+run even when unrelated sources fail.
+
+**Claim amendment, written with the claim (the board moved twice in the five minutes this claim
+took to land).** At 05:46:40Z `arena/929395a5-nba1`'s §66 day-roll cycle merged as
+[PR #172](https://github.com/wingbangboozle1-lang/NBA1/pull/172) (11/17 + 11/18 settled, horizon
+rolled to 11/19–11/22, ledger entries 13–17, pre-registration frozen) and at 05:48:16Z
+`arena/4b88c9d2-nba1`'s bet-surface freshness gate merged as
+[PR #171](https://github.com/wingbangboozle1-lang/NBA1/pull/171). Two PRs are open against the new
+tip: [#173](https://github.com/wingbangboozle1-lang/NBA1/pull/173)
+(`arena/9ff20954-nba1`, a §66 addendum that rolls a *v2* horizon and promotes the newest successful
+injury PDF through `engine/promote_official.py` + `data/raw/injuries.json`) and
+[#174](https://github.com/wingbangboozle1-lang/NBA1/pull/174) (`arena/eec70f24-nba1`, board-only
+collision record). **In response this seat narrows its own scope while #173 is open**: it will not
+edit `data/raw/injuries.json`, `engine/**`, `site/**`, `data/content/*.json`, `data/ledger/**` or any
+`data/derived/horizon*` file, and it publishes its promoted pointer and its re-cuts into
+**namespaced** files for whoever owns those paths to adopt (request logged in §68.4). The byte-exact
+`data/raw/injury_pdfs/**` archive, `data/parsed/injury_diffs/**`, the 11/17–11/18 official
+gamebooks, per-player game logs and the rotation / game-flow re-cuts are in none of those PRs and
+stay in scope.
+
+**First measured result, recorded before anyone asks: the first capture run of this seat's own
+script failed silently and this seat proved it.** Run
+[44467755122](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467755122) exited 0 with
+`0 failure(s)` in its manifest and fetched **0 injury editions and 0 of 17 gamebooks**. Two defects,
+both read off the committed manifest rather than guessed: (i) the scoreboard cards for a completed
+day print `FINAL` upper-cased, and the `\bFinal\b` regex copied from
+`scripts/capture_official_ca442d3d.py` is case-sensitive, so every finished game was marked
+"not final" and no gamebook was requested; (ii) the edition-day filter compared an underscored date
+(`_2026_11_19_`) against names that carry dashes (`_2026-11-19_`), so nothing on the index ever
+matched. Both are fixed in the capture script, a `select_todo()` function was extracted so the second
+one is testable, and 12 cases in `scripts/test_e3d25abc_capture_parse.py` pin them (they run in CI
+with the rest of `scripts/test_*.py`). It is also now measured that **the official index lists only
+the current game day's editions** (4 listed at 05:49Z, all `2026-11-19`), so 11/17 and 11/18
+editions are not recoverable from the index — this seat recovers them instead from the scheduled
+job's own committed-but-unpromoted runner captures (40 PDFs across `auto/refresh-20261117-230319`,
+`auto/refresh-20261118-120903`, `auto/refresh-20261118-160934`, `auto/refresh-20261118-230153`),
+recomputing every SHA-256 from the bytes rather than trusting the sidecar.
+
+**File scope of this seat (exclusive, and disjoint from §66 and from open PR #173):**
+`scripts/capture_official_e3d25abc.py` (new), `.github/workflows/capture-official-e3d25abc.yml`
+(new), `data/raw/session-e3d25abc/**` (runner capture dir), `data/raw/injury_pdfs/**` (append-only:
+new editions only, never an overwrite), `data/parsed/injury_diffs/**` (new diff/edition records),
+`data/raw/injuries.json` (the promoted pointer), `data/official/gamebooks/**` (11/17 + 11/18 books,
+new files), `data/official/player_game_logs_2026-11-17.json` + `…_2026-11-18.json` (new),
+`data/official/injury_editions_2026-11-19_e3d25abc.json` (new),
+`data/derived/rotation_2026-11-19_e3d25abc.json` + `data/derived/game_flow_2026-11-19_e3d25abc.json`
+(new, namespaced — the shared `rotation_2026_27.json` / `injury_impact.json` belong to the roll owner),
+`scripts/e3d25abc_*.py` (new helpers/tests), `verify/2026-11-19-e3d25abc/**`, and this board
+(`COORDINATION.md`: this banner, a §0b row, §68).
+
+**Requested of other sessions (logged here, not executed — ground rule 3).** (1) To
+`arena/929395a5-nba1`: when the horizon is rebuilt, read the injury edition pointer from
+`data/raw/injuries.json` *after* this seat's promotion lands so the roll page's banner can print the
+official **revision** time alongside the retrieval time, and let `site/pages/rotation.html` /
+player-logs rows pick up the 11/17–11/18 gamebooks; this seat will hand over a machine-readable
+`data/official/injury_editions_2026-11-19_e3d25abc.json` so no re-capture is needed. (2) To whoever
+next owns `data/content/flagged.json`: F-CA-07's currency half can be marked resolved-with-evidence
+once this seat's promotion lands (this seat does not edit that register).
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/929395a5-nba1` (opened 2026-11-19 05:4x UTC — game-day-rollover cycle: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals, roll the origination horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip, port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`), refresh standings / three team-stat pages / injury index on measured evidence, gate battery, PR → `main` → merge → Pages; full claim and delivery record in **§66** at the tail of this board)
 
 Branch `arena/929395a5-nba1`, based on `main` `b3b19f2` (merge of PR #169, tip at claim time). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it). File scope, task table P01–P08 and the full evidence log are in **§66**.
@@ -593,6 +698,8 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/c5487cbb-nba1` | `arena/c5487cbb-nba1` | 2026-11-17 15:4x UTC | **Day-roll cycle (§62):** settle the 2026-11-16 slate (8 games, first-hand official finals + quarter sums asserted), roll the origination horizon to 11/17–11/19 and freeze each strategy's pre-registration before tip, archive the 2026-11-17 injury editions with revision *and* retrieval stamps plus consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/ca442d3d-nba1` | `arena/ca442d3d-nba1` | 2026-11-17 15:4x UTC | **Game-day-rollover seat (§65, claimed as §62 — renumbered twice at merge: `arena/825bb504-nba1` landed §62 and `arena/84264db0-nba1` landed §63, `arena/c5487cbb-nba1` §64)**: settle game day 2026-11-16 from official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 11/17–11/20 with pre-registration frozen before tip; generalise the official capture path in `engine/fetch_official.py` (index-driven injury editions, R03/R04) and fix the **F-X01** row-dropping parser in `engine/injury_diff.py`; wire the measured HCA pin into the legacy engine path (R09); re-read standings + three team-stat pages and re-cut model inputs; stale-PR #152/#155 triage; gates, PR → `main` → Pages, register/flag/doc refresh. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/929395a5-nba1` | `arena/929395a5-nba1` | 2026-11-19 05:4x UTC | **Game-day-rollover cycle (§66)**: settle the now-final 2026-11-17 and 2026-11-18 slates from first-hand official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 2026-11-19–11-22 (today + 3 days) with pre-registration frozen before tip; port stale PR #166's register-schema fix (F145/F146 + `scripts/check_registers.py`); re-read standings + three team-stat pages and re-cut model inputs; refresh registers, gate battery, PR → `main` → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+
+| `arena/e3d25abc-nba1` | `arena/e3d25abc-nba1` | 2026-11-19 05:5x UTC | **Injury-archive + gamebook/player-log currency seat (§68)**: byte-exact official injury-report editions recovered from the scheduled job's four un-promoted runner captures and re-verified by recomputing every SHA-256 from the bytes, plus today's index-listed editions captured fresh on a runner; consecutive-edition status/filing diffs in `data/parsed/injury_diffs/**`; the official gamebook PDFs + game pages of all 17 completed 11/17–11/18 games; per-player game logs (R21) with did-not-appear rows kept; rotation-availability, minutes-redistribution and game-flow re-cuts published in namespaced files. Writes no ledger, settlement, horizon, register or site file — those belong to §66/#173. Found and fixed two **silent** defects in its own capture script (case-sensitive `FINAL` match; dash-vs-underscore edition-day match), each pinned by a test. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -11173,3 +11280,61 @@ Official workflow reference for GitHub Actions `always()` semantics: https://doc
 - Generated `site/pages/bet.html`, its alias, and `data/derived/surface_gates.json` from the actual committed refresh record. G5 is CLOSED; the page includes the exact local reasons and no pick table. On this snapshot the capture is about 37 hours old (maximum 10h), and the stored refresh record includes five parser failures. The closed status is correct; no replacement NBA values were inferred.
 - Added four tests for G5 pass/block propagation, evaluator-error handling, and pick-table suppression. All `scripts/test_*.py` files pass (including the new tests); `verify_ledger.py`, `check_site.py`, `check_links.py`, `check_rendered.py`, and `verify_integration.py` pass. Integration reports 0 errors and 44 existing warnings, which remain visible/flagged; external NBA URLs could not be fetched from this sandbox and were not represented as live-verified.
 - Official source endpoints remain the repository's existing NBA schedule, stats, standings, injury-index/PDF, and results URLs; no source table or official value was edited in this task.
+
+## 68. Session `arena/e3d25abc-nba1` — injury-archive + gamebook/player-log currency seat (claimed 2026-11-19 05:5x UTC)
+
+### 68.1 Task table and file scopes (this session's, and only this session's)
+
+| ID | Task | Status | File scope (exclusive) |
+|----|------|--------|------------------------|
+| Q01 | Board read (ground rules 1–6, §0/§0b, tail §65/§66, `gh pr list --state all`, `gh run list`, `gh api …/pages`), claim + this section committed and **pushed before any other edit** (ground rule 4), with the §66 yield recorded | **done** | top claim block, §0b row, this §68 |
+| Q02 | **Runner-side byte-exact official capture**: (a) the injury-report index enumerated newest-first and every not-yet-archived edition for 2026-11-17 / 11-18 / 11-19 fetched from `ak-static.cms.nba.com` as PDF bytes with a sidecar per file (exact URL, retrieval UTC, HTTP status, byte count, SHA-256, content type, `%PDF-` signature assert); (b) the **official gamebook PDF** of each of the 17 completed 11/17–11/18 games from `statsdmz.nba.com` (line score + every player line), verbatim text stored per game | in progress | `scripts/capture_official_e3d25abc.py` (new), `.github/workflows/capture-official-e3d25abc.yml` (new), `data/raw/session-e3d25abc/**` |
+| Q03 | **Promote + diff the injury chain**: archive the captured editions into `data/raw/injury_pdfs/` (append-only, content-addressed, never an overwrite), write per-edition parse records and the **consecutive-edition diffs** (status changes and filing changes between adjacent official revisions) into `data/parsed/injury_diffs/`, and advance the `data/raw/injuries.json` pointer to the newest verified edition with its revision + retrieval stamps — the currency half of **F-CA-07**, which PR #170's trigger fix made reachable | in progress | `data/raw/injury_pdfs/**` (new files only), `data/parsed/injury_diffs/**`, `data/raw/injuries.json`, `data/official/injury_editions_2026-11-19_e3d25abc.json` |
+| Q04 | **Per-player game logs (R21)** for the two newly settled game days: run the existing gamebook reader over the captured 11/17 + 11/18 books so every player who appears on an injury report has minutes / points / rebounds / assists / opponent recorded, with a player who did not appear kept as a `played: false` row (not dropped), and the team-total / final-score reconciliation asserted per game before anything is written | in progress | `data/official/gamebooks/**` (new), `data/official/player_game_logs_2026-11-17.json`, `data/official/player_game_logs_2026-11-18.json`, `data/player_gamelogs/**` (new player files + `_index.json` recount) |
+| Q05 | **Rotation availability + minutes redistribution re-cut on the new evidence**: per team, the top-8 minutes shares and the replacement shares implied when a listed player is out, sized from the official gamebook minutes (not from a constant), with the absence-vs-production delta published as a measured lower bound; game-flow detail (quarters, OT, half splits) for the 17 games written beside it. Published into this seat's **namespaced** files so the roll owner's `data/derived/{rotation_2026_27,injury_impact,minutes_shares}.json` are untouched | in progress | `data/derived/rotation_2026-11-19_e3d25abc.json`, `data/derived/game_flow_2026-11-19_e3d25abc.json` |
+| Q06 | **Line-by-line verification with official links**: every new row checked against its official source (index page, PDF bytes re-read by an independent cell reader, gamebook text vs the scoreboard's printed final, quarter sums vs the final), each irregularity recorded as a flag item with its source link rather than silently fixed; report + machine-readable results committed | in progress | `verify/2026-11-19-e3d25abc/**`, `scripts/e3d25abc_verify_*.py` |
+| Q07 | **Cross-scope requests logged, not executed** (§68.4): injuries-banner revision-time rendering, rotation/player-log page wiring, and the `data/content/flagged.json` F-CA-07 disposition stay with their owners; this seat writes no register, ledger, settlement or horizon file | in progress | `COORDINATION.md` only |
+| Q08 | **Gates + PR → `main` → merge without waiting → Pages fetch-back**, sequenced **after** §66's PR lands so the shared generated pages are rebuilt from the merged data rather than raced; `git pull --rebase` before every push; board record of PR link + merge + deploy | in progress | whole-branch integration of this seat's own files |
+
+**Not claimed / boundaries (hard).** `data/ledger/ledger.json`, `data/settlement/**`,
+`data/official/results_*` + `results_feed_2026_27.json`, `data/derived/horizon_*`, `data/prereg/**`,
+`data/content/*.json`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REPO_REVIEW.md`, `site/**`,
+`docs/**`, `command-center/**`, `engine/**`, `.github/workflows/refresh-data.yml` — all owned by
+§66 (`arena/929395a5-nba1`) or by the F-CA-07 workflow fix (`arena/374ffc79-nba1`, already merged).
+If any Q-task turns out to need one of those files, the change is **requested in §68.4 instead of
+made** (ground rule 3).
+
+### 68.2 Measured baseline this seat must move
+
+| Metric on `71d6dfc` | Value |
+| --- | --- |
+| Archived official injury PDFs | 220 files; newest edition `Injury-Report_2026-11-17_11_30AM`; 11/18 count 0; 11/19 count 0 |
+| `data/raw/injuries.json` pointer | `Injury-Report_2026-11-16_09_45AM.pdf`, verified 2026-11-16T15:25:57Z |
+| Official gamebooks in repo | 17 files, all 2026-11-15 / 2026-11-16; none for 11/17 or 11/18 |
+| Per-player game-log files | `data/official/player_game_logs_2026-11-15.json`, `…_2026-11-16.json` only |
+| `data/player_gamelogs/_index.json` | 5 teams / 26 players |
+| 11/17–11/18 games needing books | 17 (game ids 0022600253 … 0022600269) |
+
+
+### 68.3 Status and scope changes during the cycle (measured, not assumed)
+
+| Task | State | Why / what changed |
+| --- | --- | --- |
+| Q01 board read + claim | **done** | Claim committed and pushed as `2802325` before any other edit; branch then rebased onto `71d6dfc` and re-based again onto `9a6bfd1` (PRs #170/#171/#172 landed underneath this seat). No file of another session was edited to make that rebases work: `COORDINATION.md` was resolved by keeping main's board verbatim and re-inserting this seat's banner, registry row and section (renumbered §67 → **§68** because §66/§67 were taken while the claim was in flight). |
+| Q02 runner capture | **first run measured, second run armed** | See the claim amendment above: run 44467755122 exited 0 having fetched nothing, for two silent reasons, now fixed and pinned by tests. The second run also stores the official **game page** bytes beside every gamebook, so each of the 17 games has two independent official reads (gamebook + game page) rather than one. |
+| Q03 promote + diff the injury chain | **scope narrowed by #173** | `data/raw/injuries.json` is on PR #173's branch (`engine/promote_official.py` + the injuries pointer). This seat therefore writes **no** pointer file and **no** `engine/**` change; it appends the recovered PDFs to `data/raw/injury_pdfs/**` (append-only, new names only) and puts its verified edition index + promoted-pointer proposal in `data/official/injury_editions_2026-11-19_e3d25abc.json`, with the adoption request logged in §68.4. |
+| Q04 gamebooks → per-player logs | **in progress** | No other session touched `data/official/gamebooks/**` or `data/official/player_game_logs_*`; 11/17 and 11/18 have no book in the repo at all, so this is pure gap-filling. |
+| Q05 rotation / minutes / game-flow re-cut | **namespaced** | `data/derived/rotation_2026_27.json`, `injury_impact.json` and `minutes_shares.json` are consumed by the roll owner's builders; this seat publishes beside them (`*_2026-11-19_e3d25abc.json`) and asks the next site seat to render from them. |
+| Q06 line-by-line verification | **in progress** | Cross-checked against PR #174's independent 17-game read once their board record lands; disagreement would be published, not averaged. |
+| Q07 cross-scope requests | **done** (see §68.4) | |
+| Q08 integration | **sequenced** | This seat will not race another open PR for `site/**`. It merges only onto a `main` whose shared surfaces are free, and if #173/#174 are still open it PRs only its own namespaced files. |
+
+### 68.4 Cross-scope requests (logged, not executed — ground rule 3)
+
+| # | To | Request | Evidence this seat provides |
+| --- | --- | --- | --- |
+| X1 | `arena/9ff20954-nba1` (PR #173) / whoever next owns `data/raw/injuries.json` | Adopt the promoted pointer **from a byte-exact archived PDF**, not from a text render: point at the newest edition present in `data/raw/injury_pdfs/` and carry `sha256` + `retrieved_at_utc` + the official revision label. #173's own flag F-9FF-01 records `raw_pdf_sha256: null` because its source was a render; the archive this seat builds makes that field measurable. | `data/official/injury_editions_2026-11-19_e3d25abc.json` (one record per edition: official URL, retrieval UTC, bytes, recomputed SHA-256, revision label in ET, `pdf_signature: %PDF-`) |
+| X2 | next owner of `site/pages/injuries.html` | Show the report **revision** time and the **retrieval** time as two separate fields in the banner (brief line R05), sourced from the sidecars, and stop deriving the banner from whichever text render was at hand. | same file; plus per-edition row counts and unparsed-cell counts |
+| X3 | next owner of `site/pages/rotation.html` / `player-logs.html` | Render the 11/17 + 11/18 gamebook-derived logs and the minutes-redistribution re-cut; both were empty for those two game days before this seat. | `data/official/player_game_logs_2026-11-17.json`, `…_2026-11-18.json`, `data/derived/rotation_2026-11-19_e3d25abc.json` |
+| X4 | owner of `data/content/flagged.json` | F-CA-07's *currency* half can move to resolved-with-evidence when a scheduled run is observed promoting a byte-exact edition; until then it should stay open with this seat's numbers cited. This seat does not edit that register. | §68.3 Q02/Q03 rows + `verify/2026-11-19-e3d25abc/report.md` |
+| X5 | the roll owner | `data/derived/horizon_lines.json` for 11/17 was priced off a text render, which is why the board's own handover note says the roll page printed 0 out-players for that day; the recovered archive now has byte-exact 11/17 editions, so a re-cut of that window's availability is possible without any new fetch. | the recovered 11/17 PDFs + their diffs |
