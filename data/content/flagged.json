@@ -1765,6 +1765,103 @@
    "suggested_action": "Keep the diagnostics. Any future fetch failure must name what the document actually contained, because the alternative is spending a day re-deriving it."
   },
   {
+   "id": "F-7B8-01",
+   "severity": "Medium",
+   "status": "open",
+   "title": "The Injuries page stated three different 'current edition' claims",
+   "detail": "Before session arena/7b8d624a-nba1 the Injuries page carried (1) a banner calling 11/19/26 12:30 AM ET the newest official edition, which the official index no longer does (it lists 11/19 editions through 07:00 AM ET); (2) a 'consecutive-edition diff' banner whose file was the 11/17 10:15 to 10:30 AM comparison, picked by filename sort and labelled as 'against the previous stored edition'; (3) a hard-coded warning naming 11/13/26 07:30 PM ET rows and a 'latest edition read this cycle (01:30 PM ET)'. The table itself is built from the 11/16/26 09:45 AM ET edition. The three banners are now computed from stored records (scripts/build_dashboard.py, injuries section) and pinned by scripts/test_injuries_banner_7b8d624a.py, which fails on the old text. Status stays open until a reviewer confirms the live page.",
+   "affected": "site/pages/injuries.html banners; the reader's understanding of which injury edition the impact figures use",
+   "source": "S5",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Review the rebuilt banners on the live page. Close this flag when the banner text matches data/official/injury_index_2026-11-19_7b8d624a.json and the 11/16 09:45 AM edition record."
+  },
+  {
+   "id": "F-7B8-02",
+   "severity": "High",
+   "status": "open",
+   "title": "The injury table is one edition (11/16 09:45 AM) and the index lists 29 newer 11/19 editions that are not transcribed",
+   "detail": "Measured on 2026-11-19 (session arena/7b8d624a-nba1). The table's 97 rows: 65 are dated 11/16 and 11/17, the slate covered by the 11/16/26 09:45 AM ET edition (its record: 65 rows, retrieved 2026-11-16T14:47:44Z, SHA-256 a84e58a9...). The other 32 rows are dated 11/18 and 11/19 and read 'NO ENTRY IN THE NBA OFFICIAL INJURY REPORT', because that edition does not list those games; they carry no injury claim. The official index (read 2026-11-19T12:16:36Z) lists 29 November 19 editions from 12:00 AM to 07:00 AM ET. The 07:00 AM ET PDF header reads 'Injury Report: 11/19/26 07:00 AM'. Its rows are not captured as bytes, not transcribed, and not used. The impact figures and minutes shown on the page therefore do not reflect any 11/19 edition.",
+   "affected": "Injury impact, rotation minutes and the injury-adjusted reads for the 11/18-11/19 games; the freshness of every injury-dependent line on the horizon",
+   "source": "S5",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Byte-capture the 11/19 editions on the runner (the scheduled-job injury pointer, X6 on the board), store them with revision and retrieval stamps, transcribe them with the existing parser, and diff consecutive editions before any dependent line is re-priced. Do not hand-type rows."
+  },
+  {
+   "id": "F-7B8-03",
+   "severity": "Low",
+   "status": "open",
+   "title": "Two injury PDF headers and the index page were read through a text channel, not captured as bytes",
+   "detail": "The 11/19/26 07:00 AM ET PDF header and the 11/16/26 09:45 AM ET PDF header were read with the platform's text fetch channel (session arena/7b8d624a-nba1), and so was the 11/19 index section. Those reads confirm the printed revision time and the listing. They do not provide a SHA-256 of the bytes, and they are not reproducible from the repository. The 11/16 09:45 AM edition's bytes were hashed on a runner (record data/parsed/injury_diffs/editions/Injury-Report_2026-11-16_09_45AM.json). The reads are recorded in data/official/injury_index_2026-11-19_7b8d624a.json with their windows and the limit stated.",
+   "affected": "Provenance strength of the 11/19 index listing and the two printed headers",
+   "source": "S5",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf",
+   "suggested_action": "Capture the same editions on the runner with byte hashes so the index listing and printed headers become reproducible from committed bytes."
+  },
+  {
+   "id": "F-HCA-01",
+   "severity": "Medium",
+   "status": "open",
+   "title": "Three committed home-court pins disagree; the published horizon uses 0.10 pts, not the 0.71 pts its requirement text describes",
+   "detail": "Measured first-hand from the committed files on 2026-11-19 (\u00a776). (1) data/hca_measured.json (legacy engine pin, written by engine/pipeline.py): home-win rate 0.5135 over 74 games, sigma 17.409, 0.59 pts. (2) data/derived/horizon_lines_v2.json (the published horizon): home-win rate 0.5023 over 221 final-score games, sigma 16.68, 0.10 pts. (3) data/derived/hca_pin_2026_11_17_ca442d3d.json (\u00a765): home-win rate 0.5171, sigma 16.868, which recomputes to 0.72 pts. The formula is the same in all three; the corpora differ. \u00a776 wired the legacy reference line to read pin (1) instead of a literal 2.0 (requirement R09), so the legacy line and the published horizon now carry different home edges. No corpus of record is named, and the requirement text for R09 still quotes the earlier 0.71. Requested: name one corpus of record and regenerate every pin from it. This flag does not change any published number.",
+   "affected": "R09 (home-court pin); horizon home_court_anchor; legacy reference line; F-CA-03",
+   "source": "S74_HCA",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_v2.json"
+  },
+  {
+   "id": "F-915-01",
+   "severity": "High",
+   "status": "open",
+   "title": "The scheduled refresh's publish step could never publish anything: a git add naming four paths that cannot exist aborted every commit, for 13 runs",
+   "detail": "The 'Publish captures' step ran one `git add` over a fixed list containing data/raw/standings.json, team_traditional.json and team_opponent.json (all three declared unreadable, so their snapshots cannot exist) plus data/raw/_capture_S1_season.json (0 commits in the repository's entire history). `git add` aborts the WHOLE invocation with exit 128 when any one pathspec matches nothing (measured by scripts/fb91550a_refresh_publish_audit.py, which runs the command), and the step's `2>/dev/null || true` hid the abort. Every scheduled run therefore committed nothing and 13 auto/refresh-* branches carry 0 pull requests. The 12:03Z run on 2026-11-19 is the proof of cost: its record lists 20 promoted items including 25 reconciled finals, a 26-game schedule and two injury editions, and not one of them reached main. Fixed in this session by staging only paths that exist, one at a time.",
+   "source": "S89F_REFRESH",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/refresh_publish_audit.json"
+  },
+  {
+   "id": "F-915-02",
+   "severity": "High",
+   "status": "open",
+   "title": "The scheduled rebuild step had three independent unsatisfiable predicates, not one",
+   "detail": "Section 69 found and fixed the first (a required snapshot nothing can produce). Measuring the gate line by line found two more, each sufficient on its own to keep the rebuild step from ever running: (a) the step required `promote.outcome == success`, but engine/promote_official.py exits 1 whenever ANY item is blocked, so one permanently blocked item disabled the rebuild forever regardless of the freshness gate; (b) the S1 completeness test read `payload.get('row_count')`, a field no writer emits, joined by `or` to the row count, making it true for every well-formed capture. A fourth latent defect: the declaration mechanism had no effect on S1 because the missing-capture branch and the snapshot-comparison step both re-blocked it, and the anti-rot check did not even measure S1. All four are fixed and covered by scripts/test_fb91550a_gate.py; three of those tests fail on the pre-change gate.",
+   "source": "S89F_REFRESH",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py"
+  },
+  {
+   "id": "F-915-03",
+   "severity": "Medium",
+   "status": "open",
+   "title": "The scheduled run's own record said 22 source-register entries were added; its own sources.json contains none of them",
+   "detail": "The 12:03Z record reads '26 games -> data/raw/schedule_upcoming.json; 22 source-register entries added', but the same run's committed data/raw/sources.json has none of the 22 S4_<game_id> keys (measured 0/22). This is why promoting the schedule here made three rows render a blank Source cell and fail check_site: the register half of the promotion did not travel. The 22 entries were added by this session from the schedule's own game ids and the league's own URL pattern, which were then read back first-hand (https://www.nba.com/game/cha-vs-atl-0022600043 resolves and names the fixture).",
+   "source": "S89F_REFRESH",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/sources.json"
+  },
+  {
+   "id": "F-915-04",
+   "severity": "Medium",
+   "status": "open",
+   "title": "R01 is NOT declarable: S1 (team advanced) IS readable first-hand, so the rebuild must be fixed by fetching, not by declaring it unreadable",
+   "detail": "The natural shortcut was to add S1_season to data/raw/unreadable_sources.json, exactly as S8/S9/S10 are. That would be false, so it was refused. Read through the platform fetch channel on 2026-11-19, https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns the complete 30-row Advanced table with headers GP/POSS/PIE (Los Angeles Lakers first, 16 GP, 1,614 possessions), current through 2026-11-18. The scheduled runner cannot read it because its plain HTTP client receives only client-rendered shells and the official stats.nba.com fallback times out from the runner; the page itself is fine. The correct next step is therefore a runner-side fetch route (fetch channel/proxy or a pre-computed capture), not a declaration. Until then R01 stays partial by design: the gate blocks on S1, which is the gate working.",
+   "source": "S89F_REFRESH",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "F-915-05",
+   "severity": "Low",
+   "status": "open",
+   "title": "PR #181 closed as a conflicting duplicate; R09 yielded to a parallel session, logged rather than merged twice",
+   "detail": "Two conflicts were resolved this session without discarding anyone's work. (1) PR #181 (arena/39b70241-nba1) was CONFLICTING over 300 files and its whole subject - 11/17+11/18 settlement, the 11/19-11/22 roll, the SGP grades - is already on main by PR #172 (\u00a766), with ledger entries 15-17 and every settlement file present; merging it would append a second divergent settlement and fork the hash chain. Its comment records the evidence; it was already closed when this seat went to close it. (2) Session arena/65bda668-nba1 opened PR #195 doing the same R09 fix on the same four call sites while this seat was implementing it. This seat withdrew its R09 change completely and logged the yield on the board; the one substantive difference (their pin read RAISES when missing; ours returned 0.0 and said NOT APPLIED) is recorded on COORDINATION.md because the stricter choice is a policy decision.",
+   "source": "S89F_REFRESH",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/pull/181"
+  },
+  {
+   "id": "F-915-06",
+   "severity": "High",
+   "status": "open",
+   "title": "Publishing 25 verified finals flips the measured home-court pin from +0.59 to -1.10 points",
+   "detail": "The HCA pin R09 requires is derived, not fitted: HCA_points = sigma_margin * Phi^-1(home win rate) over every final in data/raw/games_completed.json (engine/hca.compute_hca). Restoring the 25 finals the scheduled run captured but could not publish therefore changes a published model constant. Measured: with 74 finals the home record is 38-36 (0.5135) -> +0.59 points; with 99 finals it is 47-52 (0.4747) -> -1.10 points. The 25 restored games went 9 home wins and 16 road wins, which is why. A negative home-court constant is not an error in the formula, but it is a finding that needs a decision rather than a silent publication: either the early-season home rate is genuinely below even at n=99 (the 11/18 feed the other sessions used reported 0.5023 at n=221 for the prior season's window), or the formula's sigma_margin should be re-measured on the same corpus before the pin is trusted. Flagged for review with both numbers; nothing is hidden and no value was chosen by hand.",
+   "source": "S74_HCA",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/hca_measured.json"
+  },
+  {
    "id": "F-70D-01",
    "severity": "High",
    "status": "open",

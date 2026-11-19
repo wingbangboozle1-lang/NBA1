@@ -253,6 +253,12 @@ def evaluate_with_report(record: dict, now: dt.datetime,
 
     # Resolve declared-unreadable sources now, before any per-source verdict,
     # so that every later check can ask "is this source excused, and by what?"
+    # EVERY source a declaration may name must be measured here, including S1
+    # (COORDINATION.md section 74, T02): with S1 absent from this map,
+    # `parse_ok.get("S1_season")` was None, so the section 69 anti-rot rule
+    # could never fire for it and a declaration on S1 would have stayed live
+    # even on the day the page became readable. The map now covers all five
+    # keys the fetcher can write a capture for.
     parse_ok = {}
     for key, capture in (("S1_season", "_capture_S1_season.json"),
                          ("S2_train", "_capture_S2_train.json"),
@@ -420,22 +426,42 @@ def evaluate_with_report(record: dict, now: dt.datetime,
         try:
             payload = read_json(path)
         except (OSError, ValueError):
-            errors.append(f"missing/invalid structured capture: {rel}")
+            # A DECLARED source never produces a rows-bearing capture, so a
+            # missing capture for one is its normal state and was already
+            # handled by the evidence-record proof above (COORDINATION.md
+            # section 74, T02). Previously this branch re-blocked the very
+            # source the declaration had just excused, which made the
+            # declaration mechanism a no-op for S1 and left the rebuild
+            # unreachable for a second, independent reason.
+            if check_key not in declared:
+                errors.append(f"missing/invalid structured capture: {rel}")
             continue
-        if check_key == "S1_season" and (payload.get("row_count") != 30 or len(payload.get("rows", [])) != 30):
-            # S1 IS producible (engine/fetch_official.py has its own parser for
-            # the page plus the official stats API fallback), so it is never
-            # declared. When its parse fails the gate must block: that is a
-            # transient failure and no snapshot may be rebuilt from it. The
-            # message names the fallback so the operator knows the fix.
-            errors.append("advanced team capture is not a complete 30-team table "
-                          "(the page's own parser and the official stats.nba.com "
-                          "fallback both failed this run)")
-        if check_key == "S4_schedule" and not payload.get("games"):
+        if check_key == "S1_season":
+            # A complete table is 30 rows. The record's optional `row_count`
+            # field is not part of the capture schema (engine/fetch_official.py
+            # writes `rows`/`cols`), so testing it with `or` made this clause
+            # true for EVERY well-formed capture ever written - a second latent
+            # unsatisfiable predicate, fixed here together with the missing
+            # declaration escape.
+            complete = len(payload.get("rows") or []) == 30
+            if not complete and check_key not in declared:
+                # S1 is producible through two routes (the page's own parser
+                # and the official stats.nba.com fallback), so a transient
+                # parse failure must block rather than be declared around.
+                errors.append("advanced team capture is not a complete 30-team table "
+                              "(the page's own parser and the official stats.nba.com "
+                              "fallback both failed this run)")
+        if check_key == "S4_schedule" and not payload.get("games") and check_key not in declared:
             errors.append("official schedule capture has no parsed game IDs")
 
     # Advanced rows are parseable now, so compare every official row against
     # the season-to-date model snapshot rather than trusting a change list.
+    # A DECLARED source has no capture to compare (their section 74 note):
+    # the comparison is skipped for it and the declaration's evidence record
+    # is the proof instead - EXCEPT that the consumed snapshot is still
+    # freshness-gated below (section 78: a declaration excuses the parse,
+    # never the input). The exact-match comparison applies to every
+    # non-declared source.
     if "S1_season" in declared:
         # The runner cannot refresh team_advanced.json (S1 is declared
         # runner-unreadable). A declaration excuses the parse - never the

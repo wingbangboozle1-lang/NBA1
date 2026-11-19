@@ -1,0 +1,320 @@
+{
+ "title": "Horizon 2026-11-19..22 re-read first-hand on the official games pages",
+ "session": "arena/fb91550a-nba1",
+ "board": "COORDINATION.md section 74 (T01)",
+ "verified_at_utc": "2026-11-19T12:26:32Z",
+ "rule": "Every row is compared with the official NBA games page for its date. A value that could not be read is null and marked NOT_CHECKED; it is never recorded as agreement.",
+ "counts": {
+  "official_day_counts": {
+   "2026-11-19": 4,
+   "2026-11-20": 9,
+   "2026-11-21": 6,
+   "2026-11-22": 7,
+   "source": "day grid on https://www.nba.com/games (GAMES per date cell)"
+  },
+  "committed_rows": 26,
+  "rollup_total": 26,
+  "matchups_verified": 25,
+  "times_checked": 25,
+  "times_agree": 25,
+  "not_checked": 1,
+  "status": "all 11/19-11/22 games unplayed at read time (no Final on any page)"
+ },
+ "rows": [
+  {
+   "date": "2026-11-19",
+   "away": "LAC",
+   "home": "SAS",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600273",
+   "source_url": "https://www.nba.com/games?date=2026-11-19"
+  },
+  {
+   "date": "2026-11-19",
+   "away": "GSW",
+   "home": "MEM",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600270",
+   "source_url": "https://www.nba.com/games?date=2026-11-19"
+  },
+  {
+   "date": "2026-11-19",
+   "away": "NYK",
+   "home": "MIN",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600272",
+   "source_url": "https://www.nba.com/games?date=2026-11-19"
+  },
+  {
+   "date": "2026-11-19",
+   "away": "POR",
+   "home": "MIL",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600271",
+   "source_url": "https://www.nba.com/games?date=2026-11-19"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "CHA",
+   "home": "ATL",
+   "official_time_et": "7:00 PM ET",
+   "committed_time_et": "7:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600043",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "TOR",
+   "home": "DET",
+   "official_time_et": "7:30 PM ET",
+   "committed_time_et": "7:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600046",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "IND",
+   "home": "CLE",
+   "official_time_et": "7:30 PM ET",
+   "committed_time_et": "7:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600045",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "ORL",
+   "home": "BKN",
+   "official_time_et": "7:30 PM ET",
+   "committed_time_et": "7:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600044",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "NOP",
+   "home": "OKC",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600048",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "WAS",
+   "home": "CHI",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600047",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "PHX",
+   "home": "UTA",
+   "official_time_et": "9:30 PM ET",
+   "committed_time_et": "9:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600049",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "HOU",
+   "home": "DEN",
+   "official_time_et": "10:00 PM ET",
+   "committed_time_et": "10:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600050",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-20",
+   "away": "SAC",
+   "home": "LAL",
+   "official_time_et": "10:00 PM ET",
+   "committed_time_et": "10:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600051",
+   "source_url": "https://www.nba.com/games?date=2026-11-20"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "MIL",
+   "home": "PHI",
+   "official_time_et": "1:00 PM ET",
+   "committed_time_et": "1:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600274",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "POR",
+   "home": "NYK",
+   "official_time_et": "7:30 PM ET",
+   "committed_time_et": "7:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600275",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "NOP",
+   "home": "SAS",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600278",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "MEM",
+   "home": "MIN",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600277",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "LAC",
+   "home": "DAL",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600276",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-21",
+   "away": "BOS",
+   "home": "SAC",
+   "official_time_et": "10:00 PM ET",
+   "committed_time_et": "10:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600279",
+   "source_url": "https://www.nba.com/games?date=2026-11-21"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "DET",
+   "home": "ATL",
+   "official_time_et": "3:30 PM ET",
+   "committed_time_et": "3:30 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600280",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "OKC",
+   "home": "MIA",
+   "official_time_et": "6:00 PM ET",
+   "committed_time_et": "6:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600281",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "DAL",
+   "home": "UTA",
+   "official_time_et": "7:00 PM ET",
+   "committed_time_et": "7:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600284",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "ORL",
+   "home": "WAS",
+   "official_time_et": "7:00 PM ET",
+   "committed_time_et": "7:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600282",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "DEN",
+   "home": "CHI",
+   "official_time_et": "7:00 PM ET",
+   "committed_time_et": "7:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600283",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "IND",
+   "home": "NYK",
+   "official_time_et": "8:00 PM ET",
+   "committed_time_et": "8:00 pm ET",
+   "matchup_present": true,
+   "time_agrees": true,
+   "game_id": "0022600285",
+   "source_url": "https://www.nba.com/games?date=2026-11-22"
+  },
+  {
+   "date": "2026-11-22",
+   "away": "BOS",
+   "home": "GSW",
+   "official_time_et": null,
+   "committed_time_et": "8:30 pm ET",
+   "matchup_present": null,
+   "time_agrees": null,
+   "game_id": "0022600286",
+   "source_url": "https://www.nba.com/games?date=2026-11-22",
+   "note": "NOT_CHECKED - beyond the read chunk; not agreement and not a discrepancy"
+  }
+ ],
+ "corrections_made_during_this_read": [
+  "First pass compared a 12-hour clock string against a 24-hour one and produced 25 false 'disagreements'; the normaliser was fixed and the honest result is 25/25 agreement. Recorded so the error is visible rather than quietly overwritten.",
+  "A first impression that WAS@CHI read 7:00 PM in the committed row was wrong: the committed row is 8:00 pm ET and the official page is 8:00 PM ET. Both agree."
+ ],
+ "not_verified_by_this_read": [
+  "BOS@GSW 2026-11-22 (game 0022600286): beyond the chunk returned by the fetch channel; NOT_CHECKED.",
+  "Venues and the records printed beside each team on the official games pages were not row-compared here."
+ ]
+}
