@@ -127,9 +127,29 @@ def capture_gamebooks(dates, manifest):
             code = f"{g['away']}{g['home']}"
             gb_url = (f"https://statsdmz.nba.com/pdfs/{ymd}/"
                       f"{ymd}_{code}_book.pdf")
-            grec = base.fetch_recorded(gb_url, f"gamebooks/{d}", f"{d}_{code}",
-                                       expect="pdf")
-            grec.pop("_raw", None)
+            # Idempotence: a re-armed run must not re-fetch what the content-
+            # addressed store already holds (the runner is reclaimed every few
+            # minutes; batches resume from disk).
+            prior_rec = None
+            gb_dir = os.path.join(SESSION_DIR, "gamebooks", d)
+            if os.path.isdir(gb_dir):
+                for fn in sorted(os.listdir(gb_dir)):
+                    if fn.startswith(f"{d}_{code}__") and fn.endswith(".sidecar.json"):
+                        try:
+                            with open(os.path.join(gb_dir, fn), encoding="utf-8") as fh:
+                                prior_rec = json.load(fh)
+                        except ValueError:
+                            prior_rec = None
+                        break
+            if prior_rec and prior_rec.get("sha256") and prior_rec.get("stored"):
+                # the sidecar IS the fetch record (same fields), verbatim
+                grec = dict(prior_rec)
+                grec["reused_from_store"] = True
+            else:
+                grec = base.fetch_recorded(gb_url, f"gamebooks/{d}", f"{d}_{code}",
+                                           expect="pdf")
+                grec.pop("_raw", None)
+            grec["date"] = d
             grec["game_id"] = g["game_id"]
             grec["away"] = g["away"]
             grec["home"] = g["home"]
@@ -143,6 +163,18 @@ def capture_gamebooks(dates, manifest):
             log(f"  gamebook {d} {code}: "
                 f"{grec.get('http_status')} {grec.get('bytes', 0)} bytes")
             time.sleep(1.2)
+
+
+GRID_WINDOW = None   # (lo, hi) datetime batch filter; set by --grid-from/--grid-to
+
+
+def _edition_dt(edition):
+    m = _re.search(r"_(\d{4}-\d{2}-\d{2})_(\d{2})_(\d{2})(AM|PM)\.pdf$", edition)
+    if not m:
+        return None
+    from datetime import datetime as _dt
+    d, hh, mm, ampm = m.groups()
+    return _dt.strptime("%s %s:%s%s" % (d, hh, mm, ampm), "%Y-%m-%d %I:%M%p")
 
 
 def probe_clock_grid():
@@ -193,7 +225,20 @@ def probe_clock_grid():
                 archived.add(fn[:-4].split("__")[0] + ".pdf")
 
     results = []
-    todo = [e for e in candidates if e not in archived]
+    def _in_window(edition):
+        if GRID_WINDOW is None:
+            return True
+        dt = _edition_dt(edition)
+        if dt is None:
+            return False
+        lo, hi = GRID_WINDOW
+        if lo is not None and dt < lo:
+            return False
+        if hi is not None and dt > hi:
+            return False
+        return True
+
+    todo = [e for e in candidates if e not in archived and _in_window(e)]
     log("injury clock-grid probe: %d candidates (%d already archived), %d to probe"
         % (len(candidates), len(archived & set(candidates)), len(todo)))
     for edition in todo:
@@ -372,7 +417,18 @@ def main() -> int:
     ap.add_argument("--only", choices=("gamebooks", "injury"), default=None,
                     help="run one stage only (the workflow commits each stage "
                          "separately so a reclaimed runner loses no completed work)")
+    ap.add_argument("--grid-from", dest="grid_from", default=None,
+                    help="clock-grid batch window start, e.g. 2026-11-17_11:45AM")
+    ap.add_argument("--grid-to", dest="grid_to", default=None,
+                    help="clock-grid batch window end, e.g. 2026-11-17_03:30PM")
     args = ap.parse_args()
+    global GRID_WINDOW
+    GRID_WINDOW = None
+    if args.grid_from or args.grid_to:
+        from datetime import datetime as _dt
+        fmt = "%Y-%m-%d_%I:%M%p"
+        GRID_WINDOW = (_dt.strptime(args.grid_from, fmt) if args.grid_from else None,
+                       _dt.strptime(args.grid_to, fmt) if args.grid_to else None)
     run_stamp = {"at_utc": now_utc(), "argv": " ".join(sys.argv[1:]) or "(all stages)"}
     if args.only == "gamebooks":
         args.skip_injury = True

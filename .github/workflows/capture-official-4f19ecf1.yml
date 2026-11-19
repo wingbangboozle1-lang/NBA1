@@ -14,16 +14,18 @@ name: Capture official evidence (4f19ecf1)
 #   * runs only on this session's branch, and only when this file or the capture
 #     script itself changes - it cannot arm itself in a loop and cannot be armed
 #     by another session's push;
-#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * the bot commits carry [skip ci], which does not trigger workflows;
 #   * it writes only data/raw/session-4f19ecf1/** (this session's capture dir),
 #     the canonical append-only content-addressed data/raw/injury_pdfs/** archive
 #     (claimed by this session in §68 G02) and its probe run record;
 #   * the fetch script refuses any host outside the four official ones;
-#   * each stage commits as soon as it finishes. The 2026-11-19T06:06Z run of
-#     the single-stage version was cancelled by the runner two minutes in
-#     ("The operation was canceled" - runner shutdown/reclaim class, same
-#     symptom the board records for probe-official runs), so partial progress
-#     must survive a lost runner.
+#   * every stage commits as soon as it finishes, and the injury clock-grid is
+#     probed in small labelled batches. MEASURED: runs are cancelled by the
+#     runner about two minutes in (2026-11-19T06:06Z, 06:16Z - "The operation
+#     was canceled", the same symptom the board records for probe-official
+#     runs), so progress must survive a lost runner batch by batch. Re-armed
+#     runs skip anything already on disk (content-addressed store + archive),
+#     so each push advances the frontier.
 
 on:
   push:
@@ -67,14 +69,89 @@ jobs:
             git push origin HEAD:arena/4f19ecf1-nba1
           fi
 
-      - name: Fetch official injury editions (stage 2)
-        run: python3 scripts/capture_official_4f19ecf1.py --only injury
+      # Injury clock-grid batches: quarter-hourly label windows, each committed
+      # immediately. Windows: 11/17 PM (2 x 16-32), 11/18 full day (4 x 24),
+      # 11/19 00:00-02:00 (9).
+      - name: Injury grid batch A (11/17 11:45AM-03:30PM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-17_11:45AM --grid-to 2026-11-17_03:30PM
 
-      - name: Commit injury editions
+      - name: Commit batch A
         run: |
           git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
           if ! git diff --cached --quiet; then
-            git commit -m "Capture official NBA evidence: 11/17..19 injury editions (4f19ecf1 G02) [skip ci]"
+            git commit -m "Capture official NBA evidence: injury grid batch A (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch B (11/17 03:45PM-11:45PM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-17_03:45PM --grid-to 2026-11-17_11:45PM
+
+      - name: Commit batch B
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch B (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch C (11/18 12:00AM-05:45AM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-18_12:00AM --grid-to 2026-11-18_05:45AM
+
+      - name: Commit batch C
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch C (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch D (11/18 06:00AM-11:45AM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-18_06:00AM --grid-to 2026-11-18_11:45AM
+
+      - name: Commit batch D
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch D (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch E (11/18 12:00PM-05:45PM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-18_12:00PM --grid-to 2026-11-18_05:45PM
+
+      - name: Commit batch E
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch E (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch F (11/18 06:00PM-11:45PM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-18_06:00PM --grid-to 2026-11-18_11:45PM
+
+      - name: Commit batch F
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch F (4f19ecf1 G02) [skip ci]"
+            git pull --rebase origin arena/4f19ecf1-nba1
+            git push origin HEAD:arena/4f19ecf1-nba1
+          fi
+
+      - name: Injury grid batch G (11/19 12:00AM-02:00AM ET)
+        run: python3 scripts/capture_official_4f19ecf1.py --only injury --grid-from 2026-11-19_12:00AM --grid-to 2026-11-19_02:00AM
+
+      - name: Commit batch G
+        run: |
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture official NBA evidence: injury grid batch G (4f19ecf1 G02) [skip ci]"
             git pull --rebase origin arena/4f19ecf1-nba1
             git push origin HEAD:arena/4f19ecf1-nba1
           fi
