@@ -1,0 +1,241 @@
+{
+ "title": "Runner capture of official NBA evidence \u2014 session arena/bc8c07a3-nba1",
+ "captured_at_utc": "2026-11-19T05:56:03Z",
+ "result_dates": [
+  "2026-11-17",
+  "2026-11-18",
+  "2026-11-19",
+  "2026-11-20"
+ ],
+ "gamebook_dates": [
+  "2026-11-17"
+ ],
+ "rule": "Only official hosts are contacted (www.nba.com, official.nba.com, ak-static.cms.nba.com, statsdmz.nba.com, stats.nba.com, cdn.nba.com). Every artifact carries its exact URL, retrieval timestamp and SHA-256. A failure is recorded with its HTTP status and never substituted.",
+ "manifest": [
+  {
+   "key": "games_2026-11-17",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "retrieved_at_utc": "2026-11-19T05:47:35Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/games_2026-11-17__0df0bafb2487007118757f63ec0224c2dda00b9866ff2cdd38b25bbb3fb344bb.gz",
+   "sha256": "0df0bafb2487007118757f63ec0224c2dda00b9866ff2cdd38b25bbb3fb344bb",
+   "bytes": 430568
+  },
+  {
+   "key": "games_2026-11-18",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "retrieved_at_utc": "2026-11-19T05:47:36Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/games_2026-11-18__82d50542d303c5e002601e55f9f5c4886d69ac725cbec326b89d6b1dc3dab747.gz",
+   "sha256": "82d50542d303c5e002601e55f9f5c4886d69ac725cbec326b89d6b1dc3dab747",
+   "bytes": 644570
+  },
+  {
+   "key": "games_2026-11-19",
+   "source_url": "https://www.nba.com/games?date=2026-11-19",
+   "retrieved_at_utc": "2026-11-19T05:47:37Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/games_2026-11-19__977984149f6d4c7ee4793432b120bde477a0e9d6c65f59ede761073cd1e1c9f6.gz",
+   "sha256": "977984149f6d4c7ee4793432b120bde477a0e9d6c65f59ede761073cd1e1c9f6",
+   "bytes": 346858
+  },
+  {
+   "key": "games_2026-11-20",
+   "source_url": "https://www.nba.com/games?date=2026-11-20",
+   "retrieved_at_utc": "2026-11-19T05:47:38Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/games_2026-11-20__518b3cd227b515659f451af4b7fac52a2e741b5f9508973a053a81cf46498b8c.gz",
+   "sha256": "518b3cd227b515659f451af4b7fac52a2e741b5f9508973a053a81cf46498b8c",
+   "bytes": 359638
+  },
+  {
+   "key": "schedule_page",
+   "source_url": "https://www.nba.com/schedule",
+   "retrieved_at_utc": "2026-11-19T05:47:38Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/schedule_page__8061c8b37a0a67bb896a66504a12f14c3b4f4a15e19195dde1675a3ac5d12c1b.gz",
+   "sha256": "8061c8b37a0a67bb896a66504a12f14c3b4f4a15e19195dde1675a3ac5d12c1b",
+   "bytes": 203778
+  },
+  {
+   "key": "standings_page",
+   "source_url": "https://www.nba.com/standings",
+   "retrieved_at_utc": "2026-11-19T05:47:39Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/standings_page__1d4fbe7a73f205b305c557f4560c73e4c8be1e6b4387aca8b279a90d33ff34b6.gz",
+   "sha256": "1d4fbe7a73f205b305c557f4560c73e4c8be1e6b4387aca8b279a90d33ff34b6",
+   "bytes": 225736
+  },
+  {
+   "key": "teams_advanced_page",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "retrieved_at_utc": "2026-11-19T05:47:40Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/teams_advanced_page__38ff99696a07a1b6f96231ee020ae7a232f48a6dd5726876346d3e30c047c90f.gz",
+   "sha256": "38ff99696a07a1b6f96231ee020ae7a232f48a6dd5726876346d3e30c047c90f",
+   "bytes": 294089
+  },
+  {
+   "key": "teams_traditional_page",
+   "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+   "retrieved_at_utc": "2026-11-19T05:47:41Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/teams_traditional_page__069a35f657abb10c8ed1da2db6239c2bb4414dd4b4a7671c3ef5dd91ffb7ec29.gz",
+   "sha256": "069a35f657abb10c8ed1da2db6239c2bb4414dd4b4a7671c3ef5dd91ffb7ec29",
+   "bytes": 294119
+  },
+  {
+   "key": "teams_opponent_page",
+   "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+   "retrieved_at_utc": "2026-11-19T05:47:42Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/teams_opponent_page__ed47b12840fd40f0889f43db62fedd0063be86048b31f6c026993c60cf0ed082.gz",
+   "sha256": "ed47b12840fd40f0889f43db62fedd0063be86048b31f6c026993c60cf0ed082",
+   "bytes": 294089
+  },
+  {
+   "key": "injury_index",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "retrieved_at_utc": "2026-11-19T05:47:43Z",
+   "http_status": 200,
+   "content_type": "text/html",
+   "stored": "data/raw/session-bc8c07a3/html/injury_index__6de9fd4820959f1bcf39b3dc3f78dde9712d09bf9e33a6b22a18cb7290252d41.gz",
+   "sha256": "6de9fd4820959f1bcf39b3dc3f78dde9712d09bf9e33a6b22a18cb7290252d41",
+   "bytes": 36274
+  },
+  {
+   "key": "gamebook_20261117_NYKTOR",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
+   "retrieved_at_utc": "2026-11-19T05:55:58Z",
+   "http_status": 200,
+   "content_type": "application/pdf",
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "stored": "data/raw/session-bc8c07a3/gamebooks/gamebook_20261117_NYKTOR__9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5.bin",
+   "sha256": "9f0fd60bee417e276200df6517fd9814be3cc434c0dc287349d3fd3b3a77b3b5",
+   "bytes": 138584
+  },
+  {
+   "key": "gamebook_20261117_DETSAS",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261117/20261117_DETSAS_book.pdf",
+   "retrieved_at_utc": "2026-11-19T05:55:59Z",
+   "http_status": 200,
+   "content_type": "application/pdf",
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "stored": "data/raw/session-bc8c07a3/gamebooks/gamebook_20261117_DETSAS__31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e.bin",
+   "sha256": "31dae494511f496bfb9254c3b3c66f8f9290013e0426307ec1f032224ee5d98e",
+   "bytes": 143606
+  },
+  {
+   "key": "gamebook_20261117_PORMIN",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261117/20261117_PORMIN_book.pdf",
+   "retrieved_at_utc": "2026-11-19T05:56:00Z",
+   "http_status": 200,
+   "content_type": "application/pdf",
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "stored": "data/raw/session-bc8c07a3/gamebooks/gamebook_20261117_PORMIN__c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6.bin",
+   "sha256": "c9693c2c235bfddaec192c21e12fbce5409f469e49b7a29e5144712f0e744af6",
+   "bytes": 151022
+  },
+  {
+   "key": "gamebook_20261117_UTALAC",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAC_book.pdf",
+   "retrieved_at_utc": "2026-11-19T05:56:00Z",
+   "http_status": 200,
+   "content_type": "application/pdf",
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "stored": "data/raw/session-bc8c07a3/gamebooks/gamebook_20261117_UTALAC__5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5.bin",
+   "sha256": "5c8aaf393d8a16d6a51008cd54b6765a64ea6be17fa063a16c908642dc517ca5",
+   "bytes": 141081
+  },
+  {
+   "key": "gamebook_20261117_CHALAL",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261117/20261117_CHALAL_book.pdf",
+   "retrieved_at_utc": "2026-11-19T05:56:01Z",
+   "http_status": 200,
+   "content_type": "application/pdf",
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "stored": "data/raw/session-bc8c07a3/gamebooks/gamebook_20261117_CHALAL__6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5.bin",
+   "sha256": "6c267358269a389199929498a553bb0aa049eb6c42251aecf8b6cf8aa08469f5",
+   "bytes": 180655
+  }
+ ],
+ "failures": [
+  {
+   "key": "leaguedashteamstats_advanced",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Advanced&PerMode=Totals&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&DateFrom=&DateTo=",
+   "checked_at_utc": "2026-11-19T05:49:46Z",
+   "http_status": null,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "leaguedashteamstats_traditional",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Base&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&DateFrom=&DateTo=",
+   "checked_at_utc": "2026-11-19T05:51:49Z",
+   "http_status": null,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "leaguedashteamstats_opponent",
+   "url": "https://stats.nba.com/stats/leaguedashteamstats?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&MeasureType=Opponent&PerMode=PerGame&Scope=Season&LastNGames=0&Month=0&OpponentTeamID=0&DateFrom=&DateTo=",
+   "checked_at_utc": "2026-11-19T05:53:53Z",
+   "http_status": null,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "leaguestandingsv3",
+   "url": "https://stats.nba.com/stats/leaguestandingsv3?LeagueID=00&Season=2026-27&SeasonType=Regular+Season",
+   "checked_at_utc": "2026-11-19T05:55:56Z",
+   "http_status": null,
+   "error": "TimeoutError: The read operation timed out"
+  },
+  {
+   "key": "gamebook_20261117_UTALAL",
+   "url": "https://statsdmz.nba.com/pdfs/20261117/20261117_UTALAL_book.pdf",
+   "checked_at_utc": "2026-11-19T05:56:02Z",
+   "http_status": 404,
+   "game_id": "0022600268"
+  },
+  {
+   "key": "gamebook_20261117_WASTOR",
+   "url": "https://statsdmz.nba.com/pdfs/20261117/20261117_WASTOR_book.pdf",
+   "checked_at_utc": "2026-11-19T05:56:03Z",
+   "http_status": 404,
+   "game_id": "0022600263"
+  },
+  {
+   "key": "gamebook_20261117_ATLOKC",
+   "url": "https://statsdmz.nba.com/pdfs/20261117/20261117_ATLOKC_book.pdf",
+   "checked_at_utc": "2026-11-19T05:56:03Z",
+   "http_status": 404,
+   "game_id": "0022600265"
+  }
+ ],
+ "counts": {
+  "artifacts": 15,
+  "failures": 7
+ }
+}
