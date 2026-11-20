@@ -1,12 +1,12 @@
 {
  "_meta": {
   "method": "HCA_points = sigma_margin * norm_ppf(home_win_rate), pinned to the measured home-win rate from official completed games. Not a free parameter.",
-  "home_win_rate": 0.4747,
-  "home_wins": 47,
-  "games": 99,
+  "home_win_rate": 0.4757,
+  "home_wins": 49,
+  "games": 103,
   "sigma_margin": 17.409312,
   "source": "data/raw/games_completed.json (official NBA.com game pages, captured by engine/fetch_official.py) written by engine/pipeline.py from engine/hca.compute_hca"
  },
- "hca_points": -1.1,
- "home_win_rate": 0.4747
+ "hca_points": -1.06,
+ "home_win_rate": 0.4757
 }
