@@ -1,0 +1,35 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-20_05_30PM.pdf",
+  "label": "Injury-Report_2026-11-20_05_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-20_05_30PM.pdf",
+  "retrieved_at_utc": "2026-11-20T22:52:53Z",
+  "sha256": "e62e364e99788c149b21e7c0c3f619f9a9be5d323997162e1f4205a968de6617",
+  "rows": 132
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-20_05_45PM.pdf",
+  "label": "Injury-Report_2026-11-20_05_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-20_05_45PM.pdf",
+  "retrieved_at_utc": "2026-11-20T22:52:53Z",
+  "sha256": "de213f00721add12924149c4e836bd10db73cec73ace25d4aac62264425ec03d",
+  "rows": 132
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "New York Knicks",
+   "player": "Anunoby, OG",
+   "before_status": "Questionable",
+   "after_status": "Questionable",
+   "before_reason": "Injury/Illness - Left Calf",
+   "after_reason": "Injury/Illness - Left Calf Tightness",
+   "before_matchup": "POR@NYK",
+   "after_matchup": "POR@NYK"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}
